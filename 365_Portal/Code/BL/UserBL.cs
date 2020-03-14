@@ -126,6 +126,64 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+
+
+        #region CRUD FOR DEPARTMENTS
+        public static DataSet CreateDepartment(int CompId, string DeptName, string Description, string CreatedBy)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.CreateDepartment((int)ConstantMessages.Action.INSERT, CompId, 0, DeptName, Description, CreatedBy);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet ModifyDepartment(int CompId, string DeptName, int DeptId, string Description, string CreatedBy)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.CreateDepartment((int)ConstantMessages.Action.MODIFY, CompId, DeptId, DeptName, Description, CreatedBy);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet ViewDepartment(int CompId)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.ViewDepartment(CompId);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet DeleteDepartment(int CompId, int GroupId, bool IsActive, string CreatedBy)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.DeleteDepartment(CompId, GroupId, IsActive, CreatedBy);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        #endregion DEPARTMENTS
+
+
         public static DataSet SetUserPassword(int CompId, string UserId, string Password, string CreatedBy)
         {
             DataSet ds = new DataSet();
