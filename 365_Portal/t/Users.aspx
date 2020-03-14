@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12 header mb-5">
             <a class="back" href="dashboard.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
-            <h2 class="text-center font-weight-bold">Users</h2>
+            <h2 class="text-center font-weight-bold">Users UAT</h2>
         </div>
 
         <div class="col-md-12" id="divGird">
