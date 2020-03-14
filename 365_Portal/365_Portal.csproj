@@ -712,6 +712,8 @@
     <Content Include="INCLUDES\Asset\css\gijgo.min.css" />
     <Content Include="INCLUDES\Asset\css\jodit.min.css" />
     <Content Include="INCLUDES\Asset\css\select2.min.css" />
+    <Content Include="INCLUDES\Asset\css\site.css" />
+    <Content Include="INCLUDES\Asset\css\slick.css" />
     <Content Include="INCLUDES\Asset\customer\common.js" />
     <Content Include="INCLUDES\Asset\customer\default.js" />
     <Content Include="INCLUDES\Asset\data\bunny.mp4" />
@@ -736,7 +738,10 @@
     <Content Include="INCLUDES\Asset\images\mask-group-top-red.png" />
     <Content Include="INCLUDES\Asset\images\menu.png" />
     <Content Include="INCLUDES\Asset\images\profile.png" />
+    <Content Include="INCLUDES\Asset\images\return.png" />
     <Content Include="INCLUDES\Asset\images\settings.png" />
+    <Content Include="INCLUDES\Asset\images\sun.png" />
+    <Content Include="INCLUDES\Asset\images\theme1.png" />
     <Content Include="INCLUDES\Asset\images\up-arrow.png" />
     <Content Include="INCLUDES\Asset\images\us.png" />
     <Content Include="INCLUDES\Asset\images\user.png" />
@@ -756,6 +761,7 @@
     <Content Include="INCLUDES\Asset\js\popper.min.js" />
     <Content Include="INCLUDES\Asset\js\select2.min.js" />
     <Content Include="INCLUDES\Asset\js\site.js" />
+    <Content Include="INCLUDES\Asset\js\slick.min.js" />
     <Content Include="INCLUDES\Asset\js\sweetalert2.js" />
     <Content Include="INCLUDES\Asset\tinymce\jquery.tinymce.min.js" />
     <Content Include="INCLUDES\Asset\tinymce\license.txt" />

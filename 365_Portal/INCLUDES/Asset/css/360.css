@@ -54,9 +54,8 @@ a {
 }
 
 
-.navbar {
-    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
-    /*left: 240px;*/
+/*.navbar {
+
     height: 56px;
 }
 
@@ -66,7 +65,6 @@ a {
 
     .navbar .nav-content {
         display: flex;
-        /*margin: 0 2rem;*/
     }
 
         .navbar .nav-content .navbar-nav {
@@ -244,7 +242,7 @@ a {
     transition-duration: 0.25s;
     transition-timing-function: ease;
     transition-delay: 0s;
-}
+}*/
 
 /* side nav*/
 .sidenav {
@@ -409,13 +407,13 @@ a {
 
 
 /*main*/
-
-main {
+/* comment for phase 2*/
+/*main {
     margin-top: 56px;
     margin-left: 240px;
     padding: 2rem 1.75rem;
     transition: 0.5s;
-}
+}*/
 
 .circle {
     border-radius: 50%;
@@ -475,11 +473,12 @@ main {
 }
 /* main css */
 
-.section-title {
+/*commnet for phase 2*/
+/*.section-title {
     font-weight: 700;
     margin-bottom: 1rem;
     color: rgba(0, 0, 0, 0.6);
-}
+}*/
 
 .card {
     border: none;
@@ -497,18 +496,20 @@ main {
         right: 2rem;
     }
 
-    .card .card-body {
+    /*commnet for phase 2*/
+    /*.card .card-body {
         padding: 2rem 1.25rem;
-    }
+    }*/
 
-        .card .card-body .card-title {
+
+        /*.card .card-body .card-title {
             font-weight: 700;
-        }
+        }*/
 
-        .card .card-body .card-text {
+        /*.card .card-body .card-text {
             color: rgba(0, 0, 0, 0.6);
             font-weight: 500;
-        }
+        }*/
 
         .card .card-body .anchor {
             min-height: 21.09px;
@@ -850,15 +851,14 @@ input[type=checkbox] + label, input[type=radio] + label {
         margin-right: 0.5rem;
     }
 
-.form-control, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple,
+/* commnet for phase 2*/
+/*.form-control, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
     border: none;
-    /*padding: 0;*/
     border-bottom: 1px solid rgba(0, 0, 0, 0.24);
     border-radius: 0;
     color: #000;
-    /*font-weight: 500;*/
-}
+}*/
 
     .select2-container .select2-selection--single, .select2-container .select2-selection--single,
     .select2-container--default .select2-selection--single .select2-selection__arrow {
@@ -1502,10 +1502,10 @@ table tr.tDnD_whileDrag {
         transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
 
-        .button-color a.auto, .button-color a.light, .btn.auto, .btn.light {
+        /*.button-color a.auto, .button-color a.light, .btn.auto, .btn.light {
             background: red !important;
             color: #fff !important;
-        }
+        }*/
 
         .button-color a.dark, .btn.dark {
             background: red !important;

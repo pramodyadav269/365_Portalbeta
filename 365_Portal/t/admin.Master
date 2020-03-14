@@ -8,15 +8,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
+    <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
     <link href="../includes/Asset/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../includes/Asset/css/all.css" rel="stylesheet" />
     <link href="../includes/Asset/css/gijgo.min.css" rel="stylesheet" />
     <link href="../Asset/css/select2.min.css" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/jodit.min.css" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css" rel="stylesheet" />
     <link href="../includes/Asset/css/360.css" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css" rel="stylesheet" />
 
-    
     <%-- JS --%>
     <script src="../includes/Asset/js/angular.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
@@ -35,6 +37,7 @@
     <script src="../includes/Asset/js/jquery.dataTables.min.js"></script>
     <script src="../includes/Asset/js/dataTables.bootstrap4.min.js"></script>
     <script src="../includes/Asset/js/jquery.tablednd.js"></script>
+    <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../includes/Asset/js/site.js"></script>
     <script>
 
@@ -171,7 +174,7 @@
                 </div>
             </div>
         </div>
-        <div id="sideNav" runat="server" class="sidenav">
+        <div id="sideNav" runat="server" class="sidenav d-none">
             <div class="sidenav-top">
                 <div class="sidenav-brand">
                     <img id="imgCompanyLogo" style="cursor: pointer;" onclick="location.href='default.aspx';" runat="server" src="../INCLUDES/Asset/images/logo-white.svg" class="logo" />
@@ -323,11 +326,92 @@
             </div>
         </div>
 
-        <nav class="navbar fixed-top navbar-light bg-white">
-            <a class="navbar-brand"></a>
-            <%--<a class="navbar-brand" onclick="ToggleNav()">
-                <i class="fas fa-bars"></i>
-            </a>--%>
+        <nav class="navbar navbar-expand-sm bg-white navbar-light navbar-light justify-content-between nav-search">
+            <%--<nav class="navbar fixed-top navbar-light bg-white">--%>
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="../INCLUDES/Asset/images/logo-black.svg" class="logo" alt="Logo">
+            </a>
+
+            <%-- phase2 --%>
+            <ul class="navbar-nav">
+                <li class="nav-item courses dropdown"><a class="nav-link" id="navbarCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="name dropdown-toggle">Courses</span></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarCourses">
+                        <div class="courses-item">
+                            <div class="courses-title">
+                                <a class="dropdown-item">Data and Tech</a>
+                                <a class="dropdown-item">Languages</a>
+                                <a class="dropdown-item">Digital Marketing</a>
+                                <a class="dropdown-item">Career Development</a>
+                                <a class="dropdown-item">Personal Development</a>
+                                <a class="dropdown-item">Lifestyle Classes</a>
+                                <a class="dropdown-item">Leadership</a>
+                                <a class="btn btn-dark" href="#">All Courses</a>
+                            </div>
+                            <div class="courses-details">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-6 course-length">
+                                        <span class="courses-details-title">Course Length</span>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cbU2H">
+                                            <label class="custom-control-label" for="cbU2H">under 2 hours</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cb2to10H">
+                                            <label class="custom-control-label" for="cb2to10H">2 - 10 hours</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cb11to20H">
+                                            <label class="custom-control-label" for="cb11to20H">11 - 20 hours</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cb20PlusH">
+                                            <label class="custom-control-label" for="cb20PlusH">20+ hours</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6">
+                                        <a class="courses-details-title">Recommended Classes</a>
+                                        <a class="courses-details-title mt-3">Trending Classes</a>
+                                        <a class="courses-details-title mt-3">Popular Classes</a>
+                                    </div>
+                                    <div class="w-100">
+                                        <hr />
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6">
+                                        <span class="courses-details-title">Course Provider</span>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cbTeam">
+                                            <label class="custom-control-label" for="cbTeam">Team</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cbCompanyWide">
+                                            <label class="custom-control-label" for="cbCompanyWide">Company Wide</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="cbGlobal">
+                                            <label class="custom-control-label" for="cbGlobal">Global</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <%-- Search --%>
+            <div class="form-inline input-group col-12 col-sm-4 col-md-5 col-lg-6">
+                <input class="form-control" type="text" placeholder="What you want to learn today?">
+                <div class="input-group-append">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+            </div>
+            <%-- phase2 --%>
+
+
+
+
             <div class="nav-content float-right">
                 <ul class="navbar-nav">
                     <li class="nav-item icon dropdown d-none"><a class="nav-link" id="navbarComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -372,16 +456,40 @@
                     <li class="nav-item profile dropdown">
                         <a class="nav-link" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <asp:Label ID="lblUserName" runat="server" CssClass="name dropdown-toggle" />
-                            <span class="status">Available</span>
+                            <span class="status">0 badges, 0 points</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
-                            <a id="A1" href="Settings.aspx" class="dropdown-item">Settings</a>
+                            <%--<a id="A1" href="Settings.aspx" class="dropdown-item">Settings</a>--%>
                             <a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
+        <nav class="navbar navbar-expand-sm bg-white navbar-light navbar-light justify-content-center nav-menu">
+            <!-- Links -->
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Learning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">My Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Integrations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul>
+        </nav>
+        <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
 
         <div class="d-none">
             <%-- <img id="imgCompanyLogo" runat="server" src="../Asset/images/logo.svg" class="logo" />--%>
