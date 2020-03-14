@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server"> 
     <section>
         <h4 class="section-title">Recommendation</h4>
         <div class="row content">
@@ -274,7 +274,6 @@
     <script>
         $(document).ready(function () {
 
-
             $('.content').slick({
                 dots: false,
                 infinite: false,
@@ -287,9 +286,7 @@
                         breakpoint: 1024,
                         settings: {
                             slidesToShow: 3,
-                            slidesToScroll: 1,
-                            infinite: true,
-                            dots: true
+                            slidesToScroll: 1
                         }
                     },
                     {
