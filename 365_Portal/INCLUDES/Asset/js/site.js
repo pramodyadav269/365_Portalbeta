@@ -1,5 +1,11 @@
 ﻿
 $(document).ready(function () {
+
+    $('.courses.dropdown .dropdown-menu').on("click", function (e) {
+        e.stopPropagation();
+        //e.preventDefault();
+    });
+
     selectInit('select.select2', 'Select a option');
 
     //bsCustomFileInput.init();

@@ -15,8 +15,8 @@
     <link href="Assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="Assets/css/select2.min.css" rel="stylesheet" />
     <link href="Assets/css/slick.css" rel="stylesheet" />
-    <link href="Assets/css/site.css" rel="stylesheet" />
-
+    <%--<link href="Assets/css/site.css" rel="stylesheet" />--%>
+    <link href="../INCLUDES/Asset/css/site.css" rel="stylesheet" />
     <%-- JS --%>
     <script src="Assets/js/jquery.min.js"></script>
     <script src="Assets/js/popper.min.js"></script>

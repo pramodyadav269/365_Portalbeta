@@ -1,11 +1,147 @@
 ﻿<%@ Page Title="365" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="default.aspx.cs" Inherits="Life.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
     <script src="../includes/Asset/customer/default.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+
+    <%-- phase 2 --%>
+    <section>
+        <h4 class="section-title">Recommendation</h4>
+        <div class="row content">
+            <div class="col content-item">
+                <div class="card bc-blue">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-blue bc-blue">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-item">
+                <div class="card bc-red">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-red bc-red">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-item">
+                <div class="card bc-blue">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-blue bc-blue">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-item">
+                <div class="card bc-blue">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-blue bc-blue">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-item">
+                <div class="card bc-blue">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-blue bc-blue">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-item">
+                <div class="card bc-blue">
+                    <div class="card-icon">
+                        <img src="../INCLUDES/Asset/images/sun.png">
+                        <span class="point">+400 Points</span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">How to Accomplish More With Less</h5>
+                        <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
+                        <p class="card-text text-muted mb-4">Leadership & Management</p>
+                        <div class="action">
+                            <span><i class="fas fa-heart"></i></span>
+                            <span><i class="fas fa-plus"></i></span>
+                            <span><i class="fas fa-tag rotate-90deg"></i></span>
+                            <span class="play bg-blue bc-blue">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <%-- phase 2 --%>
+
     <div ng-app="MasterPage" ng-controller="DefaultController">
         <div class="row">
             <div class="col-12 achievements mb-5">
@@ -15,7 +151,7 @@
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
                                 <p class="card-text">Welcome to 365!</p>
-                               
+
                             </div>
                         </div>
 
@@ -795,6 +931,39 @@
 
     <script>
         $(document).ready(function () {
+
+            $('.content').slick({
+                dots: false,
+                infinite: false,
+                speed: 300,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                centerMode: false,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
                 placeholder: "Select a option",
