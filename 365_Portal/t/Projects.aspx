@@ -256,11 +256,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
+                <div class="row input-form-2 d-none" id="dvCreateProject">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row input-validation">
                                     <div class="col-12 col-sm-12 col-md-10 mb-3">
                                         <div class="form-group">
                                             <label for="txtProjectName">Project Name</label>
@@ -295,12 +295,50 @@
 
         </div>
     </div>
+
+
+    <div class="modal fade" id="modalTaskInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <a class="close-modal" data-dismiss="modal" aria-label="Close">
+                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                <div class="modal-body">
+                    <div class="row input-validation">
+                        <div class="col-12 col-sm-12mb-3">
+                            <div class="form-group">
+                                <label for="txtProjectName">Project Name</label>
+                                <input type="text" class="form-control required" id="txtrojectName" placeholder="Project Name" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12">
+                            <div class="form-group">
+                                <label for="ddlProjectMembers">Project Members</label>
+                                <select class="form-control select2 required" id="ddlProjectembers" style="width: 100% !important" multiple>
+                                    <option></option>
+                                    <option value="1">Project Member 1</option>
+                                    <option value="1">Project Member 2</option>
+                                    <option value="1">Project Member 3</option>
+                                    <option value="1">Project Member 4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-12 col-sm-12 mt-4 text-right">
+                            <a class="btn bg-yellow" onclick="inputValidation('.input-validation');">Submit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
 
         var prevTitle = '';
 
         $(document).ready(function () {
-
+            $('#modalTask').modal({
+                backdrop: false
+            })
         });
 
         function onClickAddTask() {

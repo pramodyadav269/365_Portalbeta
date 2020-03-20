@@ -582,6 +582,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
     .website-redesign .card-body .wr-content .wr-content-title {
         font-weight: 600;
+        color: rgba(0, 0, 0, 0.5);
     }
 
     .website-redesign .card-body .wr-content .wr-content-anchar .anchar-profile-icon {

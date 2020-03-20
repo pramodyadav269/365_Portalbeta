@@ -347,7 +347,7 @@
                                 <a class="dropdown-item">Personal Development</a>
                                 <a class="dropdown-item">Lifestyle Classes</a>
                                 <a class="dropdown-item">Leadership</a>
-                                <a class="btn btn-dark" href="#">All Courses</a>
+                                <a class="btn btn-dark rounded" href="#">All Courses</a>
                             </div>
                             <div class="courses-details">
                                 <div class="row">
