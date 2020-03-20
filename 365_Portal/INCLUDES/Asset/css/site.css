@@ -78,9 +78,9 @@ a {
                 border: 1.5px solid #fff;
                 font-size: 8px;
                 font-weight: 500;
-                position: relative;
-                top: -8px;
-                left: -8px;
+                position: absolute;
+                top: -3px;
+                right: -6px;
             }
 
             .navbar .nav-content .nav-item.icon img {
@@ -89,15 +89,16 @@ a {
 
         .navbar .nav-content .nav-item.profile-photo {
             margin-left: 3rem;
+            position: relative;
         }
 
             .navbar .nav-content .nav-item.profile-photo .badge {
                 border-radius: 50%;
                 border: 2px solid #fff;
                 font-size: 6px;
-                position: relative;
-                top: -12px;
-                left: -12px;
+                position: absolute;
+                top: 0;
+                right: -4px;
             }
 
                 .navbar .nav-content .nav-item.profile-photo .badge.online {
@@ -113,6 +114,7 @@ a {
         .navbar .nav-content .nav-item .nav-link {
             padding: 0;
             color: #000;
+            position: relative;
         }
 
         .navbar .nav-content .nav-item.profile a span {
@@ -331,7 +333,7 @@ a {
 
 /* main */
 
-main {
+main .container-fluid.dashboard {
     padding: 4rem;
 }
 
@@ -464,3 +466,184 @@ main {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
+/* task bar */
+
+.sub-side-menu .list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: .55rem 1.25rem;
+    border-radius: 0;
+    border-left: 3px solid rgba(255, 255, 255, 0);
+    font-size: 14px;
+}
+
+.task-bar .task-title {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.task-bar .task-item {
+    cursor: pointer;
+}
+
+    .task-bar .task-item:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: #FEC900;
+    }
+
+.task-bar .task-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: .25rem;
+    margin-right: .5rem;
+}
+
+.task-bar .task-user-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+
+.task-summary span {
+    display: block;
+}
+
+.task-summary .task-summary-count {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.task-summary .task-summary-title {
+    color: rgba(0, 0, 0, 0.4);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+a .svg-inline--fa, .section-title .svg-inline--fa {
+    margin-right: .75rem;
+}
+
+.content-title {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+    .content-title .svg-inline--fa {
+        margin-right: 1rem;
+    }
+
+.content-activity {
+    color: rgba(0, 0, 0, 0.5) !important;
+    margin-left: 2rem;
+    font-size: 13px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+    .content-activity .svg-inline--fa {
+        color: #2D7DD2;
+        font-size: 15px;
+    }
+
+.website-redesign .card {
+    border-radius: .75rem;
+    margin-bottom: 2rem;
+}
+
+    .website-redesign .card.add-status .card-body {
+        text-align: center;
+        padding: 3rem 0;
+        cursor: pointer;
+    }
+
+        .website-redesign .card.add-status .card-body .icon {
+            font-size: 4.2rem;
+            width: 100px;
+            height: 100px;
+            color: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+
+
+.website-redesign .card-body .wr-content {
+    background: rgba(0, 0, 0, 0.04);
+    padding: 1rem 1.5rem;
+    border-radius: .25rem;
+}
+
+    .website-redesign .card-body .wr-content .content-img {
+        border-radius: .75rem;
+    }
+
+    .website-redesign .card-body .wr-content .wr-content-title {
+        font-weight: 600;
+    }
+
+    .website-redesign .card-body .wr-content .wr-content-anchar .anchar-profile-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: .75rem;
+    }
+
+    .website-redesign .card-body .wr-content .wr-content-anchar .anchar-title {
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 2rem;
+        text-transform: uppercase;
+    }
+
+    .website-redesign .card-body .wr-content .wr-content-anchar .anchor-date {
+        color: rgba(0, 0, 0, 0.25) !important;
+    }
+
+        .website-redesign .card-body .wr-content .wr-content-anchar .anchor-date span {
+            font-size: 11px;
+            padding: 0 0 0 5px;
+        }
+
+.anchar-title.development {
+    color: #FF7F45;
+    background: rgba(255, 127, 69, 0.07);
+}
+
+.anchar-title.marketing {
+    color: #7467F0;
+    background: rgba(116, 103, 240, 0.07);
+}
+
+.anchar-title.design {
+    color: #147EFB;
+    background: rgba(20, 126, 251, 0.07);
+}
+
+
+#dvCreateProject .card .card-body {
+    padding: 4rem;
+    height: 100vh
+}
+
+/* input-form-2 */
+.input-form-2 .form-group label {
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 500;
+    margin-bottom: .2rem;
+}
+
+.input-form-2 .form-control {
+    font-size: .9rem;
+    border: 1px solid #aaa;
+}
+
+.input-form-2 input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.c-pointer {
+    cursor: pointer;
+}

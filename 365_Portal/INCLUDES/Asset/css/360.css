@@ -840,6 +840,14 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: #f74e35;
 }
 
+.c-yellow {
+    color: #FEC900 !important;
+}
+
+.c-blue {
+    color: #2D7DD2 !important;
+}
+
 .btn {
     border-radius: 0;
     
