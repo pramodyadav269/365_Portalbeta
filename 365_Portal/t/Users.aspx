@@ -15,6 +15,7 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-2">
                             <a class="btn bg-yellow" onclick="AddNew();">Add New</a>
+                            <%--<a class="btn bg-yellow" id="btnExport" onclick="Export();" style="display:none;">Export to Excel</a>--%><%--Added for Export to excel--%>
                         </div>
                         <div class="col-sm-12 col-md-3" id="dvCompanyFilter" style="display:none;">
                             <div class="form-group">
@@ -208,7 +209,7 @@
                     tbl += '<tr>';
                     tbl += '<td>' + (i + 1) + '</td>';
                     tbl += '<td style="display:none;" id="id">' + Table[i].UserID + '</td>';
-                    tbl += '<td title="' + Table[i].FirstName + '" >' + Table[i].FirstName + '</td>';                    
+                    tbl += '<td title="' + Table[i].FirstName + '" >' + Table[i].FirstName + '</td>';
                     tbl += '<td title="' + Table[i].EmailID + '" >' + Table[i].EmailID + '</td>';
                     tbl += '<td title="' + Table[i].Gender + '" >' + FormatGender(Table[i].Gender) + '</td>';
                     tbl += '<td title="' + Table[i].DeptName + '" >' + Table[i].DeptName + '</td>';
@@ -219,7 +220,13 @@
                         '<i title="Delete" onclick="Delete(this,' + Table[i].UserID + ');" class="fas fa-trash text-danger"></i></td>';
                     tbl += '</tr>';
                 }
+
+                //$('#btnExport').show();//Added for Export to excel
             }
+            //else {//Added for Export to excel entire else condition
+            //    $('#btnExport').hide();
+            //}
+
             tbl += '</tbody>';
             tbl += '</table>';
             $('#divTable').empty().append(tbl);
@@ -752,6 +759,29 @@
                     $("#txtUpdatePassword").attr("disabled", "disabled");
                 }
             }
+
+
+            //function Export()
+            //{
+            //    debugger
+            //    var grid = document.getElementById('tblGird');
+            //    var data_type = 'data:application/vnd.ms-excel';
+            //    var export_data = "<table border='1px'>";
+
+            //    for (var j = 0; j < grid.rows.length; j++)
+            //    {
+            //        export_data = export_data + "<tr>";
+            //        for (var i = 0; i < grid.rows[j].cells.length; i++)
+            //        {
+            //            export_data = export_data + "<td>" + grid.rows[j].cells[i].innerText + "</td>";
+            //        }
+            //        export_data = export_data + "</tr>";
+            //    }
+                
+            //    export_data += "</table>";
+            //    sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(export_data));
+            //}
+
 
     </script>
 </asp:Content>

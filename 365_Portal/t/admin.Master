@@ -39,6 +39,9 @@
     <script src="../includes/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../includes/Asset/js/site.js"></script>
+
+
+
     <script>
 
         var accessToken = '<%=Session["access_token"]%>';

@@ -285,6 +285,10 @@
             <div class="col-sm-12">
                 <div class="row topics">
                     <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="topic in Topics">
+
+<%--                        <span ng-click="AddFavourite(topic.TopicId)"><i class="fas fa-heart"></i></span>
+                        <span ng-click="AddBookmark(topic.TopicId)"><i class="fas fa-plus"></i></span>--%>
+
                         <div ng-click="GetModulesByTopic(topic.TopicId)" style="cursor: pointer;">
                             <div class="{{topic.Class}}">
                                 <img class="card-mask-top" src="{{topic.TopClass}}" />
@@ -293,7 +297,7 @@
                                     <h5 class="card-title">{{topic.Title}}</h5>
                                     <p class="card-text">{{topic.Description}}</p>
                                     <p ng-if="topic.IsCompleted == '1'" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
-                                    <p ng-if="topic.IsCompleted != '1'" class="text-right anchor">{{topic.CompletedModules + '/' + topic.TotalModules}}</p>
+                                    <p ng-if="topic.IsCompleted != '1'" class="text-right anchor">{{topic.CompletedModules + '/' + topic.TotalModules}}</p>                                    
                                 </div>
                             </div>
                         </div>
