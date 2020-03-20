@@ -256,41 +256,48 @@
                         </div>
                     </div>
                 </div>--%>
-                    <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row input-validation">
-                                        <div class="col-12 col-sm-12 col-md-10 mb-3">
-                                            <div class="form-group">
-                                                <label for="txtProjectName">Project Name</label>
-                                                <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
-                                            </div>
+                </div>
+
+                <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row input-validation">
+                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                        <div class="form-group">
+                                            <label for="txtProjectName">Project Name</label>
+                                            <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-10">
-                                            <div class="form-group">
-                                                <label for="ddlProjectMembers">Project Members</label>
-                                                <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
-                                                    <%--<option></option>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                        <div class="form-group">
+                                            <label for="txtProjectName">Project Goal</label>
+                                            <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-10">
+                                        <div class="form-group">
+                                            <label for="ddlProjectMembers">Project Members</label>
+                                            <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
+                                                <%--<option></option>
                                                 <option value="1">Project Member 1</option>
                                                 <option value="2">Project Member 2</option>
                                                 <option value="3">Project Member 3</option>
                                                 <option value="4">Project Member 4</option>--%>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="w-100"></div>
-                                        <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
-                                            <a class="btn bg-yellow" onclick="inputValidation('.input-validation');" onclick="SaveProject(this)">Submit</a>
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="w-100"></div>
+                                    <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
+                                        <a class="btn bg-yellow" onclick="inputValidation('.input-validation');" onclick="SaveProject(this)">Submit</a>
+                                    </div>
                                 </div>
-
                             </div>
 
                         </div>
 
                     </div>
+
                 </div>
 
             </div>
