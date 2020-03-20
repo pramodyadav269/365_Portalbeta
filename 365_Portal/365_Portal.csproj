@@ -474,6 +474,13 @@
     <Compile Include="t\MsgNotification.aspx.designer.cs">
       <DependentUpon>MsgNotification.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\Projects.aspx.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\Projects.aspx.designer.cs">
+      <DependentUpon>Projects.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\roles.aspx.cs">
       <DependentUpon>roles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -727,6 +734,7 @@
     <Content Include="INCLUDES\Asset\images\learning-library.png" />
     <Content Include="INCLUDES\Asset\images\logo-black.svg" />
     <Content Include="INCLUDES\Asset\images\logo-white.svg" />
+    <Content Include="INCLUDES\Asset\images\mobile-img.jpg" />
     <Content Include="INCLUDES\Asset\images\notifications.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-bottom-green.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-bottom-orange.png" />
@@ -1050,6 +1058,7 @@
     <Content Include="t\Departments.aspx" />
     <Content Include="t\flashcards.aspx" />
     <Content Include="t\MsgNotification.aspx" />
+    <Content Include="t\Projects.aspx" />
     <Content Include="t\roles.aspx" />
     <Content Include="t\Groups.aspx" />
     <Content Include="t\Modules.aspx" />
