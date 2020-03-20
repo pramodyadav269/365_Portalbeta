@@ -24,12 +24,12 @@
             <div class="col-2 pl-0 sub-side-menu">
                 <ul class="list-group mb-4">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="task-summary"><span class="task-summary-count">372</span><span class="task-summary-title">Completed Tasks</span></div>
-                        <div class="task-summary"><span class="task-summary-count">11</span><span class="task-summary-title">Open Tasks</span></div>
+                        <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
+                        <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>
                     </li>
                 </ul>
-                <ul class="list-group task-bar mb-4">
-                    <li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects
+                <ul id="ulProjects" class="list-group task-bar mb-4">
+                    <%--<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects
                         <a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>
                     </li>
                     <li class="list-group-item task-item">
@@ -39,11 +39,11 @@
                     <li class="list-group-item task-item">
                         <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Website Redesign</li>
                     <li class="list-group-item task-item">
-                        <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Communication Tool</li>
+                        <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Communication Tool</li>--%>
                 </ul>
 
-                <ul class="list-group task-bar mb-4">
-                    <li class="list-group-item task-title">Teams</li>
+                <ul id="ulTeam" class="list-group task-bar mb-4">
+                    <%-- <li class="list-group-item task-title">Teams</li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">Designers
                         <span>
                             <img class="task-user-icon" src="../INCLUDES/Asset/images/profile.png" />
@@ -65,12 +65,12 @@
                             <img class="task-user-icon" src="../INCLUDES/Asset/images/profile.png" />
                         </span>
                     </li>
-                    <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>
+                    <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
             <div class="col-10">
                 <div class="row website-redesign" id="dvWebsiteRedesign">
-                    <div class="col-12 col-sm-12 col-md-4">
+                    <%--   <div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="row">
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row input-form-2 d-none" id="dvCreateProject">
+                <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -271,17 +271,17 @@
                                         <div class="form-group">
                                             <label for="ddlProjectMembers">Project Members</label>
                                             <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
-                                                <option></option>
+                                                <%--<option></option>
                                                 <option value="1">Project Member 1</option>
-                                                <option value="1">Project Member 2</option>
-                                                <option value="1">Project Member 3</option>
-                                                <option value="1">Project Member 4</option>
+                                                <option value="2">Project Member 2</option>
+                                                <option value="3">Project Member 3</option>
+                                                <option value="4">Project Member 4</option>--%>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="w-100"></div>
                                     <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
-                                        <a class="btn bg-yellow" onclick="inputValidation('.input-validation');">Submit</a>
+                                        <a class="btn bg-yellow" onclick="inputValidation('.input-validation');" onclick="SaveProject(this)">Submit</a>
                                     </div>
                                 </div>
                             </div>
@@ -336,9 +336,7 @@
         var prevTitle = '';
 
         $(document).ready(function () {
-            $('#modalTask').modal({
-                backdrop: false
-            })
+
         });
 
         function onClickAddTask() {
@@ -353,5 +351,175 @@
             toggle(view, hide);
             $('#contentTitle').empty().append(prevTitle);
         }
+
+        function BindCards() {
+
+            // Ajax Call
+            var jsonStatusList = [];
+            jsonStatusList.push({ StatusID: 1, Status: "To Do" });
+            jsonStatusList.push({ StatusID: 2, Status: "In Progress" });
+            jsonStatusList.push({ StatusID: 3, Status: "Done" });
+
+            var jsonTaskList = [];
+            jsonTaskList.push({ TaskId: 1, StatusID: 1, TaskName: "This is some text within a card body." });
+            jsonTaskList.push({ TaskId: 2, StatusID: 2, TaskName: "This is some text within a card body." });
+            jsonTaskList.push({ TaskId: 3, StatusID: 3, TaskName: "This is some text within a card body." });
+
+            var jsonTaskSummary = [];
+            jsonTaskSummary.push({ CompletedTasksCount: 20, OpenTasksCount: 7 });
+
+            $("#spnCompletedTasksCount").html(jsonTaskSummary.CompletedTasksCount);
+            $("#spnOpenTasksCount").html(jsonTaskSummary.OpenTasksCount);
+
+            var cardHtml = '';
+
+            $.each(jsonStatusList, function (indxStatus, objStatus) {
+                // Repeat Status
+                cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
+                cardHtml += '<div class="card shadow">';
+                cardHtml += '<div class="card-body">';
+                cardHtml += '<div class="row">';
+                cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
+                cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
+                cardHtml += '<a class="btn bg-yellow rounded"><i class="fas fa-plus"></i>Add Task</a>';
+                cardHtml += ' </div>';
+
+                var statusWiseTaskList = $.grep(jsonTaskList, function (n, i) {
+                    return n.StatusID === objStatus.StatusID;
+                });
+
+                //statusWiseTaskList = [];
+                if (statusWiseTaskList.length > 0) {
+                    // Repeat Tasks
+                    $.each(statusWiseTaskList, function (indxTask, objTask) {
+                        cardHtml += '<div class="col-12 mb-2">';
+                        cardHtml += '<div class="wr-content">';
+                        cardHtml += '<div class="wr-content-title mb-2">';
+                        cardHtml += objTask.TaskName;
+                        cardHtml += '</div>';
+                        cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
+                        cardHtml += '<div>';
+                        cardHtml += ' <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span>';
+                        cardHtml += '</div>';
+                        cardHtml += ' <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
+                        cardHtml += ' </div>';
+                        cardHtml += ' </div>';
+                        cardHtml += ' </div>';
+                    });
+                }
+                else {
+                    cardHtml += '<div>No Tasks Found</div>';
+                }
+
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+            });
+
+            $("#dvWebsiteRedesign").html(cardHtml);
+
+        }
+
+        function BindProjects() {
+
+            // Ajax Call
+            var jsonProjectList = [];
+            jsonProjectList.push({ ProjectID: 1, ProjectName: "Project 1" });
+            jsonProjectList.push({ ProjectID: 2, ProjectName: "Project 2" });
+            jsonProjectList.push({ ProjectID: 3, ProjectName: "Project 3" });
+            jsonProjectList.push({ ProjectID: 4, ProjectName: "Project 4" });
+            jsonProjectList.push({ ProjectID: 5, ProjectName: "Project 5" });
+            jsonProjectList.push({ ProjectID: 6, ProjectName: "Project 6" });
+            jsonProjectList.push({ ProjectID: 7, ProjectName: "Project 7" });
+
+            var projectHtml = '';
+            projectHtml += '<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects';
+            projectHtml += '<a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>';
+            projectHtml += ' </li>';
+            //jsonProjectList = [];
+            if (jsonProjectList.length > 0) {
+                $.each(jsonProjectList, function (indxProject, objProject) {
+                    projectHtml += '<li class="list-group-item task-item">';
+                    projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName + '</li>';
+                });
+            }
+            else {
+                projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
+            }
+            $("#ulProjects").html(projectHtml);
+        }
+
+        function BindTeam() {
+
+            // Ajax Call
+            var jsonTeam = [];
+            jsonTeam.push({ GroupID: 1, GroupName: "Team 1" });
+            jsonTeam.push({ GroupID: 2, GroupName: "Team 2" });
+            jsonTeam.push({ GroupID: 3, GroupName: "Team 3" });
+
+            var jsonTeamMembers = [];
+            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
+            jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
+
+            var teamHtml = '';
+            teamHtml += '<li class="list-group-item task-title">Teams</li>';
+            // jsonTeam = [];
+            if (jsonTeam.length > 0) {
+                $.each(jsonTeam, function (indxTeam, objTeam) {
+                    teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.GroupName + '';
+                    teamHtml += '<span>';
+
+                    var groupWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
+                        return n.GroupID === objTeam.GroupID;
+                    });
+
+                    $.each(groupWiseMembers, function (indxMember, objMember) {
+                        teamHtml += '<img class="task-user-icon" src="../INCLUDES/Asset/images/profile.png" />';
+                    });
+                    teamHtml += '</span>';
+                    teamHtml += '</li>';
+                });
+            }
+            else {
+                teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">No Team Found';
+            }
+            teamHtml += '<li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>';
+            $("#ulTeam").html(teamHtml);
+        }
+
+        function BindTeamMembers() {
+
+            // Ajax Call
+            var jsonTeamMembers = [];
+            jsonTeamMembers.push({ UserId: 1, Name: "userName 1" });
+            jsonTeamMembers.push({ UserId: 2, Name: "userName 2" });
+            jsonTeamMembers.push({ UserId: 3, Name: "userName 3" });
+            jsonTeamMembers.push({ UserId: 4, Name: "userName 4" });
+            jsonTeamMembers.push({ UserId: 5, Name: "userName 5" });
+
+            var jsonTeamMembersHtml = "";
+            $.each(jsonTeamMembers, function (indxMember, objMember) {
+                jsonTeamMembersHtml += '<option value="' + objMember.UserId + '">' + objMember.Name + '</option>';
+            });
+            $("#ddlProjectMembers").html(jsonTeamMembersHtml);
+        }
+
+        function SaveProject() {
+            $("#txtProjectName").val();
+            $("#ddlProjectMembers").val();
+
+
+            // Ajax Call
+        }
+
     </script>
 </asp:Content>

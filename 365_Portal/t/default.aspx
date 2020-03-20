@@ -7,19 +7,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
-    <div class="container-fluid dashboard">
+    <div ng-app="MasterPage" ng-controller="DefaultController" class="container-fluid dashboard">
         <%-- phase 2 --%>
         <section>
             <h4 class="section-title">Recommendation</h4>
             <div class="row content">
-                <div class="col content-item">
+                <div class="col content-item" ng-repeat="topic in Topics">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
                             <span class="point">+400 Points</span>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
+                            <h5 class="card-title">{{topic.Title}}</h5>
                             <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
                             <p class="card-text text-muted mb-4">Leadership & Management</p>
                             <div class="action">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col content-item">
+                <%--     <div class="col content-item">
                     <div class="card bc-red">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -137,13 +137,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </div>--%>
             </div>
         </section>
         <%-- phase 2 --%>
 
-        <div ng-app="MasterPage" ng-controller="DefaultController">
+        <div>
             <div class="row">
                 <div class="col-12 achievements mb-5">
                     <div class="card top shadow">
