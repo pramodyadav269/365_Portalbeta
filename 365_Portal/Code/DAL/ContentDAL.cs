@@ -197,6 +197,7 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
                 cmd.Parameters.AddWithValue("p_SrNo", content.SrNo);
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);
+                cmd.Parameters.AddWithValue("p_duedate", content.DueDate);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
