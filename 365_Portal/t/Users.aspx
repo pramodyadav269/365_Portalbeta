@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-12 header mb-5">
             <a class="back" href="dashboard.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
-            <h2 class="text-center font-weight-bold">Users UAT</h2>
+            <h2 class="text-center font-weight-bold">Users</h2>
         </div>
 
         <div class="col-md-12" id="divGird">
@@ -101,8 +101,7 @@
                             </div>
                         </div>
 
-                    <div>
-
+                    
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="ddlGender">Gender</label>
@@ -146,8 +145,7 @@
                             </div>
                         </div>
 
-                    </div>
-
+                    
                         <div class="w-100"></div>
 
                         <div class="col-md-12 mt-4">
@@ -202,7 +200,7 @@
             $('#divTable').empty().append();
 
             var tbl = '<table id="tblGird" class="table table-bordered" style="width:100%">' +
-                '<thead><tr><th>#</th><th style="display:none;">ID</th><th>First Name</th><th>Last Name</th><th>Email ID</th><th>Title</th><th>Role</th><th>Groups</th><th style="width:9%">Action</th></thead>'
+                '<thead><tr><th>#</th><th style="display:none;">ID</th><th>First Name</th><th>Email ID</th><th>Gender</th><th>Department</th><th>Team</th><th>Manager</th><th>StartDate</th><th style="width:9%">Action</th></thead>'
 
             tbl += '<tbody>';
             if (Table != undefined && Table.length > 0) {
@@ -210,12 +208,13 @@
                     tbl += '<tr>';
                     tbl += '<td>' + (i + 1) + '</td>';
                     tbl += '<td style="display:none;" id="id">' + Table[i].UserID + '</td>';
-                    tbl += '<td title="' + Table[i].FirstName + '" >' + Table[i].FirstName + '</td>';
-                    tbl += '<td title="' + Table[i].LastName + '" >' + Table[i].LastName + '</td>';
+                    tbl += '<td title="' + Table[i].FirstName + '" >' + Table[i].FirstName + '</td>';                    
                     tbl += '<td title="' + Table[i].EmailID + '" >' + Table[i].EmailID + '</td>';
-                    tbl += '<td title="' + Table[i].Position + '" >' + Table[i].Position + '</td>';
-                    tbl += '<td title="' + Table[i].RoleName + '" >' + Table[i].RoleName + '</td>';
-                    tbl += '<td title="' + Table[i].GroupName + '" >' + FormatGroups(Table[i].GroupName) + '</td>';
+                    tbl += '<td title="' + Table[i].Gender + '" >' + FormatGender(Table[i].Gender) + '</td>';
+                    tbl += '<td title="' + Table[i].DeptName + '" >' + Table[i].DeptName + '</td>';
+                    tbl += '<td title="' + Table[i].TeamName + '" >' + Table[i].TeamName + '</td>';
+                    tbl += '<td title="' + Table[i].Manager + '" >' + Table[i].Manager + '</td>';
+                    tbl += '<td title="' + Table[i].StartDate + '" >' + FormatDate(Table[i].StartDate) + '</td>';
                     tbl += '<td><i title="Edit" onclick="Edit(this,' + Table[i].UserID + ');" class="fas fa-edit text-warning"></i>' +
                         '<i title="Delete" onclick="Delete(this,' + Table[i].UserID + ');" class="fas fa-trash text-danger"></i></td>';
                     tbl += '</tr>';
@@ -639,12 +638,13 @@
                                     {
                                         Month = '0' + Month;
                                     }
-                                    var Day = fromDate.getDay();
+                                    debugger
+                                    var Day = fromDate.getDate();
                                     if (Day < 10) {
                                         Day = '0' + Day;
                                     }
                                     var date = Year + '-' + Month + '-' + Day;
-
+                                    
                                     $('#txtDOJ').val(date);
                                 }                                
 

@@ -453,6 +453,13 @@
     <Compile Include="t\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\Departments.aspx.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\Departments.aspx.designer.cs">
+      <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\flashcards.aspx.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1048,6 +1055,7 @@
     <Content Include="t\Contents.aspx" />
     <Content Include="t\dashboard.aspx" />
     <Content Include="t\default.aspx" />
+    <Content Include="t\Departments.aspx" />
     <Content Include="t\flashcards.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />

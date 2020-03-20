@@ -1155,6 +1155,284 @@ namespace _365_Portal.Controllers
         }
         #endregion
 
+        #region CRUD FOR DEPARTMENTS
+
+        [HttpPost]
+        [Route("API/User/CreateDepartment")]
+        public IHttpActionResult CreateDepartment(JObject requestParams)
+        {
+            var data = string.Empty;
+            string DepartmentName = string.Empty;
+            int CompID;
+            string CreatedBy = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(requestParams["DepartmentName"].ToString()))
+                    {
+                        CompID = identity.CompId;
+                        CreatedBy = identity.UserID;
+
+                        if (!string.IsNullOrEmpty(requestParams["DepartmentName"].ToString()))
+                        {
+                            DepartmentName = requestParams["DepartmentName"].ToString();
+                        }
+                        else
+                        {
+                            DepartmentName = string.Empty;
+                        }
+                        var ds = UserBL.CreateDepartment(CompID, DepartmentName, string.Empty, CreatedBy);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/ModifyDepartment")]
+        public IHttpActionResult ModifyDepartment(JObject requestParams)
+        {
+            var data = string.Empty;
+            int DepartmentId = 0;
+            string DepartmentName = string.Empty;
+            int CompID;
+            string CreatedBy = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (((Convert.ToInt32(requestParams["DepartmentID"]) != 0 && !string.IsNullOrEmpty(requestParams["DepartmentID"].ToString())) &&
+                        !string.IsNullOrEmpty(requestParams["DepartmentName"].ToString())))
+                    {
+                        CompID = identity.CompId;
+                        CreatedBy = identity.UserID;
+                        if (!string.IsNullOrEmpty(requestParams["DepartmentID"].ToString()))
+                        {
+                            DepartmentId = Convert.ToInt32(requestParams["DepartmentID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["DepartmentName"].ToString()))
+                        {
+                            DepartmentName = requestParams["DepartmentName"].ToString();
+                        }
+                        else
+                        {
+                            content.TopicTitle = null;
+                        }
+                        var ds = UserBL.ModifyDepartment(CompID, DepartmentName, DepartmentId, string.Empty, CreatedBy);
+
+                        if (ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables["Data"];
+                            if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                            {
+                                data = Utility.ConvertDataSetToJSONString(dt);
+                                data = Utility.Successful(data);
+                            }
+                            else
+                            {
+                                data = dt.Rows[0]["ReturnMessage"].ToString();
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/GetDepartment")]
+        public IHttpActionResult GetDepartment(JObject requestParams)
+        {
+            var data = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    var ds = UserBL.ViewDepartment(identity.CompId);
+                    DataTable dt = ds.Tables["Data"];
+                    if (dt != null)
+                    {
+                        if (ds.Tables.Count > 0)
+                        {
+                            data = Utility.ConvertDataSetToJSONString(dt);
+                            data = Utility.Successful(data);
+                        }
+                        else
+                        {
+                            data = dt.Rows[0]["ReturnMessage"].ToString();
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = "Please Try Again";
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/DeleteDepartment")]
+        public IHttpActionResult DeleteDepartment(JObject requestParams)
+        {
+            var data = string.Empty;
+            int DepartmentId = 0;
+            string DepartmentName = string.Empty;
+            int CompID;
+
+            string CreatedBy = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if ((Convert.ToInt32(requestParams["DepartmentID"]) != 0 && !string.IsNullOrEmpty(requestParams["DepartmentID"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                    {
+                        bool IsActive = false;
+                        CompID = identity.CompId;
+                        CreatedBy = identity.UserID;
+                        if (!string.IsNullOrEmpty(requestParams["DepartmentID"].ToString()))
+                        {
+                            DepartmentId = Convert.ToInt32(requestParams["DepartmentID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                        {
+                            IsActive = (bool)requestParams["IsActive"];
+                        }
+                        var ds = UserBL.DeleteDepartment(CompID, DepartmentId, IsActive, CreatedBy);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        #endregion DEPARTMENTS
+
 
         [Route("API/User/GetUsers")]
         [HttpPost]

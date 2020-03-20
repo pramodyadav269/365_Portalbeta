@@ -72,6 +72,37 @@
             }
         });
 
+        function FormatGender(Gender) {
+            if (Gender != undefined && Gender != '')
+            {
+                if (Gender == 'M')
+                {
+                    Gender = 'Male';
+                }
+                else if (Gender == 'F') {
+                    Gender = 'Female';
+                }
+            }
+            else
+            {
+                Gender = '';
+            }
+            return Gender;
+        }
+
+        function FormatDate(date)
+        {
+            debugger
+            if (date != undefined && date != '')
+            {
+                date = date.substring(0, 9);
+            }
+            else {
+                date = '';
+            }
+            return date;
+        }
+
         function BindNotification() {
             //debugger
             var getUrl = "/API/Trainning/GetMsgNotifications";
