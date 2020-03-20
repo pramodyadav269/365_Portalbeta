@@ -11,8 +11,8 @@
         <%-- phase 2 --%>
         <section>
             <h4 class="section-title">Recommendation</h4>
-            <div class="row content">
-                <div class="col content-item" ng-repeat="topic in Topics">
+            <div class="content">
+                <div class="content-item" ng-repeat="topic in Topics">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <%--     <div class="col content-item">
+                <%--         <div class="content-item">
                     <div class="card bc-red">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col content-item">
+                <div class="content-item">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col content-item">
+                <div class="content-item">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col content-item">
+                <div class="content-item">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col content-item">
+                <div class="content-item">
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
@@ -932,7 +932,22 @@
     <script>
         $(document).ready(function () {
 
-            $('.content').slick({
+
+
+            $("#dvMenu_Dashboard").addClass("active");
+            $('select.select2').select2({
+                placeholder: "Select a option",
+                allowClear: true
+            });
+            //$('.date').datepicker({ uiLibrary: 'bootstrap4', format: 'yyyy-dd-mm' });
+            bsCustomFileInput.init();
+
+            GetAchievements();
+
+        });
+
+        function InitSlickSlider(el) {
+            $(el).slick({
                 dots: false,
                 infinite: false,
                 speed: 300,
@@ -963,17 +978,7 @@
                     }
                 ]
             });
-
-            $("#dvMenu_Dashboard").addClass("active");
-            $('select.select2').select2({
-                placeholder: "Select a option",
-                allowClear: true
-            });
-            //$('.date').datepicker({ uiLibrary: 'bootstrap4', format: 'yyyy-dd-mm' });
-            bsCustomFileInput.init();
-
-            GetAchievements();
-        });
+        }
 
         //This code loads the IFrame Player API code asynchronously.
         //var tag = document.createElement('script');

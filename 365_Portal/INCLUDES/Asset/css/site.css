@@ -347,6 +347,8 @@ main .container-fluid.dashboard {
 
     .content .content-item {
         margin-bottom: 1rem;
+        width: 356px;
+        margin-right: 1.5rem;
     }
 
         .content .content-item .card {
@@ -414,20 +416,20 @@ main .container-fluid.dashboard {
 
 /*slick slider*/
 
-.content.disable-bg-prev::before, .content.disable-bg-next::after {
+.content.slick-slider.disable-bg-prev::before, .content.slick-slider.disable-bg-next::after {
     opacity: 0;
 }
 
-.content.disable-bg-prev::before {
+.content.slick-slider.disable-bg-prev::before {
     left: -200px;
 }
 
-.content.disable-bg-next::after {
+.content.slick-slider.disable-bg-next::after {
     right: -200px;
 }
 
 
-.content::before {
+.content.slick-slider::before {
     position: absolute;
     top: -6px;
     left: 0;
@@ -439,7 +441,7 @@ main .container-fluid.dashboard {
     background: linear-gradient(to left, rgba(245, 246, 247, 0) 0%,#F5F6F7 50%,#F5F6F7 51%,#F5F6F7 100%)
 }
 
-.content::after {
+.content.slick-slider::after {
     position: absolute;
     top: -6px;
     right: 0;
