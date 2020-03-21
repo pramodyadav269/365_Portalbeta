@@ -52,6 +52,14 @@ namespace _365_Portal
         public List<Question> Questions { get; set; }
         public List<FlashcarIntro> FlashcardIntro { get; set; }
         public List<FlashcardSlides> FlashcardSlides { get; set; }
+
+
+
+        public int CourseCategory { get; set; }
+        public string CategoryColor { get; set; }
+        public double Points { get; set; }
+        public string CourseTime { get; set; }
+        public bool IsGlobal { get; set; }
     }
 
     public class FlashcarIntro

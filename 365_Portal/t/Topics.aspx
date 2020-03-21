@@ -27,15 +27,41 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="txtTitle">Title</label>
-                                <input type="text" class="form-control required" id="txtTitle" maxlength="50" placeholder="Title" />
+                                <label for="txtTitle">Course Name</label>
+                                <input type="text" class="form-control required" id="txtTitle" maxlength="50" placeholder="Course Name" />
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="txtDescription">Description</label>
-                                <textarea class="form-control required" placeholder="Description" id="txtDescription"></textarea>
+                                <label for="txtDescription">Course Summary</label>
+                                <textarea class="form-control required" placeholder="Course Summary" id="txtDescription"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ddlCourseCategory">Course Category</label>
+                                <select class="form-control required select2" id="ddlCourseCategory" style="width: 100% !important">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtCategoryColor">Category Color</label>
+                                <input type="text" class="form-control required" id="txtCategoryColor" placeholder="Category Color" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtPoints">Points</label>
+                                <input type="text" class="form-control required" id="txtPoints"  placeholder="Points" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtCourseTime">Course Time</label>
+                                <input type="text" class="form-control required" id="txtCourseTime" placeholder="Course Time" />
                             </div>
                         </div>
 
@@ -45,6 +71,16 @@
                                 <div class="custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" id="cbIsPublished" name="cgIsPublished" class="custom-control-input">
                                     <label class="custom-control-label" for="cbIsPublished">Yes</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group checkbox ">
+                                <label>Is Global</label>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="cbIsGlobal" name="cbIsGlobal" class="custom-control-input">
+                                    <label class="custom-control-label" for="cbIsGlobal">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -64,12 +100,62 @@
 
         $(document).ready(function () {
             //var s; $('#tblGird').find('tr').each(function i(i, index) { if (this.id != "") { s = s + this.id + ','; } console.log(this.id); }); console.log(s.length);
-
-
             View();
+            BindCourseCategory('view',0);
         });
+
         var accessToken = '<%=Session["access_token"]%>';
         var id;
+
+        function BindCourseCategory(flag,id) {
+            var getUrl = "/API/Content/BindCourseCategory";
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                contentType: "application/json",
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        HideLoader();
+                        if (DataSet.StatusCode == "1")
+                        {
+                            var CourseCategory = DataSet.Data.Data;
+
+                            if (CourseCategory != undefined && CourseCategory.length > 0) {
+                                $('#ddlCourseCategory').empty().append('<option></option>');
+                                for (var i = 0; i < CourseCategory.length; i++) {
+                                    $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
+                                }
+                                selectInit('#ddlCourseCategory', 'Select Course Category');
+                            }
+                            if (flag == 'update' && id != undefined) {
+                                $('#ddlCourseCategory').val(id).trigger('change');
+                            }
+                        }
+                        else {
+                            if (DataSet.Data != undefined && DataSet.Data.length > 0) {
+                                Swal.fire(DataSet.Data[0].ReturnMessage, {
+                                    icon: "error",
+                                });
+                            }
+                            else {
+                                Swal.fire(DataSet.StatusDescription, {
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    HideLoader();
+                }
+            });
+        }
+        
         function AddNew() {
 
             clearFields('.input-validation')
@@ -91,6 +177,16 @@
                 var _Title = $('#txtTitle').val();
                 var _Description = $('#txtDescription').val();
                 var _IsPublished = $('#cbIsPublished').prop('checked');
+
+
+                var _CourseCategory = $("#ddlCourseCategory option:selected").val();
+                var _CategoryColor = $('#txtCategoryColor').val();
+                var _Points = $('#txtPoints').val();
+                var _CourseTime = $('#txtCourseTime').val();
+                var _IsGlobal = $('#cbIsGlobal').prop('checked');
+
+                
+
                 if ($('#submit')[0].name == INSERT) {
                     getUrl = "/API/Content/CreateTopic";
 
@@ -100,7 +196,7 @@
 
                 }
 
-                requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive:true };
+                requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, IsGlobal: _IsGlobal };
 
                 try {
                     $.ajax({
@@ -204,27 +300,97 @@
         }
 
         function Edit(Topicid) {
-
+            debugger
             id = Topicid;
 
-            $('#' + id).find("td:not(:last-child)").each(function (i, data) {
-                if (this.className == 'title') {
-                    $('#txtTitle').val(this.innerText); ///This will find title for Topic 
+            //$('#' + id).find("td:not(:last-child)").each(function (i, data) {
+            //    if (this.className == 'title') {
+            //        $('#txtTitle').val(this.innerText); ///This will find title for Topic 
 
-                }
-                if (this.className == 'description') {
-                    $('#txtDescription').val(this.innerText);
-                }
-                if (this.className == 'isPublished') {
-                    if (this.innerText == "Yes") {
-                        $('#cbIsPublished').prop('checked', true);
-                    }
-                    else {
-                        $('#cbIsPublished').prop('checked', false);
-                    }
+            //    }
+            //    if (this.className == 'description') {
+            //        $('#txtDescription').val(this.innerText);
+            //    }
+            //    if (this.className == 'isPublished') {
+            //        if (this.innerText == "Yes") {
+            //            $('#cbIsPublished').prop('checked', true);
+            //        }
+            //        else {
+            //            $('#cbIsPublished').prop('checked', false);
+            //        }
 
+            //    }
+            //});
+
+            $('#txtTitle').val();
+            $('#txtDescription').val();
+            $('#txtCategoryColor').val();
+            $('#txtPoints').val();
+            $('#txtCourseTime').val();
+            $('#cbIsPublished').prop('checked', false);
+            $('#cbIsGlobal').prop('checked', false);
+
+            ShowLoader();
+            var getUrl = "/API/Content/EditTopic";
+            var requestParams = { TopicID: Topicid };
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(requestParams),
+                contentType: "application/json",
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        HideLoader();
+                        if (DataSet.StatusCode == "1")
+                        {
+                            //debugger
+                            var EditTopic = DataSet.Data.Data;
+
+                            $('#txtTitle').val(EditTopic[0].Title);
+                            $('#txtDescription').val(EditTopic[0].Description);
+                            $('#txtCategoryColor').val(EditTopic[0].CategoryColor);
+                            $('#txtPoints').val(EditTopic[0].Points);
+                            $('#txtCourseTime').val(EditTopic[0].CourseTime);
+                            
+                            if (EditTopic[0].IsPublished == "1") {
+                                $('#cbIsPublished').prop('checked', true);
+                            }
+                            else {
+                                $('#cbIsPublished').prop('checked', false);
+                            }
+                            if (EditTopic[0].IsGlobal == "1") {
+                                $('#cbIsGlobal').prop('checked', true);
+                            }
+                            else {
+                                $('#cbIsGlobal').prop('checked', false);
+                            }
+                            BindCourseCategory('update', EditTopic[0].CategoryID);
+                        }
+                        else {
+                            if (DataSet.Data != undefined && DataSet.Data.length > 0) {
+                                Swal.fire(DataSet.Data[0].ReturnMessage, {
+                                    icon: "error",
+                                });
+                            }
+                            else {
+                                Swal.fire(DataSet.StatusDescription, {
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    HideLoader();
                 }
             });
+
+
             inputValidation('.input-validation');
             toggle('divForm', 'divGird');
             $('#submit').attr('name', EDIT);

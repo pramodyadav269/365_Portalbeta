@@ -87,6 +87,28 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_IsPublished", Convert.ToInt32(content.IsPublished));
                 cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);
+
+
+                cmd.Parameters.AddWithValue("p_CourseCategory", content.CourseCategory);
+                if (!string.IsNullOrEmpty(content.CategoryColor))
+                {
+                    cmd.Parameters.AddWithValue("p_CategoryColor", content.CategoryColor);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_CategoryColor", DBNull.Value);
+                }
+                cmd.Parameters.AddWithValue("p_Points", content.Points);
+                if (!string.IsNullOrEmpty(content.CourseTime))
+                {
+                    cmd.Parameters.AddWithValue("p_CourseTime", content.CourseTime);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_CourseTime", DBNull.Value);
+                }
+                cmd.Parameters.AddWithValue("p_IsGlobal", Convert.ToInt32(content.IsGlobal));
+
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
@@ -274,6 +296,15 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);
 
+                cmd.Parameters.AddWithValue("p_Points", content.Points);
+                if (!string.IsNullOrEmpty(content.CourseTime))
+                {
+                    cmd.Parameters.AddWithValue("p_CourseTime", content.CourseTime);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_CourseTime", DBNull.Value);
+                }
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
@@ -393,6 +424,9 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_Title", content.ContentTitle.Trim());
                 cmd.Parameters.AddWithValue("p_FlashcardHighlights", content.FlashcardHighlights);
                 cmd.Parameters.AddWithValue("p_Description", content.ContentDescription);
+
+                cmd.Parameters.AddWithValue("p_Points", content.Points);
+
                 cmd.Parameters.AddWithValue("p_Overview", content.ModuleOverview);//Overview column
                 cmd.Parameters.AddWithValue("p_FlashcardTitle", content.FlashcardTitle);
                 cmd.Parameters.AddWithValue("p_SkipFlashcards", Convert.ToInt32(content.SkipFlashcard));
@@ -403,6 +437,7 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_PassingPercent", content.PassingPercent);
                 cmd.Parameters.AddWithValue("p_PassingScore", content.PassingScore);
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);
+                cmd.Parameters.AddWithValue("p_CourseTime", content.CourseTime);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
@@ -533,5 +568,92 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
         #endregion
+
+        public static DataSet BindCourseCategory(int compid, string userid, string Role)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            try
+            {
+                conn.Open();
+                string stm = "spBindCourseCategory";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_UserID", userid);
+                cmd.Parameters.AddWithValue("p_CompID", compid);
+                cmd.Parameters.AddWithValue("p_Role", Role);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
+        public static DataSet EditTopics(int compid, string userid, string Role,string topicid)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            try
+            {
+                conn.Open();
+                string stm = "spEditTopic";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_UserID", userid);
+                cmd.Parameters.AddWithValue("p_CompID", compid);
+                cmd.Parameters.AddWithValue("p_Role", Role);
+                cmd.Parameters.AddWithValue("p_TopicID", topicid);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
+        public static DataSet EditModules(int compid, string userid, string Role, string topicid, string moduleid)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            try
+            {
+                conn.Open();
+                string stm = "spEditModules";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_UserID", userid);
+                cmd.Parameters.AddWithValue("p_CompID", compid);
+                cmd.Parameters.AddWithValue("p_Role", Role);
+                cmd.Parameters.AddWithValue("p_TopicID", topicid);
+                cmd.Parameters.AddWithValue("p_ModuleID", moduleid);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
     }
 }
