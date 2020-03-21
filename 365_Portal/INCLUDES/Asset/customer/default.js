@@ -622,6 +622,14 @@ app.directive('myPostRepeatDirective', function () {
     };
 });
 
+app.directive('myTopicRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            InitSlickSlider('.content');
+        }
+    };
+});
+
 function NextItemContent(contentid) {
     var contId = {};
     $.each(allContents, function (key, content) {

@@ -501,12 +501,12 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic)
+        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic,DateTime dueDate)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = TrainningDAL.AssignTopicsByEntity(compID, userId, topicIds, groupIds, userIds, removeTopic);
+                ds = TrainningDAL.AssignTopicsByEntity(compID, userId, topicIds, groupIds, userIds, removeTopic, dueDate);
             }
             catch (Exception ex)
             {

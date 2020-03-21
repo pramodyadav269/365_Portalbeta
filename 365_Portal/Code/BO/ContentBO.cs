@@ -48,6 +48,7 @@ namespace _365_Portal
         public double TotalScore { get; set; }
         public double PassingPercent { get; set; }
         public double PassingScore { get; set; }
+        public DateTime DueDate { get; set; }
 
         public List<Question> Questions { get; set; }
         public List<FlashcarIntro> FlashcardIntro { get; set; }

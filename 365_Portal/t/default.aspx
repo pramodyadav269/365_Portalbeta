@@ -9,11 +9,11 @@
     <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
     <div ng-app="MasterPage" ng-controller="DefaultController" class="container-fluid dashboard">
         <%-- phase 2 --%>
-        <section>
-            <h4 class="section-title">Recommendation</h4>
+        <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+            <h4 class="section-title">My Courses</h4>
             <div class="content">
-                <div class="content-item" ng-repeat="topic in Topics">
-                    <div class="card bc-blue">
+                <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
+                    <div class="card bc-blue" >
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
                             <span class="point">+400 Points</span>
@@ -26,7 +26,7 @@
                                 <span><i class="fas fa-heart"></i></span>
                                 <span><i class="fas fa-plus"></i></span>
                                 <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
+                                <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId)" style="cursor: pointer;">
                                     <i class="fas fa-play"></i>
                                 </span>
                             </div>
@@ -144,14 +144,13 @@
 
         <div>
             <div class="row">
-                <div class="col-12 achievements mb-5">
+                <div class="col-12 achievements mb-5" style="display:none;">
                     <div class="card top shadow">
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
                                     <p class="card-text">Welcome to 365!</p>
-
                                 </div>
                             </div>
 
@@ -278,7 +277,7 @@
                 </div>
             </div>
             <%--Start Topics--%>
-            <div class="row" id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+            <div class="row" style="display:none;" ng-if="ActiveContainer =='Topic'">
                 <div class="col-12">
                     <h6 class="section-title">My Courses</h6>
                 </div>

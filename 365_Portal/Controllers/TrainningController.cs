@@ -590,6 +590,9 @@ namespace _365_Portal.Controllers
                     var groupIds = Convert.ToString(requestParams["GroupIds"].ToString());
                     var userIds = Convert.ToString(requestParams["UserIds"].ToString());
                     var removeTopic = Convert.ToString(requestParams["RemoveTopics"].ToString());
+                    var dueDate = DateTime.Now.AddYears(50);
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["DueDate"])))
+                        dueDate = Convert.ToDateTime(Convert.ToString(requestParams["DueDate"]));
 
                     if (!string.IsNullOrEmpty(userIds))
                     {
@@ -615,7 +618,7 @@ namespace _365_Portal.Controllers
                         }
                     }
 
-                    var ds = TrainningBL.AssignTopicsByEntity(compId, userId, topicIds, groupIds, userIds, removeTopic);
+                    var ds = TrainningBL.AssignTopicsByEntity(compId, userId, topicIds, groupIds, userIds, removeTopic, dueDate);
                     if (ds.Tables.Count > 0)
                     {
                         // Successful
