@@ -267,6 +267,12 @@
                                             <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
                                         </div>
                                     </div>
+                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                        <div class="form-group">
+                                            <label for="txtProjectGoal">Project Goal</label>
+                                            <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
+                                        </div>
+                                    </div>
                                     <div class="col-12 col-sm-12 col-md-10">
                                         <div class="form-group">
                                             <label for="ddlProjectMembers">Project Members</label>
@@ -372,7 +378,7 @@
             });
 
             $('#dvDueDate').on('dp.change', function (event) {
-                var formatted_date = event.date.format('MM/DD/YYYY hh:mm A');
+                var formatted_date = event.date.format('DD/MM/YYYY hh:mm A');
                 $('#txtDueDate').val(formatted_date);
             });
 
