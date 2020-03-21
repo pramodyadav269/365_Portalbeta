@@ -73,11 +73,11 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GetModulesByTopic = function (topicId) {
-        $scope.ActiveContainer = "Module";
         $scope.SelectedTopic = $rootScope.Topics.filter(function (v) {
             return topicId == v.TopicId;
         })[0];
         objDs.DS_GetModulesByTopic(topicId);
+        $scope.ActiveContainer = "Module";
     }
 
     $scope.GetContentsByModule = function (topicId, moduleId) {
@@ -268,6 +268,19 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         objDs.DS_RetakeTest(topicId, moduleId, contentId, surveyId);
     }
 
+    $scope.ChangeTopicProperty = function (objTopic, type, topicId, flag) {
+        if (type == 1)
+            objTopic.IsFavourite = flag;
+        else if (type == 2)
+            objTopic.IsArchieved = flag;
+        else if (type == 3)
+            objTopic.IsBookmark = flag;
+        else if (type == 4)
+            objTopic.IsDeleted = flag;
+
+        objDs.DS_ChangeTopicProperty(type, topicId, flag);
+    }
+
     $scope.GetFormattedDate = function (date) {
         //return date.split("/").reverse().join("-");
         var dateParts = date.split("-");
@@ -299,6 +312,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GoBack = function (prevPage) {
+        if (prevPage == "Module") {
+            lockLessonFirstTime = true;
+            unlockLessonFirstTime = true;
+        }
+        else if (prevPage == "Topic") {
+
+        }
 
         $scope.ActiveContainer = prevPage;
         if (prevPage == 'Content')
@@ -323,6 +343,29 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         var nextContent = NextItemContent(contentId);
         $scope.ViewContent(nextContent.TopicID, nextContent.ModuleID, nextContent.ContentID, nextContent.Title, nextContent.ContentType);
     }
+
+    $scope.GetTopicTime = function (timeHrsMin) {
+        var arrHrsMins = timeHrsMin.split(':');
+        if (arrHrsMins.length == 1) {
+            return arrHrsMins[0] + " hr";
+        }
+        else if (arrHrsMins.length == 2) {
+            return arrHrsMins[0] + " hr " + arrHrsMins[1] + " m";
+        }
+        else {
+            return "";
+        }
+    }
+    //var callCount = 1;
+    //$scope.finished = function () {
+    //    if (callCount == 1) {
+    //        alert("completed");
+    //        InitSlickSlider('#dvUnlockedLessons');
+    //        callCount = 2;
+    //    }
+    //    else
+    //        callCount = 1;
+    //}
 });
 
 //COMMON SERVICE OPERATIONS
@@ -596,6 +639,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             data: requestParams,
         }).then(function success(response) {
             var responseData = response.data;
+            alert("Success");
             HideLoader();
         });
     }
@@ -625,7 +669,44 @@ app.directive('myPostRepeatDirective', function () {
 app.directive('myTopicRepeatDirective', function () {
     return function (scope, element, attrs) {
         if (scope.$last) {
-            InitSlickSlider('.content');
+            InitSlickSlider('#dvTopics');
+            isDone = false;
+        }
+    };
+});
+
+var unlockLessonFirstTime = true;
+var unlockLessonCount = 1;
+app.directive('myUnlocklessonRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            if (unlockLessonFirstTime || unlockLessonCount == 2) {
+                InitSlickSlider('#dvUnlockedLessons');
+                unlockLessonFirstTime = false;
+                unlockLessonCount = 1;
+                $("#dvModuleContainer").show();
+            }
+            else {
+                unlockLessonCount = 2;
+            }
+        }
+    };
+});
+
+var lockLessonFirstTime = true;
+var lockLessonCount = 1;
+app.directive('myLockedlessonRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            if (lockLessonFirstTime || lockLessonCount == 2) {
+                InitSlickSlider('#dvLockedLessons');
+                lockLessonFirstTime = false;
+                lockLessonCount = 1;
+                $("#dvModuleContainer").show();
+            }
+            else {
+                lockLessonCount = 2;
+            }
         }
     };
 });

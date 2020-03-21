@@ -305,34 +305,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="INCLUDES\360Life.Master.cs">
-      <DependentUpon>360Life.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="INCLUDES\360Life.Master.designer.cs">
-      <DependentUpon>360Life.Master</DependentUpon>
-    </Compile>
-    <Compile Include="INCLUDES\Dashboard.aspx.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="INCLUDES\Dashboard.aspx.designer.cs">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="INCLUDES\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="INCLUDES\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="INCLUDES\ValidationForm.aspx.cs">
-      <DependentUpon>ValidationForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="INCLUDES\ValidationForm.aspx.designer.cs">
-      <DependentUpon>ValidationForm.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -562,68 +534,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="Asset\admin\login.js" />
-    <Content Include="Asset\css\all.css" />
-    <Content Include="Asset\css\bootstrap.css" />
-    <Content Include="Asset\css\bootstrap.min.css" />
-    <Content Include="Asset\css\dataTables.bootstrap4.min.css" />
-    <Content Include="Asset\css\gijgo.min.css" />
-    <Content Include="Asset\css\select2.min.css" />
-    <Content Include="Asset\css\site.css" />
-    <Content Include="Asset\customer\common.js" />
-    <Content Include="Asset\customer\default.js" />
-    <Content Include="Asset\data\bunny.mp4" />
-    <Content Include="Asset\fonts\gijgo-material.svg" />
-    <Content Include="Asset\images\close-button.png" />
-    <Content Include="Asset\images\contract-file.png" />
-    <Content Include="Asset\images\didnt-like-icon.svg" />
-    <Content Include="Asset\images\diploma.png" />
-    <Content Include="Asset\images\employee-illustration.svg" />
-    <Content Include="Asset\images\engager-icon.svg" />
-    <Content Include="Asset\images\exam.png" />
-    <Content Include="Asset\images\flash-card.png" />
-    <Content Include="Asset\images\flashcard-icon.svg" />
-    <Content Include="Asset\images\giftbox.png" />
-    <Content Include="Asset\images\like-icon.svg" />
-    <Content Include="Asset\images\logo.svg" />
-    <Content Include="Asset\images\love-icon.svg" />
-    <Content Include="Asset\images\meh-icon.svg" />
-    <Content Include="Asset\images\next-flashcard-icon.svg" />
-    <Content Include="Asset\images\next-pdf-icon.svg" />
-    <Content Include="Asset\images\next-video-icon.svg" />
-    <Content Include="Asset\images\pdf-file.png" />
-    <Content Include="Asset\images\pdf-icon.svg" />
-    <Content Include="Asset\images\perfectionist-c-icon.svg" />
-    <Content Include="Asset\images\profile.png" />
-    <Content Include="Asset\images\quiz-icon.svg" />
-    <Content Include="Asset\images\quiz-master-c-icon.svg" />
-    <Content Include="Asset\images\reward-icon.svg" />
-    <Content Include="Asset\images\suprrise-icon.svg" />
-    <Content Include="Asset\images\survey-icon.svg" />
-    <Content Include="Asset\images\survey.png" />
-    <Content Include="Asset\images\target.png" />
-    <Content Include="Asset\images\video-file.png" />
-    <Content Include="Asset\images\video-icon.svg" />
-    <Content Include="Asset\images\wordsmith-c-icon.svg" />
-    <Content Include="Asset\js\all.js" />
-    <Content Include="Asset\js\angular.min.js" />
-    <Content Include="Asset\js\bootstrap.js" />
-    <Content Include="Asset\js\bootstrap.min.js" />
-    <Content Include="Asset\js\bs-custom-file-input.min.js" />
-    <Content Include="Asset\js\dataTables.bootstrap4.min.js" />
-    <Content Include="Asset\js\gijgo.min.js" />
-    <Content Include="Asset\js\jquery.dataTables.min.js" />
-    <Content Include="Asset\js\jquery.min.js" />
-    <Content Include="Asset\js\jquery.tablednd.js" />
-    <Content Include="Asset\js\moment.js" />
-    <Content Include="Asset\js\popper.min.js" />
-    <Content Include="Asset\js\select2.min.js" />
-    <Content Include="Asset\js\site.js" />
-    <Content Include="Asset\js\sweetalert.min.js" />
-    <Content Include="Asset\js\sweetalert2.js" />
-    <Content Include="Asset\webfonts\fa-brands-400.svg" />
-    <Content Include="Asset\webfonts\fa-regular-400.svg" />
-    <Content Include="Asset\webfonts\fa-solid-900.svg" />
     <Content Include="bin\365_Portal.dll" />
     <Content Include="bin\365_Portal.pdb" />
     <Content Include="bin\Antlr3.Runtime.dll" />
@@ -724,18 +634,36 @@
     <Content Include="INCLUDES\Asset\customer\common.js" />
     <Content Include="INCLUDES\Asset\customer\default.js" />
     <Content Include="INCLUDES\Asset\data\bunny.mp4" />
+    <Content Include="INCLUDES\Asset\data\test.pdf" />
+    <Content Include="INCLUDES\Asset\fonts\gijgo-material.eot" />
     <Content Include="INCLUDES\Asset\fonts\gijgo-material.svg" />
+    <Content Include="INCLUDES\Asset\fonts\gijgo-material.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\gijgo-material.woff" />
+    <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-700.woff2" />
+    <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-regular.woff2" />
     <Content Include="INCLUDES\Asset\images\add-people.png" />
     <Content Include="INCLUDES\Asset\images\arrow-down-sign-to-navigate.png" />
+    <Content Include="INCLUDES\Asset\images\close-button.png" />
     <Content Include="INCLUDES\Asset\images\college-graduation.png" />
     <Content Include="INCLUDES\Asset\images\combined-shape.png" />
-    <Content Include="INCLUDES\Asset\images\diamond.png" />
     <Content Include="INCLUDES\Asset\images\comments.png" />
+    <Content Include="INCLUDES\Asset\images\CompanyLogo.png" />
+    <Content Include="INCLUDES\Asset\images\contract-file.png" />
+    <Content Include="INCLUDES\Asset\images\diamond.png" />
+    <Content Include="INCLUDES\Asset\images\didnt-like-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\diploma.png" />
+    <Content Include="INCLUDES\Asset\images\employee-illustration.svg" />
+    <Content Include="INCLUDES\Asset\images\engager-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\exam.png" />
+    <Content Include="INCLUDES\Asset\images\flash-card.png" />
+    <Content Include="INCLUDES\Asset\images\flashcard-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\giftbox.png" />
     <Content Include="INCLUDES\Asset\images\learning-library.png" />
+    <Content Include="INCLUDES\Asset\images\like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\logo-black.svg" />
     <Content Include="INCLUDES\Asset\images\logo-white.svg" />
-    <Content Include="INCLUDES\Asset\images\mobile-img.jpg" />
-    <Content Include="INCLUDES\Asset\images\notifications.png" />
+    <Content Include="INCLUDES\Asset\images\logo.svg" />
+    <Content Include="INCLUDES\Asset\images\love-icon.svg" />
     <Content Include="INCLUDES\Asset\images\mask-group-bottom-green.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-bottom-orange.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-bottom-purple.png" />
@@ -744,15 +672,35 @@
     <Content Include="INCLUDES\Asset\images\mask-group-top-orange.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-top-purple.png" />
     <Content Include="INCLUDES\Asset\images\mask-group-top-red.png" />
+    <Content Include="INCLUDES\Asset\images\meh-icon.svg" />
     <Content Include="INCLUDES\Asset\images\menu.png" />
+    <Content Include="INCLUDES\Asset\images\mobile-img.jpg" />
+    <Content Include="INCLUDES\Asset\images\next-flashcard-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\next-pdf-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\next-video-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\notifications.png" />
+    <Content Include="INCLUDES\Asset\images\pdf-file.png" />
+    <Content Include="INCLUDES\Asset\images\pdf-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\perfectionist-c-icon.svg" />
     <Content Include="INCLUDES\Asset\images\profile.png" />
+    <Content Include="INCLUDES\Asset\images\quiz-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\quiz-master-c-icon.svg" />
     <Content Include="INCLUDES\Asset\images\return.png" />
+    <Content Include="INCLUDES\Asset\images\reward-icon.svg" />
     <Content Include="INCLUDES\Asset\images\settings.png" />
     <Content Include="INCLUDES\Asset\images\sun.png" />
+    <Content Include="INCLUDES\Asset\images\suprrise-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\survey-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\survey.png" />
+    <Content Include="INCLUDES\Asset\images\target.png" />
+    <Content Include="INCLUDES\Asset\images\text-icon.svg" />
     <Content Include="INCLUDES\Asset\images\theme1.png" />
     <Content Include="INCLUDES\Asset\images\up-arrow.png" />
     <Content Include="INCLUDES\Asset\images\us.png" />
     <Content Include="INCLUDES\Asset\images\user.png" />
+    <Content Include="INCLUDES\Asset\images\video-file.png" />
+    <Content Include="INCLUDES\Asset\images\video-icon.svg" />
+    <Content Include="INCLUDES\Asset\images\wordsmith-c-icon.svg" />
     <Content Include="INCLUDES\Asset\js\360.js" />
     <Content Include="INCLUDES\Asset\js\all.js" />
     <Content Include="INCLUDES\Asset\js\angular-sanitize.js" />
@@ -772,6 +720,7 @@
     <Content Include="INCLUDES\Asset\js\slick.min.js" />
     <Content Include="INCLUDES\Asset\js\sweetalert2.js" />
     <Content Include="INCLUDES\Asset\tinymce\jquery.tinymce.min.js" />
+    <Content Include="INCLUDES\Asset\tinymce\langs\readme.md" />
     <Content Include="INCLUDES\Asset\tinymce\license.txt" />
     <Content Include="INCLUDES\Asset\tinymce\plugins\advlist\plugin.min.js" />
     <Content Include="INCLUDES\Asset\tinymce\plugins\anchor\plugin.min.js" />
@@ -824,23 +773,35 @@
     <Content Include="INCLUDES\Asset\tinymce\skins\content\writer\content.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\content.inline.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\content.min.css" />
+    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\content.min.css.15712_1.266.partial" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\content.mobile.min.css" />
+    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\skin.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\skin.mobile.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\content.inline.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\content.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\content.mobile.min.css" />
+    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\skin.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\skin.mobile.min.css" />
     <Content Include="INCLUDES\Asset\tinymce\themes\mobile\theme.min.js" />
     <Content Include="INCLUDES\Asset\tinymce\themes\silver\theme.min.js" />
     <Content Include="INCLUDES\Asset\tinymce\tinymce.min.js" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.eot" />
     <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.svg" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.ttf" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.woff" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.woff2" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.eot" />
     <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.svg" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.ttf" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.woff" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.woff2" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.eot" />
     <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.svg" />
-    <Content Include="INCLUDES\Dashboard.aspx" />
-    <Content Include="INCLUDES\Default.aspx" />
-    <Content Include="INCLUDES\ValidationForm.aspx" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.ttf" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff" />
+    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff2" />
     <Content Include="Login.aspx" />
     <Content Include="Phase2\Assets\css\site.css" />
     <Content Include="Phase2\Assets\css\all.css" />
@@ -966,52 +927,11 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Asset\fonts\heebo-v5-latin-700.woff2" />
-    <Content Include="Asset\fonts\heebo-v5-latin-regular.woff2" />
-    <Content Include="Asset\webfonts\fa-brands-400.eot" />
-    <Content Include="Asset\webfonts\fa-brands-400.ttf" />
-    <Content Include="Asset\webfonts\fa-brands-400.woff" />
-    <Content Include="Asset\webfonts\fa-brands-400.woff2" />
-    <Content Include="Asset\webfonts\fa-regular-400.eot" />
-    <Content Include="Asset\webfonts\fa-regular-400.ttf" />
-    <Content Include="Asset\webfonts\fa-regular-400.woff" />
-    <Content Include="Asset\webfonts\fa-regular-400.woff2" />
-    <Content Include="Asset\webfonts\fa-solid-900.eot" />
-    <Content Include="Asset\webfonts\fa-solid-900.ttf" />
-    <Content Include="Asset\webfonts\fa-solid-900.woff" />
-    <Content Include="Asset\webfonts\fa-solid-900.woff2" />
-    <Content Include="Asset\data\test.pdf" />
-    <Content Include="Asset\fonts\gijgo-material.eot" />
-    <Content Include="Asset\fonts\gijgo-material.ttf" />
-    <Content Include="Asset\fonts\gijgo-material.woff" />
     <Content Include="bin\365_Portal.dll.config" />
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bulk_upload.xlsx" />
-    <Content Include="INCLUDES\360Life.Master" />
-    <Content Include="INCLUDES\Asset\data\test.pdf" />
-    <Content Include="INCLUDES\Asset\fonts\gijgo-material.eot" />
-    <Content Include="INCLUDES\Asset\fonts\gijgo-material.ttf" />
-    <Content Include="INCLUDES\Asset\fonts\gijgo-material.woff" />
-    <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-700.woff2" />
-    <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-regular.woff2" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.eot" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.ttf" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.woff" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-brands-400.woff2" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.eot" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.ttf" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.woff" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-regular-400.woff2" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.eot" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.ttf" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff" />
-    <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff2" />
-    <Content Include="INCLUDES\Asset\tinymce\langs\readme.md" />
-    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\content.min.css.15712_1.266.partial" />
-    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
-    <Content Include="INCLUDES\Asset\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Phase2\Site.Master" />
     <Content Include="Phase2\Assets\fonts\gijgo-material.eot" />
     <Content Include="Phase2\Assets\fonts\gijgo-material.ttf" />
