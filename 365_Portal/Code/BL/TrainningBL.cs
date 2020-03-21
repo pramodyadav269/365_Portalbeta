@@ -46,6 +46,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet AddFavAndBookMark(string UserID, int CompID, int TopicID, int IsFav, int IsBookMark)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.AddFavAndBookMark(UserID, CompID,TopicID, IsFav, IsBookMark);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
         public static DataSet GetModulesByTopic(int compId, string userId, int topicId)
         {
             DataSet ds = new DataSet();
