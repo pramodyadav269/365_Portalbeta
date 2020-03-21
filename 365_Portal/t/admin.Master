@@ -42,6 +42,9 @@
     <script src="../includes/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../includes/Asset/js/site.js"></script>
+
+
+
     <script>
 
         var accessToken = '<%=Session["access_token"]%>';
@@ -332,7 +335,7 @@
             </a>
 
             <%-- phase2 --%>
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" style="display:none;">
                 <li class="nav-item courses dropdown"><a class="nav-link" id="navbarCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="name dropdown-toggle">Courses</span></a>
                     <div class="dropdown-menu" aria-labelledby="navbarCourses">

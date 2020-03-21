@@ -46,6 +46,75 @@ namespace _365_Portal.Controllers
             return new APIResult(Request, data);
         }
 
+        [Route("api/Trainning/AddFavAndBookMark")]
+        [HttpPost]
+        public IHttpActionResult AddFavAndBookMark(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                try
+                {
+                    int TopicID = 0;
+                    int IsFav = 0;
+                    int IsBookMark = 0;
+                    bool ValFlag = true;
+
+                    string Message = string.Empty;
+                    int compId = identity.CompId;
+                    string userId = identity.UserID;
+
+                    if (requestParams.SelectToken("TopicID") != null && requestParams.SelectToken("TopicID").ToString().Trim() != "")
+                    {
+                        TopicID = Convert.ToInt32(requestParams.SelectToken("TopicID"));
+                    }
+                    else
+                    {
+                        Message = "Please provide TopicID."; ValFlag = false;
+                    }
+                    if (requestParams.SelectToken("Fav") != null && requestParams.SelectToken("Fav").ToString().Trim() != "" 
+                        && (requestParams.SelectToken("Fav").ToString().Trim() == "0" || requestParams.SelectToken("Fav").ToString().Trim() == "1"))
+                    {
+                        IsFav = Convert.ToInt32(requestParams.SelectToken("Fav"));
+                    }
+                    else
+                    {
+                        Message = "Please provide valid Favourite flag."; ValFlag = false;
+                    }
+                    if (requestParams.SelectToken("BookMark") != null && requestParams.SelectToken("BookMark").ToString().Trim() != ""
+                        && (requestParams.SelectToken("BookMark").ToString().Trim() == "0" || requestParams.SelectToken("BookMark").ToString().Trim() == "1"))
+                    {
+                        IsBookMark = Convert.ToInt32(requestParams.SelectToken("BookMark"));
+                    }
+                    else
+                    {
+                        Message = "Please provide valid Bookmark flag."; ValFlag = false;
+                    }
+
+                    if (ValFlag)
+                    {
+                        var ds = TrainningBL.AddFavAndBookMark(userId, compId, TopicID, IsFav, IsBookMark);
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", Message);
+                    }                    
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
         [Route("api/Trainning/GetModulesByTopic")]
         [HttpPost]
         public IHttpActionResult GetModulesByTopic(JObject requestParams)
@@ -521,6 +590,9 @@ namespace _365_Portal.Controllers
                     var groupIds = Convert.ToString(requestParams["GroupIds"].ToString());
                     var userIds = Convert.ToString(requestParams["UserIds"].ToString());
                     var removeTopic = Convert.ToString(requestParams["RemoveTopics"].ToString());
+                    var dueDate = DateTime.Now.AddYears(50);
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["DueDate"])))
+                        dueDate = Convert.ToDateTime(Convert.ToString(requestParams["DueDate"]));
 
                     if (!string.IsNullOrEmpty(userIds))
                     {
@@ -546,7 +618,7 @@ namespace _365_Portal.Controllers
                         }
                     }
 
-                    var ds = TrainningBL.AssignTopicsByEntity(compId, userId, topicIds, groupIds, userIds, removeTopic);
+                    var ds = TrainningBL.AssignTopicsByEntity(compId, userId, topicIds, groupIds, userIds, removeTopic, dueDate);
                     if (ds.Tables.Count > 0)
                     {
                         // Successful
@@ -669,5 +741,6 @@ namespace _365_Portal.Controllers
             }
             return new APIResult(Request, data);
         }
+
     }
 }

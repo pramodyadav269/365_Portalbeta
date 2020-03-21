@@ -8,150 +8,161 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
     <div ng-app="MasterPage" ng-controller="DefaultController" class="container-fluid dashboard">
-        <%-- phase 2 --%>
-        <section>
-            <h4 class="section-title">Recommendation</h4>
-            <div class="content">
-                <div class="content-item" ng-repeat="topic in Topics">
+        <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+            <h4 class="section-title">My Courses</h4>
+            <div id="dvTopics" class="content">
+                <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
                     <div class="card bc-blue">
                         <div class="card-icon">
                             <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
+                            <span class="point">+{{topic.Points}} Points</span>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{topic.Title}}</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
+                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
+                            <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                             <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
+                                <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
                                 <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
+                                <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId)" style="cursor: pointer;">
                                     <i class="fas fa-play"></i>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%--         <div class="content-item">
-                    <div class="card bc-red">
-                        <div class="card-icon">
-                            <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
-                            <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
-                                <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-red bc-red">
-                                    <i class="fas fa-play"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-item">
-                    <div class="card bc-blue">
-                        <div class="card-icon">
-                            <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
-                            <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
-                                <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
-                                    <i class="fas fa-play"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-item">
-                    <div class="card bc-blue">
-                        <div class="card-icon">
-                            <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
-                            <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
-                                <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
-                                    <i class="fas fa-play"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-item">
-                    <div class="card bc-blue">
-                        <div class="card-icon">
-                            <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
-                            <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
-                                <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
-                                    <i class="fas fa-play"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="content-item">
-                    <div class="card bc-blue">
-                        <div class="card-icon">
-                            <img src="../INCLUDES/Asset/images/sun.png">
-                            <span class="point">+400 Points</span>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">How to Accomplish More With Less</h5>
-                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">18 hrs</span></div>
-                            <p class="card-text text-muted mb-4">Leadership & Management</p>
-                            <div class="action">
-                                <span><i class="fas fa-heart"></i></span>
-                                <span><i class="fas fa-plus"></i></span>
-                                <span><i class="fas fa-tag rotate-90deg"></i></span>
-                                <span class="play bg-blue bc-blue">
-                                    <i class="fas fa-play"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
             </div>
         </section>
-        <%-- phase 2 --%>
+
+        <div id="dvModuleContainer" style="display: none;" ng-if="ActiveContainer =='Module'">
+            <div class="col-sm-12 header">
+                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
+                <h6 class="text-center section-title mt-3 color-0-25">Course</h6>
+            </div>
+            <div class="col-sm-6 mt-4 offset-md-3 completed-progress">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="float-left"><span>{{SelectedTopic.CompletedModules}} of {{SelectedTopic.TotalModules}}</span> lessons completed</p>
+                        <i class="fas fa-trophy fa-lg float-right"></i>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress border-radius-0">
+                            <div class="progress-bar bg-green" role="progressbar" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <h4 class="section-title">Unlocked Lessons</h4>
+                <div id="dvUnlockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
+                        <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <span class="point">+{{module.LessonPoints}} Points</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(module.LessonTime) }}</span></div>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
+                                <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4 class="section-title">Locked Lessons</h4>
+                <div id="dvLockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
+                        <div class="card bc-blue">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <span class="point">+{{module.LessonPoints}} Points</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p class="text-right anchor"><i class="fas fa-lock"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <%--    <div id="dvModuleContainer"  ng-if="ActiveContainer =='Module'">
+            <div class="col-sm-12 header">
+                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
+                <h6 class="text-center section-title mt-3 color-0-25">Course</h6>
+            </div>
+            <div class="col-sm-6 mt-4 offset-md-3 completed-progress">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="float-left"><span>{{SelectedTopic.CompletedModules}} of {{SelectedTopic.TotalModules}}</span> lessons completed</p>
+                        <i class="fas fa-trophy fa-lg float-right"></i>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress border-radius-0">
+                            <div class="progress-bar bg-green" role="progressbar" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <h4 class="section-title">Unlocked Lessons</h4>
+                <div id="dvUnlockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
+                        <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
+                                <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4 class="section-title">Locked Lessons</h4>
+                <div id="dvLockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
+                        <div class="card bc-blue">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p class="text-right anchor"><i class="fas fa-lock"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>--%>
 
         <div>
             <div class="row">
-                <div class="col-12 achievements mb-5">
+                <div class="col-12 achievements mb-5" style="display: none;">
                     <div class="card top shadow">
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
                                     <p class="card-text">Welcome to 365!</p>
-
                                 </div>
                             </div>
 
@@ -278,7 +289,7 @@
                 </div>
             </div>
             <%--Start Topics--%>
-            <div class="row" id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+            <%--   <div class="row" style="display:none;" ng-if="ActiveContainer =='Topic'">
                 <div class="col-12">
                     <h6 class="section-title">My Courses</h6>
                 </div>
@@ -300,13 +311,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
+            </div>--%>
 
             <%--End Topics--%>
 
             <%--Start Modules--%>
-            <div class="row" id="dvModuleContainer" ng-if="ActiveContainer =='Module'">
+            <%--   <div class="row" id="dvModuleContainer11" style="display: none;" ng-if="ActiveContainer =='Module'">
                 <div class="col-sm-12 header">
                     <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                     <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
@@ -332,7 +342,8 @@
                         <div class="col-sm-12 mb-1">
                             <h6 class="section-title">Unlocked Lessons</h6>
                         </div>
-                        <div class="col-sm-12">
+
+                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-4" ng-repeat="module in Module.UnlockedItems">
                                     <div ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
@@ -344,28 +355,10 @@
                                                 <p class="card-text">{{module.Description}}</p>
                                                 <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
                                                 <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
-                                                <%-- TopicID:{{SelectedTopic.TopicId}},ModuleID:{{module.ModuleID}}--%>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <%--
-                             <div class="col-sm-12 col-md-4" ng-repeat="topic in Topics">
-                                <div ng-click="GetModulesByTopic(topic.TopicId)" style="cursor: pointer;">
-                                    <div class="{{topic.Class}}">
-                                        <img class="card-mask-top" src="{{topic.TopClass}}" />
-                                        <img class="card-mask-bottom" src="{{topic.BottomClass}}" />
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{topic.Title}}</h5>
-                                            <p class="card-text">{{topic.Description}}</p>
-                                            <p ng-if="topic.IsCompleted == '1'" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
-                                            <p ng-if="topic.IsCompleted != '1'" class="text-right anchor">{{topic.CompletedModules + '/' + topic.TotalModules}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                --%>
                             </div>
                         </div>
                     </div>
@@ -390,7 +383,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
             <%--End Modules--%>
 
             <%--Start Content--%>
@@ -433,6 +426,7 @@
                                     <div class="card-body">
                                         <div class="row align-items-center content-type">
                                             <div class="col-sm-2 col-md-2 col-lg-1">
+                                                {{$index + 1}}
                                                 <img ng-if="content.ContentType=='PDF'" src="../includes/Asset/images/pdf-icon.svg" />
                                                 <img ng-if="content.ContentType=='VIDEO'" src="../includes/Asset/images/video-icon.svg" />
                                                 <img ng-if="content.ContentType=='SURVEY'" src="../includes/Asset/images/survey-icon.svg" />
@@ -446,6 +440,7 @@
                                             </div>
                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                 <p ng-if="content.IsCompleted =='1'" class="anchor text-right"><i class="fas fa-check c-green"></i></p>
+                                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(content.ContentTime) }}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -459,6 +454,7 @@
                                     <div class="card-body">
                                         <div class="row align-items-center content-type">
                                             <div class="col-sm-2 col-md-2 col-lg-1">
+                                                {{Content.UnlockedItems.length + $index + 1}}
                                                 <img ng-if="content.ContentType=='PDF'" src="../includes/Asset/images/pdf-icon.svg" />
                                                 <img ng-if="content.ContentType=='VIDEO'" src="../includes/Asset/images/video-icon.svg" />
                                                 <img ng-if="content.ContentType=='TEXT'" src="../includes/Asset/images/text-icon.svg" />
@@ -472,6 +468,7 @@
                                             </div>
                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                 <p class="anchor text-right"><i class="fas fa-lock"></i></p>
+                                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(content.ContentTime) }}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -931,9 +928,6 @@
     </div>
     <script>
         $(document).ready(function () {
-
-
-
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
                 placeholder: "Select a option",

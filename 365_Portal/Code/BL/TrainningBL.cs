@@ -46,6 +46,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet AddFavAndBookMark(string UserID, int CompID, int TopicID, int IsFav, int IsBookMark)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.AddFavAndBookMark(UserID, CompID,TopicID, IsFav, IsBookMark);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
         public static DataSet GetModulesByTopic(int compId, string userId, int topicId)
         {
             DataSet ds = new DataSet();
@@ -487,12 +501,12 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic)
+        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic,DateTime dueDate)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = TrainningDAL.AssignTopicsByEntity(compID, userId, topicIds, groupIds, userIds, removeTopic);
+                ds = TrainningDAL.AssignTopicsByEntity(compID, userId, topicIds, groupIds, userIds, removeTopic, dueDate);
             }
             catch (Exception ex)
             {

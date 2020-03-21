@@ -54,6 +54,21 @@
                             </div>
                         </div>
 
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtPoints">Points</label>
+                                <input type="text" class="form-control required" id="txtPoints"  placeholder="Points" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtCourseTime">Course Time</label>
+                                <input type="text" class="form-control required" id="txtCourseTime" placeholder="Course Time" />
+                            </div>
+                        </div>
+
+
                         <div class="w-100"></div>
 
                         <div class="col-md-12 mt-4">
@@ -142,31 +157,89 @@
             if (ModuleId != null && ModuleId != '') {
                 _ModuleID = ModuleId; //Initalizing Global varaiable of Module ID;
                 $('#ddlTopic').val(TopicID).trigger("change");
-                $('#' + _ModuleID).find("td:not(:last-child)").each(function (i, data) {
-                    if (TopicID != null || TopicID != undefined) {
-                        $('#ddlTopic option:selected').val(TopicID); ///This will find title for Topic
 
-                    }
-                    if (this.className == 'title') {
-                        $('#txtTitle').val(this.innerText); ///This will find title for Topic 
+                //$('#' + _ModuleID).find("td:not(:last-child)").each(function (i, data) {
+                //    if (TopicID != null || TopicID != undefined) {
+                //        $('#ddlTopic option:selected').val(TopicID); ///This will find title for Topic
+                //    }
+                //    if (this.className == 'title') {
+                //        $('#txtTitle').val(this.innerText); ///This will find title for Topic 
+                //    }
+                //    if (this.className == 'description') {
+                //        $('#txtDescription').val(this.innerText);
+                //    }
+                //    if (this.className == 'overview') {
+                //        $('#txtOverview').val(this.innerText);
+                //    }
+                //    if (this.className == 'isPublished') {
+                //        if (this.innerText == "Yes") {
+                //            $('#cbIsPublished').prop('checked', true);
+                //        }
+                //        else {
+                //            $('#cbIsPublished').prop('checked', false);
+                //        }
+                //    }
+                //});
 
-                    }
-                    if (this.className == 'description') {
-                        $('#txtDescription').val(this.innerText);
-                    }
-                    if (this.className == 'overview') {
-                        $('#txtOverview').val(this.innerText);
-                    }
-                    if (this.className == 'isPublished') {
-                        if (this.innerText == "Yes") {
-                            $('#cbIsPublished').prop('checked', true);
+                $('#txtTitle').val();
+                $('#txtOverview').val();
+                $('#txtDescription').val();
+                $('#txtPoints').val();
+                $('#txtCourseTime').val();
+                $('#cbIsPublished').prop('checked', false);
+
+                ShowLoader();
+                var getUrl = "/API/Content/EditModule";
+                var requestParams = { TopicID: TopicID, ModuleID: ModuleId };
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            HideLoader();
+                            if (DataSet.StatusCode == "1") {
+                                //debugger
+                                var EditModule = DataSet.Data.Data;
+
+                                $('#txtTitle').val(EditModule[0].Title);
+                                $('#txtOverview').val(EditModule[0].Overview);
+                                $('#txtDescription').val(EditModule[0].Description);                                
+                                $('#txtPoints').val(EditModule[0].Points);
+                                $('#txtCourseTime').val(EditModule[0].CourseTime);
+
+                                if (EditModule[0].IsPublished == "1") {
+                                    $('#cbIsPublished').prop('checked', true);
+                                }
+                                else {
+                                    $('#cbIsPublished').prop('checked', false);
+                                }
+                            }
+                            else {
+                                if (DataSet.Data != undefined && DataSet.Data.length > 0) {
+                                    Swal.fire(DataSet.Data[0].ReturnMessage, {
+                                        icon: "error",
+                                    });
+                                }
+                                else {
+                                    Swal.fire(DataSet.StatusDescription, {
+                                        icon: "error",
+                                    });
+                                }
+                            }
                         }
-                        else {
-                            $('#cbIsPublished').prop('checked', false);
+                        catch (e) {
+                            HideLoader();
                         }
-
+                    },
+                    failure: function (response) {
+                        HideLoader();
                     }
                 });
+
                 $('#ddlTopic').attr("disabled", true);
                 toggle('divForm', 'divGird');
                 $('#submit').attr('name', EDIT);
@@ -202,10 +275,12 @@
                     getUrl = "/API/Content/ModifyModule";
                 }
 
+                var _Points = $('#txtPoints').val();
+                var _CourseTime = $('#txtCourseTime').val();
 
                 var _SrNo = "";
                 try {
-                    var requestParams = { TopicID: _Topic_Id, ModuleTitle: _Title, ModuleOverview: _Overview, ModuleDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, UserID: "", IsActive: true, ModuleID: ID };
+                    var requestParams = { TopicID: _Topic_Id, ModuleTitle: _Title, ModuleOverview: _Overview, ModuleDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, UserID: "", IsActive: true, ModuleID: ID, Points: _Points, CourseTime: _CourseTime };
 
 
                     $.ajax({
