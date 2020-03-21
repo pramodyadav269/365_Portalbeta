@@ -314,6 +314,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CommonHelper.cs" />
     <Compile Include="Models\ConstantMessages.cs" />
     <Compile Include="Models\EmailHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -431,6 +432,13 @@
     </Compile>
     <Compile Include="t\Departments.aspx.designer.cs">
       <DependentUpon>Departments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\DownloadExcel.aspx.cs">
+      <DependentUpon>DownloadExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\DownloadExcel.aspx.designer.cs">
+      <DependentUpon>DownloadExcel.aspx</DependentUpon>
     </Compile>
     <Compile Include="t\flashcards.aspx.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
@@ -976,6 +984,7 @@
     <Content Include="t\dashboard.aspx" />
     <Content Include="t\default.aspx" />
     <Content Include="t\Departments.aspx" />
+    <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />

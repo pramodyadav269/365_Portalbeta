@@ -41,12 +41,22 @@
 
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="txtSurveyDescription">Description</label>
                                 <textarea class="form-control required" rows="4" cols="50" placeholder="Description" id="txtSurveyDescription"></textarea>
                             </div>
                         </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtPoints">Points</label>
+                                <input type="text" class="form-control required" id="txtPoints"  placeholder="Points" />
+                            </div>
+                        </div>
+
 
                         <%--  <div class="col-md-6">
                             <div class="form-group">
@@ -267,6 +277,9 @@
                     $("#dvQuestionMasterForm").show();
                     $("#txtSurveyTitle").val(response.Title);
                     $("#txtSurveyDescription").val(response.Description);
+
+                    $("#txtPoints").val(response.Points);
+
                     $("#chkIsPublished").prop("checked", response.IsPublished);
                     $("#lblPercentage").text(response.PassingPercent + "%");
                     $("#lblTotalScore").text(response.TotalScore);
@@ -1092,6 +1105,9 @@
                 , "ContentTypeID": gbl_contentTypeID
                 , "Title": $("#txtSurveyTitle").val()
                 , "Description": $("#txtSurveyDescription").val()
+
+                , "Points": $("#txtPoints").val()
+
                 , "IsPublished": $("#chkIsPublished").prop("checked")
                 , "SkipFlashcard": false
                 , "IsGift": false

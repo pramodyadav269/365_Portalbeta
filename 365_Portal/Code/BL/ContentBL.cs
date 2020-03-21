@@ -206,6 +206,9 @@ namespace _365_Portal.Code.BL
                                   Title = Convert.ToString(dr["Title"]),
                                   SrNo = Convert.ToInt32(Convert.ToString(dr["SrNo"])),
                                   Description = Convert.ToString(dr["Description"]),
+
+                                  Points = !string.IsNullOrEmpty(dr["Points"].ToString()) ? Convert.ToDouble(dr["Points"].ToString()) : 0,
+
                                   IntroTitle = Convert.ToString(dr["FlashcardTitle"]),
                                   QuizCount = Convert.ToInt32(Convert.ToString(dr["QuizCount"])),
                                   IsPublished = !string.IsNullOrEmpty(dr["IsPublished"].ToString()) ? Convert.ToBoolean(Convert.ToInt32(dr["IsPublished"].ToString())) : true,
@@ -309,6 +312,48 @@ namespace _365_Portal.Code.BL
             return ds;
         }
         #endregion
+
+        public static DataSet BindCourseCategory(int compid, string userid, string Role)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.BindCourseCategory(compid, userid, Role);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+        public static DataSet EditTopics(int compid, string userid, string Role, string topicid)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.EditTopics(compid, userid, Role, topicid);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+        public static DataSet EditModules(int compid, string userid, string Role, string topicid, string moduleid)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.EditModules(compid, userid, Role, topicid, moduleid);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
 
     }
 

@@ -61,6 +61,16 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtCourseTime">Course Time</label>
+                                <input type="text" class="form-control required" id="txtCourseTime" placeholder="Course Time" />
+                            </div>
+                        </div>
+
+
                         <div class="col-md-12">
                             <label for="txtDescription">Description</label>
                             <div id="txtDescription"></div>
@@ -295,6 +305,9 @@
                     }
                     formdata.append("IsGift", $("#chkIsGift").prop("checked"));
                     formdata.append("IsPublished", $("#chkIsPublished").prop("checked"));
+
+                    formdata.append("CourseTime", $("#txtCourseTime").val());
+
                     formdata.append("TopicID", TopicID);
                     formdata.append("ModuleID", _ModuleID);
                     formdata.append("TypeID", "1");
@@ -584,6 +597,7 @@
                             tbl += '<th>Is Gift';
                             tbl += '<th>Is Published';
                             tbl += '<th>Action';
+                            tbl += '<th style="display:none;">CourseTime';
                             tbl += '<tbody>';
 
 
@@ -636,6 +650,9 @@
                                             tbl += "<td><input type='checkbox' " + isPublishedValue + " /></td>";
                                             tbl += '<td><i title="Edit" contentfileid="' + content.ContentFileID + '" index=' + content.ContentID + ' onclick="EditContent($(this));" class="fas fa-edit text-warning"></i><i title="Delete" index=' + content.ContentID + ' onclick="DeleteContent($(this));" class="fas fa-trash text-danger"></i></td>';
                                             
+                                            debugger
+                                            tbl += "<td style='display:none;'>" + content.CourseTime + "</td>";
+
                                             tbl += "</tr>";
                                         }
                                         catch (ex) {
@@ -714,6 +731,9 @@
 
                 $("#ddlDocType").val(content.DocType);
                 $("#txtTitle").val(content.Title);
+
+                $("#txtCourseTime").val(content.CourseTime);
+
                 tinymce.get('txtDescription').setContent($("<div/>").html(content.Description).text());
                 if (content.FilePath.split('.')[1] != undefined) {
                     if (allowedExtensions.indexOf(content.FilePath.split('.')[1]) != -1) {

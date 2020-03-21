@@ -29,7 +29,13 @@ namespace _365_Portal.ControllersReOrderContent
                 {
                     if ((
                         !string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())))
+                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CourseCategory"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["IsGlobal"].ToString())
+                        ))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
@@ -73,6 +79,36 @@ namespace _365_Portal.ControllersReOrderContent
                         if (!string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
                         {
                             content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
+                        }
+
+
+                        if (!string.IsNullOrEmpty(requestParams["CourseCategory"].ToString()))
+                        {
+                            content.CourseCategory = Convert.ToInt32(requestParams["CourseCategory"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CategoryColor"].ToString()))
+                        {
+                            content.CategoryColor = requestParams["CategoryColor"].ToString();
+                        }
+                        else
+                        {
+                            content.CategoryColor = null;
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        {
+                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        {
+                            content.CourseTime = requestParams["CourseTime"].ToString();
+                        }
+                        else
+                        {
+                            content.CourseTime = null;
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["IsGlobal"].ToString()))
+                        {
+                            content.IsGlobal = (bool)requestParams["IsGlobal"];
                         }
 
 
@@ -143,7 +179,13 @@ namespace _365_Portal.ControllersReOrderContent
 
                     if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) && !string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()) &&
                         !string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString()) && !string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
+                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString()) && !string.IsNullOrEmpty(requestParams["SrNo"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CourseCategory"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["IsGlobal"].ToString())
+                        )
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
@@ -192,6 +234,38 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
                         }
+
+
+                        if (!string.IsNullOrEmpty(requestParams["CourseCategory"].ToString()))
+                        {
+                            content.CourseCategory = Convert.ToInt32(requestParams["CourseCategory"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CategoryColor"].ToString()))
+                        {
+                            content.CategoryColor = requestParams["CategoryColor"].ToString();
+                        }
+                        else
+                        {
+                            content.CategoryColor = null;
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        {
+                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        {
+                            content.CourseTime = requestParams["CourseTime"].ToString();
+                        }
+                        else
+                        {
+                            content.CourseTime = null;
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["IsGlobal"].ToString()))
+                        {
+                            content.IsGlobal = (bool)requestParams["IsGlobal"];
+                        }
+
+
                         var ds = ContentBL.ModifyTopic(content);
                         if (ds != null)
                         {
@@ -398,7 +472,10 @@ namespace _365_Portal.ControllersReOrderContent
 
                     if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) &&
                         !string.IsNullOrEmpty(requestParams["ModuleTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()) && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())))
+                        && !string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()) && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                        ))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
@@ -450,6 +527,21 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
                         }
+
+
+                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        {
+                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        {
+                            content.CourseTime = requestParams["CourseTime"].ToString();
+                        }
+                        else
+                        {
+                            content.CourseTime = null;
+                        }
+
                         var ds = ContentBL.CreateModule(content);
                         if (ds != null)
                         {
@@ -518,6 +610,8 @@ namespace _365_Portal.ControllersReOrderContent
                     if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) &&
                     !string.IsNullOrEmpty(requestParams["ModuleTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()) &&
                     !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()) && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                    && !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                    && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
                     )
                     {
                         content.CompID = identity.CompId;
@@ -569,6 +663,21 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
                         }
+
+
+                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        {
+                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        {
+                            content.CourseTime = requestParams["CourseTime"].ToString();
+                        }
+                        else
+                        {
+                            content.CourseTime = null;
+                        }
+
                         var ds = ContentBL.ModifyModule(content);
                         if (ds != null)
                         {
@@ -800,6 +909,8 @@ namespace _365_Portal.ControllersReOrderContent
                             //&& !string.IsNullOrEmpty(requestParams["Overview"].ToString())
                             //&& !string.IsNullOrEmpty(requestParams["IsGift"].ToString())
                             //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+
+                            && !string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString())
                             )
                         {
                             content.CompID = identity.CompId;
@@ -980,6 +1091,16 @@ namespace _365_Portal.ControllersReOrderContent
                             {
                                 content.PassingScore = Convert.ToDouble(httpRequest.Form["PassingScore"]);
                             }
+
+                            if (!string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString()))
+                            {
+                                content.CourseTime = httpRequest.Form["CourseTime"].ToString();
+                            }
+                            else
+                            {
+                                content.CourseTime = null;
+                            }
+
                             if (isValidrequest == true)
                             {
                                 var ds = ContentBL.CreateContent(content);
@@ -1074,6 +1195,7 @@ namespace _365_Portal.ControllersReOrderContent
                         //&& !string.IsNullOrEmpty(requestParams["Overview"].ToString())
                         //&& !string.IsNullOrEmpty(requestParams["IsGift"].ToString())
                         // && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        && !string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString())
                         )
                         {
                             content.CompID = identity.CompId;
@@ -1238,6 +1360,15 @@ namespace _365_Portal.ControllersReOrderContent
                             if (!string.IsNullOrEmpty(httpRequest.Form["PassingScore"].ToString()))
                             {
                                 content.PassingScore = Convert.ToDouble(httpRequest.Form["PassingScore"]);
+                            }
+
+                            if (!string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString()))
+                            {
+                                content.CourseTime = httpRequest.Form["CourseTime"].ToString();
+                            }
+                            else
+                            {
+                                content.CourseTime = null;
                             }
 
                             if (isValidrequest == true)
@@ -1515,5 +1646,101 @@ namespace _365_Portal.ControllersReOrderContent
 
         }
         #endregion
+
+
+        [Route("API/Content/BindCourseCategory")]
+        [HttpPost]
+        public IHttpActionResult BindCourseCategory()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {                
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {                   
+                    var ds = ContentBL.BindCourseCategory(identity.CompId, identity.UserID, identity.Role);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/Content/EditTopic")]
+        [HttpPost]
+        public IHttpActionResult EditTopic(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {                
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()))
+                    {
+                        var ds = ContentBL.EditTopics(identity.CompId, identity.UserID, identity.Role, requestParams["TopicID"].ToString());
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/Content/EditModule")]
+        [HttpPost]
+        public IHttpActionResult EditModule(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) && !string.IsNullOrEmpty(requestParams["ModuleID"].ToString()))
+                    {
+                        var ds = ContentBL.EditModules(identity.CompId, identity.UserID, identity.Role, requestParams["TopicID"].ToString(), requestParams["ModuleID"].ToString());
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
     }
 }

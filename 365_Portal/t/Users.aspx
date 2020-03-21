@@ -15,7 +15,9 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-2">
                             <a class="btn bg-yellow" onclick="AddNew();">Add New</a>
-                            <%--<a class="btn bg-yellow" id="btnExport" onclick="Export();" style="display:none;">Export to Excel</a>--%><%--Added for Export to excel--%>
+                        </div>
+                        <div class="col-sm-12 col-md-2">
+                            <a class="btn bg-yellow" id="btnExport" onclick="Export();">Export to Excel</a><%--Added for Export to excel--%>
                         </div>
                         <div class="col-sm-12 col-md-3" id="dvCompanyFilter" style="display:none;">
                             <div class="form-group">
@@ -760,6 +762,14 @@
                 }
             }
 
+            var UserID = '<%=Session["UserID"]%>';
+            var CompId = '<%=Session["CompId"]%>';
+            
+            function Export()
+            {
+                debugger
+                window.open("DownloadExcel.aspx?val=users|" + UserID + "|" + CompId + "|" + Role);
+            }
 
             //function Export()
             //{

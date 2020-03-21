@@ -77,6 +77,9 @@ namespace _365_Portal.Controllers
                     content.ContentTypeID = Convert.ToInt32(Convert.ToString(requestParams["ContentTypeID"]));
                     content.ContentTitle = Convert.ToString(requestParams["Title"]);
                     content.ContentDescription = Convert.ToString(requestParams["Description"]);
+
+                    content.Points = Convert.ToDouble(requestParams["Points"]);
+
                     content.FlashcardTitle = Convert.ToString(requestParams["IntroTitle"]);
                     content.IsPublished = Convert.ToBoolean(Convert.ToString(requestParams["IsPublished"]));
                     content.SkipFlashcard = Convert.ToBoolean(Convert.ToString(requestParams["SkipFlashcard"]));
