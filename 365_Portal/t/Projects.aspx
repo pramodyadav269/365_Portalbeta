@@ -70,13 +70,13 @@
             </div>
             <div class="col-10">
                 <div class="row website-redesign" id="dvWebsiteRedesign">
-                    <%--   <div class="col-12 col-sm-12 col-md-4">
+                <%--    <div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12 mb-3 d-flex justify-content-between align-items-center">
                                         <h5 class="font-weight-bold">To Do</h5>
-                                        <a class="btn bg-yellow rounded"><i class="fas fa-plus"></i>Add Task</a>
+                                        <a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>
                                     </div>
                                     <div class="col-12 mb-2">
                                         <div class="wr-content">
@@ -254,7 +254,7 @@
                                 <h3 class="mt-4">Add Status</h3>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
                 <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
                     <div class="col-12">
@@ -297,34 +297,59 @@
     </div>
 
 
-    <div class="modal fade" id="modalTaskInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+    <div class="modal fade p-0" id="modalTaskInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg shadow modal-right">
+            <div class="modal-content rounded">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
                     <img src="../Asset/images/close-button.png" class="close" /></a>
-                <div class="modal-body">
-                    <div class="row input-validation">
-                        <div class="col-12 col-sm-12mb-3">
+                <div class="modal-body p-5">
+                    <h4 class="mb-4 font-weight-bold">Task Info</h4>
+                    <div class="row input-validation-modal input-form-2">
+                        <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
-                                <label for="txtProjectName">Project Name</label>
-                                <input type="text" class="form-control required" id="txtrojectName" placeholder="Project Name" />
+                                <label for="txtTaskName">Name</label>
+                                <input type="text" class="form-control required" id="txtTaskName" placeholder="Name" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="ddlStatus">Status</label>
+                                <select class="form-control select2 required" id="ddlStatus" style="width: 100% !important">
+                                    <option></option>
+                                    <option value="1">To Do</option>
+                                    <option value="2">In Progress</option>
+                                    <option value="3">Done</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="txtTopicSummary">Topic Summary</label>
+                                <textarea class="form-control required" placeholder="Topic Summary" id="txtTopicSummary"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="ddlAddAssignee">Add Assignee</label>
+                                <select class="form-control select2 required" id="ddlAddAssignee" style="width: 100% !important">
+                                    <option></option>
+                                    <option value="1">Assignee 1</option>
+                                    <option value="2">Assignee 2</option>
+                                    <option value="3">Assignee 3</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12">
                             <div class="form-group">
-                                <label for="ddlProjectMembers">Project Members</label>
-                                <select class="form-control select2 required" id="ddlProjectembers" style="width: 100% !important" multiple>
-                                    <option></option>
-                                    <option value="1">Project Member 1</option>
-                                    <option value="1">Project Member 2</option>
-                                    <option value="1">Project Member 3</option>
-                                    <option value="1">Project Member 4</option>
-                                </select>
+                                <label for="txtDueDate">Set Due Date</label>
+                                <input type="text" readonly class="form-control required" id="txtDueDate" placeholder="Select Date" />
+                                <div id="dvDueDate" class="mt-3"></div>
                             </div>
                         </div>
+
                         <div class="w-100"></div>
                         <div class="col-12 col-sm-12 mt-4 text-right">
-                            <a class="btn bg-yellow" onclick="inputValidation('.input-validation');">Submit</a>
+                            <a class="btn bg-yellow" onclick="inputValidation('.input-validation-modal');">Submit</a>
                         </div>
                     </div>
                 </div>
@@ -336,15 +361,36 @@
         var prevTitle = '';
 
         $(document).ready(function () {
+            BindTeamMembers()
+            BindProjects();
+            BindTeam();
+            BindCards();
+
+            $('#dvDueDate').datetimepicker({
+                inline: true,
+                sideBySide: true
+            });
+
+            $('#dvDueDate').on('dp.change', function (event) {
+                var formatted_date = event.date.format('MM/DD/YYYY hh:mm A');
+                $('#txtDueDate').val(formatted_date);
+            });
 
         });
+
+        function onOpenTaskInfoModal() {
+            $('#modalTaskInfo').modal('show');
+        }
 
         function onClickAddTask() {
             toggle('dvCreateProject', 'dvWebsiteRedesign');
             prevTitle = $('#contentTitle').html();
             $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
 
+
             selectInit('#ddlProjectMembers', 'Search by user or by user name');
+
+
         }
 
         function onClickBack(view, hide) {
@@ -381,7 +427,7 @@
                 cardHtml += '<div class="row">';
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
-                cardHtml += '<a class="btn bg-yellow rounded"><i class="fas fa-plus"></i>Add Task</a>';
+                cardHtml += '<a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>';
                 cardHtml += ' </div>';
 
                 var statusWiseTaskList = $.grep(jsonTaskList, function (n, i) {
@@ -418,7 +464,7 @@
                 cardHtml += '</div>';
             });
 
-            $("#dvWebsiteRedesign").html(cardHtml);
+            $("#dvWebsiteRedesign").empty().html(cardHtml);
 
         }
 
@@ -448,7 +494,7 @@
             else {
                 projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
             }
-            $("#ulProjects").html(projectHtml);
+            $("#ulProjects").empty().html(projectHtml);
         }
 
         function BindTeam() {
@@ -493,7 +539,7 @@
                 teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">No Team Found';
             }
             teamHtml += '<li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>';
-            $("#ulTeam").html(teamHtml);
+            $("#ulTeam").empty().html(teamHtml);
         }
 
         function BindTeamMembers() {
@@ -506,11 +552,11 @@
             jsonTeamMembers.push({ UserId: 4, Name: "userName 4" });
             jsonTeamMembers.push({ UserId: 5, Name: "userName 5" });
 
-            var jsonTeamMembersHtml = "";
+            var jsonTeamMembersHtml = '<option></option>';
             $.each(jsonTeamMembers, function (indxMember, objMember) {
                 jsonTeamMembersHtml += '<option value="' + objMember.UserId + '">' + objMember.Name + '</option>';
             });
-            $("#ddlProjectMembers").html(jsonTeamMembersHtml);
+            $("#ddlProjectMembers").empty().html(jsonTeamMembersHtml);
         }
 
         function SaveProject() {
