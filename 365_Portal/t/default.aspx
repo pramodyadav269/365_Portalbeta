@@ -34,7 +34,69 @@
                 </div>
             </div>
         </section>
-        <div id="dvModuleContainer"  ng-if="ActiveContainer =='Module'">
+
+        <div id="dvModuleContainer" style="display: none;" ng-if="ActiveContainer =='Module'">
+            <div class="col-sm-12 header">
+                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
+                <h6 class="text-center section-title mt-3 color-0-25">Course</h6>
+            </div>
+            <div class="col-sm-6 mt-4 offset-md-3 completed-progress">
+                <div class="row">
+                    <div class="col-12">
+                        <p class="float-left"><span>{{SelectedTopic.CompletedModules}} of {{SelectedTopic.TotalModules}}</span> lessons completed</p>
+                        <i class="fas fa-trophy fa-lg float-right"></i>
+                    </div>
+                    <div class="col-12">
+                        <div class="progress border-radius-0">
+                            <div class="progress-bar bg-green" role="progressbar" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section>
+                <h4 class="section-title">Unlocked Lessons</h4>
+                <div id="dvUnlockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
+                        <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <span class="point">+{{module.LessonPoints}} Points</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(module.LessonTime) }}</span></div>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
+                                <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4 class="section-title">Locked Lessons</h4>
+                <div id="dvLockedLessons" class="content">
+                    <div class="content-item" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
+                        <div class="card bc-blue">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <span class="point">+{{module.LessonPoints}} Points</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{module.Title}}</h5>
+                                <p class="card-text">{{module.Description}}</p>
+                                <p class="text-right anchor"><i class="fas fa-lock"></i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <%--    <div id="dvModuleContainer"  ng-if="ActiveContainer =='Module'">
             <div class="col-sm-12 header">
                 <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                 <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
@@ -90,7 +152,7 @@
                     </div>
                 </div>
             </section>
-        </div>
+        </div>--%>
 
         <div>
             <div class="row">
@@ -364,6 +426,7 @@
                                     <div class="card-body">
                                         <div class="row align-items-center content-type">
                                             <div class="col-sm-2 col-md-2 col-lg-1">
+                                                {{$index + 1}}
                                                 <img ng-if="content.ContentType=='PDF'" src="../includes/Asset/images/pdf-icon.svg" />
                                                 <img ng-if="content.ContentType=='VIDEO'" src="../includes/Asset/images/video-icon.svg" />
                                                 <img ng-if="content.ContentType=='SURVEY'" src="../includes/Asset/images/survey-icon.svg" />
@@ -377,6 +440,7 @@
                                             </div>
                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                 <p ng-if="content.IsCompleted =='1'" class="anchor text-right"><i class="fas fa-check c-green"></i></p>
+                                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(content.ContentTime) }}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -390,6 +454,7 @@
                                     <div class="card-body">
                                         <div class="row align-items-center content-type">
                                             <div class="col-sm-2 col-md-2 col-lg-1">
+                                                {{Content.UnlockedItems.length + $index + 1}}
                                                 <img ng-if="content.ContentType=='PDF'" src="../includes/Asset/images/pdf-icon.svg" />
                                                 <img ng-if="content.ContentType=='VIDEO'" src="../includes/Asset/images/video-icon.svg" />
                                                 <img ng-if="content.ContentType=='TEXT'" src="../includes/Asset/images/text-icon.svg" />
@@ -403,6 +468,7 @@
                                             </div>
                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                 <p class="anchor text-right"><i class="fas fa-lock"></i></p>
+                                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(content.ContentTime) }}</span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -862,9 +928,6 @@
     </div>
     <script>
         $(document).ready(function () {
-
-
-
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
                 placeholder: "Select a option",
