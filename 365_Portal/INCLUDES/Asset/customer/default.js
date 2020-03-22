@@ -350,22 +350,16 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             return arrHrsMins[0] + " hr";
         }
         else if (arrHrsMins.length == 2) {
-            return arrHrsMins[0] + " hr " + arrHrsMins[1] + " m";
+            if (parseInt(arrHrsMins[0])>0)
+                return arrHrsMins[0] + " hr " + arrHrsMins[1] + " m";
+            else
+                return arrHrsMins[1] + " m";
         }
         else {
             return "";
         }
     }
-    //var callCount = 1;
-    //$scope.finished = function () {
-    //    if (callCount == 1) {
-    //        alert("completed");
-    //        InitSlickSlider('#dvUnlockedLessons');
-    //        callCount = 2;
-    //    }
-    //    else
-    //        callCount = 1;
-    //}
+   
 });
 
 //COMMON SERVICE OPERATIONS
@@ -669,8 +663,9 @@ app.directive('myPostRepeatDirective', function () {
 app.directive('myTopicRepeatDirective', function () {
     return function (scope, element, attrs) {
         if (scope.$last) {
-            InitSlickSlider('#dvTopics');
-            isDone = false;
+            //alert("abc");
+           // InitSlickSlider('#dvTopics');
+            InitSlickSlider('.content');
         }
     };
 });
@@ -710,6 +705,16 @@ app.directive('myLockedlessonRepeatDirective', function () {
         }
     };
 });
+
+//app.directive('contentRepeatDirective', function () {
+//    return function (scope, element, attrs) {
+//        if (scope.$last) {
+//            //alert("abc");
+//            // InitSlickSlider('#dvTopics');
+//            InitSlickSlider('.content');
+//        }
+//    };
+//});
 
 function NextItemContent(contentid) {
     var contId = {};

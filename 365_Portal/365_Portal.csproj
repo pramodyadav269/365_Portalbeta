@@ -632,6 +632,7 @@
     <Content Include="INCLUDES\Asset\admin\login.js" />
     <Content Include="INCLUDES\Asset\css\360.css" />
     <Content Include="INCLUDES\Asset\css\all.css" />
+    <Content Include="INCLUDES\Asset\css\bootstrap-datetimepicker.min.css" />
     <Content Include="INCLUDES\Asset\css\bootstrap.min.css" />
     <Content Include="INCLUDES\Asset\css\dataTables.bootstrap4.min.css" />
     <Content Include="INCLUDES\Asset\css\gijgo.min.css" />
@@ -714,6 +715,7 @@
     <Content Include="INCLUDES\Asset\js\all.js" />
     <Content Include="INCLUDES\Asset\js\angular-sanitize.js" />
     <Content Include="INCLUDES\Asset\js\angular.min.js" />
+    <Content Include="INCLUDES\Asset\js\bootstrap-datetimepicker.min.js" />
     <Content Include="INCLUDES\Asset\js\bootstrap.min.js" />
     <Content Include="INCLUDES\Asset\js\bs-custom-file-input.min.js" />
     <Content Include="INCLUDES\Asset\js\dataTables.bootstrap4.min.js" />

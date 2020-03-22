@@ -507,6 +507,7 @@ main .container-fluid.dashboard {
     width: 20px;
     height: 20px;
     border-radius: 50%;
+    margin-left: .2rem;
 }
 
 
@@ -640,7 +641,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .input-form-2 .form-control {
     font-size: .9rem;
-    border: 1px solid #aaa;
 }
 
 .input-form-2 input::placeholder {
@@ -649,4 +649,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .c-pointer {
     cursor: pointer;
+}
+
+.modal-right {
+    margin: 0 0 0 auto;
 }
