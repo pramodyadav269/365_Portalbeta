@@ -85,7 +85,7 @@ namespace _365_Portal.Code.DAL
                     cmd.Parameters.AddWithValue("p_MinUnlockedModules", DBNull.Value);
                 }
                 cmd.Parameters.AddWithValue("p_IsPublished", Convert.ToInt32(content.IsPublished));
-                cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
+                cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive)); 
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);
 
 
