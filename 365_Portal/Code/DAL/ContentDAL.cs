@@ -107,7 +107,10 @@ namespace _365_Portal.Code.DAL
                 {
                     cmd.Parameters.AddWithValue("p_CourseTime", DBNull.Value);
                 }
-                cmd.Parameters.AddWithValue("p_IsGlobal", Convert.ToInt32(content.IsGlobal));
+                cmd.Parameters.AddWithValue("p_CourseLogoFileID", content.CourseLogoFileID);
+                cmd.Parameters.AddWithValue("p_AchievementBadgeID", content.AchievementBadge);
+                cmd.Parameters.AddWithValue("p_Accessibility", content.Accessibility);
+                cmd.Parameters.AddWithValue("p_selectedTags", content.selectedTags);                
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");

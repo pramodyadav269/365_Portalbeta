@@ -635,6 +635,7 @@ namespace _365_Portal.Code.DAL
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_UserID", objUsers.UserID);
+                cmd.Parameters.AddWithValue("p_CompID", objUsers.CompId);
                 cmd.Parameters.AddWithValue("p_Type", Type);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");

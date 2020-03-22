@@ -34,7 +34,8 @@ namespace _365_Portal.ControllersReOrderContent
                         && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
                         && !string.IsNullOrEmpty(requestParams["Points"].ToString())
                         && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["IsGlobal"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["Accessibility"].ToString())
                         ))
                     {
                         content.CompID = identity.CompId;
@@ -106,10 +107,40 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.CourseTime = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["IsGlobal"].ToString()))
+                        if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
                         {
-                            content.IsGlobal = (bool)requestParams["IsGlobal"];
+                            content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
                         }
+                        if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
+                        {
+                            content.Accessibility = Convert.ToInt32(requestParams["Accessibility"].ToString());
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["selectedTags"].ToString()))
+                        {
+                            content.selectedTags = requestParams["selectedTags"].ToString();
+                        }
+
+                        string CourseLogoBase64 = Convert.ToString(requestParams.SelectToken("CourseLogoBase64"));
+                        if (!string.IsNullOrEmpty(CourseLogoBase64))
+                        {
+                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                            if (files.Count() == 1)
+                                CourseLogoBase64 = files[0];
+                            else
+                                CourseLogoBase64 = files[1];
+
+                            byte[] imageBytes = Convert.FromBase64String(CourseLogoBase64);
+                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(CourseLogoBase64);
+                            string filePath = HttpContext.Current.Server.MapPath("~/Files/CourseLogo/" + fileName);
+                            File.WriteAllBytes(filePath, imageBytes);                            
+
+                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/CourseLogo/"), false, "CourseLogo");
+                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            {
+                                content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                            }
+                        }
+
 
 
                         var ds = ContentBL.CreateTopic(content);
@@ -184,7 +215,8 @@ namespace _365_Portal.ControllersReOrderContent
                         && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
                         && !string.IsNullOrEmpty(requestParams["Points"].ToString())
                         && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["IsGlobal"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
+                        && !string.IsNullOrEmpty(requestParams["Accessibility"].ToString())
                         )
                     {
                         content.CompID = identity.CompId;
@@ -260,9 +292,41 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.CourseTime = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["IsGlobal"].ToString()))
+
+                        if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
                         {
-                            content.IsGlobal = (bool)requestParams["IsGlobal"];
+                            content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
+                        }
+
+                        if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
+                        {
+                            content.Accessibility = Convert.ToInt32(requestParams["Accessibility"].ToString());
+                        }
+
+                        if (!string.IsNullOrEmpty(requestParams["selectedTags"].ToString()))
+                        {
+                            content.selectedTags = requestParams["selectedTags"].ToString();
+                        }
+
+                        string CourseLogoBase64 = Convert.ToString(requestParams.SelectToken("CourseLogoBase64"));
+                        if (!string.IsNullOrEmpty(CourseLogoBase64))
+                        {
+                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                            if (files.Count() == 1)
+                                CourseLogoBase64 = files[0];
+                            else
+                                CourseLogoBase64 = files[1];
+
+                            byte[] imageBytes = Convert.FromBase64String(CourseLogoBase64);
+                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(CourseLogoBase64);
+                            string filePath = HttpContext.Current.Server.MapPath("~/Files/CourseLogo/" + fileName);
+                            File.WriteAllBytes(filePath, imageBytes);
+
+                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/CourseLogo/"), false, "CourseLogo");
+                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            {
+                                content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                            }
                         }
 
 
@@ -1647,34 +1711,6 @@ namespace _365_Portal.ControllersReOrderContent
         }
         #endregion
 
-
-        [Route("API/Content/BindCourseCategory")]
-        [HttpPost]
-        public IHttpActionResult BindCourseCategory()
-        {
-            var data = "";
-            var identity = MyAuthorizationServerProvider.AuthenticateUser();
-            if (identity != null)
-            {                
-                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
-                {                   
-                    var ds = ContentBL.BindCourseCategory(identity.CompId, identity.UserID, identity.Role);
-
-                    data = Utility.ConvertDataSetToJSONString(ds);
-                    data = Utility.Successful(data);
-                }
-                else
-                {
-                    data = Utility.API_Status("3", "You do not have access for this functionality");
-                }
-            }
-            else
-            {
-                data = Utility.AuthenticationError();
-            }
-            return new APIResult(Request, data);
-        }
-
         [Route("API/Content/EditTopic")]
         [HttpPost]
         public IHttpActionResult EditTopic(JObject requestParams)
@@ -1730,6 +1766,58 @@ namespace _365_Portal.ControllersReOrderContent
                         data = ConstantMessages.WebServiceLog.InValidValues;
                         data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                     }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/Content/GetCourseCategoryTagsAndBadge")]
+        [HttpPost]
+        public IHttpActionResult GetCourseCategoryTagsAndBadge()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin || identity.Role == ConstantMessages.Roles.subadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var dsTags = CommonBL.BindDropDown(objUser, "tag");
+                    var dsBadge = CommonBL.BindDropDown(objUser, "badge");
+                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory");
+
+                    DataTable dtTags = new DataTable();
+                    DataTable dtBadge = new DataTable();
+                    DataTable dtCourseCategory = new DataTable();
+                    dtTags = dsTags.Tables[0].Copy();
+                    dtBadge = dsBadge.Tables[0].Copy();
+                    dtCourseCategory = dsCourseCategory.Tables[0].Copy();
+
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(dtTags);
+                    ds.Tables[0].TableName = "Tag";
+
+                    ds.Tables.Add(dtBadge);
+                    ds.Tables[1].TableName = "AchievementBadge";
+
+                    ds.Tables.Add(dtCourseCategory);
+                    ds.Tables[2].TableName = "CourseCategory";
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
                 }
                 else
                 {

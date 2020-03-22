@@ -65,22 +65,51 @@
                             </div>
                         </div>
 
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ddlAchievementBadge">Achievement Badge</label>
+                                <select class="form-control required select2" id="ddlAchievementBadge" style="width: 100% !important">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="ddlAccessibility">Accessibility</label>
+                                <select class="form-control required select2" id="ddlAccessibility" style="width: 100% !important">
+                                    <option></option>
+                                    <option value="1">Global</option>
+                                    <option value="2">Organization</option>
+                                    <option value="3">Assigned</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-9">
+                            <div class="form-group">
+                                <label for="ddlTags">Tags</label>
+                                <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img class="circle user-photo" id="imgCourseLogo" src="../includes/Asset/images/CourseLogo.png" />
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileCourseLogo" onchange="encodeImagetoBase64(this,'CourseLogo')">
+                                <label class="custom-file-label mt-2" for="fileCourseLogo">Course Logo</label><br />
+                                <br />
+                            </div>
+                        </div>
+
+
+
+
                         <div class="col-md-3">
                             <div class="form-group checkbox ">
                                 <label>Is Published</label>
                                 <div class="custom-control custom-checkbox custom-control-inline">
                                     <input type="checkbox" id="cbIsPublished" name="cgIsPublished" class="custom-control-input">
                                     <label class="custom-control-label" for="cbIsPublished">Yes</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group checkbox ">
-                                <label>Is Global</label>
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="cbIsGlobal" name="cbIsGlobal" class="custom-control-input">
-                                    <label class="custom-control-label" for="cbIsGlobal">Yes</label>
                                 </div>
                             </div>
                         </div>
@@ -101,14 +130,14 @@
         $(document).ready(function () {
             //var s; $('#tblGird').find('tr').each(function i(i, index) { if (this.id != "") { s = s + this.id + ','; } console.log(this.id); }); console.log(s.length);
             View();
-            BindCourseCategory('view',0);
+            GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
         });
 
         var accessToken = '<%=Session["access_token"]%>';
         var id;
 
-        function BindCourseCategory(flag,id) {
-            var getUrl = "/API/Content/BindCourseCategory";
+        function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, AchievementBadgeID, TagID) {
+            var getUrl = "/API/Content/GetCourseCategoryTagsAndBadge";
             $.ajax({
                 type: "POST",
                 url: getUrl,
@@ -120,17 +149,57 @@
                         HideLoader();
                         if (DataSet.StatusCode == "1")
                         {
-                            var CourseCategory = DataSet.Data.Data;
+                            var Tags = DataSet.Data.Tag;
+                            var AchievementBadge = DataSet.Data.AchievementBadge;
+                            var CourseCategory = DataSet.Data.CourseCategory;
 
-                            if (CourseCategory != undefined && CourseCategory.length > 0) {
+                            if (Tags != undefined && Tags.length > 0)
+                            {
+                                $('#ddlTags').empty().append('<option></option>');
+                                for (var i = 0; i < Tags.length; i++) {
+                                    $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
+                                }
+                                selectInit('#ddlTags', 'Select Tag');
+                            }
+                            if (AchievementBadge != undefined && AchievementBadge.length > 0)
+                            {
+                                $('#ddlAchievementBadge').empty().append('<option></option>');
+                                for (var i = 0; i < AchievementBadge.length; i++) {
+                                    $('#ddlAchievementBadge').append('<option value="' + AchievementBadge[i].BadgeID + '">' + AchievementBadge[i].BadgeName + '</option>');
+                                }
+                                selectInit('#ddlAchievementBadge', 'Select Achievement Badge');
+                            }
+                            if (CourseCategory != undefined && CourseCategory.length > 0)
+                            {
                                 $('#ddlCourseCategory').empty().append('<option></option>');
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }
                                 selectInit('#ddlCourseCategory', 'Select Course Category');
                             }
-                            if (flag == 'update' && id != undefined) {
-                                $('#ddlCourseCategory').val(id).trigger('change');
+                            if (flag == 'update') {
+                                debugger
+                                $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');                                
+                                $('#ddlAchievementBadge').val(AchievementBadgeID).trigger('change');
+
+                                if (TagID != undefined)
+                                {
+                                    for (i = 0; i < 1; i++)
+                                    {
+                                        if (TagID.includes(',,'))
+                                        {
+                                            TagID = TagID.replace(",,", ",");
+                                            if (TagID.includes(',,'))
+                                            {
+                                                i--;
+                                            }
+                                        }                                        
+                                    }                             
+
+                                    TagID = TagID.replace(/,\s*$/, "");
+                                    var selectedTagsArray = TagID.split(',');
+                                    $("#ddlTags").val(selectedTagsArray).trigger('change');
+                                }                                
                             }
                         }
                         else {
@@ -167,7 +236,7 @@
         }
 
         function Submit() {
-
+            debugger
             var getUrl;
             var requestParams;
             ShowLoader();
@@ -183,9 +252,21 @@
                 var _CategoryColor = $('#txtCategoryColor').val();
                 var _Points = $('#txtPoints').val();
                 var _CourseTime = $('#txtCourseTime').val();
-                var _IsGlobal = $('#cbIsGlobal').prop('checked');
+                //var _IsGlobal = $('#cbIsGlobal').prop('checked');
+                var _AchievementBadge = $("#ddlAchievementBadge option:selected").val();
+                var _Accessibility = $("#ddlAccessibility option:selected").val();
 
-                
+                debugger
+                var selectedTagsArray = $('#ddlTags').val();
+                var _selectedTags = '';
+                if (selectedTagsArray.length > 0)
+                {
+                    for (i = 0; i < selectedTagsArray.length; i++)
+                    {
+                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
+                    }
+                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                }                
 
                 if ($('#submit')[0].name == INSERT) {
                     getUrl = "/API/Content/CreateTopic";
@@ -193,10 +274,9 @@
                 } else {
                     _Topic_Id = id;
                     getUrl = "/API/Content/ModifyTopic";
-
                 }
 
-                requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, IsGlobal: _IsGlobal };
+                requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, AchievementBadge: _AchievementBadge, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags };
 
                 try {
                     $.ajax({
@@ -328,7 +408,8 @@
             $('#txtPoints').val();
             $('#txtCourseTime').val();
             $('#cbIsPublished').prop('checked', false);
-            $('#cbIsGlobal').prop('checked', false);
+            $("#imgCourseLogo").attr("src", "../includes/Asset/images/CourseLogo.png");
+            //$('#cbIsGlobal').prop('checked', false);
 
             ShowLoader();
             var getUrl = "/API/Content/EditTopic";
@@ -345,7 +426,7 @@
                         HideLoader();
                         if (DataSet.StatusCode == "1")
                         {
-                            //debugger
+                            debugger
                             var EditTopic = DataSet.Data.Data;
 
                             $('#txtTitle').val(EditTopic[0].Title);
@@ -360,13 +441,17 @@
                             else {
                                 $('#cbIsPublished').prop('checked', false);
                             }
-                            if (EditTopic[0].IsGlobal == "1") {
-                                $('#cbIsGlobal').prop('checked', true);
-                            }
-                            else {
-                                $('#cbIsGlobal').prop('checked', false);
-                            }
-                            BindCourseCategory('update', EditTopic[0].CategoryID);
+                            //if (EditTopic[0].IsGlobal == "1") {
+                            //    $('#cbIsGlobal').prop('checked', true);
+                            //}
+                            //else {
+                            //    $('#cbIsGlobal').prop('checked', false);
+                            //}
+
+                            $('#ddlAccessibility').val(EditTopic[0].Accessibility).trigger('change');
+                            $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
+
+                            GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, EditTopic[0].AchievementBadgeID, EditTopic[0].TagID);
                         }
                         else {
                             if (DataSet.Data != undefined && DataSet.Data.length > 0) {
@@ -591,6 +676,7 @@
             //        }
             //    });
         }
+
         function View() {
             var url = "/API/Content/GetTopics";
 
@@ -792,5 +878,37 @@
             toggle('divGird', 'divForm');
             View();
         }
+
+        var base64CourseLogo = '';
+        function encodeImagetoBase64(element, flag) {
+            //debugger
+            var file = element.files[0];
+            var size = file.size;
+            if (file.size != undefined) {
+                if (file.size < 5000000) {
+                    var reader = new FileReader();
+                    reader.onloadend = function () {
+
+                        if (flag == 'CourseLogo') {
+                            base64CourseLogo = reader.result;
+                            $("#imgCourseLogo").attr("src", base64CourseLogo);
+                        }
+                    }
+                    reader.readAsDataURL(file);
+                }
+                else {
+                    Swal.fire("File size should not be greater than 5MB", {
+                        icon: "error",
+                    });
+                }
+            }
+            else {
+                Swal.fire("Invalid File", {
+                    icon: "error",
+                });
+            }
+
+        }
+
     </script>
 </asp:Content>

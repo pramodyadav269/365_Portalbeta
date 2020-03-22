@@ -657,6 +657,7 @@
     <Content Include="INCLUDES\Asset\images\comments.png" />
     <Content Include="INCLUDES\Asset\images\CompanyLogo.png" />
     <Content Include="INCLUDES\Asset\images\contract-file.png" />
+    <Content Include="INCLUDES\Asset\images\CourseLogo.png" />
     <Content Include="INCLUDES\Asset\images\diamond.png" />
     <Content Include="INCLUDES\Asset\images\didnt-like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\diploma.png" />
@@ -1022,6 +1023,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Files\CompLogo\" />
     <Folder Include="Files\Content\" />
+    <Folder Include="Files\CourseLogo\" />
     <Folder Include="Files\Favicon\" />
     <Folder Include="Files\Others\" />
     <Folder Include="Files\ProfilePic\" />
