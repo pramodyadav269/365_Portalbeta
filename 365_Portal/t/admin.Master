@@ -335,7 +335,7 @@
             </a>
 
             <%-- phase2 --%>
-            <ul class="navbar-nav" style="display:none;">
+            <ul class="navbar-nav" style="display: none;">
                 <li class="nav-item courses dropdown"><a class="nav-link" id="navbarCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="name dropdown-toggle">Courses</span></a>
                     <div class="dropdown-menu" aria-labelledby="navbarCourses">
@@ -441,29 +441,54 @@
                         </div>--%>
                     </li>
 
-                    <li class="nav-item language dropdown">
-                        <img src="../includes/Asset/images/us.png" class="circle" height="26" /></li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="width: 28px;">
-                            <span class="language">EN<img class="dropdown-arrow" src="../includes/Asset/images/arrow-down-sign-to-navigate.png" /></span>
-                        </a>
+                    <li class="nav-item icon language dropdown">
+                        <img src="../includes/Asset/images/us.png" class="circle lang-icon" />
+                        <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
 
-                    <li class="nav-item profile-photo">
-                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" />
+                    <%-- old profile code --%>
+                    <li class="nav-item profile-photo d-none">
+                        <%--<img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" />--%>
                         <span class="badge online">0</span>
                         <%--offline--%>
                     </li>
-                    <li class="nav-item profile dropdown">
+                    <li class="nav-item profile dropdown d-none">
                         <a class="nav-link" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <asp:Label ID="lblUserName" runat="server" CssClass="name dropdown-toggle" />
+                            <%--<asp:Label ID="lblUserName" runat="server" CssClass="name dropdown-toggle" />--%>
                             <span class="status">0 badges, 0 points</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
                             <%--<a id="A1" href="Settings.aspx" class="dropdown-item">Settings</a>--%>
-                            <a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>
+                            <%--<a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>--%>
                         </div>
                     </li>
+                    <%-- old code --%>
+
+                    <%-- Start profile --%>
+                    <li class="nav-item user-name">
+                        <asp:Label CssClass="name" ID="lblUserName" runat="server" />
+                        <span class="status">0 badges, 0 points</span>
+                    </li>
+                    <li class="nav-item user-photo dropdown">
+                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+
+                        <div class="dropdown-menu user-profile shadow" aria-labelledby="imgProfilePic">
+                            <img src="../INCLUDES/Asset/images/theme1_1.png" class="img-fluid profile-theme" />
+                            <div class="user-profile-content">
+                                <img id="imgProfileUserPic" runat="server" src="../Asset/images/profile.png" />
+                                <h5 id="lblProfileUserName" runat="server" class="profile-user-name mb-3"></h5>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">Profile</a>
+                                    <a href="#" class="list-group-item">Settings</a>
+                                    <a href="#" class="list-group-item">Favorites</a>
+                                    <a href="#" class="list-group-item activity-log">Activity Log</a>
+                                    <a href="#" class="list-group-item logout">Log out</a>
+                                </div>
+                            </div>
+                            <%--<a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>--%>
+                        </div>
+                    </li>
+                    <%-- End profile --%>
                 </ul>
             </div>
         </nav>
