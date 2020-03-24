@@ -20,9 +20,9 @@ namespace _365_Portal.Admin
         {
             if (!Page.IsPostBack)
             {
-                if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["CompId"] != null) 
+                if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["CompId"] != null)
                 {
-                    DataSet ds = TrainningBL.GetMsgNotifications(Convert.ToInt32(HttpContext.Current.Session["CompId"]), HttpContext.Current.Session["UserId"].ToString(),4);
+                    DataSet ds = TrainningBL.GetMsgNotifications(Convert.ToInt32(HttpContext.Current.Session["CompId"]), HttpContext.Current.Session["UserId"].ToString(), 4);
                     if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
                         lblNotiCount.Text = ds.Tables[0].Rows[0]["NotificationCount"].ToString();
@@ -59,11 +59,13 @@ namespace _365_Portal.Admin
                 if (HttpContext.Current.Session["FirstName"] != null && HttpContext.Current.Session["LastName"] != null)
                 {
                     lblUserName.Text = HttpContext.Current.Session["FirstName"].ToString() + " " + HttpContext.Current.Session["LastName"].ToString();
+                    lblProfileUserName.InnerHtml = HttpContext.Current.Session["FirstName"].ToString() + " " + HttpContext.Current.Session["LastName"].ToString();
                 }
 
                 if (HttpContext.Current.Session["ProfilePicFile"] != null && !string.IsNullOrEmpty(HttpContext.Current.Session["ProfilePicFile"].ToString()))
                 {
                     imgProfilePic.Src = "../Files/ProfilePic/" + HttpContext.Current.Session["ProfilePicFile"].ToString();
+                    imgProfileUserPic.Src = "../Files/ProfilePic/" + HttpContext.Current.Session["ProfilePicFile"].ToString();
                 }
                 if (HttpContext.Current.Session["CompanyProfilePicFile"] != null && !string.IsNullOrEmpty(HttpContext.Current.Session["CompanyProfilePicFile"].ToString()))
                 {
@@ -95,7 +97,7 @@ namespace _365_Portal.Admin
                         dvSubMenu_Roles.Visible = true;
                         dvSubMenu_Customize.Visible = true;
 
-                        dvSubMenu_Users.Visible = false; 
+                        dvSubMenu_Users.Visible = false;
                     }
                     else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.companyadmin)
                     {

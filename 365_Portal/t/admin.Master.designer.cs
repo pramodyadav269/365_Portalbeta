@@ -222,15 +222,6 @@ namespace _365_Portal.Admin
         protected global::System.Web.UI.WebControls.Label lblNotiCount;
 
         /// <summary>
-        /// imgProfilePic control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgProfilePic;
-
-        /// <summary>
         /// lblUserName control.
         /// </summary>
         /// <remarks>
@@ -240,13 +231,31 @@ namespace _365_Portal.Admin
         protected global::System.Web.UI.WebControls.Label lblUserName;
 
         /// <summary>
-        /// menuLogout control.
+        /// imgProfilePic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor menuLogout;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgProfilePic;
+
+        /// <summary>
+        /// imgProfileUserPic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgProfileUserPic;
+
+        /// <summary>
+        /// lblProfileUserName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblProfileUserName;
 
         /// <summary>
         /// dvDashboard control.

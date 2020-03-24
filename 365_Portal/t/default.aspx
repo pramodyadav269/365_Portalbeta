@@ -6,7 +6,10 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
+    <div class="theme-section">
+        <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
+        <h4>Welcome shoumen! Let's learn something new today :)</h4>
+    </div>
     <div ng-app="MasterPage" ng-controller="DefaultController" class="container-fluid dashboard">
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
             <h4 class="section-title">My Courses</h4>

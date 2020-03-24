@@ -684,6 +684,7 @@
     <Content Include="INCLUDES\Asset\images\meh-icon.svg" />
     <Content Include="INCLUDES\Asset\images\menu.png" />
     <Content Include="INCLUDES\Asset\images\mobile-img.jpg" />
+    <Content Include="INCLUDES\Asset\images\mobile-img_1.png" />
     <Content Include="INCLUDES\Asset\images\next-flashcard-icon.svg" />
     <Content Include="INCLUDES\Asset\images\next-pdf-icon.svg" />
     <Content Include="INCLUDES\Asset\images\next-video-icon.svg" />
@@ -704,6 +705,8 @@
     <Content Include="INCLUDES\Asset\images\target.png" />
     <Content Include="INCLUDES\Asset\images\text-icon.svg" />
     <Content Include="INCLUDES\Asset\images\theme1.png" />
+    <Content Include="INCLUDES\Asset\images\theme1_1.png" />
+    <Content Include="INCLUDES\Asset\images\theme2.jpg" />
     <Content Include="INCLUDES\Asset\images\up-arrow.png" />
     <Content Include="INCLUDES\Asset\images\us.png" />
     <Content Include="INCLUDES\Asset\images\user.png" />

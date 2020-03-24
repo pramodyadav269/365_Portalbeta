@@ -3,7 +3,198 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="row user-details">
+
+    <div class="theme-section position-absolute">
+        <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
+    </div>
+
+    <div class="container profile">
+        <section>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                    <div class="card shadow-sm mb-4 profile-info">
+                        <div class="card-body mb-2">
+                            <li class="media align-items-center mb-2">
+                                <div class="mr-4 position-relative">
+                                    <img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic">
+                                    <a class="upload"><i class="fas fa-camera"></i></a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="mt-0 mb-0">John Cena</h4>
+                                    <span class="mb-3">Biochemical Engineer at Kids Mart</span>
+                                    <span>Andheri, Mumbai</span>
+                                </div>
+                            </li>
+                            <a class="edit rounded-circle"><i class="fas fa-pen"></i></a>
+                            <a class="bio">Tell us about yourself! Add a short bio.</a>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm mb-4 badges">
+                        <div class="card-body mb-2">
+                            <h4 class="card-title mb-3">0 Badges</h4>
+                            <li class="media align-items-center">
+                                <img src="../INCLUDES/Asset/images/sun.png" class="mr-4" alt="Badges" style="width: 76px;">
+                                <div class="media-body">
+                                    <a class="earn-badge">Earn your first badge : Basic</a>
+                                    <span class="mt-3">Get started with the fun way to learn</span>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm mb-4 contact">
+                        <div class="card-body mb-2">
+                            <h4 class="card-title mb-3">Contact</h4>
+                            <a class="edit rounded"><i class="fas fa-pen"></i></a>
+                            <p class="card-subtitle mb-3 text-uppercase">About Us</p>
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Prononu</div>
+                                    <div class="contact-info add">Add</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Role</div>
+                                    <div class="contact-info">Biochemical Engineer at Kids Mart</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Company</div>
+                                    <div class="contact-info">Kids Mart</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Company Size</div>
+                                    <div class="contact-info add">Add</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Company Website</div>
+                                    <div class="contact-info add">Add</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">Country</div>
+                                    <div class="contact-info">India</div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                    <div class="contact-title">State</div>
+                                    <div class="contact-info">Maharashtra</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-5 col-lg-4">
+                    <div class="card shadow-sm mb-4 learning">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Learning Path</h5>
+                            <p class="card-subtitle mb-2">Start Learning</p>
+                            <p class="card-subtitle">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                        <div class="learning-point">
+                            <li class="media align-items-center">
+                                <img src="../INCLUDES/Asset/images/mobile-img_1.png" class="mr-4 learning-icon shadow-sm" alt="learning">
+                                <div class="media-body">
+                                    <div class="mb-3">
+                                        <span class="count">0</span>
+                                        <span>Badges</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="count">0</span>
+                                        <span>Points</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="count">0</span>
+                                        <span>Learning Path</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <span class="mt-3">Earn 1 more badges and 200 more points</span>
+                        </div>
+                        <a href="#" class="path">Go to Learning Path</a>
+                    </div>
+                    <div class="card shadow-sm mb-4 learning">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Community Connections</h5>
+                            <p class="card-subtitle mb-2">Learning is better togather</p>
+                            <p class="card-subtitle mb-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="mb-3 social">
+                                <div class="mr-3">
+                                    <span class="count">0</span>
+                                    <span>Followers</span>
+                                </div>
+                                <div class="users">
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                </div>
+                            </div>
+                            <div class="mb-3 social">
+                                <div class="mr-3">
+                                    <span class="count">0</span>
+                                    <span>Following</span>
+                                </div>
+                                <div class="users">
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                </div>
+                            </div>
+                            <div class="mb-3 social">
+                                <div class="mr-3">
+                                    <span class="count">0</span>
+                                    <span>Groups</span>
+                                </div>
+                                <div class="users">
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                    <a class="rounded-circle"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="path">Go to Community feed</a>
+                    </div>
+                    <div class="card shadow-sm mb-4 learning">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Community Activity</h5>
+                            <div class="row">
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Answers</span>
+                                </div>
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Best Answers</span>
+                                </div>
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Questions</span>
+                                </div>
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Ideas</span>
+                                </div>
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Votes</span>
+                                </div>
+                                <div class="col-4 col-sm-4 mb-4 activity">
+                                    <span class="count">0</span>
+                                    <span>Comments</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="path">Go to Community</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </div>
+
+
+
+    <%-- old code --%>
+    <div class="row user-details d-none">
         <div class="col-md-12 header">
             <a class="back" href="Default.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
             <h2 class="text-center font-weight-bold">Your Profile</h2>
