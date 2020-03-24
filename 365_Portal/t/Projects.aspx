@@ -277,11 +277,6 @@
                                         <div class="form-group">
                                             <label for="ddlProjectMembers">Project Members</label>
                                             <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
-                                                <%--<option></option>
-                                                <option value="1">Project Member 1</option>
-                                                <option value="2">Project Member 2</option>
-                                                <option value="3">Project Member 3</option>
-                                                <option value="4">Project Member 4</option>--%>
                                             </select>
                                         </div>
                                     </div>

@@ -261,9 +261,11 @@
     <Compile Include="Code\BL\FlashcardBL.cs" />
     <Compile Include="Code\BL\ModulesBL.cs" />
     <Compile Include="Code\BL\OrganizationBL.cs" />
+    <Compile Include="Code\BL\ProjectBL.cs" />
     <Compile Include="Code\BL\QuizBL.cs" />
     <Compile Include="Code\BL\SurveyBL.cs" />
     <Compile Include="Code\BL\TopicsBL.cs" />
+    <Compile Include="Code\BL\TaskBL.cs" />
     <Compile Include="Code\BL\TrainningBL.cs" />
     <Compile Include="Code\BL\UserBL.cs" />
     <Compile Include="Code\BO\ContentBO.cs" />
@@ -279,8 +281,10 @@
     <Compile Include="Code\DAL\FlashcardDAL.cs" />
     <Compile Include="Code\DAL\ModuleDAL.cs" />
     <Compile Include="Code\DAL\OrganizationDAL.cs" />
+    <Compile Include="Code\DAL\ProjectDAL.cs" />
     <Compile Include="Code\DAL\QuizDAL.cs" />
     <Compile Include="Code\DAL\SurveyDAL.cs" />
+    <Compile Include="Code\DAL\TaskDAL.cs" />
     <Compile Include="Code\DAL\TopicsDAL.cs" />
     <Compile Include="Code\DAL\TrainningDAL.cs" />
     <Compile Include="Code\DAL\UserDAL.cs" />
@@ -298,7 +302,9 @@
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TrainningController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -319,8 +325,10 @@
     <Compile Include="Models\EmailHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Project.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\ResponseBase.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\WebServiceLog.cs" />
     <Compile Include="MyAuthorizationServerProvider.cs" />
     <Compile Include="Phase2\Dashboard.aspx.cs">
