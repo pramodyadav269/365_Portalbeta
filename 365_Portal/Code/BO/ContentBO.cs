@@ -60,7 +60,11 @@ namespace _365_Portal
         public string CategoryColor { get; set; }
         public double Points { get; set; }
         public string CourseTime { get; set; }
-        public bool IsGlobal { get; set; }
+        public int IsGlobal { get; set; }
+        public int AchievementBadge { get; set; }
+        public int Accessibility { get; set; }
+        public int CourseLogoFileID { get; set; }
+        public string selectedTags { get; set; }        
     }
 
     public class FlashcarIntro
