@@ -94,7 +94,7 @@
         }
 
         function FormatDate(date) {
-            debugger
+            //debugger
             if (date != undefined && date != '') {
                 date = date.substring(0, 9);
             }

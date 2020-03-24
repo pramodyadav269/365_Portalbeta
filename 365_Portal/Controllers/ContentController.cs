@@ -1795,9 +1795,9 @@ namespace _365_Portal.ControllersReOrderContent
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
 
-                    var dsTags = CommonBL.BindDropDown(objUser, "tag");
-                    var dsBadge = CommonBL.BindDropDown(objUser, "badge");
-                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory");
+                    var dsTags = CommonBL.BindDropDown(objUser, "tag", ConstantMessages.Procedures.spBindDropdown);
+                    var dsBadge = CommonBL.BindDropDown(objUser, "badge", ConstantMessages.Procedures.spBindDropdown);
+                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory",ConstantMessages.Procedures.spBindDropdown);
 
                     DataTable dtTags = new DataTable();
                     DataTable dtBadge = new DataTable();

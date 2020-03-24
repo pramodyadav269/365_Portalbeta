@@ -1436,7 +1436,46 @@ namespace _365_Portal.Controllers
 
         [Route("API/User/GetUsers")]
         [HttpPost]
-        public IHttpActionResult GetUsers(JObject requestParams)
+        public IHttpActionResult GetUsers()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;                    
+
+                    var ds = CommonBL.GetUsers(objUser);
+                    if (ds.Tables.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "No user found");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/SearchUsers")]
+        [HttpPost]
+        public IHttpActionResult SearchUsers(JObject requestParams)
         {
             var data = "";
             var identity = MyAuthorizationServerProvider.AuthenticateUser();
@@ -1449,12 +1488,35 @@ namespace _365_Portal.Controllers
                     objUser.UserID = identity.UserID;
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
-                    if (objUser.Role == "superadmin")
+
+                    int ddlCompID = 0, ddlRoleID = 0;                    
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlCompId"])))
                     {
-                        objUser.CompId = Convert.ToInt32(requestParams["CompId"].ToString());
+                        ddlCompID = Convert.ToInt32(requestParams["ddlCompId"]); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ManagerID"].ToString())))
+                    {
+                        objUser.ManagerID = Convert.ToString((requestParams["ManagerID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlRoleID"].ToString())))
+                    {
+                        ddlRoleID = Convert.ToInt32((requestParams["ddlRoleID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TeamID"].ToString())))
+                    {
+                        objUser.TeamID = Convert.ToString((requestParams["TeamID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["DepartmentID"].ToString())))
+                    {
+                        objUser.DepartmentID = Convert.ToString((requestParams["DepartmentID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["GroupID"].ToString())))
+                    {
+                        objUser.GroupId = Convert.ToString((requestParams["GroupID"])); 
                     }
 
-                    var ds = CommonBL.GetUsers(objUser);
+                    var ds = CommonBL.SearchUsers(objUser, ddlCompID, ddlRoleID);
                     if (ds.Tables.Count > 0)
                     {
                         data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
@@ -2060,7 +2122,40 @@ namespace _365_Portal.Controllers
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
 
-                    var ds = CommonBL.BindDropDown(objUser, "createuser");
+                    var ds = CommonBL.BindDropDown(objUser, "createuser",ConstantMessages.Procedures.spBindDropdown);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/BindUsersFilter")]
+        [HttpPost]
+        public IHttpActionResult BindUsersFilter()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin || identity.Role == ConstantMessages.Roles.subadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var ds = CommonBL.BindDropDown(objUser, "getusersfilter", ConstantMessages.Procedures.spBindDropdown);
 
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
