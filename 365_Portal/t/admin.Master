@@ -103,6 +103,13 @@
             }
             return date;
         }
+        
+        function BlankIfNullOrUndefined(string) {            
+            if (string == null || string == undefined) {
+                string = '';
+            }            
+            return string;
+        }
 
         function BindNotification() {
             //debugger

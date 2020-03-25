@@ -690,6 +690,66 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+        
+        public static DataSet GetUserCourseEngagement(int compid, int topicid, int filtertype)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
 
+            try
+            {
+                conn.Open();
+                string stm = "spUserCourseEngagement";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compid", compid);
+                cmd.Parameters.AddWithValue("p_topicid", topicid);                
+                cmd.Parameters.AddWithValue("p_filtertype", filtertype);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+
+        public static DataSet GetGetUserCourseStatus(int compid, int filtertype,string Operator,int count)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spGetUserCourseStatus";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compid", compid);                
+                cmd.Parameters.AddWithValue("p_filtertype", filtertype);
+                cmd.Parameters.AddWithValue("p_operator", Operator);
+                cmd.Parameters.AddWithValue("p_count", count);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
     }
 }

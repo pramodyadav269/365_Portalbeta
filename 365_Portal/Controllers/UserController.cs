@@ -2172,5 +2172,109 @@ namespace _365_Portal.Controllers
             return new APIResult(Request, data);
         }
 
+
+        [Route("API/User/GetCourses")]
+        [HttpPost]
+        public IHttpActionResult GetCourses()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var ds = CommonBL.BindDropDown(objUser, "getcourses", ConstantMessages.Procedures.spBindDropdown);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+        
+        [Route("API/User/GetUserCourseEngagement")]
+        [HttpPost]
+        public IHttpActionResult GetUserCourseEngagement(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {                    
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("EngageFilterID"))) && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("CourseID"))))
+                    {
+                        var ds = CommonBL.GetUserCourseEngagement(identity.CompId, Convert.ToInt32(requestParams.SelectToken("CourseID")), Convert.ToInt32(requestParams.SelectToken("EngageFilterID")));
+
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "! Please enter all fields.");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/GetGetUserCourseStatus")]
+        [HttpPost]
+        public IHttpActionResult GetGetUserCourseStatus(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("CourseFilterID"))) && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("Operator")))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("Count"))))
+                    {
+                        var ds = CommonBL.GetGetUserCourseStatus(identity.CompId, Convert.ToInt32(requestParams.SelectToken("CourseFilterID"))
+                            , Convert.ToString(requestParams.SelectToken("Operator")), Convert.ToInt32(requestParams.SelectToken("Count")));
+
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "! Please enter all fields.");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
     }
 }

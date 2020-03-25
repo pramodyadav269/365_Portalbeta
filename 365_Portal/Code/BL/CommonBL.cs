@@ -266,5 +266,32 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet GetUserCourseEngagement(int compid, int topicid, int filtertype)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = CommonDAL.GetUserCourseEngagement(compid, topicid, filtertype);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet GetGetUserCourseStatus(int compid, int filtertype, string Operator, int count)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = CommonDAL.GetGetUserCourseStatus(compid, filtertype, Operator, count);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
     }
 }

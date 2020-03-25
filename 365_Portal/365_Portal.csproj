@@ -532,6 +532,20 @@
     <Compile Include="t\Topics.aspx.designer.cs">
       <DependentUpon>Topics.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\UserCourseMgmt.aspx.cs">
+      <DependentUpon>UserCourseMgmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\UserCourseMgmt.aspx.designer.cs">
+      <DependentUpon>UserCourseMgmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\UserCourseStatus.aspx.cs">
+      <DependentUpon>UserCourseStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\UserCourseStatus.aspx.designer.cs">
+      <DependentUpon>UserCourseStatus.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\UserGroupMapping.aspx.cs">
       <DependentUpon>UserGroupMapping.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1011,6 +1025,8 @@
     <Content Include="t\Settings.aspx" />
     <Content Include="t\discussion.aspx" />
     <Content Include="t\Topics.aspx" />
+    <Content Include="t\UserCourseMgmt.aspx" />
+    <Content Include="t\UserCourseStatus.aspx" />
     <Content Include="t\UserGroupMapping.aspx" />
     <Content Include="t\Users.aspx" />
     <Content Include="Web.config">
