@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Departments.aspx.cs" Inherits="_365_Portal.t.Departments" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="AddCategory.aspx.cs" Inherits="_365_Portal.t.AddCategory" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
@@ -7,7 +7,7 @@
 
         <div class="col-md-12 header mb-5">
             <a class="back" href="dashboard.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
-            <h2 class="text-center font-weight-bold">Department</h2>
+            <h2 class="text-center font-weight-bold">Add Category</h2>
         </div>
 
         <div class="col-md-12" id="divGird">
@@ -46,37 +46,40 @@
 
     <script>
 
+        var accessToken = '<%=Session["access_token"]%>';
+        var id;
+
         $(document).ready(function () {
             View();
         });
-        var accessToken = '<%=Session["access_token"]%>';
-        var id;
-        function AddNew() {
 
+        function AddNew() {
             clearFields('.input-validation')
             toggle('divForm', 'divGird')
             $('#submit').attr('name', INSERT);
-            //Submit button name attribute changed to Insert;
         }
 
-        function Submit()
-        {
+        function back() {
+            toggle('divGird', 'divForm');
+            View();
+        }
+
+        function Submit() {
             var getUrl;
             var requestParams;
             ShowLoader();
-            if (inputValidation('.input-validation'))
-            {
-                var _Dept_Id;
-                var _Title = $('#txtTitle').val(); 
-                var _Description = $('#txtDescription').val(); 
+            if (inputValidation('.input-validation')) {
+                var _ID;
+                var _Title = $('#txtTitle').val();
+                var _Description = $('#txtDescription').val();
 
                 if ($('#submit')[0].name == INSERT) {
-                    getUrl = "/API/User/CreateDepartment";
+                    getUrl = "/API/User/CreateCategory";
                 } else {
-                    _Dept_Id = id;
-                    getUrl = "/API/User/ModifyDepartment";
+                    _ID = id;
+                    getUrl = "/API/User/ModifyCategory";
                 }
-                requestParams = { DepartmentID: _Dept_Id, DepartmentName: _Title, DeptDescription: _Description };
+                requestParams = { ID: _ID, Title: _Title, Description: _Description };
 
                 try {
                     $.ajax({
@@ -169,16 +172,14 @@
             }
         }
 
-        function Edit(DeptId) {
+        function Edit(_ID) {
 
-            id = DeptId;
+            id = _ID;
 
             $('#' + id).find("td:not(:last-child)").each(function (i, data) {
                 if (this.className == 'title') {
                     $('#txtTitle').val(this.innerText); ///This will find title for Topic 
-
                 }
-
             });
             toggle('divForm', 'divGird');
             $('#submit').attr('name', EDIT);
@@ -188,8 +189,8 @@
             //Submit button name attribute changed to EDIT(Modify);
         }
 
-        function Delete(DeptId) {
-            id = DeptId;
+        function Delete(_ID) {
+            id = _ID;
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -203,8 +204,8 @@
                 if (result.value) {
                     ShowLoader();
                     try {
-                        var requestParams = { DepartmentID: id, IsActive: 0 };
-                        var getUrl = "/API/User/DeleteDepartment";
+                        var requestParams = { ID: id, IsActive: 0 };
+                        var getUrl = "/API/User/DeleteCategory";
 
                         $.ajax({
                             type: "POST",
@@ -287,15 +288,13 @@
                     }
                 }
             })
-
-
-
         }
+
         function View() {
-            var url = "/API/User/GetDepartment";
+            var url = "/API/User/GetCategory";
             try {
                 debugger
-                requestParams = { DepartmentID: "", DepartmentName: "", DepartmentDescription: "" };
+                requestParams = { ID: "", Title: "", Description: "" };
                 ShowLoader();
                 $.ajax({
                     type: "POST",
@@ -305,6 +304,7 @@
                     contentType: "application/json",
                     processData: false,
                     success: function (response) {
+                    debugger
                         var tbl = '<table id="tblGird" class="table table-bordered" style="width: 100%">';
                         tbl += '<thead><tr>';
                         tbl += '<th>Sr.No.';
@@ -320,7 +320,7 @@
                                         $.each(DataSet.Data, function (i, data) {
                                             tbl += '<tr id="' + data.Id + '">';
                                             tbl += '<td>' + (i + 1);
-                                            tbl += '<td class="title">' + data.DeptName;
+                                            tbl += '<td class="title">' + data.CatName;
                                             //tbl += '<td class="description">' + data.Description;
                                             tbl += '<td><i title="Edit" onclick="Edit(' + data.Id + ');" class="fas fa-edit text-warning"></i>' +
                                                 '<i title="Delete" onclick="Delete(' + data.Id + ');" class="fas fa-trash text-danger"></i>';
@@ -362,7 +362,6 @@
                         }
                         $('#divTable').empty().append(tbl);
                         $('#tblGird').DataTable()
-                        // $('#tblGird').tableDnD()
                     },
                     complete: function () {
                         HideLoader();
@@ -380,31 +379,16 @@
             HideLoader();
         }
 
-
         //This funcion is to get and save changes of Serial No
         function SaveGrid() {
-
-            //var sqnData=0;
             var sqnData = "";
             var array = [];
 
             $.each($('#tblGird tbody tr'), function (i, data) {
                 var obj = {};
-                //obj['id'] = $(data).attr('id');
-                // obj['title'] = $(data).find('.title').text();
-                //obj['sqn'] = i + 1;
-
-                //array.push(obj);
                 sqnData += $(data).attr('id') + ",";
             });
-            //sqnData = JSON.stringify(array);
+        }        
 
-
-        }
-        function back() {
-            toggle('divGird', 'divForm');
-            View();
-        }
     </script>
-
 </asp:Content>
