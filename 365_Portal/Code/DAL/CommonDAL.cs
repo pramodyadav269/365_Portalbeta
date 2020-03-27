@@ -449,6 +449,43 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+
+        public static DataSet SearchUsers(UserBO objUsers,int ddlCompID, int ddlRoleID)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spSearchUsers";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_UserID", objUsers.UserID);
+                cmd.Parameters.AddWithValue("p_CompID", objUsers.CompId);
+                cmd.Parameters.AddWithValue("p_Role", objUsers.Role);
+                cmd.Parameters.AddWithValue("p_ddlCompID", ddlCompID);
+                cmd.Parameters.AddWithValue("p_ManagerID", !string.IsNullOrEmpty(objUsers.ManagerID) ? objUsers.ManagerID : DBNull.Value.ToString());
+                cmd.Parameters.AddWithValue("p_ddlRoleID", ddlRoleID);
+                cmd.Parameters.AddWithValue("p_TeamID", !string.IsNullOrEmpty(objUsers.TeamID) ? objUsers.TeamID : DBNull.Value.ToString());
+                cmd.Parameters.AddWithValue("p_DeptID", !string.IsNullOrEmpty(objUsers.DepartmentID) ? objUsers.DepartmentID : DBNull.Value.ToString());
+                cmd.Parameters.AddWithValue("p_GroupId", !string.IsNullOrEmpty(objUsers.GroupId) ? objUsers.GroupId : DBNull.Value.ToString());
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+
         public static DataSet BindRoleAndGroup(UserBO objUsers)
         {
             DataSet ds = new DataSet();
@@ -623,7 +660,7 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
 
-        public static DataSet BindDropDown(UserBO objUsers, string Type)
+        public static DataSet BindDropDown(UserBO objUsers, string Type, string ProcedureName)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -631,11 +668,12 @@ namespace _365_Portal.Code.DAL
             try
             {
                 conn.Open();
-                string stm = "spBindDropdown";
+                string stm = ProcedureName;
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_UserID", objUsers.UserID);
                 cmd.Parameters.AddWithValue("p_CompID", objUsers.CompId);
+                cmd.Parameters.AddWithValue("p_Role", objUsers.Role);
                 cmd.Parameters.AddWithValue("p_Type", Type);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
@@ -652,6 +690,66 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+        
+        public static DataSet GetUserCourseEngagement(int compid, int topicid, int filtertype)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
 
+            try
+            {
+                conn.Open();
+                string stm = "spUserCourseEngagement";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compid", compid);
+                cmd.Parameters.AddWithValue("p_topicid", topicid);                
+                cmd.Parameters.AddWithValue("p_filtertype", filtertype);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+
+        public static DataSet GetGetUserCourseStatus(int compid, int filtertype,string Operator,int count)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spGetUserCourseStatus";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compid", compid);                
+                cmd.Parameters.AddWithValue("p_filtertype", filtertype);
+                cmd.Parameters.AddWithValue("p_operator", Operator);
+                cmd.Parameters.AddWithValue("p_count", count);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
     }
 }

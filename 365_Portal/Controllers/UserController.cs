@@ -1433,10 +1433,557 @@ namespace _365_Portal.Controllers
 
         #endregion DEPARTMENTS
 
+        #region CRUD FOR CATEGORY
+        [HttpPost]
+        [Route("API/User/CreateCategory")]
+        public IHttpActionResult CreateCategory(JObject requestParams)
+        {
+            var data = string.Empty;            
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(requestParams["Title"].ToString()))
+                    {
+                        string Title = string.Empty;
+                        Title = requestParams["Title"].ToString();
+                        
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.INSERT,identity.CompId,0, Title, string.Empty, identity.UserID, true);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/ModifyCategory")]
+        public IHttpActionResult ModifyCategory(JObject requestParams)
+        {
+            var data = string.Empty;            
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && !string.IsNullOrEmpty(Convert.ToString(requestParams["Title"])))
+                    {
+                        string Title = string.Empty;
+                        int ID = 0;
+
+                        if (!string.IsNullOrEmpty(requestParams["ID"].ToString()))
+                        {
+                            ID = Convert.ToInt32(requestParams["ID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["Title"].ToString()))
+                        {
+                            Title = requestParams["Title"].ToString();
+                        }
+                                                
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.MODIFY ,identity.CompId, ID, Title,string.Empty, identity.UserID, true);
+
+                        if (ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables["Data"];
+                            if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                            {
+                                data = Utility.ConvertDataSetToJSONString(dt);
+                                data = Utility.Successful(data);
+                            }
+                            else
+                            {
+                                data = dt.Rows[0]["ReturnMessage"].ToString();
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/GetCategory")]
+        public IHttpActionResult GetCategory(JObject requestParams)
+        {
+            var data = string.Empty;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.VIEW,identity.CompId,0,string.Empty, string.Empty,identity.UserID,true);
+                    DataTable dt = ds.Tables["Data"];
+                    if (dt != null)
+                    {
+                        if (ds.Tables.Count > 0)
+                        {
+                            data = Utility.ConvertDataSetToJSONString(dt);
+                            data = Utility.Successful(data);
+                        }
+                        else
+                        {
+                            data = dt.Rows[0]["ReturnMessage"].ToString();
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = "Please Try Again";
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/DeleteCategory")]
+        public IHttpActionResult DeleteCategory(JObject requestParams)
+        {
+            var data = string.Empty;                       
+
+            string CreatedBy = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && Convert.ToInt32(requestParams["ID"]) != 0 
+                        && (Convert.ToString(requestParams["IsActive"]) !="0" || Convert.ToString(requestParams["IsActive"]) != "1"))
+                    {
+                        int ID = 0;
+                        bool IsActive = false;
+                        
+                        if (!string.IsNullOrEmpty(requestParams["ID"].ToString()))
+                        {
+                            ID = Convert.ToInt32(requestParams["ID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                        {
+                            IsActive = (bool)requestParams["IsActive"];
+                        }
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.DELETE,identity.CompId, ID,string.Empty, string.Empty, identity.UserID, IsActive);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+        #endregion CATEGORY
+
+        #region CRUD FOR TEAM
+        [HttpPost]
+        [Route("API/User/CreateTeam")]
+        public IHttpActionResult CreateTeam(JObject requestParams)
+        {
+            var data = string.Empty;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(requestParams["Title"].ToString()))
+                    {
+                        string Title = string.Empty;
+                        Title = requestParams["Title"].ToString();
+
+                        var ds = UserBL.TeamCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, true);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/ModifyTeam")]
+        public IHttpActionResult ModifyTeam(JObject requestParams)
+        {
+            var data = string.Empty;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && !string.IsNullOrEmpty(Convert.ToString(requestParams["Title"])))
+                    {
+                        string Title = string.Empty;
+                        int ID = 0;
+
+                        if (!string.IsNullOrEmpty(requestParams["ID"].ToString()))
+                        {
+                            ID = Convert.ToInt32(requestParams["ID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["Title"].ToString()))
+                        {
+                            Title = requestParams["Title"].ToString();
+                        }
+
+                        var ds = UserBL.TeamCRUD((int)ConstantMessages.Action.MODIFY, identity.CompId, ID, Title, string.Empty, identity.UserID, true);
+
+                        if (ds.Tables.Count > 0)
+                        {
+                            DataTable dt = ds.Tables["Data"];
+                            if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                            {
+                                data = Utility.ConvertDataSetToJSONString(dt);
+                                data = Utility.Successful(data);
+                            }
+                            else
+                            {
+                                data = dt.Rows[0]["ReturnMessage"].ToString();
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/GetTeam")]
+        public IHttpActionResult GetTeam(JObject requestParams)
+        {
+            var data = string.Empty;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    var ds = UserBL.TeamCRUD((int)ConstantMessages.Action.VIEW, identity.CompId, 0, string.Empty, string.Empty, identity.UserID, true);
+                    DataTable dt = ds.Tables["Data"];
+                    if (dt != null)
+                    {
+                        if (ds.Tables.Count > 0)
+                        {
+                            data = Utility.ConvertDataSetToJSONString(dt);
+                            data = Utility.Successful(data);
+                        }
+                        else
+                        {
+                            data = dt.Rows[0]["ReturnMessage"].ToString();
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = "Please Try Again";
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/DeleteTeam")]
+        public IHttpActionResult DeleteTeam(JObject requestParams)
+        {
+            var data = string.Empty;
+
+            string CreatedBy = string.Empty;
+            ContentBO content = new ContentBO();
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && Convert.ToInt32(requestParams["ID"]) != 0
+                        && (Convert.ToString(requestParams["IsActive"]) != "0" || Convert.ToString(requestParams["IsActive"]) != "1"))
+                    {
+                        int ID = 0;
+                        bool IsActive = false;
+
+                        if (!string.IsNullOrEmpty(requestParams["ID"].ToString()))
+                        {
+                            ID = Convert.ToInt32(requestParams["ID"]);
+                        }
+                        if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                        {
+                            IsActive = (bool)requestParams["IsActive"];
+                        }
+                        var ds = UserBL.TeamCRUD((int)ConstantMessages.Action.DELETE, identity.CompId, ID, string.Empty, string.Empty, identity.UserID, IsActive);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+        #endregion TEAM
+
+
+
 
         [Route("API/User/GetUsers")]
         [HttpPost]
-        public IHttpActionResult GetUsers(JObject requestParams)
+        public IHttpActionResult GetUsers()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;                    
+
+                    var ds = CommonBL.GetUsers(objUser);
+                    if (ds.Tables.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "No user found");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/SearchUsers")]
+        [HttpPost]
+        public IHttpActionResult SearchUsers(JObject requestParams)
         {
             var data = "";
             var identity = MyAuthorizationServerProvider.AuthenticateUser();
@@ -1449,12 +1996,35 @@ namespace _365_Portal.Controllers
                     objUser.UserID = identity.UserID;
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
-                    if (objUser.Role == "superadmin")
+
+                    int ddlCompID = 0, ddlRoleID = 0;                    
+
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlCompId"])))
                     {
-                        objUser.CompId = Convert.ToInt32(requestParams["CompId"].ToString());
+                        ddlCompID = Convert.ToInt32(requestParams["ddlCompId"]); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ManagerID"].ToString())))
+                    {
+                        objUser.ManagerID = Convert.ToString((requestParams["ManagerID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlRoleID"].ToString())))
+                    {
+                        ddlRoleID = Convert.ToInt32((requestParams["ddlRoleID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TeamID"].ToString())))
+                    {
+                        objUser.TeamID = Convert.ToString((requestParams["TeamID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["DepartmentID"].ToString())))
+                    {
+                        objUser.DepartmentID = Convert.ToString((requestParams["DepartmentID"])); 
+                    }
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["GroupID"].ToString())))
+                    {
+                        objUser.GroupId = Convert.ToString((requestParams["GroupID"])); 
                     }
 
-                    var ds = CommonBL.GetUsers(objUser);
+                    var ds = CommonBL.SearchUsers(objUser, ddlCompID, ddlRoleID);
                     if (ds.Tables.Count > 0)
                     {
                         data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
@@ -2060,10 +2630,147 @@ namespace _365_Portal.Controllers
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
 
-                    var ds = CommonBL.BindDropDown(objUser, "createuser");
+                    var ds = CommonBL.BindDropDown(objUser, "createuser",ConstantMessages.Procedures.spBindDropdown);
 
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/BindUsersFilter")]
+        [HttpPost]
+        public IHttpActionResult BindUsersFilter()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin || identity.Role == ConstantMessages.Roles.subadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var ds = CommonBL.BindDropDown(objUser, "getusersfilter", ConstantMessages.Procedures.spBindDropdown);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+
+        [Route("API/User/GetCourses")]
+        [HttpPost]
+        public IHttpActionResult GetCourses()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var ds = CommonBL.BindDropDown(objUser, "getcourses", ConstantMessages.Procedures.spBindDropdown);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+        
+        [Route("API/User/GetUserCourseEngagement")]
+        [HttpPost]
+        public IHttpActionResult GetUserCourseEngagement(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {                    
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("EngageFilterID"))) && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("CourseID"))))
+                    {
+                        var ds = CommonBL.GetUserCourseEngagement(identity.CompId, Convert.ToInt32(requestParams.SelectToken("CourseID")), Convert.ToInt32(requestParams.SelectToken("EngageFilterID")));
+
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "! Please enter all fields.");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/GetGetUserCourseStatus")]
+        [HttpPost]
+        public IHttpActionResult GetGetUserCourseStatus(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("CourseFilterID"))) && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("Operator")))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("Count"))))
+                    {
+                        var ds = CommonBL.GetGetUserCourseStatus(identity.CompId, Convert.ToInt32(requestParams.SelectToken("CourseFilterID"))
+                            , Convert.ToString(requestParams.SelectToken("Operator")), Convert.ToInt32(requestParams.SelectToken("Count")));
+
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "! Please enter all fields.");
+                    }
                 }
                 else
                 {

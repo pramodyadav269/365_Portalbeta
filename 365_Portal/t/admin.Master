@@ -95,7 +95,7 @@
         }
 
         function FormatDate(date) {
-            debugger
+            //debugger
             if (date != undefined && date != '') {
                 date = date.substring(0, 9);
             }
@@ -103,6 +103,13 @@
                 date = '';
             }
             return date;
+        }
+        
+        function BlankIfNullOrUndefined(string) {            
+            if (string == null || string == undefined) {
+                string = '';
+            }            
+            return string;
         }
 
         function BindNotification() {

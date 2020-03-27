@@ -626,6 +626,78 @@ namespace _365_Portal.Code.DAL
         }
         #endregion DEPARTMENTS
 
+        #region CRUD FOR CATEGORY
+        public static DataSet CategoryCRUD(int Action, int CompId, int CatId, string CatName, string Description, string CreatedBy, bool IsActive)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spCategoryCRUD";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", Action);
+                cmd.Parameters.AddWithValue("p_CompId", CompId);
+                cmd.Parameters.AddWithValue("p_CatId", CatId);
+                cmd.Parameters.AddWithValue("p_CatName", CatName.Trim().ToString());
+                //cmd.Parameters.AddWithValue("p_Description", Description);
+                cmd.Parameters.AddWithValue("p_IsActive", IsActive);
+                cmd.Parameters.AddWithValue("p_CreatedBy", CreatedBy);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+        #endregion DEPARTMENTS
+
+        #region CRUD FOR TEAM
+        public static DataSet TeamCRUD(int Action, int CompId, int TeamId, string TeamName, string Description, string CreatedBy, bool IsActive)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spTeamCRUD";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", Action);
+                cmd.Parameters.AddWithValue("p_CompId", CompId);
+                cmd.Parameters.AddWithValue("p_TeamId", TeamId);
+                cmd.Parameters.AddWithValue("p_TeamName", TeamName.Trim().ToString());
+                //cmd.Parameters.AddWithValue("p_Description", Description);
+                cmd.Parameters.AddWithValue("p_IsActive", IsActive);
+                cmd.Parameters.AddWithValue("p_CreatedBy", CreatedBy);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+        #endregion TEAM
+
         public static DataSet SetUserPassword(Int32 CompId, string UserId, string Password, string CreatedBy)
         {
             DataSet ds = new DataSet();

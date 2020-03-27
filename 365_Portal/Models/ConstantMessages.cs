@@ -84,6 +84,11 @@ namespace _365_Portal.Models
             public static string topic = "3";
         }
 
+        public class Procedures
+        {
+            public static string spBindDropdown = "spBindDropdown";
+        }
+
         public enum StatusCode
         {
             Success = 1, Failure = 0

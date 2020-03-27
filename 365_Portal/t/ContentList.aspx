@@ -14,14 +14,14 @@
             <div class="card shadow border-0 border-radius-0">
                 <div class="card-body">
                     <div class="row input-validation">
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="display:none;">
                             <div class="form-group">
 
                                 <label for="ddlDocType">Doc Type</label>
                                 <select class="form-control required" id="ddlDocType" style="width: 100% !important">
                                    <%-- <option></option>--%>
-                                    <option value="PDF">PDF</option>
-                                    <option value="VIDEO">Video</option>
+                                    <%--<option value="PDF">PDF</option>
+                                    <option value="VIDEO">Video</option>--%>
                                     <option value="TEXT">Text</option>
                                 </select>
                                 <script>
@@ -43,6 +43,12 @@
                                 <input type="text" class="form-control required" id="txtTitle" placeholder="Title" />
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="txtCourseTime">Course Time</label>
+                                <input type="text" class="form-control required" id="txtCourseTime" placeholder="Course Time" />
+                            </div>
+                        </div>
                         <div class="col-md-2">
                             <div class="form-group checkbox required">
                                 <label>Is Gift</label>
@@ -59,14 +65,6 @@
                                     <input type="checkbox" id="chkIsPublished" name="chkIsPublished" class="custom-control-input">
                                     <label class="custom-control-label" for="chkIsPublished">Yes</label>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="txtCourseTime">Course Time</label>
-                                <input type="text" class="form-control required" id="txtCourseTime" placeholder="Course Time" />
                             </div>
                         </div>
 
@@ -173,7 +171,8 @@
         var base64filestring;
         var FileURL;
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
-        $(document).ready(function () {
+        $(document).ready(function () {            
+
             // WYSIWYG Editer Short Init
             //tinymce.init({
             //    selector: 'textarea.tinymce',
@@ -183,7 +182,6 @@
             //    plugins: 'table',
             //    toolbar: "undo redo | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | table"
             //});
-
             
 
             TopicID = GetParameterValues('TopicID');
@@ -192,9 +190,7 @@
             GetContentList(this);
             ClearAllFields(this);
             ShowControl();
-
-
-
+            
             //tinymce.get('txtDescription').setContent($("<div/>").html(value).text());
             //tinymce.get('txtDescription').getContent()
 
@@ -202,7 +198,7 @@
 
         function SaveChanges(cntrl) {
             var regex = '';
-
+            debugger
             var formdata = new FormData();
             var selectedDocType = $("#ddlDocType").val();
             if ($("#ddlDocType").val() != "" &&
@@ -231,6 +227,14 @@
                         isUrl = 0;
                         base64filestring = $('#filepath').get(0).files[0];
                     }
+                }
+                else {
+                    Swal.fire({
+                        title: "Failure",
+                        text: "! Invalid file type.",
+                        icon: "error"
+                    });
+                    return false;
                 }
 
                 var index = contentList.length + 1;
@@ -554,7 +558,7 @@
         }
 
         function ClearAllFields(cntrl) {
-            $("#ddlDocType").val("");
+            $("#ddlDocType").val("TEXT");
             $("#txtTitle").val("");
             tinymce.get('txtDescription').setContent('')
             $("#txtOverview").val("");
@@ -650,7 +654,7 @@
                                             tbl += "<td><input type='checkbox' " + isPublishedValue + " /></td>";
                                             tbl += '<td><i title="Edit" contentfileid="' + content.ContentFileID + '" index=' + content.ContentID + ' onclick="EditContent($(this));" class="fas fa-edit text-warning"></i><i title="Delete" index=' + content.ContentID + ' onclick="DeleteContent($(this));" class="fas fa-trash text-danger"></i></td>';
                                             
-                                            debugger
+                                            //debugger
                                             tbl += "<td style='display:none;'>" + content.CourseTime + "</td>";
 
                                             tbl += "</tr>";
@@ -777,7 +781,7 @@
         }
 
         function DeleteContent(row) {
-            debugger
+            //debugger
             var index = $(row).attr("index");
 
             contentList = $.grep(contentList, function (n, i) {

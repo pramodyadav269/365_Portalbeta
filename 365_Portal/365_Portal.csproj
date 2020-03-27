@@ -371,6 +371,20 @@
     <Compile Include="t\Achievement.aspx.designer.cs">
       <DependentUpon>Achievement.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\AddCategory.aspx.cs">
+      <DependentUpon>AddCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\AddCategory.aspx.designer.cs">
+      <DependentUpon>AddCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\AddTeam.aspx.cs">
+      <DependentUpon>AddTeam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\AddTeam.aspx.designer.cs">
+      <DependentUpon>AddTeam.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\admin.Master.cs">
       <DependentUpon>admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -531,6 +545,20 @@
     </Compile>
     <Compile Include="t\Topics.aspx.designer.cs">
       <DependentUpon>Topics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\UserCourseMgmt.aspx.cs">
+      <DependentUpon>UserCourseMgmt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\UserCourseMgmt.aspx.designer.cs">
+      <DependentUpon>UserCourseMgmt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\UserCourseStatus.aspx.cs">
+      <DependentUpon>UserCourseStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\UserCourseStatus.aspx.designer.cs">
+      <DependentUpon>UserCourseStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="t\UserGroupMapping.aspx.cs">
       <DependentUpon>UserGroupMapping.aspx</DependentUpon>
@@ -990,6 +1018,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Test.aspx" />
     <Content Include="t\Achievement.aspx" />
+    <Content Include="t\AddCategory.aspx" />
+    <Content Include="t\AddTeam.aspx" />
     <Content Include="t\assign_topics.aspx" />
     <Content Include="t\bulkupload.aspx" />
     <Content Include="t\ChangePassword.aspx" />
@@ -1012,6 +1042,8 @@
     <Content Include="t\Settings.aspx" />
     <Content Include="t\discussion.aspx" />
     <Content Include="t\Topics.aspx" />
+    <Content Include="t\UserCourseMgmt.aspx" />
+    <Content Include="t\UserCourseStatus.aspx" />
     <Content Include="t\UserGroupMapping.aspx" />
     <Content Include="t\Users.aspx" />
     <Content Include="Web.config">

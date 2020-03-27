@@ -173,6 +173,19 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+        public static DataSet SearchUsers(UserBO objUserBO, int ddlCompID, int ddlRoleID)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = CommonDAL.SearchUsers(objUserBO, ddlCompID, ddlRoleID);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
         public static DataSet BindRoleAndGroup(UserBO objUserBO)
         {
             DataSet ds = new DataSet();
@@ -239,12 +252,39 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet BindDropDown(UserBO objUserBO,string Type)
+        public static DataSet BindDropDown(UserBO objUserBO,string Type,string ProcedureName)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = CommonDAL.BindDropDown(objUserBO,Type);
+                ds = CommonDAL.BindDropDown(objUserBO,Type, ProcedureName);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+        public static DataSet GetUserCourseEngagement(int compid, int topicid, int filtertype)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = CommonDAL.GetUserCourseEngagement(compid, topicid, filtertype);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet GetGetUserCourseStatus(int compid, int filtertype, string Operator, int count)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = CommonDAL.GetGetUserCourseStatus(compid, filtertype, Operator, count);
             }
             catch (Exception ex)
             {

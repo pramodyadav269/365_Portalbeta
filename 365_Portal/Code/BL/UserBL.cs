@@ -183,6 +183,38 @@ namespace _365_Portal.Code.BL
         }
         #endregion DEPARTMENTS
 
+        #region CRUD FOR CATEGORY        
+        public static DataSet CategoryCRUD(int action,int CompId,int CatID, string CatName, string Description, string CreatedBy, bool IsActive)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.CategoryCRUD(action, CompId, CatID, CatName, Description, CreatedBy, IsActive);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        #endregion CATEGORY
+
+        #region CRUD FOR TEAM        
+        public static DataSet TeamCRUD(int action, int CompId, int TeamID, string TeamName, string Description, string CreatedBy, bool IsActive)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.TeamCRUD(action, CompId, TeamID, TeamName, Description, CreatedBy, IsActive);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        #endregion TEAM
+
 
         public static DataSet SetUserPassword(int CompId, string UserId, string Password, string CreatedBy)
         {
