@@ -69,7 +69,7 @@
                 </ul>
             </div>
             <div class="col-10">
-                <div class="row website-redesign section-sorting" id="dvWebsiteRedesign">
+                <div class="row website-redesign" id="dvWebsiteRedesign">
                     <%--    <div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
@@ -408,7 +408,7 @@
             jsonStatusList.push({ StatusID: 3, Status: "Done" });
 
             var jsonTaskList = [];
-            jsonTaskList.push({ TaskId: 1, StatusID: 1, TaskName: "This is some text within a card body." });
+            jsonTaskList.push({ TaskId: 1, StatusID: 1, TaskName: "This is some text within a card body." }, { TaskId: 1, StatusID: 1, TaskName: "This is some text within a card body." });
             jsonTaskList.push({ TaskId: 2, StatusID: 2, TaskName: "This is some text within a card body." });
             jsonTaskList.push({ TaskId: 3, StatusID: 3, TaskName: "This is some text within a card body." });
 
@@ -428,9 +428,7 @@
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
                 cardHtml += '<a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>';
-                cardHtml += ' </div>';
-                cardHtml += '<div class="row">';
-
+                cardHtml += '</div>';
 
                 var statusWiseTaskList = $.grep(jsonTaskList, function (n, i) {
                     return n.StatusID === objStatus.StatusID;
@@ -438,40 +436,62 @@
 
                 //statusWiseTaskList = [];
                 if (statusWiseTaskList.length > 0) {
+                    cardHtml += '<ol class="row section-sorting">';
                     // Repeat Tasks
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
-                        cardHtml += '<div class="col-12 mb-2">';
+                        cardHtml += '<li class="col-12 mb-2 sortable-item">';
                         cardHtml += '<div class="wr-content">';
-                        cardHtml += '<div class="wr-content-title mb-2">';
-                        cardHtml += objTask.TaskName;
-                        cardHtml += '</div>';
+                        cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '</div>';
                         cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
-                        cardHtml += '<div>';
-                        cardHtml += ' <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span>';
+                        cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
+                        cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
                         cardHtml += '</div>';
-                        cardHtml += ' <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
-                        cardHtml += ' </div>';
-                        cardHtml += ' </div>';
-                        cardHtml += ' </div>';
+                        cardHtml += '</div>';
+                        cardHtml += '</li>';
                     });
+                    cardHtml += '</ol>';
                 }
                 else {
                     cardHtml += '<div>No Tasks Found</div>';
                 }
-
-                cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
             });
-
             $("#dvWebsiteRedesign").empty().html(cardHtml);
 
-            $("#dvWebsiteRedesign").sortable();
-            $("#dvWebsiteRedesign").disableSelection();
 
 
+            var adjustment;
+
+            $("ol.section-sorting").sortable({
+                group: 'section-sorting',
+                pullPlaceholder: false,
+                // animation on drop
+                onDrop: function ($item, container, _super) {
+                    _super($item, container);
+                },
+
+                // set $item relative to cursor position
+                onDragStart: function ($item, container, _super) {
+                    var offset = $item.offset(),
+                        pointer = container.rootGroup.pointer;
+
+                    adjustment = {
+                        left: pointer.left - offset.left,
+                        top: pointer.top - offset.top
+                    };
+
+                    _super($item, container);
+                },
+                onDrag: function ($item, position) {
+                    $item.css({
+                        left: position.left - adjustment.left,
+                        top: position.top - adjustment.top
+                    });
+                }
+            });
         }
 
         function BindProjects() {

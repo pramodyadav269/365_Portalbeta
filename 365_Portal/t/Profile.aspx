@@ -7,7 +7,7 @@
     <div class="theme-section position-absolute">
         <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
     </div>
-
+    
     <div class="container profile">
         <section>
             <div class="row">

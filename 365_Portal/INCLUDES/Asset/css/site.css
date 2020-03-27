@@ -926,6 +926,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-.section-sorting .card-body {
-    cursor: move;
+.section-sorting {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+    min-height: 90px;
 }
+
+    .section-sorting .sortable-item {
+        list-style-type: none;
+        cursor: move;
+    }
