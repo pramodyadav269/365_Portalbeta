@@ -44,36 +44,76 @@
                     <div class="card shadow-sm mb-4 contact">
                         <div class="card-body mb-2">
                             <h4 class="card-title mb-3">Contact</h4>
-                            <a class="edit rounded"><i class="fas fa-pen"></i></a>
+                            <a class="edit rounded" id="btnEditInfo" onclick="EditInfo('.contact-info');"><i class="fas fa-pen"></i></a>
+                            <a class="cancel rounded d-none" id="btnCancelInfo" onclick="CancelInfo('.contact-info');"><i class="fas fa-times"></i></a>
+                            <a class="submit rounded d-none" id="btnSubmitInfo" onclick="SubmitInfo('.contact-info');"><i class="fas fa-check"></i></a>
                             <p class="card-subtitle mb-3 text-uppercase">About Us</p>
-                            <div class="row">
+                            <div class="row contact-info">
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Prononu</div>
                                     <div class="contact-info add">Add</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="txtPrononu" placeholder="Prononu" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Role</div>
                                     <div class="contact-info">Biochemical Engineer at Kids Mart</div>
+                                    <div class="contact-input d-none">
+                                        <select class="form-control select2 required" id="ddlRole" style="width: 100% !important">
+                                            <option></option>
+                                            <option value="1">Role 1</option>
+                                            <option value="2">Role 2</option>
+                                            <option value="3">Role 3</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Company</div>
                                     <div class="contact-info">Kids Mart</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="txtCompany" placeholder="Company" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Company Size</div>
                                     <div class="contact-info add">Add</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="txtCompanySize" placeholder="Company Size" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Company Website</div>
                                     <div class="contact-info add">Add</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="txtCompanyWebsite" placeholder="Company Website" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Country</div>
                                     <div class="contact-info">India</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control required" id="txtCountry" placeholder="Country" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">State</div>
                                     <div class="contact-info">Maharashtra</div>
+                                    <div class="contact-input d-none">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control required" id="txtState" placeholder="State" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -469,6 +509,40 @@
             $("#dvSubMenu_MyProfile").addClass("active");
             GetAchievementNGifts();
         });
+
+        function EditInfo(el) {
+            $('#btnCancelInfo').removeClass('d-none');
+            $('#btnSubmitInfo').removeClass('d-none');
+            $('#btnEditInfo').addClass('d-none');
+
+            $(el).find('.contact-info').addClass('d-none');
+            $(el).find('.contact-input').removeClass('d-none');
+
+        }
+
+        function CancelInfo(el) {
+            $('#btnCancelInfo').addClass('d-none');
+            $('#btnSubmitInfo').addClass('d-none');
+            $('#btnEditInfo').removeClass('d-none');
+
+            $(el).find('.contact-info').removeClass('d-none');
+            $(el).find('.contact-input').addClass('d-none');
+
+            clearFields(el);
+        }
+
+        function SubmitInfo(el) {
+
+            if (inputValidation(el)) {
+                $('#btnCancelInfo').addClass('d-none');
+                $('#btnSubmitInfo').addClass('d-none');
+                $('#btnEditInfo').removeClass('d-none');
+            }
+
+
+        }
+
+
 
         function openModal(achievementId) {
             $.each(achievements, function (i, data) {

@@ -810,7 +810,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         border-radius: 50%;
     }
 
-.profile .edit {
+.profile .edit, .profile .submit {
     position: absolute;
     background: #fff;
     height: 30px;
@@ -820,13 +820,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     right: 18px;
 }
 
+.profile .cancel {
+    position: absolute;
+    background: #fff;
+    height: 30px;
+    width: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    top: 18px;
+    right: 60px;
+}
+
 .profile .upload .svg-inline--fa {
     margin: .4rem;
     font-size: 18px;
 }
 
-.profile .edit .svg-inline--fa {
-    margin: .4rem;
+.profile .edit .svg-inline--fa, .profile .submit .svg-inline--fa, .profile .cancel .svg-inline--fa {
+    margin: .4rem .5rem;
 }
 
 .profile .profile-info .media-body span, .profile .badges .media-body span {
@@ -915,3 +925,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         margin-left: .25rem;
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
+
+.section-sorting .card-body {
+    cursor: move;
+}

@@ -69,8 +69,8 @@
                 </ul>
             </div>
             <div class="col-10">
-                <div class="row website-redesign" id="dvWebsiteRedesign">
-                <%--    <div class="col-12 col-sm-12 col-md-4">
+                <div class="row website-redesign section-sorting" id="dvWebsiteRedesign">
+                    <%--    <div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="row">
@@ -425,11 +425,12 @@
                 cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                 cardHtml += '<div class="card shadow">';
                 cardHtml += '<div class="card-body">';
-                cardHtml += '<div class="row">';
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
                 cardHtml += '<a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>';
                 cardHtml += ' </div>';
+                cardHtml += '<div class="row">';
+
 
                 var statusWiseTaskList = $.grep(jsonTaskList, function (n, i) {
                     return n.StatusID === objStatus.StatusID;
@@ -466,6 +467,10 @@
             });
 
             $("#dvWebsiteRedesign").empty().html(cardHtml);
+
+            $("#dvWebsiteRedesign").sortable();
+            $("#dvWebsiteRedesign").disableSelection();
+
 
         }
 

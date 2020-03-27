@@ -732,6 +732,7 @@
     <Content Include="INCLUDES\Asset\js\dataTables.bootstrap4.min.js" />
     <Content Include="INCLUDES\Asset\js\gijgo.min.js" />
     <Content Include="INCLUDES\Asset\js\jodit.min.js" />
+    <Content Include="INCLUDES\Asset\js\jquery-ui.js" />
     <Content Include="INCLUDES\Asset\js\jquery.dataTables.min.js" />
     <Content Include="INCLUDES\Asset\js\jquery.min.js" />
     <Content Include="INCLUDES\Asset\js\jquery.tablednd.js" />
