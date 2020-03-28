@@ -2455,7 +2455,7 @@ namespace _365_Portal.Controllers
             //    Message = "Please select Manager."; ValFlag = false; return ValFlag;
             //}
             if (jsonResult.SelectToken("DOJ") != null && jsonResult.SelectToken("DOJ").ToString().Trim() != "")
-            {                
+            {
                 try
                 {
                     objUserVal.DOJ = DateTime.ParseExact(jsonResult.SelectToken("DOJ").ToString().Trim(), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
@@ -2463,7 +2463,7 @@ namespace _365_Portal.Controllers
                 catch (Exception ex)
                 {
                     Message = "Please enter valid Date of Joining."; ValFlag = false; return ValFlag;
-                }                
+                }
             }
             //else
             //{
@@ -2781,6 +2781,54 @@ namespace _365_Portal.Controllers
             {
                 data = Utility.AuthenticationError();
             }
+            return new APIResult(Request, data);
+        }
+
+        [Route("API/User/GetUserlist")]
+        [HttpPost]
+        public IHttpActionResult GetUserlist(JObject requestParams)
+        {
+            var data = "";
+            //var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            //if (identity != null)
+            //{
+            UserBO objUser = new UserBO();
+
+            //if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+            //{
+            //objUser.UserID = identity.UserID;
+            //objUser.CompId = identity.CompId;
+            //objUser.Role = identity.Role;
+            //if (objUser.Role == "superadmin")
+            //{
+            //    objUser.CompId = Convert.ToInt32(requestParams["CompId"].ToString());
+            //}
+
+            objUser.UserID = "7";
+            objUser.CompId = 1;
+            objUser.Role = "companyadmin";
+
+            var ds = CommonBL.GetUsers(objUser);
+            if (ds.Tables.Count > 0)
+            {
+                data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                data = Utility.Successful(data);
+            }
+            else
+            {
+                data = Utility.API_Status("2", "No user found");
+            }
+            //}
+            //else
+            //{
+            //    data = Utility.API_Status("3", "You do not have access for this functionality");
+            //}
+            //}
+            //    else
+            //    {
+            //        data = Utility.AuthenticationError();
+            //    }
+
             return new APIResult(Request, data);
         }
 
