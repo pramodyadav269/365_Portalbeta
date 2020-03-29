@@ -35,7 +35,6 @@
     <script src="../INCLUDES/Asset/js/jodit.min.js"></script>
     <script src="../INCLUDES/Asset/tinymce/tinymce.min.js"></script>
     <script src="../includes/Asset/js/360.js"></script>
-
     <script src="../includes/Asset/js/bs-custom-file-input.min.js"></script>
     <script src="../includes/Asset/js/select2.min.js"></script>
     <script src="../includes/Asset/js/jquery.dataTables.min.js"></script>

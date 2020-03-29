@@ -28,12 +28,21 @@
                         <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>
                     </li>
                 </ul>
-                <ul id="ulProjects" class="list-group task-bar mb-4">
+                <ul id="ulProjects" class="list-group task-bar mb-4 dropdown">
                     <%--<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects
                         <a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>
                     </li>
                     <li class="list-group-item task-item">
-                        <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Dashboard UI Kit</li>
+                        <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Dashboard UI Kit 
+                        <a class="task-item-action d-none" id="taskMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="taskMenu">
+                            <button class="dropdown-item" type="button">Action</button>
+                            <button class="dropdown-item" type="button">Another action</button>
+                            <button class="dropdown-item" type="button">Something else here</button>
+                        </div>
+                    </li>
+
+
                     <li class="list-group-item task-item">
                         <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />CRM System</li>
                     <li class="list-group-item task-item">
@@ -41,6 +50,8 @@
                     <li class="list-group-item task-item">
                         <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Communication Tool</li>--%>
                 </ul>
+
+
 
                 <ul id="ulTeam" class="list-group task-bar mb-4">
                     <%-- <li class="list-group-item task-title">Teams</li>
@@ -334,25 +345,41 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="ddlAddAssignee">Add Assignee</label>
-                                <select class="form-control select2 required" id="ddlAddAssignee" style="width: 100% !important">
-                                    <option></option>
-                                    <option value="1">Assignee 1</option>
-                                    <option value="2">Assignee 2</option>
-                                    <option value="3">Assignee 3</option>
+                                <select class="form-control select2 required" id="ddlAddAssignee" style="width: 100% !important" multiple>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12">
+                        <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtDueDate">Set Due Date</label>
-                                <input type="text" readonly class="form-control required" id="txtDueDate" placeholder="Select Date" />
-                                <div id="dvDueDate" class="mt-3"></div>
+                                <input type="text" readonly class="form-control required input-inline-picker" id="txtDueDate" placeholder="Select Date" />
+                                <div id="dvDueDate" class="inline-picker d-none"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="txtAddSubTask">Add Sub Task</label>
+                                <textarea class="form-control required" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <div class="custom-file icon">
+                                    <input type="file" class="custom-file-input required" id="fileAttachment">
+                                    <label class="custom-file-label" for="fileAttachment">Add attachment</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="txtAddPrivateNotes">Add Private Notes</label>
+                                <textarea class="form-control required" placeholder="Add Private Notes" id="txtAddPrivateNotes"></textarea>
                             </div>
                         </div>
 
                         <div class="w-100"></div>
                         <div class="col-12 col-sm-12 mt-4 text-right">
-                            <a class="btn bg-yellow" onclick="SaveTask(this)">Submit</a>
+                            <a class="btn bg-yellow" onclick="AddTask('.input-validation-modal')">Submit</a>
                         </div>
                     </div>
                 </div>
@@ -384,8 +411,15 @@
 
         });
 
+        function AddTask(el) {
+            if (inputValidation(el)) {
+
+            }
+        }
+
         function onOpenTaskInfoModal() {
             $('#modalTaskInfo').modal('show');
+            clearFields('.input-validation-modal');
         }
 
         function onClickAddTask() {
@@ -447,29 +481,26 @@
                     cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                     cardHtml += '<div class="card shadow">';
                     cardHtml += '<div class="card-body">';
-                    cardHtml += '<div class="row">';
                     cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                     cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
                     cardHtml += '<a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>';
                     cardHtml += ' </div>';
 
                     if (statusWiseTaskList.length > 0) {
+                        cardHtml += '<ol class="row section-sorting">';
                         // Repeat Tasks
                         $.each(statusWiseTaskList, function (indxTask, objTask) {
-                            cardHtml += '<div class="col-12 mb-2">';
+                            cardHtml += '<li class="col-12 mb-2 sortable-item">';
                             cardHtml += '<div class="wr-content">';
-                            cardHtml += '<div class="wr-content-title mb-2">';
-                            cardHtml += objTask.TaskName;
-                            cardHtml += '</div>';
+                            cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '</div>';
                             cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
-                            cardHtml += '<div>';
-                            cardHtml += ' <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span>';
+                            cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
+                            cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
                             cardHtml += '</div>';
-                            cardHtml += ' <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
-                            cardHtml += ' </div>';
-                            cardHtml += ' </div>';
-                            cardHtml += ' </div>';
+                            cardHtml += '</div>';
+                            cardHtml += '</li>';
                         });
+                        cardHtml += ' </ol>';
                     }
                     else {
                         cardHtml += '<div>No Tasks Found</div>';
@@ -477,11 +508,39 @@
                     cardHtml += '</div>';
                     cardHtml += '</div>';
                     cardHtml += '</div>';
-                    cardHtml += '</div>';
-                    cardHtml += '</div>';
                 }
             });
             $("#dvWebsiteRedesign").empty().html(cardHtml);
+
+            // for card drag and drop
+            var adjustment;
+            $("ol.section-sorting").sortable({
+                group: 'section-sorting',
+                pullPlaceholder: false,
+                // animation on drop
+                onDrop: function ($item, container, _super) {
+                    _super($item, container);
+                },
+
+                // set $item relative to cursor position
+                onDragStart: function ($item, container, _super) {
+                    var offset = $item.offset(),
+                        pointer = container.rootGroup.pointer;
+
+                    adjustment = {
+                        left: pointer.left - offset.left,
+                        top: pointer.top - offset.top
+                    };
+
+                    _super($item, container);
+                },
+                onDrag: function ($item, position) {
+                    $item.css({
+                        left: position.left - adjustment.left,
+                        top: position.top - adjustment.top
+                    });
+                }
+            });
         }
 
         function bindTaskStatusCounts(jsonTaskList) {
@@ -525,13 +584,30 @@
             if (jsonProjectList.Data.length > 0) {
                 $.each(jsonProjectList.Data, function (indxProject, objProject) {
                     projectHtml += '<li class="list-group-item task-item">';
-                    projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName + '</li>';
+                    projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
+
+                    projectHtml += '<a class="task-item-action d-none" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+                    projectHtml += '<div class="dropdown-menu shadow-sm" aria-labelledby="taskMenu_' + indxProject + '">';
+                    projectHtml += '<a class="dropdown-item">Action</a>';
+                    projectHtml += '<a class="dropdown-item">Another action</a>';
+                    projectHtml += '<a class="dropdown-item">Something else here</a>';
+                    projectHtml += '</div>';
+                    projectHtml += '</li >';
+
                 });
             }
             else {
-                projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
+                projectHtml += '<li class="list-group-item">No Projects Found</li>';
             }
             $("#ulProjects").empty().html(projectHtml);
+
+            $('.list-group-item.task-item').mouseover(function () {
+                $(this).find('.task-item-action').removeClass('d-none');
+            });
+
+            $('.list-group-item.task-item').mouseleave(function () {
+                $(this).find('.task-item-action').addClass('d-none');
+            });
         }
 
         function BindTeam() {
@@ -626,11 +702,12 @@
             var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
 
             if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
-                var jsonTeamMembersHtml = '<option></option>';
+                var jsonTeamMembersHtml = '';
                 $.each(jsonTeamMembers, function (indxMember, objMember) {
                     jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
                 });
                 $("#ddlAddAssignee").empty().html(jsonTeamMembersHtml);
+                selectInit('#ddlAddAssignee', 'Select a option');
             }
         }
 
