@@ -30,7 +30,7 @@
                 </ul>
                 <ul id="ulProjects" class="list-group task-bar mb-4">
                     <%--<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects
-                        <a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>
+                        <a onclick="onClickAddProject();"><i class="fas fa-plus c-yellow"></i></a>
                     </li>
                     <li class="list-group-item task-item">
                         <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Dashboard UI Kit</li>
@@ -263,6 +263,7 @@
                                 <div class="row input-validation">
                                     <div class="col-12 col-sm-12 col-md-10 mb-3">
                                         <div class="form-group">
+                                            <input type="hidden" id="hdnProjectId" />
                                             <label for="txtProjectName">Project Name</label>
                                             <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
                                         </div>
@@ -282,9 +283,9 @@
                                     </div>
                                     <div class="w-100"></div>
                                     <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
-                                        <a class="btn bg-yellow" onclick="SaveProject(this)">Submit</a>
+                                        <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
 
-                                        <%--onclick="inputValidation('.input-validation');"--%>
+                                        <%--onclick="inputValidation('.input-validation'); "--%>
                                     </div>
                                 </div>
                             </div>
@@ -352,7 +353,7 @@
 
                         <div class="w-100"></div>
                         <div class="col-12 col-sm-12 mt-4 text-right">
-                            <a class="btn bg-yellow" onclick="SaveTask(this)">Submit</a>
+                            <a class="btn bg-yellow" onclick="SaveUpdateTask(this)">Submit</a>
                         </div>
                     </div>
                 </div>
@@ -388,17 +389,12 @@
             $('#modalTaskInfo').modal('show');
         }
 
-        function onClickAddTask() {
-            toggle('dvCreateProject', 'dvWebsiteRedesign');
-            prevTitle = $('#contentTitle').html();
-            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
-            selectInit('#ddlProjectMembers', 'Search by user or by user name');
-        }
-
         function onClickBack(view, hide) {
             toggle(view, hide);
             $('#contentTitle').empty().append(prevTitle);
         }
+
+         //Task Functions
 
         function BindCards() {
             // Ajax Call
@@ -501,39 +497,6 @@
             $("#spnOpenTasksCount").html(Opentaskscount);
         }
 
-        function BindProjects() {
-
-            var requestParams = {
-                p_Action: "1"
-                , p_CompID: "1"
-                , p_ProjectID: "0"
-                , p_ProjectName: ""
-                , p_ProjectGoal: ""
-                , p_UserId: "7"
-                , p_ProjectMembers_UserIds: ""
-            };
-
-            var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
-
-            var jsonProjectList = $.parseJSON(projectajaxdata).Data;
-
-            var projectHtml = '';
-            projectHtml += '<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects';
-            projectHtml += '<a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>';
-            projectHtml += ' </li>';
-
-            if (jsonProjectList.Data.length > 0) {
-                $.each(jsonProjectList.Data, function (indxProject, objProject) {
-                    projectHtml += '<li class="list-group-item task-item">';
-                    projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName + '</li>';
-                });
-            }
-            else {
-                projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
-            }
-            $("#ulProjects").empty().html(projectHtml);
-        }
-
         function BindTeam() {
 
             // Ajax Call
@@ -579,48 +542,6 @@
             $("#ulTeam").empty().html(teamHtml);
         }
 
-        function BindTeamMembers(userlistAPIdata) {
-
-            var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
-
-            if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
-                var jsonTeamMembersHtml = '<option></option>';
-                $.each(jsonTeamMembers, function (indxMember, objMember) {
-                    jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
-                });
-                $("#ddlProjectMembers").empty().html(jsonTeamMembersHtml);
-            }
-        }
-
-        function SaveProject() {
-            var userIds = $("#ddlProjectMembers").val();
-            var stringuserIds = "";
-            $.each(userIds, function (index, value) {
-                stringuserIds = stringuserIds + value + ",";
-            });
-            var requestParams = {
-                p_Action: "2"
-                , p_CompID: "1"
-                , p_ProjectID: "0"
-                , p_ProjectName: $("#txtProjectName").val()
-                , p_ProjectGoal: $("#txtProjectGoal").val()
-                , p_UserId: "7"
-                , p_ProjectMembers_UserIds: stringuserIds
-            };
-
-            // Ajax Call
-            var userlistAPIdata = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
-            if (userlistAPIdata.StatusCode > 0) {
-                BindProjects();
-                Swal.fire({
-                    title: "Success",
-                    text: userlistAPIdata.StatusDescription,
-                    icon: "success",
-                    button: "Ok",
-                });
-            }
-        }
-
         function BindAssignee(userlistAPIdata) {
 
             var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
@@ -634,44 +555,227 @@
             }
         }
 
-        function SaveTask() {
+        function SaveUpdateTask() {
+            if (inputValidation('.input-validation-modal')) {
 
-            var userIds = $("#ddlAddAssignee").val();
+                var requestParams = {
+                    t_Action: "2"
+                    , t_ProjectID: "1"
+                    , t_CompID: "1"
+                    , t_TaskID: "0"
+                    , t_TaskName: $("#txtTaskName").val()
+                    , t_TaskSummary: $("#txtTopicSummary").val()
+                    , t_DueDate: new Date($("#txtDueDate").val())
+                    , t_PrivateNotes: ""
+                    , t_UserId: "7"
+                    , t_ProjectMembers_UserIds: $("#ddlAddAssignee").val() //varchar(500), #(Userids comma separated)
+                    , t_TagIds: "" //varchar(500), (comma separated)
+                    , t_FileIds: "" //varchar(500), #(comma separated)
+                    , t_SubTasks: "" //longtext, #(delimeter | separated)
+                    , t_StatusID: $("#ddlStatus").val()
+                    , t_Comments: ""
+                };
 
-            var duedate = new Date($("#txtDueDate").val());
-
-            var requestParams = {
-                t_Action: "2"
-                , t_ProjectID: "1"
-                , t_CompID: "1"
-                , t_TaskID: "0"
-                , t_TaskName: $("#txtTaskName").val()
-                , t_TaskSummary: $("#txtTopicSummary").val()
-                , t_DueDate: duedate
-                , t_PrivateNotes: ""
-                , t_UserId: "7"
-                , t_ProjectMembers_UserIds: userIds //varchar(500), #(Userids comma separated)
-                , t_TagIds: "" //varchar(500), (comma separated)
-                , t_FileIds: "" //varchar(500), #(comma separated)
-                , t_SubTasks: "" //longtext, #(delimeter | separated)
-                , t_StatusID: $("#ddlStatus").val()
-                , t_Comments: ""
-            };
-
-            // Ajax Call
-            var userlistAPIresponse = $.parseJSON(call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams));
-            if (userlistAPIresponse.StatusCode > 0) {
-                BindCards();
-                Swal.fire({
-                    title: "Success",
-                    text: userlistAPIresponse.StatusDescription,
-                    icon: "success",
-                    button: "Ok",
-                });
+                // Ajax Call
+                var userlistAPIresponse = $.parseJSON(call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams));
+                if (userlistAPIresponse.StatusCode > 0) {
+                    $("#modalTaskInfo").modal("hide");
+                    BindCards();
+                    Swal.fire({
+                        title: "Success",
+                        text: userlistAPIresponse.StatusDescription,
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
             }
         }
 
+        //End Task Functions
+
+        //Project Functions
+
+        function onClickAddProject() {
+            ClearProjectForm();
+            toggle('dvCreateProject', 'dvWebsiteRedesign');
+            prevTitle = $('#contentTitle').html();
+            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
+            selectInit('#ddlProjectMembers', 'Search by user or by user name');
+        }
+
+        function BindTeamMembers(userlistAPIdata) {
+
+            var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
+
+            if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
+                var jsonTeamMembersHtml = '<option></option>';
+                $.each(jsonTeamMembers, function (indxMember, objMember) {
+                    jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
+                });
+                $("#ddlProjectMembers").empty().html(jsonTeamMembersHtml);
+            }
+        }
+
+        function BindProjects() {
+
+            var requestParams = {
+                p_Action: "1"
+                , p_CompID: "1"
+                , p_ProjectID: "0"
+                , p_ProjectName: ""
+                , p_ProjectGoal: ""
+                , p_UserId: "7"
+                , p_ProjectMembers_UserIds: ""
+            };
+
+            var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
+
+            var jsonProjectList = $.parseJSON(projectajaxdata).Data;
+
+            var projectHtml = '';
+            projectHtml += '<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects';
+            projectHtml += '<a onclick="onClickAddProject();"><i class="fas fa-plus c-yellow"></i></a>';
+            projectHtml += ' </li>';
+
+            if (jsonProjectList.Data.length > 0) {
+                $.each(jsonProjectList.Data, function (indxProject, objProject) {
+                    projectHtml += '<li class="list-group-item task-item">';
+                    projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
+                    projectHtml += ' <a href="" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
+                    projectHtml += ' | <a href="" onclick="return DeleteProjectBYProjectId(' + objProject.ProjectID + ');">Delete</a>';
+                    projectHtml += '</li>';
+                });
+            }
+            else {
+                projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
+            }
+            $("#ulProjects").empty().html(projectHtml);
+        }
+
+        function BindProjectDetailsBYProjectId(projectId) {
+
+            var requestParams = {
+                p_Action: "1"
+                , p_CompID: "1"
+                , p_ProjectID: projectId
+                , p_ProjectName: ""
+                , p_ProjectGoal: ""
+                , p_UserId: "7"
+                , p_ProjectMembers_UserIds: ""
+            };
+
+            var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
+
+            var jsonProjecdetails = $.parseJSON(projectajaxdata).Data;
+
+            $("#hdnProjectId").val(jsonProjecdetails.Data[0].ProjectID);
+            $("#txtProjectName").val(jsonProjecdetails.Data[0].ProjectName);
+            $("#txtProjectGoal").val(jsonProjecdetails.Data[0].ProjectGoal);
+
+            if (jsonProjecdetails.Data1 != null && jsonProjecdetails.Data1.length > 0) {
+
+                var ddlProjectMembers = $('#ddlProjectMembers');
+                //// create the option and append to Select2
+                //var option = new Option(jsonProjecdetails.Data1[0].FirstName + " " + jsonProjecdetails.Data1[0].LastName, jsonProjecdetails.Data1[0].UserID, true, true);
+                //ddlProjectMembers.append(option).trigger('change');
+
+                $.each(jsonProjecdetails.Data1, function (indxMember, objMember) {
+                    var option = new Option(objMember.FirstName + " " + objMember.LastName, objMember.UserID, true, true);
+                    ddlProjectMembers.append(option).trigger('change');
+                });
+
+                //// manually trigger the `select2:select` event
+                //ddlProjectMembers.trigger({
+                //    type: 'select2:select',
+                //    params: {
+                //        data: jsonProjecdetails.Data1
+                //    }
+                //});
+            }
+
+            toggle('dvCreateProject', 'dvWebsiteRedesign');
+        }
+
+        function SaveUpdateProject() {
+           
+            if (inputValidation('.input-validation')) {
+               
+                var hiddenprojectId = $("#hdnProjectId").val();
+                var userIds = $("#ddlProjectMembers").val();
+
+                var requestParams = {
+                    p_Action: hiddenprojectId != null && hiddenprojectId != "" ? "3" : "2"
+                    , p_CompID: "1"
+                    , p_ProjectID: hiddenprojectId != null && hiddenprojectId != "" ? hiddenprojectId : "0"
+                    , p_ProjectName: $("#txtProjectName").val()
+                    , p_ProjectGoal: $("#txtProjectGoal").val()
+                    , p_UserId: "7"
+                    , p_ProjectMembers_UserIds: userIds.toString()
+                };
+
+                // Ajax Call
+                
+                var ProjectCRUDAPIData = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
+                if (ProjectCRUDAPIData.StatusCode > 0) {
+                    BindProjects();
+                    ClearProjectForm();
+                    onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+                    Swal.fire({
+                        title: "Success",
+                        text: ProjectCRUDAPIData.StatusDescription,
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
+            }
+        }
+
+        function DeleteProjectBYProjectId(projectId) {
+            var s = confirm('Confirm delete ?');
+            if (s == true) {
+                var requestParams = {
+                    p_Action: "4"
+                    , p_CompID: "1"
+                    , p_ProjectID: projectId
+                    , p_ProjectName: ""
+                    , p_ProjectGoal: ""
+                    , p_UserId: "7"
+                    , p_ProjectMembers_UserIds: ""
+                };
+                var ProjectCRUDAPIData = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
+                if (ProjectCRUDAPIData.StatusCode > 0) {
+                    Swal.fire({
+                        title: "Success",
+                        text: ProjectCRUDAPIData.StatusDescription,
+                        icon: "success",
+                        button: "Ok",
+                    });
+                }
+                BindProjects();
+            }
+            else {
+                return false;
+            }
+        }
+
+        function ClearProjectForm() {
+            $("#hdnProjectId").val("");
+            $("#txtProjectName").val("");
+            $("#txtProjectGoal").val("");
+            $('#ddlProjectMembers').val(null).trigger('change');
+        }
+
+        function ClearTaskForm() {
+            $("#hdnProjectId").val("");
+            $("#txtProjectName").val("");
+            $("#txtProjectGoal").val("");
+            $('#ddlProjectMembers').val(null).trigger('change');
+        }
+
+        //End Project Functions
+
         function call_ajaxfunction(url, verb, requestParams = null) {
+            ShowLoader();
             var data = "";
             $.ajax({
                 type: verb,
@@ -695,7 +799,7 @@
                     });
                 }
             });
-
+            HideLoader();
             return data;
         }
 
