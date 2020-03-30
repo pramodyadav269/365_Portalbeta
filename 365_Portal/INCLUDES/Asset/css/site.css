@@ -502,13 +502,32 @@ main .container-fluid.dashboard {
 }
 
 .task-bar .task-item {
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
+
+    .task-bar .task-item .dropdown-menu {
+        border: 0;
+        padding: 0;
+    }
+
+        .task-bar .task-item .dropdown-menu .dropdown-item {
+            padding: .5rem 1rem;
+            font-size: .9rem;
+        }
 
     .task-bar .task-item:hover {
         background: rgba(0, 0, 0, 0.05);
         border-color: #FEC900;
     }
+
+    .task-bar .task-item .task-item-action {
+        float: right;
+    }
+
+        .task-bar .task-item .task-item-action .svg-inline--fa {
+            margin: 0 0 0 .5rem;
+            color: rgba(0, 0, 0, 0.4);
+        }
 
 .task-bar .task-icon {
     width: 20px;
@@ -659,6 +678,51 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .input-form-2 input::placeholder {
     color: rgba(0, 0, 0, 0.4);
+}
+
+.input-form-2 .custom-file .custom-file-label {
+    margin: 0;
+    border-radius: .25rem;
+}
+
+    .input-form-2 .custom-file .custom-file-label::after {
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
+    }
+
+.input-form-2 .custom-file.icon .custom-file-label {
+    padding-left: 2.5rem;
+    border: 1px solid transparent;
+}
+
+    .input-form-2 .custom-file.icon .custom-file-label::after {
+        left: 0;
+        font-size: 1rem;
+        background: none;
+        right: auto;
+        color: rgba(0, 0, 0, 0.7);
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f0C6";
+    }
+
+/*.input-form-2 .select2-container .select2-selection--multiple {
+    height: 32px;
+    overflow-y: scroll;
+}*/
+
+/*.input-form-2 .select2-container--default .select2-selection--multiple .select2-selection__clear {
+    margin-right: 0;
+    position: absolute;
+    right: 26px;
+}*/
+
+.custom-file-input.is-invalid ~ .custom-file-label, .was-validated .custom-file-input:invalid ~ .custom-file-label {
+    border-color: #dc3545 !important;
+}
+
+.custom-file-input.is-valid ~ .custom-file-label, .was-validated .custom-file-input:valid ~ .custom-file-label {
+    border-color: #28a745 !important;
 }
 
 .c-pointer {
@@ -937,3 +1001,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         list-style-type: none;
         cursor: move;
     }
+
+.inline-picker {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: .5rem;
+}

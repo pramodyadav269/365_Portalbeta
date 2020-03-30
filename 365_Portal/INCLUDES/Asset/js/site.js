@@ -1,6 +1,8 @@
 ﻿
 $(document).ready(function () {
 
+    bsCustomFileInput.init();
+
     $('.courses.dropdown .dropdown-menu').on("click", function (e) {
         e.stopPropagation();
         //e.preventDefault();
@@ -39,14 +41,31 @@ $(document).ready(function () {
     //        }
     //    ]
     //});
+
+    $('.input-inline-picker').click(function () {
+        if ($('.inline-picker').hasClass('d-none'))
+            $('.inline-picker').removeClass('d-none');
+        else
+            $('.inline-picker').addClass('d-none');
+    });
 });
 
+
 function selectInit(el, placeholder) {
+
     $(el).select2({
         placeholder: placeholder,
         allowClear: true
     });
+
 }
+
+function hideSelected(value) {
+    if (value && !value.selected) {
+        return $('<span>' + value.text + '</span>');
+    }
+}
+
 
 function QueryStringValue(param) {
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');

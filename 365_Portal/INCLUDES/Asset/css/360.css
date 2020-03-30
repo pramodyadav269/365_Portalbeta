@@ -53,7 +53,6 @@ a {
     background-color: #7467F0;
 }
 
-
 /*.navbar {
 
     height: 56px;
@@ -502,19 +501,19 @@ a {
     }*/
 
 
-        /*.card .card-body .card-title {
+    /*.card .card-body .card-title {
             font-weight: 700;
         }*/
 
-        /*.card .card-body .card-text {
+    /*.card .card-body .card-text {
             color: rgba(0, 0, 0, 0.6);
             font-weight: 500;
         }*/
 
-        .card .card-body .anchor {
-            min-height: 21.09px;
-            margin: 0;
-        }
+    .card .card-body .anchor {
+        min-height: 21.09px;
+        margin: 0;
+    }
 
 .topics .card .card-body .card-text, .modules .card .card-body .card-text {
     min-height: 86px;
@@ -850,7 +849,6 @@ input[type=checkbox] + label, input[type=radio] + label {
 
 .btn {
     border-radius: 0;
-    
     /*Commented by pramod on 28 DEC to remove uppercase condition on button*/
     /*text-transform: uppercase;*/
 }
@@ -868,24 +866,29 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: #000;
 }*/
 
-    .select2-container .select2-selection--single, .select2-container .select2-selection--single,
-    .select2-container--default .select2-selection--single .select2-selection__arrow {
-        height: calc(1.5em + .75rem + 2px);
-    }
+.select2-container .select2-search--inline {
+    float: none;
+}
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
-        line-height: calc(1.5em + .75rem + 2px);
-    }
+.select2-container .select2-selection--single, .select2-container .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-selection__arrow,
+.select2-container--default .select2-selection--multiple {
+    height: calc(1.5em + .75rem + 2px);
+}
 
-    .form-control:focus {
-        box-shadow: none;
-    }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: calc(1.5em + .75rem + 2px);
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
 
 
-    .form-control.is-valid, .was-validated .form-control:valid, .form-control.is-invalid, .was-validated .form-control:invalid {
-        padding-right: .75rem;
-        background-image: none;
-    }
+.form-control.is-valid, .was-validated .form-control:valid, .form-control.is-invalid, .was-validated .form-control:invalid {
+    padding-right: .75rem;
+    background-image: none;
+}
 
 .custom-control-input.is-valid ~ .custom-control-label, .was-validated .custom-control-input:valid ~ .custom-control-label,
 .custom-control-input.is-invalid ~ .custom-control-label, .was-validated .custom-control-input:invalid ~ .custom-control-label {
@@ -913,10 +916,10 @@ input[type=checkbox] + label, input[type=radio] + label {
 }
 
 .custom-file-label {
-    border: none;
+    /*border: none;*/
     cursor: pointer;
     border-radius: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.24);*/
 }
 
     .custom-file-label::after {
@@ -929,7 +932,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 .form-group label {
     /*Commented by pramod on 28 DEC to remove uppercase condition on lable*/
     /*text-transform: uppercase;*/
-    font-weight: bold;/*Added by pramod on 28 DEC 19*/
+    font-weight: bold; /*Added by pramod on 28 DEC 19*/
     display: block;
 }
 
@@ -966,10 +969,8 @@ input[type=checkbox] + label, input[type=radio] + label {
 
 .header a.back {
     color: rgba(0, 0, 0, .50);
-
     /*Commented by pramod on 28 DEC to remove uppercase condition on Header*/
     /*text-transform: uppercase;*/
-
     font-weight: bold;
     position: absolute;
     top: .75rem;
@@ -1435,10 +1436,8 @@ p.anchor {
 .table thead th, .table tbody td {
     overflow: hidden;
     text-overflow: ellipsis;
-    
     /*Comented by Pramod on 29 DEC 19 to remove partial text in table*/
     /*white-space: nowrap;*/
-
     max-width: 260px;
 }
 
