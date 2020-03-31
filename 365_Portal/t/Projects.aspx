@@ -607,7 +607,7 @@
                     var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
 
             if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
-                var jsonTeamMembersHtml = '<option></option>';
+                var jsonTeamMembersHtml = '';
                 $.each(jsonTeamMembers, function (indxMember, objMember) {
                     jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
                 });
@@ -668,7 +668,7 @@
                     var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
 
                     if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
-                        var jsonTeamMembersHtml = '<option></option>';
+                        var jsonTeamMembersHtml = '';
                         $.each(jsonTeamMembers, function (indxMember, objMember) {
                             jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
                         });
