@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-
+         
         <div class="row">
             <div class="col-2 pl-0 sub-side-menu">
                 <ul class="list-group mb-4">
@@ -426,7 +426,7 @@
             toggle('dvCreateProject', 'dvWebsiteRedesign');
             prevTitle = $('#contentTitle').html();
             $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
-            
+             selectInit('#ddlProjectMembers', 'Search by user or by user name');
         }
 
         function onClickBack(view, hide) {
