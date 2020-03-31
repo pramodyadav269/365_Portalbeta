@@ -426,7 +426,7 @@
             toggle('dvCreateProject', 'dvWebsiteRedesign');
             prevTitle = $('#contentTitle').html();
             $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
-            selectInit('#ddlProjectMembers', 'Search by user or by user name');
+            
         }
 
         function onClickBack(view, hide) {
@@ -660,11 +660,12 @@
             var jsonTeamMembers = $.parseJSON(userlistAPIdata).Data;
 
             if (jsonTeamMembers != null && jsonTeamMembers.length > 0) {
-                var jsonTeamMembersHtml = '<option></option>';
+                var jsonTeamMembersHtml = '';
                 $.each(jsonTeamMembers, function (indxMember, objMember) {
                     jsonTeamMembersHtml += '<option value="' + objMember.UserID + '">' + objMember.FirstName + " " + objMember.LastName + '</option>';
                 });
                 $("#ddlProjectMembers").empty().html(jsonTeamMembersHtml);
+                selectInit('#ddlProjectMembers', 'Search by user or by user name');
             }
         }
 
