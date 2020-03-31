@@ -16,7 +16,7 @@ namespace _365_Portal.Models
         public DateTime t_DueDate { get; set; }
         public string t_PrivateNotes { get; set; }
         public int t_UserId { get; set; }
-        public string t_ProjectMembers_UserIds { get; set; } //(Userids comma separated)
+        public string t_TaskAssignees_UserIds { get; set; } //(Userids comma separated)
         public string t_TagIds { get; set; } //(comma separated)
         public string t_FileIds { get; set; } //(comma separated)
         public string t_SubTasks { get; set; } //(delimeter | separated)
