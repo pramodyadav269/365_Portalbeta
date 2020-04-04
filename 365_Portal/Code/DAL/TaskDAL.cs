@@ -26,7 +26,7 @@ namespace _365_Portal.Code.DAL
             cmd.Parameters.AddWithValue("t_DueDate", task.t_DueDate);
             cmd.Parameters.AddWithValue("t_PrivateNotes", task.t_PrivateNotes);
             cmd.Parameters.AddWithValue("t_UserId", task.t_UserId);
-            cmd.Parameters.AddWithValue("t_ProjectMembers_UserIds", task.t_ProjectMembers_UserIds);
+            cmd.Parameters.AddWithValue("t_TaskAssignees_UserIds", task.t_TaskAssignees_UserIds);
             cmd.Parameters.AddWithValue("t_TagIds", task.t_TagIds);
             cmd.Parameters.AddWithValue("t_FileIds", task.t_FileIds);
             cmd.Parameters.AddWithValue("t_SubTasks", task.t_SubTasks);
