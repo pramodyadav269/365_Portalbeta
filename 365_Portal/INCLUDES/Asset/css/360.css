@@ -1,6 +1,6 @@
 ﻿
 /* heebo-regular - latin */
-@font-face {
+/*@font-face {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: 400;
@@ -11,7 +11,7 @@ body {
     background: #F5F6F7;
     font-size: .9rem;
     font-family: Heebo;
-}
+}*/
 
 a {
     cursor: pointer;
@@ -770,13 +770,13 @@ a.link, a.link:hover {
         left: 2rem;
     }
 
-    .header a.back {
+    /*.header a.back {
         top: -2rem !important;
     }
 
     .header a.btn {
         top: -2.2rem !important;
-    }
+    }*/
 
     .achievements .list-group-item {
         padding: .75rem .2rem;
@@ -847,15 +847,14 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: #2D7DD2 !important;
 }
 
-.btn {
+/*.btn {
     border-radius: 0;
-    /*Commented by pramod on 28 DEC to remove uppercase condition on button*/
-    /*text-transform: uppercase;*/
+   
 }
 
     .btn .svg-inline--fa {
         margin-right: 0.5rem;
-    }
+    }*/
 
 /* commnet for phase 2*/
 /*.form-control, .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--multiple,
@@ -915,18 +914,16 @@ input[type=checkbox] + label, input[type=radio] + label {
     border-color: #dc3545;
 }
 
-.custom-file-label {
-    /*border: none;*/
+/*.custom-file-label {
     cursor: pointer;
     border-radius: 0;
-    /*border-bottom: 1px solid rgba(0, 0, 0, 0.24);*/
 }
 
     .custom-file-label::after {
         border: none;
         border-radius: 0;
         cursor: pointer;
-    }
+    }*/
 
 
 .form-group label {
@@ -967,10 +964,8 @@ input[type=checkbox] + label, input[type=radio] + label {
     font-weight: 500;
 }
 
-.header a.back {
+/*.header a.back {
     color: rgba(0, 0, 0, .50);
-    /*Commented by pramod on 28 DEC to remove uppercase condition on Header*/
-    /*text-transform: uppercase;*/
     font-weight: bold;
     position: absolute;
     top: .75rem;
@@ -990,7 +985,7 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: rgba(0, 0, 0, .25);
     font-weight: bold;
     padding-bottom: .4rem;
-}
+}*/
 
 .user-details img.user-photo, .settings img.user-photo {
     height: 128px;
