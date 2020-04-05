@@ -188,3 +188,34 @@ function inputValidation(container) {
         return false;
     }
 }
+
+function setTextCount(ctrl) {
+    var maxLength = $(ctrl).attr('maxlength');
+    var charLength = $(ctrl).val().length;
+
+    $(ctrl).next('small').find('span').html(charLength + ' / ' + maxLength);
+
+}
+
+function readURL(ctrl, el) {
+
+    if (ctrl.files.length === 0) {
+        $(el).removeClass('img');
+        $(el).empty();
+        return;
+    }
+
+    var ext = ctrl.files[0].name.split('.').pop().toLowerCase();
+    if (ctrl.files && ctrl.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // $(el).html('src', e.target.result);
+            $(el).addClass('img');
+            $(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
+        };
+        reader.readAsDataURL(ctrl.files[0]);
+    } else {
+        $(el).removeClass('img');
+        $(el).empty();
+    }
+}

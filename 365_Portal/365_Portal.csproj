@@ -469,6 +469,13 @@
     <Compile Include="t\flashcards.aspx.designer.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\Module.aspx.cs">
+      <DependentUpon>Module.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\Module.aspx.designer.cs">
+      <DependentUpon>Module.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\MsgNotification.aspx.cs">
       <DependentUpon>MsgNotification.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -674,7 +681,17 @@
     <Content Include="INCLUDES\Asset\css\gijgo.min.css" />
     <Content Include="INCLUDES\Asset\css\jodit.min.css" />
     <Content Include="INCLUDES\Asset\css\select2.min.css" />
-    <Content Include="INCLUDES\Asset\css\site.css" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="INCLUDES\Asset\css\site.scss" />
+    <Content Include="INCLUDES\Asset\css\site.css">
+      <DependentUpon>site.scss</DependentUpon>
+    </Content>
+    <Content Include="INCLUDES\Asset\css\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="INCLUDES\Asset\css\slick.css" />
     <Content Include="INCLUDES\Asset\customer\common.js" />
     <Content Include="INCLUDES\Asset\customer\default.js" />
@@ -1031,6 +1048,7 @@
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
+    <Content Include="t\Module.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />
     <Content Include="t\roles.aspx" />
