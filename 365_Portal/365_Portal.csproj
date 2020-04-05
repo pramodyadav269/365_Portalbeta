@@ -1148,6 +1148,7 @@
     <Folder Include="Files\Favicon\" />
     <Folder Include="Files\Others\" />
     <Folder Include="Files\Survey\" />
+    <Folder Include="Files\Task\" />
     <Folder Include="Views\Discussion\" />
     <Folder Include="Views\Modules\" />
     <Folder Include="Views\Organization\" />
