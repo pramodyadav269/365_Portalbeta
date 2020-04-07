@@ -1177,6 +1177,33 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
             }
         }
+
+        .select2-container {
+            &.select2-container--default {
+                .select2-selection--single, .select2-selection--multiple {
+                    border: none;
+                    border-bottom: .1rem solid #ced4da;
+                    border-radius: 0;
+                    background: none;
+
+                    .select2-selection__rendered {
+                        padding-left: 0;
+                    }
+                }
+            }
+
+            &.is-invalid {
+                .select2-selection--single, .select2-selection--multiple {
+                    border-color: #dc3545;
+                }
+            }
+
+            &.is-valid {
+                .select2-selection--single, .select2-selection--multiple {
+                    border-color: #28a745;
+                }
+            }
+        }
     }
 
     .sharing {
@@ -1216,79 +1243,80 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         background-color: rgba(0, 0, 0, 0.01);
         box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.13);
 
-
-
         .logo-img {
             border: 1px dotted rgba(0, 0, 0, 0.16);
-            height: 188px;
+            height: 184px;
             background: #fff;
-            margin: 0 1rem;
+            margin: 0 2.5rem 0 1rem;
 
             &.img {
                 border: none;
                 background: none;
+                height: auto;
+            }
+        }
+
+        .form-group {
+            .custom-file {
+                z-index: 1;
+                position: absolute;
+                width: auto;
+                top: 0px;
+                left: 38px;
+                opacity: 0;
+            }
+
+            .select2-selection {
+                overflow-y: auto;
+                height: calc(1.5em + .75rem + 3px);
+
+                .select2-search__field {
+                    float: left;
+                }
+            }
+        }
+
+        .chip {
+            display: inline-flex;
+
+            label {
+                display: inline;
+            }
+
+            .chip-item {
+                padding-left: 1rem;
+
+                span {
+                    background: #fff;
+                    color: rgba(0, 0, 0, 0.3);
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    padding: 2px 6px;
+                    border-radius: 2rem;
+                    margin-bottom: 10px;
+                    display: inline-block;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: underline;
+                    margin-top: .5rem;
+                }
             }
         }
 
         &.edit {
             .form-group {
-                .custom-file {
-                    z-index: 1;
-                    position: absolute;
-                    width: auto;
-                    top: 0px;
-                    left: 38px;
-                    opacity: 0;
+                .rounded-icon {
+                    display: none;
                 }
 
-                .select2-selection {
-                    border: none;
-                    border-bottom: .1rem solid #ced4da;
-                    border-radius: 0;
-                    background: none;
-                    overflow-y: auto;
-                    height: calc(1.5em + .75rem + 3px);
-
-                    .select2-search__field {
-                        float: left;
-                    }
+                &.chip {
+                    display: none;
                 }
             }
         }
 
         &.view {
-
-            .logo-img {
-                height: auto;
-            }
-
-            .chip {
-                display: inline-flex;
-
-                label {
-                    display: inline;
-                }
-
-                .chip-item {
-                    padding-left: 1rem;
-
-                    span {
-                        background: #fff;
-                        color: rgba(0, 0, 0, 0.3);
-                        border: 1px solid rgba(0, 0, 0, 0.1);
-                        padding: 2px 6px;
-                        border-radius: 2rem;
-                        margin-bottom: 10px;
-                        display: inline-block;
-                    }
-
-                    a {
-                        display: block;
-                        text-decoration: underline;
-                        margin-top: .5rem;
-                    }
-                }
-            }
         }
     }
 
@@ -1307,5 +1335,54 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             font-size: .8rem;
         }
     }
+
+    .edit {
+        .logo-tab {
+            .form-group {
+                .rounded-icon {
+                    display: none;
+                }
+
+
+                &.chip {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .view {
+        .form-group {
+            .form-control {
+                + small {
+                    visibility: hidden;
+                }
+            }
+        }
+
+        .logo-tab {
+            .form-group {
+
+                &.chip-input {
+                    display: none;
+                }
+            }
+        }
+
+        .course-logo {
+            label {
+                .svg-inline--fa {
+                    display: none;
+                }
+            }
+
+            .custom-file {
+                display: none;
+            }
+        }
+    }
 }
 /* module end */
+.select2-dropdown {
+    border-radius: 0;
+}

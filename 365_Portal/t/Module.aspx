@@ -12,7 +12,7 @@
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" onclick="inputValidation('#pills-course');">Save and Exit</a>
+                    <a class="btn btn-yellow" onclick="SaveAndExit('.tab-pane.active');">Save and Exit</a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
@@ -35,87 +35,88 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
-
+                    <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
                                 <div class="col-12 col-sm-12">
                                     <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-7 col-lg-8 p-0">
-                                            <div class="col-sm-12 mt-3">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
-                                                    <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier ti find
+                                        <div class="col-12 col-sm-12 col-md-7 col-lg-8">
+                                            <div class="row">
+                                                <div class="col-sm-12 mt-3">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
+                                                        <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier ti find
                                                     <span class="float-right">0 / 100</span>
-                                                    </small>
+                                                        </small>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Summary *" maxlength="200" id="txtCourseSummary" aria-describedby="txtCourseSummaryHelp" />
-                                                    <small id="txtCourseSummaryHelp" class="form-text">Keep your description brief but compelling
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Summary *" maxlength="200" id="txtCourseSummary" aria-describedby="txtCourseSummaryHelp" />
+                                                        <small id="txtCourseSummaryHelp" class="form-text">Keep your description brief but compelling
                                                     <span class="float-right">0 / 200</span>
-                                                    </small>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group color-picker">
-                                                    <label for="txtThemeColor">Theme Color</label>
-                                                    <input type="color" class="form-control" id="txtThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 sharing">
-                                                <div class="form-group radio">
-                                                    <label>Sharing</label>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="rbGlobal" name="rgSharing" class="custom-control-input" checked>
-                                                        <label class="custom-control-label" for="rbGlobal">Global</label>
-                                                        <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
+                                                        </small>
                                                     </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="rbOrganization" name="rgSharing" class="custom-control-input">
-                                                        <label class="custom-control-label" for="rbOrganization">Organization</label>
-                                                        <small class="form-text">Anyone within this organization can find and access this course.</small>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group color-picker">
+                                                        <label for="txtThemeColor">Theme Color</label>
+                                                        <input type="color" class="form-control" id="txtThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
                                                     </div>
-                                                    <div class="custom-control custom-radio custom-control-inline">
-                                                        <input type="radio" id="rbAssigned" name="rgSharing" class="custom-control-input">
-                                                        <label class="custom-control-label" for="rbAssigned">Assigned</label>
-                                                        <small class="form-text">Only shared with assignees.</small>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <select class="form-control select2 required" id="ddlCategory" style="width: 100% !important">
+                                                            <option></option>
+                                                            <option value="1">Category 1</option>
+                                                            <option value="2">Category 2</option>
+                                                            <option value="3">Category 3</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 sharing">
+                                                    <div class="form-group radio">
+                                                        <label>Sharing</label>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="rbGlobal" name="rgSharing" class="custom-control-input" checked>
+                                                            <label class="custom-control-label" for="rbGlobal">Global</label>
+                                                            <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="rbOrganization" name="rgSharing" class="custom-control-input">
+                                                            <label class="custom-control-label" for="rbOrganization">Organization</label>
+                                                            <small class="form-text">Anyone within this organization can find and access this course.</small>
+                                                        </div>
+                                                        <div class="custom-control custom-radio custom-control-inline">
+                                                            <input type="radio" id="rbAssigned" name="rgSharing" class="custom-control-input">
+                                                            <label class="custom-control-label" for="rbAssigned">Assigned</label>
+                                                            <small class="form-text">Only shared with assignees.</small>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-0 logo-tab edit">
-                                            <div class="col-sm-12 mt-3">
+                                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-0 logo-tab">
+                                            <div class="col-sm-12 mt-3 course-logo">
                                                 <div class="form-group m-0">
                                                     <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
+                                                    <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
                                                     <div class="custom-file">
                                                         <input type="file" id="fileLogo" onchange="readURL(this, '.logo-img');">
                                                     </div>
                                                 </div>
-                                                <div class="logo-img">
-                                                </div>
+                                                <div class="logo-img"></div>
+                                                <%-- if image set then use this html --%>
+                                                <%--<div class="logo-img img">
+                                                    <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
+                                                </div>--%>
                                             </div>
-                                            <div class="col-sm-12 mt-4">
-                                                <div class="form-group">
+                                            <div class="col-sm-12 mt-4 course-tag">
+                                                <div class="form-group chip-input">
                                                     <label><i class="fas fa-plus-circle black"></i>Tags</label>
                                                     <select class="form-control select2" id="ddlTags" style="width: 100% !important" multiple>
                                                     </select>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-0 logo-tab view d-none">
-                                            <div class="col-sm-12 mt-3">
-                                                <div class="form-group m-0">
-                                                    <label>Course Logo</label>
-                                                    <a class="rounded-icon" onclick="editLogTab('logo-tab');"><i class="fas fa-pen"></i></a>
-                                                </div>
-                                                <div class="logo-img img">
-                                                    <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 mt-4">
                                                 <div class="form-group chip">
                                                     <label>Tags</label>
                                                     <div class="chip-item">
@@ -125,13 +126,11 @@
                                                         <span>Database</span>
                                                         <span>Salesforce Platform</span>
 
-                                                        <a onclick="editLogTab('logo-tab');">Manage Tags</a>
+                                                        <a onclick="editTag('.course-tag');">Manage Tags</a>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -180,14 +179,42 @@
 
         $(document).ready(function () {
             $("#ddlTags").select2({
-                tags: true
+                tags: true,
+                placeholder: "Enter tag"
             });
+
+
+            selectInit('#ddlCategory', 'Select Category');
         });
 
-        function editLogTab(el) {
-            $('.' + el + '.edit').removeClass('d-none');
-            $('.' + el + '.view').addClass('d-none');
+        function SaveAndExit(el) {
+            $(el).removeClass('edit').removeClass('view')
+            $(el).addClass('view')
+
+            $('#txtCourseTitle').val('Lorem Ipsum')
+            $('#txtCourseSummary').val('Lorem Ipsum is simply dummy text of the printing and typesetting industry.')
+            $('#txtCourseSummary').val('Lorem Ipsum is simply dummy text of the printing and typesetting industry.')
+
+            $('#ddlCategory').val('2').trigger('change')
+
+            $(el).find('.logo-img').addClass('img')
+            $(el).find('.logo-img').html('<img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />')
+
+           
         }
+
+        function editCourseLogo(el) {
+            $(el).find('label .svg-inline--fa').show();
+            $(el).find('.custom-file').show();
+            $(el).find('.rounded-icon').hide();
+        }
+
+        function editTag(el) {
+            $(el).find('.chip-input').show();
+            $(el).find('.form-group.chip a').hide();
+        }
+
+
 
     </script>
 </asp:Content>

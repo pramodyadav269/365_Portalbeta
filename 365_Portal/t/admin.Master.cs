@@ -165,7 +165,7 @@ namespace _365_Portal.Admin
             }
             else
             {
-                Response.Redirect("~/login.aspx");
+                //Response.Redirect("~/login.aspx");
             }
         }
 
