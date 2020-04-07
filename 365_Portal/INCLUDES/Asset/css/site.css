@@ -17,6 +17,9 @@ a {
 a:hover {
   text-decoration: none; }
 
+.bg-light-tr {
+  background-color: rgba(0, 0, 0, 0.03); }
+
 /* navbar */
 .nav-search, .nav-menu {
   padding: .5rem 4rem; }
@@ -422,12 +425,24 @@ main .container-fluid.dashboard {
   padding: .5rem 1rem;
   font-size: .9rem; }
 
-.task-bar .task-item:hover {
+.task-bar .task-item.active {
   background: rgba(0, 0, 0, 0.05);
-  border-color: #FEC900; }
+  border-color: #FEC900;
+  color: #000; }
+
+.task-bar .task-title .task-item-action {
+  position: absolute;
+  right: 0;
+  top: 10px; }
 
 .task-bar .task-item .task-item-action {
-  float: right; }
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: none; }
+
+.task-bar .task-item.active .task-item-action {
+  display: block; }
 
 .task-bar .task-item .task-item-action .svg-inline--fa {
   margin: 0 0 0 .5rem;
@@ -524,6 +539,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .website-redesign .card-body .wr-content .wr-content-anchar .anchor-date span {
   font-size: 11px;
   padding: 0 0 0 5px; }
+
+.wr-content .wr-content-title .svg-inline--fa {
+  cursor: pointer;
+  margin: 0 0.5rem; }
+  .wr-content .wr-content-title .svg-inline--fa:last-child {
+    margin-right: 0; }
 
 .anchar-title.development {
   color: #FF7F45;
