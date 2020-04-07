@@ -476,6 +476,13 @@
     <Compile Include="t\flashcards.aspx.designer.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\LearningJourney.aspx.cs">
+      <DependentUpon>LearningJourney.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\LearningJourney.aspx.designer.cs">
+      <DependentUpon>LearningJourney.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\Module.aspx.cs">
       <DependentUpon>Module.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1105,6 +1112,7 @@
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
+    <Content Include="t\LearningJourney.aspx" />
     <Content Include="t\Module.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />

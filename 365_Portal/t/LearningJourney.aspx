@@ -1,5 +1,4 @@
-﻿<%@ Page Title="Module" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Module.aspx.cs" Inherits="_365_Portal.t.Module" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
@@ -63,16 +62,16 @@
                                                 <div class="col-sm-12 col-md-6">
                                                     <div class="form-group color-picker">
                                                         <label for="txtThemeColor">Theme Color</label>
-                                                        <input type="color" class="form-control" id="txtThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                                        <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
                                                     <div class="form-group">
-                                                        <select class="form-control select2 required" id="ddlCategory" style="width: 100% !important">
-                                                            <option></option>
+                                                        <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
+<%--                                                        <option></option>
                                                             <option value="1">Category 1</option>
                                                             <option value="2">Category 2</option>
-                                                            <option value="3">Category 3</option>
+                                                            <option value="3">Category 3</option>--%>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -80,17 +79,17 @@
                                                     <div class="form-group radio">
                                                         <label>Sharing</label>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbGlobal" name="rgSharing" class="custom-control-input" checked>
+                                                            <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
                                                             <label class="custom-control-label" for="rbGlobal">Global</label>
                                                             <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
                                                         </div>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbOrganization" name="rgSharing" class="custom-control-input">
+                                                            <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
                                                             <label class="custom-control-label" for="rbOrganization">Organization</label>
                                                             <small class="form-text">Anyone within this organization can find and access this course.</small>
                                                         </div>
                                                         <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbAssigned" name="rgSharing" class="custom-control-input">
+                                                            <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
                                                             <label class="custom-control-label" for="rbAssigned">Assigned</label>
                                                             <small class="form-text">Only shared with assignees.</small>
                                                         </div>
@@ -104,7 +103,7 @@
                                                     <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
                                                     <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
                                                     <div class="custom-file">
-                                                        <input type="file" id="fileLogo" onchange="readURL(this, '.logo-img');">
+                                                        <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');">
                                                     </div>
                                                 </div>
                                                 <div class="logo-img"></div>
