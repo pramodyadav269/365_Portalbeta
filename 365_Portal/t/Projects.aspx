@@ -17,12 +17,12 @@
             <div class="col-10 offset-2">
                 <div class="row">
                     <div class="col-auto mr-auto" id="contentTitle">
-                        <h5 id="headingProjectName" class="content-title"><i class="fas fa-tasks"></i>Website Redesign</h5>
+                        <h5 id="headingProjectName" class="content-title"><i class="fas fa-tasks"></i>Website Redesign</h5> 
                     </div>
                     <div class="col-auto">
-                        <a class="content-activity"><i class="far fa-folder"></i>File</a>
-                        <a class="content-activity"><i class="fas fa-share-alt"></i>Share</a>
-                        <a class="content-activity"><i class="fas fa-filter"></i>Filter</a>
+                        <a class="content-activity d-none"><i class="far fa-folder"></i>File</a>
+                        <a class="content-activity d-none"><i class="fas fa-share-alt"></i>Share</a>
+                        <a class="content-activity d-none"><i class="fas fa-filter"></i>Filter</a>
                         <a class="content-activity"><i class="fas fa-wave-square"></i>Recent Activity</a>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
             </div>
             <div class="col-10">
                 <div class="row website-redesign" id="dvWebsiteRedesign">
-                    <%--    <div class="col-12 col-sm-12 col-md-4">
+                    <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
                                 <div class="row">
@@ -505,40 +505,55 @@
                     return n.Status === objStatus.StatusID;
                 });
 
+                    // Repeat Status
+                    cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
+                    cardHtml += '<div class="card shadow">';
+                    cardHtml += '<div class="card-body">';
+                    cardHtml += '<div class="row">';
+                    cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
+                    cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
+                    cardHtml += '</div>';
 
-                // Repeat Status
-                cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
-                cardHtml += '<div class="card shadow">';
-                cardHtml += '<div class="card-body">';
-                cardHtml += '<div class="row">';
-                cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
-                cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
-                cardHtml += '<a class="btn bg-yellow rounded" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a>';
-                cardHtml += ' </div>';
+                    cardHtml += '<ol class="col-12 section-sorting">';
+                    if (statusWiseTaskList.length > 0) {
 
-                if (statusWiseTaskList.length > 0) {
-                    // Repeat Tasks
-                    $.each(statusWiseTaskList, function (indxTask, objTask) {
-                        cardHtml += '<li class="col-12 mb-2 sortable-item">';
-                        cardHtml += '<div class="wr-content"> <i style="cursor: pointer;" onclick="BindTaskDetailsBYProjectId(' + objTask.TaskID + ')">Edit</i>|<i style="cursor: pointer;" href="" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');">Delete</i>   ';
-                        cardHtml += '<div class="wr-content-title mb-2"> ' + objTask.TaskName + '</div>';
-                        cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
-                        cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
-                        cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
-                        cardHtml += '</div>';
-                        cardHtml += '</div>';
-                        cardHtml += '</li>';
-                    });
-                }
-                else {
-                    cardHtml += '<div>No Tasks Found</div>';
-                }
-                cardHtml += '</div>';
-                cardHtml += '</div>';
-                cardHtml += '</div>';
-                cardHtml += '</div>';
-                cardHtml += '</div>';
-                //}
+                        // Repeat Tasks
+                        $.each(statusWiseTaskList, function (indxTask, objTask) {
+                            cardHtml += '<li class="col-12 mb-2 sortable-item">';
+                            cardHtml += '<div class="wr-content">';
+                            cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
+                            cardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYProjectId(' + objTask.TaskID + ')"></i>|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i></div></div>';
+                            cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
+                            cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
+                            cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
+                            cardHtml += '</div>';
+                            cardHtml += '</div>';
+                            cardHtml += '</li>';
+
+
+
+                            //cardHtml += '<li class="col-12 mb-2 sortable-item">';
+                            //cardHtml += '<div class="wr-content"> <i style="cursor: pointer;" onclick="BindTaskDetailsBYProjectId(' + objTask.TaskID + ')">Edit</i>|<i style="cursor: pointer;" href="" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');">Delete</i>   ';
+                            //cardHtml += '<div class="wr-content-title mb-2"> ' + objTask.TaskName + '</div>';
+                            //cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
+                            //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
+                            //cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
+                            //cardHtml += '</div>';
+                            //cardHtml += '</div>';
+                            //cardHtml += '</li>';
+                        });
+                    }
+                    else {
+                        cardHtml += '<div class="col-12 text-center"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
+                    }
+                    cardHtml += ' </ol>';
+                    cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    cardHtml += '</div>';
+                    cardHtml += '</div>';
+                    cardHtml += '</div>';
+                    cardHtml += '</div>';
+                    cardHtml += '</div>';
+                    }
             });
 
             $("#dvWebsiteRedesign").empty().html(cardHtml);
@@ -860,19 +875,28 @@
                 var jsonProjectList = $.parseJSON(projectajaxdata).Data;
 
                 var projectHtml = '';
-                projectHtml += '<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects';
-                projectHtml += '<a onclick="onClickAddProject();"><i class="fas fa-plus c-yellow"></i></a>';
-                projectHtml += ' </li>';
+            projectHtml += '<li class="list-group-item task-title">Projects';
+            projectHtml += '<a onclick="onClickAddProject();" class="task-item-action"><i class="fas fa-plus c-yellow"></i></a>';
+            projectHtml += ' </li>';
 
                 if (jsonProjectList.Data.length > 0) {
                     $.each(jsonProjectList.Data, function (indxProject, objProject) {
+                    
+                      var activeClass = '';
+                    if (indxProject === 1) {
+                        activeClass = 'active';
+                    }
+                    
                         if (indxProject == 0) {
-
-                            projectHtml += '<li class="list-group-item task-item customactive Project_items" id=' + objProject.ProjectID + '>';
+                            projectHtml += '<li class="list-group-item task-item ' + activeClass+' customactive Project_items" id=' + objProject.ProjectID + '>';
                             projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
-                            projectHtml += ' <i style="cursor: pointer;" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</i>';
-                            projectHtml += '|<i style="cursor: pointer;" onclick="return DeleteProjectBYProjectId(' + objProject.ProjectID + ');">Delete</i>';
-                            projectHtml += '</li>';
+                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+
+                             projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject +'">';
+                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
+                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
+                    projectHtml += '</div></li>';
+                           
 
                             ProjectID = objProject.ProjectID;
                             BindCards();
@@ -881,11 +905,15 @@
                         }
                         else {
 
-                            projectHtml += '<li class="list-group-item task-item Project_items" id=' + objProject.ProjectID + '>';
+                            projectHtml += '<li class="list-group-item task-item ' + activeClass+' customactive Project_items" id=' + objProject.ProjectID + '>';
                             projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
-                            projectHtml += ' <i style="cursor: pointer;" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</i>';
-                            projectHtml += '|<i style="cursor: pointer;" onclick="return DeleteProjectBYProjectId(' + objProject.ProjectID + ');">Delete</i>';
-                            projectHtml += '</li>';
+                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+
+                             projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject +'">';
+                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
+                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
+                    projectHtml += '</div></li>';
+                    
                         }
                     });
                 }

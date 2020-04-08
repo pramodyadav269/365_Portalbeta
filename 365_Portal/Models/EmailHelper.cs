@@ -57,8 +57,8 @@ namespace _365_Portal.Models
                     obj.SMSText = ds.Tables[0].Rows[0]["SMSText"].ToString();
                     obj.SMSUserID = ds.Tables[0].Rows[0]["SMSUserID"].ToString();
                     obj.SMSPassword = ds.Tables[0].Rows[0]["SMSPassword"].ToString();
-                    obj.ToMail = ds.Tables[0].Rows[0]["ToMail"].ToString();
-                    //obj.ToMail = "pramodyadav269@gmail.com";
+                    //obj.ToMail = ds.Tables[0].Rows[0]["ToMail"].ToString();
+                    obj.ToMail = "pramodyadav269@gmail.com";
 
                     obj.EmailContent = obj.EmailContent.Replace("#FirstName#", obj.ToMailName);
                     obj.EmailContent = obj.EmailContent.Replace("#EmailID#", obj.ToMail);

@@ -2824,5 +2824,284 @@ namespace _365_Portal.Controllers
             return new APIResult(Request, data);
         }
 
+
+        
+
+        [Route("API/User/GetProfileFromProfilePage")]
+        [HttpPost]
+        public IHttpActionResult GetProfileFromProfilePage()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+
+                    var dsUserProfile = CommonBL.UpdateProfileFromProfilePage(objUser, 7);
+                    var dsUserDetails = CommonBL.UpdateProfileFromProfilePage(objUser, 4);
+                    
+                    if (dsUserDetails.Tables[0].Rows.Count > 0 || dsUserProfile.Tables[0].Rows.Count > 0)
+                    {
+                        DataTable dtUserProfile = new DataTable();
+                        DataTable dtUserDetails = new DataTable();
+                        dtUserProfile = dsUserProfile.Tables[0].Copy();
+                        dtUserDetails = dsUserDetails.Tables[0].Copy();                        
+
+                        DataSet ds = new DataSet();
+                        ds.Tables.Add(dtUserProfile);
+                        ds.Tables[0].TableName = "UserProfile";
+
+                        ds.Tables.Add(dtUserDetails);
+                        ds.Tables[1].TableName = "UserDetails";
+
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("3", "! No data found.");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/UpdateProfileFromProfilePage")]
+        public IHttpActionResult UpdateProfileFromProfilePage(JObject jsonResult)
+        {
+            var data = string.Empty;
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                string Message = string.Empty;
+                bool ValFlag = true;
+
+                UserBO objUserVal = new UserBO();
+                objUserVal.UserID = identity.UserID;
+                objUserVal.CompId = identity.CompId;
+                objUserVal.Role = identity.Role;
+
+                if (jsonResult.SelectToken("FirstName") != null && jsonResult.SelectToken("FirstName").ToString().Trim() != "")
+                {
+                    objUserVal.FirstName = (string)jsonResult.SelectToken("FirstName");
+                }
+                else
+                {
+                    Message = "Please provide First Name of user."; ValFlag = false;
+                }
+
+                if (jsonResult.SelectToken("LastName") != null && jsonResult.SelectToken("LastName").ToString().Trim() != "")
+                {
+                    objUserVal.LastName = (string)jsonResult.SelectToken("LastName");
+                }
+                else
+                {
+                    Message = "Please provide LastName Name of user."; ValFlag = false;
+                }
+
+                if (jsonResult.SelectToken("EmailID") != null && jsonResult.SelectToken("EmailID").ToString().Trim() != "")
+                {
+                    objUserVal.EmailID = (string)jsonResult.SelectToken("EmailID");
+
+                    if (!IsValidEmail(objUserVal.EmailID))
+                    {
+                        Message = "Please provide valid EmailID of user."; ValFlag = false;
+                    }
+                }
+                else
+                {
+                    Message = "Please provide EmailID of user."; ValFlag = false;
+                }
+
+                if (jsonResult.SelectToken("MobileNum") != null && jsonResult.SelectToken("MobileNum").ToString().Trim() != "")
+                {
+                    objUserVal.MobileNum = (string)jsonResult.SelectToken("MobileNum");
+                }
+                if (jsonResult.SelectToken("Position") != null && jsonResult.SelectToken("Position").ToString().Trim() != "")
+                {
+                    objUserVal.Position = (string)jsonResult.SelectToken("Position");
+                }
+                if (jsonResult.SelectToken("Gender") != null && jsonResult.SelectToken("Gender").ToString().Trim() != "")
+                {
+                    objUserVal.Gender = (string)jsonResult.SelectToken("Gender");
+                }
+                if (jsonResult.SelectToken("UpdateFlag") != null && jsonResult.SelectToken("UpdateFlag").ToString().Trim() == "1")
+                {
+                    if (jsonResult.SelectToken("Password") != null && jsonResult.SelectToken("Password").ToString().Trim() != "")
+                    {
+                        objUserVal.NewPassword = (string)jsonResult.SelectToken("Password");
+                        objUserVal.IsChangingPassword = "1";
+                        objUserVal.UserKey = Guid.NewGuid().ToString();
+                        objUserVal.PasswordSalt = Utility.GetSalt();
+                        objUserVal.PasswordHash = Utility.GetHashedPassword(objUserVal.NewPassword, objUserVal.PasswordSalt);
+                    }
+                    else
+                    {
+                        Message = "Please provide Password of user."; ValFlag = false;
+                    }
+                }
+                else
+                {
+                    objUserVal.IsChangingPassword = "0";
+                }
+
+                if (ValFlag)
+                {
+                    var ds = CommonBL.UpdateProfileFromProfilePage(objUserVal, 2);
+                    if (ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+
+                        if (jsonResult.SelectToken("UpdateFlag") != null && jsonResult.SelectToken("UpdateFlag").ToString().Trim() == "1")
+                        {
+                            EmailHelper.GetEmailContent(Convert.ToInt32(objUserVal.UserID), identity.CompId, EmailHelper.Functionality.CHANGE_PASS, "", "");
+                        }
+                    }
+                    else if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Failed(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("0", ConstantMessages.WebServiceLog.GenericErrorMsg);
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("2", Message);
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/UpdateProfilePic")]
+        public IHttpActionResult UpdateProfilePic(JObject jsonResult)
+        {
+            var data = string.Empty;
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {                
+                UserBO objUserVal = new UserBO();
+                objUserVal.UserID = identity.UserID;
+                objUserVal.CompId = identity.CompId;
+                objUserVal.Role = identity.Role;
+
+                if (jsonResult.SelectToken("UserProfileImageBase64") != null && jsonResult.SelectToken("UserProfileImageBase64").ToString().Trim() != "")
+                {
+                    string userProfilePicBase64 = Convert.ToString(jsonResult.SelectToken("UserProfileImageBase64"));
+                    if (!string.IsNullOrEmpty(userProfilePicBase64))
+                    {
+                        var files = userProfilePicBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                        if (files.Count() == 1)
+                            userProfilePicBase64 = files[0];
+                        else
+                            userProfilePicBase64 = files[1];
+
+                        byte[] imageBytes = Convert.FromBase64String(userProfilePicBase64);
+                        string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(userProfilePicBase64);
+                        string filePath = HttpContext.Current.Server.MapPath("~/Files/ProfilePic/" + fileName);
+                        File.WriteAllBytes(filePath, imageBytes);                       
+
+                        DataSet dsProfilePic = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/ProfilePic/"), false, "ProfilePic");
+                        if (dsProfilePic.Tables.Count > 0 && dsProfilePic.Tables[0].Rows.Count > 0)
+                        {
+                            objUserVal.ProfilePicFileID = dsProfilePic.Tables[0].Rows[0]["UniqueID"].ToString();
+                        }
+                    }
+
+                    var ds = CommonBL.UpdateProfileFromProfilePage(objUserVal, 5);
+                    if (ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Failed(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("0", ConstantMessages.WebServiceLog.GenericErrorMsg);
+                    }
+                }                
+                else
+                {
+                    data = Utility.API_Status("2", "! Please provide image.");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/User/UpdateUserStatus")]
+        public IHttpActionResult UpdateUserStatus(JObject jsonResult)
+        {
+            var data = string.Empty;
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                UserBO objUserVal = new UserBO();
+                objUserVal.UserID = identity.UserID;
+                objUserVal.CompId = identity.CompId;
+                objUserVal.Role = identity.Role;
+
+                if (jsonResult.SelectToken("UserStatus") != null && jsonResult.SelectToken("UserStatus").ToString().Trim() != "")
+                {
+                    objUserVal.UserStatus = Convert.ToString(jsonResult.SelectToken("UserStatus"));
+
+                    var ds = CommonBL.UpdateProfileFromProfilePage(objUserVal, 6);
+                    if (ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Failed(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("0", ConstantMessages.WebServiceLog.GenericErrorMsg);
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("2", "! Please provide User Status.");
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
     }
 }

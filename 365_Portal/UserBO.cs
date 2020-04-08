@@ -85,5 +85,6 @@ namespace _365_Portal
         public string TeamID { get; set; }
         public string ManagerID { get; set; }
         public DateTime? DOJ { get; set; }
+        public string UserStatus { get; set; }
     }
 }

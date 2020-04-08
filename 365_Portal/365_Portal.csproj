@@ -345,6 +345,13 @@
     <Compile Include="Phase2\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="Profile1.aspx.cs">
+      <DependentUpon>Profile1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile1.aspx.designer.cs">
+      <DependentUpon>Profile1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="RefreshTokenProvider.cs" />
@@ -468,6 +475,13 @@
     </Compile>
     <Compile Include="t\flashcards.aspx.designer.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\LearningJourney.aspx.cs">
+      <DependentUpon>LearningJourney.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\LearningJourney.aspx.designer.cs">
+      <DependentUpon>LearningJourney.aspx</DependentUpon>
     </Compile>
     <Compile Include="t\Module.aspx.cs">
       <DependentUpon>Module.aspx</DependentUpon>
@@ -670,6 +684,55 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="email\ChangePass.html" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\ProfilePic\10_0153eab8-5d58-48cd-8876-a9c8101097ad.jpg" />
+    <Content Include="Files\ProfilePic\10_025d89ec-f543-4c3a-9ac7-c31a9aef9b1d.png" />
+    <Content Include="Files\ProfilePic\10_22aca46e-2d9d-4fee-b4f8-8c1de8b0515b.png" />
+    <Content Include="Files\ProfilePic\10_5a34af47-7465-4855-aa59-89ce0f96312e.png" />
+    <Content Include="Files\ProfilePic\10_5b90fc5f-dd57-4a46-94cf-f578577b30be.png" />
+    <Content Include="Files\ProfilePic\10_5f2e690e-b562-4ad1-9679-47bed19b7a36.jpeg" />
+    <Content Include="Files\ProfilePic\10_89feed8a-ac45-4037-a863-9105ede92ca5.jpg" />
+    <Content Include="Files\ProfilePic\10_8a35e36f-df35-4d34-8858-ecc02bab074c.png" />
+    <Content Include="Files\ProfilePic\10_8a81ccec-af86-4560-823f-1f9b2d6c3854.png" />
+    <Content Include="Files\ProfilePic\10_9543d127-7154-4c51-948d-9997f91854ad.jpg" />
+    <Content Include="Files\ProfilePic\10_a2bbd945-e5ca-4f10-b616-40eb8249e18e.png" />
+    <Content Include="Files\ProfilePic\10_a3883e48-60e0-4034-87f4-f440a8cf7469.png" />
+    <Content Include="Files\ProfilePic\10_b15ac997-77f3-42a4-bd57-1dc4066eb12d.png" />
+    <Content Include="Files\ProfilePic\10_b205ba34-e75b-4131-9c66-c2d64f532e69.png" />
+    <Content Include="Files\ProfilePic\10_cd015a87-7549-42c1-bb86-0d4e51c62b33.png" />
+    <Content Include="Files\ProfilePic\10_d51923e7-f050-4f26-b4be-9f7dd37eb6ae.png" />
+    <Content Include="Files\ProfilePic\10_e82b7ae7-62c0-4c35-85b6-1c49b5e2349c.jpg" />
+    <Content Include="Files\ProfilePic\10_f6f94a92-ba19-4c7c-a037-ab718e8480dc.jpg" />
+    <Content Include="Files\ProfilePic\12_8a68d9f6-679a-450d-94c5-8b185dfe5c00.png" />
+    <Content Include="Files\ProfilePic\17_26d230ec-ee73-4ca9-954f-4852baf894ef.png" />
+    <Content Include="Files\ProfilePic\17_391a8631-208e-46f8-b082-e230e80d9b11.jpg" />
+    <Content Include="Files\ProfilePic\17_f1cf1f0d-7825-4919-9a19-af95c73766f7.png" />
+    <Content Include="Files\ProfilePic\18_c0a3b4ac-28b2-4cb6-848c-ccb937469078.png" />
+    <Content Include="Files\ProfilePic\19_0693a338-0536-4cc5-9462-6568403f02f6.jpg" />
+    <Content Include="Files\ProfilePic\23_f60eb020-d229-494f-b1d0-b6de664cb568.png" />
+    <Content Include="Files\ProfilePic\35_32578ac0-da53-4775-bfe9-e1720050cfdc.png" />
+    <Content Include="Files\ProfilePic\35_83a6fb1b-c13b-4b5b-be1a-b847ef3e9298.png" />
+    <Content Include="Files\ProfilePic\35_ee933d96-31d2-4b0d-913f-28eeb353f053.png" />
+    <Content Include="Files\ProfilePic\36_5571ee03-a6a9-4677-94ce-79ccdaa43e85.png" />
+    <Content Include="Files\ProfilePic\37_a2d9ef11-13a7-44e1-b18f-b5d7d7bbdb0d.png" />
+    <Content Include="Files\ProfilePic\37_fc3f72dd-8e0e-44c8-a522-b5d4cf864b39.png" />
+    <Content Include="Files\ProfilePic\7_1945a512-8646-43ce-bd86-ecb4dcec6565.png" />
+    <Content Include="Files\ProfilePic\7_2abda423-f02e-483c-9eaf-be7a8f354c7f.png" />
+    <Content Include="Files\ProfilePic\7_2b3cd3ae-ed03-48cf-a365-cafd43653640.png" />
+    <Content Include="Files\ProfilePic\7_3ba51fd3-817a-44e9-984b-40943f7f3e65.png" />
+    <Content Include="Files\ProfilePic\7_4291b4ac-a77a-4cf4-9a1d-e070045ae813.png" />
+    <Content Include="Files\ProfilePic\7_4f00c59a-cec2-478e-a360-e082f92587e6.png" />
+    <Content Include="Files\ProfilePic\7_588da621-d795-4699-a386-492921cdc9f9.jpg" />
+    <Content Include="Files\ProfilePic\7_5cf68378-3e41-47f3-9829-5060d6c83081.png" />
+    <Content Include="Files\ProfilePic\7_60327c61-74b5-47a1-9603-3bdaa3d1aec4.png" />
+    <Content Include="Files\ProfilePic\7_6dd39a22-e04e-4b57-b51b-f37b8b8ac29f.png" />
+    <Content Include="Files\ProfilePic\7_8daf6113-f450-425b-8169-d59cdd7ef033.png" />
+    <Content Include="Files\ProfilePic\7_d495a82e-ed5d-4cdc-b544-165e45c8f46f.png" />
+    <Content Include="Files\ProfilePic\7_e7864afa-cbe6-4cd5-95df-d73fa914812e.png" />
+    <Content Include="Files\ProfilePic\7_ed75c89f-cfc8-444f-a366-5ade75479396.png.png" />
+    <Content Include="Files\ProfilePic\7_fa0ceeca-47b8-4fef-83c6-dc2edffeeae3.png" />
+    <Content Include="Files\ProfilePic\8_66e44cec-e029-4bc2-a7d1-1d732c043960.jpg" />
+    <Content Include="Files\ProfilePic\_153f8c77-2c71-45cc-8ccb-e5849fdc75c8.png" />
+    <Content Include="Files\ProfilePic\_89963693-c4a5-40fb-b2b8-ee2f24a7d179.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="INCLUDES\Asset\admin\login.js" />
@@ -973,6 +1036,7 @@
     <Content Include="Phase2\Assets\webfonts\fa-regular-400.svg" />
     <Content Include="Phase2\Assets\webfonts\fa-solid-900.svg" />
     <Content Include="Phase2\Dashboard.aspx" />
+    <Content Include="Profile1.aspx" />
     <Content Include="ResetPassword.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1048,6 +1112,7 @@
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
+    <Content Include="t\LearningJourney.aspx" />
     <Content Include="t\Module.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />
@@ -1090,7 +1155,6 @@
     <Folder Include="Files\CourseLogo\" />
     <Folder Include="Files\Favicon\" />
     <Folder Include="Files\Others\" />
-    <Folder Include="Files\ProfilePic\" />
     <Folder Include="Files\Survey\" />
     <Folder Include="Files\Task\" />
     <Folder Include="Views\Discussion\" />

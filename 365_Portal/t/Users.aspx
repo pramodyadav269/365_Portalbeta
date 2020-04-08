@@ -73,10 +73,6 @@
                             <div class="form-group">
                                 <label for="ddlRole">Role</label>
                                 <select class="form-control required select2" id="ddlRole" style="width: 100% !important">
-                                    <%--<option></option>
-                                    <option value="1">Role 1</option>
-                                    <option value="2">Role 2</option>
-                                    <option value="3">Role 3</option>--%>
                                 </select>
                             </div>
                         </div>

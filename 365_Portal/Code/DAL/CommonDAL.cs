@@ -751,5 +751,48 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+
+        public static DataSet UpdateProfileFromProfilePage(UserBO objUsers, int Action)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spUpdateProfileFromProfilePage"; //spUpdateProfileFromProfilePage
+                 MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", Action);
+                cmd.Parameters.AddWithValue("p_UserKey", objUsers.UserKey);
+                cmd.Parameters.AddWithValue("p_UserID", objUsers.UserID);
+                cmd.Parameters.AddWithValue("p_RoleName", objUsers.Role);
+                cmd.Parameters.AddWithValue("p_FirstName", objUsers.FirstName);
+                cmd.Parameters.AddWithValue("p_LastName", objUsers.LastName);
+                cmd.Parameters.AddWithValue("p_EmailID", objUsers.EmailID);
+                cmd.Parameters.AddWithValue("p_IsChangingPassword", objUsers.IsChangingPassword);
+                cmd.Parameters.AddWithValue("p_PasswordHash", objUsers.PasswordHash);
+                cmd.Parameters.AddWithValue("p_PasswordSalt", objUsers.PasswordSalt);
+                cmd.Parameters.AddWithValue("p_MobileNum", objUsers.MobileNum);
+                cmd.Parameters.AddWithValue("p_Position", objUsers.Position);
+                cmd.Parameters.AddWithValue("p_ProFilePicFileID", objUsers.ProfilePicFileID);
+                cmd.Parameters.AddWithValue("p_Gender", objUsers.Gender);
+                cmd.Parameters.AddWithValue("p_CreatedBy", objUsers.UserID);
+                cmd.Parameters.AddWithValue("p_UserStatus", objUsers.UserStatus);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
     }
 }
