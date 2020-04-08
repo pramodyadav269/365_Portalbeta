@@ -857,6 +857,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .btn.btn-outline {
     border: 0.1rem solid rgba(0, 0, 0, 0.28);
     color: rgba(0, 0, 0, 0.5) !important; }
+    .btn.btn-outline.black {
+      color: #000 !important; }
   .btn.btn-yellow {
     background-color: #FAC900;
     color: #000; }
@@ -903,7 +905,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: 0;
   padding: .5rem 0;
   height: calc(1.5em + .5rem + 2px);
-  font-size: .9rem; }
+  font-size: .9rem;
+  background-color: transparent; }
   .module .form-group .form-control + small.form-text {
     color: rgba(0, 0, 0, 0.3); }
     .module .form-group .form-control + small.form-text span {
@@ -935,12 +938,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     font-weight: normal;
     color: rgba(0, 0, 0, 0.4); }
 
-.module .form-group label {
+.module .form-group label, .module .form-group .label, .module .form-group .label:hover {
   font-weight: normal;
   color: rgba(0, 0, 0, 0.4); }
-  .module .form-group label .svg-inline--fa {
+  .module .form-group label .svg-inline--fa, .module .form-group .label .svg-inline--fa, .module .form-group .label:hover .svg-inline--fa {
     margin-right: .5rem; }
-    .module .form-group label .svg-inline--fa.black {
+    .module .form-group label .svg-inline--fa.black, .module .form-group .label .svg-inline--fa.black, .module .form-group .label:hover .svg-inline--fa.black {
       color: #000; }
 
 .module .form-group .select2-container.select2-container--default .select2-selection--single, .module .form-group .select2-container.select2-container--default .select2-selection--multiple {
@@ -1054,3 +1057,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 /* module end */
 .select2-dropdown {
   border-radius: 0; }
+
+/* jodit editor */
+.jodit_container .jodit_workplace {
+  min-height: 160px !important;
+  max-height: 300px; }

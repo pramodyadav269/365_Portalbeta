@@ -1075,6 +1075,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     &.btn-outline {
         border: .1rem solid rgba(0, 0, 0, 0.28);
         color: rgba(0, 0, 0, .5) !important;
+
+        &.black {
+            color: #000 !important;
+        }
     }
 
     &.btn-yellow {
@@ -1149,6 +1153,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             padding: .5rem 0;
             height: calc(1.5em + .5rem + 2px);
             font-size: .9rem;
+            background-color: transparent;
 
             + small {
                 &.form-text {
@@ -1200,7 +1205,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 
     .form-group {
-        label {
+        label, .label, .label:hover {
             font-weight: normal;
             color: rgba(0, 0, 0, 0.4);
 
@@ -1420,4 +1425,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 /* module end */
 .select2-dropdown {
     border-radius: 0;
+}
+
+/* jodit editor */
+.jodit_container {
+    .jodit_workplace {
+        min-height: 160px !important;
+        max-height: 300px;
+    }
 }

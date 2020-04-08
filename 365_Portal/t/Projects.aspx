@@ -535,7 +535,7 @@
                         });
                     }
                     else {
-                        cardHtml += '<div class="col-12"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
+                        cardHtml += '<div class="col-12 text-center"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
                     }
                     cardHtml += ' </ol>';
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
