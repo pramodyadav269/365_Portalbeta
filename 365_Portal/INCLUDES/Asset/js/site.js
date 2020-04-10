@@ -1,6 +1,8 @@
 ﻿
 $(document).ready(function () {
 
+    
+
     bsCustomFileInput.init();
 
     $('.courses.dropdown .dropdown-menu').on("click", function (e) {
@@ -49,6 +51,7 @@ $(document).ready(function () {
             $('.inline-picker').addClass('d-none');
     });
 });
+
 
 
 function selectInit(el, placeholder) {
@@ -218,4 +221,27 @@ function readURL(ctrl, el) {
         $(el).removeClass('img');
         $(el).empty();
     }
+}
+
+function viewLesson() {
+    $('.theme-section').addClass('d-none');
+    $('.dashboard[ng-app="MasterPage"]').addClass('d-none');
+
+    $('#dvLesson').removeClass('d-none');
+}
+
+function viewLessonContent() {
+    $('.theme-section').addClass('d-none');
+    $('.dashboard[ng-app="MasterPage"]').addClass('d-none');
+
+    $('#dvLesson').addClass('d-none');
+    $('#dvLessonContent').removeClass('d-none');
+}
+
+function backToLesson() {
+    $('.theme-section').addClass('d-none');
+    $('.dashboard[ng-app="MasterPage"]').addClass('d-none');
+
+    $('#dvLesson').removeClass('d-none');
+    $('#dvLessonContent').addClass('d-none');
 }
