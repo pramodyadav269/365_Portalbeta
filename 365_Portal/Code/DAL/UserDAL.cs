@@ -698,6 +698,42 @@ namespace _365_Portal.Code.DAL
         }
         #endregion TEAM
 
+        public static DataSet MasterCRUD(int Action, int CompId, int Id, string Title, string Description, string CreatedBy, bool IsActive,string type)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spMasterCRUD";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", Action);
+                cmd.Parameters.AddWithValue("p_type", type);
+                cmd.Parameters.AddWithValue("p_CompId", CompId);
+                cmd.Parameters.AddWithValue("p_Id", Id);
+                cmd.Parameters.AddWithValue("p_Title", Title.Trim().ToString());
+                cmd.Parameters.AddWithValue("p_Description", Description);                
+                cmd.Parameters.AddWithValue("p_IsActive", IsActive);
+                cmd.Parameters.AddWithValue("p_CreatedBy", CreatedBy);                
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+
+
         public static DataSet SetUserPassword(Int32 CompId, string UserId, string Password, string CreatedBy)
         {
             DataSet ds = new DataSet();

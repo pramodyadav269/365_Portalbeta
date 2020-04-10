@@ -216,6 +216,22 @@ namespace _365_Portal.Code.BL
         #endregion TEAM
 
 
+        public static DataSet MasterCRUD(int action, int CompId, int TeamID, string TeamName, string Description, string CreatedBy, bool IsActive, string type)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = UserDAL.MasterCRUD(action, CompId, TeamID, TeamName, Description, CreatedBy, IsActive, type);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+
+
         public static DataSet SetUserPassword(int CompId, string UserId, string Password, string CreatedBy)
         {
             DataSet ds = new DataSet();
