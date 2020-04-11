@@ -619,7 +619,7 @@
             $(el).find('.contact-info').removeClass('d-none');
             $(el).find('.contact-input').addClass('d-none');
 
-            clearFields(el);
+            //clearFields(el);
         }
         
         function GetProfileFromProfilePage(flag)
@@ -1129,7 +1129,7 @@
                         base64UserProfileString = reader.result;
                     }
                     reader.readAsDataURL(file);
-
+                    ShowLoader();
                     var getUrl = "/API/User/UpdateProfilePic";
                     var jsonResult = { UserProfileImageBase64: base64UserProfileString };
 

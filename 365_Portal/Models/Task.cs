@@ -24,4 +24,16 @@ namespace _365_Portal.Models
         public string t_Comments { get; set; }
 
     }
+
+    public class UpdateTaskManagement
+    {
+        public int Param_ProjectID { get; set; }
+        public int Param_TaskID { get; set; }
+        public int Param_CompID { get; set; }
+        public string Param_SubTaskIds { get; set; } //#(completed taskIds comma separated)
+        public int Param_StatusID { get; set; }
+        public string Param_Comments { get; set; }
+        public int Param_UserID { get; set; }
+
+    }
 }

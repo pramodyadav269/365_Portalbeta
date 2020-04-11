@@ -27,30 +27,30 @@ namespace _365_Portal.Controllers
         public IHttpActionResult ProjectCRUD(JObject requestParams)
         {
             var data = "";
-            //var identity = MyAuthorizationServerProvider.AuthenticateUser();
-            //if (identity != null)
-            //{
-            try
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
             {
-                //Deserialize JSON data into calss object
-                Project project = requestParams.ToObject<Project>();
-                //project.p_CompID = identity.CompId;
-                //project.p_UserId = identity.CompId;    
+                try
+                {
+                    //Deserialize JSON data into calss object
+                    Project project = requestParams.ToObject<Project>();
+                    project.p_CompID = identity.CompId;
+                    project.p_UserId = Convert.ToInt32(identity.UserID);
 
-                var ds = ProjectBL.ProjectCRUD(project);
+                    var ds = ProjectBL.ProjectCRUD(project);
 
-                data = Utility.ConvertDataSetToJSONString(ds);
-                data = Utility.Successful(data);
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                data = Utility.Exception(ex); ;
+                data = Utility.AuthenticationError();
             }
-            //}
-            //else
-            //{
-            //    data = Utility.AuthenticationError();
-            //}
             return new APIResult(Request, data);
         }
     }

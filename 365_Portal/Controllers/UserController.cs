@@ -1438,7 +1438,7 @@ namespace _365_Portal.Controllers
         [Route("API/User/CreateCategory")]
         public IHttpActionResult CreateCategory(JObject requestParams)
         {
-            var data = string.Empty;            
+            var data = string.Empty;
             try
             {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
@@ -1448,8 +1448,8 @@ namespace _365_Portal.Controllers
                     {
                         string Title = string.Empty;
                         Title = requestParams["Title"].ToString();
-                        
-                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.INSERT,identity.CompId,0, Title, string.Empty, identity.UserID, true);
+
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, true);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)
@@ -1502,7 +1502,7 @@ namespace _365_Portal.Controllers
         [Route("API/User/ModifyCategory")]
         public IHttpActionResult ModifyCategory(JObject requestParams)
         {
-            var data = string.Empty;            
+            var data = string.Empty;
             try
             {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
@@ -1521,8 +1521,8 @@ namespace _365_Portal.Controllers
                         {
                             Title = requestParams["Title"].ToString();
                         }
-                                                
-                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.MODIFY ,identity.CompId, ID, Title,string.Empty, identity.UserID, true);
+
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.MODIFY, identity.CompId, ID, Title, string.Empty, identity.UserID, true);
 
                         if (ds.Tables.Count > 0)
                         {
@@ -1574,7 +1574,7 @@ namespace _365_Portal.Controllers
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.VIEW,identity.CompId,0,string.Empty, string.Empty,identity.UserID,true);
+                    var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.VIEW, identity.CompId, 0, string.Empty, string.Empty, identity.UserID, true);
                     DataTable dt = ds.Tables["Data"];
                     if (dt != null)
                     {
@@ -1613,7 +1613,7 @@ namespace _365_Portal.Controllers
         [Route("API/User/DeleteCategory")]
         public IHttpActionResult DeleteCategory(JObject requestParams)
         {
-            var data = string.Empty;                       
+            var data = string.Empty;
 
             string CreatedBy = string.Empty;
             ContentBO content = new ContentBO();
@@ -1622,12 +1622,12 @@ namespace _365_Portal.Controllers
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && Convert.ToInt32(requestParams["ID"]) != 0 
-                        && (Convert.ToString(requestParams["IsActive"]) !="0" || Convert.ToString(requestParams["IsActive"]) != "1"))
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ID"])) && Convert.ToInt32(requestParams["ID"]) != 0
+                        && (Convert.ToString(requestParams["IsActive"]) != "0" || Convert.ToString(requestParams["IsActive"]) != "1"))
                     {
                         int ID = 0;
                         bool IsActive = false;
-                        
+
                         if (!string.IsNullOrEmpty(requestParams["ID"].ToString()))
                         {
                             ID = Convert.ToInt32(requestParams["ID"]);
@@ -1636,7 +1636,7 @@ namespace _365_Portal.Controllers
                         {
                             IsActive = (bool)requestParams["IsActive"];
                         }
-                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.DELETE,identity.CompId, ID,string.Empty, string.Empty, identity.UserID, IsActive);
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.DELETE, identity.CompId, ID, string.Empty, string.Empty, identity.UserID, IsActive);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)
@@ -1939,9 +1939,6 @@ namespace _365_Portal.Controllers
         }
         #endregion TEAM
 
-
-
-
         [Route("API/User/GetUsers")]
         [HttpPost]
         public IHttpActionResult GetUsers()
@@ -1956,7 +1953,7 @@ namespace _365_Portal.Controllers
                 {
                     objUser.UserID = identity.UserID;
                     objUser.CompId = identity.CompId;
-                    objUser.Role = identity.Role;                    
+                    objUser.Role = identity.Role;
 
                     var ds = CommonBL.GetUsers(objUser);
                     if (ds.Tables.Count > 0)
@@ -1997,31 +1994,31 @@ namespace _365_Portal.Controllers
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
 
-                    int ddlCompID = 0, ddlRoleID = 0;                    
+                    int ddlCompID = 0, ddlRoleID = 0;
 
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlCompId"])))
                     {
-                        ddlCompID = Convert.ToInt32(requestParams["ddlCompId"]); 
+                        ddlCompID = Convert.ToInt32(requestParams["ddlCompId"]);
                     }
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ManagerID"].ToString())))
                     {
-                        objUser.ManagerID = Convert.ToString((requestParams["ManagerID"])); 
+                        objUser.ManagerID = Convert.ToString((requestParams["ManagerID"]));
                     }
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ddlRoleID"].ToString())))
                     {
-                        ddlRoleID = Convert.ToInt32((requestParams["ddlRoleID"])); 
+                        ddlRoleID = Convert.ToInt32((requestParams["ddlRoleID"]));
                     }
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TeamID"].ToString())))
                     {
-                        objUser.TeamID = Convert.ToString((requestParams["TeamID"])); 
+                        objUser.TeamID = Convert.ToString((requestParams["TeamID"]));
                     }
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["DepartmentID"].ToString())))
                     {
-                        objUser.DepartmentID = Convert.ToString((requestParams["DepartmentID"])); 
+                        objUser.DepartmentID = Convert.ToString((requestParams["DepartmentID"]));
                     }
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["GroupID"].ToString())))
                     {
-                        objUser.GroupId = Convert.ToString((requestParams["GroupID"])); 
+                        objUser.GroupId = Convert.ToString((requestParams["GroupID"]));
                     }
 
                     var ds = CommonBL.SearchUsers(objUser, ddlCompID, ddlRoleID);
@@ -2630,7 +2627,7 @@ namespace _365_Portal.Controllers
                     objUser.CompId = identity.CompId;
                     objUser.Role = identity.Role;
 
-                    var ds = CommonBL.BindDropDown(objUser, "createuser",ConstantMessages.Procedures.spBindDropdown);
+                    var ds = CommonBL.BindDropDown(objUser, "createuser", ConstantMessages.Procedures.spBindDropdown);
 
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
@@ -2713,7 +2710,7 @@ namespace _365_Portal.Controllers
             }
             return new APIResult(Request, data);
         }
-        
+
         [Route("API/User/GetUserCourseEngagement")]
         [HttpPost]
         public IHttpActionResult GetUserCourseEngagement(JObject requestParams)
@@ -2723,7 +2720,7 @@ namespace _365_Portal.Controllers
             if (identity != null)
             {
                 if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
-                {                    
+                {
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("EngageFilterID"))) && !string.IsNullOrEmpty(Convert.ToString(requestParams.SelectToken("CourseID"))))
                     {
                         var ds = CommonBL.GetUserCourseEngagement(identity.CompId, Convert.ToInt32(requestParams.SelectToken("CourseID")), Convert.ToInt32(requestParams.SelectToken("EngageFilterID")));
@@ -2789,46 +2786,41 @@ namespace _365_Portal.Controllers
         public IHttpActionResult GetUserlist(JObject requestParams)
         {
             var data = "";
-            //var identity = MyAuthorizationServerProvider.AuthenticateUser();
-            //if (identity != null)
-            //{
-            UserBO objUser = new UserBO();
-
-            //if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
-            //{
-            //objUser.UserID = identity.UserID;
-            //objUser.CompId = identity.CompId;
-            //objUser.Role = identity.Role;
-            //if (objUser.Role == "superadmin")
-            //{
-            //    objUser.CompId = Convert.ToInt32(requestParams["CompId"].ToString());
-            //}
-
-            objUser.UserID = "7";
-            objUser.CompId = 1;
-            objUser.Role = "companyadmin";
-
-            var ds = CommonBL.GetUsers(objUser);
-            if (ds.Tables.Count > 0)
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
             {
-                data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
-                data = Utility.Successful(data);
+                UserBO objUser = new UserBO();
+
+                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
+                {
+                    objUser.UserID = identity.UserID;
+                    objUser.CompId = identity.CompId;
+                    objUser.Role = identity.Role;
+                    if (objUser.Role == "superadmin")
+                    {
+                        objUser.CompId = Convert.ToInt32(requestParams["CompId"].ToString());
+                    }
+
+                    var ds = CommonBL.GetUsers(objUser);
+                    if (ds.Tables.Count > 0)
+                    {
+                        data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                        data = Utility.Successful(data);
+                    }
+                    else
+                    {
+                        data = Utility.API_Status("2", "No user found");
+                    }
+                }
+                else
+                {
+                    data = Utility.API_Status("3", "You do not have access for this functionality");
+                }
             }
             else
             {
-                data = Utility.API_Status("2", "No user found");
+                data = Utility.AuthenticationError();
             }
-            //}
-            //else
-            //{
-            //    data = Utility.API_Status("3", "You do not have access for this functionality");
-            //}
-            //}
-            //    else
-            //    {
-            //        data = Utility.AuthenticationError();
-            //    }
-
             return new APIResult(Request, data);
         }
 
