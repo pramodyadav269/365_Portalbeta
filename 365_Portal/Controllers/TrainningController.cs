@@ -31,7 +31,7 @@ namespace _365_Portal.Controllers
                     int compId = identity.CompId;
                     string userId = identity.UserID;
                     var ds = TrainningBL.GetTopicsByUser(compId, userId);
-                    data = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                    data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
                 }
                 catch (Exception ex)
@@ -73,7 +73,7 @@ namespace _365_Portal.Controllers
                     {
                         Message = "Please provide TopicID."; ValFlag = false;
                     }
-                    if (requestParams.SelectToken("Fav") != null && requestParams.SelectToken("Fav").ToString().Trim() != "" 
+                    if (requestParams.SelectToken("Fav") != null && requestParams.SelectToken("Fav").ToString().Trim() != ""
                         && (requestParams.SelectToken("Fav").ToString().Trim() == "0" || requestParams.SelectToken("Fav").ToString().Trim() == "1"))
                     {
                         IsFav = Convert.ToInt32(requestParams.SelectToken("Fav"));
@@ -101,7 +101,7 @@ namespace _365_Portal.Controllers
                     else
                     {
                         data = Utility.API_Status("2", Message);
-                    }                    
+                    }
                 }
                 catch (Exception ex)
                 {

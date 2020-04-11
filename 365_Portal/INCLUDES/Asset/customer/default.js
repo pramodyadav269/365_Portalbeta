@@ -88,7 +88,19 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         objDs.DS_GetContentsByModule(topicId, moduleId, true);
     }
 
-    $scope.ViewContent = function (topicId, moduleId, contentId, moduleName, type) {
+    $scope.DisplayLearningObjectives = function (cntrl, learningObjective) {
+        $scope.SelectedContent = { Description: learningObjective };
+        $(".list-group-item-action").removeClass("active");
+        $(cntrl).addClass("active");
+    }
+
+    $scope.DisplayQuiz = function (topicId, moduleId, contentId, moduleName, type) {
+
+    }
+
+    $scope.ViewContent = function (cntrl, topicId, moduleId, contentId, moduleName, type) {
+        $(".list-group-item-action").removeClass("active");
+        $(cntrl).addClass("active");
         $scope.ContentGoBackText = "Back to contents";
         $scope.SelectedContent = $rootScope.Content.UnlockedItems.filter(function (v) {
             return contentId == v.ContentID;
@@ -105,7 +117,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             $scope.ActiveContainer = "ContentQuizView";
         }
         else {
-            $scope.ActiveContainer = "ContentView";
+            // $scope.ActiveContainer = "ContentView";
             //Unlock Next Content
             objDs.DS_UpdateContent("Content", topicId, moduleId, contentId);
         }
@@ -312,13 +324,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GoBack = function (prevPage) {
-        if (prevPage == "Module") {
-            lockLessonFirstTime = true;
-            unlockLessonFirstTime = true;
-        }
-        else if (prevPage == "Topic") {
+        //if (prevPage == "Module") {
+        //    lockLessonFirstTime = true;
+        //    unlockLessonFirstTime = true;
+        //}
+        //else if (prevPage == "Topic") {
 
-        }
+        //}
 
         $scope.ActiveContainer = prevPage;
         if (prevPage == 'Content')
@@ -350,7 +362,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             return arrHrsMins[0] + " hr";
         }
         else if (arrHrsMins.length == 2) {
-            if (parseInt(arrHrsMins[0])>0)
+            if (parseInt(arrHrsMins[0]) > 0)
                 return arrHrsMins[0] + " hr " + arrHrsMins[1] + " m";
             else
                 return arrHrsMins[1] + " m";
@@ -359,7 +371,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             return "";
         }
     }
-   
+
 });
 
 //COMMON SERVICE OPERATIONS
@@ -382,7 +394,9 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             HideLoader();
             $("#dvTopicContainer").show();
             var responseData = response.data;
-            $rootScope.Topics = ds.DS_SetClasses(responseData.Data);
+            $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
+            $rootScope.Topics = responseData.Data.Data1; // My Courses except in-complete courses..
+            //$rootScope.Topics = ds.DS_SetClasses(responseData.Data);
         });
     }
 
@@ -660,12 +674,43 @@ app.directive('myPostRepeatDirective', function () {
     };
 });
 
+app.directive('inprogressTopicRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            InitSlickSlider('#dvInProgressTopics');
+        }
+    };
+});
+
 app.directive('myTopicRepeatDirective', function () {
     return function (scope, element, attrs) {
         if (scope.$last) {
-            //alert("abc");
-           // InitSlickSlider('#dvTopics');
-            InitSlickSlider('.content');
+            //InitSlickSlider('.content');
+            InitSlickSlider('#dvTopics');
+        }
+    };
+});
+
+app.directive('recommendedTopicRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            InitSlickSlider('#dvRecommendedTopics');
+        }
+    };
+});
+
+app.directive('latestTopicRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            InitSlickSlider('#dvLatestTopics');
+        }
+    };
+});
+
+app.directive('popularTopicRepeatDirective', function () {
+    return function (scope, element, attrs) {
+        if (scope.$last) {
+            InitSlickSlider('#dvPopularTopics');
         }
     };
 });
