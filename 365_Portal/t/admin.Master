@@ -103,11 +103,11 @@
             }
             return date;
         }
-        
-        function BlankIfNullOrUndefined(string) {            
+
+        function BlankIfNullOrUndefined(string) {
             if (string == null || string == undefined) {
                 string = '';
-            }            
+            }
             return string;
         }
 
@@ -342,8 +342,8 @@
             </a>
 
             <%-- phase2 --%>
-            <ul class="navbar-nav" style="display: none;">
-                <li class="nav-item courses dropdown"><a class="nav-link" id="navbarCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <ul class="navbar-nav">
+                <li class="nav-item courses dropdown d-none"><a class="nav-link" id="navbarCourses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="name dropdown-toggle">Courses</span></a>
                     <div class="dropdown-menu" aria-labelledby="navbarCourses">
                         <div class="courses-item">
@@ -480,7 +480,7 @@
                         <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 
                         <div class="dropdown-menu user-profile shadow" aria-labelledby="imgProfilePic">
-                            <img src="../INCLUDES/Asset/images/theme1_1.png" class="img-fluid profile-theme" />
+                            <img src="../INCLUDES/Asset/images/theme_sport_header_profile.svg" class="img-fluid profile-theme" />
                             <div class="user-profile-content">
                                 <img id="imgProfileUserPic" runat="server" src="../Asset/images/profile.png" />
                                 <h5 id="lblProfileUserName" runat="server" class="profile-user-name mb-3"></h5>
@@ -505,8 +505,34 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     <a class="nav-link" href="#">My Learning</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="d-flex">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span><i class="fas fa-user-friends"></i>Users and Groups</span>
+                                </li>
+                                <li class="list-group-item active">
+                                    <span><i class="far fa-file-alt"></i>Content</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span><i class="far fa-user-circle"></i>Account</span>
+                                </li>
+                                <li class="list-group-item">
+                                    <span><i class="far fa-hdd"></i>Content</span>
+                                </li>
+                            </ul>
+                            <div class="list-content">
+                                <h4 class="content-title"><i class="far fa-file-alt"></i>Content</h4>
+                                <div class="content-item">
+                                    <a href="#">Courses</a>
+                                    <a href="#">Lessons (Topics)</a>
+                                    <a href="#">Content Settings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">My Team</a>

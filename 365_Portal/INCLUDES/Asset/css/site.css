@@ -15,6 +15,24 @@ body {
   font-size: .9rem;
   font-family: Heebo; }
 
+.theme-full {
+  background-image: url("../images/theme_sport.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; }
+
+.page-card .card-body {
+  padding: 1.25rem 3rem; }
+  @media only screen and (max-width: 600px) {
+    .page-card .card-body {
+      padding: 1rem; } }
+
+.page-card .card-form {
+  margin: 2.75rem 4rem; }
+  @media only screen and (max-width: 600px) {
+    .page-card .card-form {
+      margin: 2.75rem 1rem; } }
+
 a {
   cursor: pointer; }
 
@@ -279,15 +297,59 @@ a:hover {
   border-radius: 50%; }
 
 /* navbar menu */
-.navbar.nav-menu {
+.navbar.navbar-light.nav-menu {
   box-shadow: 0 0.125rem 0.13rem rgba(0, 0, 0, 0.2);
-  padding: 0 2rem; }
-
-.navbar.nav-menu .navbar-nav .nav-item {
-  margin: 0 .75rem; }
-
-.navbar.nav-menu.navbar-light .navbar-nav .active > .nav-link {
-  font-weight: 600; }
+  padding: 0 2rem;
+  z-index: 1; }
+  .navbar.navbar-light.nav-menu .navbar-nav .nav-item {
+    margin: 0 .75rem; }
+    .navbar.navbar-light.nav-menu .navbar-nav .nav-item .nav-link {
+      border-bottom: 3px solid transparent; }
+    .navbar.navbar-light.nav-menu .navbar-nav .nav-item.active .nav-link {
+      font-weight: 600;
+      border-color: #FAC900; }
+  .navbar.navbar-light.nav-menu .dropdown .dropdown-menu {
+    padding: 0;
+    background-color: #F3F3F3;
+    min-width: 390px;
+    border: 0;
+    top: 94%;
+    left: calc(-50% - 100%); }
+    .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .svg-inline--fa {
+      margin-right: .5rem; }
+    .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item {
+      cursor: pointer;
+      border: none;
+      border-radius: 0;
+      font-size: .9rem;
+      padding: .75rem 2rem .75rem 1rem; }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item.active {
+        background-color: #fff;
+        color: #FAC900; }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item:first-child {
+        padding-top: 1.5rem; }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item:last-child {
+        padding-bottom: 1.5rem; }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item::after {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 600;
+        content: "\f054";
+        position: absolute;
+        right: 12px; }
+    .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-content {
+      padding: 1.2rem 1.2rem 1.2rem 1.5rem; }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-content .content-title {
+        color: rgba(0, 0, 0, 0.3); }
+      .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-content .content-item {
+        padding-left: 1.75rem; }
+        .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-content .content-item a {
+          display: block;
+          color: rgba(0, 0, 0, 0.5);
+          font-size: 11px;
+          margin-bottom: .5rem;
+          font-weight: 600; }
+  .navbar.navbar-light.nav-menu .dropdown:hover .dropdown-menu {
+    display: block; }
 
 /* main */
 main .container-fluid.dashboard {
@@ -692,31 +754,29 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-bottom-right-radius: .25rem; }
 
 /* theme section */
+.theme-section img {
+  width: 100%;
+  height: auto; }
+
 .theme-section h4 {
   text-align: center;
   padding: .5rem 1rem;
-  color: #fff;
-  background: #0C4E2A; }
+  color: #fff; }
+  .theme-section h4.sport {
+    background: #53122B; }
+  .theme-section h4.nature {
+    background: #0C4E2A; }
 
 /* profile*/
-.profile {
-  padding-top: 2rem;
-  padding-bottom: 2rem; }
-
-@media (min-width: 768px) {
-  .profile {
-    padding-top: 4rem;
-    padding-bottom: 3rem; } }
-
-@media (min-width: 992px) {
-  .profile {
-    padding-top: 5rem;
-    padding-bottom: 3rem; } }
-
-@media (min-width: 1200px) {
-  .profile {
-    padding-top: 8rem;
-    padding-bottom: 3rem; } }
+.profile-section {
+  position: relative;
+  top: -50px; }
+  @media only screen and (max-width: 992px) {
+    .profile-section {
+      top: -14px; } }
+  @media only screen and (min-width: 601px) and (max-width: 992px) {
+    .profile-section {
+      top: -26px; } }
 
 .profile .profile-info .photo {
   height: 114px;

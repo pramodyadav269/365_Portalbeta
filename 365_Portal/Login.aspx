@@ -14,6 +14,7 @@
     <link href="Asset/css/select2.min.css" rel="stylesheet" />
     <link href="Asset/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="Asset/css/site.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/site.css" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="Asset/js/jquery.min.js"></script>
@@ -42,8 +43,9 @@
     </style>
 
 </head>
-<body>
+<body class="theme-full">
     <form id="form1" runat="server" class="">
+        <%--<img class="theme-full-img" src="INCLUDES/Asset/images/theme-full.jpg" />--%>
         <div class="container">
             <div class="row">
                 <%--<div class="top-logo">
@@ -128,7 +130,7 @@
                                 </div>
                                 <div class="text-center mt-4">
                                     <%--<a class="btn btn-custom bg-yellow font-weight-bold" onclick="login(this)">Log In</a>--%>
-                                    <asp:Button ID="btnLogin" runat="server" class="btn btn-custom bg-yellow font-weight-bold" Text="Log In" OnClientClick="return login(this);" OnClick="btnLogin_Click" />
+                                    <asp:Button ID="btnLogin" runat="server" class="btn btn-custom w-100 bg-yellow font-weight-bold" Text="Log In" OnClientClick="return login(this);" OnClick="btnLogin_Click" />
                                 </div>
 
                                 <asp:Label runat="server" ID="lblError" ForeColor="Red" />

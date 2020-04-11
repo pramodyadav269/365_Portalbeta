@@ -7,8 +7,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div class="theme-section">
-        <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
-        <h4>Welcome shoumen! Let's learn something new today :)</h4>
+        <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
+        <h4 class="sport">Welcome shoumen! Let's learn something new today :)</h4>
     </div>
 
 

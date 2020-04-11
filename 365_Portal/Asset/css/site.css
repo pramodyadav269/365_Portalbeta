@@ -142,9 +142,9 @@ img.logo {
         transform: translate(-50%, -50%);*/
     }
 
-        .page-card .card .card-body {
+        /*.page-card .card .card-body {
             padding: 1.25rem 3rem;
-        }
+        }*/
 
 
 a.link, a.link:hover {
@@ -207,9 +207,9 @@ input[type=checkbox] + label, input[type=radio] + label {
 }
 
 
-.card-body .card-form {
+/*.card-body .card-form {
     margin: 2.75rem 4rem;
-}
+}*/
 
 .btn-custom {
     padding: 0.75rem 2rem;
