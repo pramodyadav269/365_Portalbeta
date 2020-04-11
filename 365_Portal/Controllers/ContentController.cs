@@ -526,12 +526,13 @@ namespace _365_Portal.ControllersReOrderContent
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-
-                    if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["ModuleTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()) && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                    if ((!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"])) 
+                        //&& !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString())
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"])) 
+                        //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Points"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseTime"]))
                         ))
                     {
                         content.CompID = identity.CompId;
@@ -542,10 +543,6 @@ namespace _365_Portal.ControllersReOrderContent
                             content.TopicID = Convert.ToInt32(requestParams["TopicID"]);
                         }
 
-                        //if (!string.IsNullOrEmpty(requestParams["ModuleID"].ToString()))
-                        //{
-                        //    content.ModuleID = Convert.ToInt32(requestParams["ModuleID"]);
-                        //}
                         if (!string.IsNullOrEmpty(requestParams["ModuleTitle"].ToString()))
                         {
                             content.ModuleTitle = requestParams["ModuleTitle"].ToString();
@@ -555,14 +552,14 @@ namespace _365_Portal.ControllersReOrderContent
                             content.ModuleDescription = null;
                         }
 
-                        if (!string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()))
-                        {
-                            content.ModuleDescription = requestParams["ModuleDescription"].ToString();
-                        }
-                        else
-                        {
-                            content.ModuleDescription = null;
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()))
+                        //{
+                        //    content.ModuleDescription = requestParams["ModuleDescription"].ToString();
+                        //}
+                        //else
+                        //{
+                        //    content.ModuleDescription = null;
+                        //}
 
                         if (!string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()))
                         {
@@ -572,10 +569,10 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.ModuleOverview = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
-                        {
-                            content.IsPublished = (bool)requestParams["IsPublished"];
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
+                        //{
+                        //    content.IsPublished = (bool)requestParams["IsPublished"];
+                        //}
                         if (!string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
                         {
                             content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
@@ -584,7 +581,6 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
                         }
-
 
                         if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
                         {
@@ -612,11 +608,9 @@ namespace _365_Portal.ControllersReOrderContent
                                 }
                                 else
                                 {
-
                                     data = dt.Rows[0]["ReturnMessage"].ToString();
                                     data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                                 }
-
                             }
                             else
                             {
@@ -664,11 +658,13 @@ namespace _365_Portal.ControllersReOrderContent
                 if (identity != null)
                 {
 
-                    if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) &&
-                    !string.IsNullOrEmpty(requestParams["ModuleTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()) &&
-                    !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()) && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
-                    && !string.IsNullOrEmpty(requestParams["Points"].ToString())
-                    && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])) 
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"])) 
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"])) 
+                    //&& !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()) 
+                    //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["Points"]))
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseTime"]))
                     )
                     {
                         content.CompID = identity.CompId;
@@ -691,14 +687,14 @@ namespace _365_Portal.ControllersReOrderContent
                             content.ModuleDescription = null;
                         }
 
-                        if (!string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()))
-                        {
-                            content.ModuleDescription = requestParams["ModuleDescription"].ToString();
-                        }
-                        else
-                        {
-                            content.ModuleDescription = null;
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()))
+                        //{
+                        //    content.ModuleDescription = requestParams["ModuleDescription"].ToString();
+                        //}
+                        //else
+                        //{
+                        //    content.ModuleDescription = null;
+                        //}
 
                         if (!string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()))
                         {
@@ -708,10 +704,10 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.ModuleOverview = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
-                        {
-                            content.IsPublished = (bool)requestParams["IsPublished"];
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
+                        //{
+                        //    content.IsPublished = (bool)requestParams["IsPublished"];
+                        //}
                         if (!string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
                         {
                             content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
@@ -1868,6 +1864,79 @@ namespace _365_Portal.ControllersReOrderContent
                         data = ConstantMessages.WebServiceLog.InValidValues;
                         data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                     }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
+        [HttpPost]
+        [Route("API/Content/UpdateResource")]
+        public IHttpActionResult UpdateResource(JObject requestParams)
+        {
+            var data = string.Empty;
+            ContentBO content = new ContentBO();
+            
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Description"])))
+                    {
+                        int CompID = identity.CompId;
+                        string UserID = identity.UserID;
+
+                        int TopicID = Convert.ToInt32(requestParams["TopicID"]);
+                        int ModuleID = Convert.ToInt32(requestParams["ModuleID"]);
+                        string Description = Convert.ToString(requestParams["Description"]);
+                        
+                        var ds = ContentBL.UpdateResource(Convert.ToInt32(ConstantMessages.Action.MODIFY), CompID, UserID, TopicID, ModuleID, Description);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+
                 }
                 else
                 {
