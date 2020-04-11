@@ -21,10 +21,12 @@ namespace _365_Portal.Code.BL
             DataSet dsresult = new DataSet();
             try
             {
+
+                task.t_SubTasks = task.t_SubTasks.TrimEnd('|');
+
                 if (!string.IsNullOrEmpty(task.t_FileIds))
                 {
                     string userProfilePicBase64 = string.Empty;
-
 
                     var files = task.t_FileIds.Split(new string[] { "," }, StringSplitOptions.None);
 
@@ -45,6 +47,20 @@ namespace _365_Portal.Code.BL
                     }
                 }
                 dsresult = TaskDAL.TaskCRUD(task);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return dsresult;
+        }
+
+        public static DataSet TaskUpdate(UpdateTaskManagement updateTaskManagement)
+        {
+            DataSet dsresult = new DataSet();
+            try
+            {
+                dsresult = TaskDAL.TaskUpdate(updateTaskManagement);
             }
             catch (Exception ex)
             {

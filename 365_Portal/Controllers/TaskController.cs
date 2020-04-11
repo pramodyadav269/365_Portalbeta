@@ -25,31 +25,64 @@ namespace _365_Portal.Controllers
         public IHttpActionResult TaskCRUD(JObject requestParams)
         {
             var data = "";
-            //var identity = MyAuthorizationServerProvider.AuthenticateUser();
-            //if (identity != null)
-            //{
-            try
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
             {
-                //Deserialize JSON data into calss object
-                TaskManagement task = requestParams.ToObject<TaskManagement>();
+                try
+                {
+                    //Deserialize JSON data into calss object
+                    TaskManagement task = requestParams.ToObject<TaskManagement>();
 
-                //task.t_CompID = identity.CompId;
-                //task.t_UserIds = identity.CompId;                
-                var ds = TaskBL.TaskCRUD(task);
-                data = Utility.ConvertDataSetToJSONString(ds);
-                data = Utility.Successful(data);
+                    task.t_CompID = identity.CompId;
+                    task.t_UserId = Convert.ToInt32(identity.UserID);
+
+                    var ds = TaskBL.TaskCRUD(task);
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                data = Utility.Exception(ex); ;
+                data = Utility.AuthenticationError();
             }
-            //}
-            //else
-            //{
-            //    data = Utility.AuthenticationError();
-            //}
             return new APIResult(Request, data);
         }
+
+        [Route("api/Task/TaskUpdate")]
+        [HttpPost]
+        public IHttpActionResult TaskUpdate(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                try
+                {
+                    UpdateTaskManagement task = requestParams.ToObject<UpdateTaskManagement>();
+                    task.Param_CompID = identity.CompId;
+                    task.Param_UserID = Convert.ToInt32(identity.UserID);
+
+                    var ds = TaskBL.TaskUpdate(task);
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+
 
     }
 }

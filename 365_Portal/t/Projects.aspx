@@ -4,12 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <style>
-        .task-item {
+        .Project_items_Name {
             cursor: pointer !important;
-        }
-
-        .customactive {
-            background-color: aqua !important;
         }
     </style>
     <div class="container-fluid">
@@ -17,7 +13,7 @@
             <div class="col-10 offset-2">
                 <div class="row">
                     <div class="col-auto mr-auto" id="contentTitle">
-                        <h5 id="headingProjectName" class="content-title"><i class="fas fa-tasks"></i>Website Redesign</h5> 
+                        <h5 id="headingProjectName" class="content-title"></h5>
                     </div>
                     <div class="col-auto">
                         <a class="content-activity d-none"><i class="far fa-folder"></i>File</a>
@@ -367,7 +363,7 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group input-validation-subtaskdiv">
                                 <label for="txtAddSubTask">Add Sub Task</label>
-                                <textarea class="form-control required" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
+                                <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
                                 <input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />
                             </div>
                             <div id="cblist">
@@ -380,10 +376,9 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <div class="custom-file icon">
-                                    <input type="file" class="custom-file-input required" id="fileAttachment" onchange="encodeImagetoBase64(this)">
+                                    <input type="file" class="custom-file-input" id="fileAttachment" onchange="encodeImagetoBase64(this)">
                                     <label class="custom-file-label" for="fileAttachment" id="lblfileAttachment">Add attachment</label>
                                 </div>
-
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 mb-3">
@@ -391,9 +386,20 @@
                                 <label for="txtAddPrivateNotes">Add Private Notes</label>
                                 <textarea class="form-control required" placeholder="Add Private Notes" id="txtAddPrivateNotes"></textarea>
                                 <div class="w-100"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="txtTaskComments">Comments</label>
+                                <textarea class="form-control" placeholder="Comments" id="txtTaskComments"></textarea>
+                                <div class="w-100"></div>
                                 <div class="col-12 col-sm-12 mt-4 text-right">
                                     <a class="btn bg-yellow" onclick="SaveUpdateTask(this)">Submit</a>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group" id="taskCommentHistory">
                             </div>
                         </div>
                     </div>
@@ -405,14 +411,14 @@
         var accessToken = '<%=Session["access_token"]%>';
         var prevTitle = '';
         var base64UserProfileString = "";
-        var ProjectID;
+        var ProjectID = "";
 
 
         $(document).ready(function () {
             var userlistAPIdata = call_ajaxfunction("../api/User/GetUserlist", "POST");
             BindTeamMembers(userlistAPIdata)
             BindProjects();
-            BindTeam();
+            //BindTeam(userlistAPIdata);
             //BindCards();
             BindAssignee(userlistAPIdata);
 
@@ -422,34 +428,24 @@
             });
 
             $('#dvDueDate').on('dp.change', function (event) {
-                var formatted_date = event.date.format('DD/MM/YYYY hh:mm');
+                var formatted_date = event.date.format('DD/MM/YYYY hh:mm a');
                 $('#txtDueDate').val(formatted_date);
             });
 
             $('#btnSave').click(function () {
                 var subtasname = $('#txtAddSubTask').val();
                 if (subtasname != null && subtasname != "") {
-                    addCheckbox();
+                    addCheckbox(subtasname);
                 }
                 else {
                     Swal.fire({
                         title: "Error",
-                        text: "Sub Task Name is required",
+                        text: "Sub Task is required",
                         icon: "error",
                         button: "Ok",
                     });
                 }
             });
-
-            $('li.Project_items').on('click', function () {
-                onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
-                $(this).parent().find('li.customactive').removeClass('customactive');
-                $(this).addClass('customactive');
-                $("#headingProjectName").text($(this).text());
-                ProjectID = $(this).attr("id");
-                BindCards();
-            });
-
         });
 
         function onOpenTaskInfoModal() {
@@ -470,11 +466,11 @@
             jsonStatusList.push({ StatusID: 1, Status: "To Do" });
             jsonStatusList.push({ StatusID: 2, Status: "In Progress" });
             jsonStatusList.push({ StatusID: 3, Status: "Done" });
-
+            /// alert(ProjectID);
             var requestParams = {
                 t_Action: "1"
                 , t_ProjectID: ProjectID
-                , t_CompID: "1"
+                , t_CompID: "0"
                 , t_TaskID: "0"
                 , t_TaskName: ""
                 , t_TaskSummary: ""
@@ -498,63 +494,50 @@
 
             var cardHtml = '';
             $.each(jsonStatusList, function (indxStatus, objStatus) {
-
                 // if (jsonTaskList != null && jsonTaskList.Data.length > 0) {
-
                 var statusWiseTaskList = $.grep(jsonTaskList.Data, function (n) {
                     return n.Status === objStatus.StatusID;
                 });
+                // Repeat Status
+                cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
+                cardHtml += '<div class="card shadow">';
+                cardHtml += '<div class="card-body">';
+                cardHtml += '<div class="row">';
+                cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
+                cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
+                cardHtml += '</div>';
+                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '">';
+                if (statusWiseTaskList.length > 0) {
+                    // Repeat Tasks
+                    $.each(statusWiseTaskList, function (indxTask, objTask) {
 
-                    // Repeat Status
-                    cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
-                    cardHtml += '<div class="card shadow">';
-                    cardHtml += '<div class="card-body">';
-                    cardHtml += '<div class="row">';
-                    cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
-                    cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
-                    cardHtml += '</div>';
+                        var duedate = new Date(objTask.DueDate);
 
-                    cardHtml += '<ol class="col-12 section-sorting">';
-                    if (statusWiseTaskList.length > 0) {
-
-                        // Repeat Tasks
-                        $.each(statusWiseTaskList, function (indxTask, objTask) {
-                            cardHtml += '<li class="col-12 mb-2 sortable-item">';
-                            cardHtml += '<div class="wr-content">';
-                            cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
-                            cardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYProjectId(' + objTask.TaskID + ')"></i>|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i></div></div>';
-                            cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
-                            cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
-                            cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
-                            cardHtml += '</div>';
-                            cardHtml += '</div>';
-                            cardHtml += '</li>';
-
-
-
-                            //cardHtml += '<li class="col-12 mb-2 sortable-item">';
-                            //cardHtml += '<div class="wr-content"> <i style="cursor: pointer;" onclick="BindTaskDetailsBYProjectId(' + objTask.TaskID + ')">Edit</i>|<i style="cursor: pointer;" href="" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');">Delete</i>   ';
-                            //cardHtml += '<div class="wr-content-title mb-2"> ' + objTask.TaskName + '</div>';
-                            //cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
-                            //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
-                            //cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
-                            //cardHtml += '</div>';
-                            //cardHtml += '</div>';
-                            //cardHtml += '</li>';
-                        });
-                    }
-                    else {
-                        cardHtml += '<div class="col-12 text-center"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
-                    }
-                    cardHtml += ' </ol>';
-                    cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    cardHtml += '</div>';
-                    cardHtml += '</div>';
-                    cardHtml += '</div>';
-                    cardHtml += '</div>';
-                    cardHtml += '</div>';
-                    }
+                        cardHtml += '<li class="col-12 mb-2 sortable-item">';
+                        cardHtml += '<div class="wr-content">';
+                        cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
+                        cardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYTaskId(' + objTask.TaskID + ')"></i>|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i></div></div>';
+                        cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
+                        cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
+                        //cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
+                        cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a");; + '</span></div>';
+                        cardHtml += '</div>';
+                        cardHtml += '</div>';
+                        cardHtml += '</li>';
+                    });
+                }
+                else {
+                    cardHtml += '<div class="col-12"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
+                }
+                cardHtml += ' </ol>';
+                cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
+                cardHtml += '</div>';
             });
+
 
             $("#dvWebsiteRedesign").empty().html(cardHtml);
 
@@ -566,6 +549,7 @@
                 // animation on drop
                 onDrop: function ($item, container, _super) {
                     _super($item, container);
+                    UpdtaeTaskStatus(0, 0, 0);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -603,39 +587,57 @@
             $("#spnOpenTasksCount").html(Opentaskscount);
         }
 
-        function BindTeam() {
+        function BindTeam(projectId) {
+
+            var requestParams = {
+                p_Action: "1"
+                , p_CompID: "0"
+                , p_ProjectID: projectId
+                , p_ProjectName: ""
+                , p_ProjectGoal: ""
+                , p_UserId: "0"
+                , p_ProjectMembers_UserIds: ""
+            };
+
+            var jsonProjecAssignees = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams)).Data.Data1;
 
             // Ajax Call
             var jsonTeam = [];
-            jsonTeam.push({ GroupID: 1, GroupName: "Team 1" });
-            jsonTeam.push({ GroupID: 2, GroupName: "Team 2" });
-            jsonTeam.push({ GroupID: 3, GroupName: "Team 3" });
+            jsonTeam.push({ Id: 1, TeamName: "Team 1" });
+            jsonTeam.push({ Id: 2, TeamName: "Team 2" });
+            jsonTeam.push({ Id: 3, TeamName: "Team 3" });
 
             var jsonTeamMembers = [];
-            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
-            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
-            jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
-            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
-            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
-            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
-            jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
-            jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
-            jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
+            jsonTeamMembers = jsonProjecAssignees;
+            //jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            //jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            //jsonTeamMembers.push({ GroupID: 1, Name: "userName 1" });
+            //jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            //jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            //jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            //jsonTeamMembers.push({ GroupID: 2, Name: "userName 2" });
+            //jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
+            //jsonTeamMembers.push({ GroupID: 3, Name: "userName 3" });
 
             var teamHtml = '';
             teamHtml += '<li class="list-group-item task-title">Teams</li>';
             // jsonTeam = [];
             if (jsonTeam.length > 0) {
                 $.each(jsonTeam, function (indxTeam, objTeam) {
-                    teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.GroupName + '';
-                    teamHtml += '<span>';
 
-                    var groupWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
-                        return n.GroupID === objTeam.GroupID;
+                    var TeamWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
+                        return n.Id === objTeam.Id;
                     });
 
-                    $.each(groupWiseMembers, function (indxMember, objMember) {
-                        teamHtml += '<img class="task-user-icon" src="../INCLUDES/Asset/images/profile.png" />';
+                    //var MembersWiseTeam = $.grep(jsonTeam, function (n, i) {
+                    //    return n.Id === objTeam.Id;
+                    //});
+
+                    teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
+                    teamHtml += '<span>';
+
+                    $.each(TeamWiseMembers, function (indxMember, objMember) {
+                        teamHtml += '<img class="task-user-icon" src="../INCLUDES/Asset/images/profile.png"  title="' + objMember.FirstName + ' ' + objMember.LastName + '"/>';
                     });
                     teamHtml += '</span>';
                     teamHtml += '</li>';
@@ -644,7 +646,7 @@
             else {
                 teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">No Team Found';
             }
-            teamHtml += '<li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>';
+            //teamHtml += '<li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>';
             $("#ulTeam").empty().html(teamHtml);
         }
 
@@ -662,7 +664,7 @@
             }
         }
 
-        function BindTaskDetailsBYProjectId(TaskId) {
+        function BindTaskDetailsBYTaskId(TaskId) {
             ClearTaskForm();
             var requestParams = {
                 t_Action: "1"
@@ -688,38 +690,57 @@
             if (jsonTaskdetails.Data != null && jsonTaskdetails.Data.length > 0) {
 
                 $("#hdnTaskId").val(jsonTaskdetails.Data[0].TaskID);
-                $("#txtTaskName").val(jsonTaskdetails.Data[0].TaskName)
-                $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary)
-                $("#txtDueDate").val(jsonTaskdetails.Data[0].DueDate)
+                $("#txtTaskName").val(jsonTaskdetails.Data[0].TaskName);
+                $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary);
+                var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
+                $("#txtDueDate").val(moment(dateTime).format("DD/MM/YYYY HH:mm a")); 
                 $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes)
                 $('#ddlStatus').val(jsonTaskdetails.Data[0].Status);
                 $('#ddlStatus').select2().trigger('change');
 
                 if (jsonTaskdetails.Data1 != null && jsonTaskdetails.Data1.length > 0) {
-                    $('#ddlAddAssignee').val(null).trigger('change');
-                    var ddlProjectMembers = $('#ddlAddAssignee');
-                    $.each(jsonTaskdetails.Data1, function (indxMember, objMember) {
-                        var option = new Option(objMember.FirstName + " " + objMember.LastName, objMember.UserID, true, true);
-                        ddlProjectMembers.append(option).trigger('change');
-                    });
+                    if (jsonTaskdetails.Data1[0].Message == null) {
+                        $('#ddlAddAssignee').val(null).trigger('change');
+                        var ddlProjectMembers = $('#ddlAddAssignee');
+                        $.each(jsonTaskdetails.Data1, function (indxMember, objMember) {
+                            var option = new Option(objMember.FirstName + " " + objMember.LastName, objMember.UserID, true, true);
+                            ddlProjectMembers.append(option).trigger('change');
+                        });
+                    }
                 }
 
                 if (jsonTaskdetails.Data2 != null && jsonTaskdetails.Data2.length > 0) {
-                    var container = $('#cblist');
-                    container.empty();
-                    $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
-                        if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
-                            $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName }).appendTo(container);
-                            $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
-                        }
-                    });
+                    if (jsonTaskdetails.Data2[0].Message == null) {
+                        var container = $('#cblist');
+                        container.empty();
+                        $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
+                            if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
 
-                    // $("#txtAddSubTask").val(stringsubtask);
+                                var Ischecked = objsubtask.Status === 3 ? true : false;
+                                $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
+                                $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
+                            }
+                        });
+
+                        // $("#txtAddSubTask").val(stringsubtask);
+                    }
                 }
 
                 if (jsonTaskdetails.Data3 != null && jsonTaskdetails.Data3.length > 0) {
-
-                    $("#lblfileAttachment").val(jsonTaskdetails.Data3[0].FilePath);
+                    if (jsonTaskdetails.Data3[0].Message == null) {
+                        $("#lblfileAttachment").val(jsonTaskdetails.Data3[0].FilePath);
+                    }
+                }
+                if (jsonTaskdetails.Data4 != null && jsonTaskdetails.Data4.length > 0) {
+                    if (jsonTaskdetails.Data4[0].Message == null) {
+                        var container = $('#taskCommentHistory');
+                        container.empty();
+                        $.each(jsonTaskdetails.Data4, function (indx, objstatustracker) {
+                            if (objstatustracker.Comments != null && objstatustracker.Comments != "") {
+                                $('<label />', { text: objstatustracker.CreatedDate + " = " + objstatustracker.FirstName + " : " + objstatustracker.Comments }).appendTo(container);
+                            }
+                        });
+                    }
                 }
             }
 
@@ -732,6 +753,7 @@
             $("#txtTaskName").val("");
             $("#txtTopicSummary").val("");
             $("#txtAddPrivateNotes").val("");
+            $("#txtTaskComments").val("");
             $('#ddlAddAssignee').val(null).trigger('change');
             $("#txtAddSubTask").val("");
             $("#ddlStatus").val("");
@@ -740,14 +762,22 @@
         function SaveUpdateTask() {
             if (inputValidation('.input-validation-modal')) {
                 var hiddenTaskId = $("#hdnTaskId").val();
-                var duedate = new Date();
+                var duedate = $("#txtDueDate").val();
 
                 var StringSubtask = "";
                 var container = $('#cblist');
                 var inputs = container.find('input');
                 if (inputs.length > 0) {
                     $.each(inputs, function (indx, objinputs) {
-                        StringSubtask = StringSubtask + objinputs.value + "|";
+                        var chekboxtext = objinputs.value;
+                        if ($(this).prop("checked") == true) {
+                            chekboxtext = chekboxtext + "^" + "3";
+                        }
+                        else {
+                            chekboxtext = chekboxtext + "^" + "1";
+                        }
+
+                        StringSubtask = StringSubtask + chekboxtext + "|";
                     });
                 }
 
@@ -758,7 +788,7 @@
                     , t_TaskID: hiddenTaskId != null && hiddenTaskId != "" ? hiddenTaskId : "0"
                     , t_TaskName: $("#txtTaskName").val()
                     , t_TaskSummary: $("#txtTopicSummary").val()
-                    , t_DueDate: duedate
+                    , t_DueDate: moment(duedate).format("DD/MM/YYYY HH:mm:ss")
                     , t_PrivateNotes: $("#txtAddPrivateNotes").val()
                     , t_UserId: "0"
                     , t_TaskAssignees_UserIds: $("#ddlAddAssignee").val().toString() //varchar(500), #(Userids comma separated)
@@ -766,20 +796,15 @@
                     , t_FileIds: base64UserProfileString //varchar(500), #(comma separated)
                     , t_SubTasks: StringSubtask //longtext, #(delimeter | separated)
                     , t_StatusID: $("#ddlStatus").val()
-                    , t_Comments: ""
+                    , t_Comments: $("#txtTaskComments").val()
                 };
 
                 // Ajax Call
                 var userlistAPIresponse = $.parseJSON(call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams));
                 if (userlistAPIresponse.StatusCode > 0) {
+                    call_Notification(userlistAPIresponse, "caller is " + arguments.callee.caller.toString());
                     $("#modalTaskInfo").modal("hide");
                     BindCards();
-                    //Swal.fire({
-                    //    title: "Success",
-                    //    text: userlistAPIresponse.StatusDescription,
-                    //    icon: "success",
-                    //    button: "Ok",
-                    //});
                     ClearTaskForm();
                 }
             }
@@ -819,12 +844,7 @@
                     if (userlistAPIresponse.StatusCode > 0) {
                         $("#modalTaskInfo").modal("hide");
                         BindCards();
-                        //Swal.fire({
-                        //    title: "Success",
-                        //    text: userlistAPIresponse.StatusDescription,
-                        //    icon: "success",
-                        //    button: "Ok",
-                        //});
+                        call_Notification(userlistAPIresponse, "caller is " + arguments.callee.caller.toString());
                     }
                 }
             })
@@ -871,50 +891,41 @@
             };
 
             var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
-            if (projectajaxdata! = null) {
+            if (projectajaxdata != null) {
                 var jsonProjectList = $.parseJSON(projectajaxdata).Data;
 
                 var projectHtml = '';
-            projectHtml += '<li class="list-group-item task-title">Projects';
-            projectHtml += '<a onclick="onClickAddProject();" class="task-item-action"><i class="fas fa-plus c-yellow"></i></a>';
-            projectHtml += ' </li>';
+                projectHtml += '<li class="list-group-item task-title">Projects';
+                projectHtml += '<a onclick="onClickAddProject();" class="task-item-action"><i class="fas fa-plus c-yellow"></i></a>';
+                projectHtml += ' </li>';
 
                 if (jsonProjectList.Data.length > 0) {
                     $.each(jsonProjectList.Data, function (indxProject, objProject) {
-                    
-                      var activeClass = '';
-                    if (indxProject === 1) {
-                        activeClass = 'active';
-                    }
-                    
-                        if (indxProject == 0) {
-                            projectHtml += '<li class="list-group-item task-item ' + activeClass+' customactive Project_items" id=' + objProject.ProjectID + '>';
-                            projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
-                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
-
-                             projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject +'">';
-                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
-                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
-                    projectHtml += '</div></li>';
-                           
-
+                        var activeClass = '';
+                        if (ProjectID != "") {
+                            if (objProject.ProjectID == ProjectID) {
+                                activeClass = 'active';
+                                BindCards();
+                                setcontentTitle(objProject.ProjectName);
+                                BindTeam(objProject.ProjectID);
+                            }
+                        }
+                        else if (indxProject === 0) {
+                            activeClass = 'active';
                             ProjectID = objProject.ProjectID;
                             BindCards();
-                            $("#headingProjectName").text(objProject.ProjectName);
-
+                            setcontentTitle(objProject.ProjectName);
+                            BindTeam(objProject.ProjectID);
                         }
-                        else {
 
-                            projectHtml += '<li class="list-group-item task-item ' + activeClass+' customactive Project_items" id=' + objProject.ProjectID + '>';
-                            projectHtml += ' <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />' + objProject.ProjectName;
-                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject+'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
-
-                             projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject +'">';
-                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
-                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
-                    projectHtml += '</div></li>';
-                    
-                        }
+                        projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
+                        projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" >' + objProject.ProjectName + '</span>';
+                        projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+                        projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
+                        projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
+                        projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
+                        projectHtml += '</div></li>';
+                        projectHtml += '</div></li>';
                     });
                 }
                 else {
@@ -924,6 +935,22 @@
             }
 
 
+            $('span.Project_items_Name').on('click', function () {
+                onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+                $(this).parent().parent().find('li.active').removeClass('active');
+                $(this).parent().addClass('active');
+                //$("#headingProjectName").text($(this).text());
+                setcontentTitle($(this).text());
+                ProjectID = $(this).attr("id");
+                BindCards();
+                BindTeam(ProjectID);
+            });
+
+        }
+
+        function setcontentTitle(tilename) {
+            prevTitle = $('#contentTitle').html();
+            $('#contentTitle').empty().append('<h5 class="content-title">' + tilename + '</h5>')
         }
 
         function BindProjectDetailsBYProjectId(projectId) {
@@ -959,12 +986,12 @@
                     ddlProjectMembers.append(option).trigger('change');
                 });
             }
-            // toggle('dvCreateProject', 'dvWebsiteRedesign');
-            openProjectForm();
+            toggle('dvCreateProject', 'dvWebsiteRedesign');
+            setcontentTitle($("#txtProjectName").val());
         }
 
         function SaveUpdateProject() {
-
+            ShowLoader();
             if (inputValidation('.input-validation')) {
 
                 var hiddenprojectId = $("#hdnProjectId").val();
@@ -982,12 +1009,14 @@
                 // Ajax Call
 
                 var ProjectCRUDAPIData = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
-                if (data.ProjectCRUDAPIData > 0) {
-                    BindProjects();
+                if (ProjectCRUDAPIData.StatusCode > 0) {
                     ClearProjectForm();
+                    BindProjects();
                     onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+                    call_Notification(ProjectCRUDAPIData, "caller is " + arguments.callee.caller.toString());
                 }
             }
+            HideLoader();
         }
 
         function DeleteProjectBYProjectId(projectId) {
@@ -1011,17 +1040,11 @@
                         , p_UserId: "0"
                         , p_ProjectMembers_UserIds: ""
                     };
-                    var ProjectCRUDAPIData = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
-                    //if (ProjectCRUDAPIData.StatusCode > 0) {
-                    //    Swal.fire({
-                    //        title: "Success",
-                    //        text: ProjectCRUDAPIData.StatusDescription,
-                    //        icon: "success",
-                    //        button: "Ok",
-                    //    });
-                    //}
-                    BindProjects();
-                    return false;
+                    var ProjectCRUDAPIData = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
+                    if (ProjectCRUDAPIData.StatusCode > 0) {
+                        BindProjects();
+                        call_Notification(ProjectCRUDAPIData, "caller is " + arguments.callee.caller.toString());
+                    }
                 }
             })
         }
@@ -1049,26 +1072,29 @@
                 success: function (response) {
                     data = response;
                 },
-                complete: function () {
-                    //HideLoader();
-                },
                 failure: function (response) {
-                    HideLoader();
+
                     Swal.fire({
                         title: "Failure",
                         text: "Please try Again",
                         icon: "error",
                         button: "Ok",
                     });
+                },
+                complete: function () {
+                    HideLoader();
                 }
             });
-            HideLoader();
+            return data
+        }
 
-            if (data != null) {
+        function call_Notification(responsedata, callerinfo) {
+           // alert(callerinfo);
+            if (responsedata != null) {
                 var swaltitle = "";
                 var swalicon = "";
 
-                if (data.StatusCode > 0) {
+                if (responsedata.StatusCode > 0) {
                     swaltitle = "Success";
                     swalicon = "success";
                 }
@@ -1076,14 +1102,15 @@
                     swaltitle = "Error";
                     swalicon = "error";
                 }
-                Swal.fire({
-                    title: swaltitle,
-                    text: data.StatusDescription,
-                    icon: swalicon,
-                    button: "Ok",
-                });
+                if (responsedata.StatusDescription != null && responsedata.StatusDescription != "") {
+                    Swal.fire({
+                        title: swaltitle,
+                        text: responsedata.StatusDescription,
+                        icon: swalicon,
+                        button: "Ok",
+                    });
+                }
             }
-            return data
         }
 
         //Enode the file to base64
@@ -1100,7 +1127,6 @@
                         if (file.size < 25000000) {
                             var reader = new FileReader();
                             reader.onloadend = function () {
-                                // alert(reader.result);
                                 base64UserProfileString = reader.result;
                             }
                             reader.readAsDataURL(file);
@@ -1159,6 +1185,22 @@
             $('<label />', { 'for': 'cb' + id, text: name }).appendTo(container);
 
             $('#txtAddSubTask').val("");
+        }
+
+        function UpdtaeTaskStatus(ProjectID, TaskID, StatusID) {
+
+            var requestParams = {
+                Param_ProjectID: ProjectID,
+                Param_TaskID: TaskID,
+                Param_CompID: "0",
+                Param_SubTaskIds: "", //#(completed taskIds comma separated)
+                Param_StatusID: StatusID,
+                Param_Comments: "",
+                Param_UserID: "0"
+            }
+
+            //var UpdateTaskajaxdata = $.parseJSON(call_ajaxfunction("../api/Task/TaskUpdate", "POST", requestParams));
+            //call_Notification(UpdateTaskajaxdata,"caller is " + arguments.callee.caller.toString());
         }
 
     </script>

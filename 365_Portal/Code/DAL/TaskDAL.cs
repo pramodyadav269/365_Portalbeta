@@ -35,6 +35,19 @@ namespace _365_Portal.Code.DAL
             return cmd;
         }
 
+        private static MySqlCommand mySqlCommandParameters(MySqlCommand cmd, UpdateTaskManagement task)
+        {
+            cmd.Parameters.AddWithValue("Param_ProjectID", task.Param_ProjectID);
+            cmd.Parameters.AddWithValue("Param_TaskID", task.Param_TaskID);
+            cmd.Parameters.AddWithValue("Param_CompID", task.Param_CompID);
+            cmd.Parameters.AddWithValue("Param_SubTaskIds", task.Param_SubTaskIds);
+            cmd.Parameters.AddWithValue("Param_StatusID", task.Param_StatusID);
+            cmd.Parameters.AddWithValue("Param_Comments", task.Param_Comments);
+            cmd.Parameters.AddWithValue("Param_UserID", task.Param_UserID);
+            
+            return cmd;
+        }
+
         public static DataSet TaskCRUD(TaskManagement task)
         {
             DataSet ds = new DataSet();
@@ -47,6 +60,33 @@ namespace _365_Portal.Code.DAL
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd = mySqlCommandParameters(cmd, task); // setting values to the procedure parameters
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
+        public static DataSet TaskUpdate(UpdateTaskManagement updateTask)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spTM_UpdateTask";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd = mySqlCommandParameters(cmd, updateTask); // setting values to the procedure parameters
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
