@@ -337,7 +337,7 @@
         <nav class="navbar navbar-expand-sm bg-white navbar-light navbar-light justify-content-between nav-search">
             <%--<nav class="navbar fixed-top navbar-light bg-white">--%>
             <!-- Brand -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="default.aspx">
                 <img src="../INCLUDES/Asset/images/logo-black.svg" class="logo" alt="Logo">
             </a>
 
@@ -485,11 +485,11 @@
                                 <img id="imgProfileUserPic" runat="server" src="../Asset/images/profile.png" />
                                 <h5 id="lblProfileUserName" runat="server" class="profile-user-name mb-3"></h5>
                                 <div class="list-group">
-                                    <a href="#" class="list-group-item">Profile</a>
-                                    <a href="#" class="list-group-item">Settings</a>
+                                    <a href="profile.aspx" class="list-group-item">Profile</a>
+                                    <a href="settings.aspx" class="list-group-item">Settings</a>
                                     <a href="#" class="list-group-item">Favorites</a>
                                     <a href="#" class="list-group-item activity-log">Activity Log</a>
-                                    <a href="#" class="list-group-item logout">Log out</a>
+                                    <a href="#" id="menuLogout" runat="server"  onserverclick="btnLogout_Click" class="list-group-item logout">Log out</a>
                                 </div>
                             </div>
                             <%--<a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>--%>
