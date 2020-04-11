@@ -431,9 +431,10 @@ a:hover {
                         .list-group-item {
                             cursor: pointer;
                             border: none;
-                            border-radius: 0;
                             font-size: .9rem;
-                            padding: .75rem 2rem .75rem 1rem;
+                            padding: .75rem 2rem .25rem 1rem;
+                            border-top-right-radius: 0;
+                            border-bottom-right-radius: 0;
 
                             &.active {
                                 background-color: #fff;
@@ -1589,17 +1590,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             @media #{$small-and-down} {
                 padding: 2.25rem 1.25rem 0;
             }
-            /*.lesson-marker {
-                &::before {
-                    position: absolute;
-                    top: 4px;
-                    color: $yellow-color;
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    content: "\f3c5";
-                    font-size: 2rem;
-                }
-            }*/
+
             .lesson {
                 position: relative;
                 margin-left: 1rem;
@@ -1607,8 +1598,22 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 padding-left: 2.75rem;
                 border-left: 2px dashed rgba(0, 0, 0, 0.1);
 
+
                 .card {
                     cursor: pointer;
+
+                    .card-body {
+                        padding: .75rem 1.25rem;
+
+                        .card-title {
+                            font-weight: bold;
+                            margin-bottom: .25rem;
+                        }
+
+                        .card-text {
+                            color: rgba(0, 0, 0, 0.4);
+                        }
+                    }
                 }
 
                 &:first-child {
@@ -1670,15 +1675,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     content: "";
                     background: no-repeat 50%/50% 50%;
                     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-                }
-
-                .card-title {
-                    font-weight: bold;
-                    margin-bottom: .25rem;
-                }
-
-                .card-text {
-                    color: rgba(0, 0, 0, 0.4);
                 }
             }
         }

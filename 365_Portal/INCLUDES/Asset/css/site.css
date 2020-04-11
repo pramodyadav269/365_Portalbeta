@@ -320,9 +320,10 @@ a:hover {
     .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item {
       cursor: pointer;
       border: none;
-      border-radius: 0;
       font-size: .9rem;
-      padding: .75rem 2rem .75rem 1rem; }
+      padding: .75rem 2rem .25rem 1rem;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0; }
       .navbar.navbar-light.nav-menu .dropdown .dropdown-menu .list-group .list-group-item.active {
         background-color: #fff;
         color: #FAC900; }
@@ -1144,18 +1145,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-radius: .2rem; }
 
 .dashboard .course-wrapper .course-lesson {
-  padding: 3rem 1rem 2rem 4rem;
-  /*.lesson-marker {
-                &::before {
-                    position: absolute;
-                    top: 4px;
-                    color: $yellow-color;
-                    font-family: "Font Awesome 5 Free";
-                    font-weight: 900;
-                    content: "\f3c5";
-                    font-size: 2rem;
-                }
-            }*/ }
+  padding: 3rem 1rem 2rem 4rem; }
   @media only screen and (max-width: 600px) {
     .dashboard .course-wrapper .course-lesson {
       padding: 2.25rem 1.25rem 0; } }
@@ -1167,6 +1157,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     border-left: 2px dashed rgba(0, 0, 0, 0.1); }
     .dashboard .course-wrapper .course-lesson .lesson .card {
       cursor: pointer; }
+      .dashboard .course-wrapper .course-lesson .lesson .card .card-body {
+        padding: .75rem 1.25rem; }
+        .dashboard .course-wrapper .course-lesson .lesson .card .card-body .card-title {
+          font-weight: bold;
+          margin-bottom: .25rem; }
+        .dashboard .course-wrapper .course-lesson .lesson .card .card-body .card-text {
+          color: rgba(0, 0, 0, 0.4); }
     .dashboard .course-wrapper .course-lesson .lesson:first-child {
       border-left: 0; }
       .dashboard .course-wrapper .course-lesson .lesson:first-child::before {
@@ -1211,11 +1208,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       content: "";
       background: no-repeat 50%/50% 50%;
       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e"); }
-    .dashboard .course-wrapper .course-lesson .lesson .card-title {
-      font-weight: bold;
-      margin-bottom: .25rem; }
-    .dashboard .course-wrapper .course-lesson .lesson .card-text {
-      color: rgba(0, 0, 0, 0.4); }
 
 .dashboard .course-wrapper .course-content {
   position: relative;

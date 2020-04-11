@@ -25,7 +25,10 @@
                         <a class="nav-link active" id="pills-course-tab" data-toggle="pill" href="#pills-course" role="tab" aria-controls="pills-course" aria-selected="true">Course</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="pills-lesson-and-content-tab" data-toggle="pill" href="#pills-lesson-and-content" role="tab" aria-controls="pills-lesson-and-content" aria-selected="false">Lesson & Content</a>
+                        <a class="nav-link" id="pills-lesson-tab" data-toggle="pill" href="#pills-lesson" role="tab" aria-controls="pills-lesson" aria-selected="false">Lesson</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-content-tab" data-toggle="pill" href="#pills-content" role="tab" aria-controls="pills-content" aria-selected="false">Content</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="pills-resources-tab" data-toggle="pill" href="#pills-resources" role="tab" aria-controls="pills-resources" aria-selected="false">Resources</a>
@@ -136,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-lesson-and-content" role="tabpanel" aria-labelledby="pills-lesson-and-content-tab">
+                    <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
                                 <div class="col-12 col-sm-12">
@@ -157,19 +160,6 @@
                                                         <small id="txtLearningObjectivesHelp" class="form-text">Keep your description brief but compelling
                                                     <span class="float-right">0 / 200</span>
                                                         </small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Content Header *" maxlength="200" id="txtContentHeader" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div id="txtContentDescription"></div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="form-group mt-2">
-                                                        <a class="label"><i class="fas fa-plus-circle"></i>Add Content</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -193,6 +183,35 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-0">
+                                <div class="col-12 col-sm-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-12 mt-3">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Content Header *" maxlength="200" id="txtContentHeader" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div id="txtContentDescription"></div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group mt-2">
+                                                        <a class="label"><i class="fas fa-plus-circle"></i>Add Content</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="tab-pane fade" id="pills-resources" role="tabpanel" aria-labelledby="pills-resources-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
@@ -282,6 +301,8 @@
                     $('#btnNextTab').text('Add Lesson');
                 } else if ((e.target.id).indexOf("lesson") !== -1) {
                     $('#btnAddMoreLesson').removeClass('d-none');
+                    $('#btnNextTab').text('Add Content');
+                } else if ((e.target.id).indexOf("content") !== -1) {
                     $('#btnNextTab').text('Add Resources');
                 } else if ((e.target.id).indexOf("resources") !== -1) {
                     $('#btnNextTab').text('Add Quiz');
