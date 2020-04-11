@@ -28,22 +28,20 @@ namespace _365_Portal.ControllersReOrderContent
                 if (identity != null)
                 {
                     if ((
-                        !string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()) && !string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CourseCategory"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["Accessibility"].ToString())
+                        !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicTitle"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicDescription"]))
+                        //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseCategory"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["CategoryColor"]))
+                        //&& !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                        //&& !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                        //&& !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Accessibility"]))
                         ))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
-                        //if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()))
-                        //{
-                        //    content.TopicID = Convert.ToInt32(requestParams["TopicID"]);
-                        //}
+
                         if (!string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()))
                         {
                             content.TopicTitle = requestParams["TopicTitle"].ToString();
@@ -61,10 +59,10 @@ namespace _365_Portal.ControllersReOrderContent
                             content.TopicDescription = null;
                         }
 
-                        if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
-                        {
-                            content.IsPublished = (bool)requestParams["IsPublished"];
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
+                        //{
+                        //    content.IsPublished = (bool)requestParams["IsPublished"];
+                        //}
                         if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
@@ -95,22 +93,22 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.CategoryColor = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
-                        {
-                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
-                        {
-                            content.CourseTime = requestParams["CourseTime"].ToString();
-                        }
-                        else
-                        {
-                            content.CourseTime = null;
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
-                        {
-                            content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        //{
+                        //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        //}
+                        //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        //{
+                        //    content.CourseTime = requestParams["CourseTime"].ToString();
+                        //}
+                        //else
+                        //{
+                        //    content.CourseTime = null;
+                        //}
+                        //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
+                        //{
+                        //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
+                        //}
                         if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
                         {
                             content.Accessibility = Convert.ToInt32(requestParams["Accessibility"].ToString());
@@ -140,8 +138,6 @@ namespace _365_Portal.ControllersReOrderContent
                                 content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
                             }
                         }
-
-
 
                         var ds = ContentBL.CreateTopic(content);
 
@@ -208,14 +204,16 @@ namespace _365_Portal.ControllersReOrderContent
                 if (identity != null)
                 {
 
-                    if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()) && !string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()) &&
-                        !string.IsNullOrEmpty(requestParams["IsPublished"].ToString()) && !string.IsNullOrEmpty(requestParams["SrNo"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CourseCategory"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CategoryColor"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["Points"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
-                        && !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicTitle"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicDescription"]))
+                        //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString()) 
+                        && !string.IsNullOrEmpty(requestParams["SrNo"].ToString())
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseCategory"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["CategoryColor"]))
+                        //&& !string.IsNullOrEmpty(requestParams["Points"].ToString())
+                        //&& !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
+                        //&& !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
                         && !string.IsNullOrEmpty(requestParams["Accessibility"].ToString())
                         )
                     {
@@ -225,10 +223,6 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.TopicID = Convert.ToInt32(requestParams["TopicID"]);
                         }
-                        //if (!string.IsNullOrEmpty(requestParams["UserID"].ToString()))
-                        //{
-                        //    content.UserIDs = requestParams["UserID"].ToString();
-                        //}
                         if (!string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()))
                         {
                             content.TopicTitle = requestParams["TopicTitle"].ToString();
@@ -245,11 +239,10 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.TopicDescription = null;
                         }
-                        //content.TopicOverview = requestParams["TopicOverview"].ToString();
-                        if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
-                        {
-                            content.IsPublished = (bool)requestParams["IsPublished"];
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
+                        //{
+                        //    content.IsPublished = (bool)requestParams["IsPublished"];
+                        //}
                         if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
@@ -280,23 +273,23 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.CategoryColor = null;
                         }
-                        if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
-                        {
-                            content.Points = Convert.ToDouble(requestParams["Points"].ToString());
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
-                        {
-                            content.CourseTime = requestParams["CourseTime"].ToString();
-                        }
-                        else
-                        {
-                            content.CourseTime = null;
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                        //{
+                        //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                        //}
+                        //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                        //{
+                        //    content.CourseTime = requestParams["CourseTime"].ToString();
+                        //}
+                        //else
+                        //{
+                        //    content.CourseTime = null;
+                        //}
 
-                        if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
-                        {
-                            content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
-                        }
+                        //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
+                        //{
+                        //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
+                        //}
 
                         if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
                         {
@@ -1830,5 +1823,65 @@ namespace _365_Portal.ControllersReOrderContent
             }
             return new APIResult(Request, data);
         }
+
+
+
+
+        [HttpPost]
+        [Route("API/Content/MasterAdd")]
+        public IHttpActionResult MasterAdd(JObject requestParams)
+        {
+            var data = string.Empty;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Title"])) && !string.IsNullOrEmpty(Convert.ToString(requestParams["type"])))
+                    {                        
+                        string Title = requestParams["Title"].ToString();
+                        string type = requestParams["type"].ToString();
+                        string Description = Convert.ToString(requestParams["Description"]);
+
+                        var ds = UserBL.MasterCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, true, type);
+                        if (ds != null && ds.Tables.Count > 0)
+                        {                            
+                            if (ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
+                            {
+                                data = Utility.ConvertDataSetToJSONString(ds);
+                                data = Utility.Successful(data);
+                            }
+                            else
+                            {
+                                data = ds.Tables[0].Rows[0]["ReturnMessage"].ToString();
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
+
     }
 }
