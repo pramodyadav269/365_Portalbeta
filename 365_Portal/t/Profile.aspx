@@ -4,11 +4,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div class="theme-section position-absolute">
-        <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
+    <div class="theme-section">
+        <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
     </div>
     
-    <div class="container profile">
+    <div class="container profile profile-section">
         <section>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-7 col-lg-8">
@@ -619,7 +619,7 @@
             $(el).find('.contact-info').removeClass('d-none');
             $(el).find('.contact-input').addClass('d-none');
 
-            clearFields(el);
+            //clearFields(el);
         }
         
         function GetProfileFromProfilePage(flag)
@@ -1129,7 +1129,7 @@
                         base64UserProfileString = reader.result;
                     }
                     reader.readAsDataURL(file);
-
+                    ShowLoader();
                     var getUrl = "/API/User/UpdateProfilePic";
                     var jsonResult = { UserProfileImageBase64: base64UserProfileString };
 

@@ -11,13 +11,13 @@
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" onclick="Save('.tab-pane.active');">Save</a>
+                    <a class="btn btn-yellow" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
                 <div class="progress">
                     <%--<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--%>
-                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" id="divProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
                     <li class="nav-item">
@@ -103,7 +103,7 @@
                                                     <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
                                                     <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
                                                     <div class="custom-file">
-                                                        <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')"><%--onchange="readURL(this, '.logo-img');"--%>
+                                                        <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
                                                     </div>
                                                 </div>
                                                 <div class="logo-img"></div>
@@ -119,6 +119,15 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="col-12 col-sm-12 col-md-9">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-black" data-toggle="modal" data-target="#modalAddTag">
+                                                      Add More Tags
+                                                    </button>
+                                                </div>
+                                            </div>
+
                                             <%--<div class="col-sm-12 mt-4 course-tag">
                                                 <div class="form-group chip-input">
                                                     <label><i class="fas fa-plus-circle black"></i>Tags</label>
@@ -186,9 +195,45 @@
             </div>
 
             <div class="col-12 col-sm-12 mt-3">
-                <a id="btnAddLesson" style="display:none" class="btn btn-black float-right">Add Lesson</a>
+                <a id="btnAddLesson" onclick="AddCourseFromLesson('.tab-pane.active');" class="btn btn-black float-right">Add Lesson</a>
             </div>
         </div>
+
+
+        <%--Modal popup region--%>
+        
+        <div class="modal fade" id="modalAddTag" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Add Tag</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12 mt-3">
+                                <div class="form-group">
+                                    <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
+                                    <small id="txtTagNameHelp" class="form-text">Add tag name
+                                        <span class="float-right">0 / 100</span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" onclick="AddTag();" class="btn btn-primary">Add</button>
+                        <%--<a id="btnAddTag" onclick="AddTag();" class="btn btn-primary">Add</a>--%>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%--End Modal popup region--%>
+
     </div>
 
     <script>
@@ -196,6 +241,8 @@
         var accessToken = '<%=Session["access_token"]%>';
         var CourseFlag = '0';
         var LessonFlag = '0';
+        var ResourceFlag = '0';
+        var QuizFlag = '0';
 
         $(document).ready(function () {
             debugger
@@ -325,13 +372,13 @@
             return true;
         }
 
-        function Save(el) {
+        function SaveAsDraft(el) {
 
             var active_button = $('#pills-tabContent div#pills-course');
             var activeTabID = $(active_button).attr('id');
 
             if (activeTabID == 'pills-course') {
-                AddCourse();
+                AddCourse('redirect');
             }            
             else if (activeTabID == 'pills-lesson-and-content') {
 
@@ -358,6 +405,11 @@
             //$(el).find('.logo-img').html('<img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />')           
         }
 
+        function AddCourseFromLesson()
+        {
+            AddCourse('samepage');
+        }
+
         function editCourseLogo(el) {
             $(el).find('label .svg-inline--fa').show();
             $(el).find('.custom-file').show();
@@ -381,7 +433,7 @@
             selectInit('#ddlTags ', 'Select Tag');
         }
 
-        function AddCourse() {
+        function AddCourse(flag) {
             debugger
             var getUrl;
             var requestParams;            
@@ -455,30 +507,45 @@
                         success: function (response) {
                             try {
                                 if (response != null) {
+                                    debugger
                                     var DataSet = $.parseJSON(response);
                                     if (DataSet != null && DataSet != "") {
                                         if (DataSet.StatusCode == "1")
                                         {
-                                            HideLoader();                                            
-                                            if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '')
+                                            if (flag == 'redirect')
                                             {
-                                                CourseFlag = DataSet.Data[0].InsertedID;
-                                                $("#btnAddLesson").show();
+                                                Swal.fire({
+                                                    title: "Success",
+                                                    text: DataSet.Data[0].ReturnMessage,
+                                                    icon: "success"
+                                                    }).then((value) => {
+                                                        if (value) {
+                                                            document.location = 'Dashboard.aspx';
+                                                        }
+                                                    });
                                             }
+                                            else if (flag == 'samepage') {
+                                                HideLoader();
+                                                if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                                    CourseFlag = DataSet.Data[0].InsertedID;
+                                                }
 
-                                            ClearFieldsAddCourse();
+                                                SetProgressBar();
+                                                ClearFieldsAddCourse();
 
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.StatusDescription,
-                                                icon: "success"
-                                            });
-                                            //}).then((value) => {
-                                            //    if (value) {
-                                            //        toggle('divGird', 'divForm');
-                                            //        View();
-                                            //    }
-                                            //});
+                                                Swal.fire({
+                                                    title: "Success",
+                                                    text: DataSet.Data[0].ReturnMessage,
+                                                    icon: "success"
+                                                });
+                                            }
+                                            else {
+                                                Swal.fire({
+                                                    title: "Failure",
+                                                    text: "Oops! Something went wrong. Please try again",
+                                                    icon: "error"
+                                                });
+                                            }                                            
                                         }
                                         else {
                                             HideLoader();
@@ -541,6 +608,23 @@
 
                     });
                 }
+            }
+        }
+
+        function SetProgressBar()
+        {
+            if (CourseFlag != '0' && LessonFlag == '0' && ResourceFlag == '0' && QuizFlag == '0')
+            {
+                $("#divProgressBar").css("width", "25%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag == '0' && QuizFlag == '0') {
+                $("#divProgressBar").css("width", "50%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag != '0' && QuizFlag == '0') {
+                $("#divProgressBar").css("width", "75%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag != '0' && QuizFlag != '0') {
+                $("#divProgressBar").css("width", "100%");
             }
         }
 
@@ -635,6 +719,126 @@
             }
 
         }
+
+        function AddTag()
+        {
+            var getUrl;
+            var requestParams;
+            ShowLoader();
+            if ($('#txtTagName').val() != '' && $('#txtTagName').val() != undefined)
+            {
+                var _Title = $('#txtTagName').val();
+                var _Description = '';
+
+                var getUrl = "/API/Content/MasterAdd";
+                var requestParams = { Title: _Title, Description: _Description, type:'tag' };
+
+                try {
+                    $.ajax({
+                        type: "POST",
+                        url: getUrl,
+                        headers: { "Authorization": "Bearer " + accessToken },
+                        data: JSON.stringify(requestParams),
+                        contentType: "application/json",
+                        success: function (response) {
+                            try {
+                                if (response != null) {
+                                    var DataSet = $.parseJSON(response);
+                                    debugger
+                                    HideLoader();
+                                    if (DataSet.StatusCode == "1")
+                                    {
+                                        if (DataSet.Data.Data1 != undefined)
+                                        {
+                                            var Tags = DataSet.Data.Data1;
+                                            if (Tags != undefined && Tags.length > 0) {
+                                                $('#ddlTags').empty().append('<option></option>');
+                                                for (var i = 0; i < Tags.length; i++) {
+                                                    $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
+                                                }
+                                                selectInit('#ddlTags', 'Select Tag');
+                                            }
+                                        }
+
+                                        $('#txtTagName').val();
+                                        
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: DataSet.Data.Data[0].ReturnMessage,
+                                            icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+                                                $('#modalAddTag').modal('toggle');
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        HideLoader();
+                                        Swal.fire({
+                                            title: "Failure",
+                                            text: DataSet.Data.Data[0].ReturnMessage,
+                                            icon: "error",
+                                            button: "Ok",
+                                        });
+                                    }
+                                }
+                                else {
+                                    HideLoader();
+                                    Swal.fire({
+                                        title: "Failure",
+                                        text: "Please try Again",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+
+                                }
+                            }
+                            catch (e) {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: "Please try Again",
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                            }
+                        },
+                        complete: function () {
+                            HideLoader();
+                        },
+                        failure: function (response) {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error",
+                                button: "Ok",
+                            });
+                        }
+                    });
+                }
+                catch (e) {
+                    HideLoader();
+                    Swal.fire({
+                        title: "Alert",
+                        text: "Oops! An Occured. Please try again",
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+            }
+            else {
+                HideLoader();
+                Swal.fire({
+                    title: "Alert",
+                    text: "Fill tag name",
+                    icon: "error",
+                    button: "Ok",
+                });
+            }
+        }
+
+
 
 
     </script>

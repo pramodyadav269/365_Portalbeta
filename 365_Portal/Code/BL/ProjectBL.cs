@@ -25,6 +25,7 @@ namespace _365_Portal.Code.BL
             catch (Exception ex)
             {
                 Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw ex;
             }
             return ds;
         }

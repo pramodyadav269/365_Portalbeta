@@ -895,9 +895,12 @@
     <Content Include="INCLUDES\Asset\images\survey.png" />
     <Content Include="INCLUDES\Asset\images\target.png" />
     <Content Include="INCLUDES\Asset\images\text-icon.svg" />
-    <Content Include="INCLUDES\Asset\images\theme1.png" />
-    <Content Include="INCLUDES\Asset\images\theme1_1.png" />
-    <Content Include="INCLUDES\Asset\images\theme2.jpg" />
+    <Content Include="INCLUDES\Asset\images\theme_nature.svg" />
+    <Content Include="INCLUDES\Asset\images\theme_nature_header_profile.svg" />
+    <Content Include="INCLUDES\Asset\images\theme_nature_header.svg" />
+    <Content Include="INCLUDES\Asset\images\theme_sport.svg" />
+    <Content Include="INCLUDES\Asset\images\theme_sport_header_profile.svg" />
+    <Content Include="INCLUDES\Asset\images\theme_sport_header.svg" />
     <Content Include="INCLUDES\Asset\images\up-arrow.png" />
     <Content Include="INCLUDES\Asset\images\us.png" />
     <Content Include="INCLUDES\Asset\images\user.png" />
