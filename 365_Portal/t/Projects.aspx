@@ -7,6 +7,7 @@
         .Project_items_Name {
             cursor: pointer !important;
         }
+        /*current code*/
     </style>
     <div class="container-fluid">
         <div class="row pt-4 pb-4">
@@ -364,19 +365,21 @@
                             <div class="form-group input-validation-subtaskdiv" id="divSubtask">
                                 <label for="txtAddSubTask">Add Sub Task</label>
                                 <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
-                                <input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />
+                                <%--<input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />--%>
+                                <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add Sub Task</a>
                             </div>
-                            <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add Sub Task</a>
                         </div>
-
-                        <div class="col-12 col-sm-12 mb-3" id="cblist">
+                        <label for="cblist">Sub Task(s)</label><br />
+                        <div id="cblist">
                         </div>
-
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <div class="custom-file icon" id="divfileAttachment">
                                     <input type="file" class="custom-file-input" id="fileAttachment" onchange="encodeImagetoBase64(this)">
                                     <label class="custom-file-label" for="fileAttachment" id="lblfileAttachment">Add attachment</label>
+                                </div>
+                                <div class="custom-file icon" id="divfileAttachmentDownload">
+                                    <a id="linkFileDownload" target="_blank"></a>
                                 </div>
                             </div>
                         </div>
@@ -517,24 +520,24 @@
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.StatusName + '</h5>';
                 cardHtml += '</div>';
-                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '" status_id="' + objStatus.StatusID + '">';
+                cardHtml += '<ol class="col-12 section-sorting" status_id="' + objStatus.StatusID + '">';
                 if (statusWiseTaskList.length > 0) {
                     // Repeat Tasks
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
 
                         var duedate = new Date(objTask.DueDate);
 
-                        cardHtml += '<li class="col-12 mb-2 sortable-item">';
+                        cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         cardHtml += '<div class="wr-content">';
                         cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
                         cardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYTaskId(' + objTask.TaskID + ')"></i>';
                         if (Role != "enduser") {
-                           cardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i>';
-                             }
+                            cardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i>';
+                        }
                         cardHtml += '</div></div>';
                         cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
-                          var requestParams = {
+                        var requestParams = {
                             t_Action: "1"
                             , t_ProjectID: ProjectID
                             , t_CompID: "0"
@@ -551,7 +554,6 @@
                             , t_StatusID: "0"
                             , t_Comments: ""
                         };
-
                         var Taskajaxdata = call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams);
                         var jsonTaskdetails = $.parseJSON(Taskajaxdata).Data;
                         if (jsonTaskdetails.Data1 != null && jsonTaskdetails.Data1.length > 0) {
@@ -560,7 +562,7 @@
 
                                     var profilepicpath = '';
                                     if (objMember.FilePath != null && objMember.FilePath != "") {
-                                        profilepicpath = '../Files/ProfilePic / ' + objMember.FilePath;
+                                        profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
                                     } else {
                                         profilepicpath = "../INCLUDES/Asset/images/profile.png";
                                     }
@@ -568,9 +570,6 @@
                                 });
                             }
                         }
-                        //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
-                       
-                        //cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
                         cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a");; + '</span></div>';
                         cardHtml += '</div>';
                         cardHtml += '</div>';
@@ -602,11 +601,12 @@
                 // animation on drop
                 onDrop: function ($item, container, _super) {
                     _super($item, container);
-
                     // added by imtiyaz (statusId)
                     var statusId = container.el.attr('status_id');
-
-                    UpdtaeTaskStatus(0, 0, statusId);
+                    var ProjectId = $item.attr('project_Id');
+                    var taskId = $item.attr('task_Id');
+                    //alert(statusId);
+                    UpdtaeTaskStatus(ProjectId, taskId, statusId);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -665,7 +665,7 @@
             //jsonTeam.push({ Id: 3, TeamName: "Team 3" });
 
             var jsonTeamMembers = [];
-            jsonTeamMembers = $.parseJSON(jsonProjecAssignees).Data.Data1;
+            jsonTeamMembers = jsonProjecAssignees;
 
             var teamHtml = '';
             teamHtml += '<li class="list-group-item task-title">Teams</li>';
@@ -704,7 +704,7 @@
             $("#ulTeam").empty().html(teamHtml);
         }
 
-         function BindAssignee(projectId) {
+        function BindAssignee(projectId) {
 
             var requestParams = {
                 p_Action: "1"
@@ -795,6 +795,11 @@
                 if (jsonTaskdetails.Data3 != null && jsonTaskdetails.Data3.length > 0) {
                     if (jsonTaskdetails.Data3[0].Message == null) {
                         $("#lblfileAttachment").val(jsonTaskdetails.Data3[0].FilePath);
+                        // $(this).attr("href", newUrl);
+                        newUrl = '../Files/Task/' + jsonTaskdetails.Data3[0].FilePath;
+                        $("#linkFileDownload").attr("href", newUrl);
+                        $("#linkFileDownload").text(jsonTaskdetails.Data3[0].FilePath);
+
                     }
                 }
                 if (jsonTaskdetails.Data4 != null && jsonTaskdetails.Data4.length > 0) {
@@ -823,7 +828,7 @@
             $('#ddlAddAssignee').val(null).trigger('change');
             $("#txtAddSubTask").val("");
             $("#ddlStatus").val("");
-             var container = $('#cblist');
+            var container = $('#cblist');
             container.empty();
         }
 
@@ -978,7 +983,7 @@
                                 BindCards();
                                 setcontentTitle(objProject.ProjectName);
                                 BindTeam(objProject.ProjectID);
-                                  BindAssignee(ProjectID);
+                                BindAssignee(ProjectID);
                             }
                         }
                         else if (indxProject == 0) {
@@ -987,15 +992,15 @@
                             BindCards();
                             setcontentTitle(objProject.ProjectName);
                             BindTeam(objProject.ProjectID);
-                              BindAssignee(ProjectID);
+                            BindAssignee(ProjectID);
                         }
 
                         projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
                         projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" >' + objProject.ProjectName + '</span>';
-  if (Role != "enduser") {
+                        if (Role != "enduser") {
                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
                         }
-                       
+
                         projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
                         projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
                         projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
@@ -1263,6 +1268,7 @@
         }
 
         function UpdtaeTaskStatus(ProjectID, TaskID, StatusID) {
+            //Param_CompID, Param_UserID, Param_TaskID, Param_StatusID, Param_Comments
 
             var requestParams = {
                 Param_ProjectID: ProjectID,
@@ -1274,8 +1280,11 @@
                 Param_UserID: "0"
             }
 
-            //var UpdateTaskajaxdata = $.parseJSON(call_ajaxfunction("../api/Task/TaskUpdate", "POST", requestParams));
-            //call_Notification(UpdateTaskajaxdata,"caller is " + arguments.callee.caller.toString());
+            var UpdateTaskajaxdata = $.parseJSON(call_ajaxfunction("../api/Task/TaskUpdate", "POST", requestParams));
+            if (UpdateTaskajaxdata.StatusCode > 0) {
+                BindCards();
+                //call_Notification(UpdateTaskajaxdata, "caller is " + arguments.callee.caller.toString());
+            }
         }
 
         function RoleWaiseHideControls() {
@@ -1285,7 +1294,9 @@
             $('#ddlAddAssignee').attr('readonly', true);
             $("#txtAddPrivateNotes").attr('readonly', true);
             $("#divSubtask").hide();
-            $("#divfileAttachment").attr('readonly', true);
+            //$("#divfileAttachment").attr('readonly', true);
+            $("#divfileAttachment").hide();
+            // divfileAttachmentDownload
             $("#dvDueDate").hide();
         }
 

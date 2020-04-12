@@ -37,6 +37,14 @@ namespace _365_Portal.Controllers
                     project.p_CompID = identity.CompId;
                     project.p_UserId = Convert.ToInt32(identity.UserID);
 
+                    if (project.p_Action == 1)//View Action
+                    {
+                        if (identity.Role != "enduser")
+                        {
+                            project.p_UserId = 0;
+                        }
+                    }
+
                     var ds = ProjectBL.ProjectCRUD(project);
 
                     data = Utility.ConvertDataSetToJSONString(ds);
