@@ -124,12 +124,12 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
-        public static DataSet GetModules(ContentBO content)
+        public static DataSet GetModules(int action,ContentBO content)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = ContentDAL.GetModules(content);
+                ds = ContentDAL.GetModules(action, content);
             }
             catch (Exception ex)
             {
