@@ -506,7 +506,7 @@
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
                 cardHtml += '</div>';
-                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '">';
+                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '" status_id="' + objStatus.StatusID + '">';
                 if (statusWiseTaskList.length > 0) {
                     // Repeat Tasks
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
@@ -549,7 +549,11 @@
                 // animation on drop
                 onDrop: function ($item, container, _super) {
                     _super($item, container);
-                    UpdtaeTaskStatus(0, 0, 0);
+
+                    // added by imtiyaz (statusId)
+                    var statusId = container.el.attr('status_id');
+
+                    UpdtaeTaskStatus(0, 0, statusId);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -693,7 +697,7 @@
                 $("#txtTaskName").val(jsonTaskdetails.Data[0].TaskName);
                 $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary);
                 var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
-                $("#txtDueDate").val(moment(dateTime).format("DD/MM/YYYY HH:mm a")); 
+                $("#txtDueDate").val(moment(dateTime).format("DD/MM/YYYY HH:mm a"));
                 $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes)
                 $('#ddlStatus').val(jsonTaskdetails.Data[0].Status);
                 $('#ddlStatus').select2().trigger('change');
@@ -1089,7 +1093,7 @@
         }
 
         function call_Notification(responsedata, callerinfo) {
-           // alert(callerinfo);
+            // alert(callerinfo);
             if (responsedata != null) {
                 var swaltitle = "";
                 var swalicon = "";
