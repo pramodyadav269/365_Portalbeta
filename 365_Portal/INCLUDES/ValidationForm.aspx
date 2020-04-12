@@ -90,6 +90,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-sm-12">
             <div id="editor"></div>
         </div>

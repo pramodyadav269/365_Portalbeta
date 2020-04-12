@@ -489,7 +489,7 @@
                                     <a href="settings.aspx" class="list-group-item">Settings</a>
                                     <a href="#" class="list-group-item">Favorites</a>
                                     <a href="#" class="list-group-item activity-log">Activity Log</a>
-                                    <a href="#" id="menuLogout" runat="server"  onserverclick="btnLogout_Click" class="list-group-item logout">Log out</a>
+                                    <a href="#" id="menuLogout" runat="server" onserverclick="btnLogout_Click" class="list-group-item logout">Log out</a>
                                 </div>
                             </div>
                             <%--<a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>--%>
@@ -506,45 +506,58 @@
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">My Learning</a>
+                    <a class="nav-link" href="#">Directory</a>
                     <div class="dropdown-menu shadow">
-                        <div class="d-flex">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span><i class="fas fa-user-friends"></i>Users and Groups</span>
-                                </li>
-                                <li class="list-group-item active">
-                                    <span><i class="far fa-file-alt"></i>Content</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span><i class="far fa-user-circle"></i>Account</span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span><i class="far fa-hdd"></i>Content</span>
-                                </li>
-                            </ul>
-                            <div class="list-content">
-                                <h4 class="content-title"><i class="far fa-file-alt"></i>Content</h4>
-                                <div class="content-item">
-                                    <a href="#">Courses</a>
-                                    <a href="#">Lessons (Topics)</a>
-                                    <a href="#">Content Settings</a>
-                                </div>
-                            </div>
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">Users</a>
+                            <a class="list-group-item" href="#">Groups</a>
+                            <a class="list-group-item" href="#">User Group Mapping</a>
+                            <a class="list-group-item" href="#">Directory Settings</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Team</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Integrations</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#">Content</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">Courses</a>
+                            <a class="list-group-item" href="#">Lessons</a>
+                            <a class="list-group-item" href="#">Content Settings</a>
+                            <a class="list-group-item" href="#">Assign Courses</a>
+                        </div>
+                    </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#">Account</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">Company Profile</a>
+                            <a class="list-group-item" href="#">Domain</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#">Settings</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">My Account</a>
+                            <a class="list-group-item" href="#">Notifications</a>
+                            <a class="list-group-item" href="#">Customize</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link" href="#">Help</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="list-group">
+                            <a class="list-group-item" href="#">Help Center</a>
+                            <a class="list-group-item" href="#">Support</a>
+                            <a class="list-group-item" href="#">Chat</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>

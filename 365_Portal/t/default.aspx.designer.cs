@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Life {
-    
-    
-    public partial class Default {
-        
+namespace Life
+{
+
+
+    public partial class Default
+    {
+
         /// <summary>
         /// dvUserName control.
         /// </summary>
@@ -20,16 +22,7 @@ namespace Life {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvUserName;
-        
-        /// <summary>
-        /// dvUserName1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvUserName1;
-        
+
         /// <summary>
         /// dvAdminTasks control.
         /// </summary>

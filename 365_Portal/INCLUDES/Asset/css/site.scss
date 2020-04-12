@@ -417,12 +417,11 @@ a:hover {
 
                 .dropdown-menu {
                     padding: 0;
-                    background-color: #F3F3F3;
-                    min-width: 390px;
+                    /*background-color: #F3F3F3;*/
+                    /*min-width: 192px;*/
                     border: 0;
                     top: 94%;
-                    left: calc(-50% - 100%);
-
+                    /*left: calc(-50% - 100%);*/
                     .svg-inline--fa {
                         margin-right: .5rem;
                     }
@@ -432,30 +431,33 @@ a:hover {
                             cursor: pointer;
                             border: none;
                             font-size: .9rem;
-                            padding: .75rem 2rem .25rem 1rem;
-                            border-top-right-radius: 0;
-                            border-bottom-right-radius: 0;
-
+                            padding: .75rem .75rem .2rem .75rem;
+                            /*padding: .75rem 2rem .25rem 1rem;*/
+                            color: #000;
+                            /*border-top-right-radius: 0;
+                            border-bottom-right-radius: 0;*/
                             &.active {
                                 background-color: #fff;
                                 color: $yellow-color;
                             }
 
-                            &:first-child {
-                                padding-top: 1.5rem;
+                            &:hover {
+                                background-color: #fff;
+                                color: $yellow-color;
                             }
-
+                            /*&:first-child {
+                                padding-top: .75rem;
+                            }*/
                             &:last-child {
-                                padding-bottom: 1.5rem;
+                                padding-bottom: .75rem;
                             }
-
-                            &::after {
+                            /*&::after {
                                 font-family: "Font Awesome 5 Free";
                                 font-weight: 600;
                                 content: "\f054";
                                 position: absolute;
                                 right: 12px;
-                            }
+                            }*/
                         }
                     }
 
@@ -1164,13 +1166,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .section-sorting .sortable-item {
     list-style-type: none;
     cursor: move;
+    /*z-index: 1;*/
 }
 
 .inline-picker {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: .5rem;
+
+    .svg-inline--fa {
+        cursor: pointer;
+    }
 }
-/* module start */
+/* module start  */
 .header {
     margin-top: 2rem;
 
@@ -1541,7 +1548,92 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
     }
+
+    .lesson-wrapper {
+
+        .card {
+            margin-bottom: 1.5rem;
+
+            .card-body {
+                position: relative;
+                padding: 1.2rem 1.25rem .75rem 3.25rem;
+
+                .grid-icon {
+                    font-size: 20px;
+                    position: absolute;
+                    top: 24px;
+                    left: 24px;
+                    color: rgba(0, 0, 0, 0.5);
+                }
+
+                .tag {
+                    position: absolute;
+                    background-color: #FFF7E2;
+                    color: $yellow-color;
+                    top: -6px;
+                    left: 24px;
+                    padding: 0 .5rem;
+                    border-bottom-left-radius: .1rem;
+                    border-bottom-right-radius: .1rem;
+                    font-size: .8rem;
+                    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075);
+
+                    &::after {
+                        content: "";
+                        border-left: 5px solid #B59D58;
+                        border-top: 6px solid transparent;
+                        position: absolute;
+                        top: 0;
+                        right: -5px;
+                    }
+                }
+
+                .card-title {
+                    margin-bottom: .25rem;
+                }
+
+                .card-text {
+                    color: rgba(0, 0, 0, 0.5);
+                }
+
+                .action {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    span {
+                        height: 30px;
+                        border-right: 1px solid rgba(0, 0, 0, 0.3);
+                        padding-left: 1.5rem;
+                        margin-top: .25rem;
+                    }
+
+                    .svg-inline--fa {
+                        color: rgba(0, 0, 0, 0.7);
+                        font-size: 20px;
+                        cursor: pointer;
+                        margin-left: 1.5rem;
+                        margin-top: .5rem;
+                    }
+                }
+            }
+        }
+
+        a {
+            &.label {
+                color: #0147EB;
+
+                &:hover {
+                    color: #0147EB;
+                }
+            }
+        }
+    }
 }
+
+.card {
+    margin-bottom: 1rem;
+}
+
 /* module end */
 .select2-dropdown {
     border-radius: 0;
@@ -1774,140 +1866,143 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
     }
-}
-
-.breadcrumb {
-    background-color: #FFFCE9;
-    padding-left: 300px;
-    margin-bottom: 0;
-
-    @media #{$medium-and-down} {
-        padding-left: 1rem;
-    }
-
-    .breadcrumb-item {
-        position: relative;
-
-        a {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        &.active {
-            color: $yellow-color;
-
-            &::before {
-                color: rgba(0, 0, 0, 0.4);
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
-                content: "\f054";
-            }
-
-            &::after {
-                font-family: "Font Awesome 5 Free";
-                font-weight: 900;
-                content: "\f0dd";
-                padding-left: .5rem;
-                font-size: 1.3rem;
-                position: absolute;
-                top: -9px;
-            }
-        }
-    }
-}
-
-.lesson-wrapper {
-    position: relative;
-    padding: 2rem;
-    padding-left: 300px;
-    display: flex;
-    flex-direction: row-reverse;
-
-    @media #{$medium-and-down} {
-        padding: 1rem;
-    }
-
-    .lesson-scrollspy {
-        position: relative;
-        height: 68vh;
-        overflow: auto;
-        margin-bottom: 2rem;
-        margin-right: 2rem;
-
-        @media #{$small-and-down} {
-            margin-right: 0;
-        }
-
-        .lesson-title {
-            margin-bottom: 1.5rem;
-        }
-
-        .lesson-content {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
 
-            .lesson-content-title {
-                margin-bottom: 1rem;
-            }
-        }
-    }
-
-    .lesson-list {
-        margin-bottom: 2rem;
-        margin-right: 1rem;
-        background: #fff;
-        border-radius: .25rem;
-        font-size: 1rem;
+    .breadcrumb {
+        background-color: #FFFCE9;
+        padding-left: 300px;
+        margin-bottom: 0;
 
         @media #{$medium-and-down} {
-            margin-right: 0;
+            padding-left: 1rem;
         }
 
-        .duration {
-            padding: .75rem 2rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        .breadcrumb-item {
+            position: relative;
 
-            span {
-                display: block;
+            a {
+                color: rgba(0, 0, 0, 0.5);
+            }
+
+            &.active {
+                color: $yellow-color;
+
+                &::before {
+                    color: rgba(0, 0, 0, 0.4);
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    content: "\f054";
+                }
+
+                &::after {
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 900;
+                    content: "\f0dd";
+                    padding-left: .5rem;
+                    font-size: 1.3rem;
+                    position: absolute;
+                    top: -9px;
+                }
+            }
+        }
+    }
+
+
+
+    .lesson-wrapper {
+        position: relative;
+        padding: 2rem;
+        padding-left: 300px;
+        display: flex;
+        flex-direction: row-reverse;
+
+        @media #{$medium-and-down} {
+            padding: 1rem;
+        }
+
+        .lesson-scrollspy {
+            position: relative;
+            height: 68vh;
+            overflow: auto;
+            margin-bottom: 2rem;
+            margin-right: 2rem;
+
+            @media #{$small-and-down} {
+                margin-right: 0;
+            }
+
+            .lesson-title {
+                margin-bottom: 1.5rem;
+            }
+
+            .lesson-content {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+
+                .lesson-content-title {
+                    margin-bottom: 1rem;
+                }
             }
         }
 
-        .header {
-            margin: 0;
-            padding: 1rem 2rem;
-            padding-bottom: 0;
-        }
+        .lesson-list {
+            margin-bottom: 2rem;
+            margin-right: 1rem;
+            background: #fff;
+            border-radius: .25rem;
+            font-size: 1rem;
 
-        .list-group {
-            padding: 2rem;
-            padding-top: .75rem;
+            @media #{$medium-and-down} {
+                margin-right: 0;
+            }
 
+            .duration {
+                padding: .75rem 2rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
-            .list-group-item {
-                font-size: 14px;
-                font-weight: 600;
-                border: none;
-                border-radius: 0;
-                border-left: 1px solid rgba(0, 0, 0, 0.2);
-                color: rgba(0, 0, 0, 0.35);
-                padding: .5rem 1rem .5rem 1.2rem;
-
-                &.active {
-                    background-color: #fff;
-                    color: #000;
-                    border-left: 4px solid $yellow-color;
-                    padding: .5rem 1rem;
+                span {
+                    display: block;
                 }
             }
 
-            .next {
-                cursor: pointer;
-                padding: 1rem 1.5rem;
-                background-color: #FFFCE9;
-                border-radius: .25rem;
-                margin-top: 1.5rem;
+            .header {
+                margin: 0;
+                padding: 1rem 2rem;
+                padding-bottom: 0;
+            }
 
-                .svg-inline--fa {
-                    margin-right: .5rem;
+            .list-group {
+                padding: 2rem;
+                padding-top: .75rem;
+
+
+                .list-group-item {
+                    font-size: 14px;
+                    font-weight: 600;
+                    border: none;
+                    border-radius: 0;
+                    border-left: 1px solid rgba(0, 0, 0, 0.2);
+                    color: rgba(0, 0, 0, 0.35);
+                    padding: .5rem 1rem .5rem 1.2rem;
+
+                    &.active {
+                        background-color: #fff;
+                        color: #000;
+                        border-left: 4px solid $yellow-color;
+                        padding: .5rem 1rem;
+                    }
+                }
+
+                .next {
+                    cursor: pointer;
+                    padding: 1rem 1.5rem;
+                    background-color: #FFFCE9;
+                    border-radius: .25rem;
+                    margin-top: 1.5rem;
+
+                    .svg-inline--fa {
+                        margin-right: .5rem;
+                    }
                 }
             }
         }

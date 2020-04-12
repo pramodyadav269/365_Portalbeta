@@ -7,9 +7,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div ng-app="MasterPage" ng-controller="DefaultController">
-        <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-            <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
-            <h4 id="dvUserName" runat="server">Welcome Let's learn something new today :)</h4>
+        <div class="theme-section">
+            <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
+            <h4 class="sport">Welcome shoumen! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
@@ -304,7 +304,7 @@
                                 <div class="action">
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                    <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
+
                                     <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
@@ -316,7 +316,7 @@
 
                 <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
 
-                <div id="dvTopics" class="content">
+                <div id="dvMyTopics" class="content">
                     <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
@@ -330,7 +330,7 @@
                                 <div class="action">
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                    <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
+
                                     <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
@@ -339,6 +339,29 @@
                         </div>
                     </div>
                 </div>
+
+                <%--  <div id="dvTopics" class="content">
+                    <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
+                        <div class="card bc-blue">
+                            <div class="card-icon">
+                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <span class="point">+{{topic.Points}} Points</span>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{topic.Title}}</h5>
+                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
+                                <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
+                                <div class="action">
+                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                        <i class="fas fa-play"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>--%>
 
                 <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
 
@@ -545,7 +568,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-4">
                                     <div class="card-body">
-                                        <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName1">Welcome back, John!!</h5>
+                                        <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
                                         <p class="card-text">Welcome to 365!</p>
                                     </div>
                                 </div>
