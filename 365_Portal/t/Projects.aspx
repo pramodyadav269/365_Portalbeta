@@ -333,10 +333,10 @@
                             <div class="form-group">
                                 <label for="ddlStatus">Status</label>
                                 <select class="form-control select2 required" id="ddlStatus" style="width: 100% !important">
-                                    <option></option>
+                                    <%--  <option></option>
                                     <option value="1">To Do</option>
                                     <option value="2">In Progress</option>
-                                    <option value="3">Done</option>
+                                    <option value="3">Done</option>--%>
                                 </select>
                             </div>
                         </div>
@@ -414,21 +414,23 @@
         var prevTitle = '';
         var base64UserProfileString = "";
         var ProjectID = "";
+        var jsonTeam = [];
+        var jsonStatusList = [];
 
 
         $(document).ready(function () {
-
             //Role = "enduser";
-            if (Role === "enduser") {
+            if (Role == "enduser") {
                 RoleWaiseHideControls();
             }
+
+            BindTeamMaster();
+            BindStatusMaster();
 
             var userlistAPIdata = call_ajaxfunction("../api/User/GetUserlist", "POST");
             BindTeamMembers(userlistAPIdata)
             BindProjects();
-            //BindTeam(userlistAPIdata);
-            //BindCards();
-            //BindAssignee(userlistAPIdata);
+
 
             $('#dvDueDate').datetimepicker({
                 inline: true,
@@ -473,11 +475,12 @@
 
         function BindCards() {
             // Ajax Call
-            var jsonStatusList = [];
-            jsonStatusList.push({ StatusID: 1, Status: "To Do" });
-            jsonStatusList.push({ StatusID: 2, Status: "In Progress" });
-            jsonStatusList.push({ StatusID: 3, Status: "Done" });
-            /// alert(ProjectID);
+            //var jsonStatusList = [];
+            //jsonStatusList.push({ StatusID: 1, StatusName: "To Do" });
+            //jsonStatusList.push({ StatusID: 2, StatusName: "In Progress" });
+            //jsonStatusList.push({ StatusID: 3, StatusName: "Done" });
+
+
             var requestParams = {
                 t_Action: "1"
                 , t_ProjectID: ProjectID
@@ -505,17 +508,18 @@
 
             var cardHtml = '';
             $.each(jsonStatusList, function (indxStatus, objStatus) {
-                // if (jsonTaskList != null && jsonTaskList.Data.length > 0) {
+
                 var statusWiseTaskList = $.grep(jsonTaskList.Data, function (n) {
-                    return n.Status === objStatus.StatusID;
+                    return n.Status == objStatus.StatusID;
                 });
+
                 // Repeat Status
                 cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                 cardHtml += '<div class="card shadow">';
                 cardHtml += '<div class="card-body">';
                 cardHtml += '<div class="row">';
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
-                cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
+                cardHtml += '<h5 class="font-weight-bold">' + objStatus.StatusName + '</h5>';
                 cardHtml += '</div>';
                 cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '">';
                 if (statusWiseTaskList.length > 0) {
@@ -628,11 +632,11 @@
         function bindTaskStatusCounts(jsonTaskList) {
 
             var Completedtasks = $.grep(jsonTaskList, function (v) {
-                return v.Status === 3;
+                return v.Status == 3;
             });
 
             var opentask = $.grep(jsonTaskList, function (v) {
-                return v.Status === 1 || v.Status === 2;
+                return v.Status == 1 || v.Status == 2;
             });
 
             var Completedtaskscount = Completedtasks != null ? Completedtasks.length : 0;
@@ -657,10 +661,10 @@
             var jsonProjecAssignees = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
 
             // Ajax Call
-            var jsonTeam = [];
-            jsonTeam.push({ Id: 1, TeamName: "Team 1" });
-            jsonTeam.push({ Id: 2, TeamName: "Team 2" });
-            jsonTeam.push({ Id: 3, TeamName: "Team 3" });
+            //var jsonTeam = [];
+            //jsonTeam.push({ Id: 1, TeamName: "Team 1" });
+            //jsonTeam.push({ Id: 2, TeamName: "Team 2" });
+            //jsonTeam.push({ Id: 3, TeamName: "Team 3" });
 
             var jsonTeamMembers = [];
             jsonTeamMembers = $.parseJSON(jsonProjecAssignees).Data.Data1;
@@ -673,7 +677,7 @@
                 $.each(jsonTeam, function (indxTeam, objTeam) {
 
                     var TeamWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
-                        return n.Id === objTeam.Id;
+                        return n.Id == objTeam.Id;
                     });
 
                     teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
@@ -777,7 +781,7 @@
                         $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
                             if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
 
-                                var Ischecked = objsubtask.Status === 3 ? true : false;
+                                var Ischecked = objsubtask.Status == 3 ? true : false;
                                 $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
                                 $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
                             }
@@ -976,7 +980,7 @@
                                 BindAssignee(ProjectID);
                             }
                         }
-                        else if (indxProject === 0) {
+                        else if (indxProject == 0) {
                             activeClass = 'active';
                             ProjectID = objProject.ProjectID;
                             BindCards();
@@ -1181,7 +1185,7 @@
             }
         }
 
-        //Enode the file to base64
+        //Encode the file to base64
         function encodeImagetoBase64(element) {
 
             if (element != null && element != undefined) {
@@ -1280,6 +1284,44 @@
             $("#divSubtask").hide();
             $("#divfileAttachment").attr('readonly', true);
             $("#dvDueDate").hide();
+        }
+
+        function BindTeamMaster() {
+            var requestParams = { ID: "", Title: "", Description: "" };
+            var bindTeams = call_ajaxfunction("../API/User/GetTeam", "POST", requestParams);
+            jsonTeam = $.parseJSON(bindTeams).Data;
+        }
+
+        function BindStatusMaster() {
+            var requestParams = {
+                t_Action: "5"
+                , t_ProjectID: "0"
+                , t_CompID: "0"
+                , t_TaskID: "0"
+                , t_TaskName: ""
+                , t_TaskSummary: ""
+                , t_DueDate: new Date()
+                , t_PrivateNotes: ""
+                , t_UserId: "0"
+                , t_TaskAssignees_UserIds: "" //varchar(500), #(Userids comma separated)
+                , t_TagIds: "" //varchar(500), (comma separated)
+                , t_FileIds: "" //varchar(500), #(comma separated)
+                , t_SubTasks: "" //longtext, #(delimeter | separated)
+                , t_StatusID: "0"
+                , t_Comments: ""
+            };
+
+            var Taskajaxdata = call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams);
+            var jsonTaskdetails = $.parseJSON(Taskajaxdata).Data.Data;
+            if (jsonTaskdetails != null && jsonTaskdetails.length > 0) {
+                var jsonstatusHtml = '';
+                $.each(jsonTaskdetails, function (indx, objstatus) {
+                    jsonstatusHtml += '<option value="' + objstatus.StatusID + '">' + objstatus.StatusName + '</option>';
+                });
+                $("#ddlStatus").empty().html(jsonstatusHtml);
+            }
+
+            jsonStatusList = jsonTaskdetails;
         }
 
     </script>
