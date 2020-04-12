@@ -395,7 +395,32 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $("#dvTopicContainer").show();
             var responseData = response.data;
             $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
+            if ($rootScope.InProgressTopics.length == 0) {
+                $("#dvInProgressTitle").hide();
+                $("#dvInProgressTopics").hide();
+            }
+            else {
+                $("#dvInProgressTitle").show();
+                $("#dvInProgressTopics").show();
+            }
             $rootScope.Topics = responseData.Data.Data1; // My Courses except in-complete courses..
+            if ($rootScope.Topics.length == 0) {
+                $("#dvMyTopicsTitle").hide();
+                $("#dvMyTopics").hide();
+            }
+            else {
+                $("#dvMyTopicsTitle").show();
+                $("#dvMyTopics").show();
+            }
+
+            //dvRecommendedTopicsTitle
+            //dvRecommendedTopics
+
+            //dvLatestTopicsTitle
+            //dvLatestTopics
+
+            //dvPopularTopicsTitle
+            //dvPopularTopics
             //$rootScope.Topics = ds.DS_SetClasses(responseData.Data);
         });
     }
@@ -685,8 +710,9 @@ app.directive('inprogressTopicRepeatDirective', function () {
 app.directive('myTopicRepeatDirective', function () {
     return function (scope, element, attrs) {
         if (scope.$last) {
+            // alert("my topic");
             //InitSlickSlider('.content');
-            InitSlickSlider('#dvTopics');
+            InitSlickSlider('#dvMyTopics');
         }
     };
 });

@@ -38,6 +38,7 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
+
                     <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
@@ -139,6 +140,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
@@ -229,6 +231,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="pills-quiz" role="tabpanel" aria-labelledby="pills-quiz-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
@@ -319,7 +322,7 @@
             var tabCurrentId = $('#pills-tab-course').find('a.active').attr('id')
             var tabNextId = $('#pills-tab-course').find('a.active').parent().next().find('a').attr('id')
 
-            $('#' + tabNextId).tab('show')
+            $('#' + tabNextId).tab('show');
 
 
         }

@@ -28,7 +28,7 @@
             <div class="col-2 pl-0 sub-side-menu">
                 <%--<ul class="list-group mb-4">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                         <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
+                        <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
                         <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>
                     </li>
                 </ul>--%>
@@ -366,12 +366,10 @@
                                 <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
                                 <input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />
                             </div>
-                            <label for="cblist">Sub Task(s)</label>
-                            <div id="cblist">
-                                <%-- <input type="checkbox" value="first checkbox" id="cb1" />
-                                    <label for="cb1">first checkbox</label>--%>
-                                <%--</div>--%>
-                            </div>
+                            <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add Sub Task</a>
+                        </div>
+
+                        <div class="col-12 col-sm-12 mb-3" id="cblist">
                         </div>
 
                         <div class="col-12 col-sm-12 mb-3">
@@ -458,8 +456,6 @@
             });
         });
 
-
-
         function onOpenTaskInfoModal() {
             $('#modalTaskInfo').modal('show');
             clearFields('.input-validation-modal');
@@ -521,7 +517,7 @@
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
                 cardHtml += '<h5 class="font-weight-bold">' + objStatus.StatusName + '</h5>';
                 cardHtml += '</div>';
-                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '">';
+                cardHtml += '<ol class="col-12 section-sorting ' + objStatus.StatusID + '" status_id="' + objStatus.StatusID + '">';
                 if (statusWiseTaskList.length > 0) {
                     // Repeat Tasks
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
@@ -531,15 +527,14 @@
                         cardHtml += '<li class="col-12 mb-2 sortable-item">';
                         cardHtml += '<div class="wr-content">';
                         cardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
-
                         cardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYTaskId(' + objTask.TaskID + ')"></i>';
                         if (Role != "enduser") {
-                            cardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i>';
-                        }
+                           cardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i>';
+                             }
                         cardHtml += '</div></div>';
                         cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
-                        var requestParams = {
+                          var requestParams = {
                             t_Action: "1"
                             , t_ProjectID: ProjectID
                             , t_CompID: "0"
@@ -574,8 +569,7 @@
                             }
                         }
                         //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title development">Development</span></div>';
-
-
+                       
                         //cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>';
                         cardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a");; + '</span></div>';
                         cardHtml += '</div>';
@@ -608,7 +602,11 @@
                 // animation on drop
                 onDrop: function ($item, container, _super) {
                     _super($item, container);
-                    UpdtaeTaskStatus(0, 0, 0);
+
+                    // added by imtiyaz (statusId)
+                    var statusId = container.el.attr('status_id');
+
+                    UpdtaeTaskStatus(0, 0, statusId);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -658,7 +656,7 @@
                 , p_ProjectMembers_UserIds: ""
             };
 
-            var jsonProjecAssignees = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
+            var jsonProjecAssignees = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams)).Data.Data1;
 
             // Ajax Call
             //var jsonTeam = [];
@@ -669,7 +667,6 @@
             var jsonTeamMembers = [];
             jsonTeamMembers = $.parseJSON(jsonProjecAssignees).Data.Data1;
 
-
             var teamHtml = '';
             teamHtml += '<li class="list-group-item task-title">Teams</li>';
             // jsonTeam = [];
@@ -679,6 +676,10 @@
                     var TeamWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
                         return n.Id == objTeam.Id;
                     });
+
+                    //var MembersWiseTeam = $.grep(jsonTeam, function (n, i) {
+                    //    return n.Id === objTeam.Id;
+                    //});
 
                     teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
                     teamHtml += '<span>';
@@ -703,7 +704,7 @@
             $("#ulTeam").empty().html(teamHtml);
         }
 
-        function BindAssignee(projectId) {
+         function BindAssignee(projectId) {
 
             var requestParams = {
                 p_Action: "1"
@@ -728,6 +729,7 @@
                 selectInit('#ddlAddAssignee', 'Select a option');
             }
         }
+
 
         function BindTaskDetailsBYTaskId(TaskId) {
             ClearTaskForm();
@@ -780,13 +782,12 @@
                         container.empty();
                         $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
                             if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
-
                                 var Ischecked = objsubtask.Status == 3 ? true : false;
                                 $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
                                 $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
+
                             }
                         });
-
                         // $("#txtAddSubTask").val(stringsubtask);
                     }
                 }
@@ -822,7 +823,7 @@
             $('#ddlAddAssignee').val(null).trigger('change');
             $("#txtAddSubTask").val("");
             $("#ddlStatus").val("");
-            var container = $('#cblist');
+             var container = $('#cblist');
             container.empty();
         }
 
@@ -977,7 +978,7 @@
                                 BindCards();
                                 setcontentTitle(objProject.ProjectName);
                                 BindTeam(objProject.ProjectID);
-                                BindAssignee(ProjectID);
+                                  BindAssignee(ProjectID);
                             }
                         }
                         else if (indxProject == 0) {
@@ -986,14 +987,15 @@
                             BindCards();
                             setcontentTitle(objProject.ProjectName);
                             BindTeam(objProject.ProjectID);
-                            BindAssignee(ProjectID);
+                              BindAssignee(ProjectID);
                         }
 
                         projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
                         projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" >' + objProject.ProjectName + '</span>';
-                        if (Role != "enduser") {
+  if (Role != "enduser") {
                             projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
                         }
+                       
                         projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
                         projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
                         projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
@@ -1007,6 +1009,7 @@
                 $("#ulProjects").empty().html(projectHtml);
             }
 
+
             $('span.Project_items_Name').on('click', function () {
                 onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
                 $(this).parent().parent().find('li.active').removeClass('active');
@@ -1018,6 +1021,7 @@
                 BindTeam(ProjectID);
                 BindAssignee(ProjectID);
             });
+
         }
 
         function setcontentTitle(tilename) {
@@ -1063,7 +1067,7 @@
         }
 
         function SaveUpdateProject() {
-            ShowLoader();
+
             if (inputValidation('.input-validation')) {
 
                 var hiddenprojectId = $("#hdnProjectId").val();
@@ -1088,7 +1092,6 @@
                     call_Notification(ProjectCRUDAPIData, "caller is " + arguments.callee.caller.toString());
                 }
             }
-            HideLoader();
         }
 
         function DeleteProjectBYProjectId(projectId) {
@@ -1323,6 +1326,5 @@
 
             jsonStatusList = jsonTaskdetails;
         }
-
     </script>
 </asp:Content>

@@ -1,8 +1,6 @@
 ﻿
 $(document).ready(function () {
 
-    
-
     bsCustomFileInput.init();
 
     $('.courses.dropdown .dropdown-menu').on("click", function (e) {
@@ -45,13 +43,23 @@ $(document).ready(function () {
     //});
 
     $('.input-inline-picker').click(function () {
-        if ($('.inline-picker').hasClass('d-none'))
+        if ($('.inline-picker').hasClass('d-none')) {
             $('.inline-picker').removeClass('d-none');
-        else
+        }
+        else {
             $('.inline-picker').addClass('d-none');
+        }
     });
+
+    // set close button for inline datepicker
+    $('.inline-picker').append('<div class="mt-2 mb-2"><i class="fas fa-times float-right" onclick="closeDatetime();"></i></div>');
+
+
 });
 
+function closeDatetime() {
+    $('.inline-picker').addClass('d-none');
+}
 
 
 function selectInit(el, placeholder) {
