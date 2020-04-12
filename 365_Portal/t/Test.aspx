@@ -386,10 +386,8 @@
         var editorResourcesDesc = new Jodit('#txtResourcesDescription');
 
         var accessToken = '<%=Session["access_token"]%>';
-
         var CourseFlag = '0';
         var LessonFlag = '0';
-        var ContentFlag = '0';
         var ResourceFlag = '0';
         var QuizFlag = '0';
 
@@ -403,34 +401,16 @@
 
         $(document).ready(function () {
             debugger
-            if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
-            {
-                CourseFlag = readQueryString()["topic"];
-                EditCourse();
+            ShowButtons('pills-course', 'tabclick');
 
-                if (readQueryString()["module"] != undefined && readQueryString()["module"] != '')
-                {
-                    LessonFlag = readQueryString()["module"];
-                    EditLesson();
-
-                    if (readQueryString()["content"] != undefined && readQueryString()["content"] != '')
-                    {
-                        ContentFlag = readQueryString()["content"];   
-                    }
-                    if (readQueryString()["resource"] != undefined && readQueryString()["resource"] != '') {
-                        ResourceFlag = readQueryString()["resource"];
-                    }
-                    if (readQueryString()["quiz"] != undefined && readQueryString()["quiz"] != '') {
-                        QuizFlag = readQueryString()["quiz"];
-                    }
-                }
-            }            
+            if (readQueryString()["Id"] != undefined && readQueryString()["Id"] != '') {
+                CourseFlag = readQueryString()["Id"];
+                Edit();
+            }
             else {
-                ShowButtons('pills-course', 'tabclick');
                 GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
             }
         });
-
 
         function readQueryString() {
             var vars = [], hash;
@@ -457,92 +437,55 @@
                 $('#btnAddQuiz').hide();
             }
             else if (id == 'pills-lesson') {
-                if (CourseFlag != '0') {
-                    $('#btnAddCourse').hide();
-                    $('#btnAddMoreLesson').show();
-                    $('#btnAddLession').show();
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
+                $('#btnAddCourse').hide();
+                $('#btnAddMoreLesson').show();
+                $('#btnAddLession').show();
+                $('#btnAddMoreContent').hide();
+                $('#btnAddContent').hide();
+                $('#btnAddResource').hide();
+                $('#btnAddMoreQuiz').hide();
+                $('#btnAddQuiz').hide();
 
-                    if (divLessonFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }
-                }
-                else {
-                    nextTab('pills-course-tab');
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Course, Requesting to add Course.", icon: "error" });
+                if (divLessonFlag == 'new') {
+                    $('#btnAddLession').hide();
                 }
             }
             else if (id == 'pills-content') {
+                $('#btnAddCourse').hide();
+                $('#btnAddMoreLesson').hide();
+                $('#btnAddLession').hide();
+                $('#btnAddMoreContent').show();
+                $('#btnAddContent').show();
+                $('#btnAddResource').hide();
+                $('#btnAddMoreQuiz').hide();
+                $('#btnAddQuiz').hide();
 
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-                    $('#btnAddMoreLesson').hide();
+                if (divContentFlag == 'new') {
                     $('#btnAddLession').hide();
-                    $('#btnAddMoreContent').show();
-                    $('#btnAddContent').show();
-                    $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
-
-                    if (divContentFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }
                 }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    nextTab('pills-lesson-tab');
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Lesson, Requesting to add Lesson.", icon: "error" });
-                }
-                else {
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Course, Requesting to add Course.", icon: "error" });
-                    nextTab('pills-course-tab');
-                }                
             }
             else if (id == 'pills-resources') {
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').hide();
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnAddResource').show();
-                    $('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
-                }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    nextTab('pills-lesson-tab');
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Lesson, Requesting to add Lesson.", icon: "error" });
-                }
-                else {
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Course, Requesting to add Course.", icon: "error" });
-                    nextTab('pills-course-tab');
-                }
+                $('#btnAddCourse').hide();
+                $('#btnAddMoreLesson').hide();
+                $('#btnAddLession').hide();
+                $('#btnAddMoreContent').hide();
+                $('#btnAddContent').hide();
+                $('#btnAddResource').show();
+                $('#btnAddMoreQuiz').hide();
+                $('#btnAddQuiz').hide();
             }
             else if (id == 'pills-quiz') {
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').hide();
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').show();
-                    $('#btnAddQuiz').show();
+                $('#btnAddCourse').hide();
+                $('#btnAddMoreLesson').hide();
+                $('#btnAddLession').hide();
+                $('#btnAddMoreContent').hide();
+                $('#btnAddContent').hide();
+                $('#btnAddResource').hide();
+                $('#btnAddMoreQuiz').show();
+                $('#btnAddQuiz').show();
 
-                    if (divQuizFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }
-                }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    nextTab('pills-lesson-tab');
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Lesson, Requesting to add Lesson.", icon: "error" });
-                }
-                else {
-                    Swal.fire({ title: "Failure", text: "It seems you have not Added Course, Requesting to add Course.", icon: "error" });
-                    nextTab('pills-course-tab');
+                if (divQuizFlag == 'new') {
+                    $('#btnAddLession').hide();
                 }
             }
             else {
@@ -559,7 +502,7 @@
                 AddCourse('redirect');
             }
             else if (activeTabID == 'pills-lesson') {
-                AddLession('redirect');
+
             }
             else if (activeTabID == 'pills-content') {
 
@@ -586,12 +529,12 @@
                 $('#btnAddLession').hide();
 
                 if (AddMoreLessonFlag == 'add') {
+                    //AddLeeson();
 
+                    //OnSuccess
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
-                    AddMoreLessonFlag = 'more';
-
-                    AddLession('samepage');
+                    AddMoreLessonFlag = 'new';
                 }
                 else {
                     ClearFieldsAddLesson();                    
@@ -613,7 +556,7 @@
                     //OnSuccess
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
-                    AddMoreContentFlag = 'more';
+                    AddMoreContentFlag = 'new';
                 }
                 else {
                     ClearFieldsAddContent();                    
@@ -635,7 +578,7 @@
                     //OnSuccess
                     $('#divQuizAdd').hide();
                     $('#divQuizGrid').show();
-                    AddMoreQuizFlag = 'more';
+                    AddMoreQuizFlag = 'new';
                 }
                 else {
                     ClearFieldsAddQuiz();                    
@@ -733,17 +676,6 @@
                     HideLoader();
                 }
             });
-        }
-
-        function ClearFieldsAddCourse() {
-            $('#txtCourseTitle').val('');
-            $('#txtCourseSummary').val('');
-            $('#txtCourseThemeColor').val('');
-            $('#ddlCourseCategory').val('').trigger('change');
-            $("#rbGlobal").prop("checked", true)
-            $('#txtCourseThemeColor').val('#161E98');
-            $("#ddlTags option:selected").prop("selected", false);
-            selectInit('#ddlTags ', 'Select Tag');
         }
 
         function validateAddCourse()
@@ -884,7 +816,7 @@
                                             else {
                                                 Swal.fire({
                                                     title: "Failure",
-                                                    text: DataSet.StatusDescription,
+                                                    text: "Oops! Something went wrong. Please try again",
                                                     icon: "error"
                                                 });
                                             }
@@ -953,80 +885,6 @@
             }
         }
 
-        function EditCourse() {
-            debugger
-            ClearFieldsAddCourse();
-
-            ShowLoader();
-            var getUrl = "/API/Content/EditTopic";
-            var requestParams = { TopicID: CourseFlag };
-            $.ajax({
-                type: "POST",
-                url: getUrl,
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: JSON.stringify(requestParams),
-                async: false,
-                contentType: "application/json",
-                success: function (response) {
-                    try {
-                        var DataSet = $.parseJSON(response);
-                        HideLoader();
-                        if (DataSet.StatusCode == "1") {
-                            debugger
-                            var EditTopic = DataSet.Data.Data;
-
-                            $('#txtCourseTitle').val(EditTopic[0].Title);
-                            $('#txtCourseSummary').val(EditTopic[0].Description);
-                            $('#txtCourseThemeColor').val(EditTopic[0].CategoryColor);
-
-                            if (EditTopic[0].Accessibility == '2') {
-                                $("#rbOrganization").prop("checked", true)
-                            }
-                            else if (EditTopic[0].Accessibility == '3') {
-                                $("#rbAssigned").prop("checked", true)
-                            }
-                            else {
-                                $("#rbGlobal").prop("checked", true)
-                            }
-                            $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
-
-                            //$("#divCourseLogo").addClass('img');
-                            //$("#divCourseLogo").append('<img src="" class="img-fluid">');
-
-                            GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
-
-                            nextTab('pills-course-tab');
-                        }
-                        else {
-                            if (DataSet.Data != undefined && DataSet.Data.length > 0) {
-                                Swal.fire(DataSet.Data[0].ReturnMessage, {
-                                    icon: "error",
-                                });
-                            }
-                            else {
-                                Swal.fire(DataSet.StatusDescription, {
-                                    icon: "error",
-                                });
-                            }
-                        }
-                    }
-                    catch (e) {
-                        HideLoader();
-                    }
-                },
-                failure: function (response) {
-                    HideLoader();
-                }
-            });
-        }
-
-
-        function ClearFieldsAddLesson() {
-            $('#txtLessonTitle').val();
-            $('#txtLearningObjectives').val();
-            $('#txtEstimatedTime').val();
-            $('#txtPoint').val();
-        }
 
         function validateAddLesson()
         {
@@ -1042,19 +900,13 @@
             else if ($("#txtPoint").val() == undefined || $("#txtPoint").val() == '') {
                 return { error: true, msg: "Please enter Point" };
             }
-            else if (CourseFlag == '0') {
-                return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
-            }
             return true;
         }
 
         function AddLessionFromContent()
         {
-            AddLession('samepage');
-        }
+            nextTab('pills-content-tab');
 
-        function AddLession(flag)
-        {
             var result = validateAddLesson();
             if (result.error) {
                 Swal.fire({
@@ -1076,7 +928,6 @@
                 var _Points = $('#txtPoint').val();
                 var _CourseTime = $('#txtEstimatedTime').val();
 
-                var ID;
                 if (LessonFlag == '0') {
                     getUrl = "/API/Content/CreateModule";
 
@@ -1095,57 +946,32 @@
                         headers: { "Authorization": "Bearer " + accessToken },
                         data: JSON.stringify(requestParams),
                         contentType: "application/json",
-                        async: false,
                         success: function (response) {
                             try {
                                 var DataSet = $.parseJSON(response);
-                                debugger
                                 if (DataSet != null && DataSet != "") {
-                                    if (DataSet.StatusCode == "1")
-                                    {                                        
-                                        if (flag == 'redirect')
-                                        {
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    document.location = 'Dashboard.aspx';
-                                                }
-                                            });
-                                        }
-                                        else if (flag == 'samepage')
-                                        {
-                                            HideLoader();
-                                            if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                                LessonFlag = DataSet.Data[0].InsertedID;
-                                            }
+                                    if (DataSet.StatusCode == "1") {
+                                        
+                                        HideLoader();
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: DataSet.StatusDescription,
+                                            icon: "success",
 
-                                            SetProgressBar();
-                                            ClearFieldsAddLesson();
-
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    if (AddMoreLessonFlag == 'add')
-                                                    {
-                                                        nextTab('pills-content-tab');
-                                                    }
-                                                }
-                                            });
-                                        }
+                                        });
+                                        toggle('divGird', 'divForm');
+                                        View();
                                     }
                                     else {
+                                        HideLoader();
                                         Swal.fire({
                                             title: "Failure",
                                             text: DataSet.StatusDescription,
                                             icon: "error"
                                         });
                                     }
+                                    //clearFields('.input-validation');
+
                                 }
                                 else {
                                     HideLoader();
@@ -1191,19 +1017,132 @@
             }
         }
 
-        function EditLesson() {
-            debugger
-            ClearFieldsAddLesson();
+
+        function validateAddContent()
+        {
+            if ($("#txtContentHeader").val() == undefined || $("#txtContentHeader").val() == '') {
+                return { error: true, msg: "Please enter Content Header" };
+            }
+            else if ($('#divContentDescription').find('.jodit_wysiwyg').text() == undefined || $('#divContentDescription').find('.jodit_wysiwyg').text() == '') {
+                return { error: true, msg: "Please enter Content Details" };
+            }
+        }
+
+        function AddContentFromResource()
+        {
+            nextTab('pills-resources-tab');
+        }
+
+
+        function validateAddResource()
+        {
+            if ($('#divResourcesDescription').find('.jodit_wysiwyg').text() == undefined || $('#divResourcesDescription').find('.jodit_wysiwyg').text() == '') {
+                return { error: true, msg: "Please enter Resource Details" };
+            }
+        }
+
+        function AddResourceFromQuiz()
+        {
+            nextTab('pills-quiz-tab');
+        }
+
+
+        function validateAddQuiz()
+        {
+            if ($("#txtQuizTitle").val() == undefined || $("#txtQuizTitle").val() == '') {
+                return { error: true, msg: "Please enter Quiz Title" };
+            }
+            else if ($("#txtQuizDescription").val() == undefined || $("#txtQuizDescription").val() == '') {
+                return { error: true, msg: "Please enter Quiz Description" };
+            }
+            else if ($("#txtPassingPercentage").val() == undefined || $("#txtPassingPercentage").val() == '') {
+                return { error: true, msg: "Please enter Passing Percentage" };
+            }
+        }
+
+        function AddQuiz()
+        {
+            //nextTab();
+        }
+
+
+        function ClearFieldsAddCourse()
+        {
+            $('#txtCourseTitle').val('');
+            $('#txtCourseSummary').val('');
+            $('#txtCourseThemeColor').val('');
+            $('#ddlCourseCategory').val('').trigger('change');
+            $("#rbGlobal").prop("checked", true)
+            $('#txtCourseThemeColor').val('#161E98');
+            $("#ddlTags option:selected").prop("selected", false);
+            selectInit('#ddlTags ', 'Select Tag');
+        }
+
+        function ClearFieldsAddLesson() {
+            $('#txtLessonTitle').val();
+            $('#txtLearningObjectives').val();
+            $('#txtEstimatedTime').val();
+            $('#txtPoint').val();
+        }
+
+        function ClearFieldsAddContent() {
+            $('#txtContentHeader').val();
+            $('#divContentDescription').empty().append('<div id="txtContentDescription"></div>');
+            var editorContentDesc = new Jodit('#txtContentDescription');
+        }
+
+        function ClearFieldsAddResource() {
+            $('#txtResourcesDescription').empty();
+            var editorResourcesDesc = new Jodit('#txtResourcesDescription');
+        }
+
+        function ClearFieldsAddQuiz() {            
+            $('#txtQuizTitle').val();
+            $('#txtQuizDescription').val();
+            $('#txtPassingPercentage').val();
+        }
+
+
+        function editCourseLogo(el) {
+            $(el).find('label .svg-inline--fa').show();
+            $(el).find('.custom-file').show();
+            $(el).find('.rounded-icon').hide();
+        }
+
+        function editTag(el) {
+            $(el).find('.chip-input').show();
+            $(el).find('.form-group.chip a').hide();
+        }
+
+        function SetProgressBar()
+        {
+            if (CourseFlag != '0' && LessonFlag == '0' && ResourceFlag == '0' && QuizFlag == '0')
+            {
+                $("#divProgressBar").css("width", "25%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag == '0' && QuizFlag == '0') {
+                $("#divProgressBar").css("width", "50%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag != '0' && QuizFlag == '0') {
+                $("#divProgressBar").css("width", "75%");
+            }
+            else if (CourseFlag != '0' && LessonFlag != '0' && ResourceFlag != '0' && QuizFlag != '0') {
+                $("#divProgressBar").css("width", "100%");
+            }
+        }
+
+        function Edit() {
+            debugger            
+            ClearFieldsAddCourse();
 
             ShowLoader();
-            var getUrl = "/API/Content/EditModule";
-            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
+            var getUrl = "/API/Content/EditTopic";
+            var requestParams = { TopicID: CourseFlag };
             $.ajax({
                 type: "POST",
                 url: getUrl,
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
-                async: false,
                 contentType: "application/json",
                 success: function (response) {
                     try {
@@ -1211,14 +1150,27 @@
                         HideLoader();
                         if (DataSet.StatusCode == "1") {
                             debugger
-                            var EditModule = DataSet.Data.Data;
+                            var EditTopic = DataSet.Data.Data;
 
-                            $('#txtLessonTitle').val(EditModule[0].Title);
-                            $('#txtLearningObjectives').val(EditModule[0].Overview);
-                            $('#txtEstimatedTime').val(EditModule[0].CourseTime);
-                            $('#txtPoint').val(EditModule[0].Points);
+                            $('#txtCourseTitle').val(EditTopic[0].Title);
+                            $('#txtCourseSummary').val(EditTopic[0].Description);
+                            $('#txtCourseThemeColor').val(EditTopic[0].CategoryColor);                            
+                            
+                            if (EditTopic[0].Accessibility == '2') {
+                                $("#rbOrganization").prop("checked", true)
+                            }
+                            else if (EditTopic[0].Accessibility == '3') {
+                                $("#rbAssigned").prop("checked", true)
+                            }
+                            else {
+                                $("#rbGlobal").prop("checked", true)
+                            }
+                            $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
 
-                            nextTab('pills-lesson-tab');
+                            //$("#divCourseLogo").addClass('img');
+                            //$("#divCourseLogo").append('<img src="" class="img-fluid">');
+
+                            GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
                         }
                         else {
                             if (DataSet.Data != undefined && DataSet.Data.length > 0) {
@@ -1242,240 +1194,6 @@
                 }
             });
         }
-
-
-        function ClearFieldsAddContent() {
-            $('#txtContentHeader').val();
-            $('#divContentDescription').empty().append('<div id="txtContentDescription"></div>');
-            var editorContentDesc = new Jodit('#txtContentDescription');
-        }
-
-        function validateAddContent()
-        {
-            if ($("#txtContentHeader").val() == undefined || $("#txtContentHeader").val() == '') {
-                return { error: true, msg: "Please enter Content Header" };
-            }
-            else if ($('#divContentDescription').find('.jodit_wysiwyg').text() == undefined || $('#divContentDescription').find('.jodit_wysiwyg').text() == '') {
-                return { error: true, msg: "Please enter Content Details" };
-            }
-            else if (CourseFlag == '0' || LessonFlag == '0') {
-                return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
-            }
-        }
-
-        function AddContentFromResource()
-        {
-            //nextTab('pills-resources-tab');
-            AddContent('samepage');
-        }
-
-        function AddContent()
-        {            
-            var result = validateAddContent();
-            if (result.error) {
-                Swal.fire({
-                    title: "Alert",
-                    text: result.msg,
-                    icon: "error",
-                    button: "Ok",
-                });
-            }
-            else {
-                
-            }
-        }
-
-
-        function ClearFieldsAddResource() {
-            $('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
-            var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-            
-        }
-
-        function validateAddResource()
-        {
-            if ($('#divResourcesDescription').find('.jodit_wysiwyg').text() == undefined || $('#divResourcesDescription').find('.jodit_wysiwyg').text() == '') {
-                return { error: true, msg: "Please enter Resource Details" };
-            }
-            return true;
-        }
-
-        function AddResourceFromQuiz() {
-            AddResource('samepage');
-        }
-
-        function AddResource(flag)
-        {
-            debugger
-            var result = validateAddResource();
-            if (result.error) {
-                Swal.fire({
-                    title: "Alert",
-                    text: result.msg,
-                    icon: "error",
-                    button: "Ok",
-                });
-            }
-            else {                
-                ShowLoader();
-                var Description = $('#divResourcesDescription').find('.jodit_wysiwyg').text();
-                var getUrl = "/API/Content/UpdateResource";
-
-                try {
-                    var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
-
-                    $.ajax({
-                        type: "POST",
-                        url: getUrl,
-                        headers: { "Authorization": "Bearer " + accessToken },
-                        data: JSON.stringify(requestParams),
-                        contentType: "application/json",
-                        async: false,
-                        success: function (response) {
-                            try {
-                                var DataSet = $.parseJSON(response);
-                                debugger
-                                if (DataSet != null && DataSet != "") {
-                                    if (DataSet.StatusCode == "1") {
-                                        if (flag == 'redirect') {
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    document.location = 'Dashboard.aspx';
-                                                }
-                                            });
-                                        }
-                                        else if (flag == 'samepage') {
-                                            HideLoader();
-                                            ResourceFlag = LessonFlag;
-
-                                            SetProgressBar();
-                                            ClearFieldsAddResource();
-
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    nextTab('pills-quiz-tab');
-                                                }
-                                            });
-                                        }
-                                    }
-                                    else {
-                                        Swal.fire({
-                                            title: "Failure",
-                                            text: DataSet.StatusDescription,
-                                            icon: "error"
-                                        });
-                                    }
-                                }
-                                else {
-                                    HideLoader();
-                                    Swal.fire({
-                                        title: "Failure",
-                                        text: "Please try Again",
-                                        icon: "error"
-                                    });
-                                }
-                            }
-                            catch (e) {
-                                HideLoader();
-                                Swal.fire({
-                                    title: "Failure",
-                                    text: "Please try Again",
-                                    icon: "error"
-                                });
-                            }
-                        },
-                        complete: function () {
-                            HideLoader();
-                        },
-                        failure: function (response) {
-                            HideLoader();
-                            alert(response.data);
-                            Swal.fire({
-                                title: "Failure",
-                                text: "Please try Again",
-                                icon: "error"
-                            });
-                        }
-                    });
-                }
-                catch (e) {
-                    HideLoader();
-                    Swal.fire({
-                        title: "Alert",
-                        text: "Oops! An Occured. Please try again",
-                        icon: "error"
-
-                    });
-                }
-            }
-        }
-
-
-        function ClearFieldsAddQuiz() {
-            $('#txtQuizTitle').val();
-            $('#txtQuizDescription').val();
-            $('#txtPassingPercentage').val();
-        }
-
-        function validateAddQuiz()
-        {
-            if ($("#txtQuizTitle").val() == undefined || $("#txtQuizTitle").val() == '') {
-                return { error: true, msg: "Please enter Quiz Title" };
-            }
-            else if ($("#txtQuizDescription").val() == undefined || $("#txtQuizDescription").val() == '') {
-                return { error: true, msg: "Please enter Quiz Description" };
-            }
-            else if ($("#txtPassingPercentage").val() == undefined || $("#txtPassingPercentage").val() == '') {
-                return { error: true, msg: "Please enter Passing Percentage" };
-            }
-        }
-
-        function AddQuiz()
-        {
-            //nextTab();
-        }
-
-
-        function editCourseLogo(el) {
-            $(el).find('label .svg-inline--fa').show();
-            $(el).find('.custom-file').show();
-            $(el).find('.rounded-icon').hide();
-        }
-
-        function editTag(el) {
-            $(el).find('.chip-input').show();
-            $(el).find('.form-group.chip a').hide();
-        }
-
-        function SetProgressBar()
-        {
-            var width = 0;
-            if (CourseFlag != '0') {
-                width = width + 20;
-            }
-            if (LessonFlag != '0') {
-                width = width + 20;
-            }
-            if (ContentFlag != '0') {
-                width = width + 20;
-            }
-            if (ResourceFlag != '0') {
-                width = width + 20;
-            }
-            if (QuizFlag != '0') {
-                width = width + 20;
-            }
-            $("#divProgressBar").css("width", width.toString() + "%");
-        }
-
 
         var base64CourseLogo = '';
         function encodeImagetoBase64(element, flag) {

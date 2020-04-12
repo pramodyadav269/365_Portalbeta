@@ -382,7 +382,7 @@
         function Edit_New(Topicid)
         {
             debugger
-            document.location = 'LearningJourney.aspx?Id=' + Topicid;
+            document.location = 'LearningJourney.aspx?topic=' + Topicid;
         }
 
         function Edit(Topicid) {

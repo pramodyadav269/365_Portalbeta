@@ -18,9 +18,9 @@ namespace Life
                 {
                     dvAdminTasks.Visible = true;
                 }
-
                 // Take UserName from Session.
-                dvUserName.InnerText = "Hey " + HttpContext.Current.Session["FirstName"] + "!";
+                // dvUserName.InnerText = "Hey " + HttpContext.Current.Session["FirstName"] + "!";
+                dvUserName.InnerText = "Welcome " + HttpContext.Current.Session["FirstName"] + "! Let's learn something new today :)";
             }
             else
             {
