@@ -142,6 +142,7 @@
                     </div>
 
                     <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
+                        <%-- edit card --%>
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
                                 <div class="col-12 col-sm-12">
@@ -184,6 +185,66 @@
                                 </div>
                             </div>
                         </div>
+
+                        <%-- view card --%>
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
+
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="tag">Lesson</div>
+                                            <i class="fas fa-grip-vertical grid-icon"></i>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-9 col-lg-10">
+                                                    <h5 class="card-title">Understand Custom & Standard Objects</h5>
+                                                    <p class="card-text">~15 mins</p>
+                                                </div>
+                                                <div class="col-sm-12 col-md-3 col-lg-2">
+                                                    <div class="action">
+                                                        <i class="far fa-eye"></i>
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        <span></span>
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="tag">Lesson</div>
+                                            <i class="fas fa-grip-vertical grid-icon"></i>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-9 col-lg-10">
+                                                    <h5 class="card-title">Create Object Relationships</h5>
+                                                    <p class="card-text">~15 mins</p>
+                                                </div>
+                                                <div class="col-sm-12 col-md-3 col-lg-2">
+                                                    <div class="action">
+                                                        <i class="far fa-eye"></i>
+                                                        <i class="fas fa-trash-alt"></i>
+                                                        <span></span>
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group mt-2 text-center">
+                                            <a class="label"><i class="fas fa-plus-circle"></i>Add Content</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
 
                     <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">

@@ -366,7 +366,7 @@ namespace _365_Portal.Code.DAL
         /// <summary>
         /// Data Access Layer for Getting Module 
         /// </summary>
-        public static DataSet GetModules(ContentBO content)
+        public static DataSet GetModules(int action, ContentBO content)
         {
 
             DataSet ds = new DataSet();
@@ -379,6 +379,7 @@ namespace _365_Portal.Code.DAL
                 string stm = "spGetModule";
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", action);
                 cmd.Parameters.AddWithValue("p_TopicID", content.TopicID);
                 cmd.Parameters.AddWithValue("p_CompID", content.CompID);
                 cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
