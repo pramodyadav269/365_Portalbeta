@@ -30,7 +30,8 @@ namespace _365_Portal.Controllers
                 {
                     int compId = identity.CompId;
                     string userId = identity.UserID;
-                    var ds = TrainningBL.GetTopicsByUser(compId, userId);
+                    string searchText = Convert.ToString(requestParams["SearchText"].ToString());
+                    var ds = TrainningBL.GetTopicsByUser(compId, userId, searchText);
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
                 }
@@ -128,6 +129,10 @@ namespace _365_Portal.Controllers
                     int compId = identity.CompId;
                     string userId = identity.UserID;
                     int topicId = Convert.ToInt32(requestParams["TopicID"].ToString());
+                    var checkIfTopicAssigned = Convert.ToBoolean(Convert.ToInt32(requestParams["CheckIfTopicAssigned"].ToString()));
+                    if (checkIfTopicAssigned)
+                        TrainningBL.CheckIfTopicAssigned(compId, userId, topicId);
+
                     var ds = TrainningBL.GetModulesByTopic(compId, userId, topicId);
                     var sourceInfo = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
                     sourceInfo = sourceInfo.Substring(2, sourceInfo.Length - 4);

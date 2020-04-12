@@ -38,7 +38,7 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
 
-        public static DataSet GetTopicsByUser(int compID, string userId)
+        public static DataSet GetTopicsByUser(int compID, string userId,string searchText)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -51,6 +51,37 @@ namespace _365_Portal.Code.DAL
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_compID", compID);
                 cmd.Parameters.AddWithValue("p_userId", userId);
+                cmd.Parameters.AddWithValue("p_searchText", searchText);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
+        public static DataSet CheckIfTopicAssigned(int compID, string userId, int topicId)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spCheckIfTopicAssigned";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compID", compID);
+                cmd.Parameters.AddWithValue("p_userId", userId);
+                cmd.Parameters.AddWithValue("p_topicid", topicId);
+                cmd.Parameters.AddWithValue("p_CreatedBy", userId);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
@@ -560,7 +591,7 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
 
-        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic,DateTime dueDate)
+        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic, DateTime dueDate)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);

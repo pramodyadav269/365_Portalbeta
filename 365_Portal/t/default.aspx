@@ -2,14 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
-    <script src="../includes/Asset/customer/default.js"></script>
+
     <script src="https://www.youtube.com/iframe_api"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div ng-app="MasterPage" ng-controller="DefaultController">
+    <div>
         <div class="theme-section">
             <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
-            <h4 class="sport">Welcome shoumen! Let's learn something new today :)</h4>
+            <h4 class="sport" id="dvUserName" runat="server">Welcome shoumen! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
@@ -305,7 +305,7 @@
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -317,7 +317,7 @@
                 <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
 
                 <div id="dvMyTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
+                    <div class="content-item" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
                                 <img src="../INCLUDES/Asset/images/sun.png">
@@ -331,7 +331,7 @@
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -366,7 +366,7 @@
                 <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
 
                 <div id="dvRecommendedTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in Topics" recommended-topic-repeat-directive>
+                    <div class="content-item" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
                                 <img src="../INCLUDES/Asset/images/sun.png">
@@ -377,10 +377,10 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+                                    <%--<span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -392,7 +392,7 @@
                 <h4 class="section-title" id="dvLatestTopicsTitle">Latest</h4>
 
                 <div id="dvLatestTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in Topics" latest-topic-repeat-directive>
+                    <div class="content-item" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
                                 <img src="../INCLUDES/Asset/images/sun.png">
@@ -403,10 +403,10 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+                                    <%--  <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -418,7 +418,7 @@
                 <h4 class="section-title" id="dvPopularTopicsTitle">Popular</h4>
 
                 <div id="dvPopularTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in Topics" popular-topic-repeat-directive>
+                    <div class="content-item" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
                                 <img src="../INCLUDES/Asset/images/sun.png">
@@ -429,10 +429,10 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+                                    <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
+                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -1277,11 +1277,13 @@
         });
 
         function InitSlickSlider(el) {
+$(el).removeClass("slick-initialized");
+$(el).removeClass("slick-slider");
             $(el).slick({
                 dots: false,
-                infinite: false,
+                infinite: true,
                 speed: 300,
-                slidesToShow: 4,
+                slidesToShow: 5,
                 slidesToScroll: 1,
                 centerMode: false,
                 responsive: [

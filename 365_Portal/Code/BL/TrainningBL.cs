@@ -32,12 +32,26 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet GetTopicsByUser(int compId, string userId)
+        public static DataSet GetTopicsByUser(int compId, string userId, string searchText)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = TrainningDAL.GetTopicsByUser(compId, userId);
+                ds = TrainningDAL.GetTopicsByUser(compId, userId, searchText);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+        public static DataSet CheckIfTopicAssigned(int compId, string userId, int topicId)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.CheckIfTopicAssigned(compId, userId, topicId);
             }
             catch (Exception ex)
             {
@@ -51,7 +65,7 @@ namespace _365_Portal.Code.BL
             DataSet ds = new DataSet();
             try
             {
-                ds = TrainningDAL.AddFavAndBookMark(UserID, CompID,TopicID, IsFav, IsBookMark);
+                ds = TrainningDAL.AddFavAndBookMark(UserID, CompID, TopicID, IsFav, IsBookMark);
             }
             catch (Exception ex)
             {
@@ -501,7 +515,7 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic,DateTime dueDate)
+        public static DataSet AssignTopicsByEntity(int compID, string userId, string topicIds, string groupIds, string userIds, string removeTopic, DateTime dueDate)
         {
             DataSet ds = new DataSet();
             try
