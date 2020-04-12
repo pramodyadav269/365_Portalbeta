@@ -153,6 +153,12 @@
             //Submit button name attribute changed to Insert;
         }
 
+
+        function Edit_New(Topicid,ModuleId) {
+            debugger
+            document.location = 'LearningJourney.aspx?topic=' + Topicid + '&module=' + ModuleId;
+        }
+
         function Edit(ModuleId) {
             if (ModuleId != null && ModuleId != '') {
                 _ModuleID = ModuleId; //Initalizing Global varaiable of Module ID;
@@ -545,7 +551,8 @@
                                                 tbl += '<td title="' + data.ModuleID + '"><a href="Quiz.aspx?type=1&TID=' + TopicID + '&MID=' + data.ModuleID + '">' + data.SurveyCount + '</a>';
                                                 tbl += '<td title="' + data.ModuleID + '"><a href="Flashcards.aspx?type=2&TID=' + TopicID + '&MID=' + data.ModuleID + '">' + data.FlashCardCount + '</a>';
                                                 tbl += '<td title="' + data.ModuleID + '"><a href="Quiz.aspx?type=3&TID=' + TopicID + '&MID=' + data.ModuleID + '">' + data.FinalQuizCount + '</a>';
-                                                tbl += '<td><i title="Edit" onclick="Edit(' + data.ModuleID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.ModuleID + ');" class="fas fa-trash text-danger"></i>';
+                                                //tbl += '<td><i title="Edit" onclick="Edit(' + data.ModuleID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.ModuleID + ');" class="fas fa-trash text-danger"></i>';
+                                                tbl += '<td><i title="Edit" onclick="Edit_New('+ TopicID +',' + data.ModuleID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.ModuleID + ');" class="fas fa-trash text-danger"></i>';
 
 
                                             });
