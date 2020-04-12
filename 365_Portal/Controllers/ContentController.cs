@@ -879,21 +879,27 @@ namespace _365_Portal.ControllersReOrderContent
                 {
                     content.CompID = identity.CompId;
                     content.CreatedBy = identity.UserID;
-                    if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()))
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])))
                     {
                         content.TopicID = Convert.ToInt32(requestParams["TopicID"]);
                     }
-                    if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["IsActive"])))
                     {
                         content.IsActive = (bool)requestParams["IsActive"];
                     }
-                    var ds = ContentBL.GetModules(content);
+
+                    int action = 4;
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Flag"])))
+                    {
+                        action = Convert.ToInt32(ConstantMessages.Action.SEARCH);
+                    }
+
+                    var ds = ContentBL.GetModules(action, content);
                     if (ds != null)
                     {
                         DataTable dt = ds.Tables["Data"];
                         if (ds.Tables.Count > 0)
                         {
-
                             data = Utility.ConvertDataSetToJSONString(dt);
                             data = Utility.Successful(data);
                         }
@@ -927,9 +933,8 @@ namespace _365_Portal.ControllersReOrderContent
                 data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
             }
             return new APIResult(Request, data);
-
-
         }
+
         #endregion
         #region Content all CRUD
         [HttpPost]

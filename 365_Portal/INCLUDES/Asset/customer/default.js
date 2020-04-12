@@ -5,12 +5,16 @@ var allContents = [];
 // CONTROLLER FUNCTIONS
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
     objDs = DataService;
-    objDs.DS_GetUserTopics();
+    objDs.DS_GetUserTopics("");
     $("#dvTopicContainer").hide();
 
     $scope.ActiveContainer = "Topic";
     $scope.NotificationText = "Notifications";
     $scope.ColorIndex = 1;
+
+    $scope.SearchTopics = function () {
+        objDs.DS_GetUserTopics($scope.SearchText);
+    }
 
     $scope.trustAsHtml = function (html) {
 
@@ -72,11 +76,11 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         return image;
     }
 
-    $scope.GetModulesByTopic = function (topicId) {
+    $scope.GetModulesByTopic = function (topicId, checkIfTopicAssigned) {
         $scope.SelectedTopic = $rootScope.Topics.filter(function (v) {
             return topicId == v.TopicId;
         })[0];
-        objDs.DS_GetModulesByTopic(topicId);
+        objDs.DS_GetModulesByTopic(topicId, checkIfTopicAssigned);
         $scope.ActiveContainer = "Module";
     }
 
@@ -378,9 +382,9 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 app.service("DataService", function ($http, $rootScope, $compile) {
     var ds = this;
 
-    ds.DS_GetUserTopics = function () {
+    ds.DS_GetUserTopics = function (searchText) {
         ShowLoader();
-        var requestParams = { contact_name: "Scott", company_name: "HP" };
+        var requestParams = { SearchText: searchText };
         $http({
             method: "POST",
             url: "../api/Trainning/GetTopicsByUser",
@@ -403,8 +407,9 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvInProgressTitle").show();
                 $("#dvInProgressTopics").show();
             }
-            $rootScope.Topics = responseData.Data.Data1; // My Courses except in-complete courses..
-            if ($rootScope.Topics.length == 0) {
+
+            $rootScope.MyCourses = responseData.Data.Data1; // My Courses except in-complete courses..
+            if ($rootScope.MyCourses.length == 0) {
                 $("#dvMyTopicsTitle").hide();
                 $("#dvMyTopics").hide();
             }
@@ -413,14 +418,47 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvMyTopics").show();
             }
 
-            //dvRecommendedTopicsTitle
-            //dvRecommendedTopics
+            $rootScope.RecommendedCourses = responseData.Data.Data2; // Recommended Courses
+            if ($rootScope.RecommendedCourses.length == 0) {
+                $("#dvRecommendedTopicsTitle").hide();
+                $("#dvRecommendedTopics").hide();
+            }
+            else {
+                $("#dvRecommendedTopicsTitle").show();
+                $("#dvRecommendedTopics").show();
+            }
 
-            //dvLatestTopicsTitle
-            //dvLatestTopics
 
-            //dvPopularTopicsTitle
-            //dvPopularTopics
+            $rootScope.LatestCourses = responseData.Data.Data3; // Latest Courses
+            if ($rootScope.LatestCourses.length == 0) {
+                $("#dvLatestTopicsTitle").hide();
+                $("#dvLatestTopics").hide();
+            }
+            else {
+                $("#dvLatestTopicsTitle").show();
+                $("#dvLatestTopics").show();
+            }
+
+
+            $rootScope.PopularCourses = responseData.Data.Data4; // Popular Courses
+            if ($rootScope.PopularCourses.length == 0) {
+                $("#dvPopularTopicsTitle").hide();
+                $("#dvPopularTopics").hide();
+            }
+            else {
+                $("#dvPopularTopicsTitle").show();
+                $("#dvPopularTopics").show();
+            }
+
+            var allTopics = [];
+            $.merge(allTopics, $rootScope.InProgressTopics);
+            $.merge(allTopics, $rootScope.MyCourses);
+            $.merge(allTopics, $rootScope.RecommendedCourses);
+            $.merge(allTopics, $rootScope.LatestCourses);
+            $.merge(allTopics, $rootScope.PopularCourses);
+
+            $rootScope.Topics = allTopics;
+
             //$rootScope.Topics = ds.DS_SetClasses(responseData.Data);
         });
     }
@@ -458,9 +496,9 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         return jsonObject;
     }
 
-    ds.DS_GetModulesByTopic = function (topicId) {
+    ds.DS_GetModulesByTopic = function (topicId, checkIfTopicAssigned) {
         ShowLoader();
-        var requestParams = { TopicID: topicId };
+        var requestParams = { TopicID: topicId, CheckIfTopicAssigned: checkIfTopicAssigned };
         $http({
             method: "POST",
             url: "../api/Trainning/GetModulesByTopic",
@@ -702,6 +740,7 @@ app.directive('myPostRepeatDirective', function () {
 app.directive('inprogressTopicRepeatDirective', function () {
     return function (scope, element, attrs) {
         if (scope.$last) {
+            //alert("called");
             InitSlickSlider('#dvInProgressTopics');
         }
     };
