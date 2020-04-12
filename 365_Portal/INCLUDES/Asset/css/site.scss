@@ -1164,11 +1164,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .section-sorting .sortable-item {
     list-style-type: none;
     cursor: move;
+    z-index: 1;
 }
 
 .inline-picker {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: .5rem;
+
+    .svg-inline--fa {
+        cursor: pointer;
+    }
 }
 /* module start */
 .header {

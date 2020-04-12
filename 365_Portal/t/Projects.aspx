@@ -364,13 +364,11 @@
                             <div class="form-group input-validation-subtaskdiv">
                                 <label for="txtAddSubTask">Add Sub Task</label>
                                 <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
-                                <input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />
                             </div>
-                            <div id="cblist">
-                                <%-- <input type="checkbox" value="first checkbox" id="cb1" />
-                                    <label for="cb1">first checkbox</label>--%>
-                                <%--</div>--%>
-                            </div>
+                            <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add Sub Task</a>
+                        </div>
+
+                        <div class="col-12 col-sm-12 mb-3" id="cblist">
                         </div>
 
                         <div class="col-12 col-sm-12 mb-3">
@@ -415,6 +413,7 @@
 
 
         $(document).ready(function () {
+            ShowLoader();
             var userlistAPIdata = call_ajaxfunction("../api/User/GetUserlist", "POST");
             BindTeamMembers(userlistAPIdata)
             BindProjects();
@@ -721,11 +720,12 @@
                             if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
 
                                 var Ischecked = objsubtask.Status === 3 ? true : false;
+
                                 $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
                                 $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
+
                             }
                         });
-
                         // $("#txtAddSubTask").val(stringsubtask);
                     }
                 }
@@ -990,12 +990,12 @@
                     ddlProjectMembers.append(option).trigger('change');
                 });
             }
-            toggle('dvCreateProject', 'dvWebsiteRedesign');
-            setcontentTitle($("#txtProjectName").val());
+            openProjectForm()
+            $('#contentTitle').empty().append('<h5 class="content-title" id="headingProjectName"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>' + $("#txtProjectName").val() + '</h5>')
         }
 
         function SaveUpdateProject() {
-            ShowLoader();
+
             if (inputValidation('.input-validation')) {
 
                 var hiddenprojectId = $("#hdnProjectId").val();
@@ -1020,7 +1020,6 @@
                     call_Notification(ProjectCRUDAPIData, "caller is " + arguments.callee.caller.toString());
                 }
             }
-            HideLoader();
         }
 
         function DeleteProjectBYProjectId(projectId) {
