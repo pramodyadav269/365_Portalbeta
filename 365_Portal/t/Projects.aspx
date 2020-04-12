@@ -415,12 +415,17 @@
 
 
         $(document).ready(function () {
+
+            ShowLoader();
+
             var userlistAPIdata = call_ajaxfunction("../api/User/GetUserlist", "POST");
             BindTeamMembers(userlistAPIdata)
             BindProjects();
             //BindTeam(userlistAPIdata);
             //BindCards();
             BindAssignee(userlistAPIdata);
+
+            HideLoader();
 
             $('#dvDueDate').datetimepicker({
                 inline: true,
@@ -693,7 +698,7 @@
                 $("#txtTaskName").val(jsonTaskdetails.Data[0].TaskName);
                 $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary);
                 var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
-                $("#txtDueDate").val(moment(dateTime).format("DD/MM/YYYY HH:mm a")); 
+                $("#txtDueDate").val(moment(dateTime).format("DD/MM/YYYY HH:mm a"));
                 $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes)
                 $('#ddlStatus').val(jsonTaskdetails.Data[0].Status);
                 $('#ddlStatus').select2().trigger('change');
@@ -1016,6 +1021,7 @@
                     call_Notification(ProjectCRUDAPIData, "caller is " + arguments.callee.caller.toString());
                 }
             }
+            alert("loader hiding");
             HideLoader();
         }
 
@@ -1082,6 +1088,7 @@
                     });
                 },
                 complete: function () {
+                    //alert(url);
                     HideLoader();
                 }
             });
@@ -1089,7 +1096,7 @@
         }
 
         function call_Notification(responsedata, callerinfo) {
-           // alert(callerinfo);
+            // alert(callerinfo);
             if (responsedata != null) {
                 var swaltitle = "";
                 var swalicon = "";
