@@ -51,12 +51,9 @@ $(document).ready(function () {
         }
     });
 
-    // set close button for datepicker
+    // set close button for inline datepicker
     $('.inline-picker').append('<div class="mt-2 mb-2"><i class="fas fa-times float-right" onclick="closeDatetime();"></i></div>');
 
-    //$(window).click(function () {
-    //    $('.inline-picker').addClass('d-none');
-    //});
 
 });
 

@@ -7,9 +7,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div ng-app="MasterPage" ng-controller="DefaultController">
-        <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-            <img src="../INCLUDES/Asset/images/theme1.png" class="img-fluid" />
-            <h4 id="dvUserName" runat="server">Welcome Let's learn something new today :)</h4>
+        <div class="theme-section">
+            <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
+            <h4 class="sport">Welcome shoumen! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
@@ -316,7 +316,7 @@
 
                 <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
 
-                  <div id="dvMyTopics" class="content">
+                <div id="dvMyTopics" class="content">
                     <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
@@ -340,7 +340,7 @@
                     </div>
                 </div>
 
-              <%--  <div id="dvTopics" class="content">
+                <%--  <div id="dvTopics" class="content">
                     <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
                         <div class="card bc-blue">
                             <div class="card-icon">
