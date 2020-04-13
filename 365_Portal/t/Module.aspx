@@ -144,8 +144,8 @@
                     <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
                         <%-- edit card --%>
                         <div class="card shadow-sm">
-                            <div class="card-body p-0">
-                                <div class="col-12 col-sm-12">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                                             <div class="row">

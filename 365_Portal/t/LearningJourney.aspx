@@ -154,8 +154,8 @@
 
                     <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
                         <div class="card shadow-sm">
-                            <div class="card-body p-0">
-                                <div class="col-12 col-sm-12">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
                                     <div class="row" id="divLessonAdd">
                                         <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                                             <div class="row">
@@ -193,7 +193,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" id="divLessonGrid" style="display:none;">                                        
+                                    <div id="divLessonGrid" style="display:none;">                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -202,8 +203,8 @@
 
                     <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
                         <div class="card shadow-sm">
-                            <div class="card-body p-0">
-                                <div class="col-12 col-sm-12">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
                                     <div class="row" id="divContentAdd">
                                         <div class="col-12 col-sm-12">
                                             <div class="row">
@@ -219,20 +220,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" id="divContentGrid" style="display:none;">
-                                        <div class="container"> 
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
-                                            </div>
-                                          </div>
-                                          <br>  
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
-                                            </div>
-                                          </div>
-                                        </div>
+                                    <div class="row" id="divContentGrid">
+
+                                        <%--Bind Content--%>
+
                                     </div>
                                 </div>
                             </div>
@@ -390,7 +381,7 @@
 
         var editorContentDesc = new Jodit('#txtContentDescription');
         var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-
+        var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
         var CourseFlag = '0';
@@ -412,14 +403,15 @@
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
             {
                 CourseFlag = readQueryString()["topic"];
-                EditCourse();                
+                EditCourse();
 
                 if (readQueryString()["module"] != undefined && readQueryString()["module"] != '')
                 {
                     LessonFlag = readQueryString()["module"];
 
                     if (readQueryString()["content"] != undefined && readQueryString()["content"] != '') {
-                        ContentFlag = readQueryString()["content"];   
+                        ContentFlag = readQueryString()["content"];
+                        //BindContent();
                     }
                     if (readQueryString()["resource"] != undefined && readQueryString()["resource"] != '') {
                         ResourceFlag = readQueryString()["resource"];
@@ -428,13 +420,15 @@
                         QuizFlag = readQueryString()["quiz"];
                     }
                 }
-                if (LessonFlag == '0') {
+                if (CourseFlag != '0' && LessonFlag == '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
                     BindLesson('fromtopic');
                 }
-                else {
+                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
                     BindLesson('frommodule');
                 }
-                
+                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag != '0' && ResourceFlag == '0' && QuizFlag == '0') {
+                    BindContent('fromcontent');
+                }                
             }            
             else {
                 ShowButtons('pills-course', 'tabclick');
@@ -523,8 +517,33 @@
                     $('#btnAddQuiz').hide();
 
                     if (divContentFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }                    
+                        $('#btnAddContent').hide();
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                    }
+                    else if (divContentFlag == 'add') {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').show();
+
+                        $('#divContentAdd').show();
+                        $('#divContentGrid').hide();
+                    }
+                    else if (divContentFlag == 'bindtile') {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').hide();
+
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                    }
+                    else if (divContentFlag == 'bindtileafterlessonadd') {
+                        //$('#btnAddMoreContent').show();
+                        //$('#btnAddContent').hide();
+
+                        //$('#divContentAdd').hide();
+                        //$('#divContentGrid').show();
+
+                        BindContent('addmore');
+                    }
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {                    
                     Swal.fire({
@@ -651,7 +670,18 @@
                 }
             }
             else if (activeTabID == 'pills-content') {
-
+                var result = validateAddContent();
+                if (result.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: result.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+                else {
+                    AddContent('redirect');
+                }
             }
             else if (activeTabID == 'pills-resources') {
 
@@ -700,7 +730,7 @@
 
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
-                    AddMoreLessonFlag = 'more';
+                    AddMoreLessonFlag = 'more';                    
                 }
                 else {
                     ClearFieldsAddLesson();                    
@@ -715,13 +745,36 @@
                 }
             }
             else if (id == 'btnAddMoreContent') {
-                $('#btnAddMoreContent').show();
-                $('#btnAddContent').hide();
+                //$('#btnAddMoreContent').show();
+                //$('#btnAddContent').hide();
 
                 if (AddMoreContentFlag == 'add') {
-                    //AddContent();
 
-                    //OnSuccess
+                    var result = validateAddContent();
+                    if (result.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: result.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                    }
+                    else {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').hide();
+
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                        AddMoreContentFlag = 'more';
+
+                        AddContent('addmore');
+                    }
+                }
+                else if (AddMoreContentFlag == 'bindtile') {
+                    ClearFieldsAddContent();
+                    $('#btnAddMoreContent').show();
+                    $('#btnAddContent').hide();
+
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
@@ -734,6 +787,17 @@
                     $('#divContentAdd').show();
                     $('#divContentGrid').hide();
                     AddMoreContentFlag = 'add';
+
+
+                    ClearFieldsAddLesson();
+                    $('#btnAddMoreContent').show();
+                    $('#btnAddContent').show();
+
+                    $('#divContentAdd').show();
+                    $('#divContentGrid').hide();
+                    AddMoreContentFlag = 'add';
+                    divContentFlag = 'add';
+                    ContentFlag = '0';
                 }
             }
             else if (id == 'btnAddMoreQuiz') {
@@ -1130,7 +1194,7 @@
                 }
             });
         }
-
+        
 
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
@@ -1245,7 +1309,7 @@
                                         }).then((value) => {
                                             if (value) {
                                                 if (AddMoreLessonFlag == 'add')
-                                                {                                                    
+                                                {
                                                     nextTab('pills-content-tab');                                                    
                                                 }
                                             }
@@ -1373,16 +1437,83 @@
 
         function EditLessionFromTile(obj,id)
         {
-            debugger            
-            $('#txtLessonTitle').val($(obj).closest('div').find("#spTitle").text());
-            $('#txtLearningObjectives').val($(obj).closest('div').find("#spOverview").text());
-            $('#txtEstimatedTime').val($(obj).closest('div').find("#spCourseTime").text());
-            $('#txtPoint').val($(obj).closest('div').find("#spPoints").text());
+            debugger                        
+            $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
+            $('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            $('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
+            $('#txtPoint').val($(obj).parent().parent().parent().parent().find('#spPoints').text());
 
             LessonFlag = id;
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
             nextTab('pills-lesson-tab');
+
+            BindResource();
+        }
+
+        function DeleteLessionFromTile(obj, id)
+        {
+            debugger
+            LessonFlag = id;
+            ShowLoader();
+            var getUrl = "/API/Content/DeleteModule";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, IsActive:0 };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            LessonFlag = '0';
+                                            BindLesson('addmore');
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error"});
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure",text: "Please try Again",icon: "error"});
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again",icon: "error"});
+            }
         }
 
         function BindLesson(flag)
@@ -1405,22 +1536,27 @@
                                 
                                 var Modules = DataSet.Data;
                                 var tblModules = '';
+
                                 $('#divLessonGrid').empty();
                                 if (Modules != undefined && Modules.length > 0) {
 
-                                    tblModules = tblModules + '<div class="container">';
+                                    for (var i = 0; i < Modules.length; i++) {
 
-                                    for (var i = 0; i < Modules.length; i++)
-                                    {
-                                        tblModules = tblModules + '<div class="card"><div class="card-body">';
-                                        tblModules = tblModules + '<span id="sp' + Modules[i].ModuleID + '" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')"; style="display:none";>' + Modules[i].ModuleID + '</span>';
-                                        tblModules = tblModules + '<span id="spTitle" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";>' + Modules[i].Title + '</span>';
-                                        tblModules = tblModules + '<span id="spOverview">' + Modules[i].Overview + '</span>';
-                                        tblModules = tblModules + '<span id="spCourseTime">' + Modules[i].CourseTime + '</span>';
-                                        tblModules = tblModules + '<span id="spPoints">' + Modules[i].Points + '</span>';
-                                        tblModules = tblModules + '</div></div><br>';
+                                        tblModules = tblModules + '<div class="card shadow-sm" id="divLessonTile"><div class="card-body">';
+                                        tblModules = tblModules + '<div class="tag"><span id="spTitle" >' + Modules[i].Title + '</span></div>';
+                                        tblModules = tblModules + '<i class="fas fa-grip-vertical grid-icon"></i>';
+                                        tblModules = tblModules + '<div class="row">';
+                                        tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
+                                        tblModules = tblModules + '<h5 class="card-title" id="spOverview">' + Modules[i].Overview + '</h5>';                                        
+                                        tblModules = tblModules + '<p class="card-text">~<span id="spCourseTime">' + Modules[i].CourseTime + '</span> mins</p>';
+                                        tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';
+                                        tblModules = tblModules + '</div>';
+                                        tblModules = tblModules + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
+                                        //tblContents = tblContents + '<i class="far fa-eye"></i>';
+                                        tblModules = tblModules + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + Modules[i].ModuleID + ')";></i><span></span>';
+                                        tblModules = tblModules + '<i class="fas fa-edit" title="Edit" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";></i>';
+                                        tblModules = tblModules + '</div></div></div></div></div>';
                                     }
-                                    $('#divLessonGrid').append('</div>');
                                 }
                                 else {
                                     tblModules = tblModules + '<div class="container"><h3>Lesson Not Found</h3></div>';
@@ -1440,6 +1576,8 @@
                                     AddMoreLessonFlag = 'bindtile';
                                     divLessonFlag = 'bindtile';
                                     AddMore('btnAddMoreLesson');
+
+                                    divContentFlag = 'bindtileafterlessonadd';
                                     nextTab('pills-content-tab');
                                 }
                                 else if (flag == 'addmore') {
@@ -1490,16 +1628,12 @@
             else if (CourseFlag == '0' || LessonFlag == '0') {
                 return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
             }
+            return true;
         }
 
         function AddContentFromResource()
         {
-            //nextTab('pills-resources-tab');
-            AddContent('samepage');
-        }
-
-        function AddContent()
-        {            
+            debugger
             var result = validateAddContent();
             if (result.error) {
                 Swal.fire({
@@ -1510,8 +1644,352 @@
                 });
             }
             else {
-                
+                AddContent('nexttab');
             }
+        }
+
+        function AddContent(flag)
+        {
+            debugger
+            var getURL = '';
+            var regex = '';
+            var formdata = new FormData();
+            var selectedDocType = 'TEXT';
+            var isUrl = '';
+            var index = 1;
+            var ContentID = '';
+
+            if (ContentFlag == '0') {
+                getURL = "/API/Content/CreateContent";
+            }
+            else {
+                ContentID = ContentFlag;
+                getURL = "/API/Content/ModifyContent";
+            }
+
+            formdata.append("ContentID", ContentID);
+            formdata.append("SrNo", index);
+            formdata.append("DocType", selectedDocType);
+            formdata.append("Title", $("#txtContentHeader").val());
+            formdata.append("Description", $('#divContentDescription').find('.jodit_wysiwyg').text());
+            formdata.append("Overview", "");
+            formdata.append("IsGift", "");
+            formdata.append("IsPublished", "");
+            formdata.append("CourseTime", "");
+            formdata.append("TopicID", CourseFlag);
+            formdata.append("ModuleID", LessonFlag);
+            formdata.append("TypeID", "1");
+            formdata.append("FlashcardTitle", "");
+            formdata.append("IsActive", "");
+            formdata.append("TotalScore", "");
+            formdata.append("PassingPercent", "");
+            formdata.append("PassingScore", "");
+            formdata.append("FlashcardHighlights", "");
+            formdata.append("SkipFlashcards", "");
+            formdata.append("IsURL", isUrl);
+            ShowLoader();
+
+            $.ajax({
+                type: "POST",
+                url: getURL,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    try {
+                        debugger
+                        var DataSet = $.parseJSON(response);
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+                                ClearFieldsAddContent();
+                                HideLoader();                                
+
+                                if (flag == 'redirect') {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            document.location = 'Dashboard.aspx';
+                                        }
+                                    });
+                                }
+                                else if (flag == 'nexttab') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    SetProgressBar();
+                                    ContentFlag = '0';
+                                    BindContent('nexttab');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            if (AddMoreContentFlag == 'add') {
+                                                nextTab('pills-resources-tab');
+                                            }
+                                        }
+                                    });
+                                }
+                                else if (flag == 'addmore') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    SetProgressBar();
+                                    ContentFlag = '0';
+                                    BindContent('addmore');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: DataSet.StatusDescription,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error"
+                            });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({
+                            title: "Failure",
+                            text: "Please try Again",
+                            icon: "error"
+                        });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    alert(response.data);
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
+        function EditContentFromTile(obj, id) {
+            debugger
+            $('#txtContentHeader').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
+            $('#divContentDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+
+            ContentFlag = id;
+            AddMoreContentFlag = 'add';
+            divContentFlag = 'add';
+            nextTab('pills-content-tab');
+        }
+
+        function DeleteContentFromTile(obj, id)
+        {
+            debugger
+            debugger
+            ContentFlag = id;
+            ShowLoader();
+            var getUrl = "/API/Content/DeleteContent";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag,p_ContentID: ContentFlag, IsActive: 0 };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            ContentFlag = '0';
+                                            BindContent('addmore');
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+        function is_valid_url(url) {
+            return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(url);
+        }
+
+        function BindURL(Description)
+        {
+            var FilePath = "";
+            var returnString = ''
+
+            if (Description != "" && Description != undefined) {
+                if (Description.split('.')[1] != undefined) {
+                    if (allowedExtensions.indexOf(Description.split('.')[1]) != -1) {
+                        FilePath = Description;
+                    }
+                    else {
+                        FilePath = Description;
+                    }
+                }
+                else {
+                    FilePath = Description;
+                }
+            }
+            if (FilePath != '' && FilePath != undefined)
+            {
+                if (is_valid_url(FilePath)) {
+                    returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
+                }
+                else {
+                    returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
+                    //returnString += "<a href=" + FilePath + " target=_blank>File</a>";
+                }
+            }
+            return returnString;
+        }
+
+        function BindContent(flag) {
+            var getUrl = "/API/Content/GetContentList";
+            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag,ContentTypeID: "", IsGift: "true", Flag: 'learningjourney' };
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(requestParams),
+                contentType: "application/json",
+                async: false,
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        debugger
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+
+                                var Contents = DataSet.Data;
+                                var tblContents = '';
+                                $('#divContentGrid').empty();
+                                if (Contents != undefined && Contents.length > 0) {
+
+                                    for (var i = 0; i < Contents.length; i++) {
+
+                                        tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
+                                        tblContents = tblContents + '<div class="tag"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
+                                        tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
+                                        tblContents = tblContents + '<div class="row">';
+                                        tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
+                                        tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
+                                        //tblContents = tblContents + '<p class="card-text">~' + Contents[i].CourseTime + ' mins</p>';
+                                        tblContents = tblContents + '</div>';
+                                        tblContents = tblContents + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
+                                        //tblContents = tblContents + '<i class="far fa-eye"></i>';
+                                        tblContents = tblContents + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + Contents[i].ContentID + ')";></i><span></span>';
+                                        tblContents = tblContents + '<i class="fas fa-edit" title="Edit" onclick="EditContentFromTile(this,' + Contents[i].ContentID + ')";></i>';
+                                        tblContents = tblContents + '</div></div></div></div></div>';
+                                    }
+                                }
+                                else {
+                                    tblContents = tblContents + '<div class="container"><h3>Content Not Found</h3></div>';
+                                }
+                                $('#divContentGrid').append(tblContents);
+
+                                if (flag == 'fromcontent') {
+                                    $("#sp" + ContentFlag).click();
+                                }
+                                else if (flag == 'nexttab') {
+                                    AddMoreContentFlag = 'bindtile';
+                                    divContentFlag = 'bindtile';
+                                    AddMore('btnAddMoreContent');
+                                    nextTab('pills-resources-tab');
+                                }
+                                else if (flag == 'addmore') {
+                                    AddMoreContentFlag = 'bindtile';
+                                    divContentFlag = 'bindtile';
+                                    AddMore('btnAddMoreContent');
+                                }
+                            }
+                            else {
+                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                }
+            });
         }
 
 
@@ -1644,6 +2122,56 @@
 
                     });
                 }
+            }
+        }
+
+        function BindResource() {
+            debugger
+            ClearFieldsAddResource();
+            ShowLoader();
+            var getUrl = "/API/Content/GetResource";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+                                    $('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
             }
         }
 

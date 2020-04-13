@@ -662,14 +662,14 @@ namespace _365_Portal.Code.DAL
         }
 
 
-        public static DataSet UpdateResource(int action, int CompID, string UserID, int TopicID, int ModuleID, string Description)
+        public static DataSet ResourceCRUD(int action, int CompID, string UserID, int TopicID, int ModuleID, string Description)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
             try
             {
                 conn.Open();
-                string stm = "spUpdateResource";
+                string stm = "spResourceCRUD";
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_Action", action);
