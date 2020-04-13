@@ -78,7 +78,7 @@ namespace _365_Portal.Admin
                 //aMe_Menu.InnerHtml = "<i class='fas fa-user'></i><span class='tooltiptext'>" + fName + "</span><span>" + fName + "</span>";
 
                 //sideNav.Style.Add("background-color", "blue");
-
+                /*
                 if (HttpContext.Current.Session["RoleName"] != null)
                 {
                     if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.superadmin)
@@ -140,6 +140,7 @@ namespace _365_Portal.Admin
                         dvAssignTopics.Visible = false;
                     }
                 }
+                */
 
                 // Change Theme Colors & Fonts..
                 var theme1 = Convert.ToString(HttpContext.Current.Session["ThemeColor"]);

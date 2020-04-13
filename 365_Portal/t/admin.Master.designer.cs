@@ -265,15 +265,6 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor menuLogout;
         
         /// <summary>
-        /// dvDashboard control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDashboard;
-        
-        /// <summary>
         /// dvUserDashboard control.
         /// </summary>
         /// <remarks>
@@ -281,15 +272,6 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUserDashboard;
-        
-        /// <summary>
-        /// dvGroups control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvGroups;
         
         /// <summary>
         /// dvUsers control.
@@ -301,22 +283,76 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUsers;
         
         /// <summary>
-        /// dvTopics control.
+        /// dvGroups control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTopics;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvGroups;
         
         /// <summary>
-        /// dvAssignTopics control.
+        /// dvUserGroupMpng control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAssignTopics;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUserGroupMpng;
+        
+        /// <summary>
+        /// dvTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTeam;
+        
+        /// <summary>
+        /// dvDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDepartment;
+        
+        /// <summary>
+        /// dvDirectorySettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDirectorySettings;
+        
+        /// <summary>
+        /// dvSubMenu_HelpCenter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvSubMenu_HelpCenter;
+        
+        /// <summary>
+        /// dvSubMenu_Support control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvSubMenu_Support;
+        
+        /// <summary>
+        /// dvSubMenu_Chat control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvSubMenu_Chat;
         
         /// <summary>
         /// body control.

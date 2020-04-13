@@ -9,7 +9,7 @@
     <div>
         <div class="theme-section">
             <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
-            <h4 class="sport" id="dvUserName" runat="server">Welcome shoumen! Let's learn something new today :)</h4>
+            <h4 class="sport" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
@@ -302,7 +302,7 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart active"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
                                     <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
@@ -568,7 +568,7 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 col-lg-4">
                                     <div class="card-body">
-                                        <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
+                                        <h5 class="card-title font-weight-bold" style="font-weight: bold" runat="server" id="dvUserName1">Welcome back, John!!</h5>
                                         <p class="card-text">Welcome to 365!</p>
                                     </div>
                                 </div>
@@ -1283,7 +1283,7 @@ $(el).removeClass("slick-slider");
                 dots: false,
                 infinite: true,
                 speed: 300,
-                slidesToShow: 5,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 centerMode: false,
                 responsive: [
