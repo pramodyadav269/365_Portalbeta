@@ -336,6 +336,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
         //}
 
+
         $scope.ActiveContainer = prevPage;
         if (prevPage == 'Content')
             $("#dvVideoRating").hide();
@@ -344,6 +345,9 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         } if (prevPage == 'Content') {
             $('#videoControl').removeClass('d-none');
             $('#videoControl').hide();
+        }
+        if (prevPage == "Module") {
+            $("#dvModuleContainer").show();
         }
     }
 
@@ -510,7 +514,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         }).then(function success(response) {
             HideLoader();
             var responseData = response.data;
-            responseData.LockedItems = ds.DS_SetClasses(responseData.LockedItems);
+            responseData.TopicTags = ds.DS_SetClasses(responseData.LockedItems);
             responseData.UnlockedItems = ds.DS_SetClasses(responseData.UnlockedItems);
             $rootScope.Module = responseData;
         });
@@ -698,7 +702,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
     }
 
     ds.DS_ChangeTopicProperty = function (type, topicId, flag) {
-        ShowLoader();
+        //ShowLoader();
         var requestParams = { Type: type, TopicID: topicId, Flag: flag };
         $http({
             method: "POST",
@@ -710,8 +714,8 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             data: requestParams,
         }).then(function success(response) {
             var responseData = response.data;
-            alert("Success");
-            HideLoader();
+            //alert("Success");
+            //  HideLoader();
         });
     }
 });
