@@ -7,18 +7,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div>
-        <div class="theme-section">
+        <div class="theme-section" ng-if="ActiveContainer =='Topic'">
             <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
             <h4 class="sport" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
-        <div class="dashboard">
-            <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'" style="display: none;">
+        <div class="dashboard" style="margin-top: -8px;">
+            <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
                 <div class="card text-white bg-dark-blue course-header">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 col-md-7 col-lg-8">
+                                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                                 <h2 class="card-title">{{SelectedTopic.Title}}</h2>
                                 <p class="card-text">{{SelectedTopic.Description}}</p>
                                 <div class="action">
@@ -34,31 +35,6 @@
                         <div class="col-sm-12 col-md-7 col-lg-8 p-0">
                             <div class="course-lesson">
                                 <div class="lesson"></div>
-                                <%--  <div class="lesson">
-                                    <div class="card shadow-sm" onclick="viewLessonContent()">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Understand Custom & Standard Objects</h5>
-                                            <p class="card-text">~15 mins</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lesson">
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Create Object Relationships</h5>
-                                            <p class="card-text">~15 mins</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="lesson">
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Work with Schema Builder</h5>
-                                            <p class="card-text">~15 mins</p>
-                                        </div>
-                                    </div>
-                                </div>--%>
-
                                 <div class="lesson" ng-repeat="module in Module.UnlockedItems">
                                     <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
                                         <div class="card-body">
@@ -67,23 +43,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <%--  <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
-                                    <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
-                                        <div class="card-icon">
-                                            <img src="../INCLUDES/Asset/images/sun.png">
-                                            <span class="point">+{{module.LessonPoints}} Points</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{module.Title}}</h5>
-                                            <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(module.LessonTime) }}</span></div>
-                                            <p class="card-text">{{module.Description}}</p>
-                                            <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
-                                            <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
-                                        </div>
-                                    </div>
-                                </div>--%>
-
                                 <div class="lesson"></div>
                             </div>
                         </div>
@@ -93,7 +52,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">+{{SelectedTopic.Points}} Points</h5>
                                         <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
-                                        <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.LessonTime) }}</p>
+                                        <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
                                         <div class="point-progress">
                                             <span>{{(SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%'}}</span>
                                             <div class="progress">
@@ -106,11 +65,12 @@
                                         <div class="tag">
                                             <p class="card-text"><i class="fas fa-tag rotate-90deg"></i>Tags</p>
                                             <div class="tag-item">
-                                                <span>Admin</span>
+                                                <span ng-repeat="tag in Module.TopicTags">{{tag.TagName}}</span>
+                                                <%-- <span>Admin</span>
                                                 <span>Developer</span>
                                                 <span>Beginner</span>
                                                 <span>Database</span>
-                                                <span>Salesforce Platform</span>
+                                                <span>Salesforce Platform</span>--%>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +92,7 @@
             <section id="dvContentsContainer" ng-show="ActiveContainer =='Content'">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#" onclick="GoBack('Module')">{{SelectedTopic.Title}}</a></li>
+                        <li class="breadcrumb-item"><a href="#" ng-click="GoBack('Module')">{{SelectedTopic.Title}}</a></li>
                         <li class="breadcrumb-item active">{{SelectedModule.Title}}</li>
                     </ol>
                 </nav>
@@ -302,7 +262,7 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart active"></i></span>
+                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
                                     <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
@@ -1277,11 +1237,11 @@
         });
 
         function InitSlickSlider(el) {
-$(el).removeClass("slick-initialized");
-$(el).removeClass("slick-slider");
+            $(el).removeClass("slick-initialized");
+            $(el).removeClass("slick-slider");
             $(el).slick({
                 dots: false,
-                infinite: true,
+                infinite: false,
                 speed: 300,
                 slidesToShow: 4,
                 slidesToScroll: 1,

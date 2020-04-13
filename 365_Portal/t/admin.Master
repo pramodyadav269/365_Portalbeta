@@ -505,83 +505,85 @@
             <!-- Links -->
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" d="dvDashboard" runat="server" visible="false" href="dashboard.aspx">Home</a>
+                    <a class="nav-link" id="dvDashboard" runat="server" visible="false" href="dashboard.aspx">Home</a>
                     <a class="nav-link" id="dvUserDashboard" runat="server" visible="false" href="default.aspx">Home</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Learn</a>
+                    <a class="nav-link" href="#" id="dvLearn" runat="server" visible="false">Learn</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#">My Learning</a>
-                            <a class="list-group-item" href="#">Team Learning</a>
-                            <a class="list-group-item" href="#">Learn New Skills</a>
-                            <a class="list-group-item" href="#">Discover Learning</a>
+                            <a class="list-group-item" href="#" runat="server" id="dvMyLearning" visible="false">My Learning</a>
+                            <a class="list-group-item" href="#" runat="server" id="dvTeamLearning" visible="false">Team Learning</a>
+                            <a class="list-group-item" href="#" runat="server" id="dvLearnNewSkills" visible="false">Learn New Skills</a>
+                            <a class="list-group-item" href="#" runat="server" id="dvDiscoverLearning" visible="false">Discover Learning</a>
+                            <a class="list-group-item" href="assign_topics.aspx" runat="server" id="dvAssignCourses" visible="false">Assign Courses</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" d="dvTopics" runat="server" visible="false" href="Default.aspx">Courses</a>
+                    <a class="nav-link" id="dvTopics" runat="server" visible="false" href="Default.aspx">Courses</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Users and Teams</a>
+                    <a class="nav-link" href="#" id="dvUsersNTeams" runat="server" visible="false">Users and Teams</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
+                             <a class="list-group-item" id="dvOrganizations" runat="server" visible="false" href="Organization.aspx">Organizations</a>
                             <a class="list-group-item" id="dvUsers" runat="server" visible="false" href="Users.aspx">Users</a>
                             <a class="list-group-item" id="dvGroups" runat="server" visible="false" href="Groups.aspx">Groups</a>
                             <a class="list-group-item" id="dvUserGroupMpng" runat="server" visible="false" href="UserGroupMapping.aspx">User Group Mapping</a>
-                            <a class="list-group-item" id="dvTeam" runat="server" visible="false" href="#">Team</a>
-                            <a class="list-group-item" id="dvDepartment" runat="server" visible="false" href="#">Department</a>
+                            <a class="list-group-item" id="dvTeam" runat="server" visible="false" href="AddTeam.aspx">Team</a>
+                            <a class="list-group-item" id="dvDepartment" runat="server" visible="false" href="Departments.aspx">Department</a>
                             <a class="list-group-item" id="dvDirectorySettings" runat="server" visible="false" href="comingsoon.aspx">Directory Settings</a>
                         </div>
                     </div>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Community</a>
+                    <a class="nav-link" href="#" id="dvCommunity" runat="server" visible="false">Community</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#">Connect with other Learners</a>
-                            <a class="list-group-item" href="#">Discover new opportunities</a>
-                            <a class="list-group-item" href="#">Fun with Quizzes</a>
+                            <a class="list-group-item" href="#" id="dvConnectWithOtherLearners" runat="server" visible="false">Connect with other Learners</a>
+                            <a class="list-group-item" href="#" id="dvDiscoverNewOpportunities" runat="server" visible="false">Discover new opportunities</a>
+                            <a class="list-group-item" href="#" id="dvFunWithQuizzes" runat="server" visible="false">Fun with Quizzes</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Admin Console</a>
+                    <a class="nav-link" href="#" id="dvAdminConsole" runat="server" visible="false">Admin Console</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#">Content</a>
+                            <a class="list-group-item" id="dvContent" runat="server" visible="false" href="#">Content</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Insights</a>
+                    <a class="nav-link" href="#" id="dvInsights" runat="server" visible="false">Insights</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#">Report 1</a>
-                            <a class="list-group-item" href="#">Report 2</a>
+                            <a class="list-group-item" href="UserCourseMgmt.aspx" id="dvReport1" runat="server" visible="false">Report 1</a>
+                            <a class="list-group-item" href="UserCourseStatus.aspx" id="dvReport2" runat="server" visible="false">Report 2</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Settings</a>
+                    <a class="nav-link" href="#" id="dvSettings" runat="server" visible="false">Settings</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#">My Account</a>
-                            <a class="list-group-item" href="#">Organization Settings</a>
-                            <a class="list-group-item" href="#">Languages</a>
-                            <a class="list-group-item" href="#">Account Settings</a>
-                            <a class="list-group-item" href="#">Integrations</a>
-                            <a class="list-group-item" href="#">Customize</a>
-                            <a class="list-group-item" href="#">Notifications</a>
-                            <a class="list-group-item" href="#">Sessions</a>
-                            <a class="list-group-item" href="#">Activity Logs</a>
-                            <a class="list-group-item" href="#">Billing</a>
+                            <a class="list-group-item" href="profile.aspx" id="dvMyAccount" runat="server" visible="false">My Account</a>
+                            <a class="list-group-item" href="#" id="dvOrganizationSettings" runat="server" visible="false">Organization Settings</a>
+                            <a class="list-group-item" href="#" id="dvLanguages" runat="server" visible="false">Languages</a>
+                            <a class="list-group-item" href="#" id="dvAccountSettings" runat="server" visible="false">Account Settings</a>
+                            <a class="list-group-item" href="#" id="dvIntegrations" runat="server" visible="false">Integrations</a>
+                            <a class="list-group-item" href="#" id="dvCustomize" runat="server" visible="false">Customize</a>
+                            <a class="list-group-item" href="msgnotification.aspx" id="dvNotifications" runat="server" visible="false">Notifications</a>
+                            <a class="list-group-item" href="#" id="dvSessions" runat="server" visible="false">Sessions</a>
+                            <a class="list-group-item" href="#" id="dvActivityLogs" runat="server" visible="false">Activity Logs</a>
+                            <a class="list-group-item" href="#" id="dvBilling" runat="server" visible="false">Billing</a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#">Help</a>
+                    <a class="nav-link" href="#" id="dvHelp" runat="server" visible="false">Help</a>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
                             <a class="list-group-item" id="dvSubMenu_HelpCenter" runat="server" visible="false" href="http://support.365staffapp.com/en">Help Center</a>

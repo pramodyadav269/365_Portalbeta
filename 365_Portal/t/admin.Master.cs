@@ -142,6 +142,131 @@ namespace _365_Portal.Admin
                 }
                 */
 
+                if (HttpContext.Current.Session["RoleName"] != null)
+                {
+                    if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.superadmin)
+                    {
+                        dvDashboard.Visible = true;
+                        dvLearn.Visible = true;
+                        dvMyLearning.Visible = true;
+                        dvTeamLearning.Visible = true;
+                        dvLearnNewSkills.Visible = true;
+                        dvDiscoverLearning.Visible = true;
+                        dvTopics.Visible = true;
+                        dvUsersNTeams.Visible = true;
+                        dvUsers.Visible = true;
+                        dvOrganizations.Visible = true;
+                        dvDirectorySettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvConnectWithOtherLearners.Visible = true;
+                        dvDiscoverNewOpportunities.Visible = true;
+                        dvFunWithQuizzes.Visible = true;
+
+                        dvSettings.Visible = true;
+                        dvMyAccount.Visible = true;
+                        dvOrganizationSettings.Visible = true;
+                        dvLanguages.Visible = true;
+                        dvAccountSettings.Visible = true;
+                        dvIntegrations.Visible = true;
+                        dvSessions.Visible = true;
+                        dvActivityLogs.Visible = true;
+                        dvBilling.Visible = true;
+
+                        dvHelp.Visible = true;
+                        dvSubMenu_HelpCenter.Visible = true;
+                        dvSubMenu_Support.Visible = true;
+                        dvSubMenu_Chat.Visible = true;
+
+                    }
+                    else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.companyadmin)
+                    {
+                        dvUserDashboard.Visible = true;
+                        dvTopics.Visible = true;
+
+                        dvLearn.Visible = true;
+                        dvMyLearning.Visible = true;
+                        dvTeamLearning.Visible = true;
+                        dvLearnNewSkills.Visible = true;
+                        dvDiscoverLearning.Visible = true;
+                        dvAssignCourses.Visible = true;
+
+                        dvInsights.Visible = true;
+                        dvReport1.Visible = true;
+                        dvReport2.Visible = true;
+
+                        dvUsersNTeams.Visible = true;
+                        dvUsers.Visible = true;
+                        dvGroups.Visible = true;
+                        dvUserGroupMpng.Visible = true;
+                        dvTeam.Visible = true;
+                        dvDepartment.Visible = true;
+                        dvDirectorySettings.Visible = true;
+
+                        dvSessions.Visible = true;
+                        dvActivityLogs.Visible = true;
+                        dvBilling.Visible = true;
+                        dvCustomize.Visible = true;
+                        dvIntegrations.Visible = true;
+                        dvAccountSettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvConnectWithOtherLearners.Visible = true;
+                        dvDiscoverNewOpportunities.Visible = true;
+                        dvFunWithQuizzes.Visible = true;
+
+                        dvAdminConsole.Visible = true;
+                        dvContent.Visible = true;
+
+                        dvSettings.Visible = true;
+                        dvMyAccount.Visible = true;
+                        dvLanguages.Visible = true;
+                        dvNotifications.Visible = true;
+
+                        dvSubMenu_HelpCenter.Visible = true;
+                        dvSubMenu_Support.Visible = true;
+                        dvSubMenu_Chat.Visible = true;
+                    }
+                    else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.subadmin)
+                    {
+                        dvUserDashboard.Visible = true;
+                        dvTopics.Visible = true;
+                        dvCommunity.Visible = true;
+                        dvConnectWithOtherLearners.Visible = true;
+                        dvDiscoverNewOpportunities.Visible = true;
+                        dvFunWithQuizzes.Visible = true;
+
+                        dvAdminConsole.Visible = true;
+                        dvContent.Visible = true;
+
+                        dvSettings.Visible = true;
+                        dvMyAccount.Visible = true;
+                        dvLanguages.Visible = true;
+                        dvNotifications.Visible = true;
+
+                        dvSubMenu_HelpCenter.Visible = true;
+                        dvSubMenu_Support.Visible = true;
+                        dvSubMenu_Chat.Visible = true;
+                    }
+                    else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.enduser)
+                    {
+                        dvUserDashboard.Visible = true;
+                        dvTopics.Visible = true;
+                        dvCommunity.Visible = true;
+                        dvConnectWithOtherLearners.Visible = true;
+                        dvDiscoverNewOpportunities.Visible = true;
+                        dvFunWithQuizzes.Visible = true;
+                        dvSettings.Visible = true;
+                        dvMyAccount.Visible = true;
+                        dvLanguages.Visible = true;
+                        dvNotifications.Visible = true;
+
+                        dvSubMenu_HelpCenter.Visible = true;
+                        dvSubMenu_Support.Visible = true;
+                        dvSubMenu_Chat.Visible = true;
+                    }
+                }
+
                 // Change Theme Colors & Fonts..
                 var theme1 = Convert.ToString(HttpContext.Current.Session["ThemeColor"]);
                 var theme2 = Convert.ToString(HttpContext.Current.Session["ThemeColor2"]);
