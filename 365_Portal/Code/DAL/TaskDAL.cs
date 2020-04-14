@@ -67,6 +67,7 @@ namespace _365_Portal.Code.DAL
             catch (Exception ex)
             {
                 Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw ex;
             }
             finally
             {
@@ -94,6 +95,7 @@ namespace _365_Portal.Code.DAL
             catch (Exception ex)
             {
                 Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw ex;
             }
             finally
             {
