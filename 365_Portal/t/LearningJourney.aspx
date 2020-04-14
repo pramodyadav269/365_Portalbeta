@@ -257,7 +257,7 @@
                             <div class="card-body p-0">
                                 <div class="col-12 col-sm-12">
                                     <div class="row" id="divQuizAdd">
-                                        <div class="col-12 col-sm-12 col-md-8 col-lg-9">
+                                        <div class="col-12 col-sm-12">
                                             <div class="row">
                                                 <div class="col-sm-12 mt-3">
                                                     <div class="form-group">
@@ -271,16 +271,29 @@
                                                         <small id="txtQuizDescriptionHelp" class="form-text">Keep your description brief but compelling</small>
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-md-3" id="trScoreSummary">
+                                                    <div class="form-group">
+                                                        <label class="float-left">Total Score: <span id="lblTotalScore">0</span></label>
+                                                        <span class="float-right" id="lblPassingScore"></span>
+                                                        <input type="range" class="custom-range" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
+                                                        <span id="lblPercentage">0%</span>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
+                                        <%--<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Passing Percentage</label>
                                                     <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--%>
                                     </div>
 
                                     <div class="row" id="divQuizGrid" style="display:none;">
@@ -323,8 +336,8 @@
                 <a style="display:none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();" >Add Quiz</a>
 
                 <%--Quiz--%>
-                <a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>
-                <a style="display:none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuiz();" >Add Quiz</a>
+                <%--<a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>--%>
+                <a style="display:none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuizFinal();" >Add Quiz</a>
 
             </div>
         </div>
@@ -403,6 +416,11 @@
         var divContentFlag = 'add';
         var divQuizFlag = 'add';
 
+        var ContentContentTypeID = '1';
+        var QuizContentTypeID = '5';
+        var passingScore = 0;
+        var pasingPercentage = 0;
+
         $(document).ready(function () {
             debugger
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
@@ -463,7 +481,7 @@
                 $('#btnAddMoreContent').hide();
                 $('#btnAddContent').hide();
                 $('#btnAddResource').hide();
-                $('#btnAddMoreQuiz').hide();
+                //$('#btnAddMoreQuiz').hide();
                 $('#btnAddQuiz').hide();
             }
             else if (id == 'pills-lesson') {
@@ -474,7 +492,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
                     if (divLessonFlag == 'new') {
@@ -518,7 +536,7 @@
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
                     if (divContentFlag == 'new') {
@@ -581,7 +599,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').show();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {
@@ -615,7 +633,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').show();
+                    //$('#btnAddMoreQuiz').show();
                     $('#btnAddQuiz').show();
 
                     if (divQuizFlag == 'new') {
@@ -816,6 +834,7 @@
                     ContentFlag = '0';
                 }
             }
+            /*
             else if (id == 'btnAddMoreQuiz') {
                 $('#btnAddMoreQuiz').show();
                 $('#btnAddQuiz').hide();
@@ -838,6 +857,7 @@
                     AddMoreQuizFlag = 'add';
                 }
             }
+            */
         }
 
         function nextTab(tabID)
@@ -1179,11 +1199,14 @@
                             else {
                                 $("#rbGlobal").prop("checked", true)
                             }
-                            $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
 
-                            //$("#divCourseLogo").addClass('img');
-                            //$("#divCourseLogo").append('<img src="" class="img-fluid">');
-
+                            if (EditTopic[0].FilePath != undefined && EditTopic[0].FilePath != null && EditTopic[0].FilePath != '')
+                            {
+                                $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
+                                $("#divCourseLogo").addClass('img');
+                                $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
+                            }
+                            
                             GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
 
                             nextTab('pills-course-tab');
@@ -1209,8 +1232,8 @@
                     HideLoader();
                 }
             });
-        }
-        
+        }        
+
 
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
@@ -2247,7 +2270,18 @@
         function ClearFieldsAddQuiz() {
             $('#txtQuizTitle').val('');
             $('#txtQuizDescription').val('');
-            $('#txtPassingPercentage').val('');
+            $('#txtPassingScorePercentage').val('');
+            $('#lblTotalScore').text('');
+            $('#lblPassingScore').text('Passing Score: 0');
+            $('#lblPercentage').text('');
+            //$('#txtPassingPercentage').val('');
+        }
+
+        function ChangePercentage(val) {
+            pasingPercentage = val;
+            $("#lblPercentage").text(val + "%");
+            passingScore = Math.round((parseFloat($("#lblTotalScore").text()) * parseInt(val)) / 100);
+            $("#lblPassingScore").text("Passing Score: " + passingScore);
         }
 
         function validateAddQuiz()
@@ -2258,15 +2292,79 @@
             else if ($("#txtQuizDescription").val() == undefined || $("#txtQuizDescription").val() == '') {
                 return { error: true, msg: "Please enter Quiz Description" };
             }
-            else if ($("#txtPassingPercentage").val() == undefined || $("#txtPassingPercentage").val() == '') {
-                return { error: true, msg: "Please enter Passing Percentage" };
+            else if ($("#txtPassingScorePercentage").val() == undefined || $("#txtPassingScorePercentage").val() == '') {
+                return { error: true, msg: "Please select Passing Percentage" };
+            }
+            return true;
+        }
+
+        function AddQuizFinal() {
+            debugger
+            var result = validateAddQuiz();
+            if (result.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: result.msg,
+                    icon: "error",
+                    button: "Ok",
+                });
+            }
+            else {
+                AddQuiz('nexttab');
             }
         }
 
-        function AddQuiz()
+        function AddQuiz(flag)
         {
-            //nextTab();
+            debugger
+            ShowLoader();
+            var Title = $("#txtQuizTitle").val();
+            var Description = $("#txtQuizDescription").val();
+            var TotalScore = $("#lblTotalScore").text();
+            var PassingScore = $("#lblPassingScore").text().replace("Passing Score: ", "");
+            var PassingPercentage = $("#lblPercentage").text().replace("%", "");
+
+            var requestParams = {
+                TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: '', ContentTypeID: QuizContentTypeID, Title: Title, Description: Description, Points: '0', IsPublished: true
+                , SkipFlashcard: false, IsGift: false, TotalScore: TotalScore, PassingScore: PassingScore, PassingPercentage: PassingPercentage
+            };
+            
+            try {
+                $.ajax({
+                    method: "POST",
+                    url: "../api/Quiz/SaveContent",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                }).then(function success(response) {
+                    debugger
+                    HideLoader();
+                    var DataSet = $.parseJSON(response);                    
+                    if (DataSet != null && DataSet != "") {
+                        if (DataSet.StatusCode == "1") {
+                            Swal.fire({
+                                title: "Success",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "success"
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Failure",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "error"
+                            });
+                        }
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error"});
+            }
         }
+
+        
 
 
         function editCourseLogo(el) {
