@@ -331,6 +331,17 @@
                                     </div>
                                     <div class="card shadow-sm">
                                         <div class="card-body">
+                                            <%-- view ques --%>
+                                            <div class="row">
+                                                <div class="col-sm-12 d-flex justify-content-between align-items-center ques">
+                                                    <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
+                                                    <div class="col-sm-8 col-md-10">
+                                                        <h5 class="font-weight-bold">What is a Module</h5>
+                                                    </div> 
+                                                    <a><i class="fas fa-pen"></i></a>
+                                                </div>
+                                            </div>
+                                            <%-- edit ques --%>
                                             <div class="row">
                                                 <div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">
                                                     <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
