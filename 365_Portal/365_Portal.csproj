@@ -448,6 +448,13 @@
     <Compile Include="t\dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\courses.aspx.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\courses.aspx.designer.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1192,6 +1199,7 @@
     <Content Include="t\ContentList.aspx" />
     <Content Include="t\Contents.aspx" />
     <Content Include="t\dashboard.aspx" />
+    <Content Include="t\courses.aspx" />
     <Content Include="t\default.aspx" />
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
