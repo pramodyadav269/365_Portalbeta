@@ -294,7 +294,7 @@
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
                                 <%-- edit --%>
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" id="divQuiz">
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                                             <div class="row">
@@ -324,93 +324,102 @@
                                 </div>
 
                                 <%-- view --%>
-                                <div class="col-sm-12 quiz-wrapper">
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="font-weight-bold">Quiz</h5>
-                                        <div class="percentage-text">Passing Percentage <span>74</span></div>
-                                    </div>
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <%-- view ques --%>
-                                            <div class="row">
-                                                <div class="col-sm-12 d-flex justify-content-between align-items-center ques">
-                                                    <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <h5 class="font-weight-bold">What is a Module</h5>
-                                                    </div> 
-                                                    <a><i class="fas fa-pen"></i></a>
-                                                </div>
-                                            </div>
-                                            <%-- edit ques --%>
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">
-                                                    <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="form-group">
-                                                            <input readonly type="text" class="form-control" value="What is a Module" />
-                                                        </div>
+                                <div id="divQuestion">
+                                    <div class="col-sm-12 quiz-wrapper">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="font-weight-bold">Quiz</h5>
+                                            <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
+                                        </div>
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+                                                <%-- view ques --%>
+                                                <div class="row">
+                                                    <div class="col-sm-12 d-flex justify-content-between align-items-center ques">
+                                                        <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
+                                                        <div class="col-sm-8 col-md-10">
+                                                            <h5 class="font-weight-bold">What is a Module</h5>
+                                                        </div> 
+                                                        <a><i class="fas fa-pen"></i></a>
                                                     </div>
-                                                    <span class="correct">Correct</span>
                                                 </div>
-
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-10">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="A real life business senario" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-2">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="0" />
-                                                                </div>
+                                                <%-- edit ques --%>
+                                                <div class="row">
+                                                    <div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">
+                                                        <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
+                                                        <div class="col-sm-8 col-md-10">
+                                                            <div class="form-group">
+                                                                <input readonly type="text" class="form-control" value="What is a Module" />
                                                             </div>
                                                         </div>
+                                                        <span class="correct">Correct</span>
                                                     </div>
-                                                    <span class="checked-icon"><i class="far fa-check-circle correct"></i></span>
-                                                </div>
 
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-10">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="A single learning topic" />
+                                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                                        <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
+                                                        <div class="col-sm-8 col-md-10">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-10">
+                                                                    <div class="form-group">
+                                                                        <input readonly type="text" class="form-control" value="A real life business senario" />
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-2">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="0" />
+                                                                <div class="col-sm-3 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <input readonly type="text" class="form-control" value="0" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <span class="checked-icon"><i class="far fa-check-circle correct"></i></span>
                                                     </div>
-                                                    <span class="checked-icon"><i class="far fa-check-circle wrong"></i></span>
-                                                </div>
 
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2">
-                                                    <div class="form-group mt-2">
-                                                        <a class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>
+                                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                                        <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
+                                                        <div class="col-sm-8 col-md-10">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-10">
+                                                                    <div class="form-group">
+                                                                        <input readonly type="text" class="form-control" value="A single learning topic" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <input readonly type="text" class="form-control" value="0" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <span class="checked-icon"><i class="far fa-check-circle wrong"></i></span>
+                                                    </div>
+
+                                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2">
+                                                        <div class="form-group mt-2">
+                                                            <a class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="col-sm-12 mt-3 dropright">
-                                    <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-plus-circle"></i>Add Question
-                                    </a>
-                                    <div class="dropdown-menu quiz-element">
-                                        <a class="dropdown-item"><i class="far fa-check-square"></i>Multiple Choice</a>
-                                        <a class="dropdown-item"><i class="fas fa-dot-circle"></i>Radio Button</a>
-                                        <a class="dropdown-item"><i class="far fa-caret-square-down"></i>Dropdown</a>
+                                    <div class="col-sm-12 mt-3 dropright" id="divQuestionType" >
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus-circle"></i>Add Type
+                                        </a>
+                                        <div class="dropdown-menu quiz-element">
+                                            <a class="dropdown-item"><i class="far fa-check-square"></i>Multiple Choice</a>
+                                            <a class="dropdown-item"><i class="fas fa-dot-circle"></i>Radio Button</a>
+                                            <a class="dropdown-item"><i class="far fa-caret-square-down"></i>Dropdown</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display:none;">
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus-circle"></i>Add Question
+                                        </a>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

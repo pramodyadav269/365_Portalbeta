@@ -257,6 +257,7 @@
                             <div class="card-body p-0">
                                 
                                 <div class="col-12 col-sm-12">
+
                                     <div class="row" id="divQuizAdd">
                                         <div class="col-12 col-sm-12">
                                             <div class="row">
@@ -277,7 +278,7 @@
                                                 <div class="col-md-3" id="trScoreSummary">
                                                     <div class="form-group">
                                                         <label class="float-left">Total Score: <span id="lblTotalScore">0</span></label>
-                                                        <span class="float-right" id="lblPassingScore"></span>
+                                                        <span class="float-right" id="lblPassingScore" style="display:none;"></span>
                                                         <input type="range" class="custom-range" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
                                                         <span id="lblPercentage">0%</span>
                                                     </div>
@@ -297,93 +298,44 @@
                                         </div>--%>
                                     </div>
 
-                                    <div class="row" id="divQuizGrid" style="display:none;">
-                                        <div class="container"> 
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
+
+                                    <div id="divQuestion" >
+                                        <div class="col-sm-12 quiz-wrapper">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="font-weight-bold">Quiz</h5>
+                                                <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
                                             </div>
-                                          </div>
-                                          <br>  
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
-                                            </div>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div class="card shadow-sm">
+                                                <div class="card-body">
 
-                                <div id="divQuestion">
+                                                    <div id="divQuestionTile"></div>
+                                                    <div id="divQuestionAdd"></div>
 
-                                </div>
-
-                                <div class="col-sm-12 quiz-wrapper" >
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="font-weight-bold">Quiz</h5>
-                                        <div class="percentage-text">Passing Percentage <span>74</span></div>
-                                    </div>
-                                    <div class="card shadow-sm">
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">
-                                                    <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="form-group">
-                                                            <input readonly type="text" class="form-control" value="What is a Module" />
-                                                        </div>
-                                                    </div>
-                                                    <span class="correct">Correct</span>
-                                                </div>
-
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-10">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="A real life business senario" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-2">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="0" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span class="checked-icon"><i class="far fa-check-circle correct"></i></span>
-                                                </div>
-
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
-                                                    <div class="col-sm-8 col-md-10">
-                                                        <div class="row">
-                                                            <div class="col-sm-12 col-md-10">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="A single learning topic" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3 col-md-2">
-                                                                <div class="form-group">
-                                                                    <input readonly type="text" class="form-control" value="0" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span class="checked-icon"><i class="far fa-check-circle wrong"></i></span>
-                                                </div>
-
-                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2">
-                                                    <div class="form-group mt-2">
-                                                        <a class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
 
+                                        <div class="col-sm-12 mt-3 dropright" id="divQuestionType" >
+                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-plus-circle"></i>Add question
+                                            </a>
+                                            <div class="dropdown-menu quiz-element">
+                                                <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square" ></i>Multiple Choice</a>
+                                                <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle" ></i>Radio Button</a>
+                                                <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down" ></i>Dropdown</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display:none;">
+                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'addquestion');">
+                                                <i class="fas fa-plus-circle"></i>Add Question
+                                            </a>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -486,7 +438,7 @@
 
         var divLessonFlag = 'add';
         var divContentFlag = 'add';
-        var divQuizFlag = 'add';
+        var divQuizFlag = 'question';//quiz
 
         var ContentContentTypeID = '1';
         var QuizContentTypeID = '5';
@@ -706,11 +658,19 @@
                     $('#btnAddContent').hide();
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').show();
-                    $('#btnAddQuiz').show();
+                    //$('#btnAddQuiz').show();
 
-                    if (divQuizFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }
+                    //if (divQuizFlag == 'question')
+                    //{
+                    //    $('#btnAddQuiz').hide();
+                    //    $('#divQuestionTile').show();
+                    //    $('#divQuestionAdd').show();
+                    //}
+                    //else if (divQuizFlag == 'quiz') {
+                    //    $('#btnAddQuiz').show();
+                    //    $('#divQuestionTile').hide();
+                    //    $('#divQuestionAdd').hide();
+                    //}
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {
                     Swal.fire({
@@ -850,10 +810,7 @@
                     LessonFlag = '0';
                 }
             }
-            else if (id == 'btnAddMoreContent') {
-                //$('#btnAddMoreContent').show();
-                //$('#btnAddContent').hide();
-
+            else if (id == 'btnAddMoreContent') {                
                 if (AddMoreContentFlag == 'add') {
 
                     var result = validateAddContent();
@@ -1425,8 +1382,8 @@
                                         }
 
                                         SetProgressBar();
-                                        ClearFieldsAddLesson();
-                                        BindLesson('nexttab');
+                                        //ClearFieldsAddLesson();
+                                        //BindLesson('nexttab');
 
                                         Swal.fire({
                                             title: "Success",
@@ -1611,6 +1568,7 @@
             nextTab('pills-lesson-tab');
 
             BindResource();
+            BindQuiz();
         }
 
         function DeleteLessionFromTile(obj, id)
@@ -1711,12 +1669,13 @@
                                         tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
                                         tblModules = tblModules + '<h5 class="card-title" id="spOverview">' + Modules[i].Overview + '</h5>';                                        
                                         tblModules = tblModules + '<p class="card-text">~<span id="spCourseTime">' + Modules[i].CourseTime + '</span> mins</p>';
-                                        tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';
+                                        tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';                                        
                                         tblModules = tblModules + '</div>';
                                         tblModules = tblModules + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
                                         //tblContents = tblContents + '<i class="far fa-eye"></i>';
                                         tblModules = tblModules + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + Modules[i].ModuleID + ')";></i><span></span>';
-                                        tblModules = tblModules + '<i class="fas fa-edit" title="Edit" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";></i>';
+                                        tblModules = tblModules + '<i class="fas fa-edit" title="Edit" id="sp' + Modules[i].ModuleID + '" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";></i>';
+                                        //tblModules = tblModules + '<span id="sp' + Modules[i].ModuleID + '" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')"; style="display:none";>' + Modules[i].ModuleID + '</span>';
                                         tblModules = tblModules + '</div></div></div></div></div>';
                                     }
                                 }
@@ -2370,6 +2329,106 @@
             return true;
         }
 
+        function validateAddQuestion(obj)
+        {
+            debugger
+            if ($("#txtQuestion").val() == undefined || $("#txtQuestion").val() == '') {
+                return { error: true, msg: "Please enter Question" };
+            }
+            var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
+            var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
+            
+            if (Answer != undefined && Answer.length > 2) {
+                for (var i = 0; i < Answer.length; i++)
+                {
+                    if (Answer[i] != undefined && Answer[i].trim() != '') {
+                        break;
+                    }
+                    if (i == Answer.length - 1) {
+                        return { error: true, msg: "Please enter atleast three answer" };
+                    }
+                }
+            }
+            else {
+                return { error: true, msg: "Please enter atleast three answer" };
+            }
+
+            if (Score != undefined && Score.length > 2) {
+                for (var i = 0; i < Score.length; i++) {
+                    if (Score[i] != undefined && Score[i].trim() != '') {
+                        break;
+                    }
+                    if (i == Score.length - 1) {
+                        return { error: true, msg: "Please enter atleast three answer score" };
+                    }
+                }
+            }
+            else {
+                return { error: true, msg: "Please enter atleast three answer score" };
+            }
+        }
+
+        function BindQuiz() {
+            debugger
+            ClearFieldsAddResource();
+            ShowLoader();
+            var getUrl = "/API/Quiz/GetQuiz";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    QuizFlag = DataSet.Data[0].ContentID;
+
+                                    $('#txtQuizTitle').val(DataSet.Data[0].Title);
+                                    $('#txtQuizDescription').val(DataSet.Data[0].Description);
+                                    $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingScore);
+                                    $('#lblTotalScore').text(DataSet.Data[0].TotalScore);
+                                    $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
+                                    $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
+                                }
+                                else {
+                                    ClearFieldsAddQuiz();
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
         function AddQuizFinal() {
             debugger
             var result = validateAddQuiz();
@@ -2397,7 +2456,7 @@
             var PassingPercentage = $("#lblPercentage").text().replace("%", "");
 
             var requestParams = {
-                TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: '', ContentTypeID: QuizContentTypeID, Title: Title, Description: Description, Points: '0', IsPublished: true
+                TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: QuizFlag, ContentTypeID: QuizContentTypeID, Title: Title, Description: Description, Points: '0', IsPublished: true
                 , SkipFlashcard: false, IsGift: false, TotalScore: TotalScore, PassingScore: PassingScore, PassingPercentage: PassingPercentage
             };
             
@@ -2413,20 +2472,21 @@
                     HideLoader();
                     var DataSet = $.parseJSON(response);                    
                     if (DataSet != null && DataSet != "") {
-                        if (DataSet.StatusCode == "1") {
-                            Swal.fire({
-                                title: "Success",
-                                text: DataSet.Data[0].ReturnMessage,
-                                icon: "success"
-                            });
-                        }
-                        else {
-                            Swal.fire({
-                                title: "Failure",
-                                text: DataSet.Data[0].ReturnMessage,
-                                icon: "error"
-                            });
-                        }
+                        //Added on 14 APR
+                        //if (DataSet.StatusCode == "1") {
+                        //    Swal.fire({
+                        //        title: "Success",
+                        //        text: DataSet.Data[0].ReturnMessage,
+                        //        icon: "success"
+                        //    });
+                        //}
+                        //else {
+                        //    Swal.fire({
+                        //        title: "Failure",
+                        //        text: DataSet.Data[0].ReturnMessage,
+                        //        icon: "error"
+                        //    });
+                        //}
                     }
                 });
             }
@@ -2436,7 +2496,239 @@
             }
         }
 
-        
+        function AddQuestion(obj,flag)
+        {
+            debugger            
+            var result = validateAddQuestion(obj);
+            if (result.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: result.msg,
+                    icon: "error",
+                    button: "Ok",
+                });
+            }
+            else {
+
+                AddQuiz('');
+
+                var Question = $("#txtQuestion").val();
+                var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
+                var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
+                
+                var Ans = [];
+                for (var i = 0; i < Score.length; i++)
+                {
+                    if (i == 0) {
+                        Ans.Push('1');
+                    }
+                    else {
+                        Ans.Push('0');
+                    }
+                }
+
+                
+
+                var index = Questions.length + 1;
+                var newQuestion = {
+                    "ContentTypeID": QuizContentTypeID
+                    , Type: AnswerTypeCode
+                    , "QuestionID": 0
+                    , "ContentID": QuizFlag
+                    , "SrNo": index
+                    , "Title": Question
+                    , "QType": AnswerTypeCode
+                    , "IsBox": false
+                    //, "MaxScore": GetMaxScore(AnswerOptions)
+                    , "MaxScore": 10
+                    , "AnswerOptions": AnswerOptions
+                    , "Action":1
+                };
+
+                ShowLoader();
+                var requestParams = newQuestion;
+                $.ajax({
+                    method: "POST",
+                    url: "../api/Quiz/ManageQuestion",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                }).then(function success(response) {
+                    HideLoader();
+                    Swal.fire({
+                        title: 'Success',
+                        icon: 'success',
+                        html: "Question details updated successfully.",
+                        showConfirmButton: true,
+                        showCloseButton: true
+                    });
+                    BindQuiz(false);
+                });
+            }
+        }
+
+        //var QuizFlag = 'addquestion';
+        function ManageQuizButton(flag) {
+            debugger
+            if (flag == 'addquestion') {
+                $('#divQuestionType').show();
+                $('#divAddQuestion').hide();
+            }
+            else if (flag == 'questiontype') {
+                $('#divQuestionType').hide();
+                $('#divAddQuestion').show();
+            }
+
+        }
+
+        function BindQuestion()
+        {
+            debugger
+            //Bind Question Tile
+            var divQuestionTile = '<div class="col-sm-12 d-flex justify-content-between align-items-center ques">' +
+            divQuestionTile + divQuestionTile + '<span class="sr" id="spQuestionId"><i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>' +
+            divQuestionTile + divQuestionTile + '<div class="col-sm-8 col-md-10">' +
+            divQuestionTile + divQuestionTile + '<h5 class="font-weight-bold" id="spQuestion"></h5>' +
+            divQuestionTile + divQuestionTile + '</div><a><i class="fas fa-pen"></i></a></div>';
+
+            $('#divQuestionTile').empty().append(divQuestionTile);
+        }
+
+        var addClass = '';
+        var AnswerTypeCode = '';
+        function ShowQuestion(AnswerType)
+        {
+            AddQuiz('');
+
+            if (AnswerType == 'multiple') {
+                addClass = 'far fa-check-square';
+                AnswerTypeCode = "1";
+            }
+            else if (AnswerType == 'dropdown') {
+                addClass = 'far fa-caret-square-down';
+                AnswerTypeCode = "2";
+            }
+            else if (AnswerType == 'radio') {
+                addClass = 'fas fa-dot-circle';
+                AnswerTypeCode = "3";
+            }
+            else {
+                Swal.fire({ title: "Alert", text: result.msg, icon: "error", button: "Ok" });
+                return false;
+            }
+
+            ManageQuizButton('questiontype');
+
+            $('#divQuestionType').hide();
+            $('#divAddQuestion').show();
+
+            $('#txtQuestion').val('');            
+
+            //Bind question text field
+            var divQuestionAdd = '<div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">'+
+                                 '<span class="sr">Q<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>'+
+                                 '<div class="col-sm-8 col-md-10">'+
+                                 '<div class="form-group">'+
+                                 '<input type="text" class="form-control" value="" id="txtQuestion" placeholder="Enter Question"/>'+
+                                 '</div></div><span class="correct">Correct</span></div>';
+
+            //Bind Add dynamic answer text field
+            divQuestionAdd = divQuestionAdd + '<div id="divAnswer">'+
+                                              '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                              '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                                              '<div class="col-sm-8 col-md-10">' +
+                                              '<div class="row">' +
+                                              '<div class="col-sm-12 col-md-10">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" class="form-control" value="" id="txtAnswer"/>' +
+                                              '</div></div>' +
+                                              '<div class="col-sm-3 col-md-2">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" id="txtScore" class="form-control" value="0" />' +
+                                              '</div></div></div></div>' +
+                                              '<span class="checked-icon"><i class="far fa-check-circle correct" id="ansFlag" onclick="changeAnsFlag(this)"></i></span></div>' +
+
+                                              '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                              '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                                              '<div class="col-sm-8 col-md-10">' +
+                                              '<div class="row">' +
+                                              '<div class="col-sm-12 col-md-10">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" class="form-control" value="" id="txtAnswer"/>' +
+                                              '</div></div>' +
+                                              '<div class="col-sm-3 col-md-2">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" id="txtScore" class="form-control" value="0" />' +
+                                              '</div></div></div></div>' +
+                                              '<span class="checked-icon"><i class="far fa-check-circle correct" id="ansFlag" onclick="changeAnsFlag(this)"></i></span></div>' +
+
+                                              '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                              '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                                              '<div class="col-sm-8 col-md-10">' +
+                                              '<div class="row">' +
+                                              '<div class="col-sm-12 col-md-10">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" class="form-control" value="" id="txtAnswer"/>' +
+                                              '</div></div>' +
+                                              '<div class="col-sm-3 col-md-2">' +
+                                              '<div class="form-group">' +
+                                              '<input type="text" id="txtScore" class="form-control" value="0" />' +
+                                              '</div></div></div></div>' +
+                                              '<span class="checked-icon"><i class="far fa-check-circle correct" id="ansFlag" onclick="changeAnsFlag(this)"></i></span></div>' +
+
+                                              '</div>';
+
+            //Bind Add more answer button
+            divQuestionAdd = divQuestionAdd + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2">' +
+                                              '<div class="form-group mt-2">' +
+                                              '<a id="btnAddAnswer" onclick="AddAnswer();" class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>' +
+                                              '</div></div>';
+            //Bind Entire Add question div
+            $('#divQuestionAdd').empty().append(divQuestionAdd);
+
+        }
+
+        function changeAnsFlag(obj)
+        {
+            debugger
+            if ($(obj).hasClass('fa-check-circle')) {
+                $(obj).removeClass('far');
+                $(obj).removeClass('fa-check-circle');
+                $(obj).removeClass('correct');
+
+                $(obj).addClass('fal');
+                $(obj).addClass('fa-times-circle');
+            }
+            else {
+                $(obj).removeClass('fal');
+                $(obj).removeClass('fa-times-circle');
+
+                $(obj).addClass('far');
+                $(obj).addClass('fa-check-circle');
+                $(obj).addClass('correct');
+            }
+            
+        }
+                
+        function AddAnswer()
+        {
+            debugger            
+            var AddAnswer = '';
+            AddAnswer = AddAnswer + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                                    '<div class="col-sm-8 col-md-10">' +
+                                    '<div class="row">' +
+                                    '<div class="col-sm-12 col-md-10">' +
+                                    '<div class="form-group">' +
+                                    '<input type="text" class="form-control" value="" id="txtAnswer"/>' +
+                                    '</div></div>' +
+                                    '<div class="col-sm-3 col-md-2">' +
+                                    '<div class="form-group">' +
+                                    '<input type="text" id="txtScore" class="form-control" value="0" />' +
+                                    '</div></div></div></div>' +
+                                    '<span class="checked-icon"><i class="far fa-check-circle correct" id="ansFlag" onclick="changeAnsFlag(this)"></i></span></div>';
+            $('#divAnswer').append(AddAnswer);
+        }
 
 
         function editCourseLogo(el) {

@@ -369,6 +369,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet QuizCRUD(int action, int CompID, string UserID, int TopicID, int ModuleID, string Description)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.QuizCRUD(action, CompID, UserID, TopicID, ModuleID, Description);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
     }
 
 
