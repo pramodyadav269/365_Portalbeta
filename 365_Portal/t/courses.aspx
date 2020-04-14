@@ -5,10 +5,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div>
-        <div class="container-fluid dashboard">
+        <div class="container courses">
             <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
-                <div id="dvMyTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in AllTopics">
+                <div id="dvMyTopics" class="row content">
+                    <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AllTopics">
                         <div class="card bc-blue">
                             <div class="card-icon">
                                 <img src="../INCLUDES/Asset/images/sun.png">

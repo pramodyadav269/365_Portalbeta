@@ -1522,3 +1522,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     text-transform: none; }
     .dropright .dropdown-menu .dropdown-item .svg-inline--fa {
       font-size: 18px; }
+
+.courses {
+  padding-top: 4rem;
+  padding-bottom: 4rem; }
+  .courses .content .content-item {
+    margin-right: 0; }
