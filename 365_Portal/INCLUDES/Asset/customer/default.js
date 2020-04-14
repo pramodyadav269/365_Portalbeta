@@ -6,6 +6,7 @@ var allContents = [];
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
     objDs = DataService;
     objDs.DS_GetUserTopics("");
+    objDs.DS_GetAllTopics("");
     $("#dvTopicContainer").hide();
 
     $scope.ActiveContainer = "Topic";
@@ -385,6 +386,25 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 //COMMON SERVICE OPERATIONS
 app.service("DataService", function ($http, $rootScope, $compile) {
     var ds = this;
+
+    ds.DS_GetAllTopics = function (searchText) {
+        ShowLoader();
+        var requestParams = { TopicID: "", TopicTitle: "", TopicDescription: "", IsPublished: "", SrNo: "", MinUnlockedModules: "", UserID: "", IsActive: "" };
+        $http({
+            method: "POST",
+            url: "../API/Content/GetTopics",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                "Authorization": "Bearer " + accessToken
+            },
+            data: JSON.stringify(requestParams),
+
+        }).then(function success(response) {
+            HideLoader();
+            var responseData = response.data;
+            $rootScope.AllTopics = responseData.Data;
+        });
+    }
 
     ds.DS_GetUserTopics = function (searchText) {
         ShowLoader();
