@@ -4,8 +4,20 @@ var allContents = [];
 
 // CONTROLLER FUNCTIONS
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
+
+    var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
     objDs = DataService;
-    objDs.DS_GetUserTopics("");
+
+    if (currentPage.indexOf('courses.aspx') > -1) {
+        if (userRole == "enduser")
+            objDs.DS_GetUserTopics("", userRole);
+        else
+            objDs.DS_GetAllTopics("");
+    }
+    else if (currentPage.indexOf('default.aspx') > -1) {
+        objDs.DS_GetUserTopics("", "");
+    }
+
     $("#dvTopicContainer").hide();
 
     $scope.ActiveContainer = "Topic";
@@ -13,7 +25,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     $scope.ColorIndex = 1;
 
     $scope.SearchTopics = function () {
-        objDs.DS_GetUserTopics($scope.SearchText);
+        objDs.DS_GetUserTopics($scope.SearchText, "");
     }
 
     $scope.trustAsHtml = function (html) {
@@ -85,15 +97,17 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GetContentsByModule = function (topicId, moduleId) {
+
         $scope.ActiveContainer = "Content";
         $scope.SelectedModule = $rootScope.Module.UnlockedItems.filter(function (v) {
             return moduleId == v.ModuleID;
         })[0];
+        $scope.SelectedContent = { Title: "Learning Objectives", Description: $scope.SelectedModule.Overview };
         objDs.DS_GetContentsByModule(topicId, moduleId, true);
     }
 
-    $scope.DisplayLearningObjectives = function (cntrl, learningObjective) {
-        $scope.SelectedContent = { Description: learningObjective };
+    $scope.DisplayLearningObjectives = function (cntrl, title, learningObjective) {
+        $scope.SelectedContent = { Title: title, Description: learningObjective };
         $(".list-group-item-action").removeClass("active");
         $(cntrl).addClass("active");
     }
@@ -336,6 +350,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
         //}
 
+
         $scope.ActiveContainer = prevPage;
         if (prevPage == 'Content')
             $("#dvVideoRating").hide();
@@ -344,6 +359,9 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         } if (prevPage == 'Content') {
             $('#videoControl').removeClass('d-none');
             $('#videoControl').hide();
+        }
+        if (prevPage == "Module") {
+            $("#dvModuleContainer").show();
         }
     }
 
@@ -361,6 +379,8 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GetTopicTime = function (timeHrsMin) {
+        if (timeHrsMin == null)
+            return "0 hr 0m";
         var arrHrsMins = timeHrsMin.split(':');
         if (arrHrsMins.length == 1) {
             return arrHrsMins[0] + " hr";
@@ -376,13 +396,39 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
     }
 
+    $scope.GetCompletedPercentage = function (completed, total) {
+        return parseInt((completed / total) * 100) + '%'
+    }
+
+    $scope.EditTopic = function (topicId) {
+        window.location.href = 'LearningJourney.aspx?topic=' + topicId;
+    }
 });
 
 //COMMON SERVICE OPERATIONS
 app.service("DataService", function ($http, $rootScope, $compile) {
     var ds = this;
 
-    ds.DS_GetUserTopics = function (searchText) {
+    ds.DS_GetAllTopics = function (searchText) {
+        ShowLoader();
+        var requestParams = { TopicID: "", TopicTitle: "", TopicDescription: "", IsPublished: "", SrNo: "", MinUnlockedModules: "", UserID: "", IsActive: "" };
+        $http({
+            method: "POST",
+            url: "../API/Content/GetTopics",
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8',
+                "Authorization": "Bearer " + accessToken
+            },
+            data: JSON.stringify(requestParams),
+
+        }).then(function success(response) {
+            HideLoader();
+            var responseData = response.data;
+            $rootScope.AllTopics = responseData.Data;
+        });
+    }
+
+    ds.DS_GetUserTopics = function (searchText, userRole) {
         ShowLoader();
         var requestParams = { SearchText: searchText };
         $http({
@@ -439,7 +485,6 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvLatestTopics").show();
             }
 
-
             $rootScope.PopularCourses = responseData.Data.Data4; // Popular Courses
             if ($rootScope.PopularCourses.length == 0) {
                 $("#dvPopularTopicsTitle").hide();
@@ -457,7 +502,16 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $.merge(allTopics, $rootScope.LatestCourses);
             $.merge(allTopics, $rootScope.PopularCourses);
 
-            $rootScope.Topics = allTopics;
+            if (userRole == "enduser") {
+                $rootScope.AllTopics = allTopics;
+                angular.forEach(jsonObject, function (value, key) {
+                    value.CanEdit = 0;
+                });
+            }
+            else
+                $rootScope.Topics = allTopics;
+
+            $rootScope.$apply();
 
             //$rootScope.Topics = ds.DS_SetClasses(responseData.Data);
         });
@@ -510,7 +564,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         }).then(function success(response) {
             HideLoader();
             var responseData = response.data;
-            responseData.LockedItems = ds.DS_SetClasses(responseData.LockedItems);
+            responseData.TopicTags = ds.DS_SetClasses(responseData.LockedItems);
             responseData.UnlockedItems = ds.DS_SetClasses(responseData.UnlockedItems);
             $rootScope.Module = responseData;
         });
@@ -698,7 +752,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
     }
 
     ds.DS_ChangeTopicProperty = function (type, topicId, flag) {
-        ShowLoader();
+        //ShowLoader();
         var requestParams = { Type: type, TopicID: topicId, Flag: flag };
         $http({
             method: "POST",
@@ -710,8 +764,8 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             data: requestParams,
         }).then(function success(response) {
             var responseData = response.data;
-            alert("Success");
-            HideLoader();
+            //alert("Success");
+            //  HideLoader();
         });
     }
 });

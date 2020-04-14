@@ -54,6 +54,9 @@ $(document).ready(function () {
     // set close button for inline datepicker
     $('.inline-picker').append('<div class="mt-2 mb-2"><i class="fas fa-times float-right" onclick="closeDatetime();"></i></div>');
 
+    $('.upload .custom-file-input').on('change', function () {
+        $('label[for=' + this.id + ']').text('');
+    });
 
 });
 

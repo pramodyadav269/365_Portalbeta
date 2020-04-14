@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="~/t/admin.master.cs" Inherits="_365_Portal.Admin.admin" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="enduser.Master.cs" Inherits="_365_Portal.Admin.EndUser" %>
 
 <!DOCTYPE html>
 
@@ -22,6 +22,7 @@
 
     <%-- JS --%>
     <script src="../includes/Asset/js/angular.min.js"></script>
+    <script src="../INCLUDES/Asset/customer/default.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
     <script src="../includes/Asset/js/jquery.min.js"></script>
@@ -173,7 +174,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body id="dvBody" runat="server">
+<body id="dvBody" runat="server" ng-app="MasterPage" ng-controller="DefaultController">
     <form id="form1" runat="server">
 
         <div class="spinner-center d-none">
@@ -648,6 +649,7 @@
                 }
             }
         }
+
     </script>
 </body>
 </html>

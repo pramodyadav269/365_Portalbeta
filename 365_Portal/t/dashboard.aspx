@@ -7,13 +7,13 @@
         <div class="col-12 achievements">
             <div class="card top shadow">
                 <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="col-sm-12 col-md-6 col-lg-4" style="display:none;"> 
                         <div class="card-body">
                             <h5 class="card-title font-weight-bold" style="font-weight:bold" runat="server" id="dvUserName">Welcome back, John!!</h5>
                             <p class="card-text">Welcome to 365!</p>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md col-lg-8 achievements-progress">
+                    <div class="col-sm-12 col-md col-lg-8 achievements-progress" style="display:none;">
                             <ul class="list-group list-group-horizontal float-right" id="dvAchievement">
                                 <li class="list-group-item" onclick="openModal(1)">
                                     <span class="ach-title">Professor</span>

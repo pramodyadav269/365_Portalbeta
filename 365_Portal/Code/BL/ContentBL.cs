@@ -355,12 +355,12 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
-        public static DataSet UpdateResource(int action, int CompID, string UserID, int TopicID, int ModuleID, string Description)
+        public static DataSet ResourceCRUD(int action, int CompID, string UserID, int TopicID, int ModuleID, string Description)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = ContentDAL.UpdateResource(action, CompID, UserID, TopicID, ModuleID, Description);
+                ds = ContentDAL.ResourceCRUD(action, CompID, UserID, TopicID, ModuleID, Description);
             }
             catch (Exception ex)
             {

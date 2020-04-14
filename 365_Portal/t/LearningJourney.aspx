@@ -154,8 +154,8 @@
 
                     <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
                         <div class="card shadow-sm">
-                            <div class="card-body p-0">
-                                <div class="col-12 col-sm-12">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
                                     <div class="row" id="divLessonAdd">
                                         <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                                             <div class="row">
@@ -167,13 +167,16 @@
                                                         </small>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <%--<div class="col-sm-12">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Learning Objectives *" maxlength="200" id="txtLearningObjectives" aria-describedby="txtLearningObjectivesHelp" />
                                                         <small id="txtLearningObjectivesHelp" class="form-text">Keep your description brief but compelling
                                                     <span class="float-right">0 / 200</span>
                                                         </small>
                                                     </div>
+                                                </div>--%>
+                                                <div class="col-sm-12" id="divLessonDescription">
+                                                    <div id="txtLessonDescription"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,19 +184,21 @@
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                                    <input type="text" class="form-control required" id="txtEstimatedTime" placeholder="12:00 AM" />
+                                                    <input type="text" class="form-control required" maxlength="2" id="txtHour" placeholder="hour" />
+                                                    <input type="text" class="form-control required" maxlength="2" id="txtMin" placeholder="minutes" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-5">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Point</label>
-                                                    <input type="text" class="form-control required" id="txtPoint" placeholder="+100" />
+                                                    <input type="text" class="form-control required" id="txtPoint" placeholder="100" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row" id="divLessonGrid" style="display:none;">                                        
+                                    <div id="divLessonGrid" style="display:none;">                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -202,8 +207,8 @@
 
                     <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
                         <div class="card shadow-sm">
-                            <div class="card-body p-0">
-                                <div class="col-12 col-sm-12">
+                            <div class="card-body">
+                                <div class="col-12 col-sm-12 lesson-wrapper">
                                     <div class="row" id="divContentAdd">
                                         <div class="col-12 col-sm-12">
                                             <div class="row">
@@ -219,20 +224,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" id="divContentGrid" style="display:none;">
-                                        <div class="container"> 
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
-                                            </div>
-                                          </div>
-                                          <br>  
-                                          <div class="card">
-                                            <div class="card-body">
-                                                <span>Light card</span><span> Light card</span><span> Light card</span>
-                                            </div>
-                                          </div>
-                                        </div>
+                                    <div id="divContentGrid" style="display:none;">
+
+                                        <%--Bind Content--%>
+
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +257,7 @@
                             <div class="card-body p-0">
                                 <div class="col-12 col-sm-12">
                                     <div class="row" id="divQuizAdd">
-                                        <div class="col-12 col-sm-12 col-md-8 col-lg-9">
+                                        <div class="col-12 col-sm-12">
                                             <div class="row">
                                                 <div class="col-sm-12 mt-3">
                                                     <div class="form-group">
@@ -276,16 +271,29 @@
                                                         <small id="txtQuizDescriptionHelp" class="form-text">Keep your description brief but compelling</small>
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-md-3" id="trScoreSummary">
+                                                    <div class="form-group">
+                                                        <label class="float-left">Total Score: <span id="lblTotalScore">0</span></label>
+                                                        <span class="float-right" id="lblPassingScore"></span>
+                                                        <input type="range" class="custom-range" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
+                                                        <span id="lblPercentage">0%</span>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
                                         </div>
-                                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
+                                        <%--<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Passing Percentage</label>
                                                     <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div>--%>
                                     </div>
 
                                     <div class="row" id="divQuizGrid" style="display:none;">
@@ -328,8 +336,8 @@
                 <a style="display:none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();" >Add Quiz</a>
 
                 <%--Quiz--%>
-                <a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>
-                <a style="display:none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuiz();" >Add Quiz</a>
+                <%--<a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>--%>
+                <a style="display:none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuizFinal();" >Add Quiz</a>
 
             </div>
         </div>
@@ -390,7 +398,8 @@
 
         var editorContentDesc = new Jodit('#txtContentDescription');
         var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-
+        var editorLessonDesc = new Jodit('#txtLessonDescription');
+        var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
         var CourseFlag = '0';
@@ -407,19 +416,25 @@
         var divContentFlag = 'add';
         var divQuizFlag = 'add';
 
+        var ContentContentTypeID = '1';
+        var QuizContentTypeID = '5';
+        var passingScore = 0;
+        var pasingPercentage = 0;
+
         $(document).ready(function () {
             debugger
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
             {
                 CourseFlag = readQueryString()["topic"];
-                EditCourse();                
+                EditCourse();
 
                 if (readQueryString()["module"] != undefined && readQueryString()["module"] != '')
                 {
                     LessonFlag = readQueryString()["module"];
 
                     if (readQueryString()["content"] != undefined && readQueryString()["content"] != '') {
-                        ContentFlag = readQueryString()["content"];   
+                        ContentFlag = readQueryString()["content"];
+                        //BindContent();
                     }
                     if (readQueryString()["resource"] != undefined && readQueryString()["resource"] != '') {
                         ResourceFlag = readQueryString()["resource"];
@@ -428,13 +443,15 @@
                         QuizFlag = readQueryString()["quiz"];
                     }
                 }
-                if (LessonFlag == '0') {
+                if (CourseFlag != '0' && LessonFlag == '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
                     BindLesson('fromtopic');
                 }
-                else {
+                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
                     BindLesson('frommodule');
                 }
-                
+                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag != '0' && ResourceFlag == '0' && QuizFlag == '0') {
+                    BindContent('fromcontent');
+                }                
             }            
             else {
                 ShowButtons('pills-course', 'tabclick');
@@ -464,7 +481,7 @@
                 $('#btnAddMoreContent').hide();
                 $('#btnAddContent').hide();
                 $('#btnAddResource').hide();
-                $('#btnAddMoreQuiz').hide();
+                //$('#btnAddMoreQuiz').hide();
                 $('#btnAddQuiz').hide();
             }
             else if (id == 'pills-lesson') {
@@ -475,7 +492,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
                     if (divLessonFlag == 'new') {
@@ -519,12 +536,37 @@
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
                     if (divContentFlag == 'new') {
-                        $('#btnAddLession').hide();
-                    }                    
+                        $('#btnAddContent').hide();
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                    }
+                    else if (divContentFlag == 'add') {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').show();
+
+                        $('#divContentAdd').show();
+                        $('#divContentGrid').hide();
+                    }
+                    else if (divContentFlag == 'bindtile') {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').hide();
+
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                    }
+                    else if (divContentFlag == 'bindtileafterlessonadd') {
+                        //$('#btnAddMoreContent').show();
+                        //$('#btnAddContent').hide();
+
+                        //$('#divContentAdd').hide();
+                        //$('#divContentGrid').show();
+
+                        BindContent('addmore');
+                    }
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {                    
                     Swal.fire({
@@ -557,7 +599,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').show();
-                    $('#btnAddMoreQuiz').hide();
+                    //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {
@@ -591,7 +633,7 @@
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnAddResource').hide();
-                    $('#btnAddMoreQuiz').show();
+                    //$('#btnAddMoreQuiz').show();
                     $('#btnAddQuiz').show();
 
                     if (divQuizFlag == 'new') {
@@ -651,10 +693,32 @@
                 }
             }
             else if (activeTabID == 'pills-content') {
-
+                var result = validateAddContent();
+                if (result.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: result.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+                else {
+                    AddContent('redirect');
+                }
             }
             else if (activeTabID == 'pills-resources') {
-
+                var result = validateAddResource();
+                if (result.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: result.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+                else {
+                    AddResource('redirect');
+                }
             }
             else if (activeTabID == 'pills-quiz') {
 
@@ -700,7 +764,7 @@
 
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
-                    AddMoreLessonFlag = 'more';
+                    AddMoreLessonFlag = 'more';                    
                 }
                 else {
                     ClearFieldsAddLesson();                    
@@ -715,13 +779,36 @@
                 }
             }
             else if (id == 'btnAddMoreContent') {
-                $('#btnAddMoreContent').show();
-                $('#btnAddContent').hide();
+                //$('#btnAddMoreContent').show();
+                //$('#btnAddContent').hide();
 
                 if (AddMoreContentFlag == 'add') {
-                    //AddContent();
 
-                    //OnSuccess
+                    var result = validateAddContent();
+                    if (result.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: result.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                    }
+                    else {
+                        $('#btnAddMoreContent').show();
+                        $('#btnAddContent').hide();
+
+                        $('#divContentAdd').hide();
+                        $('#divContentGrid').show();
+                        AddMoreContentFlag = 'more';
+
+                        AddContent('addmore');
+                    }
+                }
+                else if (AddMoreContentFlag == 'bindtile') {
+                    ClearFieldsAddContent();
+                    $('#btnAddMoreContent').show();
+                    $('#btnAddContent').hide();
+
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
@@ -734,8 +821,20 @@
                     $('#divContentAdd').show();
                     $('#divContentGrid').hide();
                     AddMoreContentFlag = 'add';
+
+
+                    ClearFieldsAddLesson();
+                    $('#btnAddMoreContent').show();
+                    $('#btnAddContent').show();
+
+                    $('#divContentAdd').show();
+                    $('#divContentGrid').hide();
+                    AddMoreContentFlag = 'add';
+                    divContentFlag = 'add';
+                    ContentFlag = '0';
                 }
             }
+            /*
             else if (id == 'btnAddMoreQuiz') {
                 $('#btnAddMoreQuiz').show();
                 $('#btnAddQuiz').hide();
@@ -758,6 +857,7 @@
                     AddMoreQuizFlag = 'add';
                 }
             }
+            */
         }
 
         function nextTab(tabID)
@@ -979,7 +1079,7 @@
                                                 }
 
                                                 SetProgressBar();
-                                                ClearFieldsAddCourse();
+                                                //ClearFieldsAddCourse();
 
                                                 Swal.fire({
                                                     title: "Success",
@@ -1099,11 +1199,14 @@
                             else {
                                 $("#rbGlobal").prop("checked", true)
                             }
-                            $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
 
-                            //$("#divCourseLogo").addClass('img');
-                            //$("#divCourseLogo").append('<img src="" class="img-fluid">');
-
+                            if (EditTopic[0].FilePath != undefined && EditTopic[0].FilePath != null && EditTopic[0].FilePath != '')
+                            {
+                                $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
+                                $("#divCourseLogo").addClass('img');
+                                $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
+                            }
+                            
                             GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
 
                             nextTab('pills-course-tab');
@@ -1129,13 +1232,17 @@
                     HideLoader();
                 }
             });
-        }
+        }        
 
 
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
-            $('#txtLearningObjectives').val('');
-            $('#txtEstimatedTime').val('');
+            //$('#txtLearningObjectives').val('');
+            $('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
+            var editorContentDesc = new Jodit('#txtLessonDescription');
+            //$('#txtEstimatedTime').val('');
+            $('#txtHour').val('');
+            $('#txtMin').val('');
             $('#txtPoint').val('');
         }
 
@@ -1144,11 +1251,20 @@
             if ($("#txtLessonTitle").val() == undefined || $("#txtLessonTitle").val() == '') {
                 return { error: true, msg: "Please enter Lesson Title" };
             }
-            else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
-                return { error: true, msg: "Please enter Learning Objectives" };
+            //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
+            //    return { error: true, msg: "Please enter Learning Objectives" };
+            //}
+            else if ($('#divLessonDescription').find('.jodit_wysiwyg').text() == undefined || $('#divLessonDescription').find('.jodit_wysiwyg').text() == '') {
+                return { error: true, msg: "Please enter Lesson Details" };
             }
-            else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
-                return { error: true, msg: "Please enter Estimate Time" };
+            //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
+            //    return { error: true, msg: "Please enter Estimate Time" };
+            //}
+            else if ($("#txtHour").val() == undefined || $("#txtHour").val() == '') {
+                return { error: true, msg: "Please enter Hour" };
+            }
+            else if ($("#txtMin").val() == undefined || $("#txtMin").val() == '') {
+                return { error: true, msg: "Please enter Minute" };
             }
             else if ($("#txtPoint").val() == undefined || $("#txtPoint").val() == '') {
                 return { error: true, msg: "Please enter Point" };
@@ -1181,12 +1297,14 @@
             ShowLoader();
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
-            var _Overview = $('#txtLearningObjectives').val();
+            //var _Overview = $('#txtLearningObjectives').val();
+            var _Overview = $('#divLessonDescription').find('.jodit_wysiwyg').text();
             //var _Description = $('#txtDescription').val();
             //var _IsPublished = $('#cbIsPublished').prop('checked');
                 
             var _Points = $('#txtPoint').val();
-            var _CourseTime = $('#txtEstimatedTime').val();
+            //var _CourseTime = $('#txtEstimatedTime').val();
+            var _CourseTime = $('#txtHour').val() + ':' + $('#txtMin').val();
 
             var ID;
             if (LessonFlag == '0') {
@@ -1245,7 +1363,7 @@
                                         }).then((value) => {
                                             if (value) {
                                                 if (AddMoreLessonFlag == 'add')
-                                                {                                                    
+                                                {
                                                     nextTab('pills-content-tab');                                                    
                                                 }
                                             }
@@ -1342,8 +1460,25 @@
                             var EditModule = DataSet.Data.Data;
 
                             $('#txtLessonTitle').val(EditModule[0].Title);
-                            $('#txtLearningObjectives').val(EditModule[0].Overview);
-                            $('#txtEstimatedTime').val(EditModule[0].CourseTime);
+                            //$('#txtLearningObjectives').val(EditModule[0].Overview);
+                            $('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
+
+
+                            //$('#txtEstimatedTime').val(EditModule[0].CourseTime);
+                            if (EditModule[0].CourseTime != '' && EditModule[0].CourseTime.split(":").length > 0) {
+                                $('#txtHour').val(EditModule[0].CourseTime.split(":")[0]);
+                                if (EditModule[0].CourseTime.split(":").length > 1) {
+                                    $('#txtMin').val(EditModule[0].CourseTime.split(":")[1]);
+                                }
+                                else {
+                                    $('#txtMin').val('00');
+                                }
+                            }
+                            else {
+                                $('#txtHour').val('');
+                                $('#txtMin').val('');
+                            }
+
                             $('#txtPoint').val(EditModule[0].Points);
 
                             nextTab('pills-lesson-tab');
@@ -1373,16 +1508,102 @@
 
         function EditLessionFromTile(obj,id)
         {
-            debugger            
-            $('#txtLessonTitle').val($(obj).closest('div').find("#spTitle").text());
-            $('#txtLearningObjectives').val($(obj).closest('div').find("#spOverview").text());
-            $('#txtEstimatedTime').val($(obj).closest('div').find("#spCourseTime").text());
-            $('#txtPoint').val($(obj).closest('div').find("#spPoints").text());
+            debugger                        
+            $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
+            //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            //$('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
+
+            if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text() != undefined
+                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text() != ''
+                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 0
+                )
+            {
+                $('#txtHour').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[0]);
+                if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 1)
+                {
+                    $('#txtMin').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[1]);
+                }
+            }
+            else {
+                $('#txtHour').val('');
+                $('#txtMin').val('');
+            }
+
+            
+            $('#txtPoint').val($(obj).parent().parent().parent().parent().find('#spPoints').text());
 
             LessonFlag = id;
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
             nextTab('pills-lesson-tab');
+
+            BindResource();
+        }
+
+        function DeleteLessionFromTile(obj, id)
+        {
+            debugger
+            LessonFlag = id;
+            ShowLoader();
+            var getUrl = "/API/Content/DeleteModule";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, IsActive:0 };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            LessonFlag = '0';
+                                            BindLesson('addmore');
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error"});
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure",text: "Please try Again",icon: "error"});
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again",icon: "error"});
+            }
         }
 
         function BindLesson(flag)
@@ -1405,22 +1626,27 @@
                                 
                                 var Modules = DataSet.Data;
                                 var tblModules = '';
+
                                 $('#divLessonGrid').empty();
                                 if (Modules != undefined && Modules.length > 0) {
 
-                                    tblModules = tblModules + '<div class="container">';
+                                    for (var i = 0; i < Modules.length; i++) {
 
-                                    for (var i = 0; i < Modules.length; i++)
-                                    {
-                                        tblModules = tblModules + '<div class="card"><div class="card-body">';
-                                        tblModules = tblModules + '<span id="sp' + Modules[i].ModuleID + '" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')"; style="display:none";>' + Modules[i].ModuleID + '</span>';
-                                        tblModules = tblModules + '<span id="spTitle" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";>' + Modules[i].Title + '</span>';
-                                        tblModules = tblModules + '<span id="spOverview">' + Modules[i].Overview + '</span>';
-                                        tblModules = tblModules + '<span id="spCourseTime">' + Modules[i].CourseTime + '</span>';
-                                        tblModules = tblModules + '<span id="spPoints">' + Modules[i].Points + '</span>';
-                                        tblModules = tblModules + '</div></div><br>';
+                                        tblModules = tblModules + '<div class="card shadow-sm" id="divLessonTile"><div class="card-body">';
+                                        tblModules = tblModules + '<div class="tag"><span id="spTitle" >' + Modules[i].Title + '</span></div>';
+                                        tblModules = tblModules + '<i class="fas fa-grip-vertical grid-icon"></i>';
+                                        tblModules = tblModules + '<div class="row">';
+                                        tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
+                                        tblModules = tblModules + '<h5 class="card-title" id="spOverview">' + Modules[i].Overview + '</h5>';                                        
+                                        tblModules = tblModules + '<p class="card-text">~<span id="spCourseTime">' + Modules[i].CourseTime + '</span> mins</p>';
+                                        tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';
+                                        tblModules = tblModules + '</div>';
+                                        tblModules = tblModules + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
+                                        //tblContents = tblContents + '<i class="far fa-eye"></i>';
+                                        tblModules = tblModules + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + Modules[i].ModuleID + ')";></i><span></span>';
+                                        tblModules = tblModules + '<i class="fas fa-edit" title="Edit" onclick="EditLessionFromTile(this,' + Modules[i].ModuleID + ')";></i>';
+                                        tblModules = tblModules + '</div></div></div></div></div>';
                                     }
-                                    $('#divLessonGrid').append('</div>');
                                 }
                                 else {
                                     tblModules = tblModules + '<div class="container"><h3>Lesson Not Found</h3></div>';
@@ -1440,6 +1666,8 @@
                                     AddMoreLessonFlag = 'bindtile';
                                     divLessonFlag = 'bindtile';
                                     AddMore('btnAddMoreLesson');
+
+                                    divContentFlag = 'bindtileafterlessonadd';
                                     nextTab('pills-content-tab');
                                 }
                                 else if (flag == 'addmore') {
@@ -1490,16 +1718,12 @@
             else if (CourseFlag == '0' || LessonFlag == '0') {
                 return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
             }
+            return true;
         }
 
         function AddContentFromResource()
         {
-            //nextTab('pills-resources-tab');
-            AddContent('samepage');
-        }
-
-        function AddContent()
-        {            
+            debugger
             var result = validateAddContent();
             if (result.error) {
                 Swal.fire({
@@ -1510,8 +1734,353 @@
                 });
             }
             else {
-                
+                AddContent('nexttab');
             }
+        }
+
+        function AddContent(flag)
+        {
+            debugger
+            var getURL = '';
+            var regex = '';
+            var formdata = new FormData();
+            var selectedDocType = 'TEXT';
+            var isUrl = '';
+            var index = 1;
+            var ContentID = '';
+
+            if (ContentFlag == '0') {
+                getURL = "/API/Content/CreateContent";
+            }
+            else {
+                ContentID = ContentFlag;
+                getURL = "/API/Content/ModifyContent";
+            }
+
+            formdata.append("ContentID", ContentID);
+            formdata.append("SrNo", index);
+            formdata.append("DocType", selectedDocType);
+            formdata.append("Title", $("#txtContentHeader").val());
+            formdata.append("Description", $('#divContentDescription').find('.jodit_wysiwyg').text());
+            formdata.append("Overview", "");
+            formdata.append("IsGift", "");
+            formdata.append("IsPublished", "");
+            formdata.append("CourseTime", "");
+            formdata.append("TopicID", CourseFlag);
+            formdata.append("ModuleID", LessonFlag);
+            formdata.append("TypeID", "1");
+            formdata.append("FlashcardTitle", "");
+            formdata.append("IsActive", "");
+            formdata.append("TotalScore", "");
+            formdata.append("PassingPercent", "");
+            formdata.append("PassingScore", "");
+            formdata.append("FlashcardHighlights", "");
+            formdata.append("SkipFlashcards", "");
+            formdata.append("IsURL", isUrl);
+            ShowLoader();
+
+            $.ajax({
+                type: "POST",
+                url: getURL,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    try {
+                        debugger
+                        var DataSet = $.parseJSON(response);
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+                                ClearFieldsAddContent();
+                                HideLoader();                                
+
+                                if (flag == 'redirect') {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            document.location = 'Dashboard.aspx';
+                                        }
+                                    });
+                                }
+                                else if (flag == 'nexttab') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    SetProgressBar();
+                                    ContentFlag = '0';
+                                    BindContent('nexttab');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            if (AddMoreContentFlag == 'add') {
+                                                nextTab('pills-resources-tab');
+                                            }
+                                        }
+                                    });
+                                }
+                                else if (flag == 'addmore') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    SetProgressBar();
+                                    ContentFlag = '0';
+                                    BindContent('addmore');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: DataSet.StatusDescription,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error"
+                            });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({
+                            title: "Failure",
+                            text: "Please try Again",
+                            icon: "error"
+                        });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    alert(response.data);
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
+        function EditContentFromTile(obj, id) {
+            debugger
+            $('#txtContentHeader').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
+            $('#divContentDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+
+            ContentFlag = id;
+            AddMoreContentFlag = 'add';
+            divContentFlag = 'add';
+            nextTab('pills-content-tab');
+        }
+
+        function DeleteContentFromTile(obj, id)
+        {
+            debugger
+            debugger
+            ContentFlag = id;
+            ShowLoader();
+            var getUrl = "/API/Content/DeleteContent";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag,p_ContentID: ContentFlag, IsActive: 0 };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            ContentFlag = '0';
+                                            BindContent('addmore');
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+        function is_valid_url(url) {
+            return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(url);
+        }
+
+        function BindURL(Description)
+        {
+            var FilePath = "";
+            var returnString = ''
+
+            if (Description != "" && Description != undefined) {
+                if (Description.split('.')[1] != undefined) {
+                    if (allowedExtensions.indexOf(Description.split('.')[1]) != -1) {
+                        FilePath = Description;
+                    }
+                    else {
+                        FilePath = Description;
+                    }
+                }
+                else {
+                    FilePath = Description;
+                }
+            }
+            if (FilePath != '' && FilePath != undefined)
+            {
+                if (is_valid_url(FilePath)) {
+                    returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
+                }
+                else {                    
+                    returnString += "<a href=" + FilePath + " target=_blank>File</a>";
+                }
+            }
+            return returnString;
+        }
+
+        function BindContent(flag) {
+            var getUrl = "/API/Content/GetContentList";
+            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag,ContentTypeID: "", IsGift: "true", Flag: 'learningjourney' };
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(requestParams),
+                contentType: "application/json",
+                async: false,
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        debugger
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+
+                                var Contents = DataSet.Data;
+                                var tblContents = '';
+                                $('#divContentGrid').empty();
+                                if (Contents != undefined && Contents.length > 0) {
+
+                                    for (var i = 0; i < Contents.length; i++) {
+
+                                        tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
+                                        tblContents = tblContents + '<div class="tag"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
+                                        tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
+                                        tblContents = tblContents + '<div class="row">';
+                                        tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
+                                        //tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
+                                        tblContents = tblContents + '<a target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
+                                        
+                                        //tblContents = tblContents + '<p class="card-text">~' + Contents[i].CourseTime + ' mins</p>';
+                                        tblContents = tblContents + '</div>';
+                                        tblContents = tblContents + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
+                                        //tblContents = tblContents + '<i class="far fa-eye"></i>';
+                                        tblContents = tblContents + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + Contents[i].ContentID + ')";></i><span></span>';
+                                        tblContents = tblContents + '<i class="fas fa-edit" title="Edit" onclick="EditContentFromTile(this,' + Contents[i].ContentID + ')";></i>';
+                                        tblContents = tblContents + '</div></div></div></div></div>';
+                                    }
+                                }
+                                else {
+                                    tblContents = tblContents + '<div class="container"><h3>Content Not Found</h3></div>';
+                                }
+                                $('#divContentGrid').append(tblContents);
+
+                                if (flag == 'fromcontent') {
+                                    $("#sp" + ContentFlag).click();
+                                }
+                                else if (flag == 'nexttab') {
+                                    AddMoreContentFlag = 'bindtile';
+                                    divContentFlag = 'bindtile';
+                                    AddMore('btnAddMoreContent');
+                                    nextTab('pills-resources-tab');
+                                }
+                                else if (flag == 'addmore') {
+                                    AddMoreContentFlag = 'bindtile';
+                                    divContentFlag = 'bindtile';
+                                    AddMore('btnAddMoreContent');
+                                }
+                            }
+                            else {
+                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                }
+            });
         }
 
 
@@ -1582,7 +2151,7 @@
                                             ResourceFlag = LessonFlag;
 
                                             SetProgressBar();
-                                            ClearFieldsAddResource();
+                                            //ClearFieldsAddResource();
 
                                             Swal.fire({
                                                 title: "Success",
@@ -1647,11 +2216,72 @@
             }
         }
 
+        function BindResource() {
+            debugger
+            ClearFieldsAddResource();
+            ShowLoader();
+            var getUrl = "/API/Content/GetResource";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+                                    $('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
 
         function ClearFieldsAddQuiz() {
             $('#txtQuizTitle').val('');
             $('#txtQuizDescription').val('');
-            $('#txtPassingPercentage').val('');
+            $('#txtPassingScorePercentage').val('');
+            $('#lblTotalScore').text('');
+            $('#lblPassingScore').text('Passing Score: 0');
+            $('#lblPercentage').text('');
+            //$('#txtPassingPercentage').val('');
+        }
+
+        function ChangePercentage(val) {
+            pasingPercentage = val;
+            $("#lblPercentage").text(val + "%");
+            passingScore = Math.round((parseFloat($("#lblTotalScore").text()) * parseInt(val)) / 100);
+            $("#lblPassingScore").text("Passing Score: " + passingScore);
         }
 
         function validateAddQuiz()
@@ -1662,15 +2292,79 @@
             else if ($("#txtQuizDescription").val() == undefined || $("#txtQuizDescription").val() == '') {
                 return { error: true, msg: "Please enter Quiz Description" };
             }
-            else if ($("#txtPassingPercentage").val() == undefined || $("#txtPassingPercentage").val() == '') {
-                return { error: true, msg: "Please enter Passing Percentage" };
+            else if ($("#txtPassingScorePercentage").val() == undefined || $("#txtPassingScorePercentage").val() == '') {
+                return { error: true, msg: "Please select Passing Percentage" };
+            }
+            return true;
+        }
+
+        function AddQuizFinal() {
+            debugger
+            var result = validateAddQuiz();
+            if (result.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: result.msg,
+                    icon: "error",
+                    button: "Ok",
+                });
+            }
+            else {
+                AddQuiz('nexttab');
             }
         }
 
-        function AddQuiz()
+        function AddQuiz(flag)
         {
-            //nextTab();
+            debugger
+            ShowLoader();
+            var Title = $("#txtQuizTitle").val();
+            var Description = $("#txtQuizDescription").val();
+            var TotalScore = $("#lblTotalScore").text();
+            var PassingScore = $("#lblPassingScore").text().replace("Passing Score: ", "");
+            var PassingPercentage = $("#lblPercentage").text().replace("%", "");
+
+            var requestParams = {
+                TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: '', ContentTypeID: QuizContentTypeID, Title: Title, Description: Description, Points: '0', IsPublished: true
+                , SkipFlashcard: false, IsGift: false, TotalScore: TotalScore, PassingScore: PassingScore, PassingPercentage: PassingPercentage
+            };
+            
+            try {
+                $.ajax({
+                    method: "POST",
+                    url: "../api/Quiz/SaveContent",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                }).then(function success(response) {
+                    debugger
+                    HideLoader();
+                    var DataSet = $.parseJSON(response);                    
+                    if (DataSet != null && DataSet != "") {
+                        if (DataSet.StatusCode == "1") {
+                            Swal.fire({
+                                title: "Success",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "success"
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: "Failure",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "error"
+                            });
+                        }
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error"});
+            }
         }
+
+        
 
 
         function editCourseLogo(el) {

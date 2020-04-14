@@ -203,7 +203,8 @@
             var selectedDocType = $("#ddlDocType").val();
             if ($("#ddlDocType").val() != "" &&
                 $("#txtTitle").val() != "" &&
-                tinymce.get('txtDescription').getContent() != "" &&
+                //tinymce.get('txtDescription').getContent() != "" &&
+                $('#txtDescription').text() != "" &&
                 TopicID != "" && _ModuleID != "") {
                 var isUrl;
 
@@ -228,14 +229,14 @@
                         base64filestring = $('#filepath').get(0).files[0];
                     }
                 }
-                else {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "! Invalid file type.",
-                        icon: "error"
-                    });
-                    return false;
-                }
+                //else {
+                //    Swal.fire({
+                //        title: "Failure",
+                //        text: "! Invalid file type.",
+                //        icon: "error"
+                //    });
+                //    return false;
+                //}
 
                 var index = contentList.length + 1;
                 //var newContent = {
@@ -280,7 +281,8 @@
                     formdata.append("SrNo", index);
                     formdata.append("DocType", $("#ddlDocType").val());
                     formdata.append("Title", $("#txtTitle").val());
-                    formdata.append("Description", tinymce.get('txtDescription').getContent());
+                    //formdata.append("Description", tinymce.get('txtDescription').getContent());
+                    formdata.append("Description", $('#txtDescription').text());
                     formdata.append("Overview", "");
                     if (selectedDocType != "TEXT") {
                         if (($('#filepath').val() != "" && $('#filepath').val() != undefined) && isUrl == 0 && $("input[name=filetype]:checked").val() != "URL") {
@@ -322,7 +324,7 @@
                     formdata.append("PassingScore", "");
                     formdata.append("FlashcardHighlights", "");
                     formdata.append("SkipFlashcards", "");
-                    formdata.append("IsURL", isUrl);
+                    formdata.append("IsURL", '');
                     ShowLoader();
 
                     $.ajax({

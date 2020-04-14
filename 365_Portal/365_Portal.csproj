@@ -392,6 +392,13 @@
     <Compile Include="t\AddTeam.aspx.designer.cs">
       <DependentUpon>AddTeam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\enduser.Master.cs">
+      <DependentUpon>enduser.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\enduser.Master.designer.cs">
+      <DependentUpon>enduser.Master</DependentUpon>
+    </Compile>
     <Compile Include="t\admin.Master.cs">
       <DependentUpon>admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -447,6 +454,13 @@
     </Compile>
     <Compile Include="t\dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\courses.aspx.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\courses.aspx.designer.cs">
+      <DependentUpon>courses.aspx</DependentUpon>
     </Compile>
     <Compile Include="t\default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -1193,6 +1207,7 @@
     <Content Include="t\ContentList.aspx" />
     <Content Include="t\Contents.aspx" />
     <Content Include="t\dashboard.aspx" />
+    <Content Include="t\courses.aspx" />
     <Content Include="t\default.aspx" />
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
@@ -1233,6 +1248,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="t\admin.Master" />
+    <Content Include="t\enduser.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
