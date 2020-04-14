@@ -97,15 +97,17 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GetContentsByModule = function (topicId, moduleId) {
+
         $scope.ActiveContainer = "Content";
         $scope.SelectedModule = $rootScope.Module.UnlockedItems.filter(function (v) {
             return moduleId == v.ModuleID;
         })[0];
+        $scope.SelectedContent = { Title: "Learning Objectives", Description: $scope.SelectedModule.Overview };
         objDs.DS_GetContentsByModule(topicId, moduleId, true);
     }
 
-    $scope.DisplayLearningObjectives = function (cntrl, learningObjective) {
-        $scope.SelectedContent = { Description: learningObjective };
+    $scope.DisplayLearningObjectives = function (cntrl, title, learningObjective) {
+        $scope.SelectedContent = { Title: title, Description: learningObjective };
         $(".list-group-item-action").removeClass("active");
         $(cntrl).addClass("active");
     }
@@ -377,6 +379,8 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.GetTopicTime = function (timeHrsMin) {
+        if (timeHrsMin == null)
+            return "0 hr 0m";
         var arrHrsMins = timeHrsMin.split(':');
         if (arrHrsMins.length == 1) {
             return arrHrsMins[0] + " hr";
@@ -390,6 +394,10 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         else {
             return "";
         }
+    }
+
+    $scope.GetCompletedPercentage = function (completed, total) {
+        return parseInt((completed / total) * 100) + '%'
     }
 
     $scope.EditTopic = function (topicId) {

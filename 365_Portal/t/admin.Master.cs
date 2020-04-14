@@ -153,6 +153,7 @@ namespace _365_Portal.Admin
                         dvLearnNewSkills.Visible = true;
                         dvDiscoverLearning.Visible = true;
                         dvTopics.Visible = true;
+                       
                         dvUsersNTeams.Visible = true;
                         dvUsers.Visible = true;
                         dvOrganizations.Visible = true;
@@ -183,6 +184,8 @@ namespace _365_Portal.Admin
                     {
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
+                        dvAllCourses.Visible = true;
+                        dvAddNewCourse.Visible = true;
 
                         dvLearn.Visible = true;
                         dvMyLearning.Visible = true;
@@ -231,6 +234,8 @@ namespace _365_Portal.Admin
                     {
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
+                        dvAllCourses.Visible = true;
+                        dvAddNewCourse.Visible = true;
                         dvCommunity.Visible = true;
                         dvConnectWithOtherLearners.Visible = true;
                         dvDiscoverNewOpportunities.Visible = true;
@@ -252,6 +257,7 @@ namespace _365_Portal.Admin
                     {
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
+                        dvAllCourses.Visible = true;
                         dvCommunity.Visible = true;
                         dvConnectWithOtherLearners.Visible = true;
                         dvDiscoverNewOpportunities.Visible = true;

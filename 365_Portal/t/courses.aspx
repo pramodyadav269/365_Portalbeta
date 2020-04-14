@@ -13,12 +13,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
                 </li>
-                <li class="nav-item">
+              <%--  <li class="nav-item">
                     <a class="nav-link" id="pills-published-tab" data-toggle="pill" href="#pills-published" role="tab" aria-controls="pills-published" aria-selected="false">Published</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-drafts-tab" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
-                </li>
+                </li>--%>
             </ul>
             <div class="tab-content" id="pills-tabCoursesContent">
                 <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
@@ -37,7 +37,7 @@
                                     <div class="action">
                                         <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
 
-                                        <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-plus"></i></span>
+                                        <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
                                         <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>--%>

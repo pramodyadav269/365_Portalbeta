@@ -23,8 +23,10 @@
                                 <h2 class="card-title">{{SelectedTopic.Title}}</h2>
                                 <p class="card-text">{{SelectedTopic.Description}}</p>
                                 <div class="action">
-                                    <span><i class="fas fa-heart"></i></span>
-                                    <span><i class="fas fa-plus"></i></span>
+                                    <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
+                                    <span ng-show="SelectedTopic.IsFavourite !=1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-show="SelectedTopic.IsBookmark ==1" ng-click="ChangeTopicProperty(SelectedTopic,3,SelectedTopic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
+                                    <span ng-show="SelectedTopic.IsBookmark !=1" ng-click="ChangeTopicProperty(SelectedTopic,3,toSelectedTopicpic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +56,7 @@
                                         <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
                                         <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
                                         <div class="point-progress">
-                                            <span>{{(SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%'}}</span>
+                                            <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
                                                     aria-valuemin="0" aria-valuemax="100">
@@ -100,10 +102,10 @@
                     <div class="row lesson-wrapper">
                         <div class="col-sm-12 col-md-5 col-lg-4 p-0">
                             <div class="lesson-list shadow-sm">
-                                <div class="duration"><span>Time Estimate</span><span>About 15 mins</span></div>
+                                <div class="duration"><span>Time Estimate</span><span>About {{ GetTopicTime(SelectedModule.LessonTime) }}</span></div>
                                 <div class="header">Content</div>
                                 <div id="list-lesson" class="list-group">
-                                    <a class="list-group-item list-group-item-action active" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,SelectedModule.Overview)">Learning Objectives</a>
+                                    <a class="list-group-item list-group-item-action active" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Learning Objectives',SelectedModule.Overview)">Learning Objectives</a>
                                     <%-- <a class="list-group-item list-group-item-action" href="#list-item-2">Overview of Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-3">Get to Know Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-4">Create a Custom Object</a>--%>
@@ -111,6 +113,8 @@
                                     <a ng-repeat="content in Content.UnlockedItems"
                                         ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
                                         class="list-group-item list-group-item-action" href="#">{{content.Title}}</a>
+
+                                    <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
                                     <div class="next shadow-sm"><i class="fas fa-chevron-right"></i>Quiz</div>
                                 </div>
@@ -148,7 +152,7 @@
                             <div data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
                                 <div class="lesson-content" id="list-item-1">
                                     <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
-                                    <h4 class="lesson-content-title">Learning Objectives</h4>
+                                    <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
                                     <%--Display Content here..--%>
                                     <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
 
@@ -263,12 +267,14 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                   
-                                   <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                       <i class="fas fa-play"></i>
-                                   </span>
+                                    <span ng-show="topic.IsFavourite ==1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
+                                    <span ng-show="topic.IsFavourite !=1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-show="topic.IsBookmark ==1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
+                                    <span ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+
+                                    <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+                                        <i class="fas fa-play"></i>
+                                    </span>
                                     <%-- background-color--%>
                                 </div>
                             </div>
@@ -291,12 +297,14 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                   
-                                   <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                       <i class="fas fa-play"></i>
-                                   </span>
+                                    <span ng-show="topic.IsFavourite ==1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
+                                    <span ng-show="topic.IsFavourite !=1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                    <span ng-show="topic.IsBookmark ==1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
+                                    <span ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+
+                                    <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+                                        <i class="fas fa-play"></i>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -348,7 +356,7 @@
                                     <%--  <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                   
+
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>

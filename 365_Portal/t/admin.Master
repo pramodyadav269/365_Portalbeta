@@ -454,8 +454,8 @@
                     <li class="nav-item icon menu dropdown">
                         <i class="fas fa-th" id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                         <div class="dropdown-menu" aria-labelledby="navDash">
-                            <a class="dropdown-item" href="default.aspx">Learn</a>
-                            <a class="dropdown-item" href="projects.aspx">Task</a>
+                            <a class="dropdown-item" href="default.aspx" target="_blank">Learn</a>
+                            <a class="dropdown-item" href="projects.aspx" target="_blank">Task</a>
                             <a class="dropdown-item" href="#">Chat</a>
                         </div>
                     </li>
@@ -527,8 +527,14 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item dropdown">
                     <a class="nav-link" id="dvTopics" runat="server" visible="false" href="Default.aspx">Courses</a>
+                    <div class="dropdown-menu shadow">
+                        <div class="list-group">
+                            <a class="list-group-item" href="courses.aspx" runat="server" id="dvAllCourses" visible="false">All Courses</a>
+                            <a class="list-group-item" href="learningjourney.aspx" runat="server" id="dvAddNewCourse" visible="false">Add new course</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="#" id="dvUsersNTeams" runat="server" visible="false">Users and Teams</a>
