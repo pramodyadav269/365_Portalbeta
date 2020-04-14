@@ -14,7 +14,7 @@ using static _365_Portal.Models.Login;
 
 namespace _365_Portal.Admin
 {
-    public partial class admin : System.Web.UI.MasterPage
+    public partial class EndUser : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -142,6 +142,7 @@ namespace _365_Portal.Admin
                 }
                 */
 
+
                 if (HttpContext.Current.Session["RoleName"] != null)
                 {
                     if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.superadmin)
@@ -153,7 +154,7 @@ namespace _365_Portal.Admin
                         dvLearnNewSkills.Visible = true;
                         dvDiscoverLearning.Visible = true;
                         dvTopics.Visible = true;
-                       
+
                         dvUsersNTeams.Visible = true;
                         dvUsers.Visible = true;
                         dvOrganizations.Visible = true;
