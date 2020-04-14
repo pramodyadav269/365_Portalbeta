@@ -4,35 +4,61 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div>
-        <div class="container courses">
-            <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
-                <div id="dvMyTopics" class="row content">
-                    <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AllTopics">
-                        <div class="card bc-blue">
-                            <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
-                                <span class="point">+{{topic.Points}} Points</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{topic.Title}}</h5>
-                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
-                                <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
-                                <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>
+    <div class="container courses">
+
+        <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+
+
+            <ul class="nav nav-pills" id="pills-tab-courses" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-published-tab" data-toggle="pill" href="#pills-published" role="tab" aria-controls="pills-published" aria-selected="false">Published</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-drafts-tab" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabCoursesContent">
+                <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                    <div id="dvMyTopics" class="row content">
+                        <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AllTopics">
+                            <div class="card bc-blue">
+                                <div class="card-icon">
+                                    <img src="../INCLUDES/Asset/images/sun.png">
+                                    <span class="point">+{{topic.Points}} Points</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{topic.Title}}</h5>
+                                    <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
+                                    <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
+                                    <div class="action">
+                                        <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
+                                        <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
+
+                                        <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+                                            <i class="fas fa-play"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="tab-pane fade" id="pills-published" role="tabpanel" aria-labelledby="pills-published-tab">
+                </div>
+                <div class="tab-pane fade" id="pills-drafts" role="tabpanel" aria-labelledby="pills-drafts-tab">
+                </div>
+            </div>
+
+        </section>
+
+
+
     </div>
+
 
     <script>
         $(document).ready(function () {

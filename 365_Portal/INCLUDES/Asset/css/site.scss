@@ -2199,7 +2199,24 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .courses {
     padding-top: 4rem;
     padding-bottom: 4rem;
+
+    .nav-pills {
+        .nav-link {
+            padding: .3rem 1rem;
+            color: rgba(0, 0, 0, 0.4);
+
+            &.active {
+                color: $yellow-color;
+                border-radius: 0;
+                background-color: transparent;
+                border-bottom: 0.15rem solid $yellow-color;
+            }
+        }
+    }
+
     .content {
+        margin-top: 1rem;
+
         .content-item {
             margin-right: 0;
         }
