@@ -1233,7 +1233,6 @@
             bsCustomFileInput.init();
 
             GetAchievements();
-
         });
 
         function InitSlickSlider(el) {
