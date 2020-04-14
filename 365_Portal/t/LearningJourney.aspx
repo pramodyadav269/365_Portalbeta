@@ -184,13 +184,14 @@
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                                    <input type="text" class="form-control required" id="txtEstimatedTime" placeholder="12:00 AM" />
+                                                    <input type="text" class="form-control required" maxlength="2" id="txtHour" placeholder="hour" />
+                                                    <input type="text" class="form-control required" maxlength="2" id="txtMin" placeholder="minutes" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-5">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Point</label>
-                                                    <input type="text" class="form-control required" id="txtPoint" placeholder="+100" />
+                                                    <input type="text" class="form-control required" id="txtPoint" placeholder="100" />
                                                 </div>
                                             </div>
                                         </div>
@@ -223,7 +224,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row" id="divContentGrid">
+                                    <div id="divContentGrid" style="display:none;">
 
                                         <%--Bind Content--%>
 
@@ -688,7 +689,18 @@
                 }
             }
             else if (activeTabID == 'pills-resources') {
-
+                var result = validateAddResource();
+                if (result.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: result.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+                else {
+                    AddResource('redirect');
+                }
             }
             else if (activeTabID == 'pills-quiz') {
 
@@ -1205,7 +1217,9 @@
             //$('#txtLearningObjectives').val('');
             $('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
             var editorContentDesc = new Jodit('#txtLessonDescription');
-            $('#txtEstimatedTime').val('');
+            //$('#txtEstimatedTime').val('');
+            $('#txtHour').val('');
+            $('#txtMin').val('');
             $('#txtPoint').val('');
         }
 
@@ -1220,8 +1234,14 @@
             else if ($('#divLessonDescription').find('.jodit_wysiwyg').text() == undefined || $('#divLessonDescription').find('.jodit_wysiwyg').text() == '') {
                 return { error: true, msg: "Please enter Lesson Details" };
             }
-            else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
-                return { error: true, msg: "Please enter Estimate Time" };
+            //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
+            //    return { error: true, msg: "Please enter Estimate Time" };
+            //}
+            else if ($("#txtHour").val() == undefined || $("#txtHour").val() == '') {
+                return { error: true, msg: "Please enter Hour" };
+            }
+            else if ($("#txtMin").val() == undefined || $("#txtMin").val() == '') {
+                return { error: true, msg: "Please enter Minute" };
             }
             else if ($("#txtPoint").val() == undefined || $("#txtPoint").val() == '') {
                 return { error: true, msg: "Please enter Point" };
@@ -1260,7 +1280,8 @@
             //var _IsPublished = $('#cbIsPublished').prop('checked');
                 
             var _Points = $('#txtPoint').val();
-            var _CourseTime = $('#txtEstimatedTime').val();
+            //var _CourseTime = $('#txtEstimatedTime').val();
+            var _CourseTime = $('#txtHour').val() + ':' + $('#txtMin').val();
 
             var ID;
             if (LessonFlag == '0') {
@@ -1418,7 +1439,23 @@
                             $('#txtLessonTitle').val(EditModule[0].Title);
                             //$('#txtLearningObjectives').val(EditModule[0].Overview);
                             $('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
-                            $('#txtEstimatedTime').val(EditModule[0].CourseTime);
+
+
+                            //$('#txtEstimatedTime').val(EditModule[0].CourseTime);
+                            if (EditModule[0].CourseTime != '' && EditModule[0].CourseTime.split(":").length > 0) {
+                                $('#txtHour').val(EditModule[0].CourseTime.split(":")[0]);
+                                if (EditModule[0].CourseTime.split(":").length > 1) {
+                                    $('#txtMin').val(EditModule[0].CourseTime.split(":")[1]);
+                                }
+                                else {
+                                    $('#txtMin').val('00');
+                                }
+                            }
+                            else {
+                                $('#txtHour').val('');
+                                $('#txtMin').val('');
+                            }
+
                             $('#txtPoint').val(EditModule[0].Points);
 
                             nextTab('pills-lesson-tab');
@@ -1452,7 +1489,25 @@
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
             $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
-            $('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
+            //$('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
+
+            if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text() != undefined
+                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text() != ''
+                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 0
+                )
+            {
+                $('#txtHour').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[0]);
+                if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 1)
+                {
+                    $('#txtMin').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[1]);
+                }
+            }
+            else {
+                $('#txtHour').val('');
+                $('#txtMin').val('');
+            }
+
+            
             $('#txtPoint').val($(obj).parent().parent().parent().parent().find('#spPoints').text());
 
             LessonFlag = id;
@@ -1913,9 +1968,8 @@
                 if (is_valid_url(FilePath)) {
                     returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
                 }
-                else {
-                    returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
-                    //returnString += "<a href=" + FilePath + " target=_blank>File</a>";
+                else {                    
+                    returnString += "<a href=" + FilePath + " target=_blank>File</a>";
                 }
             }
             return returnString;
@@ -1950,7 +2004,9 @@
                                         tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblContents = tblContents + '<div class="row">';
                                         tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
-                                        tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
+                                        //tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
+                                        tblContents = tblContents + '<a target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
+                                        
                                         //tblContents = tblContents + '<p class="card-text">~' + Contents[i].CourseTime + ' mins</p>';
                                         tblContents = tblContents + '</div>';
                                         tblContents = tblContents + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';

@@ -197,12 +197,12 @@
                                             <i class="fas fa-grip-vertical grid-icon"></i>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-9 col-lg-10">
-                                                    <h5 class="card-title">Understand Custom & Standard Objects</h5>
-                                                    <p class="card-text">~15 mins</p>
+                                                    <h5 class="card-title">Understand</h5>
+                                                    <%--<p class="card-text">~15 mins</p>--%>
                                                 </div>
                                                 <div class="col-sm-12 col-md-3 col-lg-2">
                                                     <div class="action">
-                                                        <i class="far fa-eye"></i>
+                                                        <%--<i class="far fa-eye"></i>--%>
                                                         <i class="fas fa-trash-alt"></i>
                                                         <span></span>
                                                         <i class="fas fa-chevron-down"></i>
@@ -217,12 +217,12 @@
                                             <i class="fas fa-grip-vertical grid-icon"></i>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-9 col-lg-10">
-                                                    <h5 class="card-title">Create Object Relationships</h5>
-                                                    <p class="card-text">~15 mins</p>
+                                                    <h5 class="card-title">Create</h5>
+                                                    <%--<p class="card-text">~15 mins</p>--%>
                                                 </div>
                                                 <div class="col-sm-12 col-md-3 col-lg-2">
                                                     <div class="action">
-                                                        <i class="far fa-eye"></i>
+                                                        <%--<i class="far fa-eye"></i>--%>
                                                         <i class="fas fa-trash-alt"></i>
                                                         <span></span>
                                                         <i class="fas fa-chevron-down"></i>
