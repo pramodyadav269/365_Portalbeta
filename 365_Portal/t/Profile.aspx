@@ -7,43 +7,43 @@
     <div class="theme-section">
         <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
     </div>
-    
+
     <div class="container profile profile-section">
         <section>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-7 col-lg-8">
-
                     <div class="card shadow-sm mb-4 profile-info">
                         <div class="card-body mb-2">
-                            <li class="media align-items-center mb-2">
+                            <li class="media align-items-center mb-3">
                                 <div class="mr-4 position-relative">
-                                    <%--<img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic">
-                                    <a class="upload"><i class="fas fa-camera"></i></a>                                    --%>
-
-                                    <img class="circle user-photo" id="imgUserProfile" src="../INCLUDES/Asset/images/profile.png" />
-                                    <div class="custom-file">
+                                    <img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic" id="imgUserProfile">
+                                    <div class="custom-file upload">
                                         <input type="file" class="custom-file-input" id="fileUserProfile" onchange="encodeImagetoBase64(this,'userpic')">
-                                        <label class="custom-file-label mt-2" for="fileUserProfile">Change Profile</label>
+                                        <label class="custom-file-label" for="fileUserProfile"></label>
                                     </div>
-
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="mt-0 mb-0" id="hdgName"></h4>
+                                    <h4 class="mt-0 mb-0" id="hdgName">User Name</h4>
+                                    <span class="mb-3" id="hdgRole">Role</span>
+                                    <span id="hdgCity">Place, City</span>
                                 </div>
                             </li>
-                            <div class="mr-4 position-relative">
-                                <a style="display:none" class="bio" id="actionUserStatus" onclick="actionUserStatus();">Tell us about yourself! Add a short bio.</a>                                
-                                <input style="display:none" type="text" class="form-control required" id="txtUserStatus" placeholder="maximum 500 character." />                                                                
-                                <%--<a style="display:none" class="edit rounded" id="btnEditUserStatus" ><i class="fas fa-pen"></i></a>
-                                <a style="display:none" class="submit rounded"  id="btnsubmituserstatus" ><i class="fas fa-check"></i></a>--%>
+                            <a class="edit rounded-circle" id="btnEditBio" onclick="EditBio();"><i class="fas fa-pen"></i></a>
+                            <a class="cancel rounded-circle d-none" id="btnCancelBio" onclick="CancelBio();"><i class="fas fa-times"></i></a>
+                            <a class="submit rounded-circle d-none" id="btnSubmitBio" onclick="SubmitUserStatus();"><i class="fas fa-check"></i></a>
+                            <a class="bio" id="txtActionBio">Tell us about yourself! Add a short bio.</a>
 
-                                <span style="display:none" id="spanUserStatus"></span>
-                                <a style="display:none" class="btn bg-yellow float-right" id="btnEditUserStatus" onclick="editUserStatus();">Edit</a>
-                                <a style="display:none" class="btn bg-yellow float-right"  id="btnsubmituserstatus"  onclick="SubmitUserStatus();">Submit</a>
-                            </div>                            
+                            <div class="col-12 col-sm-12 mt-2 mb-2 d-none" id="dvBioInput">
+                                <div class="contact-info" id="divtxtBio"></div>
+                                <div class="contact-input d-none">
+                                    <div class="form-group">
+                                        <textarea class="form-control required" placeholder="Max 500 character." id="txtUserStatus"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
+
 
 
                     <div class="card shadow-sm mb-4 badges">
@@ -69,7 +69,7 @@
                             <a class="submit rounded d-none" id="btnSubmitInfo" onclick="SubmitInfo('.contact-info');"><i class="fas fa-check"></i></a>
                             <p class="card-subtitle mb-3 text-uppercase">About Us</p>
                             <div class="row contact-info">
-                                
+
                                 <%--<div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Role</div>
                                     <div class="contact-info" id="divddlRole">Test</div>
@@ -123,7 +123,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-12 col-md-6 mb-4"  id="divGroup" style="display: none;">
+                                <div class="col-12 col-sm-12 col-md-6 mb-4" id="divGroup" style="display: none;">
                                     <div class="contact-title">Group</div>
                                     <div class="contact-info" id="divddlGroup"></div>
                                     <div class="contact-input d-none">
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
 
-<%--                                <div class="col-12 col-sm-12 col-md-6 mb-4">
+                                <%--                                <div class="col-12 col-sm-12 col-md-6 mb-4">
                                     <div class="contact-title">Department</div>
                                     <div class="contact-info" id="divddlDepartment">Test</div>
                                     <div class="contact-input d-none">
@@ -187,8 +187,6 @@
                                         </div>
                                     </div>
                                 </div>--%>
-
-
                             </div>
                         </div>
                     </div>
@@ -588,6 +586,35 @@
             GetProfileFromProfilePage('pageload');
         });
 
+        function EditBio() {
+            $('#btnCancelBio').removeClass('d-none');
+            $('#btnSubmitBio').removeClass('d-none');
+            $('#btnEditBio').addClass('d-none');
+
+            $('#txtActionBio').addClass('d-none');
+
+            $('#dvBioInput').removeClass('d-none');
+            $('#dvBioInput').find('.contact-info').addClass('d-none');
+            $('#dvBioInput').find('.contact-input').removeClass('d-none');
+
+
+        }
+
+        function CancelBio() {
+            $('#btnCancelBio').addClass('d-none');
+            $('#btnSubmitBio').addClass('d-none');
+            $('#btnEditBio').removeClass('d-none');
+
+            $('#dvBioInput').removeClass('d-none');
+            $('#dvBioInput').find('.contact-info').removeClass('d-none');
+            $('#dvBioInput').find('.contact-input').addClass('d-none');
+
+            if ($('#dvBioInput').find('.contact-info').text().length === 0) {
+                $('#dvBioInput').find('.contact-info').addClass('d-none');
+                $('#txtActionBio').removeClass('d-none');
+            }
+
+        }
 
         function enableUpdatePassword() {
             if ($('#cbUpdatePassword').prop('checked')) {
@@ -621,9 +648,8 @@
 
             //clearFields(el);
         }
-        
-        function GetProfileFromProfilePage(flag)
-        {
+
+        function GetProfileFromProfilePage(flag) {
             //debugger
             ShowLoader();
             var getUrl = "/API/User/GetProfileFromProfilePage";
@@ -641,7 +667,7 @@
 
                             var UserProfile = DataSet.Data.UserProfile;
                             var Data = DataSet.Data.UserDetails;
-                            
+
 
                             //*************** Bind user details ****************//
 
@@ -658,8 +684,7 @@
                             $("#divtxtUpdatePassword").text('**********');
                             $("#txtUpdatePassword").val('');
 
-                            if (Data[0].Gender == 'M')
-                            {
+                            if (Data[0].Gender == 'M') {
                                 $("#divddlGender").text('Male');
                                 $("#ddlGender").val('M');
                             }
@@ -675,27 +700,25 @@
                             debugger
                             $("#imgUserProfile").attr("src", "../Files/ProfilePic/" + UserProfile[0].FilePath);
                             $("#hdgName").text(UserProfile[0].FirstName + ' ' + UserProfile[0].LastName);
-                            
+                            $("#hdgRole").text(DataSet.Data.UserDetails[0].Title);
 
-                            $("#actionUserStatus").show();
-                            $("#spanUserStatus").hide();
-                            $("#btnEditUserStatus").hide();
+
+                            $('#txtActionBio').removeClass('d-none');
+                            $('#dvBioInput').addClass('d-none');
 
                             if (UserProfile != undefined && UserProfile[0].UserStatus != '' && UserProfile[0].UserStatus != undefined) {
-                                $("#actionUserStatus").hide();
-                                $("#spanUserStatus").text(UserProfile[0].UserStatus);
-                                $("#spanUserStatus").show();
-                                $("#btnEditUserStatus").show();
+
+                                $('#txtActionBio').addClass('d-none');
+                                $('#dvBioInput').removeClass('d-none');
+                                $("#divtxtBio").text(UserProfile[0].UserStatus);
                             }
-                            $("#txtUserStatus").hide();
-                            $("#btnsubmituserstatus").hide();
 
                             //*************** Bind profile,Name and Status ****************//
-                            
+
                             $('#btncancelinfo').addclass('d-none');
                             $('#btnsubmitinfo').addclass('d-none');
                             $('#btneditinfo').removeclass('d-none');
-                            
+
                             $('.contact-info').find('.contact-info').removeclass('d-none');
                             $('.contact-info').find('.contact-input').addclass('d-none');
                         }
@@ -719,7 +742,7 @@
                 failure: function (response) {
                     HideLoader();
                 }
-            });            
+            });
         }
 
 
@@ -1096,30 +1119,9 @@
             });
         }
 
-        
-
-        function editUserStatus()
-        {
-            debugger
-            $("#actionUserStatus").hide();            
-            $("#spanUserStatus").hide();
-            $("#btnEditUserStatus").hide();
-            $("#txtUserStatus").show();
-            $("#txtUserStatus").text($("#spanUserStatus").text());
-            $("#btnsubmituserstatus").show();
-        }
-        function actionUserStatus() {
-            debugger
-            $("#actionUserStatus").hide();
-            $("#spanUserStatus").hide();
-            $("#btnEditUserStatus").hide();            
-            $("#txtUserStatus").show();
-            $("#btnsubmituserstatus").show();
-        }
-
         var base64UserProfileString = '';
         function encodeImagetoBase64(element, flag) {
-            debugger
+
             var file = element.files[0];
             var size = file.size;
             if (file.size != undefined) {
@@ -1175,8 +1177,7 @@
             }
         }
 
-        function SubmitUserStatus()
-        {
+        function SubmitUserStatus() {
             debugger
             if ($("#txtUserStatus").val() != '') {
                 var getUrl = "/API/User/UpdateUserStatus";
@@ -1195,12 +1196,16 @@
                             HideLoader();
                             //debugger
                             if (DataSet.StatusCode == "1") {
-                                $("#actionUserStatus").hide();
-                                $("#spanUserStatus").text($("#txtUserStatus").val());
-                                $("#spanUserStatus").show();
-                                $("#btnEditUserStatus").show();
-                                $("#txtUserStatus").hide();
-                                $("#btnsubmituserstatus").hide();
+
+                                $('#txtActionBio').addClass('d-none');
+
+                                $("#divtxtBio").text($("#txtUserStatus").val());
+
+
+                                CancelBio();
+
+                                
+
                             }
                             else {
                                 Swal.fire(DataSet.StatusDescription, {
