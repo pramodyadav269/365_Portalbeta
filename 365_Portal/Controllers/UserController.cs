@@ -2836,42 +2836,35 @@ namespace _365_Portal.Controllers
             if (identity != null)
             {
                 UserBO objUser = new UserBO();
+                
+                objUser.UserID = identity.UserID;
+                objUser.CompId = identity.CompId;
+                objUser.Role = identity.Role;
 
-                if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
-                {
-                    objUser.UserID = identity.UserID;
-                    objUser.CompId = identity.CompId;
-                    objUser.Role = identity.Role;
-
-                    var dsUserProfile = CommonBL.UpdateProfileFromProfilePage(objUser, 7);
-                    var dsUserDetails = CommonBL.UpdateProfileFromProfilePage(objUser, 4);
+                var dsUserProfile = CommonBL.UpdateProfileFromProfilePage(objUser, 7);
+                var dsUserDetails = CommonBL.UpdateProfileFromProfilePage(objUser, 4);
                     
-                    if (dsUserDetails.Tables[0].Rows.Count > 0 || dsUserProfile.Tables[0].Rows.Count > 0)
-                    {
-                        DataTable dtUserProfile = new DataTable();
-                        DataTable dtUserDetails = new DataTable();
-                        dtUserProfile = dsUserProfile.Tables[0].Copy();
-                        dtUserDetails = dsUserDetails.Tables[0].Copy();                        
+                if (dsUserDetails.Tables[0].Rows.Count > 0 || dsUserProfile.Tables[0].Rows.Count > 0)
+                {
+                    DataTable dtUserProfile = new DataTable();
+                    DataTable dtUserDetails = new DataTable();
+                    dtUserProfile = dsUserProfile.Tables[0].Copy();
+                    dtUserDetails = dsUserDetails.Tables[0].Copy();                        
 
-                        DataSet ds = new DataSet();
-                        ds.Tables.Add(dtUserProfile);
-                        ds.Tables[0].TableName = "UserProfile";
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(dtUserProfile);
+                    ds.Tables[0].TableName = "UserProfile";
 
-                        ds.Tables.Add(dtUserDetails);
-                        ds.Tables[1].TableName = "UserDetails";
+                    ds.Tables.Add(dtUserDetails);
+                    ds.Tables[1].TableName = "UserDetails";
 
-                        data = Utility.ConvertDataSetToJSONString(ds);
-                        data = Utility.Successful(data);
-                    }
-                    else
-                    {
-                        data = Utility.API_Status("3", "! No data found.");
-                    }
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
                 }
                 else
                 {
-                    data = Utility.API_Status("3", "You do not have access for this functionality");
-                }
+                    data = Utility.API_Status("3", "! No data found.");
+                }              
             }
             else
             {

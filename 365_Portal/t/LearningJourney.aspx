@@ -167,13 +167,16 @@
                                                         </small>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12">
+                                                <%--<div class="col-sm-12">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Learning Objectives *" maxlength="200" id="txtLearningObjectives" aria-describedby="txtLearningObjectivesHelp" />
                                                         <small id="txtLearningObjectivesHelp" class="form-text">Keep your description brief but compelling
                                                     <span class="float-right">0 / 200</span>
                                                         </small>
                                                     </div>
+                                                </div>--%>
+                                                <div class="col-sm-12" id="divLessonDescription">
+                                                    <div id="txtLessonDescription"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -381,6 +384,7 @@
 
         var editorContentDesc = new Jodit('#txtContentDescription');
         var editorResourcesDesc = new Jodit('#txtResourcesDescription');
+        var editorLessonDesc = new Jodit('#txtLessonDescription');
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
@@ -1043,7 +1047,7 @@
                                                 }
 
                                                 SetProgressBar();
-                                                ClearFieldsAddCourse();
+                                                //ClearFieldsAddCourse();
 
                                                 Swal.fire({
                                                     title: "Success",
@@ -1198,7 +1202,9 @@
 
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
-            $('#txtLearningObjectives').val('');
+            //$('#txtLearningObjectives').val('');
+            $('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
+            var editorContentDesc = new Jodit('#txtLessonDescription');
             $('#txtEstimatedTime').val('');
             $('#txtPoint').val('');
         }
@@ -1208,8 +1214,11 @@
             if ($("#txtLessonTitle").val() == undefined || $("#txtLessonTitle").val() == '') {
                 return { error: true, msg: "Please enter Lesson Title" };
             }
-            else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
-                return { error: true, msg: "Please enter Learning Objectives" };
+            //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
+            //    return { error: true, msg: "Please enter Learning Objectives" };
+            //}
+            else if ($('#divLessonDescription').find('.jodit_wysiwyg').text() == undefined || $('#divLessonDescription').find('.jodit_wysiwyg').text() == '') {
+                return { error: true, msg: "Please enter Lesson Details" };
             }
             else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
                 return { error: true, msg: "Please enter Estimate Time" };
@@ -1245,7 +1254,8 @@
             ShowLoader();
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
-            var _Overview = $('#txtLearningObjectives').val();
+            //var _Overview = $('#txtLearningObjectives').val();
+            var _Overview = $('#divLessonDescription').find('.jodit_wysiwyg').text();
             //var _Description = $('#txtDescription').val();
             //var _IsPublished = $('#cbIsPublished').prop('checked');
                 
@@ -1406,7 +1416,8 @@
                             var EditModule = DataSet.Data.Data;
 
                             $('#txtLessonTitle').val(EditModule[0].Title);
-                            $('#txtLearningObjectives').val(EditModule[0].Overview);
+                            //$('#txtLearningObjectives').val(EditModule[0].Overview);
+                            $('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
                             $('#txtEstimatedTime').val(EditModule[0].CourseTime);
                             $('#txtPoint').val(EditModule[0].Points);
 
@@ -1439,7 +1450,8 @@
         {
             debugger                        
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
-            $('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
             $('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
             $('#txtPoint').val($(obj).parent().parent().parent().parent().find('#spPoints').text());
 
@@ -2060,7 +2072,7 @@
                                             ResourceFlag = LessonFlag;
 
                                             SetProgressBar();
-                                            ClearFieldsAddResource();
+                                            //ClearFieldsAddResource();
 
                                             Swal.fire({
                                                 title: "Success",
