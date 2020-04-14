@@ -255,6 +255,7 @@
                     <div class="tab-pane fade" id="pills-quiz" role="tabpanel" aria-labelledby="pills-quiz-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
+                                
                                 <div class="col-12 col-sm-12">
                                     <div class="row" id="divQuizAdd">
                                         <div class="col-12 col-sm-12">
@@ -312,6 +313,77 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div id="divQuestion">
+
+                                </div>
+
+                                <div class="col-sm-12 quiz-wrapper" >
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="font-weight-bold">Quiz</h5>
+                                        <div class="percentage-text">Passing Percentage <span>74</span></div>
+                                    </div>
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">
+                                                    <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
+                                                    <div class="col-sm-8 col-md-10">
+                                                        <div class="form-group">
+                                                            <input readonly type="text" class="form-control" value="What is a Module" />
+                                                        </div>
+                                                    </div>
+                                                    <span class="correct">Correct</span>
+                                                </div>
+
+                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
+                                                    <div class="col-sm-8 col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-10">
+                                                                <div class="form-group">
+                                                                    <input readonly type="text" class="form-control" value="A real life business senario" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-2">
+                                                                <div class="form-group">
+                                                                    <input readonly type="text" class="form-control" value="0" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="checked-icon"><i class="far fa-check-circle correct"></i></span>
+                                                </div>
+
+                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                                    <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="far fa-circle"></i></span>
+                                                    <div class="col-sm-8 col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-10">
+                                                                <div class="form-group">
+                                                                    <input readonly type="text" class="form-control" value="A single learning topic" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-2">
+                                                                <div class="form-group">
+                                                                    <input readonly type="text" class="form-control" value="0" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span class="checked-icon"><i class="far fa-check-circle wrong"></i></span>
+                                                </div>
+
+                                                <div class="offset-1 offset-sm-1 col-sm-11 mb-2">
+                                                    <div class="form-group mt-2">
+                                                        <a class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
