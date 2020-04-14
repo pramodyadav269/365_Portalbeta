@@ -4,302 +4,323 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div>
-        <div class="container-fluid dashboard">
-            <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
-                <div id="dvMyTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in AllTopics">
-                        <div class="card bc-blue">
-                            <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
-                                <span class="point">+{{topic.Points}} Points</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{topic.Title}}</h5>
-                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
-                                <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
-                                <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
+    <div class="container courses">
 
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+        <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+
+
+            <ul class="nav nav-pills" id="pills-tab-courses" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-published-tab" data-toggle="pill" href="#pills-published" role="tab" aria-controls="pills-published" aria-selected="false">Published</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-drafts-tab" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabCoursesContent">
+                <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+                    <div id="dvMyTopics" class="row content">
+                        <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AllTopics">
+                            <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
+                                <div class="card-icon">
+                                    <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                    <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
+                                    <span class="point">+{{topic.Points}} Points</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{topic.Title}}</h5>
+                                    <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
+                                    <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
+                                    <div class="action">
+                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
+
+                                        <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-plus"></i></span>
+                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
-                                    </span>
+                                    </span>--%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
-    </div>
+                <div class="tab-pane fade" id="pills-published" role="tabpanel" aria-labelledby="pills-published-tab">
+                </div>
+                <div class="tab-pane fade" id="pills-drafts" role="tabpanel" aria-labelledby="pills-drafts-tab">
+                </div>
+            </div>
+        </section>
 
-    <script>
-        $(document).ready(function () {
-            $("#dvMenu_Dashboard").addClass("active");
-            $('select.select2').select2({
-                placeholder: "Select a option",
-                allowClear: true
+        <script>
+            $(document).ready(function () {
+                $("#dvMenu_Dashboard").addClass("active");
+                $('select.select2').select2({
+                    placeholder: "Select a option",
+                    allowClear: true
+                });
+                //$('.date').datepicker({ uiLibrary: 'bootstrap4', format: 'yyyy-dd-mm' });
+                bsCustomFileInput.init();
+
+                GetAchievements();
             });
-            //$('.date').datepicker({ uiLibrary: 'bootstrap4', format: 'yyyy-dd-mm' });
-            bsCustomFileInput.init();
 
-            GetAchievements();
-        });
-
-        function InitSlickSlider(el) {
-            $(el).removeClass("slick-initialized");
-            $(el).removeClass("slick-slider");
-            $(el).slick({
-                dots: false,
-                infinite: false,
-                speed: 300,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                centerMode: false,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
+            function InitSlickSlider(el) {
+                $(el).removeClass("slick-initialized");
+                $(el).removeClass("slick-slider");
+                $(el).slick({
+                    dots: false,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    centerMode: false,
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 3,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 2,
+                                slidesToScroll: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
                         }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-        }
-
-        //This code loads the IFrame Player API code asynchronously.
-        //var tag = document.createElement('script');
-        //tag.src = "https://www.youtube.com/iframe_api";
-        //var firstScriptTag = document.getElementsByTagName('script')[0];
-        //firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        // This function creates an iframe and YouTube player
-        // after the API code downloads.
-        var ik_player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('ik_player', {
-                height: '390',
-                width: '640',
-                videoId: '',
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onPlaybackQualityChange': onPlayerPlaybackQualityChange,
-                    'onPlaybackRateChange': onPlayerPlaybackRateChange,
-                    'onError': onPlayerError,
-                    'onApiChange': onPlayerApiChange
-                }
-            });
-        }
-
-        // The API will call this function when the video player is ready.
-        function onPlayerReady(event) {
-            console.log('player is ready');
-        }
-
-        // The API calls this function when the player's state changes.
-        function onPlayerStateChange(event) {
-
-            switch (event.data) {
-                case YT.PlayerState.UNSTARTED:
-                    console.log('unstarted');
-                    break;
-                case YT.PlayerState.ENDED:
-                    $("#dvVideoRating").show();
-                    $('#dvVideoRating').removeClass('d-none');
-                    $('#videoControl').addClass('d-none');
-                    $('#videoControl').hide();
-                    break;
-                case YT.PlayerState.PLAYING:
-                    console.log('playing');
-                    break;
-                case YT.PlayerState.PAUSED:
-                    console.log('paused');
-                    break;
-                case YT.PlayerState.BUFFERING:
-                    console.log('buffering');
-                    break;
-                case YT.PlayerState.CUED:
-                    console.log('video cued');
-                    break;
+                    ]
+                });
             }
-        }
 
-        function onPlayerPlaybackQualityChange(playbackQuality) {
-            //alert("onPlayerPlaybackQualityChange");
-            console.log('playback quality changed to ' + playbackQuality.data);
-        }
+            //This code loads the IFrame Player API code asynchronously.
+            //var tag = document.createElement('script');
+            //tag.src = "https://www.youtube.com/iframe_api";
+            //var firstScriptTag = document.getElementsByTagName('script')[0];
+            //firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        function onPlayerPlaybackRateChange(playbackRate) {
-            //alert("onPlayerPlaybackRateChange");
-            console.log('playback rate changed to ' + playbackRate.data);
-        }
+            // This function creates an iframe and YouTube player
+            // after the API code downloads.
+            var ik_player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('ik_player', {
+                    height: '390',
+                    width: '640',
+                    videoId: '',
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onPlaybackQualityChange': onPlayerPlaybackQualityChange,
+                        'onPlaybackRateChange': onPlayerPlaybackRateChange,
+                        'onError': onPlayerError,
+                        'onApiChange': onPlayerApiChange
+                    }
+                });
+            }
 
-        function onPlayerError(e) {
-            //alert("onPlayerError");
-            console.log('An error occurred: ' + e.data);
-        }
+            // The API will call this function when the video player is ready.
+            function onPlayerReady(event) {
+                console.log('player is ready');
+            }
 
-        function onPlayerApiChange() {
-            //alert("onPlayerApiChange");
-            console.log('The player API changed');
-        }
+            // The API calls this function when the player's state changes.
+            function onPlayerStateChange(event) {
 
-
-
-        var achievements = [];
-
-        function GetAchievements() {
-            ShowLoader();
-            var requestParams = { contact_name: "Scott", company_name: "HP" };
-            $.ajax({
-                type: "POST",
-                url: "../api/Trainning/GetAchievementNGifts",
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: JSON.stringify(requestParams),
-                contentType: "application/json",
-                success: function (response) {
-                    achievements = $.parseJSON(response).Achievements;
-                    gifts = $.parseJSON(response).Gifts;
-                    HideLoader();
+                switch (event.data) {
+                    case YT.PlayerState.UNSTARTED:
+                        console.log('unstarted');
+                        break;
+                    case YT.PlayerState.ENDED:
+                        $("#dvVideoRating").show();
+                        $('#dvVideoRating').removeClass('d-none');
+                        $('#videoControl').addClass('d-none');
+                        $('#videoControl').hide();
+                        break;
+                    case YT.PlayerState.PLAYING:
+                        console.log('playing');
+                        break;
+                    case YT.PlayerState.PAUSED:
+                        console.log('paused');
+                        break;
+                    case YT.PlayerState.BUFFERING:
+                        console.log('buffering');
+                        break;
+                    case YT.PlayerState.CUED:
+                        console.log('video cued');
+                        break;
                 }
-            });
-        }
+            }
 
-        function openModal(achievementId) {
-            $.each(achievements, function (i, data) {
-                if (data.AchievementID == achievementId) {
-                    $("#dvAchievementTitle").html(data.Title);
-                    $("#dvAchievmentDescription").html(data.Description);
+            function onPlayerPlaybackQualityChange(playbackQuality) {
+                //alert("onPlayerPlaybackQualityChange");
+                console.log('playback quality changed to ' + playbackQuality.data);
+            }
 
-                    if (data.Title.includes("quiz master"))
-                        $("#imgAchievementIcon").attr("src", '../Asset/images/quiz-master-c-icon.svg');
-                    if (data.Title.includes("world"))
-                        $("#imgAchievementIcon").attr("src", '../Asset/images/perfectionist-c-icon.svg');
-                    if (data.Title.includes("wordsmith"))
-                        $("#imgAchievementIcon").attr("src", '../Asset/images/wordsmith-c-icon.svg');
-                    if (data.Title.includes("engager"))
-                        $("#imgAchievementIcon").attr("src", '../Asset/images/engager-icon.svg');
-                    if (data.Title.includes("Guru"))
-                        $("#imgAchievementIcon").attr("src", '../Asset/images/diploma.png');
+            function onPlayerPlaybackRateChange(playbackRate) {
+                //alert("onPlayerPlaybackRateChange");
+                console.log('playback rate changed to ' + playbackRate.data);
+            }
 
-                    var reqHtml = "";
-                    $.each(data.Requirements, function (indx, req) {
-                        reqHtml += '<li class="list-group-item border-0">' + req.Description + '</li>';
-                    });
-                    $("#dvRequirements").html(reqHtml);
+            function onPlayerError(e) {
+                //alert("onPlayerError");
+                console.log('An error occurred: ' + e.data);
+            }
 
-                    return false;
-                }
-            });
+            function onPlayerApiChange() {
+                //alert("onPlayerApiChange");
+                console.log('The player API changed');
+            }
 
-            $('#modalAchievements').modal('show');
-        }
 
-        function VideoFinished(e) {
-            $("#dvVideoRating").show();
-            $('#dvVideoRating').removeClass('d-none');
-            $('#videoControl').addClass('d-none');
-            $('#videoControl').hide();
-        }
 
-        function VideoPlayPause(action) {
-            if (action == 1) {
-                // video.play();
-                $('#vdVideoPlayer')[0].play();
+            var achievements = [];
+
+            function GetAchievements() {
+                ShowLoader();
+                var requestParams = { contact_name: "Scott", company_name: "HP" };
+                $.ajax({
+                    type: "POST",
+                    url: "../api/Trainning/GetAchievementNGifts",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        achievements = $.parseJSON(response).Achievements;
+                        gifts = $.parseJSON(response).Gifts;
+                        HideLoader();
+                    }
+                });
+            }
+
+            function openModal(achievementId) {
+                $.each(achievements, function (i, data) {
+                    if (data.AchievementID == achievementId) {
+                        $("#dvAchievementTitle").html(data.Title);
+                        $("#dvAchievmentDescription").html(data.Description);
+
+                        if (data.Title.includes("quiz master"))
+                            $("#imgAchievementIcon").attr("src", '../Asset/images/quiz-master-c-icon.svg');
+                        if (data.Title.includes("world"))
+                            $("#imgAchievementIcon").attr("src", '../Asset/images/perfectionist-c-icon.svg');
+                        if (data.Title.includes("wordsmith"))
+                            $("#imgAchievementIcon").attr("src", '../Asset/images/wordsmith-c-icon.svg');
+                        if (data.Title.includes("engager"))
+                            $("#imgAchievementIcon").attr("src", '../Asset/images/engager-icon.svg');
+                        if (data.Title.includes("Guru"))
+                            $("#imgAchievementIcon").attr("src", '../Asset/images/diploma.png');
+
+                        var reqHtml = "";
+                        $.each(data.Requirements, function (indx, req) {
+                            reqHtml += '<li class="list-group-item border-0">' + req.Description + '</li>';
+                        });
+                        $("#dvRequirements").html(reqHtml);
+
+                        return false;
+                    }
+                });
+
+                $('#modalAchievements').modal('show');
+            }
+
+            function VideoFinished(e) {
+                $("#dvVideoRating").show();
+                $('#dvVideoRating').removeClass('d-none');
                 $('#videoControl').addClass('d-none');
                 $('#videoControl').hide();
             }
-        }
 
-        function VideoPaused(e) {
-            //alert("Video Paused");
-            $('#videoControl').removeClass('d-none');
-            $('#videoControl').hide();
-            $('#vdVideoPlayer')[0].pause();
-        }
-
-        var accessToken = '<%=Session["access_token"]%>';
-
-
-        function ChangeFileName(cntrl) {
-            var scope = angular.element(cntrl).scope();
-            var selectedQuestion = jQuery.grep(scope.SpecialContents.Questions, function (obj) {
-                return obj.QuestionID === parseInt($(cntrl).attr("questionid"));
-            });
-
-            selectedQuestion[0].Value_Text = cntrl.files[0].name;
-            //selectedQuestion.Value_Text = cntrl.files[0].name;
-        }
-
-        //function GetFormattedDate(date) {
-        //    var dateParts = date.split("-");
-        //    date = format(dateParts[1]) + "-" + format(dateParts[0]) + "-" + format(dateParts[2]);
-        //    var todayTime = new Date(date);
-        //    var month = format(todayTime.getMonth() + 1);
-        //    var day = format(todayTime.getDate());
-        //    var year = format(todayTime.getFullYear());
-        //    return day + "/" + month + "/" + year;
-        //}
-
-        function format(str) {
-            return str < 10 ? "0" + str : str;
-        }
-
-        function encodeImagetoBase64(element, scope) {
-            var uploadFile = true;
-            if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test(element.files[0].name)) {
-                uploadFile = false;
+            function VideoPlayPause(action) {
+                if (action == 1) {
+                    // video.play();
+                    $('#vdVideoPlayer')[0].play();
+                    $('#videoControl').addClass('d-none');
+                    $('#videoControl').hide();
+                }
             }
 
-            if (uploadFile) {
-                var sizeInMB = parseInt(element.files[0].size / 1024 / 1024);
-                if (sizeInMB <= 2) {
-                    var file = element.files[0];
-                    var reader = new FileReader();
-                    reader.onloadend = function () {
-                        scope.question.FilePath = reader.result;
-                        scope.question.Value_Text = element.files[0].name;
+            function VideoPaused(e) {
+                //alert("Video Paused");
+                $('#videoControl').removeClass('d-none');
+                $('#videoControl').hide();
+                $('#vdVideoPlayer')[0].pause();
+            }
+
+            var accessToken = '<%=Session["access_token"]%>';
+            var userRole ='<%=Session["RoleName"]%>';
+
+
+            function ChangeFileName(cntrl) {
+                var scope = angular.element(cntrl).scope();
+                var selectedQuestion = jQuery.grep(scope.SpecialContents.Questions, function (obj) {
+                    return obj.QuestionID === parseInt($(cntrl).attr("questionid"));
+                });
+
+                selectedQuestion[0].Value_Text = cntrl.files[0].name;
+                //selectedQuestion.Value_Text = cntrl.files[0].name;
+            }
+
+            //function GetFormattedDate(date) {
+            //    var dateParts = date.split("-");
+            //    date = format(dateParts[1]) + "-" + format(dateParts[0]) + "-" + format(dateParts[2]);
+            //    var todayTime = new Date(date);
+            //    var month = format(todayTime.getMonth() + 1);
+            //    var day = format(todayTime.getDate());
+            //    var year = format(todayTime.getFullYear());
+            //    return day + "/" + month + "/" + year;
+            //}
+
+            function format(str) {
+                return str < 10 ? "0" + str : str;
+            }
+
+            function encodeImagetoBase64(element, scope) {
+                var uploadFile = true;
+                if (!(/\.(gif|jpg|jpeg|tiff|png)$/i).test(element.files[0].name)) {
+                    uploadFile = false;
+                }
+
+                if (uploadFile) {
+                    var sizeInMB = parseInt(element.files[0].size / 1024 / 1024);
+                    if (sizeInMB <= 2) {
+                        var file = element.files[0];
+                        var reader = new FileReader();
+                        reader.onloadend = function () {
+                            scope.question.FilePath = reader.result;
+                            scope.question.Value_Text = element.files[0].name;
+                        }
+                        reader.readAsDataURL(file);
                     }
-                    reader.readAsDataURL(file);
+                    else {
+                        Swal.fire({
+                            title: 'Failure',
+                            icon: 'error',
+                            html: "Maximum file upload size is 2 MB",
+                            showConfirmButton: false,
+                            showCloseButton: true
+                        });
+                    }
                 }
                 else {
                     Swal.fire({
                         title: 'Failure',
                         icon: 'error',
-                        html: "Maximum file upload size is 2 MB",
+                        html: "Only images with (gif|jpg|jpeg|tiff|png) extensions can be uploaded.",
                         showConfirmButton: false,
                         showCloseButton: true
                     });
                 }
             }
-            else {
-                Swal.fire({
-                    title: 'Failure',
-                    icon: 'error',
-                    html: "Only images with (gif|jpg|jpeg|tiff|png) extensions can be uploaded.",
-                    showConfirmButton: false,
-                    showCloseButton: true
-                });
-            }
-        }
 
-    </script>
+        </script>
 </asp:Content>
 

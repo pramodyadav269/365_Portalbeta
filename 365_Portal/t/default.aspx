@@ -252,9 +252,10 @@
 
                 <div id="dvInProgressTopics" class="content">
                     <div class="content-item" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
-                        <div class="card bc-blue">
+                        <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                 <span class="point">+{{topic.Points}} Points</span>
                             </div>
                             <div class="card-body">
@@ -264,10 +265,11 @@
                                 <div class="action">
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>
+                                   
+                                   <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+                                       <i class="fas fa-play"></i>
+                                   </span>
+                                    <%-- background-color--%>
                                 </div>
                             </div>
                         </div>
@@ -278,9 +280,10 @@
 
                 <div id="dvMyTopics" class="content">
                     <div class="content-item" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
-                        <div class="card bc-blue">
+                        <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                 <span class="point">+{{topic.Points}} Points</span>
                             </div>
                             <div class="card-body">
@@ -290,46 +293,24 @@
                                 <div class="action">
                                     <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>
+                                   
+                                   <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
+                                       <i class="fas fa-play"></i>
+                                   </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <%--  <div id="dvTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in Topics" my-topic-repeat-directive>
-                        <div class="card bc-blue">
-                            <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
-                                <span class="point">+{{topic.Points}} Points</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{topic.Title}}</h5>
-                                <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
-                                <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
-                                <div class="action">
-                                    <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>--%>
-
                 <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
 
                 <div id="dvRecommendedTopics" class="content">
                     <div class="content-item" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
-                        <div class="card bc-blue">
+                        <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                 <span class="point">+{{topic.Points}} Points</span>
                             </div>
                             <div class="card-body">
@@ -340,7 +321,7 @@
                                     <%--<span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
+                                    <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -353,9 +334,10 @@
 
                 <div id="dvLatestTopics" class="content">
                     <div class="content-item" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
-                        <div class="card bc-blue">
+                        <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                 <span class="point">+{{topic.Points}} Points</span>
                             </div>
                             <div class="card-body">
@@ -366,9 +348,11 @@
                                     <%--  <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
+                                   
+                                    <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
+
                                 </div>
                             </div>
                         </div>
@@ -379,9 +363,10 @@
 
                 <div id="dvPopularTopics" class="content">
                     <div class="content-item" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
-                        <div class="card bc-blue">
+                        <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                 <span class="point">+{{topic.Points}} Points</span>
                             </div>
                             <div class="card-body">
@@ -392,7 +377,7 @@
                                     <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
-                                    <span class="play bg-blue bc-blue" ng-click="GetModulesByTopic(topic.TopicId,1);" style="cursor: pointer;">
+                                    <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <i class="fas fa-play"></i>
                                     </span>
                                 </div>
@@ -1223,7 +1208,9 @@
         </div>
     </div>
     <script>
+
         $(document).ready(function () {
+
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
                 placeholder: "Select a option",
@@ -1424,6 +1411,7 @@
         }
 
         var accessToken = '<%=Session["access_token"]%>';
+var userRole ='<%=Session["RoleName"]%>';
 
 
         function ChangeFileName(cntrl) {

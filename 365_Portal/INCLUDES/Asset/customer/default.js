@@ -4,9 +4,20 @@ var allContents = [];
 
 // CONTROLLER FUNCTIONS
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
+
+    var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
     objDs = DataService;
-    objDs.DS_GetUserTopics("");
-    objDs.DS_GetAllTopics("");
+
+    if (currentPage.indexOf('courses.aspx') > -1) {
+        if (userRole == "enduser")
+            objDs.DS_GetUserTopics("", userRole);
+        else
+            objDs.DS_GetAllTopics("");
+    }
+    else if (currentPage.indexOf('default.aspx') > -1) {
+        objDs.DS_GetUserTopics("", "");
+    }
+
     $("#dvTopicContainer").hide();
 
     $scope.ActiveContainer = "Topic";
@@ -14,7 +25,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     $scope.ColorIndex = 1;
 
     $scope.SearchTopics = function () {
-        objDs.DS_GetUserTopics($scope.SearchText);
+        objDs.DS_GetUserTopics($scope.SearchText, "");
     }
 
     $scope.trustAsHtml = function (html) {
@@ -381,6 +392,9 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
     }
 
+    $scope.EditTopic = function (topicId) {
+        window.location.href = 'LearningJourney.aspx?topic=' + topicId;
+    }
 });
 
 //COMMON SERVICE OPERATIONS
@@ -406,7 +420,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         });
     }
 
-    ds.DS_GetUserTopics = function (searchText) {
+    ds.DS_GetUserTopics = function (searchText, userRole) {
         ShowLoader();
         var requestParams = { SearchText: searchText };
         $http({
@@ -463,7 +477,6 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvLatestTopics").show();
             }
 
-
             $rootScope.PopularCourses = responseData.Data.Data4; // Popular Courses
             if ($rootScope.PopularCourses.length == 0) {
                 $("#dvPopularTopicsTitle").hide();
@@ -481,7 +494,16 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $.merge(allTopics, $rootScope.LatestCourses);
             $.merge(allTopics, $rootScope.PopularCourses);
 
-            $rootScope.Topics = allTopics;
+            if (userRole == "enduser") {
+                $rootScope.AllTopics = allTopics;
+                angular.forEach(jsonObject, function (value, key) {
+                    value.CanEdit = 0;
+                });
+            }
+            else
+                $rootScope.Topics = allTopics;
+
+            $rootScope.$apply();
 
             //$rootScope.Topics = ds.DS_SetClasses(responseData.Data);
         });
