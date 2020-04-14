@@ -155,6 +155,21 @@ a:hover {
     height: 20px;
 }
 
+.navbar .nav-content .nav-item.icon .svg-inline--fa {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor:pointer;
+}
+
+.navbar .nav-content .nav-item.icon.menu .dropdown-menu {
+    width: auto;
+    left: -102px;
+}
+
+.navbar .nav-content .nav-item.fav-icon img {
+    height: 20px;
+}
+
 .navbar .nav-content .nav-item.profile-photo {
     margin-left: 3rem;
     position: relative;
@@ -494,8 +509,16 @@ a:hover {
 
 
 /* main */
-main .container-fluid.dashboard {
-    padding: 4rem;
+main {
+    .container-fluid {
+        &.dashboard {
+            padding: 4rem 6rem;
+
+            @media #{$medium-and-down} {
+                padding: 4rem 3rem;
+            }
+        }
+    }
 }
 
 .section-title {
@@ -586,29 +609,41 @@ main .container-fluid.dashboard {
 }
 
 
-.content.slick-slider::before {
-    position: absolute;
-    top: -6px;
-    left: 0;
-    width: 140px;
-    height: 100%;
-    z-index: 1;
-    content: "";
-    /*background: linear-gradient(to right, red, yellow);*/
-    background: linear-gradient(to left, rgba(245, 246, 247, 0) 0%,#F5F6F7 50%,#F5F6F7 51%,#F5F6F7 100%)
+.content.slick-slider {
+
+    &::before {
+        position: absolute;
+        top: -6px;
+        left: 0;
+        width: 140px;
+        height: 100%;
+        z-index: 1;
+        content: "";
+        /*background: linear-gradient(to right, red, yellow);*/
+        background: linear-gradient(to left, rgba(245, 246, 247, 0) 0%,#F5F6F7 50%,#F5F6F7 51%,#F5F6F7 100%);
+
+        @media #{$small-and-down} {
+            width: 60px;
+        }
+    }
+
+    &::after {
+        position: absolute;
+        top: -6px;
+        right: 0;
+        width: 140px;
+        height: 100%;
+        z-index: 1;
+        content: "";
+        /*background: linear-gradient(to left, red, yellow);*/
+        background: linear-gradient(to right, rgba(245, 246, 247, 0) 0%,#F5F6F7 50%,#F5F6F7 51%,#F5F6F7 100%);
+
+        @media #{$small-and-down} {
+            width: 60px;
+        }
+    }
 }
 
-.content.slick-slider::after {
-    position: absolute;
-    top: -6px;
-    right: 0;
-    width: 140px;
-    height: 100%;
-    z-index: 1;
-    content: "";
-    /*background: linear-gradient(to left, red, yellow);*/
-    background: linear-gradient(to right, rgba(245, 246, 247, 0) 0%,#F5F6F7 50%,#F5F6F7 51%,#F5F6F7 100%)
-}
 /* spinner style*/
 .spinner-center {
     position: fixed;
@@ -1633,7 +1668,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .card {
     margin-bottom: 1rem;
 }
-
 /* module end */
 .select2-dropdown {
     border-radius: 0;
