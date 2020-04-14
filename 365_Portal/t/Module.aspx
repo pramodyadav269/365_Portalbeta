@@ -420,8 +420,6 @@
 
         $(document).ready(function () {
 
-            $('#pills-quiz-tab').tab('show');
-
             $("#ddlTags").select2({
                 tags: true,
                 placeholder: "Enter tag"
