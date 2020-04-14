@@ -419,9 +419,6 @@
             </div>
             <%-- phase2 --%>
 
-
-
-
             <div class="nav-content float-right">
                 <ul class="navbar-nav">
                     <li class="nav-item icon dropdown d-none"><a class="nav-link" id="navbarComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -455,23 +452,34 @@
                         <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
 
-                    <%-- old profile code --%>
+                    <li class="nav-item icon menu dropdown">
+                        <i class="fas fa-th" id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                         <div class="dropdown-menu" aria-labelledby="navDash">
+                            <a class="dropdown-item" href="#">Learn</a>
+                            <a class="dropdown-item" href="#">Task</a>
+                            <a class="dropdown-item" href="#">Chat</a>
+                        </div>
+                    </li>
+
+
+
+                    <%--
                     <li class="nav-item profile-photo d-none">
-                        <%--<img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" />--%>
+                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" />
                         <span class="badge online">0</span>
-                        <%--offline--%>
+                        
                     </li>
                     <li class="nav-item profile dropdown d-none">
                         <a class="nav-link" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <%--<asp:Label ID="lblUserName" runat="server" CssClass="name dropdown-toggle" />--%>
+                            <asp:Label ID="lblUserName" runat="server" CssClass="name dropdown-toggle" />
                             <span class="status">0 badges, 0 points</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
-                            <%--<a id="A1" href="Settings.aspx" class="dropdown-item">Settings</a>--%>
-                            <%--<a id="menuLogout" runat="server" class="dropdown-item" onserverclick="btnLogout_Click">Logout</a>--%>
+                            <a id="a1" href="settings.aspx" class="dropdown-item">settings</a>
+                            <a id="menulogout" runat="server" class="dropdown-item" onserverclick="btnlogout_click">logout</a>
                         </div>
                     </li>
-                    <%-- old code --%>
+                    --%>
 
                     <%-- Start profile --%>
                     <li class="nav-item user-name">
