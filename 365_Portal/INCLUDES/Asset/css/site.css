@@ -1522,3 +1522,19 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     text-transform: none; }
     .dropright .dropdown-menu .dropdown-item .svg-inline--fa {
       font-size: 18px; }
+
+.courses {
+  padding-top: 4rem;
+  padding-bottom: 4rem; }
+  .courses .nav-pills .nav-link {
+    padding: .3rem 1rem;
+    color: rgba(0, 0, 0, 0.4); }
+    .courses .nav-pills .nav-link.active {
+      color: #FAC900;
+      border-radius: 0;
+      background-color: transparent;
+      border-bottom: 0.15rem solid #FAC900; }
+  .courses .content {
+    margin-top: 1rem; }
+    .courses .content .content-item {
+      margin-right: 0; }
