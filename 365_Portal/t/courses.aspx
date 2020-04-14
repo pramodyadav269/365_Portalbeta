@@ -1,4 +1,4 @@
-﻿<%@ Page Title="365" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Courses.aspx.cs" Inherits="Life.Courses" %>
+﻿<%@ Page Title="365" Language="C#" MasterPageFile="~/t/enduser.Master" AutoEventWireup="true" CodeBehind="Courses.aspx.cs" Inherits="Life.Courses" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
