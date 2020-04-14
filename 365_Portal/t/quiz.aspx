@@ -1098,6 +1098,7 @@
         }
 
         function SubmitChanges(displayPopup) {
+            debugger
             var question = {
                 "TopicID": gbl_TopicID
                 , "ModuleID": gbl_ModuleID

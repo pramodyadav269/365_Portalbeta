@@ -12,6 +12,8 @@ using System.Web.Http;
 using System.Reflection;
 using Newtonsoft.Json;
 using _365_Portal.Code.BO;
+using _365_Portal.Models;
+
 namespace _365_Portal.Controllers
 {
     public class QuizController : ApiController
@@ -121,15 +123,20 @@ namespace _365_Portal.Controllers
                         ds = ContentBL.CreateContent(content);
                     if (ds.Tables.Count > 0)
                     {
-                        if (ds.Tables[0].Rows[0]["StatusCode"].ToString() == "1")
+                        DataTable dt = ds.Tables["Data"];
+                        if (dt.Rows[0]["ReturnCode"].ToString() == "1")
                         {
                             // Successful
-                            data = Utility.Successful("");
+                            //data = Utility.Successful("");
+                            data = Utility.ConvertDataSetToJSONString(dt);
+                            data = Utility.Successful(data);
                         }
                         else
                         {
                             // Error. Check Logs
-                            data = Utility.API_Status("1", "There might be some error. Please try again later");
+                            //data = Utility.API_Status("1", "There might be some error. Please try again later");
+                            data = dt.Rows[0]["ReturnMessage"].ToString();
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                         }
                     }
                     else
