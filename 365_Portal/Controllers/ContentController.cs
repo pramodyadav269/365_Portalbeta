@@ -2056,17 +2056,19 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             if (ds.Tables.Count > 0)
                             {
-                                DataTable dt = ds.Tables["Data"];
-                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
-                                {
-                                    data = Utility.ConvertDataSetToJSONString(dt);
-                                    data = Utility.Successful(data);
-                                }
-                                else
-                                {
-                                    data = dt.Rows[0]["ReturnMessage"].ToString();
-                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                                }
+                                data = Utility.ConvertDataSetToJSONString(ds);
+                                data = Utility.Successful(data);
+                                //DataTable dt = ds.Tables["Data"];
+                                //if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                //{
+                                //    data = Utility.ConvertDataSetToJSONString(dt);
+                                //    data = Utility.Successful(data);
+                                //}
+                                //else
+                                //{
+                                //    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                //    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                //}
                             }
                             else
                             {

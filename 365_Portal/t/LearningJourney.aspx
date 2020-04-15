@@ -26,7 +26,7 @@
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
                     <a class="btn btn-yellow" id="dvSaveAsDraft" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
-                    <a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="SaveAsDraft('.tab-pane.active');">Publish</a>
+                    <a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="PublishCourse('');">Publish</a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
@@ -2562,40 +2562,7 @@
             }
         }
 
-        function PublishCourse(topicId) {
-
-            var requestParams = {
-                TopicID: topicId
-            };
-
-            try {
-                $.ajax({
-                    method: "POST",
-                    url: "../api/Quiz/SaveContent",
-                    headers: { "Authorization": "Bearer " + accessToken },
-                    data: JSON.stringify(requestParams),
-                    contentType: "application/json",
-                }).then(function success(response) {
-
-                    if (flag == 'redirect') {
-                        Swal.fire({
-                            title: "Success",
-                            text: "Course has been published.",
-                            icon: "success"
-                        }).then((value) => {
-                            if (value) {
-                                document.location = 'Courses.aspx';
-                            }
-                        });
-                    }
-                });
-            }
-            catch (e) {
-                HideLoader();
-                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
-            }
-        }
-
+ 
         function AddQuestion(obj, flag, type) {
 
             var actionType = flag;
@@ -2659,6 +2626,7 @@
                     contentType: "application/json",
                 }).then(function success(response) {
                     $('#divQuestionAdd').html("");
+                    IsCoursePublishable();
                     ManageQuizButton('addquestion');
                     if (type != "done") {
                         BindQuiz();
@@ -3141,7 +3109,16 @@
                             var DataSet = $.parseJSON(response);
                             if (DataSet != null && DataSet != "")
                             {
-                                if (DataSet.StatusCode == "1")
+ Swal.fire({
+                                            title: "Success",
+                                            text: "Course has been published",
+                                            icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+                                                document.location = 'courses.aspx';
+                                            }
+                                        });
+                               <%-- if (DataSet.StatusCode == "1")
                                 {
                                     Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
                                 }
@@ -3150,7 +3127,7 @@
                                 }
                                 else {
                                     Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                                }
+                                }--%>
                             }
                             else {
                                 HideLoader();
@@ -3197,16 +3174,8 @@
                         try {
                             var DataSet = $.parseJSON(response);
                             if (DataSet != null && DataSet != "") {
-                                if (DataSet.StatusCode == "1") {
-
-                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success"});
-                                }
-                                if (DataSet.Data[0].ReturnMessage != undefined) {
-                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage,icon: "success"});
-                                }
-                                else {
-                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription,icon: "error"});
-                                }
+                                 // Check if course is publishable or not..
+                            CheckCoursePublishable(DataSet.Data.Data[0].IsPublishable, DataSet.Data.Data[0].IsPublished)
                             }
                             else {
                                 HideLoader();
