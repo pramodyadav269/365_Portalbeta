@@ -1669,7 +1669,8 @@
                                         tblModules = tblModules + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblModules = tblModules + '<div class="row">';
                                         tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
-                                        tblModules = tblModules + '<h5 class="card-title" id="spOverview">' + Modules[i].Overview + '</h5>';
+                                        tblModules = tblModules + '<h5 class="card-title">' + Modules[i].Title + '</h5>';
+                                        tblModules = tblModules + '<h5 class="card-title" style="display:none;" id="spOverview">' + Modules[i].Overview + '</h5>';
                                         tblModules = tblModules + '<p class="card-text">~<span id="spCourseTime">' + Modules[i].CourseTime + '</span> mins</p>';
                                         tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';
                                         tblModules = tblModules + '</div>';
@@ -2415,8 +2416,15 @@
                                     $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
                                     $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
 
-                                    Questions = DataSet.Data[0].Questions
-                                    BindQuestion(Questions);
+                                    Questions = DataSet.Data[0].Questions;
+                                   
+                                    if (Questions.length == 0)
+                                        $(".quiz-wrapper").hide();
+                                    else
+                                        $(".quiz-wrapper").show();
+
+                                     BindQuestion(Questions);
+
                                 }
                                 else {
                                     ClearFieldsAddQuiz();
@@ -2668,6 +2676,7 @@
                 $("#dvCancelQuestion").show();
                 $('#divQuestionType').hide();
             }
+            $(".quiz-wrapper").show();
 
             // $('#divQuestionType').hide();
             // $('#divAddQuestion').show();
@@ -2744,7 +2753,8 @@
                         '<div class="form-group">' +
                         '<input type="text" id="txtScore" class="form-control" value="' + answOption.CorrectScore + '" />' +
                         '</div></div></div></div>' +
-                        '<span class="checked-icon"><i class="' + correctAnswerCSS + '" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span></div>';
+                        '<span class="checked-icon"><i class="' + correctAnswerCSS + '" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
+                        '</div>';
                 });
             }
             else {
@@ -2762,7 +2772,8 @@
                         '<div class="form-group">' +
                         '<input type="text" id="txtScore" class="form-control" value="0" />' +
                         '</div></div></div></div>' +
-                        '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span></div>';
+                        '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>'
+                        + '</div>';
                 });
             }
 
@@ -2835,10 +2846,15 @@
                 '<div class="form-group">' +
                 '<input type="text" id="txtScore" class="form-control" value="0" />' +
                 '</div></div></div></div>' +
-                '<span class="checked-icon"><i class="far fa-check-circle correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span></div>';
+                '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
+                '<span class="checked-icon"><i class="fa fa-trash-alt fa-w-16" id="ansFlag" value="true" onclick="DeleteAnsOption(this)"></i></span>' +
+                '</div>';
             $('#divAnswer').append(AddAnswer);
         }
 
+        function DeleteAnsOption(cntrl) {
+            $(cntrl).parent().parent().remove();
+        }
 
         function editCourseLogo(el) {
             $(el).find('label .svg-inline--fa').show();
