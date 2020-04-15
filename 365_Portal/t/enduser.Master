@@ -490,7 +490,7 @@
                         <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 
                         <div class="dropdown-menu user-profile shadow" aria-labelledby="imgProfilePic">
-                            <img src="../INCLUDES/Asset/images/theme_sport_header_profile.svg" class="img-fluid profile-theme" />
+                            <img src="../INCLUDES/Asset/images/theme_nature_header_profile.svg" class="img-fluid profile-theme" />
                             <div class="user-profile-content">
                                 <img id="imgProfileUserPic" runat="server" src="../Asset/images/profile.png" />
                                 <h5 id="lblProfileUserName" runat="server" class="profile-user-name mb-3"></h5>

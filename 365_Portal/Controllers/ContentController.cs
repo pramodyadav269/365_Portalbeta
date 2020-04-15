@@ -1856,8 +1856,8 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                             else
                             {
-                                //data = ds.Tables[0].Rows[0]["ReturnMessage"].ToString();
-                                data = Utility.ConvertDataSetToJSONString(ds);
+                                data = ds.Tables[0].Rows[0]["ReturnMessage"].ToString();
+                                //data = Utility.ConvertDataSetToJSONString(ds);
                                 data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                             }
                         }

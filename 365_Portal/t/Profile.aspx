@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
     <div class="theme-section">
-        <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
+        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" />
     </div>
 
     <div class="container profile profile-section">
