@@ -1,16 +1,19 @@
 ﻿/* colors */
 /* media */
 /* heebo-regular - latin */
+/*@font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Heebo'), local('Heebo-Regular'), url('../fonts/heebo-v5-latin-regular.woff2') format('woff2');
+}*/
 @font-face {
-  font-family: 'Heebo';
-  font-style: normal;
-  font-weight: normal;
-  src: local("Heebo"), local("Heebo-Regular"), url("../fonts/heebo-v5-latin-regular.woff2") format("woff2"); }
+  font-family: 'TeachableSans-Medium';
+  src: url("../fonts/teachable/TeachableSans-Medium.woff") format("woff"), url("../fonts/teachable/TeachableSans-Medium.eot") format("embedded-opentype"), url("../fonts/teachable/TeachableSans-Medium.ttf") format("truetype"); }
 
 body {
   background: #F5F6F7;
-  font-size: .9rem;
-  font-family: Heebo; }
+  font-family: 'TeachableSans-Medium' !important; }
 
 .bg-dark-blue {
   background-color: #12217F; }
@@ -104,13 +107,16 @@ a:hover {
   height: 20px; }
 
 .navbar .nav-content .nav-item.icon .svg-inline--fa {
-  font-size: 18px;
+  font-size: 12px;
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer; }
 
 .navbar .nav-content .nav-item.icon.menu .dropdown-menu {
   width: auto;
   left: -102px; }
+
+.navbar .nav-content .nav-item.icon.menu .svg-inline--fa {
+  font-size: 18px; }
 
 .navbar .nav-content .nav-item.fav-icon img {
   height: 20px; }
