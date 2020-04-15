@@ -437,8 +437,12 @@
     <script>
 
         var editorContentDesc = new Jodit('#txtContentDescription');
+        $('#divContentDescription').find('.jodit_placeholder').text('')
         var editorResourcesDesc = new Jodit('#txtResourcesDescription');
+        $('#divResourcesDescription').find('.jodit_placeholder').text('')
         var editorLessonDesc = new Jodit('#txtLessonDescription');
+        $('#divLessonDescription').find('.jodit_placeholder').text('')
+
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
@@ -1283,6 +1287,8 @@
             //$('#txtLearningObjectives').val('');
             $('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
             var editorContentDesc = new Jodit('#txtLessonDescription');
+            $('#divLessonDescription').find('.jodit_placeholder').text('')
+            //editorContentDesc.value = '';
             //$('#txtEstimatedTime').val('');
             $('#txtHour').val('');
             $('#txtMin').val('');
@@ -1497,6 +1503,7 @@
 
                             $('#txtLessonTitle').val(EditModule[0].Title);
                             //$('#txtLearningObjectives').val(EditModule[0].Overview);
+                            $('#divLessonDescription').find('.jodit_wysiwyg').text('');
                             $('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
 
 
@@ -1543,7 +1550,7 @@
         }
 
         function EditLessionFromTile(obj, id) {
-            ""
+            debugger
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
             $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
@@ -1739,6 +1746,8 @@
             $('#txtContentHeader').val('');
             $('#divContentDescription').empty().append('<div id="txtContentDescription"></div>');
             var editorContentDesc = new Jodit('#txtContentDescription');
+            $('#divContentDescription').find('.jodit_placeholder').text('')
+            //editorContentDesc.value = '';
         }
 
         function validateAddContent() {
@@ -2115,7 +2124,8 @@
         function ClearFieldsAddResource() {
             $('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
             var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-
+            $('#divResourcesDescription').find('.jodit_placeholder').text('')
+            //editorResourcesDesc.value = '';
         }
 
         function validateAddResource() {
