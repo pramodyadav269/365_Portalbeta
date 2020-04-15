@@ -1294,7 +1294,7 @@
         function CheckCoursePublishable(IsPublishable, IsPublished) {
             if (IsPublishable == 1 && IsPublished == 1) {
                 $("#dvPublishCourse").show();
-               // $("#dvSaveAsDraft").hide();
+                // $("#dvSaveAsDraft").hide();
             }
             else if (IsPublished == 0 && IsPublishable == 1) {
                 $("#dvPublishCourse").show();
@@ -2538,10 +2538,9 @@
                         HideLoader();
                     var DataSet = $.parseJSON(response);
                     if (DataSet != null && DataSet != "") {
-                 if(DataSet.Data[0].InsertedID !=null)
-{
-                        QuizFlag = DataSet.Data[0].InsertedID;
-}
+                        if (DataSet.Data[0].InsertedID != null) {
+                            QuizFlag = DataSet.Data[0].InsertedID;
+                        }
                         if (flag == 'redirect') {
                             Swal.fire({
                                 title: "Success",
@@ -2563,10 +2562,10 @@
             }
         }
 
-  function PublishCourse(topicId) {
-        
+        function PublishCourse(topicId) {
+
             var requestParams = {
-                TopicID:topicId
+                TopicID: topicId
             };
 
             try {
@@ -2577,18 +2576,18 @@
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
                 }).then(function success(response) {
-                    
-                        if (flag == 'redirect') {
-                            Swal.fire({
-                                title: "Success",
-                                text: "Course has been published.",
-                                icon: "success"
-                            }).then((value) => {
-                                if (value) {
-                                    document.location = 'Courses.aspx';
-                                }
-                            });
-                        }
+
+                    if (flag == 'redirect') {
+                        Swal.fire({
+                            title: "Success",
+                            text: "Course has been published.",
+                            icon: "success"
+                        }).then((value) => {
+                            if (value) {
+                                document.location = 'Courses.aspx';
+                            }
+                        });
+                    }
                 });
             }
             catch (e) {
@@ -2681,9 +2680,9 @@
                         $(".quiz-wrapper").hide();
                         $("#divQuizAdd").hide();
 
-$('#divQuestionType').hide();
-$('#dvQuizDone').hide();
-$('#dvCancelQuestion').hide();
+                        $('#divQuestionType').hide();
+                        $('#dvQuizDone').hide();
+                        $('#dvCancelQuestion').hide();
 
                     }
                 });
