@@ -25,7 +25,8 @@
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
+                    <a class="btn btn-yellow" id="dvSaveAsDraft" style="display: none;" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
+                    <a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="SaveAsDraft('.tab-pane.active');">Publish</a>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
@@ -237,7 +238,7 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-12">
                                             <div class="row">
-                                                <div class="col-sm-12" id="divResourcesDescription">
+                                                <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
                                                     <div id="txtResourcesDescription"></div>
                                                 </div>
                                             </div>
@@ -255,7 +256,7 @@
                                 <div class="col-12 col-sm-12">
 
                                     <div class="row" id="divQuizAdd">
-                                        <div class="col-12 col-sm-12">
+                                        <div class="col-12 col-sm-12 col-md-8 col-lg-9">
                                             <div class="row">
                                                 <div class="col-sm-12 mt-3">
                                                     <div class="form-group">
@@ -269,90 +270,87 @@
                                                         <small id="txtQuizDescriptionHelp" class="form-text">Keep your description brief but compelling</small>
                                                     </div>
                                                 </div>
-
-
-                                                <div class="col-md-3" id="trScoreSummary">
-                                                    <div class="form-group">
-                                                        <label class="float-left" style="display: none;">Total Score: <span id="lblTotalScore">0</span></label>
-                                                        <span class="float-right" id="lblPassingScore" style="display: none;"></span>
-                                                        Passing Percentage
-                                                        <input type="range" class="custom-range" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
-                                                        <span id="lblPercentage">0%</span>
-                                                    </div>
-                                                </div>
-
-
-
                                             </div>
+
+                                            <%--  <div class="col-md-3">
+                                                <div class="form-group">
+                                                    Passing Percentage
+                                                      
+                                                </div>
+                                            </div>--%>
                                         </div>
-                                        <%--<div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab" id="trScoreSummary">
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
+                                                    <label class="float-left" style="display: none;">Total Score: <span id="lblTotalScore">0</span></label>
+                                                    <span class="float-right" id="lblPassingScore" style="display: none;"></span>
                                                     <label><i class="fas fa-plus-circle black"></i>Passing Percentage</label>
-                                                    <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />
+                                                    <%--                             <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />--%>
+                                                    <input type="range" class="form-control required" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
+                                                    <span id="lblPercentage">0%</span>
                                                 </div>
                                             </div>
-                                        </div>--%>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="divQuestion">
+                                    <div class="col-sm-12 quiz-wrapper">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="font-weight-bold">Quiz</h5>
+                                            <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
+                                        </div>
+                                        <div class="card shadow-sm">
+                                            <div class="card-body">
+
+                                                <div id="divQuestionTile"></div>
+                                                <div id="divQuestionAdd" style="margin-top: 12px"></div>
+
+                                            </div>
+                                        </div>
                                     </div>
 
-
-                                    <div id="divQuestion">
-                                        <div class="col-sm-12 quiz-wrapper">
-                                            <div class="d-flex justify-content-between">
-                                                <h5 class="font-weight-bold">Quiz</h5>
-                                                <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
-                                            </div>
-                                            <div class="card shadow-sm">
-                                                <div class="card-body">
-
-                                                    <div id="divQuestionTile"></div>
-                                                    <div id="divQuestionAdd" style="margin-top: 12px"></div>
-
-                                                </div>
-                                            </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="divQuestionType">
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus-circle"></i>New Question
+                                        </a>
+                                        <div class="dropdown-menu quiz-element">
+                                            <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square"></i>Multiple Choice</a>
+                                            <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle"></i>Radio Button</a>
+                                            <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down"></i>Dropdown</a>
                                         </div>
-
-                                        <div class="col-sm-12 mt-3 dropright" id="divQuestionType">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-plus-circle"></i>New Question
-                                            </a>
-                                            <div class="dropdown-menu quiz-element">
-                                                <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square"></i>Multiple Choice</a>
-                                                <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle"></i>Radio Button</a>
-                                                <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down"></i>Dropdown</a>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display: none;">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1');">
-                                                <i class="fas fa-plus-circle"></i>Add Question
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="dvSaveQuestion" style="display: none;">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="dvCancelQuestion" style="display: none;">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="CancelQuestion(this,'0');">Cancel
-                                            </a>
-                                        </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="dvQuizDone" style="display: none;">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1','done');">Done
-                                            </a>
-                                        </div>
-                                        <div id="dvQuizCongratulationScreen" style="display: none;">
-                                            You have successfully added course..
+                                    </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display: none;">
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1');">
+                                            <i class="fas fa-plus-circle"></i>Add Question
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="dvSaveQuestion" style="display: none;">
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="dvCancelQuestion" style="display: none;">
+                                        <a class="btn btn-outline float-left black mb-3" style="margin-left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="CancelQuestion(this,'0');">Cancel
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-12 mt-3 dropright" id="dvQuizDone" style="display: none;">
+                                        <a class="btn btn-black float-right auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1','done');">Done
+                                        </a>
+                                    </div>
+                                    <div id="dvQuizCongratulationScreen" style="display: none;">
+                                        You have successfully added course..
                                              <div class="col-sm-12 mt-3 dropright" id="dvQuizAddCourse">
                                                  <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                      onclick="RedirectToNewCourse();">
                                                      <i class="fas fa-plus-circle"></i>Add Course
                                                  </a>
                                              </div>
-                                            <div class="col-sm-12 mt-3 dropright" id="dvQuizAddLesson">
-                                                <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                    onclick="RedirectToNewLesson();">
-                                                    <i class="fas fa-plus-circle"></i>Add Lesson
-                                                </a>
-                                            </div>
+                                        <div class="col-sm-12 mt-3 dropright" id="dvQuizAddLesson">
+                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                onclick="RedirectToNewLesson();">
+                                                <i class="fas fa-plus-circle"></i>Add Lesson
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -361,54 +359,55 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-12 col-sm-12 mt-3">
-
-                <%--Course--%>
-                <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
-
-                <%--Lesson--%>
-                <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-                <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
-
-                <%--Content--%>
-                <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-                <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
-
-                <%--Resource--%>
-                <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
-
-                <%--Quiz--%>
-                <%--<a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>--%>
-                <a style="display: none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuizFinal();">Add Quiz</a>
-
-            </div>
         </div>
 
+        <div class="col-12 col-sm-12 mt-3">
 
-        <%--Modal popup region--%>
+            <%--Course--%>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
 
-        <div class="modal fade" id="modalAddTag" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Add Tag</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-12 mt-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
-                                    <small id="txtTagNameHelp" class="form-text">Add tag name
+            <%--Lesson--%>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
+
+            <%--Content--%>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
+
+            <%--Resource--%>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
+
+            <%--Quiz--%>
+            <%--<a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>--%>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuizFinal();">Add Quiz</a>
+
+        </div>
+    </div>
+
+
+    <%--Modal popup region--%>
+
+    <div class="modal fade" id="modalAddTag" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add Tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 mt-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
+                                <small id="txtTagNameHelp" class="form-text">Add tag name
                                         <span class="float-right">0 / 100</span>
-                                    </small>
-                                </div>
+                                </small>
                             </div>
+                        </div>
 
-                            <%--<div class="col-sm-12 mt-4">                            
+                        <%--<div class="col-sm-12 mt-4">                            
                                 <div class="form-group">
                                     <label>Tags</label>
                                     <div>
@@ -420,18 +419,18 @@
                                     </div>
                                 </div>
                             </div>--%>
-                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onclick="AddTag();" class="btn btn-primary">Add</button>
-                        <%--<a id="btnAddTag" onclick="AddTag();" class="btn btn-primary">Add</a>--%>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="AddTag();" class="btn btn-primary">Add</button>
+                    <%--<a id="btnAddTag" onclick="AddTag();" class="btn btn-primary">Add</a>--%>
                 </div>
             </div>
         </div>
+    </div>
 
-        <%--End Modal popup region--%>
+    <%--End Modal popup region--%>
     </div>
 
     <script>
@@ -555,7 +554,7 @@
                 else {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not Added Course, Requesting to add Course.",
+                        text: "Please add course to proceed",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -608,7 +607,7 @@
                 else if (CourseFlag != '0' && LessonFlag == '0') {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not selected Lesson, Requesting to select Lesson.",
+                        text: "Please select lesson to proceed further.",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -619,7 +618,7 @@
                 else {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not Added Course, Requesting to add Course.",
+                        text: "Please add course to proceed",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -642,7 +641,7 @@
                 else if (CourseFlag != '0' && LessonFlag == '0') {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not selected Lesson, Requesting to select Lesson.",
+                        text: "Please select lesson to proceed further.",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -653,7 +652,7 @@
                 else {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not Added Course, Requesting to add Course.",
+                        text: "Please add course to proceed",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -688,7 +687,7 @@
                 else if (CourseFlag != '0' && LessonFlag == '0') {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not selected Lesson, Requesting to select Lesson.",
+                        text: "Please select lesson to proceed further.",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -699,7 +698,7 @@
                 else {
                     Swal.fire({
                         title: "Failure",
-                        text: "It seems you have not Added Course, Requesting to add Course.",
+                        text: "Please add course to proceed",
                         icon: "error"
                     }).then((value) => {
                         if (value) {
@@ -1209,7 +1208,6 @@
         }
 
         function EditCourse() {
-            ""
             ClearFieldsAddCourse();
 
             ShowLoader();
@@ -1227,8 +1225,10 @@
                         var DataSet = $.parseJSON(response);
                         HideLoader();
                         if (DataSet.StatusCode == "1") {
-                            ""
                             var EditTopic = DataSet.Data.Data;
+
+                            // Check if course is publishable or not..
+                            CheckCoursePublishable(DataSet.Data.Data1[0].IsPublishable, DataSet.Data.Data1[0].IsPublished)
 
                             $('#txtCourseTitle').val(EditTopic[0].Title);
                             $('#txtCourseSummary').val(EditTopic[0].Description);
@@ -1277,6 +1277,20 @@
             });
         }
 
+        function CheckCoursePublishable(IsPublishable, IsPublished) {
+            if (IsPublishable == 1 && IsPublished == 1) {
+                $("#dvPublishCourse").show();
+                $("#dvSaveAsDraft").hide();
+            }
+            else if (IsPublished == 0 && IsPublishable == 1) {
+                $("#dvPublishCourse").show();
+                $("#dvSaveAsDraft").show();
+            }
+            else {
+                $("#dvPublishCourse").hide();
+                $("#dvSaveAsDraft").show();
+            }
+        }
 
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
@@ -1665,7 +1679,8 @@
                                     for (var i = 0; i < Modules.length; i++) {
 
                                         tblModules = tblModules + '<div class="card shadow-sm" id="divLessonTile"><div class="card-body">';
-                                        tblModules = tblModules + '<div class="tag"><span id="spTitle" >' + Modules[i].Title + '</span></div>';
+                                        tblModules = tblModules + '<div class="tag"><span >' + "Lesson" + '</span></div>';
+                                        tblModules = tblModules + '<div class="tag" style="display:none;"><span id="spTitle" >' + Modules[i].Title + '</span></div>';
                                         tblModules = tblModules + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblModules = tblModules + '<div class="row">';
                                         tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
@@ -2051,7 +2066,8 @@
                                     for (var i = 0; i < Contents.length; i++) {
 
                                         tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
-                                        tblContents = tblContents + '<div class="tag"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
+                                        tblContents = tblContents + '<div class="tag"><span>' + "Content" + '</span></div>';
+                                        tblContents = tblContents + '<div class="tag" style="display:none;"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
                                         tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblContents = tblContents + '<div class="row">';
                                         tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
@@ -2417,13 +2433,17 @@
                                     $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
 
                                     Questions = DataSet.Data[0].Questions;
-                                   
-                                    if (Questions.length == 0)
-                                        $(".quiz-wrapper").hide();
-                                    else
-                                        $(".quiz-wrapper").show();
 
-                                     BindQuestion(Questions);
+                                    if (Questions.length == 0) {
+                                        $(".quiz-wrapper").hide();
+                                        $("#dvQuizDone").hide();
+                                    }
+                                    else {
+                                        $(".quiz-wrapper").show();
+                                        $("#dvQuizDone").show();
+                                    }
+
+                                    BindQuestion(Questions);
 
                                 }
                                 else {
