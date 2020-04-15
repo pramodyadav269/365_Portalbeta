@@ -83,6 +83,35 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+
+        public static DataSet UpdateCourseTime(int Action ,int TopicID,int IsPublished)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.UpdateCourseTime(Action, TopicID, IsPublished);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
+        public static DataSet IsCoursePublishable(int CompID, int TopicID)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.IsCoursePublishable(CompID, TopicID);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
         #endregion
         #region Modules all CRUD
         public static DataSet CreateModule(ContentBO content)
