@@ -1306,6 +1306,7 @@
             }
         }
 
+
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
             //$('#txtLearningObjectives').val('');
@@ -3018,6 +3019,16 @@
                 var _Title = $('#txtTagName').val();
                 var _Description = '';
 
+                var selectedTagsArray = $('#ddlTags').val();
+                var _selectedTags = '';
+                if (selectedTagsArray.length > 0) {
+                    for (i = 0; i < selectedTagsArray.length; i++) {
+                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
+                    }
+                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                }
+
+
                 var getUrl = "/API/Content/MasterAdd";
                 var requestParams = { Title: _Title, Description: _Description, type: 'tag' };
 
@@ -3034,7 +3045,8 @@
                                     var DataSet = $.parseJSON(response);
                                     ""
                                     HideLoader();
-                                    if (DataSet.StatusCode == "1") {
+                                    if (DataSet.StatusCode == "1")
+                                    {
                                         if (DataSet.Data.Data1 != undefined) {
                                             var Tags = DataSet.Data.Data1;
                                             if (Tags != undefined && Tags.length > 0) {
@@ -3046,6 +3058,19 @@
                                             }
                                         }
 
+                                        if (_selectedTags != undefined) {
+                                            for (i = 0; i < 1; i++) {
+                                                if (_selectedTags.includes(',,')) {
+                                                    _selectedTags = _selectedTags.replace(",,", ",");
+                                                    if (_selectedTags.includes(',,')) {
+                                                        i--;
+                                                    }
+                                                }
+                                            }
+                                            _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                                            var selectedTagsArray = _selectedTags.split(',');
+                                            $("#ddlTags").val(selectedTagsArray).trigger('change');
+                                        }
                                         //$('#txtTagName').val();
 
                                         Swal.fire({
@@ -3057,6 +3082,11 @@
                                                 $('#modalAddTag').modal('toggle');
                                             }
                                         });
+                                    }
+                                    else if (DataSet.StatusCode == '0')
+                                    {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error", button: "Ok" });
                                     }
                                     else {
                                         HideLoader();
