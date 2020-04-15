@@ -879,6 +879,8 @@
     <Content Include="INCLUDES\Asset\images\flash-card.png" />
     <Content Include="INCLUDES\Asset\images\flashcard-icon.svg" />
     <Content Include="INCLUDES\Asset\images\giftbox.png" />
+    <Content Include="INCLUDES\Asset\images\grid-6.svg" />
+    <Content Include="INCLUDES\Asset\images\icon-play.svg" />
     <Content Include="INCLUDES\Asset\images\learning-library.png" />
     <Content Include="INCLUDES\Asset\images\like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\logo-black.svg" />

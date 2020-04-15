@@ -447,13 +447,13 @@
                         </div>--%>
                     </li>
 
-                    <li class="nav-item icon language dropdown">
+                    <li class="nav-item icon language dropdown border-0 pr-0">
                         <img src="../includes/Asset/images/us.png" class="circle lang-icon" />
                         <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
 
                     <li class="nav-item icon menu dropdown">
-                        <i class="fas fa-th" id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                        <a id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../INCLUDES/Asset/images/grid-6.svg" /></a>
                         <div class="dropdown-menu" aria-labelledby="navDash">
                             <a class="dropdown-item" href="default.aspx" target="_blank">Learn</a>
                             <a class="dropdown-item" href="projects.aspx" target="_blank">Task</a>
