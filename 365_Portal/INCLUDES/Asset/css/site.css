@@ -1096,12 +1096,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border: 1px dotted rgba(0, 0, 0, 0.16);
       height: 184px;
       background: #fff;
-      margin: 0 2.5rem 0 1rem; }
+      margin: 0 2.5rem 0 1rem;
+      margin-bottom: 1rem; }
       .module .logo-tab .logo-img.img {
         border: none;
         background: none;
-        height: auto;
-        margin-bottom: 1rem; }
+        height: auto; }
         .module .logo-tab .logo-img.img img {
           height: 182px; }
     .module .logo-tab .form-group .custom-file {
