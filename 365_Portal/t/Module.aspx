@@ -12,7 +12,16 @@
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" onclick="Save('.tab-pane.active');" id="btnSave">Save</a>
+
+                    <%--<a class="btn btn-yellow" onclick="Save('.tab-pane.active');" id="btnSave">Save</a>--%>
+
+                    <div class="col dropdown">
+                        <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">Save</a>
+                            <a class="dropdown-item">Save draft</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
@@ -42,6 +51,19 @@
                     <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
                         <div class="card shadow-sm">
                             <div class="card-body p-0">
+
+                                <%-- Congratulations alert start --%>
+                                <div class="col-sm-12 alert">
+                                    <i class="fas fa-check-circle icon"></i>
+                                    <h3 class="mt-3 mb-3">Congratulations</h3>
+                                    <h5>You have successfully added <b>Custom Objects</b> Lesson</h5>
+                                    <h5><b>you may contine to add more Lesson or create a new Course</b></h5>
+
+                                    <div class="mt-5"><a class="btn btn-outline black mr-3">Add Course</a><a class="btn btn-black">Add Lesson</a></div>
+                                </div>
+                                <%-- Congratulations alert end --%>
+
+
                                 <div class="col-12 col-sm-12">
                                     <div class="row">
                                         <div class="col-12 col-sm-12 col-md-7 col-lg-8">
@@ -198,7 +220,7 @@
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-9 col-lg-10">
                                                     <h5 class="card-title">Understand</h5>
-                                                    <%--<p class="card-text">~15 mins</p>--%>
+                                                    <p class="card-text">~15 mins</p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-3 col-lg-2">
                                                     <div class="action">
@@ -338,7 +360,7 @@
                                                         <span class="sr">Q1<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>
                                                         <div class="col-sm-8 col-md-10">
                                                             <h5 class="font-weight-bold">What is a Module</h5>
-                                                        </div> 
+                                                        </div>
                                                         <a><i class="fas fa-pen"></i></a>
                                                     </div>
                                                 </div>
@@ -402,7 +424,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12 mt-3 dropright" id="divQuestionType" >
+                                    <div class="col-sm-12 mt-3 dropright" id="divQuestionType">
                                         <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-plus-circle"></i>Add Type
                                         </a>
@@ -412,7 +434,7 @@
                                             <a class="dropdown-item"><i class="far fa-caret-square-down"></i>Dropdown</a>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display:none;">
+                                    <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display: none;">
                                         <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-plus-circle"></i>Add Question
                                         </a>

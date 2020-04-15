@@ -183,8 +183,8 @@
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                                    <input type="text" class="form-control required" maxlength="2" id="txtHour" placeholder="hour" />
-                                                    <input type="text" class="form-control required" maxlength="2" id="txtMin" placeholder="minutes" />
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" />
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-5">
@@ -286,8 +286,10 @@
                                                     <span class="float-right" id="lblPassingScore" style="display: none;"></span>
                                                     <label><i class="fas fa-plus-circle black"></i>Passing Percentage</label>
                                                     <%--                             <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />--%>
-                                                    <input type="range" class="form-control required" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
-                                                    <span id="lblPercentage">0%</span>
+                                                    <div class="custom-range-label">
+                                                        <span id="lblPercentage" class="range-label">0%</span>
+                                                        <input type="range" class="custom-range required" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,14 +303,10 @@
                                             <h5 class="font-weight-bold">Quiz</h5>
                                             <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
                                         </div>
-                                        <div class="card shadow-sm">
-                                            <div class="card-body">
 
-                                                <div id="divQuestionTile"></div>
-                                                <div id="divQuestionAdd" style="margin-top: 12px"></div>
+                                        <div id="divQuestionTile"></div>
+                                        <div id="divQuestionAdd" style="margin-top: 12px"></div>
 
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <div class="col-sm-12 mt-3 dropright" id="divQuestionType">
@@ -431,7 +429,7 @@
     </div>
 
     <%--End Modal popup region--%>
-    </div>
+
 
     <script>
 
@@ -1679,12 +1677,11 @@
                                     for (var i = 0; i < Modules.length; i++) {
 
                                         tblModules = tblModules + '<div class="card shadow-sm" id="divLessonTile"><div class="card-body">';
-                                        tblModules = tblModules + '<div class="tag"><span >' + "Lesson" + '</span></div>';
-                                        tblModules = tblModules + '<div class="tag" style="display:none;"><span id="spTitle" >' + Modules[i].Title + '</span></div>';
+                                        tblModules = tblModules + '<div class="tag">Lesson</div>';
                                         tblModules = tblModules + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblModules = tblModules + '<div class="row">';
                                         tblModules = tblModules + '<div class="col-sm-12 col-md-9 col-lg-10">';
-                                        tblModules = tblModules + '<h5 class="card-title">' + Modules[i].Title + '</h5>';
+                                        tblModules = tblModules + '<h5 class="card-title" id="spTitle">' + Modules[i].Title + '</h5>';
                                         tblModules = tblModules + '<h5 class="card-title" style="display:none;" id="spOverview">' + Modules[i].Overview + '</h5>';
                                         tblModules = tblModules + '<p class="card-text">~<span id="spCourseTime">' + Modules[i].CourseTime + '</span> mins</p>';
                                         tblModules = tblModules + '<span id="spPoints" style="display:none;">' + Modules[i].Points + '</span>';
@@ -2066,7 +2063,7 @@
                                     for (var i = 0; i < Contents.length; i++) {
 
                                         tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
-                                        tblContents = tblContents + '<div class="tag"><span>' + "Content" + '</span></div>';
+                                        tblContents = tblContents + '<div class="tag">Content</div>';
                                         tblContents = tblContents + '<div class="tag" style="display:none;"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
                                         tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblContents = tblContents + '<div class="row">';
@@ -2315,7 +2312,7 @@
             $('#txtPassingScorePercentage').val('');
             $('#lblTotalScore').text('');
             $('#lblPassingScore').text('Passing Score: 0');
-            $('#lblPercentage').text('');
+            $('#lblPercentage').text('0');
             //$('#txtPassingPercentage').val('');
         }
 
@@ -2656,11 +2653,15 @@
             // Bind Questions..
             var divQuestionTile = "";
             $.grep(questions, function (n, i) {
+
+
+                divQuestionTile = divQuestionTile + '<div class="card shadow-sm"><div class="card-body">';
                 divQuestionTile = divQuestionTile + '<div class="col-sm-12 d-flex justify-content-between align-items-center ques">';
                 divQuestionTile = divQuestionTile + '<span class="sr" id="spQuestionId">Q' + (i + 1) + ' <i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>';
                 divQuestionTile = divQuestionTile + '<div class="col-sm-8 col-md-10">';
                 divQuestionTile = divQuestionTile + '<h5 class="font-weight-bold" id="spQuestion">' + n.Title + '</h5>';
                 divQuestionTile = divQuestionTile + '</div><a onclick="ShowQuestionInEditMode(' + n.QuestionID + ')"><i class="fas fa-pen"></i></a></div>';
+                divQuestionTile = divQuestionTile + '</div></div>';
                 lastQuestionIndex = i + 1;
             });
             $('#divQuestionTile').empty().append(divQuestionTile);
@@ -2725,12 +2726,12 @@
             $('#txtQuestion').val('');
 
             //Bind question text field
-            var divQuestionAdd = '<div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
+            var divQuestionAdd = '<div class="card shadow-sm"><div class="card-body"><div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
                 '<span class="sr">Q' + (lastQuestionIndex + 1) + '<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>' +
                 '<div class="col-sm-8 col-md-10">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" value="' + (questionDetails == null ? "" : questionDetails.Title) + '" id="txtQuestion" placeholder="Enter Question"/>' +
-                '</div></div><span class="correct">Correct</span></div>';
+                '</div></div><span class="correct">Correct</span></div></div></div>';
 
             //Bind Add dynamic answer text field
             var dvAnswerOptions = '<div id="divAnswer">';
