@@ -1,22 +1,22 @@
-﻿/* heebo-regular - latin */
+﻿/* colors */
+/* media */
+/* heebo-regular - latin */
 @font-face {
   font-family: 'Heebo';
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: local("Heebo"), local("Heebo-Regular"), url("../fonts/heebo-v5-latin-regular.woff2") format("woff2"); }
 
-.bg-dark-blue {
-  background-color: #12217F; }
-
-/* colors */
-/* media */
 body {
   background: #F5F6F7;
   font-size: .9rem;
   font-family: Heebo; }
 
+.bg-dark-blue {
+  background-color: #12217F; }
+
 .theme-full {
-  background-image: url("../images/theme_sport.svg");
+  background-image: url("../images/theme_nature.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover; }

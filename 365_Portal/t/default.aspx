@@ -8,8 +8,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div>
         <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-            <img src="../INCLUDES/Asset/images/theme_sport_header.svg" />
-            <h4 class="sport" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
+            <img src="../INCLUDES/Asset/images/theme_nature_header.svg" />
+            <h4 class="nature" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
         </div>
 
         <%-- beta view lesson start --%>
