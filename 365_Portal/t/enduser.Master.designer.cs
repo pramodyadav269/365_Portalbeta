@@ -328,15 +328,6 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDiscoverLearning;
         
         /// <summary>
-        /// dvAssignCourses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAssignCourses;
-        
-        /// <summary>
         /// dvTopics control.
         /// </summary>
         /// <remarks>
@@ -362,6 +353,15 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAddNewCourse;
+        
+        /// <summary>
+        /// dvAssignCourses control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAssignCourses;
         
         /// <summary>
         /// dvUsersNTeams control.

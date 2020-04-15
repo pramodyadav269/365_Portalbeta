@@ -523,7 +523,6 @@
                             <a class="list-group-item" href="#" runat="server" id="dvTeamLearning" visible="false">Team Learning</a>
                             <a class="list-group-item" href="#" runat="server" id="dvLearnNewSkills" visible="false">Learn New Skills</a>
                             <a class="list-group-item" href="#" runat="server" id="dvDiscoverLearning" visible="false">Discover Learning</a>
-                            <a class="list-group-item" href="assign_topics.aspx" runat="server" id="dvAssignCourses" visible="false">Assign Courses</a>
                         </div>
                     </div>
                 </li>
@@ -533,6 +532,7 @@
                         <div class="list-group">
                             <a class="list-group-item" href="courses.aspx" runat="server" id="dvAllCourses" visible="false">All Courses</a>
                             <a class="list-group-item" href="learningjourney.aspx" runat="server" id="dvAddNewCourse" visible="false">Add new course</a>
+                             <a class="list-group-item" href="assign_topics.aspx" runat="server" id="dvAssignCourses" visible="false">Assign Courses</a>
                         </div>
                     </div>
                 </li>

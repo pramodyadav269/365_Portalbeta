@@ -2423,28 +2423,29 @@
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
 
-                                    QuizFlag = DataSet.Data[0].ContentID;
+                                    if (DataSet.Data.length != 0) {
+                                        QuizFlag = DataSet.Data[0].ContentID;
 
-                                    $('#txtQuizTitle').val(DataSet.Data[0].Title);
-                                    $('#txtQuizDescription').val(DataSet.Data[0].Description);
-                                    $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingPercent);
-                                    $('#lblTotalScore').text(DataSet.Data[0].TotalScore);
-                                    $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
-                                    $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
+                                        $('#txtQuizTitle').val(DataSet.Data[0].Title);
+                                        $('#txtQuizDescription').val(DataSet.Data[0].Description);
+                                        $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingPercent);
+                                        $('#lblTotalScore').text(DataSet.Data[0].TotalScore);
+                                        $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
+                                        $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
 
-                                    Questions = DataSet.Data[0].Questions;
+                                        Questions = DataSet.Data[0].Questions;
 
-                                    if (Questions.length == 0) {
-                                        $(".quiz-wrapper").hide();
-                                        $("#dvQuizDone").hide();
+                                        if (Questions.length == 0) {
+                                            $(".quiz-wrapper").hide();
+                                            $("#dvQuizDone").hide();
+                                        }
+                                        else {
+                                            $(".quiz-wrapper").show();
+                                            $("#dvQuizDone").show();
+                                        }
+
+                                        BindQuestion(Questions);
                                     }
-                                    else {
-                                        $(".quiz-wrapper").show();
-                                        $("#dvQuizDone").show();
-                                    }
-
-                                    BindQuestion(Questions);
-
                                 }
                                 else {
                                     ClearFieldsAddQuiz();
@@ -2518,6 +2519,7 @@
                         HideLoader();
                     var DataSet = $.parseJSON(response);
                     if (DataSet != null && DataSet != "") {
+                        QuizFlag = DataSet.Data[0].InsertedID;
                         if (flag == 'redirect') {
                             Swal.fire({
                                 title: "Success",
