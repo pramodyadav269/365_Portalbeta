@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" id="dvSaveAsDraft" style="display: none;" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
+                    <a class="btn btn-yellow" id="dvSaveAsDraft" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
                     <a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="SaveAsDraft('.tab-pane.active');">Publish</a>
                 </div>
             </div>
@@ -337,7 +337,19 @@
                                         </a>
                                     </div>
                                     <div id="dvQuizCongratulationScreen" style="display: none;">
-                                        You have successfully added course..
+
+                                        <%-- Congratulations alert start --%>
+                                        <div class="col-sm-12 alert">
+                                            <i class="fas fa-check-circle icon"></i>
+                                            <h3 class="mt-3 mb-3">Congratulations</h3>
+                                            <h5>You have successfully added lesson</h5>
+                                            <h5><b>you may contine to add more Lesson or create a new Course</b></h5>
+
+                                            <div class="mt-5"><a id="dvQuizAddCourse" class="btn btn-outline black mr-3" onclick="RedirectToNewCourse();">Add Course</a><a id="dvQuizAddLesson" class="btn btn-black" onclick="RedirectToNewLesson();">Add Lesson</a></div>
+                                        </div>
+                                        <%-- Congratulations alert end --%>
+
+                                        <%--  You have successfully added course..
                                              <div class="col-sm-12 mt-3 dropright" id="dvQuizAddCourse">
                                                  <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                      onclick="RedirectToNewCourse();">
@@ -349,7 +361,7 @@
                                                 onclick="RedirectToNewLesson();">
                                                 <i class="fas fa-plus-circle"></i>Add Lesson
                                             </a>
-                                        </div>
+                                        </div>--%>
                                     </div>
                                 </div>
                             </div>
@@ -1282,7 +1294,7 @@
         function CheckCoursePublishable(IsPublishable, IsPublished) {
             if (IsPublishable == 1 && IsPublished == 1) {
                 $("#dvPublishCourse").show();
-                $("#dvSaveAsDraft").hide();
+               // $("#dvSaveAsDraft").hide();
             }
             else if (IsPublished == 0 && IsPublishable == 1) {
                 $("#dvPublishCourse").show();
@@ -2526,7 +2538,10 @@
                         HideLoader();
                     var DataSet = $.parseJSON(response);
                     if (DataSet != null && DataSet != "") {
+                 if(DataSet.Data[0].InsertedID !=null)
+{
                         QuizFlag = DataSet.Data[0].InsertedID;
+}
                         if (flag == 'redirect') {
                             Swal.fire({
                                 title: "Success",
@@ -2540,6 +2555,40 @@
                         }
 
                     }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+  function PublishCourse(topicId) {
+        
+            var requestParams = {
+                TopicID:topicId
+            };
+
+            try {
+                $.ajax({
+                    method: "POST",
+                    url: "../api/Quiz/SaveContent",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                }).then(function success(response) {
+                    
+                        if (flag == 'redirect') {
+                            Swal.fire({
+                                title: "Success",
+                                text: "Course has been published.",
+                                icon: "success"
+                            }).then((value) => {
+                                if (value) {
+                                    document.location = 'Courses.aspx';
+                                }
+                            });
+                        }
                 });
             }
             catch (e) {
@@ -2631,6 +2680,11 @@
                         $("#dvQuizCongratulationScreen").show();
                         $(".quiz-wrapper").hide();
                         $("#divQuizAdd").hide();
+
+$('#divQuestionType').hide();
+$('#dvQuizDone').hide();
+$('#dvCancelQuestion').hide();
+
                     }
                 });
             }
@@ -2736,12 +2790,12 @@
             $('#txtQuestion').val('');
 
             //Bind question text field
-            var divQuestionAdd = '<div class="card shadow-sm"><div class="card-body"><div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
+            var divQuestionAdd = '<div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
                 '<span class="sr">Q' + (lastQuestionIndex + 1) + '<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>' +
                 '<div class="col-sm-8 col-md-10">' +
                 '<div class="form-group">' +
                 '<input type="text" class="form-control" value="' + (questionDetails == null ? "" : questionDetails.Title) + '" id="txtQuestion" placeholder="Enter Question"/>' +
-                '</div></div><span class="correct">Correct</span></div></div></div>';
+                '</div></div><span class="correct">Correct</span></div>';
 
             //Bind Add dynamic answer text field
             var dvAnswerOptions = '<div id="divAnswer">';
