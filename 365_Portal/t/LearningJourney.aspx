@@ -383,6 +383,7 @@
             <%--Content--%>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnCancelContent" onclick="ShowContentTile();">Add Resource</a>
 
             <%--Resource--%>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
@@ -529,6 +530,7 @@
                 $('#btnAddLession').hide();
                 $('#btnAddMoreContent').hide();
                 $('#btnAddContent').hide();
+                $('#btnCancelContent').hide();
                 $('#btnAddResource').hide();
                 //$('#btnAddMoreQuiz').hide();
                 $('#btnAddQuiz').hide();
@@ -540,6 +542,7 @@
                     $('#btnAddLession').show();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnCancelContent').hide();
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
@@ -584,18 +587,21 @@
                     $('#btnAddLession').hide();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
+                    $('#btnCancelContent').show();
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
                     if (divContentFlag == 'new') {
                         $('#btnAddContent').hide();
+                        $('#btnCancelContent').hide();
                         $('#divContentAdd').hide();
                         $('#divContentGrid').show();
                     }
                     else if (divContentFlag == 'add') {
                         $('#btnAddMoreContent').show();
                         $('#btnAddContent').show();
+                        $('#btnCancelContent').show();
 
                         $('#divContentAdd').show();
                         $('#divContentGrid').hide();
@@ -603,6 +609,7 @@
                     else if (divContentFlag == 'bindtile') {
                         $('#btnAddMoreContent').show();
                         $('#btnAddContent').hide();
+                        $('#btnCancelContent').hide();
 
                         $('#divContentAdd').hide();
                         $('#divContentGrid').show();
@@ -647,6 +654,7 @@
                     $('#btnAddLession').hide();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnCancelContent').hide();
                     $('#btnAddResource').show();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
@@ -681,6 +689,7 @@
                     $('#btnAddLession').hide();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnCancelContent').hide();
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').show();
                     //$('#btnAddQuiz').show();
@@ -697,9 +706,9 @@
                     //    $('#divQuestionAdd').hide();
                     //}
 
-BindQuiz();
-$("#divQuizAdd").show();
-$("#divQuestionType").show();
+                    BindQuiz();
+                    $("#divQuizAdd").show();
+                    $("#divQuestionType").show();
 
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {
@@ -851,6 +860,7 @@ $("#divQuestionType").show();
                     else {
                         $('#btnAddMoreContent').show();
                         $('#btnAddContent').hide();
+                        $('#btnCancelContent').hide();
 
                         $('#divContentAdd').hide();
                         $('#divContentGrid').show();
@@ -863,6 +873,7 @@ $("#divQuestionType").show();
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').hide();
+                    $('#btnCancelContent').hide();
 
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
@@ -872,6 +883,7 @@ $("#divQuestionType").show();
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
+                    $('#btnCancelContent').show();
 
                     $('#divContentAdd').show();
                     $('#divContentGrid').hide();
@@ -881,6 +893,7 @@ $("#divQuestionType").show();
                     ClearFieldsAddLesson();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
+                    $('#btnCancelContent').show();
 
                     $('#divContentAdd').show();
                     $('#divContentGrid').hide();
@@ -922,7 +935,7 @@ $("#divQuestionType").show();
         function RedirectToNewLesson() {
             $("#dvQuizCongratulationScreen").hide();
             //ShowButtons('pills-lesson', 'tabclick');
-nextTab('pills-lesson-tab');
+            nextTab('pills-lesson-tab');
         }
 
         function RedirectToNewCourse() {
@@ -2153,6 +2166,12 @@ if(IsPublished==1)
             });
         }
 
+        function ShowContentTile()
+        {
+            AddMoreContentFlag = 'bindtile';
+            AddMore('btnAddMoreContent');
+        }
+
 
         function ClearFieldsAddResource() {
             $('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
@@ -3197,17 +3216,7 @@ return;
                                             if (value) {
                                                 document.location = 'courses.aspx';
                                             }
-                                        });
-                               <%-- if (DataSet.StatusCode == "1")
-                                {
-                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
-                                }
-                                if (DataSet.Data[0].ReturnMessage != undefined) {
-                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
-                                }
-                                else {
-                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                                }--%>
+                                        });                               
                             }
                             else {
                                 HideLoader();
