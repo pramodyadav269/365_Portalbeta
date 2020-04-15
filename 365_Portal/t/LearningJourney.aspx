@@ -139,7 +139,7 @@
 
                                             <div class="col-12 col-sm-12 col-md-9">
                                                 <div class="form-group">
-                                                    <button type="button" class="btn btn-black" data-toggle="modal" data-target="#modalAddTag">
+                                                    <button type="button" class="btn btn-black" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();">
                                                         Manage Tags
                                                     </button>
                                                 </div>
@@ -3006,6 +3006,11 @@ $('#dvCancelQuestion').hide();
 
         }
 
+        function clearModalText()
+        {
+            $('#txtTagName').val('');
+        }
+
         function AddTag() {
             var getUrl;
             var requestParams;
@@ -3042,7 +3047,7 @@ $('#dvCancelQuestion').hide();
                                             }
                                         }
 
-                                        $('#txtTagName').val();
+                                        //$('#txtTagName').val();
 
                                         Swal.fire({
                                             title: "Success",
