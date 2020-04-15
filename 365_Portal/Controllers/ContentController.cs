@@ -130,7 +130,7 @@ namespace _365_Portal.ControllersReOrderContent
                             byte[] imageBytes = Convert.FromBase64String(CourseLogoBase64);
                             string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(CourseLogoBase64);
                             string filePath = HttpContext.Current.Server.MapPath("~/Files/CourseLogo/" + fileName);
-                            File.WriteAllBytes(filePath, imageBytes);                            
+                            File.WriteAllBytes(filePath, imageBytes);
 
                             DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/CourseLogo/"), false, "CourseLogo");
                             if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
@@ -526,10 +526,10 @@ namespace _365_Portal.ControllersReOrderContent
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    if ((!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])) 
-                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"])) 
+                    if ((!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"]))
                         //&& !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString())
-                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"]))
                         //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["Points"]))
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseTime"]))
@@ -659,9 +659,9 @@ namespace _365_Portal.ControllersReOrderContent
                 if (identity != null)
                 {
 
-                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])) 
-                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"])) 
-                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"])) 
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"]))
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleTitle"]))
+                    && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleOverview"]))
                     //&& !string.IsNullOrEmpty(requestParams["ModuleDescription"].ToString()) 
                     //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
                     && !string.IsNullOrEmpty(Convert.ToString(requestParams["Points"]))
@@ -1243,7 +1243,7 @@ namespace _365_Portal.ControllersReOrderContent
                 {
                     if (httpRequest != null)
                     {
-                        if (!string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["TopicID"])) 
+                        if (!string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["TopicID"]))
                             && !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["ContentID"]))
                             && !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["ModuleID"]))
                             && !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["TypeID"]))
@@ -1251,11 +1251,11 @@ namespace _365_Portal.ControllersReOrderContent
                             //&& !string.IsNullOrEmpty(requestParams["ContentFileID"].ToString())
                             && !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["Title"]))
                             && !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["Description"]))
-                            //&& !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["IsURL"]))
-                            //&& !string.IsNullOrEmpty(requestParams["Overview"].ToString())
-                            //&& !string.IsNullOrEmpty(requestParams["IsGift"].ToString())
-                            // && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
-                            //&& !string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString())
+                        //&& !string.IsNullOrEmpty(Convert.ToString(httpRequest.Form["IsURL"]))
+                        //&& !string.IsNullOrEmpty(requestParams["Overview"].ToString())
+                        //&& !string.IsNullOrEmpty(requestParams["IsGift"].ToString())
+                        // && !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
+                        //&& !string.IsNullOrEmpty(httpRequest.Form["CourseTime"].ToString())
                         )
                         {
                             content.CompID = identity.CompId;
@@ -1714,7 +1714,7 @@ namespace _365_Portal.ControllersReOrderContent
             var data = "";
             var identity = MyAuthorizationServerProvider.AuthenticateUser();
             if (identity != null)
-            {                
+            {
                 if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin)
                 {
                     if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()))
@@ -1793,7 +1793,7 @@ namespace _365_Portal.ControllersReOrderContent
 
                     var dsTags = CommonBL.BindDropDown(objUser, "tag", ConstantMessages.Procedures.spBindDropdown);
                     var dsBadge = CommonBL.BindDropDown(objUser, "badge", ConstantMessages.Procedures.spBindDropdown);
-                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory",ConstantMessages.Procedures.spBindDropdown);
+                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory", ConstantMessages.Procedures.spBindDropdown);
 
                     DataTable dtTags = new DataTable();
                     DataTable dtBadge = new DataTable();
@@ -1841,14 +1841,14 @@ namespace _365_Portal.ControllersReOrderContent
                 if (identity != null)
                 {
                     if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Title"])) && !string.IsNullOrEmpty(Convert.ToString(requestParams["type"])))
-                    {                        
+                    {
                         string Title = requestParams["Title"].ToString();
                         string type = requestParams["type"].ToString();
                         string Description = Convert.ToString(requestParams["Description"]);
 
                         var ds = UserBL.MasterCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, true, type);
                         if (ds != null && ds.Tables.Count > 0)
-                        {                            
+                        {
                             if (ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
                             {
                                 data = Utility.ConvertDataSetToJSONString(ds);
@@ -1893,14 +1893,14 @@ namespace _365_Portal.ControllersReOrderContent
         {
             var data = string.Empty;
             ContentBO content = new ContentBO();
-            
+
             try
             {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"])) 
-                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"])) 
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["ModuleID"]))
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["Description"])))
                     {
                         int CompID = identity.CompId;
@@ -1909,7 +1909,7 @@ namespace _365_Portal.ControllersReOrderContent
                         int TopicID = Convert.ToInt32(requestParams["TopicID"]);
                         int ModuleID = Convert.ToInt32(requestParams["ModuleID"]);
                         string Description = Convert.ToString(requestParams["Description"]);
-                        
+
                         var ds = ContentBL.ResourceCRUD(Convert.ToInt32(ConstantMessages.Action.MODIFY), CompID, UserID, TopicID, ModuleID, Description);
                         if (ds != null)
                         {
@@ -2123,7 +2123,7 @@ namespace _365_Portal.ControllersReOrderContent
 
                         int TopicID = Convert.ToInt32(requestParams["TopicID"]);
 
-                        var ds = ContentBL.IsCoursePublishable(CompID, TopicID);
+                        var ds = ContentBL.UpdateCourseTime(2, TopicID, 1);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)

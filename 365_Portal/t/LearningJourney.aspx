@@ -523,7 +523,6 @@
         }
 
         function ShowButtons(id, action) {
-            ""
             if (id == 'pills-course') {
                 $('#btnAddCourse').show();
                 $('#btnAddMoreLesson').hide();
@@ -697,6 +696,11 @@
                     //    $('#divQuestionTile').hide();
                     //    $('#divQuestionAdd').hide();
                     //}
+
+BindQuiz();
+$("#divQuizAdd").show();
+$("#divQuestionType").show();
+
                 }
                 else if (CourseFlag != '0' && LessonFlag == '0') {
                     Swal.fire({
@@ -917,7 +921,8 @@
 
         function RedirectToNewLesson() {
             $("#dvQuizCongratulationScreen").hide();
-            ShowButtons('pills-lesson', 'tabclick');
+            //ShowButtons('pills-lesson', 'tabclick');
+nextTab('pills-lesson-tab');
         }
 
         function RedirectToNewCourse() {
@@ -1304,6 +1309,8 @@
                 $("#dvPublishCourse").hide();
                 $("#dvSaveAsDraft").show();
             }
+if(IsPublished==1)
+ $("#dvPublishCourse").show();
         }
 
         function ClearFieldsAddLesson() {
@@ -2465,6 +2472,29 @@
 
                                         BindQuestion(Questions);
                                     }
+else
+{
+                                        $('#txtQuizTitle').val("");
+                                        $('#txtQuizDescription').val("");
+                                        $('#txtPassingScorePercentage').val("0");
+                                        $('#lblTotalScore').text("0");
+                                        $('#lblPassingScore').text("");
+                                        $('#lblPercentage').text("0");
+
+                                        Questions = [];
+
+                                        if (Questions.length == 0) {
+                                            $(".quiz-wrapper").hide();
+                                            $("#dvQuizDone").hide();
+                                        }
+                                        else {
+                                            $(".quiz-wrapper").show();
+                                            $("#dvQuizDone").show();
+                                        }
+
+                                        BindQuestion(Questions);
+}
+
                                 }
                                 else {
                                     ClearFieldsAddQuiz();
@@ -2561,7 +2591,7 @@
                 Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
             }
         }
-
+var gbl_QuestionID=0;
  
         function AddQuestion(obj, flag, type) {
 
@@ -2569,6 +2599,21 @@
             if (gbl_QuestionID != 0 && gbl_QuestionID != "") {
                 actionType = "2"; // Update
             }
+  var Question = $("#txtQuestion").val();
+
+if (type == "done" && (Question=="" || Question==null) && Questions.length > 0) {
+HideLoader();
+                        $("#dvQuizCongratulationScreen").show();
+                        $(".quiz-wrapper").hide();
+                        $("#divQuizAdd").hide();
+
+                        $('#divQuestionType').hide();
+                        $('#dvQuizDone').hide();
+                        $('#dvCancelQuestion').hide();
+return;
+                    }
+
+
             var result = validateAddQuestion(obj);
             if (result != null && result.error) {
                 Swal.fire({
@@ -2582,7 +2627,7 @@
                 ShowLoader();
                 AddQuiz(false);
 
-                var Question = $("#txtQuestion").val();
+              
                 var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
                 var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
                 var answerIds = $("input[id='txtAnswer']").map(function () { return $(this).attr("answerid"); }).get();
