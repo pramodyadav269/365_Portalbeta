@@ -1292,6 +1292,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .module {
     padding-bottom: 4rem;
 
+
+
     .nav-pills {
         .nav-link {
             padding: .3rem 1rem;
@@ -1490,6 +1492,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 border: none;
                 background: none;
                 height: auto;
+                margin-bottom: 1rem;
+
+                img {
+                    height: 182px;
+                }
             }
         }
 
@@ -1664,6 +1671,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .card-text {
                     color: rgba(0, 0, 0, 0.5);
+                    margin-bottom: 0;
                 }
 
                 .action {
@@ -2196,6 +2204,34 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 }
 
+.dropdown {
+    .dropdown-toggle {
+        &::after {
+            position: relative;
+            right: -6px;
+        }
+    }
+
+    .dropdown-menu {
+        padding: 0;
+        border: 0;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+
+
+        .dropdown-item {
+            padding: .55rem .75rem;
+            border-bottom: 1px solid #eaeaea;
+            white-space: normal;
+            font-size: 14px;
+            text-transform: none;
+
+            .svg-inline--fa {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
 .courses {
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -2220,5 +2256,28 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .content-item {
             margin-right: 0;
         }
+    }
+}
+
+.alert {
+    padding: 2rem 1.75rem;
+    text-align: center;
+
+    .icon {
+        color: #06AF22;
+        font-size: 48px;
+    }
+}
+
+.custom-range-label {
+    position: relative;
+
+    .range-label {
+        position: absolute;
+        left: 0;
+    }
+
+    .custom-range {
+        padding-left: 2.5rem;
     }
 }
