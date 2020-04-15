@@ -2563,7 +2563,7 @@
             }
         }
 
-  function PublishCourse(topicId) {
+        function PublishCourse(topicId) {
         
             var requestParams = {
                 TopicID:topicId
@@ -3119,6 +3119,123 @@ $('#dvCancelQuestion').hide();
                 });
             }
         }
+
+
+        function PublishCourse(flag)
+        {                
+            ShowLoader();
+            var TopicID = CourseFlag;
+            var getUrl = "/API/Content/PublishCourse";
+
+            try {
+                var requestParams = { TopicID: CourseFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            if (DataSet != null && DataSet != "")
+                            {
+                                if (DataSet.StatusCode == "1")
+                                {
+                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
+                                }
+                                if (DataSet.Data[0].ReturnMessage != undefined) {
+                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again",icon: "error"});
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again",icon: "error" });
+            }
+        }
+
+        function IsCoursePublishable(flag) {
+            ShowLoader();
+            var TopicID = CourseFlag;
+            var getUrl = "/API/Content/IsCoursePublishable";
+
+            try {
+                var requestParams = { TopicID: CourseFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    async: false,
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success"});
+                                }
+                                if (DataSet.Data[0].ReturnMessage != undefined) {
+                                    Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage,icon: "success"});
+                                }
+                                else {
+                                    Swal.fire({ title: "Failure", text: DataSet.StatusDescription,icon: "error"});
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again",icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+
 
     </script>
 </asp:Content>
