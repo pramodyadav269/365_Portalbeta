@@ -603,6 +603,7 @@ namespace _365_Portal.ControllersReOrderContent
                                 DataTable dt = ds.Tables["Data"];
                                 if (dt.Rows[0]["ReturnCode"].ToString() == "1")
                                 {
+                                    ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
                                 }
@@ -739,6 +740,7 @@ namespace _365_Portal.ControllersReOrderContent
                                 DataTable dt = ds.Tables["Data"];
                                 if (dt.Rows[0]["ReturnCode"].ToString() == "1")
                                 {
+                                    ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
                                 }
@@ -820,6 +822,7 @@ namespace _365_Portal.ControllersReOrderContent
                                 DataTable dt = ds.Tables["Data"];
                                 if (dt.Rows[0]["ReturnCode"].ToString() == "1")
                                 {
+                                    ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
                                 }
