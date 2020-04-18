@@ -44,6 +44,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet UpdateQuizDetails(int compId, int topicId, int moduleId, int contentId, double totalScore, double passingScore, double passingPercent)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = QuizDAL.UpdateQuizDetails(compId, topicId, moduleId, contentId, totalScore, passingScore, passingPercent);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
         public static DataSet ManageAnsOptions(int compId, string userId, int contentId, int questionId, int answerId, string title, bool isCorrect, double score, int action)
         {
             DataSet ds = new DataSet();
@@ -57,12 +71,12 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
-        public static DataSet ManageFlashcardIntro(int compId, string userId,int type, int introId,string title, string comments, int contentId, int action)
+        public static DataSet ManageFlashcardIntro(int compId, string userId, int type, int introId, string title, string comments, int contentId, int action)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = QuizDAL.ManageFlashcardIntro(compId, userId,type, introId, title,comments, contentId, action);
+                ds = QuizDAL.ManageFlashcardIntro(compId, userId, type, introId, title, comments, contentId, action);
             }
             catch (Exception ex)
             {

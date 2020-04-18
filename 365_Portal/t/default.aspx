@@ -166,7 +166,7 @@
                                         </div>
                                     </div>--%>
 
-                                    <div class="row" ng-if="ActiveContainer =='ContentQuizView'">
+                                    <div class="row" ng-if="SubContainer =='ContentQuizView'">
                                         <div class="col-sm-12 header">
                                             <a class="back" href="#" ng-click="GoBack('Content')"><i class="fas fa-arrow-left"></i>{{ContentGoBackText}}</a>
                                             <h2 class="text-center font-weight-bold">{{SelectedContent.Title}}</h2>
@@ -1419,7 +1419,7 @@
         }
 
         var accessToken = '<%=Session["access_token"]%>';
-var userRole ='<%=Session["RoleName"]%>';
+        var userRole ='<%=Session["RoleName"]%>';
 
 
         function ChangeFileName(cntrl) {

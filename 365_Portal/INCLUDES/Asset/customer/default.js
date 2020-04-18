@@ -126,13 +126,14 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
         objDs.DS_GetContentDetails(topicId, moduleId, contentId);
         if (type.toLowerCase() == 'survey') {
-            $scope.ActiveContainer = "ContentSurveyView";
+          //  $scope.ActiveContainer = "ContentSurveyView";
         }
         else if (type.toLowerCase() == 'flashcard') {
-            $scope.BeginFlashcard();
+           // $scope.BeginFlashcard();
         }
         else if (type.toLowerCase() == 'finalquiz') {
-            $scope.ActiveContainer = "ContentQuizView";
+           // $scope.ActiveContainer = "ContentQuizView";
+            $scope.SubContainer = "ContentQuizView";
         }
         else {
             // $scope.ActiveContainer = "ContentView";
@@ -425,6 +426,24 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             HideLoader();
             var responseData = response.data;
             $rootScope.AllTopics = responseData.Data;
+
+            $rootScope.GlobalTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "1";
+            });
+
+            $rootScope.PublishedTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsPublished == "1";
+            });
+
+            $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "3";
+            });
+
+            $rootScope.DraftTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsPublished == "0";
+            });
+
+
         });
     }
 
@@ -648,7 +667,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             data: requestParams,
         }).then(function success(response) {
             var responseData = response.data;
-            ds.DS_GetContentsByModule(topicId, moduleId, false);
+            //ds.DS_GetContentsByModule(topicId, moduleId, false);
 
             if (responseData.IsGift == true) {
                 $rootScope.UnlockGiftData = responseData.Data[0];

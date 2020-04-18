@@ -133,7 +133,42 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
-        public static DataSet ManageFlashcardIntro(int compId, string userId,int type, int introId,string title, string comments, int contentId, int action)
+
+        public static DataSet UpdateQuizDetails(int compId, int topicId, int moduleId, int contentId, double totalScore, double passingScore, double passingPercent)
+        {
+
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+
+                conn.Open();
+                string sp = "spUpdateQuizScoreDetails";
+                MySqlCommand cmd = new MySqlCommand(sp, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_compid", compId);
+                cmd.Parameters.AddWithValue("p_contentid", contentId);
+                cmd.Parameters.AddWithValue("p_totalscore", totalScore);
+                cmd.Parameters.AddWithValue("p_passingscore", passingScore);
+                cmd.Parameters.AddWithValue("p_passingpercent", passingPercent);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
+
+        public static DataSet ManageFlashcardIntro(int compId, string userId, int type, int introId, string title, string comments, int contentId, int action)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -147,7 +182,7 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_CompID", compId);
                 cmd.Parameters.AddWithValue("p_ID", introId);
                 //cmd.Parameters.AddWithValue("p_Type", type);
-               // cmd.Parameters.AddWithValue("p_Title", title);
+                // cmd.Parameters.AddWithValue("p_Title", title);
                 cmd.Parameters.AddWithValue("p_ContentID", contentId);
                 cmd.Parameters.AddWithValue("p_SrNo", 1);
                 cmd.Parameters.AddWithValue("p_Comments", comments);
