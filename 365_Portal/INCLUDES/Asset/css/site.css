@@ -401,8 +401,8 @@ main .container-fluid.dashboard {
     margin: 0;
     padding: 0 20px 0 0px; }
     .content .content-item.card-fix .card {
-      width: 312px !important;
-      /*height: 320px !important;*/
+      width: 312px;
+      /*height: 320px;*/
       margin: 0; }
       .content .content-item.card-fix .card .card-body .action {
         margin-bottom: 12px; }
