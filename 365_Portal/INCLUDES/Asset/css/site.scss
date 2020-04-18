@@ -23,17 +23,24 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 
 /* heebo-regular - latin */
-@font-face {
+/*@font-face {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
     src: local('Heebo'), local('Heebo-Regular'), url('../fonts/heebo-v5-latin-regular.woff2') format('woff2');
+}*/
+
+@font-face {
+    font-family: 'TeachableSans-Medium';
+    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'), /* */
+    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), /* */
+    url('../fonts/teachable/TeachableSans-Medium.ttf') format('truetype');
 }
 
 body {
+    font-size: 14px;
     background: #F5F6F7;
-    font-size: .9rem;
-    font-family: Heebo;
+    font-family: 'TeachableSans-Medium' !important;
 }
 
 .bg-dark-blue {
@@ -85,10 +92,14 @@ a:hover {
 
 /* navbar input */
 .nav-search .form-control {
+    border: 2px solid #B5B5B580;
+    border-radius: 6px;
     border-right: none;
 }
 
 .nav-search .input-group-text {
+    border: 2px solid #B5B5B580;
+    border-radius: 6px;
     background-color: transparent;
     border-left: none;
 }
@@ -137,7 +148,7 @@ a:hover {
 
 .navbar .nav-content .nav-item.icon {
     padding: 0 1.25rem;
-    border-right: 1.5px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(47, 48, 54, 0.3);
 }
 
 .navbar .nav-content .nav-item.icon span.badge {
@@ -157,7 +168,7 @@ a:hover {
 }
 
 .navbar .nav-content .nav-item.icon .svg-inline--fa {
-    font-size: 18px;
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
@@ -165,6 +176,10 @@ a:hover {
 .navbar .nav-content .nav-item.icon.menu .dropdown-menu {
     width: auto;
     left: -102px;
+}
+
+.navbar .nav-content .nav-item.icon.menu img {
+    height: 18px;
 }
 
 .navbar .nav-content .nav-item.fav-icon img {
@@ -417,6 +432,8 @@ a:hover {
                     margin: 0 .75rem;
 
                     .nav-link {
+                        font-size: 14px;
+                        color: #000;
                         border-bottom: 3px solid transparent;
                     }
 
@@ -554,8 +571,9 @@ main {
 
 .content .content-item .card .card-icon .point {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 12px;
+    font-weight: 600;
     border-radius: 16px;
     position: absolute;
     top: 1.2rem;
@@ -563,22 +581,22 @@ main {
 }
 
 .content .content-item .card .text-muted {
-    color: rgba(0, 0, 0, 0.4) !important;
+    color: rgba(112, 112, 112, 0.4) !important;
 }
 
 .content .content-item .card .action span {
     color: rgba(0, 0, 0, 0.6) !important;
-    border: 1px solid rgba(0, 0, 0, 0.1);
     margin-right: .5rem;
-    padding: 4px 6px;
+    padding: 6px 8px;
     cursor: pointer;
+    border: 1px solid rgba(112, 112, 112, 0.2);
+    border-radius: 3px;
 }
 
 .content .content-item .card .action span.play {
     color: #fff !important;
     border: 1px solid;
-    font-size: 1rem;
-    padding: 6px 12px;
+    padding: 4px 7px;
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
     border-top-right-radius: 50%;
@@ -590,7 +608,10 @@ main {
 .content .content-item .card .time {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 2px 4px;
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 3px;
+    color: #6C6D70 !important;
 }
 
 .rotate-90deg {
@@ -949,10 +970,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .user-name .name {
     font-weight: 600;
+    color: #1B1C21;
+    font-size: 13px;
+    margin-bottom: 2px;
 }
 
 .user-name .status {
-    color: rgba(0,0,0,.5);
+    font-size: 10px;
+    color: rgba(0,0,0,.53);
 }
 
 .user-photo {

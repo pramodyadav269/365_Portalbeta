@@ -273,7 +273,7 @@
                                     <span ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
+                                        <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
                                     <%-- background-color--%>
                                 </div>
@@ -303,7 +303,7 @@
                                     <span ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>
 
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
+                                        <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
                                 </div>
                             </div>
@@ -330,7 +330,7 @@
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
+                                        <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
                                 </div>
                             </div>
@@ -358,7 +358,7 @@
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
 
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
+                                        <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
 
                                 </div>
@@ -386,7 +386,7 @@
                                     <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
                                     <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
+                                        <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
                                 </div>
                             </div>
