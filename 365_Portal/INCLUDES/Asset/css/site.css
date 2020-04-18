@@ -769,7 +769,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .user-photo {
   margin-left: 1rem;
   cursor: pointer; }
-  .user-photo img {
+  .user-photo .nav-photo {
     height: 32px;
     width: 32px; }
 

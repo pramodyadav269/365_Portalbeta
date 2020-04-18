@@ -489,7 +489,7 @@
                         <span class="status">0 badges, 0 points</span>
                     </li>
                     <li class="nav-item user-photo dropdown">
-                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle nav-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 
                         <div class="dropdown-menu user-profile shadow" aria-labelledby="imgProfilePic">
                             <img src="../INCLUDES/Asset/images/theme_nature_header_profile.svg" class="img-fluid profile-theme" />
