@@ -230,6 +230,12 @@ namespace _365_Portal.Controllers
                         }
                     }
 
+                    List<Question> questionAnswerList = new List<Question>();
+                    var dataSet = TrainningBL.GetContentDetails(compId, userId, 0, 0, Convert.ToInt32(contentId), ref questionAnswerList);
+                    var totalScore = questionAnswerList.Sum(p => p.TotalScore);
+
+                    QuizBL.UpdateQuizDetails(compId, 0, 0, contentId, totalScore, 0, 0);
+
                     if (ds.Tables.Count > 0)
                     {
                         if (ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
