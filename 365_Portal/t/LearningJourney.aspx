@@ -177,14 +177,14 @@
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" />
-                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" />
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);"/>
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);"/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-5">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Point</label>
-                                                    <input type="text" class="form-control required" id="txtPoint" placeholder="100" />
+                                                    <input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="100" onkeyup="return isNumberKey('txtPoint',event);"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -796,6 +796,7 @@
         }
 
         function AddMore(id) {
+            debugger
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -882,18 +883,8 @@
                     $('#divContentAdd').show();
                     $('#divContentGrid').hide();
                     AddMoreContentFlag = 'add';
-
-
-                    ClearFieldsAddLesson();
-                    $('#btnAddMoreContent').show();
-                    $('#btnAddContent').show();
-                    $('#btnCancelContent').show();
-
-                    $('#divContentAdd').show();
-                    $('#divContentGrid').hide();
-                    AddMoreContentFlag = 'add';
                     divContentFlag = 'add';
-                    ContentFlag = '0';
+                    ContentFlag = '0';                    
                 }
             }
             /*
@@ -1244,7 +1235,7 @@
                 url: getUrl,
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
-                async: false,
+                //async: false,//Added on 18 APR
                 contentType: "application/json",
                 success: function (response) {
                     try {
@@ -1410,7 +1401,7 @@ if(IsPublished==1)
                     headers: { "Authorization": "Bearer " + accessToken },
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
-                    async: false,
+                    //async: false,//Added on 18 APR
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
@@ -1437,6 +1428,7 @@ if(IsPublished==1)
                                         SetProgressBar();
                                         //ClearFieldsAddLesson();
                                         //BindLesson('nexttab');
+                                        BindContent('addmore');
 
                                         Swal.fire({
                                             title: "Success",
@@ -1530,7 +1522,7 @@ if(IsPublished==1)
                 url: getUrl,
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
-                async: false,
+                //async: false,//Added on 18 APR
                 contentType: "application/json",
                 success: function (response) {
                     try {
@@ -1636,7 +1628,7 @@ if(IsPublished==1)
                     headers: { "Authorization": "Bearer " + accessToken },
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
-                    async: false,
+                    //async: false,//Added on 18 APR
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
@@ -1694,7 +1686,7 @@ if(IsPublished==1)
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
                 contentType: "application/json",
-                async: false,
+                //async: false,//Added on 18 APR
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
@@ -1993,7 +1985,7 @@ if(IsPublished==1)
                     headers: { "Authorization": "Bearer " + accessToken },
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
-                    async: false,
+                    //async: false,
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
@@ -2083,7 +2075,7 @@ if(IsPublished==1)
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
                 contentType: "application/json",
-                async: false,
+                //async: false,//Added on 18 APR
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
@@ -2210,7 +2202,7 @@ if(IsPublished==1)
                         headers: { "Authorization": "Bearer " + accessToken },
                         data: JSON.stringify(requestParams),
                         contentType: "application/json",
-                        async: false,
+                        //async: false,//Added on 18 APR
                         success: function (response) {
                             try {
                                 var DataSet = $.parseJSON(response);
@@ -2605,8 +2597,8 @@ else
                 Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
             }
         }
-var gbl_QuestionID=0;
- 
+
+        var gbl_QuestionID = 0;
         function AddQuestion(obj, flag, type) {
 
             var actionType = flag;
@@ -3196,7 +3188,7 @@ return;
                     headers: { "Authorization": "Bearer " + accessToken },
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
-                    async: false,
+                    //async: false,//Added on 18 APR
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
@@ -3252,7 +3244,7 @@ return;
                     headers: { "Authorization": "Bearer " + accessToken },
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
-                    async: false,
+                    //async: false,//Added on 18 APR
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
@@ -3286,7 +3278,43 @@ return;
             }
         }
 
+        function isNumberKey(flag, e)
+        {
+            debugger
+            var result = false;
+            try {
+                var charCode = (e.which) ? e.which : e.keyCode;
 
+                //if ((charCode >= 48 && charCode <= 57)) {
+                if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105))
+                {
+                    if (flag == 'txtMin') {
+                        var min = parseInt($('#' + flag).val());
+                        if (min < 0 || min > 59) {
+                            $('#' + flag).val('');
+                            Swal.fire({ title: "Failure", text: "! Please enter valid minute range between 0 to 59", icon: "error" });
+                        }
+                        else {
+                            result = true;
+                        }
+                    }
+                    else {
+                        result = true;
+                    }
+                }
+                else if (charCode == 8 || charCode == 9 || charCode == 13)
+                {
+                
+                }
+                else {
+                    $('#' + flag).val('');
+                }
+            }
+            catch (err) {
+                //console.log(err);
+            }
+            return result;
+        }
 
     </script>
 </asp:Content>
