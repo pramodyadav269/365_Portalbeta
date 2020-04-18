@@ -3,14 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <style>
-        .Tag {
-            background: #fff;
-            /*color: rgba(0, 0, 0, 0.3);*/
-            border: 1px solid rgba(0, 0, 0, 1.2);
-            padding: 2px 6px;
-            border-radius: 2rem;
-            margin-bottom: 10px;
-            display: inline-block;
+        .btnSpace {
+                margin-right: 10px;
         }
     </style>
 
@@ -382,8 +376,8 @@
 
             <%--Content--%>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnCancelContent" onclick="ShowContentTile();">Add Resource</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
 
             <%--Resource--%>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
