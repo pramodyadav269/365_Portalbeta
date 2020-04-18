@@ -2342,7 +2342,7 @@ if(IsPublished==1)
             $('#txtPassingScorePercentage').val('');
             $('#lblTotalScore').text('');
             $('#lblPassingScore').text('Passing Score: 0');
-            $('#lblPercentage').text('0');
+            $('#lblPercentage').text('0%');
             //$('#txtPassingPercentage').val('');
         }
 
@@ -2458,7 +2458,7 @@ if(IsPublished==1)
                                         $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingPercent);
                                         $('#lblTotalScore').text(DataSet.Data[0].TotalScore);
                                         $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
-                                        $('#lblPercentage').text(DataSet.Data[0].PassingPercent);
+                                        $('#lblPercentage').text(DataSet.Data[0].PassingPercent+'%');
 
                                         Questions = DataSet.Data[0].Questions;
 
@@ -2480,7 +2480,7 @@ else
                                         $('#txtPassingScorePercentage').val("0");
                                         $('#lblTotalScore').text("0");
                                         $('#lblPassingScore').text("");
-                                        $('#lblPercentage').text("0");
+                                        $('#lblPercentage').text("0%");
 
                                         Questions = [];
 

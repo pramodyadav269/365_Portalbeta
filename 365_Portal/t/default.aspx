@@ -13,7 +13,7 @@
         </div>
 
         <%-- beta view lesson start --%>
-        <div class="dashboard" style="margin-top: -8px;">
+        <div class="dashboard">
             <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
                 <div class="card text-white bg-dark-blue course-header">
                     <div class="card-body">
