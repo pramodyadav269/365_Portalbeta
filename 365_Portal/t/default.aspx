@@ -255,7 +255,7 @@
                 <h4 class="section-title" id="dvInProgressTitle">In Progress</h4>
 
                 <div id="dvInProgressTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
+                    <div class="content-item card-fix" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
@@ -285,7 +285,7 @@
                 <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
 
                 <div id="dvMyTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
+                    <div class="content-item card-fix" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
@@ -314,7 +314,7 @@
                 <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
 
                 <div id="dvRecommendedTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
+                    <div class="content-item card-fix" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
@@ -341,7 +341,7 @@
                 <h4 class="section-title" id="dvLatestTopicsTitle">Latest</h4>
 
                 <div id="dvLatestTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
+                    <div class="content-item card-fix" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
@@ -370,7 +370,7 @@
                 <h4 class="section-title" id="dvPopularTopicsTitle">Popular</h4>
 
                 <div id="dvPopularTopics" class="content">
-                    <div class="content-item" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
+                    <div class="content-item card-fix" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}">
@@ -419,7 +419,7 @@
                 <section>
                     <h4 class="section-title">Unlocked Lessons</h4>
                     <div id="dvUnlockedLessons" class="content">
-                        <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
+                        <div class="content-item card-fix" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
                             <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
                                 <div class="card-icon">
                                     <img src="../INCLUDES/Asset/images/sun.png">
@@ -439,7 +439,7 @@
                 <section>
                     <h4 class="section-title">Locked Lessons</h4>
                     <div id="dvLockedLessons" class="content">
-                        <div class="content-item" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
+                        <div class="content-item card-fix" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
                             <div class="card bc-blue">
                                 <div class="card-icon">
                                     <img src="../INCLUDES/Asset/images/sun.png">
@@ -1237,7 +1237,7 @@
                 dots: false,
                 infinite: false,
                 speed: 300,
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
                 centerMode: false,
                 responsive: [

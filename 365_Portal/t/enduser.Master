@@ -451,9 +451,12 @@
                         <img src="../includes/Asset/images/us.png" class="circle lang-icon" />
                         <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
-
+                    <li class="nav-item icon border-0 pr-0">
+                        <a>
+                            <img src="../INCLUDES/Asset/images/icon-help.svg" /></a>
                     <li class="nav-item icon menu dropdown">
-                        <a id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../INCLUDES/Asset/images/grid-6.svg" /></a>
+                        <a id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="../INCLUDES/Asset/images/grid-6.svg" /></a>
                         <div class="dropdown-menu" aria-labelledby="navDash">
                             <a class="dropdown-item" href="default.aspx" target="_blank">Learn</a>
                             <a class="dropdown-item" href="projects.aspx" target="_blank">Task</a>
@@ -487,7 +490,7 @@
                         <span class="status">0 badges, 0 points</span>
                     </li>
                     <li class="nav-item user-photo dropdown">
-                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" height="32" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
+                        <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
 
                         <div class="dropdown-menu user-profile shadow" aria-labelledby="imgProfilePic">
                             <img src="../INCLUDES/Asset/images/theme_nature_header_profile.svg" class="img-fluid profile-theme" />
