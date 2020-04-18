@@ -216,7 +216,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <span class="mt-3">Earn 1 more badges and 200 more points</span>
+                            <span class="mt-3 outer-text">Earn 1 more badges and 200 more points</span>
                         </div>
                         <a href="#" class="path">Go to Learning Path</a>
                     </div>
