@@ -221,7 +221,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="txtMobileNo">Mobile No</label>
-                                    <input type="text" class="form-control required" id="txtMobileNo" placeholder="Mobile No" />
+                                    <input type="text" class="form-control required" id="txtMobileNo" placeholder="Mobile No" pattern="\d{3}[\-]\d{3}[\-]\d{4}"/>
                                 </div>
                             </div>
 
@@ -736,7 +736,7 @@
         }
 
         function InputValidation(flag) {
-
+            debugger
             if ($("#txtBusinessName").val() == undefined || $("#txtBusinessName").val() == '') {
                 return { error: true, msg: "Please enter Business Name" };
             }
@@ -747,7 +747,7 @@
                 return { error: true, msg: "Please select Country" };
             }
 
-
+            debugger
             if (Role == "superadmin") {
                 if ($("#ddlRole option:selected").val() == undefined || $("#ddlRole option:selected").val() == '') {
                     return { error: true, msg: "Please select Role" };
@@ -761,9 +761,18 @@
                 else if ($("#txtEmailId").val() == undefined || $("#txtEmailId").val() == '') {
                     return { error: true, msg: "Please enter emailid" };
                 }
+                
                 else if (!IsValidEmail($("#txtEmailId").val())) {
                     return { error: true, msg: "Please provide valid EmailID of user" };
                 }
+                
+                if ($("#txtMobileNo").val() != undefined && $("#txtMobileNo").val().trim() != '')
+                {
+                    if (!IsValidMobileNo($("#txtMobileNo").val())) {
+                        return { error: true, msg: "! MobileNo should be numeric and 10 digit only" };
+                    }
+                }
+                
 
                 if (flag == 'create') {
                     if ($("#txtPassword").val() == undefined || $("#txtPassword").val() == '') {
@@ -780,10 +789,20 @@
         }
 
         function IsValidEmail(EmailId) {
-            debugger
+            //debugger
             //var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
             var reg = /^([0-9a-zA-Z]([\+\-_\.]+)*)+\@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,17})$/;
             if (reg.test(EmailId) == false) {
+                return false;
+            }
+            return true;
+        }
+
+        function IsValidMobileNo(inputtxt)
+        {
+            var number = parseInt(inputtxt);
+            var reg = /^[6789]\d{9}$/;
+            if (reg.test(number) == false) {
                 return false;
             }
             return true;
