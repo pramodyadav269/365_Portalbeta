@@ -53,7 +53,8 @@
                                 <div class="card shadow-sm course-point">
                                     <div class="card-body">
                                         <h5 class="card-title">+{{SelectedTopic.Points}} Points</h5>
-                                        <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
+                                        <img ng-show="SelectedTopic.CourseLogo !=null" class="img-fluid" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
+                                        <img ng-show="SelectedTopic.CourseLogo ==null" class="img-fluid" src="../INCLUDES/Asset/images/sun.png">
                                         <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
                                         <div class="point-progress">
                                             <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
@@ -110,13 +111,16 @@
                                     <a class="list-group-item list-group-item-action" href="#list-item-3">Get to Know Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-4">Create a Custom Object</a>--%>
 
-                                    <a ng-repeat="content in Content.UnlockedItems"
+                                    <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
                                         ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
                                         class="list-group-item list-group-item-action" href="#">{{content.Title}}</a>
 
                                     <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
-                                    <div class="next shadow-sm"><i class="fas fa-chevron-right"></i>Quiz</div>
+                                    <div class="next shadow-sm" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                        ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
+                                        Quiz
+                                    </div>
                                 </div>
 
                                 <%-- <div class="col-sm-12 mb-3" ng-repeat="content in Content.UnlockedItems">
@@ -149,7 +153,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8 p-0">
-                            <div data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
+                            <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
                                 <div class="lesson-content" id="list-item-1">
                                     <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
                                     <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
@@ -165,81 +169,82 @@
                                             <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-click="NextContent(SpecialContents.ContentID)">Continue</a>
                                         </div>
                                     </div>--%>
-
-                                    <div class="row" ng-if="SubContainer =='ContentQuizView'">
-                                        <div class="col-sm-12 header">
+                                </div>
+                            </div>
+                            <div class="row" ng-if="SubContainer =='ContentQuizView'">
+                                <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
+                                <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
+                                <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
+                                <%-- <div class="col-sm-12 header">
                                             <a class="back" href="#" ng-click="GoBack('Content')"><i class="fas fa-arrow-left"></i>{{ContentGoBackText}}</a>
                                             <h2 class="text-center font-weight-bold">{{SelectedContent.Title}}</h2>
-                                        </div>
+                                        </div>--%>
 
-                                        <div class="col-sm-12 mt-5">
-                                            <div class="row" id="finalQuiz">
-                                                <div class="col-sm-12 mb-3" ng-repeat="question in SpecialContents.Questions" my-post-repeat-directive>
-                                                    <div class="ng-class: 'card border-0 shadow mb-3 ' + (question.IsAnswered == true ? (question.IsCorrect ==true ? 'b-green-2' : 'b-red-2'):'' );">
-                                                        <div class="card-body question">
-                                                            <div class="media mb-4">
-                                                                <h1 class="card-title display-4 font-weight-bold mr-4">{{$index + 1}}.</h1>
-                                                                <div class="media-body pr-4">
-                                                                    <h5 class="mt-0 mb-4">{{question.Title}}</h5>
+                                <div class="col-sm-12 mt-5">
+                                    <div class="row" id="finalQuiz">
+                                        <div class="col-sm-12 mb-3" ng-repeat="question in SpecialContents.Questions" my-post-repeat-directive>
+                                            <div class="ng-class: 'card border-0 shadow mb-3 ' + (question.IsAnswered == true ? (question.IsCorrect ==true ? 'b-green-2' : 'b-red-2'):'' );">
+                                                <div class="card-body question">
+                                                    <div class="media mb-4">
+                                                        <h1 class="card-title display-4 font-weight-bold mr-4">{{$index + 1}}.</h1>
+                                                        <div class="media-body pr-4">
+                                                            <h5 class="mt-0 mb-4">{{question.Title}}</h5>
 
-                                                                    <%--Checkbox List--%>
-                                                                    <div ng-if="question.QuestionTypeID == 1 ">
-                                                                        <div class="custom-control custom-checkbox" ng-repeat="ansOption in question.AnswerOptions">
-                                                                            <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="ansOption.AnswerText_1" value="{{ansOption.AnswerID}}">
-                                                                            <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
-                                                                            <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <%--Dropdown List--%>
-                                                                    <div class="form-group" ng-if="question.QuestionTypeID == 2 ">
-                                                                        <select class="form-control select2" ng-model="question.Value_Text">
-                                                                            <option ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" value="{{ansOption.AnswerID}}" ng-repeat="ansOption in question.AnswerOptions">{{ansOption.AnswerText}} 
-                                                    <%--IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                            </option>
-                                                                        </select>
-                                                                    </div>
-
-                                                                    <%--Radio Button List--%>
-                                                                    <div ng-if="question.QuestionTypeID == 3 ">
-                                                                        <div class="custom-control custom-radio" ng-repeat="ansOption in question.AnswerOptions">
-                                                                            <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="ansOption.AnswerText_3" value="{{ansOption.AnswerID}}">
-                                                                            <label class="custom-control-label" for="{{'rbSVAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
-                                                                            <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <%--Radio Button List with box--%>
-                                                                    <div ng-if="question.QuestionTypeID == 9 " class="box">
-                                                                        <div ng-repeat="ansOption in question.AnswerOptions">
-                                                                            <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text" name="ansOption.AnswerText_9" value="{{ansOption.AnswerID}}">
-                                                                            <label for="{{'rbAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
-                                                                            <%--    IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                        </div>
-                                                                    </div>
-
+                                                            <%--Checkbox List--%>
+                                                            <div ng-if="question.QuestionTypeID == 1 ">
+                                                                <div class="custom-control custom-checkbox" ng-repeat="ansOption in question.AnswerOptions">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="ansOption.AnswerText_1" value="{{ansOption.AnswerID}}">
+                                                                    <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
+                                                                    <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
-                                                                <p class="anchor"></p>
-                                                                <i ng-if="SpecialContents.IsAnswered ==true && question.IsCorrect ==false" class="fas fa-times c-red"></i>
-                                                                <i ng-if="SpecialContents.IsAnswered ==true && question.IsCorrect ==true" class="fas fa-check c-green"></i>
-
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="w-100 mt-4 text-center">
-                                                    <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsAnswered==true && SpecialContents.IsPassed==false"
-                                                        ng-click="RetakeTest(SpecialContents.TopicID,SpecialContents.ModuleID,SpecialContents.ContentID,SpecialContents.SurveyID)">TAKE THE TEST AGAIN</a>
-                                                    <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsAnswered==false && SpecialContents.IsPassed==false"
-                                                        ng-click="SubmitAnswers()">Check Answers</a>
-                                                    <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsPassed==true"
-                                                        ng-click="UpdateContent(SpecialContents.Type,SpecialContents.TopicID,SpecialContents.ModuleID,SpecialContents.ContentID)">Continue</a>
 
+                                                            <%--Dropdown List--%>
+                                                            <div class="form-group" ng-if="question.QuestionTypeID == 2 ">
+                                                                <select class="form-control select2" ng-model="question.Value_Text">
+                                                                    <option ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" value="{{ansOption.AnswerID}}" ng-repeat="ansOption in question.AnswerOptions">{{ansOption.AnswerText}} 
+                                                    <%--IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+
+                                                            <%--Radio Button List--%>
+                                                            <div ng-if="question.QuestionTypeID == 3 ">
+                                                                <div class="custom-control custom-radio" ng-repeat="ansOption in question.AnswerOptions">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="ansOption.AnswerText_3" value="{{ansOption.AnswerID}}">
+                                                                    <label class="custom-control-label" for="{{'rbSVAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
+                                                                    <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
+                                                                </div>
+                                                            </div>
+
+                                                            <%--Radio Button List with box--%>
+                                                            <div ng-if="question.QuestionTypeID == 9 " class="box">
+                                                                <div ng-repeat="ansOption in question.AnswerOptions">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text" name="ansOption.AnswerText_9" value="{{ansOption.AnswerID}}">
+                                                                    <label for="{{'rbAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
+                                                                    <%--    IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <p class="anchor"></p>
+                                                        <i ng-if="SpecialContents.IsAnswered ==true && question.IsCorrect ==false" class="fas fa-times c-red"></i>
+                                                        <i ng-if="SpecialContents.IsAnswered ==true && question.IsCorrect ==true" class="fas fa-check c-green"></i>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="w-100 mt-4 text-center">
+                                            <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsAnswered==true && SpecialContents.IsPassed==false"
+                                                ng-click="RetakeTest(SpecialContents.TopicID,SpecialContents.ModuleID,SpecialContents.ContentID,SpecialContents.SurveyID)">TAKE THE TEST AGAIN</a>
+                                            <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsAnswered==false && SpecialContents.IsPassed==false"
+                                                ng-click="SubmitAnswers()">Check Answers</a>
+                                            <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-if="SpecialContents.IsPassed==true"
+                                                ng-click="UpdateContent(SpecialContents.Type,SpecialContents.TopicID,SpecialContents.ModuleID,SpecialContents.ContentID)">Continue</a>
 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -422,7 +427,8 @@
                         <div class="content-item card-fix" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
                             <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
                                 <div class="card-icon">
-                                    <img src="../INCLUDES/Asset/images/sun.png">
+                                    <img ng-show="SelectedTopic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
+                                    <img ng-show="SelectedTopic.CourseLogo ==null" src="../INCLUDES/Asset/images/sun.png">
                                     <span class="point">+{{module.LessonPoints}} Points</span>
                                 </div>
                                 <div class="card-body">
