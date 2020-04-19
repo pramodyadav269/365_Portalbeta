@@ -1315,9 +1315,12 @@ if(IsPublished==1)
         function ClearFieldsAddLesson() {
             $('#txtLessonTitle').val('');
             //$('#txtLearningObjectives').val('');
-            $('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
-            var editorContentDesc = new Jodit('#txtLessonDescription');
-            $('#divLessonDescription').find('.jodit_placeholder').text('')
+            //$('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
+            //var editorContentDesc = new Jodit('#txtLessonDescription');
+
+            editorLessonDesc.value = '';
+
+            //$('#divLessonDescription').find('.jodit_placeholder').text('')
             //editorContentDesc.value = '';
             //$('#txtEstimatedTime').val('');
             $('#txtHour').val('');
@@ -1369,12 +1372,14 @@ if(IsPublished==1)
         }
 
         function AddLession(flag) {
+            debugger
             var getUrl;
-            ShowLoader();
+            //ShowLoader();
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
             //var _Overview = $('#txtLearningObjectives').val();
             var _Overview = $('#divLessonDescription').find('.jodit_wysiwyg').text();
+            //var _Overview1 = $('#divLessonDescription').html().text();
             //var _Description = $('#txtDescription').val();
             //var _IsPublished = $('#cbIsPublished').prop('checked');
 
@@ -1584,7 +1589,10 @@ if(IsPublished==1)
             debugger
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+
             $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            //$('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());//Added on 19 PR
+
             //$('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
 
             if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text() != undefined
