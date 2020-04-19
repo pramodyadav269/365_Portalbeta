@@ -4,7 +4,7 @@
 
     <style>
         .btnSpace {
-                margin-right: 10px;
+            margin-right: 10px;
         }
     </style>
 
@@ -177,14 +177,14 @@
                                             <div class="col-sm-12 mt-3">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);"/>
-                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);"/>
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
+                                                    <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
                                                 </div>
                                             </div>
                                             <div class="col-sm-12 mt-5">
                                                 <div class="form-group">
                                                     <label><i class="fas fa-plus-circle black"></i>Point</label>
-                                                    <input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="100" onkeyup="return isNumberKey('txtPoint',event);"/>
+                                                    <input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="100" onkeyup="return isNumberKey('txtPoint',event);" />
                                                 </div>
                                             </div>
                                         </div>
@@ -440,12 +440,9 @@
 
     <script>
 
-        var editorContentDesc = new Jodit('#txtContentDescription');
-        $('#divContentDescription').find('.jodit_placeholder').text('')
-        var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-        $('#divResourcesDescription').find('.jodit_placeholder').text('')
         var editorLessonDesc = new Jodit('#txtLessonDescription');
-        $('#divLessonDescription').find('.jodit_placeholder').text('')
+        var editorContentDesc = new Jodit('#txtContentDescription');
+        var editorResourcesDesc = new Jodit('#txtResourcesDescription');
 
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
@@ -795,8 +792,7 @@
             }
         }
 
-        function AddMore(id) {
-            debugger
+        function AddMore(id) {            
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -884,7 +880,7 @@
                     $('#divContentGrid').hide();
                     AddMoreContentFlag = 'add';
                     divContentFlag = 'add';
-                    ContentFlag = '0';                    
+                    ContentFlag = '0';
                 }
             }
             /*
@@ -945,7 +941,8 @@
                             var CourseCategory = DataSet.Data.CourseCategory;
 
                             if (Tags != undefined && Tags.length > 0) {
-                                $('#ddlTags').empty().append('<option></option>');
+                                //$('#ddlTags').empty().append('<option></option>');
+                                $('#ddlTags').empty();
                                 for (var i = 0; i < Tags.length; i++) {
                                     $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
                                 }
@@ -1307,8 +1304,8 @@
                 $("#dvPublishCourse").hide();
                 $("#dvSaveAsDraft").show();
             }
-if(IsPublished==1)
- $("#dvPublishCourse").show();
+            if (IsPublished == 1)
+                $("#dvPublishCourse").show();
         }
 
 
@@ -1332,15 +1329,15 @@ if(IsPublished==1)
             if ($("#txtLessonTitle").val() == undefined || $("#txtLessonTitle").val() == '') {
                 return { error: true, msg: "Please enter Lesson Title" };
             }
-            //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
-            //    return { error: true, msg: "Please enter Learning Objectives" };
-            //}
-            else if ($('#divLessonDescription').find('.jodit_wysiwyg').text() == undefined || $('#divLessonDescription').find('.jodit_wysiwyg').text() == '') {
+                //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
+                //    return { error: true, msg: "Please enter Learning Objectives" };
+                //}
+            else if (editorLessonDesc.value == undefined || editorLessonDesc.value.trim() == '') {
                 return { error: true, msg: "Please enter Lesson Details" };
             }
-            //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
-            //    return { error: true, msg: "Please enter Estimate Time" };
-            //}
+                //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
+                //    return { error: true, msg: "Please enter Estimate Time" };
+                //}
             else if ($("#txtHour").val() == undefined || $("#txtHour").val() == '') {
                 return { error: true, msg: "Please enter Hour" };
             }
@@ -1372,14 +1369,13 @@ if(IsPublished==1)
         }
 
         function AddLession(flag) {
-            debugger
+            
             var getUrl;
             //ShowLoader();
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
             //var _Overview = $('#txtLearningObjectives').val();
-            var _Overview = $('#divLessonDescription').find('.jodit_wysiwyg').text();
-            //var _Overview1 = $('#divLessonDescription').html().text();
+            var _Overview = editorLessonDesc.value;
             //var _Description = $('#txtDescription').val();
             //var _IsPublished = $('#cbIsPublished').prop('checked');
 
@@ -1538,12 +1534,11 @@ if(IsPublished==1)
                             var EditModule = DataSet.Data.Data;
 
                             $('#txtLessonTitle').val(EditModule[0].Title);
-                            //$('#txtLearningObjectives').val(EditModule[0].Overview);
-                            $('#divLessonDescription').find('.jodit_wysiwyg').text('');
-                            $('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
+                            
+                            //$('#divLessonDescription').find('.jodit_wysiwyg').text('');
+                            //$('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
+                            editorLessonDesc.value = EditModule[0].Overview;
 
-
-                            //$('#txtEstimatedTime').val(EditModule[0].CourseTime);
                             if (EditModule[0].CourseTime != '' && EditModule[0].CourseTime.split(":").length > 0) {
                                 $('#txtHour').val(EditModule[0].CourseTime.split(":")[0]);
                                 if (EditModule[0].CourseTime.split(":").length > 1) {
@@ -1586,12 +1581,12 @@ if(IsPublished==1)
         }
 
         function EditLessionFromTile(obj, id) {
-            debugger
+            
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
 
-            $('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
-            //$('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());//Added on 19 PR
+            //$('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            editorLessonDesc.value = $(obj).parent().parent().parent().parent().find('#spOverview').text();
 
             //$('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
 
@@ -1622,7 +1617,7 @@ if(IsPublished==1)
         }
 
         function DeleteLessionFromTile(obj, id) {
-            
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -1633,7 +1628,7 @@ if(IsPublished==1)
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    
+
                     LessonFlag = id;
                     ShowLoader();
                     var getUrl = "/API/Content/DeleteModule";
@@ -1796,17 +1791,21 @@ if(IsPublished==1)
 
         function ClearFieldsAddContent() {
             $('#txtContentHeader').val('');
-            $('#divContentDescription').empty().append('<div id="txtContentDescription"></div>');
-            var editorContentDesc = new Jodit('#txtContentDescription');
-            $('#divContentDescription').find('.jodit_placeholder').text('')
-            //editorContentDesc.value = '';
+
+            //Commented on 19 APR 20
+            //$('#divContentDescription').empty().append('<div id="txtContentDescription"></div>');
+            //var editorContentDesc = new Jodit('#txtContentDescription');
+            //$('#divContentDescription').find('.jodit_placeholder').text('')
+
+            //Added on 19 APR 20
+            editorContentDesc.value = '';
         }
 
         function validateAddContent() {
             if ($("#txtContentHeader").val() == undefined || $("#txtContentHeader").val() == '') {
                 return { error: true, msg: "Please enter Content Header" };
             }
-            else if ($('#divContentDescription').find('.jodit_wysiwyg').text() == undefined || $('#divContentDescription').find('.jodit_wysiwyg').text() == '') {
+            else if (editorContentDesc.value == undefined || editorContentDesc.value.trim() == '') {
                 return { error: true, msg: "Please enter Content Details" };
             }
             else if (CourseFlag == '0' || LessonFlag == '0') {
@@ -1853,7 +1852,7 @@ if(IsPublished==1)
             formdata.append("SrNo", index);
             formdata.append("DocType", selectedDocType);
             formdata.append("Title", $("#txtContentHeader").val());
-            formdata.append("Description", $('#divContentDescription').find('.jodit_wysiwyg').text());
+            formdata.append("Description", editorContentDesc.value);
             formdata.append("Overview", "");
             formdata.append("IsGift", "");
             formdata.append("IsPublished", "");
@@ -1982,7 +1981,8 @@ if(IsPublished==1)
         function EditContentFromTile(obj, id) {
             ""
             $('#txtContentHeader').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
-            $('#divContentDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            //$('#divContentDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
+            editorContentDesc.value = $(obj).parent().parent().parent().parent().find('#spOverview').text();
 
             ContentFlag = id;
             AddMoreContentFlag = 'add';
@@ -1991,7 +1991,7 @@ if(IsPublished==1)
         }
 
         function DeleteContentFromTile(obj, id) {
-            
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -2111,7 +2111,7 @@ if(IsPublished==1)
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
-                        ""
+                        debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
 
@@ -2124,12 +2124,13 @@ if(IsPublished==1)
 
                                         tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
                                         tblContents = tblContents + '<div class="tag">Content</div>';
-                                        tblContents = tblContents + '<div class="tag" style="display:none;"><span id="spTitle" >' + Contents[i].Title + '</span></div>';
+                                        //tblContents = tblContents + '<div class="tag" ><span id="spTitle" >' + Contents[i].Title + '</span></div>';
                                         tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblContents = tblContents + '<div class="row">';
                                         tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
                                         //tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
-                                        tblContents = tblContents + '<a target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
+                                        tblContents = tblContents + '<h5 class="card-title" id="spTitle">' + Contents[i].Title + '</h5>';
+                                        tblContents = tblContents + '<a style="display:none;" target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
 
                                         //tblContents = tblContents + '<p class="card-text">~' + Contents[i].CourseTime + ' mins</p>';
                                         tblContents = tblContents + '</div>';
@@ -2184,22 +2185,21 @@ if(IsPublished==1)
             });
         }
 
-        function ShowContentTile()
-        {
+        function ShowContentTile() {
             AddMoreContentFlag = 'bindtile';
             AddMore('btnAddMoreContent');
         }
 
 
         function ClearFieldsAddResource() {
-            $('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
-            var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-            $('#divResourcesDescription').find('.jodit_placeholder').text('')
-            //editorResourcesDesc.value = '';
+            //$('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
+            //var editorResourcesDesc = new Jodit('#txtResourcesDescription');
+            //$('#divResourcesDescription').find('.jodit_placeholder').text('')
+            editorResourcesDesc.value = '';
         }
 
         function validateAddResource() {
-            if ($('#divResourcesDescription').find('.jodit_wysiwyg').text() == undefined || $('#divResourcesDescription').find('.jodit_wysiwyg').text() == '') {
+            if (editorResourcesDesc.value == undefined || editorResourcesDesc.value.trim() == '') {
                 return { error: true, msg: "Please enter Resource Details" };
             }
             return true;
@@ -2222,7 +2222,7 @@ if(IsPublished==1)
             }
             else {
                 ShowLoader();
-                var Description = $('#divResourcesDescription').find('.jodit_wysiwyg').text();
+                var Description = editorResourcesDesc.value;
                 var getUrl = "/API/Content/UpdateResource";
 
                 try {
@@ -2343,7 +2343,8 @@ if(IsPublished==1)
                             ""
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-                                    $('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
+                                    //$('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
+                                    editorResourcesDesc.value = DataSet.Data[0].Resource;
                                 }
                             }
                             else {
@@ -2495,7 +2496,7 @@ if(IsPublished==1)
                                         $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingPercent);
                                         $('#lblTotalScore').text(DataSet.Data[0].TotalScore);
                                         $('#lblPassingScore').text('Passing Score: ' + DataSet.Data[0].PassingScore);
-                                        $('#lblPercentage').text(DataSet.Data[0].PassingPercent+'%');
+                                        $('#lblPercentage').text(DataSet.Data[0].PassingPercent + '%');
 
                                         Questions = DataSet.Data[0].Questions;
 
@@ -2510,8 +2511,7 @@ if(IsPublished==1)
 
                                         BindQuestion(Questions);
                                     }
-else
-{
+                                    else {
                                         $('#txtQuizTitle').val("");
                                         $('#txtQuizDescription').val("");
                                         $('#txtPassingScorePercentage').val("0");
@@ -2531,7 +2531,7 @@ else
                                         }
 
                                         BindQuestion(Questions);
-}
+                                    }
 
                                 }
                                 else {
@@ -2637,19 +2637,19 @@ else
             if (gbl_QuestionID != 0 && gbl_QuestionID != "") {
                 actionType = "2"; // Update
             }
-  var Question = $("#txtQuestion").val();
+            var Question = $("#txtQuestion").val();
 
-if (type == "done" && (Question=="" || Question==null) && Questions.length > 0) {
-HideLoader();
-                        $("#dvQuizCongratulationScreen").show();
-                        $(".quiz-wrapper").hide();
-                        $("#divQuizAdd").hide();
+            if (type == "done" && (Question == "" || Question == null) && Questions.length > 0) {
+                HideLoader();
+                $("#dvQuizCongratulationScreen").show();
+                $(".quiz-wrapper").hide();
+                $("#divQuizAdd").hide();
 
-                        $('#divQuestionType').hide();
-                        $('#dvQuizDone').hide();
-                        $('#dvCancelQuestion').hide();
-return;
-                    }
+                $('#divQuestionType').hide();
+                $('#dvQuizDone').hide();
+                $('#dvCancelQuestion').hide();
+                return;
+            }
 
 
             var result = validateAddQuestion(obj);
@@ -2665,7 +2665,7 @@ return;
                 ShowLoader();
                 AddQuiz(false);
 
-              
+
                 var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
                 var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
                 var answerIds = $("input[id='txtAnswer']").map(function () { return $(this).attr("answerid"); }).get();
@@ -3056,8 +3056,7 @@ return;
 
         }
 
-        function clearModalText()
-        {
+        function clearModalText() {
             $('#txtTagName').val('');
         }
 
@@ -3095,8 +3094,7 @@ return;
                                     var DataSet = $.parseJSON(response);
                                     ""
                                     HideLoader();
-                                    if (DataSet.StatusCode == "1")
-                                    {
+                                    if (DataSet.StatusCode == "1") {
                                         if (DataSet.Data.Data1 != undefined) {
                                             var Tags = DataSet.Data.Data1;
                                             if (Tags != undefined && Tags.length > 0) {
@@ -3133,8 +3131,7 @@ return;
                                             }
                                         });
                                     }
-                                    else if (DataSet.StatusCode == '0')
-                                    {
+                                    else if (DataSet.StatusCode == '0') {
                                         HideLoader();
                                         Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error", button: "Ok" });
                                     }
@@ -3205,8 +3202,7 @@ return;
         }
 
 
-        function PublishCourse(flag)
-        {                
+        function PublishCourse(flag) {
             ShowLoader();
             var TopicID = CourseFlag;
             var getUrl = "/API/Content/PublishCourse";
@@ -3224,26 +3220,25 @@ return;
                     success: function (response) {
                         try {
                             var DataSet = $.parseJSON(response);
-                            if (DataSet != null && DataSet != "")
-                            {
- Swal.fire({
-                                            title: "Success",
-                                            text: "Course has been published",
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-                                                document.location = 'courses.aspx';
-                                            }
-                                        });                               
+                            if (DataSet != null && DataSet != "") {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Course has been published",
+                                    icon: "success"
+                                }).then((value) => {
+                                    if (value) {
+                                        document.location = 'courses.aspx';
+                                    }
+                                });
                             }
                             else {
                                 HideLoader();
-                                Swal.fire({ title: "Failure", text: "Please try Again",icon: "error"});
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                             }
                         }
                         catch (e) {
                             HideLoader();
-                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                         }
                     },
                     complete: function () {
@@ -3252,13 +3247,13 @@ return;
                     failure: function (response) {
                         HideLoader();
                         alert(response.data);
-                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                     }
                 });
             }
             catch (e) {
                 HideLoader();
-                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again",icon: "error" });
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
             }
         }
 
@@ -3281,17 +3276,17 @@ return;
                         try {
                             var DataSet = $.parseJSON(response);
                             if (DataSet != null && DataSet != "") {
-                                 // Check if course is publishable or not..
-                            CheckCoursePublishable(DataSet.Data.Data[0].IsPublishable, DataSet.Data.Data[0].IsPublished)
+                                // Check if course is publishable or not..
+                                CheckCoursePublishable(DataSet.Data.Data[0].IsPublishable, DataSet.Data.Data[0].IsPublished)
                             }
                             else {
                                 HideLoader();
-                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                             }
                         }
                         catch (e) {
                             HideLoader();
-                            Swal.fire({ title: "Failure", text: "Please try Again",icon: "error" });
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                         }
                     },
                     complete: function () {
@@ -3300,7 +3295,7 @@ return;
                     failure: function (response) {
                         HideLoader();
                         alert(response.data);
-                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error"});
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
                     }
                 });
             }
@@ -3310,16 +3305,14 @@ return;
             }
         }
 
-        function isNumberKey(flag, e)
-        {
-            debugger
+        function isNumberKey(flag, e) {
+            
             var result = false;
             try {
                 var charCode = (e.which) ? e.which : e.keyCode;
 
                 //if ((charCode >= 48 && charCode <= 57)) {
-                if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105))
-                {
+                if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105)) {
                     if (flag == 'txtMin') {
                         var min = parseInt($('#' + flag).val());
                         if (min < 0 || min > 59) {
@@ -3334,9 +3327,8 @@ return;
                         result = true;
                     }
                 }
-                else if (charCode == 8 || charCode == 9 || charCode == 13)
-                {
-                
+                else if (charCode == 8 || charCode == 9 || charCode == 13) {
+
                 }
                 else {
                     $('#' + flag).val('');
