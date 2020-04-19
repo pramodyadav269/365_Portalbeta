@@ -4,9 +4,14 @@ using _365_Portal.Code.BO;
 using _365_Portal.Code.DAL;
 using _365_Portal.Models;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Reflection;
 using System.Web;
+using System.Web.SessionState;
 using System.Web.UI;
+using System.Linq;
 using static _365_Portal.Models.Login;
 
 namespace _365_Portal
@@ -22,11 +27,6 @@ namespace _365_Portal
                 //HttpContext.Current.Session["RoleName"] = null;
                 Utility.DestroyAllSession();
             }
-
-            //string str = "123";
-            //str.isn
-            // Testing
-            // one more..
         }
 
         public string getYouTubeThumbnail(string YoutubeUrl)
@@ -100,7 +100,16 @@ namespace _365_Portal
                         else
                         {
                             // Call Login Business Layer Function to record message
-                            Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId);
+                            Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId, objResponse.EmailID);
+
+                            List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
+                            if (Cache["ActiveUsers"] != null)
+                            {
+                                lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
+                            }
+                            ActiveUsersCache cache = new ActiveUsersCache();
+                            cache.AddOrUpdate(lstActiveUsers, objResponse.UserID, objResponse.EmailID, objResponse.FirstName + " " + objResponse.LastName, Session.SessionID);
+                            Cache["ActiveUsers"] = lstActiveUsers;
 
                             //For ProfilePic,CompanyProfilePic & Theme
                             var UserDetails = UserDAL.GetUserDetailsByUserID(objResponse.UserID, "");
