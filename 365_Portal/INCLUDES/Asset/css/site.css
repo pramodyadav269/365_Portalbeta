@@ -1181,7 +1181,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       opacity: 0; }
     .module .logo-tab .form-group .select2-selection {
       overflow-y: auto;
-      height: calc(1.5em + .75rem + 3px); }
+      height: calc(5.5em + .75rem + 3px); }
       .module .logo-tab .form-group .select2-selection .select2-search__field {
         float: left; }
     .module .logo-tab .chip {
