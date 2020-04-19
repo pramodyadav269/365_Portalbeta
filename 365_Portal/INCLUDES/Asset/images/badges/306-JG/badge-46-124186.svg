@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" style="enable-background:new 0 0 128 128;" version="1.1" viewBox="0 0 128 128" xml:space="preserve"><style type="text/css">
+	.st0{fill:#382673;}
+	.st1{fill:#473080;}
+	.st2{fill:#007BC6;}
+	.st3{fill:#D44A90;}
+	.st4{fill:#A72973;}
+	.st5{fill:#F15A9E;}
+	.st6{opacity:0.4;fill:#0CAFE8;}
+	.st7{opacity:0.5;fill:#382673;}
+	.st8{fill:#0CAFE8;}
+	.st9{fill:#0B90D3;}
+	.st10{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st11{fill:#8F58B2;}
+	.st12{fill:#6E4CA0;}
+	.st13{fill:#F375AD;}
+	.st14{fill:#FFDE39;}
+	.st15{fill:#FEC632;}
+	.st16{fill:#F9A74E;}
+	.st17{fill:#DA6A2D;}
+	.st18{fill:#9EDD9A;}
+	.st19{fill:#00C2A9;}
+	.st20{fill:#00A58C;}
+	.st21{fill:#037C68;}
+	.st22{fill:#9AC0DB;}
+	.st23{fill:#FFFFFF;}
+	.st24{opacity:0.2;fill:#382673;}
+	.st25{opacity:0.4;fill:#473080;}
+	.st26{opacity:0.1;fill:#382673;}
+	.st27{fill:none;stroke:#FFDE39;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st28{fill:none;stroke:#F9A74E;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st29{fill:none;stroke:#FEC632;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st30{fill:none;stroke:#00A58C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st31{fill:none;stroke:#D44A90;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st32{fill:none;stroke:#007BC6;stroke-width:2.2439;stroke-miterlimit:10;}
+	.st33{fill:none;stroke:#F15A9E;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+	.st34{opacity:0.2;fill:none;stroke:#382673;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st35{fill:none;stroke:#F15A9E;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+	.st36{fill:none;stroke:#F9A74E;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st37{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+	.st38{opacity:0.4;fill:#382673;}
+</style><circle class="st0" cx="64" cy="64" r="60" style="fill: #382673;"/><circle class="st1" cx="64" cy="64" r="50" style="fill: #473080;"/><polygon class="st3" points="68,20 81,20 77,27 81,34 68,34 " style="fill: #D44A90;"/><polygon class="st4" points="68,20 71,24 71,25 68,25 " style="fill: #A72973;"/><rect class="st5" height="14" transform="matrix(-1 -1.224647e-16 1.224647e-16 -1 127 62)" width="15" x="56" y="24" style="fill: #F15A9E;"/><path class="st15" d="M7.5,84.1c2.2,6.2,5.4,11.8,9.3,16.9h22.1L18,68L7.5,84.1z" style="fill: #FEC632;"/><polygon class="st16" points="18,68 30.1,101 38.8,101 " style="fill: #F9A74E;"/><path class="st16" d="M115.6,94.6L92.8,58.5L65,101h46.2C112.8,99,114.3,96.9,115.6,94.6z" style="fill: #F9A74E;"/><line class="st36" x1="56" x2="56" y1="48" y2="24" style="fill: none; stroke: #F9A74E; stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 10; stroke-width: 2;"/><path class="st24" d="M92.8,58.5l15.6,42.5h2.8c1.6-2,3-4.1,4.4-6.4L92.8,58.5z" style="fill: #382673; opacity: 0.2;"/><ellipse class="st19" cx="89" cy="103.5" rx="14" ry="9.5" style="fill: #00C2A9;"/><polygon class="st14" points="56.2,44 18.9,101 92.1,101 " style="fill: #FFDE39;"/><polygon class="st15" points="56.2,44 77.1,101 92.1,101 " style="fill: #FEC632;"/><ellipse class="st19" cx="40" cy="102.9" rx="12" ry="8.1" style="fill: #00C2A9;"/><polygon class="st23" points="65.7,70 72.5,75.6 72.5,69.9 72.5,69.9 56.2,44 40.5,68 46.8,75 53.8,70 60.5,83.1 " style="fill: #FFFFFF;"/><polygon class="st24" points="72.5,75.6 72.5,69.9 56.2,44 65.7,70 " style="fill: #382673; opacity: 0.2;"/><polygon class="st23" points="92,74 100.6,79.8 103.5,75.6 92.8,58.5 81.6,75.6 87,78 " style="fill: #FFFFFF;"/><polygon class="st24" points="100.6,79.8 103.5,75.6 92.8,58.5 " style="fill: #382673; opacity: 0.2;"/><polygon class="st23" points="25.4,79.8 18,68 12.5,76.5 12.5,76.5 16.8,80.5 21.6,77.6 " style="fill: #FFFFFF;"/><polygon class="st24" points="21.6,77.6 25.4,79.8 18,68 " style="fill: #382673; opacity: 0.2;"/><path class="st20" d="M111.2,101H16.8c11,14,28,23,47.2,23S100.2,115,111.2,101z" style="fill: #00A58C;"/>
+	<metadata>
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<rdf:Description about="https://admin.iconscout.com/legal#licenses" dc:title="2064036,badge,flag,leader,mountain,sport,top,winner" dc:description="2064036,badge,flag,leader,mountain,sport,top,winner" dc:publisher="Iconscout" dc:date="2017-04-09" dc:format="image/svg+xml" dc:language="en">
+				<dc:creator>
+					<rdf:Bag>
+						<rdf:li>Laura Reen</rdf:li>
+					</rdf:Bag>
+				</dc:creator>
+			</rdf:Description>
+		</rdf:RDF>
+    </metadata></svg>
