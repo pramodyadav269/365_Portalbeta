@@ -6,79 +6,81 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div>
-        <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-            <img src="../INCLUDES/Asset/images/theme_nature_header.svg" />
-            <h4 class="nature" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
-        </div>
 
-        <%-- beta view lesson start --%>
-        <div class="dashboard">
-            <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
-                <div class="card text-white bg-dark-blue course-header">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-7 col-lg-8">
-                                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
-                                <h2 class="card-title">{{SelectedTopic.Title}}</h2>
-                                <p class="card-text">{{SelectedTopic.Description}}</p>
-                                <div class="action">
-                                    <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
-                                    <span ng-show="SelectedTopic.IsFavourite !=1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-show="SelectedTopic.IsBookmark ==1" ng-click="ChangeTopicProperty(SelectedTopic,3,SelectedTopic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
-                                    <span ng-show="SelectedTopic.IsBookmark !=1" ng-click="ChangeTopicProperty(SelectedTopic,3,toSelectedTopicpic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus"></i></span>
-                                </div>
+    <div class="theme-section" ng-if="ActiveContainer =='Topic'">
+        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" />
+        <h4 class="nature" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
+    </div>
+
+    <%-- beta view lesson start --%>
+    <div class="dashboard">
+        <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
+            <div class="card text-white bg-dark-blue course-header">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-7 col-lg-8 mb-2">
+                            <a class="back c-yellow" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                        </div>
+                        <div class="col-sm-12 col-md-7 col-lg-8">
+                            <h2 class="card-title">{{SelectedTopic.Title}}</h2>
+                            <p class="card-text">{{SelectedTopic.Description}}</p>
+                            <div class="action">
+                                <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
+                                <span ng-show="SelectedTopic.IsFavourite !=1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart"></i></span>
+                                <span ng-show="SelectedTopic.IsBookmark ==1" ng-click="ChangeTopicProperty(SelectedTopic,3,SelectedTopic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
+                                <span ng-show="SelectedTopic.IsBookmark !=1" ng-click="ChangeTopicProperty(SelectedTopic,3,toSelectedTopicpic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus"></i></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-7 col-lg-8 p-0">
-                            <div class="course-lesson">
-                                <div class="lesson"></div>
-                                <div class="lesson" ng-repeat="module in Module.UnlockedItems">
-                                    <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{module.Title}}</h5>
-                                            <p class="card-text">~{{ GetTopicTime(module.LessonTime) }}</p>
-                                        </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-sm-12 col-md-7 col-lg-8 p-0">
+                        <div class="course-lesson">
+                            <div class="lesson"></div>
+                            <div class="lesson" ng-repeat="module in Module.UnlockedItems">
+                                <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{module.Title}}</h5>
+                                        <p class="card-text">~{{ GetTopicTime(module.LessonTime) }}</p>
                                     </div>
                                 </div>
-                                <div class="lesson"></div>
                             </div>
+                            <div class="lesson"></div>
                         </div>
-                        <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                            <div class="course-content">
-                                <div class="card shadow-sm course-point">
-                                    <div class="card-body">
-                                        <h5 class="card-title">+{{SelectedTopic.Points}} Points</h5>
-                                        <img ng-show="SelectedTopic.CourseLogo !=null" class="img-fluid" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
-                                        <img ng-show="SelectedTopic.CourseLogo ==null" class="img-fluid" src="../INCLUDES/Asset/images/sun.png">
-                                        <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
-                                        <div class="point-progress">
-                                            <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
-                                                    aria-valuemin="0" aria-valuemax="100">
-                                                </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5 col-lg-4 p-0">
+                        <div class="course-content">
+                            <div class="card shadow-sm course-point">
+                                <div class="card-body">
+                                    <h5 class="card-title">+{{SelectedTopic.Points}} Points</h5>
+                                    <img ng-show="SelectedTopic.CourseLogo !=null" class="img-fluid" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
+                                    <img ng-show="SelectedTopic.CourseLogo ==null" class="img-fluid" src="../INCLUDES/Asset/images/sun.png">
+                                    <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
+                                    <div class="point-progress">
+                                        <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                                aria-valuemin="0" aria-valuemax="100">
                                             </div>
-
                                         </div>
-                                        <div class="tag">
-                                            <p class="card-text"><i class="fas fa-tag rotate-90deg"></i>Tags</p>
-                                            <div class="tag-item">
-                                                <span ng-repeat="tag in Module.TopicTags">{{tag.TagName}}</span>
-                                                <%-- <span>Admin</span>
+
+                                    </div>
+                                    <div class="tag">
+                                        <p class="card-text"><i class="fas fa-tag rotate-90deg"></i>Tags</p>
+                                        <div class="tag-item">
+                                            <span ng-repeat="tag in Module.TopicTags">{{tag.TagName}}</span>
+                                            <%-- <span>Admin</span>
                                                 <span>Developer</span>
                                                 <span>Beginner</span>
                                                 <span>Database</span>
                                                 <span>Salesforce Platform</span>--%>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <%--  <div class="card shadow-sm course-connection">
+                            </div>
+                            <%--  <div class="card shadow-sm course-connection">
                                     <div class="card-body">
                                         <h5 class="card-title">Community Connections</h5>
                                         <p class="card-text mb-1">Learning is better togather</p>
@@ -86,44 +88,44 @@
                                         <a href="#" class="path">Go to Community feed</a>
                                     </div>
                                 </div>--%>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section id="dvContentsContainer" ng-show="ActiveContainer =='Content'">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#" ng-click="GoBack('Module')">{{SelectedTopic.Title}}</a></li>
-                        <li class="breadcrumb-item active">{{SelectedModule.Title}}</li>
-                    </ol>
-                </nav>
-                <div class="col-12">
-                    <div class="row lesson-wrapper">
-                        <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                            <div class="lesson-list shadow-sm">
-                                <div class="duration"><span>Time Estimate</span><span>About {{ GetTopicTime(SelectedModule.LessonTime) }}</span></div>
-                                <div class="header">Content</div>
-                                <div id="list-lesson" class="list-group">
-                                    <a class="list-group-item list-group-item-action active" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Learning Objectives',SelectedModule.Overview)">Learning Objectives</a>
-                                    <%-- <a class="list-group-item list-group-item-action" href="#list-item-2">Overview of Objects</a>
+        <section id="dvContentsContainer" ng-show="ActiveContainer =='Content'">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#" ng-click="GoBack('Module')">{{SelectedTopic.Title}}</a></li>
+                    <li class="breadcrumb-item active">{{SelectedModule.Title}}</li>
+                </ol>
+            </nav>
+            <div class="col-12">
+                <div class="row lesson-wrapper">
+                    <div class="col-sm-12 col-md-5 col-lg-4 p-0">
+                        <div class="lesson-list shadow-sm">
+                            <div class="duration"><span>Time Estimate</span><span>About {{ GetTopicTime(SelectedModule.LessonTime) }}</span></div>
+                            <div class="header">Content</div>
+                            <div id="list-lesson" class="list-group">
+                                <a class="list-group-item list-group-item-action active" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Learning Objectives',SelectedModule.Overview)">Learning Objectives</a>
+                                <%-- <a class="list-group-item list-group-item-action" href="#list-item-2">Overview of Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-3">Get to Know Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-4">Create a Custom Object</a>--%>
 
-                                    <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                        ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
-                                        class="list-group-item list-group-item-action" href="#">{{content.Title}}</a>
+                                <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                    ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
+                                    class="list-group-item list-group-item-action" href="#">{{content.Title}}</a>
 
-                                    <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
+                                <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
-                                    <div class="next shadow-sm" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                        ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
-                                        Quiz
-                                    </div>
+                                <div class="next shadow-sm" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                    ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
+                                    Quiz
                                 </div>
+                            </div>
 
-                                <%-- <div class="col-sm-12 mb-3" ng-repeat="content in Content.UnlockedItems">
+                            <%-- <div class="col-sm-12 mb-3" ng-repeat="content in Content.UnlockedItems">
                                 <a href="#" ng-click="ViewContent(content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
                                     <div class="card border-0 shadow mb-3">
                                         <div class="card-body">
@@ -150,17 +152,17 @@
                                     </div>
                                 </a>
                             </div>--%>
-                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-7 col-lg-8 p-0">
-                            <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
-                                <div class="lesson-content" id="list-item-1">
-                                    <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
-                                    <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
-                                    <%--Display Content here..--%>
-                                    <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
+                    </div>
+                    <div class="col-sm-12 col-md-7 col-lg-8 p-0">
+                        <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
+                            <div class="lesson-content" id="list-item-1">
+                                <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
+                                <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
+                                <%--Display Content here..--%>
+                                <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
 
-                                    <%--  <div class="col-sm-12 mb-3" id="textContent" ng-show="SpecialContents.DocType == 'TEXT'">
+                                <%--  <div class="col-sm-12 mb-3" id="textContent" ng-show="SpecialContents.DocType == 'TEXT'">
                                         <div class="col-sm-12 mt-4 overview text-left">
                                             <h5 class="font-weight-bold text-uppercase">{{SelectedContent.Title}}</h5>
                                             <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
@@ -169,9 +171,10 @@
                                             <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-click="NextContent(SpecialContents.ContentID)">Continue</a>
                                         </div>
                                     </div>--%>
-                                </div>
                             </div>
-                            <div class="row" ng-if="SubContainer =='ContentQuizView'">
+                        </div>
+                        <div class="lesson-scrollspy" ng-if="SubContainer =='ContentQuizView'">
+                            <div class="lesson-content">
                                 <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
                                 <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
                                 <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
@@ -180,9 +183,9 @@
                                             <h2 class="text-center font-weight-bold">{{SelectedContent.Title}}</h2>
                                         </div>--%>
 
-                                <div class="col-sm-12 mt-5">
+                                <div class="col-sm-12">
                                     <div class="row" id="finalQuiz">
-                                        <div class="col-sm-12 mb-3" ng-repeat="question in SpecialContents.Questions" my-post-repeat-directive>
+                                        <div class="col-sm-12 pl-0 mb-3" ng-repeat="question in SpecialContents.Questions" my-post-repeat-directive>
                                             <div class="ng-class: 'card border-0 shadow mb-3 ' + (question.IsAnswered == true ? (question.IsCorrect ==true ? 'b-green-2' : 'b-red-2'):'' );">
                                                 <div class="card-body question">
                                                     <div class="media mb-4">
@@ -248,11 +251,11 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
         <%-- beta view lesson end --%>
 
         <div class="container-fluid dashboard">
