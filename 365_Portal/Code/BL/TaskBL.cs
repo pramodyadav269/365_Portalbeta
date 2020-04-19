@@ -40,7 +40,7 @@ namespace _365_Portal.Code.BL
                     string filePath = HttpContext.Current.Server.MapPath("~/Files/Task/" + fileName);
                     File.WriteAllBytes(filePath, imageBytes);
 
-                    DataSet dsFile = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/Task/"), false, "Task");
+                    DataSet dsFile = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/Task/"), false, "Task", task.t_FileName);
                     if (dsFile.Tables.Count > 0 && dsFile.Tables[0].Rows.Count > 0)
                     {
                         task.t_FileIds = dsFile.Tables[0].Rows[0]["UniqueID"].ToString().Trim();

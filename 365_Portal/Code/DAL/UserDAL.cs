@@ -83,7 +83,7 @@ namespace _365_Portal.Code.DAL
             objRequest = null;
             return objResponse;
         }
-        public static DataSet UserLogout(int CompId,string UserId,string IPAddress)
+        public static DataSet UserLogout(int CompId, string UserId, string IPAddress)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -177,7 +177,7 @@ namespace _365_Portal.Code.DAL
                 objUser.PasswordHash = dt.Rows[0]["PasswordHash"].ToString(); // newly filed Added by Rana for Change Password Logic
                 objUser.PasswordSalt = dt.Rows[0]["PasswordSalt"].ToString();// newly filed Added by Rana for Change Password Logic
                 objUser.FaviconFileID = dt.Rows[0]["FaviconPath"].ToString();
-                objUser.OrganizationName = dt.Rows[0]["OrganizationName"].ToString();                
+                objUser.OrganizationName = dt.Rows[0]["OrganizationName"].ToString();
 
                 if (dt.Rows[0]["EmailNotification"].ToString() == "")
                 {
@@ -698,7 +698,7 @@ namespace _365_Portal.Code.DAL
         }
         #endregion TEAM
 
-        public static DataSet MasterCRUD(int Action, int CompId, int Id, string Title, string Description, string CreatedBy, bool IsActive,string type)
+        public static DataSet MasterCRUD(int Action, int CompId, int Id, string Title, string Description, string CreatedBy, bool IsActive, string type)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -714,9 +714,9 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_CompId", CompId);
                 cmd.Parameters.AddWithValue("p_Id", Id);
                 cmd.Parameters.AddWithValue("p_Title", Title.Trim().ToString());
-                cmd.Parameters.AddWithValue("p_Description", Description);                
+                cmd.Parameters.AddWithValue("p_Description", Description);
                 cmd.Parameters.AddWithValue("p_IsActive", IsActive);
-                cmd.Parameters.AddWithValue("p_CreatedBy", CreatedBy);                
+                cmd.Parameters.AddWithValue("p_CreatedBy", CreatedBy);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;
@@ -765,7 +765,7 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
 
-        public static DataSet CreateFile(string FilePath, string FileDirectory,bool IsURL, string Ref1)
+        public static DataSet CreateFile(string FilePath, string FileDirectory, bool IsURL, string Ref1, string ActualFileName = "")
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -779,6 +779,7 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_FileDirectory", FileDirectory);
                 cmd.Parameters.AddWithValue("p_IsURL", Convert.ToInt32(IsURL));
                 cmd.Parameters.AddWithValue("p_Ref1", Ref1);
+                cmd.Parameters.AddWithValue("p_ActualFileName", ActualFileName);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;

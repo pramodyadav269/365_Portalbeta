@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Projects.aspx.cs" Inherits="_365_Portal.t.Projects" %>
+﻿<%@ Page Title="Task" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Projects.aspx.cs" Inherits="_365_Portal.t.Projects" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -20,19 +20,21 @@
                         <a class="content-activity d-none"><i class="far fa-folder"></i>File</a>
                         <a class="content-activity d-none"><i class="fas fa-share-alt"></i>Share</a>
                         <a class="content-activity d-none"><i class="fas fa-filter"></i>Filter</a>
-                        <%-- <a class="content-activity"><i class="fas fa-wave-square"></i>Recent Activity</a>--%>
+                        <a class="content-activity" target="_blank" href="https://xd.adobe.com/view/74659cca-f14e-44cb-7e67-6046ffc5bd97-0254/screen/92d06a3d-b8a0-48ff-8203-7d327e755004/17-Screen1-Recent-Activity-"><i class="fas fa-wave-square"></i>Recent Activity</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-2 pl-0 sub-side-menu">
-                <%--<ul class="list-group mb-4">
+                <ul class="list-group mb-4">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
-                        <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>
+                        <div class="task-summary"><span class="task-summary-count" id="spnTotalTasksCount">0</span><span class="task-summary-title">Total Tasks</span></div>
+                        <%-- <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
+                        <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>--%>
+
                     </li>
-                </ul>--%>
+                </ul>
                 <ul id="ulProjects" class="list-group task-bar mb-4 dropdown">
                     <%--<li class="list-group-item d-flex justify-content-between align-items-center task-title">Projects
                         <a onclick="onClickAddTask();"><i class="fas fa-plus c-yellow"></i></a>
@@ -55,9 +57,6 @@
                     <li class="list-group-item task-item">
                         <img class="task-icon" src="../INCLUDES/Asset/images/sun.png" />Communication Tool</li>--%>
                 </ul>
-
-
-
                 <ul id="ulTeam" class="list-group task-bar mb-4">
                     <%-- <li class="list-group-item task-title">Teams</li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">Designers
@@ -300,19 +299,13 @@
                                     <div class="w-100"></div>
                                     <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
                                         <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
-
-                                        <%--onclick="inputValidation('.input-validation'); "--%>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
     <div class="modal fade p-0" id="modalTaskInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
@@ -334,10 +327,6 @@
                             <div class="form-group">
                                 <label for="ddlStatus">Status</label>
                                 <select class="form-control select2 required" id="ddlStatus" style="width: 100% !important">
-                                    <%--  <option></option>
-                                    <option value="1">To Do</option>
-                                    <option value="2">In Progress</option>
-                                    <option value="3">Done</option>--%>
                                 </select>
                             </div>
                         </div>
@@ -365,13 +354,13 @@
                             <div class="form-group input-validation-subtaskdiv" id="divSubtask">
                                 <label for="txtAddSubTask">Add Sub Task</label>
                                 <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
-                                <%--<input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />--%>
                                 <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add</a>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group checkbox">
                                 <label>Sub Task(s)</label>
+                                <input type="hidden" id="hiddenSuntaskId" />
                                 <div id="cblist" class="sub-task-checkbox"></div>
                             </div>
                         </div>
@@ -403,55 +392,9 @@
                                 </div>
                             </div>
                         </div>
-                       <%-- <div class="col-12 col-sm-12 mb-3">
-                            <div class="form-group" id="taskCommentHistory">
-                            </div>
-                        </div>--%>
                         <div class="col-12 col-sm-12 mb-3 p-0 website-redesign comment-history">
                             <div class="card">
                                 <div class="card-body" id="taskCommentHistory">
-                                    <%--<div class="col-12 p-0 mb-1">
-                                        <div class="wr-content">
-                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
-                                                <div>
-                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
-                                                </div>
-                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
-                                            </div>
-                                            <div class="wr-content-title">
-                                                This is some text within a card body.
-                                                This is some text within a card body.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 p-0 mb-1">
-                                        <div class="wr-content">
-                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
-                                                <div>
-                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
-                                                </div>
-                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
-                                            </div>
-                                            <div class="wr-content-title">
-                                                This is some text within a card body.
-                                                This is some text within a card body.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 p-0 mb-1">
-                                        <div class="wr-content">
-                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
-                                                <div>
-                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
-                                                </div>
-                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
-                                            </div>
-                                            <div class="wr-content-title">
-                                                This is some text within a card body.
-                                                This is some text within a card body.
-                                            </div>
-                                        </div>
-                                    </div>--%>
                                 </div>
                             </div>
                         </div>
@@ -465,23 +408,18 @@
         var Role = '<%=Session["RoleName"]%>';
         var prevTitle = '';
         var base64UserProfileString = "";
+        var FileName = "";
         var ProjectID = "";
         var jsonTeam = [];
         var jsonStatusList = [];
 
-        $(document).ajaxStart(function () {
-            console.log('Ajax call started');
-            //$("#loading").show();
-            ShowLoader();
-        });
-        $(document).ajaxComplete(function () {
-            console.log('Ajax call completed');
-            //$("#loading").hide();
-            //HideLoader();
-        });
-
+        //$(document).ajaxStart(function () {
+        //    console.log('Ajax call started');
+        //    ShowLoader();
+        //});
 
         $(document).ready(function () {
+            ShowLoader();
             if (Role == "enduser") {
                 RoleWaiseHideControls();
             }
@@ -494,7 +432,6 @@
                 sideBySide: true
             });
             $('#dvDueDate').on('dp.change', function (event) {
-                // var formatted_date = event.date.format('YYYY/MM/DD hh:mm a');
                 var formatted_date = moment(event.date).format("YYYY/MM/DD hh:mm a");
                 $('#txtDueDate').val(formatted_date);
             });
@@ -510,6 +447,10 @@
                         icon: "error",
                         button: "Ok",
                     });
+                }
+
+                if ($(this).text() == "Update") {
+                    $(this).html('<i class="fas fa-plus-circle"></i>Add');
                 }
             });
         });
@@ -527,7 +468,8 @@
 
         //Task Functions
 
-        function BindCards() {
+        function BindCards(Isasync) {
+
             var requestParams = {
                 t_Action: "1"
                 , t_ProjectID: ProjectID
@@ -546,19 +488,13 @@
                 , t_Comments: ""
             };
 
-            // Ajax Call
-            //var TaskCRUDAPIResponse = $.parseJSON(call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams));
-
             $.ajax({
+                async: Isasync,
                 type: "POST",
                 url: "../api/Task/TaskCRUD",
                 contentType: "application/json",
-                async: false,
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
-                beforeSend: function () {
-                    //ShowLoader();
-                },
                 success: function (response) {
                     var jsonTaskList = $.parseJSON(response).Data;
                     bindTaskStatusCounts(jsonTaskList.Data);
@@ -660,8 +596,6 @@
                         cardHtml += '</div>';
                     });
                     $("#dvWebsiteRedesign").empty().html(cardHtml);
-
-                    HideLoader();
                 },
                 failure: function (response) {
                     Swal.fire({
@@ -672,8 +606,6 @@
                     });
                 }
             });
-
-
 
             // for card drag and drop
             var adjustment;
@@ -688,7 +620,7 @@
                     var ProjectId = $item.attr('project_Id');
                     var taskId = $item.attr('task_Id');
                     //alert("statusId:" + statusId + " ProjectId:" + ProjectId + " taskId:" + taskId);
-                    UpdtaeTaskStatus(ProjectId, taskId, statusId);
+                    UpdateTaskStatus(ProjectId, taskId, statusId);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -710,20 +642,8 @@
         }
 
         function bindTaskStatusCounts(jsonTaskList) {
-
-            var Completedtasks = $.grep(jsonTaskList, function (v) {
-                return v.Status == 3;
-            });
-
-            var opentask = $.grep(jsonTaskList, function (v) {
-                return v.Status == 1 || v.Status == 2;
-            });
-
-            var Completedtaskscount = Completedtasks != null ? Completedtasks.length : 0;
-            var Opentaskscount = opentask != null ? opentask.length : 0;
-
-            $("#spnCompletedTasksCount").html(Completedtaskscount);
-            $("#spnOpenTasksCount").html(Opentaskscount);
+            var TotalTasksCount = jsonTaskList.length;
+            $("#spnTotalTasksCount").html(TotalTasksCount);
         }
 
         function BindTeam(projectId) {
@@ -737,8 +657,6 @@
                 , p_UserId: "0"
                 , p_ProjectMembers_UserIds: ""
             };
-
-            //var jsonTeamMembers = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams)).Data.Data1;
 
             $.ajax({
                 type: "POST",
@@ -804,8 +722,8 @@
                 , p_UserId: "0"
                 , p_ProjectMembers_UserIds: ""
             };
-            //var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
             $.ajax({
+                // async: false,
                 type: "POST",
                 url: "../api/Project/ProjectCRUD",
                 contentType: "application/json",
@@ -825,8 +743,7 @@
                         $("#ddlAddAssignee").empty().html(jsonTeamMembersHtml);
                         selectInit('#ddlAddAssignee', 'Select a option');
                     }
-
-                    HideLoader();
+                    //HideLoader();
                 },
                 failure: function (response) {
                     Swal.fire({
@@ -897,40 +814,27 @@
 
                         if (jsonTaskdetails.Data2 != null && jsonTaskdetails.Data2.length > 0) {
                             if (jsonTaskdetails.Data2[0].Message == null) {
-                                //var container = $('#cblist');
-                                //container.empty();
-
                                 var container = '';
-
                                 $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
                                     if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
-                                        //var Ischecked = objsubtask.Status == 3 ? true : false;
-                                        //$('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
-                                        //$('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
-
                                         // change by imtiyaz
-
                                         var checked = objsubtask.Status == 3 ? 'checked' : '';
                                         container += '<div class="custom-control custom-checkbox">';
-                                        container += '<input type="checkbox" name="' + objsubtask.TaskID + '" id="' + objsubtask.SubTaskName + '" value="' + objsubtask.SubTaskName + '" class="custom-control-input" ' + checked + '>';
-                                        container += '<label class="custom-control-label" for="' + objsubtask.SubTaskName + '">' + objsubtask.SubTaskName + '</label>';
-                                        container += '<div class="custom-action"><i class="fas fa-pen"></i>|<i class="fas fa-trash-alt"></i></div></div>';
-
-
+                                        container += '<input type="checkbox" subtaskId="' + objsubtask.SubTaskID + '" name="subtask_' + objsubtask.SubTaskID + '" id="subtask_' + objsubtask.SubTaskID + '" value="' + objsubtask.SubTaskName + '" class="custom-control-input" ' + checked + '>';
+                                        container += '<label class="custom-control-label" subtaskId="' + objsubtask.SubTaskID + '" for="subtask_' + objsubtask.SubTaskID + '">' + objsubtask.SubTaskName + '</label>';
+                                        container += '<div class="custom-action"><i class="fas fa-pen" subtaskId="' + objsubtask.SubTaskID + '" onclick="EditSubTask(this);" ></i>|<i class="fas fa-trash-alt" id="subtask_' + objsubtask.SubTaskID + '" onclick="return DeleteSubTask(this);" ></i></div></div>';
 
                                     }
                                 });
                                 $('#cblist').empty().append(container);
-                                // $("#txtAddSubTask").val(stringsubtask);
                             }
                         }
-
                         if (jsonTaskdetails.Data3 != null && jsonTaskdetails.Data3.length > 0) {
                             if (jsonTaskdetails.Data3[0].Message == null) {
-                                $("#lblfileAttachment").val(jsonTaskdetails.Data3[0].FilePath);
+                                //$("#lblfileAttachment").val(jsonTaskdetails.Data3[0].FilePath);
                                 newUrl = '../Files/Task/' + jsonTaskdetails.Data3[0].FilePath;
                                 $("#linkFileDownload").attr("href", newUrl);
-                                $("#linkFileDownload").text(jsonTaskdetails.Data3[0].FilePath);
+                                $("#linkFileDownload").text(jsonTaskdetails.Data3[0].ActualFileName);
                             }
                         }
                         if (jsonTaskdetails.Data4 != null && jsonTaskdetails.Data4.length > 0) {
@@ -945,15 +849,13 @@
                                         container += '<div class="wr-content">';
                                         container += '<div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">';
                                         container += '<div>';
-                                        container += '<img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">' + objstatustracker.FirstName+'</span>';
+                                        container += '<img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">' + objstatustracker.FirstName + '</span>';
                                         container += '</div>';
-                                        container += '<div class="anchor-date"><span>' + objstatustracker.CreatedDate+'</span></div>';
+                                        container += '<div class="anchor-date"><span>' + moment(objstatustracker.CreatedDate).format("MMM DD YYYY, HH:mm a") + '</span></div>';
                                         container += '</div>';
-                                        container += '<div class="wr-content-title">' + objstatustracker.Comments+'</div>';
+                                        container += '<div class="wr-content-title">' + objstatustracker.Comments + '</div>';
                                         container += '</div>';
                                         container += '</div>';
-
-
                                     }
                                 });
 
@@ -989,6 +891,7 @@
             $("#ddlStatus").val("");
             $('#cblist').empty();
             $('#taskCommentHistory').empty();
+            $("#lblfileAttachment").text("");
             $("#linkFileDownload").attr("href", "#");
             $("#linkFileDownload").text("");
         }
@@ -998,25 +901,28 @@
             if (inputValidation('.input-validation-modal')) {
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
+                var arraySubtask = [];
                 var StringSubtask = "";
                 var container = $('#cblist');
                 var inputs = container.find('input');
                 if (inputs.length > 0) {
                     $.each(inputs, function (indx, objinputs) {
-                        var chekboxtext = objinputs.value;
-                        if ($(this).prop("checked") == true) {
-                            chekboxtext = chekboxtext + "^" + "3";
+                        var parentstyle = $(objinputs).parent().css('display');
+                        if (parentstyle != 'none') {
+                            var chekboxtext = objinputs.value;
+                            if ($(this).prop("checked") == true) {
+                                chekboxtext = chekboxtext + "^" + "3";
+                            }
+                            else {
+                                chekboxtext = chekboxtext + "^" + "1";
+                            }
+                            StringSubtask = StringSubtask + chekboxtext + "|";
                         }
-                        else {
-                            chekboxtext = chekboxtext + "^" + "1";
-                        }
-
-                        StringSubtask = StringSubtask + chekboxtext + "|";
                     });
                 }
-
+                var task_ActionId = hiddenTaskId != null && hiddenTaskId != "" ? "3" : "2";
                 var requestParams = {
-                    t_Action: hiddenTaskId != null && hiddenTaskId != "" ? "3" : "2"
+                    t_Action: task_ActionId
                     , t_ProjectID: ProjectID
                     , t_CompID: "0"
                     , t_TaskID: hiddenTaskId != null && hiddenTaskId != "" ? hiddenTaskId : "0"
@@ -1031,10 +937,9 @@
                     , t_SubTasks: StringSubtask //longtext, #(delimeter | separated)
                     , t_StatusID: $("#ddlStatus").val()
                     , t_Comments: $("#txtTaskComments").val()
+                    , t_FileName: FileName
                 };
 
-                // Ajax Call
-                //var userlistAPIresponse = $.parseJSON(call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams));
                 $.ajax({
                     type: "POST",
                     url: "../api/Task/TaskCRUD",
@@ -1045,13 +950,19 @@
                         //ShowLoader();
                     },
                     success: function (response) {
-                        debugger;
                         var userlistAPIresponse = $.parseJSON(response);
                         if (userlistAPIresponse.StatusCode > 0) {
                             $("#modalTaskInfo").modal("hide");
-                            BindCards();
+                            BindCards(false);
                             ClearTaskForm();
+                            if (task_ActionId == "2") {
+                                userlistAPIresponse.StatusDescription = "Task details added successfully";
+                            }
+                            else if (task_ActionId == "3") {
+                                userlistAPIresponse.StatusDescription = "Task details updated successfully";
+                            }
                         }
+                        HideLoader();
                         call_Notification(userlistAPIresponse);
                     },
                     failure: function (response) {
@@ -1061,15 +972,9 @@
                             icon: "error",
                             button: "Ok",
                         });
-                    },
-                    complete: function () {
-                        ////HideLoader();
                     }
                 });
-
-
             }
-            HideLoader();
         }
 
         function DeleteTaskBYTaskId(TaskId) {
@@ -1116,7 +1021,8 @@
                             var userlistAPIresponse = $.parseJSON(response);
                             if (userlistAPIresponse.StatusCode > 0) {
                                 $("#modalTaskInfo").modal("hide");
-                                BindCards();
+                                BindCards(true);
+                                userlistAPIresponse.StatusDescription = "Task has been deleted";
                                 call_Notification(userlistAPIresponse);
                             }
                             HideLoader();
@@ -1154,14 +1060,13 @@
         }
 
         function BindTeamMembers() {
-            //var userlistAPIdata = call_ajaxfunction("../api/User/GetUserlist", "POST");
             $.ajax({
                 type: "POST",
                 url: "../api/User/GetUserlist",
                 contentType: "application/json",
                 headers: { "Authorization": "Bearer " + accessToken },
                 beforeSend: function () {
-                    //ShowLoader();
+                    ShowLoader();
                 },
                 success: function (response) {
                     var jsonTeamMembers = $.parseJSON(response).Data;
@@ -1182,7 +1087,7 @@
                     });
                 },
                 complete: function () {
-                    //HideLoader();
+                    HideLoader();
                 }
             });
         }
@@ -1197,7 +1102,7 @@
                 , p_UserId: "0"
                 , p_ProjectMembers_UserIds: ""
             };
-            //var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
+
             $.ajax({
                 type: "POST",
                 url: "../api/Project/ProjectCRUD",
@@ -1205,7 +1110,7 @@
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
                 beforeSend: function () {
-                    //ShowLoader();
+                    ShowLoader();
                 },
                 success: function (response) {
                     if (response != null) {
@@ -1219,16 +1124,16 @@
                         if (jsonProjectList.Data.length > 0) {
                             $.each(jsonProjectList.Data, function (indxProject, objProject) {
                                 var activeClass = '';
-                                if ((ProjectID != "" && objProject.ProjectID == ProjectID) || indxProject == 0) {
+                                if ((ProjectID != "" && objProject.ProjectID == ProjectID) || (ProjectID == "" && indxProject == 0)) {
                                     activeClass = 'active';
                                     ProjectID = objProject.ProjectID;
-                                    BindCards();
+                                    BindCards(false);
                                     setcontentTitle(objProject.ProjectName);
                                     BindTeam(objProject.ProjectID);
                                     BindAssignee(ProjectID);
                                 }
                                 projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
-                                projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" >' + objProject.ProjectName + '</span>';
+                                projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" onclick="SelectProject(this)" >' + objProject.ProjectName + '</span>';
                                 if (Role != "enduser") {
                                     projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
                                 }
@@ -1244,18 +1149,6 @@
                         }
                         $("#ulProjects").empty().html(projectHtml);
                     }
-
-                    $('span.Project_items_Name').on('click', function () {
-                        onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
-                        $(this).parent().parent().find('li.active').removeClass('active');
-                        $(this).parent().addClass('active');
-                        setcontentTitle($(this).text());
-                        ProjectID = $(this).attr("id");
-                        BindCards();
-                        BindTeam(ProjectID);
-                        BindAssignee(ProjectID);
-                    });
-
                     HideLoader();
                 },
                 failure: function (response) {
@@ -1265,14 +1158,8 @@
                         icon: "error",
                         button: "Ok",
                     });
-                },
-                complete: function () {
-                    //HideLoader();
-
                 }
             });
-
-
         }
 
         function setcontentTitle(tilename, isEdit = false) {
@@ -1339,11 +1226,10 @@
         function SaveUpdateProject() {
             ShowLoader();
             if (inputValidation('.input-validation')) {
-
                 var hiddenprojectId = $("#hdnProjectId").val();
-
+                var Project_actionId = hiddenprojectId != null && hiddenprojectId != "" ? "3" : "2";
                 var requestParams = {
-                    p_Action: hiddenprojectId != null && hiddenprojectId != "" ? "3" : "2"
+                    p_Action: Project_actionId
                     , p_CompID: "0"
                     , p_ProjectID: hiddenprojectId != null && hiddenprojectId != "" ? hiddenprojectId : "0"
                     , p_ProjectName: $("#txtProjectName").val()
@@ -1352,8 +1238,6 @@
                     , p_ProjectMembers_UserIds: $("#ddlProjectMembers").val().toString()
                 };
 
-                // Ajax Call
-                //var ProjectCRUDAPIData = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
                 $.ajax({
                     type: "POST",
                     url: "../api/Project/ProjectCRUD",
@@ -1369,7 +1253,14 @@
                             ClearProjectForm();
                             BindProjects();
                             onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+                            if (Project_actionId == "2") {
+                                ProjectCRUDAPIData.StatusDescription = "Project details added successfully";
+                            }
+                            else if (Project_actionId == "3") {
+                                ProjectCRUDAPIData.StatusDescription = "Project details updated successfully";
+                            }
                         }
+                        HideLoader();
                         call_Notification(ProjectCRUDAPIData);
                     },
                     failure: function (response) {
@@ -1379,13 +1270,9 @@
                             icon: "error",
                             button: "Ok",
                         });
-                    },
-                    complete: function () {
-                        //HideLoader();
                     }
                 });
             }
-            HideLoader();
         }
 
         function DeleteProjectBYProjectId(projectId) {
@@ -1408,7 +1295,6 @@
                         , p_UserId: "0"
                         , p_ProjectMembers_UserIds: ""
                     };
-                    //var ProjectCRUDAPIData = $.parseJSON(call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams));
                     $.ajax({
                         type: "POST",
                         url: "../api/Project/ProjectCRUD",
@@ -1421,7 +1307,10 @@
                         success: function (response) {
                             var ProjectCRUDAPIData = $.parseJSON(response);
                             if (ProjectCRUDAPIData.StatusCode > 0) {
+                                ProjectID = "";
+                                //onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
                                 BindProjects();
+                                ProjectCRUDAPIData.StatusDescription = "Project has been deleted.";
                                 call_Notification(ProjectCRUDAPIData);
                             }
                             HideLoader();
@@ -1438,8 +1327,6 @@
                             //HideLoader();
                         }
                     });
-
-
                 }
             })
         }
@@ -1481,12 +1368,10 @@
 
         //Encode the file to base64
         function encodeImagetoBase64(element) {
-
             if (element != null && element != undefined) {
-
-                var file = element.files[0];;
+                var file = element.files[0];
                 var size = file.size;
-                var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
+                var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav', 'jpg'];
 
                 if (file.size != undefined) {
                     if (allowedExtensions.indexOf(file.name.split('.')[1]) != -1) {
@@ -1494,11 +1379,13 @@
                             var reader = new FileReader();
                             reader.onloadend = function () {
                                 base64UserProfileString = reader.result;
+                                FileName = file.name;
                             }
                             reader.readAsDataURL(file);
                         }
                         else {
                             base64UserProfileString = "";
+                            FileName = "";
                             $('#filepath').val('');
                             Swal.fire({
                                 text: "Error",
@@ -1510,8 +1397,8 @@
                         }
                     }
                     else {
-
                         base64UserProfileString = "";
+                        FileName = "";
                         $('#filepath').val('');
                         Swal.fire({
                             title: "Error",
@@ -1523,6 +1410,7 @@
                 }
                 else {
                     base64UserProfileString = "";
+                    FileName = "";
                     $('#filepath').val('');
                     Swal.fire({
                         title: "Error",
@@ -1531,7 +1419,6 @@
                     });
                     $('#lblfilepath').html("File Path");
                 }
-
             }
             else {
                 Swal.fire({
@@ -1544,17 +1431,31 @@
 
         function addCheckbox(name) {
             var container = $('#cblist');
-            var inputs = container.find('input');
-            var id = inputs.length + 1;
+            var hiddenSuntaskId = $("#hiddenSuntaskId").val();
 
-            $('<input />', { type: 'checkbox', id: 'cb' + id, value: name }).appendTo(container);
-            $('<label />', { 'for': 'cb' + id, text: name }).appendTo(container);
+            if (hiddenSuntaskId != "" && hiddenSuntaskId > 0) {
+
+                var Selectedcheckbox = container.find('input[subtaskId="' + hiddenSuntaskId + '"]');
+                var SelectedLable = container.find('label[subtaskId="' + hiddenSuntaskId + '"]');
+                $(Selectedcheckbox).val(name);
+                $(SelectedLable).text(name);
+                $("#hiddenSuntaskId").val("");
+            }
+            else {
+                var inputs = container.find('input');
+                var id = inputs.length + 1;
+                var SubtaskControls = '';
+                SubtaskControls += '<div class="custom-control custom-checkbox">';
+                SubtaskControls += '<input type="checkbox" subtaskId="0"  name="subtask_' + id + '" id="subtask_' + id + '" value="' + name + '" class="custom-control-input" >';
+                SubtaskControls += '<label class="custom-control-label"  subtaskId="0"   for="subtask_' + id + '">' + name + '</label>';
+                SubtaskControls += '<div class="custom-action"><i class="fas fa-pen" subtaskId="0" id="subtask_' + id + '" onclick="EditSubTask(this);" ></i>|<i class="fas fa-trash-alt" id="subtask_' + id + '" onclick="return DeleteSubTask(this);" ></i></div></div>';
+                $('#cblist').append(SubtaskControls);
+            }
 
             $('#txtAddSubTask').val("");
         }
 
-        function UpdtaeTaskStatus(ProjectID, TaskID, StatusID) {
-            //Param_CompID, Param_UserID, Param_TaskID, Param_StatusID, Param_Comments
+        function UpdateTaskStatus(ProjectID, TaskID, StatusID) {
 
             var requestParams = {
                 Param_ProjectID: ProjectID,
@@ -1566,23 +1467,18 @@
                 Param_UserID: "0"
             }
 
-            //var UpdateTaskajaxdata = $.parseJSON(call_ajaxfunction("../api/Task/TaskUpdate", "POST", requestParams));
             $.ajax({
                 type: "POST",
                 url: "../api/Task/TaskUpdate",
                 contentType: "application/json",
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
-                beforeSend: function () {
-                    //ShowLoader();
-                },
                 success: function (response) {
-                    var UpdateTaskajaxdata = $.parseJSON(response);
-                    //call_Notification(UpdateTaskajaxdata);
-                    if (UpdateTaskajaxdata.StatusCode > 0) {
-                        BindCards();
-                    }
                     HideLoader();
+                    var UpdateTaskajaxdata = $.parseJSON(response);
+                    if (UpdateTaskajaxdata.StatusCode > 0) {
+                        BindCards(true);
+                    }
                 },
                 failure: function (response) {
                     Swal.fire({
@@ -1599,18 +1495,14 @@
         }
 
         function RoleWaiseHideControls() {
-            //$('input').attr('readonly', true);
             $("#txtTaskName").attr('readonly', true);
             $("#txtTopicSummary").attr('readonly', true);
             $('#ddlAddAssignee').attr('readonly', true);
             $("#txtAddPrivateNotes").attr('readonly', true);
             $("#divSubtask").hide();
-            //$("#divfileAttachment").attr('readonly', true);
             $("#divfileAttachment").hide();
-            // divfileAttachmentDownload
             $("#dvDueDate").hide();
             $('#ddlAddAssignee').attr('Disabled', true);
-
         }
 
         function BindTeamMaster(data) {
@@ -1627,7 +1519,6 @@
                     result.push(teamobject);
                 }
             }
-
             return result;
         }
 
@@ -1649,17 +1540,12 @@
                 , t_StatusID: "0"
                 , t_Comments: ""
             };
-            //var Taskajaxdata = call_ajaxfunction("../api/Task/TaskCRUD", "POST", requestParams);
-
             $.ajax({
                 type: "POST",
                 url: "../api/Task/TaskCRUD",
                 contentType: "application/json",
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
-                beforeSend: function () {
-                    //ShowLoader();
-                },
                 success: function (response) {
                     var jsonTaskdetails = $.parseJSON(response).Data.Data;
                     if (jsonTaskdetails != null && jsonTaskdetails.length > 0) {
@@ -1678,12 +1564,43 @@
                         icon: "error",
                         button: "Ok",
                     });
-                },
-                complete: function () {
-                    //HideLoader();
                 }
             });
+        }
 
+        function SelectProject(objthis) {
+            ShowLoader();
+            onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+            $(objthis).parent().parent().find('li.active').removeClass('active');
+            $(objthis).parent().addClass('active');
+            setcontentTitle($(objthis).text());
+            ProjectID = $(objthis).attr("id");
+            BindCards(true);
+            BindTeam(ProjectID);
+            BindAssignee(ProjectID);
+        }
+
+        function EditSubTask(objthis) {
+            var subtaskId = $(objthis).attr("subtaskid");
+            $("#hiddenSuntaskId").val(subtaskId)
+            $("#txtAddSubTask").val($(objthis).parent().parent().find('label.custom-control-label').text());
+            $("#btnSave").text("Update");
+        }
+
+        function DeleteSubTask(objthis) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete Subtask ?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $(objthis).parent().parent().hide();
+                }
+            })
         }
     </script>
 </asp:Content>

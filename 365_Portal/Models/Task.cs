@@ -18,10 +18,11 @@ namespace _365_Portal.Models
         public int t_UserId { get; set; }
         public string t_TaskAssignees_UserIds { get; set; } //(Userids comma separated)
         public string t_TagIds { get; set; } //(comma separated)
-        public string t_FileIds { get; set; } //(comma separated)
+        public string t_FileIds { get; set; }
         public string t_SubTasks { get; set; } //(delimeter | separated)
         public int t_StatusID { get; set; }
         public string t_Comments { get; set; }
+        public string t_FileName { get; set; } //(comma separated)
 
     }
 
