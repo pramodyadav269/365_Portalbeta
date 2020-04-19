@@ -786,5 +786,63 @@ namespace _365_Portal.Code.DAL
         //    }
         //    return ds;
         //}
+
+        public static DataSet GetBadges(int compID, string userId, int action)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spGetUserBadges";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", action);
+                cmd.Parameters.AddWithValue("p_CompID", compID);
+                cmd.Parameters.AddWithValue("p_UserID", userId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+        public static DataSet GetPoints(int compID, string userId, int action)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spGetUserEarnings";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", action);
+                cmd.Parameters.AddWithValue("p_CompID", compID);
+                cmd.Parameters.AddWithValue("p_UserID", userId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
     }
 }

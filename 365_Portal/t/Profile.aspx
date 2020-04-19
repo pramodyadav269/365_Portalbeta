@@ -25,7 +25,8 @@
                                 <div class="media-body">
                                     <h4 class="mt-0 mb-0" id="hdgName">User Name</h4>
                                     <span class="mb-3" id="hdgRole">Role</span>
-                                    <span id="hdgCity">Place, City</span>
+                                    <%--<span id="hdgCity">Place, City</span>--%>
+                                    <span id="hdgCity"></span>
                                 </div>
                             </li>
                             <a class="edit rounded-circle" id="btnEditBio" onclick="EditBio();"><i class="fas fa-pen"></i></a>
@@ -48,7 +49,7 @@
 
                     <div class="card shadow-sm mb-4 badges">
                         <div class="card-body mb-2">
-                            <h4 class="card-title mb-3">0 Badges</h4>
+                            <h4 class="card-title mb-3" id="hdgBadge">0 Badges</h4>
                             <li class="media align-items-center">
                                 <img src="../INCLUDES/Asset/images/sun.png" class="mr-4" alt="Badges" style="width: 76px;">
                                 <div class="media-body">
@@ -203,11 +204,11 @@
                                 <img src="../INCLUDES/Asset/images/mobile-img_1.png" class="mr-4 learning-icon shadow-sm" alt="learning">
                                 <div class="media-body">
                                     <div class="mb-3">
-                                        <span class="count">0</span>
+                                        <span class="count" id="spLearningBadge">0</span>
                                         <span>Badges</span>
                                     </div>
                                     <div class="mb-3">
-                                        <span class="count">0</span>
+                                        <span class="count" id="spLearningPoints">0</span>
                                         <span>Points</span>
                                     </div>
                                     <div class="mb-3">
@@ -581,9 +582,11 @@
         $(document).ready(function () {
             //debugger
             $("#dvSubMenu_MyProfile").addClass("active");
-            GetAchievementNGifts();
+            //GetAchievementNGifts();
             //debugger
             GetProfileFromProfilePage('pageload');
+
+            BindBadgesAndPointsContent();
         });
 
         function EditBio() {
@@ -650,7 +653,7 @@
         }
 
         function GetProfileFromProfilePage(flag) {
-            //debugger
+            debugger
             ShowLoader();
             var getUrl = "/API/User/GetProfileFromProfilePage";
             $.ajax({
@@ -662,7 +665,7 @@
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
-                        HideLoader();
+                        debugger
                         if (DataSet.StatusCode == "1") {
 
                             var UserProfile = DataSet.Data.UserProfile;
@@ -734,6 +737,7 @@
                                 });
                             }
                         }
+                        HideLoader();
                     }
                     catch (e) {
                         HideLoader();
@@ -1227,6 +1231,45 @@
                     icon: "error",
                 });
             }
+        }
+
+        function BindBadgesAndPointsContent() {
+            ShowLoader();
+            var getUrl = "/API/Trainning/GetBadgesAndPoints";
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                contentType: "application/json",
+                success: function (response) {
+                    try {
+                        HideLoader();
+                        var DataSet = $.parseJSON(response);
+
+                        if (DataSet.StatusCode == "1") {
+                            var Badge = DataSet.Data.Badges;
+                            var Points = DataSet.Data.Points;
+
+                            if (Badge != undefined && Badge != null && Badge[0].BadgeCount != undefined && Badge[0].BadgeCount != null) {
+                                $('#hdgBadge').text(Badge[0].BadgeCount + ' Badges');
+                                $('#spLearningBadge').text(Badge[0].BadgeCount);
+                            }
+                            if (Points != undefined && Points != null && Points[0].PointsEarned != undefined && Points[0].PointsEarned != null) {
+                                $('#spLearningPoints').text(Points[0].PointsEarned);
+                            }
+                        }
+                        else {
+                            Swal.fire(DataSet.StatusDescription, { icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        //HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    //HideLoader();
+                }
+            });
         }
 
     </script>
