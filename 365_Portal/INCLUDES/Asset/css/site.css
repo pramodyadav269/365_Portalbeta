@@ -1021,7 +1021,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .section-sorting .sortable-item {
   list-style-type: none;
   cursor: move;
-  /*z-index: 1;*/ }
+  z-index: 1; }
 
 .inline-picker {
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -1642,3 +1642,39 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     left: 0; }
   .custom-range-label .custom-range {
     padding-left: 2.5rem; }
+
+.input-validation-subtaskdiv textarea {
+  width: 90%;
+  display: inline; }
+
+.input-validation-subtaskdiv .btn-outline {
+  display: inline;
+  float: right;
+  padding: 2px 8px; }
+  .input-validation-subtaskdiv .btn-outline .svg-inline--fa {
+    margin-right: .25rem; }
+
+.sub-task-checkbox {
+  max-height: 122px;
+  overflow-y: auto; }
+  .sub-task-checkbox .custom-control .custom-control-label {
+    padding-right: 3rem; }
+  .sub-task-checkbox .custom-control .custom-action {
+    color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 0;
+    top: 0; }
+    .sub-task-checkbox .custom-control .custom-action .svg-inline--fa {
+      cursor: pointer;
+      margin: 0 0.5rem; }
+
+.comment-history .wr-content .wr-content-anchar .anchar-profile-icon {
+  width: 28px !important;
+  height: 28px !important; }
+
+.comment-history .wr-content .wr-content-anchar .anchar-title {
+  font-size: 14px !important;
+  text-transform: capitalize !important; }
+
+.comment-history .wr-content .wr-content-anchar .anchor-date span {
+  font-size: 14px !important; }
