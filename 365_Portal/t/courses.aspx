@@ -8,7 +8,7 @@
 
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
 
-            <ul class="nav nav-pills" id="pills-tab-courses" role="tablist">
+            <ul class="nav nav-pills" style="display:none;" id="pills-tab-courses" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
                 </li>

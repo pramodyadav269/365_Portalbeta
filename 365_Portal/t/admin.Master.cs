@@ -22,6 +22,17 @@ namespace _365_Portal.Admin
             {
                 if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["CompId"] != null)
                 {
+
+                    // Update Session Time
+                    List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
+                    if (Cache["ActiveUsers"] != null)
+                    {
+                        lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
+                    }
+                    ActiveUsersCache cache = new ActiveUsersCache();
+                    cache.AddOrUpdate(lstActiveUsers, Convert.ToString(Session["UserId"]), Convert.ToString(Session["EmailID"]), Convert.ToString(Session["FirstName"]) + " " + Convert.ToString(Session["LastName"]), Session.SessionID);
+                    Cache["ActiveUsers"] = lstActiveUsers;
+
                     DataSet ds = TrainningBL.GetMsgNotifications(Convert.ToInt32(HttpContext.Current.Session["CompId"]), HttpContext.Current.Session["UserId"].ToString(), 4);
                     if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                     {
@@ -31,6 +42,8 @@ namespace _365_Portal.Admin
                     {
                         lblNotiCount.Text = "";
                     }
+
+
                 }
             }
 
@@ -153,7 +166,7 @@ namespace _365_Portal.Admin
                         dvLearnNewSkills.Visible = true;
                         dvDiscoverLearning.Visible = true;
                         dvTopics.Visible = true;
-                       
+
                         dvUsersNTeams.Visible = true;
                         dvUsers.Visible = true;
                         dvOrganizations.Visible = true;
@@ -314,6 +327,14 @@ namespace _365_Portal.Admin
                 objResponse = new ResponseBase();
                 if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["CompId"] != null)
                 {
+                    ActiveUsersCache objSession = new ActiveUsersCache();
+                    List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
+                    if (Cache["ActiveUsers"] != null)
+                    {
+                        lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
+                    }
+                    objSession.KillSession(lstActiveUsers, Session.SessionID, null);
+
                     objRequest.UserID = Convert.ToString(HttpContext.Current.Session["UserId"]);
 
                     DataSet ds = UserDAL.UserLogout(Convert.ToInt32(HttpContext.Current.Session["CompId"]), objRequest.UserID, Utility.GetClientIPaddress());

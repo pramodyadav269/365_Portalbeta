@@ -431,13 +431,14 @@ namespace _365_Portal.Code
             //System.Web.HttpContext.Current.Session.Abandon(); //Commented because this is does not allowing to create sessnio
         }
 
-        public static void CreateUserSession(string UserID, string Role, string FirstName, string LastName, int CompID)
+        public static void CreateUserSession(string UserID, string Role, string FirstName, string LastName, int CompID,string emailId)
         {
             System.Web.HttpContext.Current.Session["UserId"] = UserID;
             System.Web.HttpContext.Current.Session["CompId"] = CompID;
             System.Web.HttpContext.Current.Session["RoleName"] = Role;
             System.Web.HttpContext.Current.Session["FirstName"] = FirstName;
             System.Web.HttpContext.Current.Session["LastName"] = LastName;
+            System.Web.HttpContext.Current.Session["EmailID"] = emailId;
         }
         public static void CreateProfileAndThemeSession(string ProfilePicFileID, string CompanyProfilePicFileID, string ThemeColor)
         {
