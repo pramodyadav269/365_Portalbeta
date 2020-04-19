@@ -619,5 +619,33 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+
+
+        public static DataSet GetBadges(int compId, string userId, int action)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.GetBadges(compId, userId, action);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+        public static DataSet GetPoints(int compId, string userId, int action)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.GetPoints(compId, userId, action);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
     }
 }

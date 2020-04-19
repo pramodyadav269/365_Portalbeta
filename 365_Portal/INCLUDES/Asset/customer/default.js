@@ -9,10 +9,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     objDs = DataService;
 
     if (currentPage.indexOf('courses.aspx') > -1) {
-        if (userRole == "enduser")
+        if (userRole == "enduser") {
             objDs.DS_GetUserTopics("", userRole);
-        else
+        }
+        else {
             objDs.DS_GetAllTopics("");
+
+        }
     }
     else if (currentPage.indexOf('default.aspx') > -1) {
         objDs.DS_GetUserTopics("", "");
@@ -123,20 +126,21 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         $scope.SelectedContent = $rootScope.Content.UnlockedItems.filter(function (v) {
             return contentId == v.ContentID;
         })[0];
-
+        $("#dvContentViewer").show();
         objDs.DS_GetContentDetails(topicId, moduleId, contentId);
         if (type.toLowerCase() == 'survey') {
-          //  $scope.ActiveContainer = "ContentSurveyView";
+            //  $scope.ActiveContainer = "ContentSurveyView";
         }
         else if (type.toLowerCase() == 'flashcard') {
-           // $scope.BeginFlashcard();
+            // $scope.BeginFlashcard();
         }
         else if (type.toLowerCase() == 'finalquiz') {
-           // $scope.ActiveContainer = "ContentQuizView";
+            // $scope.ActiveContainer = "ContentQuizView";
             $scope.SubContainer = "ContentQuizView";
+            $("#dvContentViewer").hide();
         }
         else {
-            // $scope.ActiveContainer = "ContentView";
+            $scope.SubContainer = "";
             //Unlock Next Content
             objDs.DS_UpdateContent("Content", topicId, moduleId, contentId);
         }
@@ -145,7 +149,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     // Module Completed...
     $scope.UpdateContent = function (type, topicId, moduleId, contentIddd) {
         objDs.DS_UpdateContent(type, topicId, moduleId, contentIddd);
-        $scope.GetModulesByTopic(topicId, false);
+        $scope.GetModulesByTopic(topicId, 0);
 
         $scope.ActiveContainer = "Module";
     }
@@ -442,7 +446,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $rootScope.DraftTopics = $rootScope.AllTopics.filter(function (v) {
                 return v.IsPublished == "0";
             });
-
+            $("#pills-tab-courses").show();
 
         });
     }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" style="enable-background:new 0 0 128 128;" version="1.1" viewBox="0 0 128 128" xml:space="preserve"><style type="text/css">
+	.st0{fill:#382673;}
+	.st1{fill:#473080;}
+	.st2{fill:#007BC6;}
+	.st3{fill:#D44A90;}
+	.st4{fill:#A72973;}
+	.st5{fill:#F15A9E;}
+	.st6{opacity:0.4;fill:#0CAFE8;}
+	.st7{opacity:0.5;fill:#382673;}
+	.st8{fill:#0CAFE8;}
+	.st9{fill:#0B90D3;}
+	.st10{opacity:0.3;fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st11{fill:#8F58B2;}
+	.st12{fill:#6E4CA0;}
+	.st13{fill:#F375AD;}
+	.st14{fill:#FFDE39;}
+	.st15{fill:#FEC632;}
+	.st16{fill:#F9A74E;}
+	.st17{fill:#DA6A2D;}
+	.st18{fill:#9EDD9A;}
+	.st19{fill:#00C2A9;}
+	.st20{fill:#00A58C;}
+	.st21{fill:#037C68;}
+	.st22{fill:#9AC0DB;}
+	.st23{fill:#FFFFFF;}
+	.st24{opacity:0.2;fill:#382673;}
+	.st25{opacity:0.4;fill:#473080;}
+	.st26{opacity:0.1;fill:#382673;}
+	.st27{fill:none;stroke:#FFDE39;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st28{fill:none;stroke:#F9A74E;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st29{fill:none;stroke:#FEC632;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st30{fill:none;stroke:#00A58C;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st31{fill:none;stroke:#D44A90;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st32{fill:none;stroke:#007BC6;stroke-width:2.2439;stroke-miterlimit:10;}
+	.st33{fill:none;stroke:#F15A9E;stroke-width:3;stroke-linecap:round;stroke-miterlimit:10;}
+	.st34{opacity:0.2;fill:none;stroke:#382673;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st35{fill:none;stroke:#F15A9E;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+	.st36{fill:none;stroke:#F9A74E;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st37{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+	.st38{opacity:0.4;fill:#382673;}
+</style><circle class="st0" cx="64" cy="64" r="60" style="fill: #382673;"/><circle class="st1" cx="64" cy="64" r="50" style="fill: #473080;"/><rect class="st15" height="24" width="34" x="47" y="34" style="fill: #FEC632;"/><circle class="st14" cx="64" cy="76" r="33.5" style="fill: #FFDE39;"/><circle class="st15" cx="64" cy="76" r="27.2" style="fill: #FEC632;"/><path class="st16" d="M37.7,77.8c0-15,12.2-27.2,27.2-27.2c10.3,0,19.2,5.7,23.8,14.1C84.4,55.4,75,48.8,64,48.8  C49,48.8,36.8,61,36.8,76c0,4.7,1.2,9.2,3.4,13.1C38.6,85.6,37.7,81.8,37.7,77.8z" style="fill: #F9A74E;"/><circle class="st14" cx="64" cy="76" r="22.6" style="fill: #FFDE39;"/><rect class="st16" height="3" width="34" x="47" y="38" style="fill: #F9A74E;"/><path class="st23" d="M64,84.2l6.9,3.6c1,0.5,2.2-0.3,2-1.5l-1.3-7.7l5.6-5.4c0.8-0.8,0.4-2.2-0.8-2.4l-7.7-1.1l-3.4-7  c-0.5-1-2-1-2.5,0l-3.4,7l-7.7,1.1c-1.1,0.2-1.6,1.6-0.8,2.4l5.6,5.4l-1.3,7.7c-0.2,1.1,1,2,2,1.5L64,84.2z" style="fill: #FFFFFF;"/><path class="st3" d="M36.5,10.6L49,35h30L63.1,4C53.5,4.1,44.5,6.5,36.5,10.6z" style="fill: #D44A90;"/><path class="st4" d="M61.9,4.1l-14.4,28L49,35h27l1.5-2.9L63.1,4C62.7,4,62.3,4,61.9,4.1z" style="fill: #A72973;"/><path class="st14" d="M80.1,40H47.9c-2.2,0-3.9-1.8-3.9-3.9v-0.1c0-2.2,1.8-3.9,3.9-3.9h32.1c2.2,0,3.9,1.8,3.9,3.9v0.1  C84,38.2,82.2,40,80.1,40z" style="fill: #FFDE39;"/><path class="st1" d="M47.9,37c-0.5,0-0.9-0.4-0.9-0.9v-0.1c0-0.5,0.4-0.9,0.9-0.9h32.1c0.5,0,0.9,0.4,0.9,0.9v0.1  c0,0.5-0.4,0.9-0.9,0.9H47.9z" style="fill: #473080;"/><path class="st5" d="M49,35h30l12.5-24.4c-8-4.1-17-6.5-26.6-6.6L49,35z" style="fill: #F15A9E;"/>
+	<metadata>
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<rdf:Description about="https://admin.iconscout.com/legal#licenses" dc:title="2064033,award,badge,medal,prize,sport,win,winner" dc:description="2064033,award,badge,medal,prize,sport,win,winner" dc:publisher="Iconscout" dc:date="2017-04-09" dc:format="image/svg+xml" dc:language="en">
+				<dc:creator>
+					<rdf:Bag>
+						<rdf:li>Laura Reen</rdf:li>
+					</rdf:Bag>
+				</dc:creator>
+			</rdf:Description>
+		</rdf:RDF>
+    </metadata></svg>

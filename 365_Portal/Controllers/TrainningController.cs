@@ -747,5 +747,47 @@ namespace _365_Portal.Controllers
             return new APIResult(Request, data);
         }
 
+
+        [Route("API/Trainning/GetBadgesAndPoints")]
+        [HttpPost]
+        public IHttpActionResult GetBadgesAndPoints()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                string Message = string.Empty;
+
+                DataSet dsBadges = TrainningBL.GetBadges(identity.CompId, identity.UserID.ToString(), Convert.ToInt32(ConstantMessages.Action.VIEW));
+                DataSet dsPoints = TrainningBL.GetPoints(identity.CompId, identity.UserID.ToString(), Convert.ToInt32(ConstantMessages.Action.VIEW));
+
+                DataTable dtBadges = new DataTable();
+                DataTable dtPoints = new DataTable();
+                DataSet ds = new DataSet();
+
+                if (dsBadges.Tables[0].Rows.Count > 0)
+                {
+                    dtBadges = dsBadges.Tables[0].Copy();                                        
+                }
+                ds.Tables.Add(dtBadges);
+                ds.Tables[0].TableName = "Badges";
+
+                if (dsPoints.Tables[0].Rows.Count > 0)
+                {
+                    dtPoints = dsPoints.Tables[0].Copy();                    
+                }
+                ds.Tables.Add(dtPoints);
+                ds.Tables[1].TableName = "Points";
+
+                data = Utility.ConvertDataSetToJSONString(ds);
+                data = Utility.Successful(data);
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
     }
 }

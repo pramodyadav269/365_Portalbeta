@@ -78,6 +78,7 @@
                 link.href = '../Files/Favicon/' + favicon;
                 document.getElementsByTagName('head')[0].appendChild(link);
             }
+            BindBadgesAndPoints();
         });
 
         function FormatGender(Gender) {
@@ -168,6 +169,44 @@
             //$("#divMsgDropdown").addClass("show");
         }
 
+        function BindBadgesAndPoints() {
+            
+            var getUrl = "/API/Trainning/GetBadgesAndPoints";
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                contentType: "application/json",
+                success: function (response) {
+                    try {
+                        
+                        var DataSet = $.parseJSON(response);
+                        
+                        if (DataSet.StatusCode == "1")
+                        {
+                            var Badge = DataSet.Data.Badges;
+                            var Points = DataSet.Data.Points;
+
+                            if (Badge != undefined && Badge != null && Badge[0].BadgeCount != undefined && Badge[0].BadgeCount != null) {
+                                $('#spBadge').text(Badge[0].BadgeCount + ' badges,');
+                            }
+                            if (Points != undefined && Points != null && Points[0].PointsEarned != undefined && Points[0].PointsEarned != null) {
+                                $('#spPoints').text(Points[0].PointsEarned + ' points');
+                            }
+                        }
+                        else {
+                            Swal.fire(DataSet.StatusDescription, { icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        //HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    //HideLoader();
+                }
+            });
+        }
 
     </script>
 
@@ -487,7 +526,9 @@
                     <%-- Start profile --%>
                     <li class="nav-item user-name">
                         <asp:Label CssClass="name" ID="lblUserName" runat="server" />
-                        <span class="status">0 badges, 0 points</span>
+                        <%--<span class="status">0 badges, 0 points</span>--%>
+                        <span class="status" id="spBadge">0 badges,</span>
+                        <span class="status" id="spPoints"> 0 points</span>
                     </li>
                     <li class="nav-item user-photo dropdown">
                         <img id="imgProfilePic" runat="server" src="../Asset/images/profile.png" class="circle nav-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
