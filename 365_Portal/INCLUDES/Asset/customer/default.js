@@ -9,10 +9,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     objDs = DataService;
 
     if (currentPage.indexOf('courses.aspx') > -1) {
-        if (userRole == "enduser")
+        if (userRole == "enduser") {
             objDs.DS_GetUserTopics("", userRole);
-        else
+        }
+        else {
             objDs.DS_GetAllTopics("");
+
+        }
     }
     else if (currentPage.indexOf('default.aspx') > -1) {
         objDs.DS_GetUserTopics("", "");
@@ -126,13 +129,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
         objDs.DS_GetContentDetails(topicId, moduleId, contentId);
         if (type.toLowerCase() == 'survey') {
-          //  $scope.ActiveContainer = "ContentSurveyView";
+            //  $scope.ActiveContainer = "ContentSurveyView";
         }
         else if (type.toLowerCase() == 'flashcard') {
-           // $scope.BeginFlashcard();
+            // $scope.BeginFlashcard();
         }
         else if (type.toLowerCase() == 'finalquiz') {
-           // $scope.ActiveContainer = "ContentQuizView";
+            // $scope.ActiveContainer = "ContentQuizView";
             $scope.SubContainer = "ContentQuizView";
         }
         else {
@@ -442,7 +445,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $rootScope.DraftTopics = $rootScope.AllTopics.filter(function (v) {
                 return v.IsPublished == "0";
             });
-
+            $("#pills-tab-courses").show();
 
         });
     }

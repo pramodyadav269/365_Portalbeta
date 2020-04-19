@@ -366,11 +366,14 @@
                                 <label for="txtAddSubTask">Add Sub Task</label>
                                 <textarea class="form-control" placeholder="Add Sub Task" id="txtAddSubTask"></textarea>
                                 <%--<input class="btn bg-primary" type="button" value="Add Subask" id="btnSave" />--%>
-                                <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add Sub Task</a>
+                                <a class="btn btn-outline" id="btnSave"><i class="fas fa-plus-circle"></i>Add</a>
                             </div>
                         </div>
-                        <label for="cblist">Sub Task(s)</label><br />
-                        <div id="cblist">
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group checkbox">
+                                <label>Sub Task(s)</label>
+                                <div id="cblist" class="sub-task-checkbox"></div>
+                            </div>
                         </div>
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
@@ -400,8 +403,56 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 mb-3">
+                       <%-- <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group" id="taskCommentHistory">
+                            </div>
+                        </div>--%>
+                        <div class="col-12 col-sm-12 mb-3 p-0 website-redesign comment-history">
+                            <div class="card">
+                                <div class="card-body" id="taskCommentHistory">
+                                    <%--<div class="col-12 p-0 mb-1">
+                                        <div class="wr-content">
+                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
+                                                </div>
+                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
+                                            </div>
+                                            <div class="wr-content-title">
+                                                This is some text within a card body.
+                                                This is some text within a card body.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-0 mb-1">
+                                        <div class="wr-content">
+                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
+                                                </div>
+                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
+                                            </div>
+                                            <div class="wr-content-title">
+                                                This is some text within a card body.
+                                                This is some text within a card body.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 p-0 mb-1">
+                                        <div class="wr-content">
+                                            <div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    <img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">Development</span>
+                                                </div>
+                                                <div class="anchor-date"><i class="far fa-clock"></i><span>Mar 10, 12:00 PM</span></div>
+                                            </div>
+                                            <div class="wr-content-title">
+                                                This is some text within a card body.
+                                                This is some text within a card body.
+                                            </div>
+                                        </div>
+                                    </div>--%>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -846,16 +897,30 @@
 
                         if (jsonTaskdetails.Data2 != null && jsonTaskdetails.Data2.length > 0) {
                             if (jsonTaskdetails.Data2[0].Message == null) {
-                                var container = $('#cblist');
-                                container.empty();
+                                //var container = $('#cblist');
+                                //container.empty();
+
+                                var container = '';
+
                                 $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
                                     if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
-                                        var Ischecked = objsubtask.Status == 3 ? true : false;
-                                        $('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
-                                        $('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
+                                        //var Ischecked = objsubtask.Status == 3 ? true : false;
+                                        //$('<input />', { type: 'checkbox', id: objsubtask.TaskID, value: objsubtask.SubTaskName, checked: Ischecked }).appendTo(container);
+                                        //$('<label />', { 'for': objsubtask.TaskID, text: objsubtask.SubTaskName }).appendTo(container);
+
+                                        // change by imtiyaz
+
+                                        var checked = objsubtask.Status == 3 ? 'checked' : '';
+                                        container += '<div class="custom-control custom-checkbox">';
+                                        container += '<input type="checkbox" name="' + objsubtask.TaskID + '" id="' + objsubtask.SubTaskName + '" value="' + objsubtask.SubTaskName + '" class="custom-control-input" ' + checked + '>';
+                                        container += '<label class="custom-control-label" for="' + objsubtask.SubTaskName + '">' + objsubtask.SubTaskName + '</label>';
+                                        container += '<div class="custom-action"><i class="fas fa-pen"></i>|<i class="fas fa-trash-alt"></i></div></div>';
+
+
 
                                     }
                                 });
+                                $('#cblist').empty().append(container);
                                 // $("#txtAddSubTask").val(stringsubtask);
                             }
                         }
@@ -870,13 +935,29 @@
                         }
                         if (jsonTaskdetails.Data4 != null && jsonTaskdetails.Data4.length > 0) {
                             if (jsonTaskdetails.Data4[0].Message == null) {
-                                var container = $('#taskCommentHistory');
-                                container.empty();
+                                var container = '';
                                 $.each(jsonTaskdetails.Data4, function (indx, objstatustracker) {
                                     if (objstatustracker.Comments != null && objstatustracker.Comments != "") {
-                                        $('<label />', { text: objstatustracker.CreatedDate + " = " + objstatustracker.FirstName + " : " + objstatustracker.Comments }).appendTo(container);
+                                        //$('<label />', { text: objstatustracker.CreatedDate + " = " + objstatustracker.FirstName + " : " + objstatustracker.Comments }).appendTo(container);
+
+                                        // added by imtiyaz
+                                        container += '<div class="col-12 p-0 mb-1">';
+                                        container += '<div class="wr-content">';
+                                        container += '<div class="wr-content-anchar d-flex justify-content-between align-items-center mb-2">';
+                                        container += '<div>';
+                                        container += '<img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">' + objstatustracker.FirstName+'</span>';
+                                        container += '</div>';
+                                        container += '<div class="anchor-date"><span>' + objstatustracker.CreatedDate+'</span></div>';
+                                        container += '</div>';
+                                        container += '<div class="wr-content-title">' + objstatustracker.Comments+'</div>';
+                                        container += '</div>';
+                                        container += '</div>';
+
+
                                     }
                                 });
+
+                                $('#taskCommentHistory').empty().append(container);
                             }
                         }
                     }
