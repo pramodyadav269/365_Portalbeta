@@ -181,7 +181,7 @@
                     try {
                         debugger
                         var DataSet = $.parseJSON(response);
-                        HideLoader();
+                        //HideLoader();
                         if (DataSet.StatusCode == "1") {
                             var Badge = DataSet.Data.Badges;
                             var Points = DataSet.Data.Points;

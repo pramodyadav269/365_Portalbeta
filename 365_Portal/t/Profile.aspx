@@ -584,9 +584,8 @@
             $("#dvSubMenu_MyProfile").addClass("active");
             //GetAchievementNGifts();
             //debugger
-            GetProfileFromProfilePage('pageload');
-
             BindBadgesAndPointsContent();
+            GetProfileFromProfilePage('pageload');
         });
 
         function EditBio() {
@@ -718,9 +717,9 @@
 
                             //*************** Bind profile,Name and Status ****************//
 
-                            $('#btncancelinfo').addclass('d-none');
-                            $('#btnsubmitinfo').addclass('d-none');
-                            $('#btneditinfo').removeclass('d-none');
+                            $('#btnEditInfo').addclass('d-none');
+                            $('#btnSubmitInfo').addclass('d-none');
+                            $('#btnEditInfo').removeclass('d-none');
 
                             $('.contact-info').find('.contact-info').removeclass('d-none');
                             $('.contact-info').find('.contact-input').addclass('d-none');
@@ -1243,7 +1242,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     try {
-                        HideLoader();
+                        //HideLoader();
                         var DataSet = $.parseJSON(response);
 
                         if (DataSet.StatusCode == "1") {

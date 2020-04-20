@@ -372,7 +372,8 @@
 
             <%--Lesson--%>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
 
             <%--Content--%>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
@@ -519,6 +520,7 @@
                 $('#btnAddCourse').show();
                 $('#btnAddMoreLesson').hide();
                 $('#btnAddLession').hide();
+                $('#btnCancelLesson').hide();
                 $('#btnAddMoreContent').hide();
                 $('#btnAddContent').hide();
                 $('#btnCancelContent').hide();
@@ -531,6 +533,7 @@
                     $('#btnAddCourse').hide();
                     $('#btnAddMoreLesson').show();
                     $('#btnAddLession').show();
+                    $('#btnCancelLesson').show();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnCancelContent').hide();
@@ -540,12 +543,14 @@
 
                     if (divLessonFlag == 'new') {
                         $('#btnAddLession').hide();
+                        $('#btnCancelLesson').hide();
                         $('#divLessonAdd').hide();
                         $('#divLessonGrid').show();
                     }
                     else if (divLessonFlag == 'add') {
                         $('#btnAddMoreLesson').show();
                         $('#btnAddLession').show();
+                        $('#btnCancelLesson').show();
 
                         $('#divLessonAdd').show();
                         $('#divLessonGrid').hide();
@@ -553,6 +558,7 @@
                     else if (divLessonFlag == 'bindtile') {
                         $('#btnAddMoreLesson').show();
                         $('#btnAddLession').hide();
+                        $('#btnCancelLesson').hide();
 
                         $('#divLessonAdd').hide();
                         $('#divLessonGrid').show();
@@ -576,6 +582,7 @@
                     $('#btnAddCourse').hide();
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnCancelLesson').hide();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').show();
                     $('#btnCancelContent').show();
@@ -643,6 +650,7 @@
                     $('#btnAddCourse').hide();
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnCancelLesson').hide();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnCancelContent').hide();
@@ -678,6 +686,7 @@
                     $('#btnAddCourse').hide();
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnCancelLesson').hide();
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
                     $('#btnCancelContent').hide();
@@ -807,6 +816,7 @@
                     else {
                         $('#btnAddMoreLesson').show();
                         $('#btnAddLession').hide();
+                        $('#btnCancelLesson').hide();
 
                         $('#divLessonAdd').hide();
                         $('#divLessonGrid').show();
@@ -819,6 +829,7 @@
                     ClearFieldsAddLesson();
                     $('#btnAddMoreLesson').show();
                     $('#btnAddLession').hide();
+                    $('#btnCancelLesson').hide();
 
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
@@ -828,6 +839,7 @@
                     ClearFieldsAddLesson();
                     $('#btnAddMoreLesson').show();
                     $('#btnAddLession').show();
+                    $('#btnCancelLesson').show();
 
                     $('#divLessonAdd').show();
                     $('#divLessonGrid').hide();
@@ -1788,6 +1800,11 @@
             });
         }
 
+        function ShowLessonTile() {
+            AddMoreLessonFlag = 'bindtile';
+            AddMore('btnAddMoreLesson');
+        }
+
 
         function ClearFieldsAddContent() {
             $('#txtContentHeader').val('');
@@ -2190,6 +2207,7 @@
             AddMore('btnAddMoreContent');
         }
 
+               
 
         function ClearFieldsAddResource() {
             //$('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
