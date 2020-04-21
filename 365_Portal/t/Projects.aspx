@@ -16,11 +16,12 @@
                     <div class="col-auto mr-auto" id="contentTitle">
                         <h5 id="headingProjectName" class="content-title"></h5>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-auto pr-5">
                         <a class="content-activity d-none"><i class="far fa-folder"></i>File</a>
                         <a class="content-activity d-none"><i class="fas fa-share-alt"></i>Share</a>
                         <a class="content-activity d-none"><i class="fas fa-filter"></i>Filter</a>
-                        <a class="content-activity" target="_blank" href="https://xd.adobe.com/view/74659cca-f14e-44cb-7e67-6046ffc5bd97-0254/screen/92d06a3d-b8a0-48ff-8203-7d327e755004/17-Screen1-Recent-Activity-"><i class="fas fa-wave-square"></i>Recent Activity</a>
+                        <%--<a class="content-activity" target="_blank" href="https://xd.adobe.com/view/74659cca-f14e-44cb-7e67-6046ffc5bd97-0254/screen/92d06a3d-b8a0-48ff-8203-7d327e755004/17-Screen1-Recent-Activity-"><i class="fas fa-wave-square"></i>Recent Activity</a>--%>
+                        <a class="content-activity" onclick="onClickRecentActivity();"><i class="fas fa-wave-square"></i>Recent Activity</a>
                     </div>
                 </div>
             </div>
@@ -83,7 +84,7 @@
                     <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
-            <div class="col-10">
+            <div class="col-10 pr-5">
                 <div class="row website-redesign" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
@@ -305,6 +306,68 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row recent-activity d-none" id="dvRecentActivity">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="activity-wrapper">
+                                    <div class="day">Today</div>
+                                    <div class="activity">
+                                        <div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>
+                                        <div class="col-12 col-md-8 col-lg-10 content">
+                                            <b>Darika Samak</b> mark as done <b>Listing on Product Hunt so that we can reach as many potential users</b>
+                                        </div>
+                                        <div class="time">8:40 PM</div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="pre-icon"><span class="comment"><i class="fas fa-comment-alt"></i></span></div>
+                                        <div class="col-12 col-md-8 col-lg-10 content">
+                                            <b>Emilee Simchenko</b> commented on <b>Account for teams and personal in bottom style</b>
+
+                                            <div class="comment-wrapper">
+                                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                                During a project build, it is necessary to evaluate the product design and development against project requirements and outcomes
+                                            </div>
+                                        </div>
+                                        <div class="time">7:32 PM</div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="pre-icon"><span class="upload"><i class="fas fa-upload"></i></span></div>
+                                        <div class="col-12 col-md-8 col-lg-10 content">
+                                            <b>Darika Samak</b> uploaded 4 files on <b>An option to search in current projects or in all projects</b>
+                                            <div class="file-wrapper">
+                                                <img src="../INCLUDES/Asset/images/mobile-img.jpg" />
+                                                <img src="../INCLUDES/Asset/images/mobile-img.jpg" />
+                                                <img src="../INCLUDES/Asset/images/mobile-img.jpg" />
+                                                <img src="../INCLUDES/Asset/images/mobile-img.jpg" />
+                                            </div>
+                                        </div>
+                                        <div class="time">6:02 PM</div>
+                                    </div>
+
+                                </div>
+                                <div class="activity-wrapper">
+                                    <div class="day">Yesterday</div>
+                                    <div class="activity">
+                                        <div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>
+                                        <div class="col-12 col-md-8 col-lg-10 content">
+                                            <b>Darika Samak</b> mark as done <b>Listing on Product Hunt so that we can reach as many potential users</b>
+                                        </div>
+                                        <div class="time">5:49 PM</div>
+                                    </div>
+                                    <div class="activity">
+                                        <div class="pre-icon"><span class="pencil"><i class="fas fa-pencil-alt"></i></span></div>
+                                        <div class="col-12 col-md-8 col-lg-10 content">
+                                            <b>Darika Samak</b> edited <b>Listing on Product Hunt so that we can reach as many potential users</b>
+                                        </div>
+                                        <div class="time">5:40 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -464,6 +527,7 @@
         function onClickBack(view, hide) {
             toggle(view, hide);
             $('#contentTitle').empty().append(prevTitle);
+            $('#contentTitle + .col-auto').removeClass('d-none');
         }
 
         //Task Functions
@@ -1048,6 +1112,12 @@
 
         //Project Functions
 
+        function onClickRecentActivity() {
+            toggle('dvRecentActivity', 'dvWebsiteRedesign');
+            prevTitle = $('#contentTitle').html();
+            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvRecentActivity&#34;);"></i>Recent Activity</h5>')
+        }
+
         function onClickAddProject() {
             ClearProjectForm();
             openProjectForm();
@@ -1057,6 +1127,8 @@
             toggle('dvCreateProject', 'dvWebsiteRedesign');
             prevTitle = $('#contentTitle').html();
             $('#contentTitle').empty().append('<h5 class="content-title" id="headingProjectName"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
+
+            $('#contentTitle + .col-auto').addClass('d-none');
         }
 
         function BindTeamMembers() {
@@ -1206,7 +1278,7 @@
                     }
                     toggle('dvCreateProject', 'dvWebsiteRedesign');
                     setcontentTitle($("#txtProjectName").val(), true);
-
+                    $('#contentTitle + .col-auto').addClass('d-none');
                     HideLoader();
                 },
                 failure: function (response) {

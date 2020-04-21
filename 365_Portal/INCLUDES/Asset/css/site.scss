@@ -23,12 +23,12 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 
 /* heebo-regular - latin */
-/*@font-face {
+@font-face {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
     src: local('Heebo'), local('Heebo-Regular'), url('../fonts/heebo-v5-latin-regular.woff2') format('woff2');
-}*/
+}
 
 @font-face {
     font-family: 'TeachableSans-Medium';
@@ -2191,8 +2191,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
             .lesson-content {
                 /*border-bottom: 1px solid rgba(0, 0, 0, 0.1);*/
-
-
                 .lesson-content-title {
                     margin-bottom: 1rem;
                 }
@@ -2439,6 +2437,128 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             .anchor-date {
                 span {
                     font-size: 14px !important;
+                }
+            }
+        }
+    }
+}
+
+.recent-activity {
+    margin-bottom: 2rem;
+
+    .card-body {
+        padding: 2.2rem 3.5rem;
+
+        .activity-wrapper {
+            margin-bottom: 2rem;
+
+            .day {
+                font-family: 'Heebo';
+                color: rgba(19, 19, 19, 0.5);
+                text-transform: uppercase;
+                font-weight: bold;
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .activity {
+                display: flex;
+                justify-content: space-between;
+
+                &::before {
+                    content: '';
+                    border-left: 1px solid #ECECEC;
+                    position: relative;
+                    left: 21px;
+                }
+
+                &:last-child {
+                    &::before {
+                        content: '';
+                        border-left: none;
+                    }
+                }
+
+                .content {
+                    font-size: 16px;
+                    color: #131313;
+                    padding: 0 2rem;
+
+                    .comment-wrapper {
+                        padding: 20px 20px 20px 40px;
+                        background: #F7F6F3;
+                        border-radius: 10px;
+                        font-family: 'Heebo';
+                        font-size: 15px;
+                        color: #131313;
+                        margin-top: 2rem;
+
+                        img {
+                            width: 48px;
+                            height: 48px;
+                            border: 5px solid #fff;
+                            border-radius: 50%;
+                            position: absolute;
+                            left: 8px;
+                        }
+                    }
+
+                    .file-wrapper {
+                        margin-top: 2rem;
+
+                        img {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 8px;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+
+                .time {
+                    font-family: 'Heebo';
+                    color: rgba(19, 19, 19, 0.7);
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 14px;
+                    width: 134px;
+                    text-align: right;
+                    margin-left: 1rem;
+                }
+
+                .pre-icon {
+                    margin-right: 1rem;
+
+                    span {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        position: relative;
+
+                        &.check {
+                            background-color: #CEF9C6;
+                        }
+
+                        &.comment {
+                            background-color: #FFF8DD;
+                        }
+
+                        &.upload {
+                            background-color: #E3EFFF;
+                        }
+
+                        &.pencil {
+                            background-color: #F5F0FF;
+                        }
+
+                        .svg-inline--fa {
+                            color: #1D201C;
+                            position: absolute;
+                            top: calc(100% - 27px);
+                            left: calc(100% - 26px);
+                            font-size: 13px;
+                        }
+                    }
                 }
             }
         }
