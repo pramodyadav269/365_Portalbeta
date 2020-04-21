@@ -1,12 +1,12 @@
 ﻿/* colors */
 /* media */
 /* heebo-regular - latin */
-/*@font-face {
-    font-family: 'Heebo';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Heebo'), local('Heebo-Regular'), url('../fonts/heebo-v5-latin-regular.woff2') format('woff2');
-}*/
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Heebo"), local("Heebo-Regular"), url("../fonts/heebo-v5-latin-regular.woff2") format("woff2"); }
+
 @font-face {
   font-family: 'TeachableSans-Medium';
   src: url("../fonts/teachable/TeachableSans-Medium.woff") format("woff"), url("../fonts/teachable/TeachableSans-Medium.eot") format("embedded-opentype"), url("../fonts/teachable/TeachableSans-Medium.ttf") format("truetype"); }
@@ -1678,3 +1678,84 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .comment-history .wr-content .wr-content-anchar .anchor-date span {
   font-size: 14px !important; }
+
+.recent-activity {
+  margin-bottom: 2rem; }
+  .recent-activity .card-body {
+    padding: 2.2rem 3.5rem; }
+    .recent-activity .card-body .activity-wrapper {
+      margin-bottom: 2rem; }
+      .recent-activity .card-body .activity-wrapper .day {
+        font-family: 'Heebo';
+        color: rgba(19, 19, 19, 0.5);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+        margin-bottom: 30px; }
+      .recent-activity .card-body .activity-wrapper .activity {
+        display: flex;
+        justify-content: space-between; }
+        .recent-activity .card-body .activity-wrapper .activity::before {
+          content: '';
+          border-left: 1px solid #ECECEC;
+          position: relative;
+          left: 21px; }
+        .recent-activity .card-body .activity-wrapper .activity:last-child::before {
+          content: '';
+          border-left: none; }
+        .recent-activity .card-body .activity-wrapper .activity .content {
+          font-size: 16px;
+          color: #131313;
+          padding: 0 2rem; }
+          .recent-activity .card-body .activity-wrapper .activity .content .comment-wrapper {
+            padding: 20px 20px 20px 40px;
+            background: #F7F6F3;
+            border-radius: 10px;
+            font-family: 'Heebo';
+            font-size: 15px;
+            color: #131313;
+            margin-top: 2rem; }
+            .recent-activity .card-body .activity-wrapper .activity .content .comment-wrapper img {
+              width: 48px;
+              height: 48px;
+              border: 5px solid #fff;
+              border-radius: 50%;
+              position: absolute;
+              left: 8px; }
+          .recent-activity .card-body .activity-wrapper .activity .content .file-wrapper {
+            margin-top: 2rem; }
+            .recent-activity .card-body .activity-wrapper .activity .content .file-wrapper img {
+              width: 100px;
+              height: 100px;
+              border-radius: 8px;
+              margin-right: 10px; }
+        .recent-activity .card-body .activity-wrapper .activity .time {
+          font-family: 'Heebo';
+          color: rgba(19, 19, 19, 0.7);
+          text-transform: uppercase;
+          font-weight: bold;
+          font-size: 14px;
+          width: 134px;
+          text-align: right;
+          margin-left: 1rem; }
+        .recent-activity .card-body .activity-wrapper .activity .pre-icon {
+          margin-right: 1rem; }
+          .recent-activity .card-body .activity-wrapper .activity .pre-icon span {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: relative; }
+            .recent-activity .card-body .activity-wrapper .activity .pre-icon span.check {
+              background-color: #CEF9C6; }
+            .recent-activity .card-body .activity-wrapper .activity .pre-icon span.comment {
+              background-color: #FFF8DD; }
+            .recent-activity .card-body .activity-wrapper .activity .pre-icon span.upload {
+              background-color: #E3EFFF; }
+            .recent-activity .card-body .activity-wrapper .activity .pre-icon span.pencil {
+              background-color: #F5F0FF; }
+            .recent-activity .card-body .activity-wrapper .activity .pre-icon span .svg-inline--fa {
+              color: #1D201C;
+              position: absolute;
+              top: calc(100% - 27px);
+              left: calc(100% - 26px);
+              font-size: 13px; }
