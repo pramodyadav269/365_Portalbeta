@@ -262,7 +262,38 @@
             <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
                 <h4 class="section-title" id="dvInProgressTitle">In Progress</h4>
 
-                <div id="dvInProgressTopics" class="content">
+                <%-- Start new card style --%>
+                <div class="row" id="dvInProgressTopics">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
+                        <div class="card card-with-img">
+                            <div class="action-icon dropdown">
+                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                </div>
+                            </div>
+                            <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                            <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body item">
+                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <h6 class="card-title">{{topic.Title}}</h6>
+                                <p class="card-text">{{topic.Description}}</p>
+                            </div>
+                            <div class="card-body profile">
+                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">Jeff Dujohn</h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%-- End new card style --%>
+
+              <%--  <div id="dvInProgressTopics" class="content d-none">
                     <div class="content-item card-fix" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -283,16 +314,47 @@
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
-                                    <%-- background-color--%>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
 
-                <div id="dvMyTopics" class="content">
+
+                <%-- Start new card style --%>
+                <div class="row" id="dvMyTopics">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in MyCourses" my-topic-repeat-directive>
+                        <div class="card card-with-img">
+                            <div class="action-icon dropdown">
+                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                </div>
+                            </div>
+                            <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                            <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body item">
+                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <h6 class="card-title">{{topic.Title}}</h6>
+                                <p class="card-text">{{topic.Description}}</p>
+                            </div>
+                            <div class="card-body profile">
+                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">Jeff Dujohn</h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%-- End new card style --%>
+
+                <%--<div id="dvMyTopics" class="content">
                     <div class="content-item card-fix" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -317,11 +379,42 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
 
-                <div id="dvRecommendedTopics" class="content">
+                 <%-- Start new card style --%>
+                <div class="row" id="dvRecommendedTopics">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
+                        <div class="card card-with-img">
+                            <div class="action-icon dropdown">
+                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                </div>
+                            </div>
+                            <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                            <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body item">
+                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <h6 class="card-title">{{topic.Title}}</h6>
+                                <p class="card-text">{{topic.Description}}</p>
+                            </div>
+                            <div class="card-body profile">
+                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">Jeff Dujohn</h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%-- End new card style --%>
+
+                <%--<div id="dvRecommendedTopics" class="content">
                     <div class="content-item card-fix" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -334,9 +427,6 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <%--<span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
-                                    <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
@@ -344,11 +434,42 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <h4 class="section-title" id="dvLatestTopicsTitle">Latest</h4>
 
-                <div id="dvLatestTopics" class="content">
+                <%-- Start new card style --%>
+                <div class="row" id="dvLatestTopics">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
+                        <div class="card card-with-img">
+                            <div class="action-icon dropdown">
+                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                </div>
+                            </div>
+                            <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                            <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body item">
+                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <h6 class="card-title">{{topic.Title}}</h6>
+                                <p class="card-text">{{topic.Description}}</p>
+                            </div>
+                            <div class="card-body profile">
+                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">Jeff Dujohn</h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%-- End new card style --%>
+
+                <%--<div id="dvLatestTopics" class="content">
                     <div class="content-item card-fix" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -361,9 +482,6 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <%--  <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
-                                    <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
 
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <img src="../INCLUDES/Asset/images/icon-play.svg" />
@@ -373,11 +491,42 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
 
                 <h4 class="section-title" id="dvPopularTopicsTitle">Popular</h4>
 
-                <div id="dvPopularTopics" class="content">
+                <%-- Start new card style --%>
+                <div class="row" id="dvPopularTopics">
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
+                        <div class="card card-with-img">
+                            <div class="action-icon dropdown">
+                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                </div>
+                            </div>
+                            <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                            <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                            <div class="card-body item">
+                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <h6 class="card-title">{{topic.Title}}</h6>
+                                <p class="card-text">{{topic.Description}}</p>
+                            </div>
+                            <div class="card-body profile">
+                                <img src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">Jeff Dujohn</h6>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%-- End new card style --%>
+
+              <%--  <div id="dvPopularTopics" class="content">
                     <div class="content-item card-fix" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -390,9 +539,6 @@
                                 <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                 <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                 <div class="action">
-                                    <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>
-                                    <span ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i></span>--%>
-                                    <%-- <span onclick="viewLesson();"><i class="fas fa-tag rotate-90deg"></i></span>--%>
                                     <span class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
                                         <img src="../INCLUDES/Asset/images/icon-play.svg" />
                                     </span>
@@ -400,7 +546,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
             </section>
 
             <div id="dvModuleContainer1" style="display: none;" ng-if="ActiveContainer =='Module'">
@@ -1240,39 +1386,39 @@
         });
 
         function InitSlickSlider(el) {
-            $(el).removeClass("slick-initialized");
-            $(el).removeClass("slick-slider");
-            $(el).slick({
-                dots: false,
-                infinite: false,
-                speed: 300,
-                slidesToShow: 4,
-                slidesToScroll: 1,
-                centerMode: false,
-                responsive: [
-                    {
-                        breakpoint: 1420,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 900,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
+            //$(el).removeClass("slick-initialized");
+            //$(el).removeClass("slick-slider");
+            //$(el).slick({
+            //    dots: false,
+            //    infinite: false,
+            //    speed: 300,
+            //    slidesToShow: 4,
+            //    slidesToScroll: 1,
+            //    centerMode: false,
+            //    responsive: [
+            //        {
+            //            breakpoint: 1420,
+            //            settings: {
+            //                slidesToShow: 3,
+            //                slidesToScroll: 1
+            //            }
+            //        },
+            //        {
+            //            breakpoint: 900,
+            //            settings: {
+            //                slidesToShow: 2,
+            //                slidesToScroll: 1
+            //            }
+            //        },
+            //        {
+            //            breakpoint: 480,
+            //            settings: {
+            //                slidesToShow: 1,
+            //                slidesToScroll: 1
+            //            }
+            //        }
+            //    ]
+            //});
         }
 
         //This code loads the IFrame Player API code asynchronously.

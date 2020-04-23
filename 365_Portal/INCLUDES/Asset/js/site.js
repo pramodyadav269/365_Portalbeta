@@ -92,7 +92,7 @@ function QueryStringValue(param) {
 }
 
 function ToggleNav() {
-    if ($("#sideNav").width() === 250) {
+    if ($("#sideNav").width() === 210) {
         closeNav();
     } else {
         openNav();
@@ -100,13 +100,22 @@ function ToggleNav() {
 }
 
 function openNav() {
-    $("#sideNav").css("width", "250px");
-    $("main").css("margin-left", "250px");
+    $("#sideNav").css("width", "210px");
+    $("main").css("margin-left", "210px");
+
+    setTimeout(function () {
+        $('.sidenav-nav .link-text').show();
+    }, 500);
+
 }
 
 function closeNav() {
-    $("#sideNav").css("width", "0");
-    $("main").css("margin-left", "0");
+    $("#sideNav").css("width", "60px");
+    $("main").css("margin-left", "60px");
+
+    $('.sidenav-nav .link-text').hide();
+
+
 }
 
 

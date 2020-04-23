@@ -49,23 +49,23 @@ $(function () {
 
 $(document).ready(function () {
 
-    $('.sidenav-content .sidenav-item').click(function () {
+    //$('.sidenav-content .sidenav-item').click(function () {
 
-        $('.sidenav-content .sidenav-item').removeClass('active');
-        $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
-        $(this).addClass('active');
+    //    $('.sidenav-content .sidenav-item').removeClass('active');
+    //    $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
+    //    $(this).addClass('active');
 
-        if ($(this).hasClass('side-menu')) {
-            $('.sidenav-content .sidenav-item').find('.sidenav-link').addClass('cu-tooltiptext');
-            $('.sidenav-content .sidenav-item').find('.sidenav-link span:not(.tooltiptext)').css({ "opacity": "0" });
-            $('.sidenav-content-menu').css({ "transform": "translate3d(52px, 0, 0)" });
-        } else {
-            $('.sidenav-content .sidenav-item').find('.sidenav-link').removeClass('cu-tooltiptext');
-            $('.sidenav-content .sidenav-item').find('.sidenav-link span:not(.tooltiptext)').css({ "opacity": "100" });
-            $('.sidenav-content-menu').css({ "transform": "translate3d(240px, 0, 0)" });
-        }
-        $('#' + $(this).attr('sidenav-id')).removeClass('d-none');
-    });
+    //    if ($(this).hasClass('side-menu')) {
+    //        $('.sidenav-content .sidenav-item').find('.sidenav-link').addClass('cu-tooltiptext');
+    //        $('.sidenav-content .sidenav-item').find('.sidenav-link span:not(.tooltiptext)').css({ "opacity": "0" });
+    //        $('.sidenav-content-menu').css({ "transform": "translate3d(52px, 0, 0)" });
+    //    } else {
+    //        $('.sidenav-content .sidenav-item').find('.sidenav-link').removeClass('cu-tooltiptext');
+    //        $('.sidenav-content .sidenav-item').find('.sidenav-link span:not(.tooltiptext)').css({ "opacity": "100" });
+    //        $('.sidenav-content-menu').css({ "transform": "translate3d(240px, 0, 0)" });
+    //    }
+    //    $('#' + $(this).attr('sidenav-id')).removeClass('d-none');
+    //});
 
     $('.task-arrow').click(function () {
         if ($('.admin-task .card-body').hasClass('d-none')) {

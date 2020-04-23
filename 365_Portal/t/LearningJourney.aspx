@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
-                    <%--<a class="back" href="#"><i class="fas fa-arrow-left"></i>Dashboard</a>--%>
+                    <a class="back" href="#"><i class="fas fa-arrow-left"></i>Dashboard</a>
                     <h4 class="title">Add Course</h4>
                 </div>
                 <div>
@@ -235,7 +235,6 @@
                                                 <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
                                                     <div id="txtResourcesDescription"></div>
                                                 </div>
-                                                <div style="display:none;" id="divResourcesAsHTML"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -372,14 +371,14 @@
             <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
 
             <%--Lesson--%>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-            <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
 
             <%--Content--%>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-            <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
 
             <%--Resource--%>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
@@ -1594,7 +1593,7 @@
         }
 
         function EditLessionFromTile(obj, id) {
-            //debugger
+            
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
 
@@ -2129,7 +2128,7 @@
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
-                        //debugger
+                        debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
 
@@ -2243,7 +2242,7 @@
                 ShowLoader();
                 var Description = editorResourcesDesc.value;
                 var getUrl = "/API/Content/UpdateResource";
-                
+
                 try {
                     var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
 
@@ -2363,10 +2362,7 @@
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
                                     //$('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
-                                    debugger
-                                    //editorResourcesDesc.value = unescape(DataSet.Data[0].Resource);
-                                    $('#divResourcesAsHTML').html(DataSet.Data[0].Resource);
-                                    editorResourcesDesc.value = $('#divResourcesAsHTML').text();
+                                    editorResourcesDesc.value = DataSet.Data[0].Resource;
                                 }
                             }
                             else {

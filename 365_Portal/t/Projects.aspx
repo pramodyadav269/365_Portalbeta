@@ -660,6 +660,8 @@
                         cardHtml += '</div>';
                     });
                     $("#dvWebsiteRedesign").empty().html(cardHtml);
+
+
                 },
                 failure: function (response) {
                     Swal.fire({
@@ -668,9 +670,14 @@
                         icon: "error",
                         button: "Ok",
                     });
+                },
+                complete: function () {
+                    initDragDrop()
                 }
             });
+        }
 
+        function initDragDrop() {
             // for card drag and drop
             var adjustment;
             $("ol.section-sorting").sortable({
