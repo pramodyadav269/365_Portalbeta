@@ -267,6 +267,65 @@ namespace _365_Portal.Controllers
             return new APIResult(Request, data);
         }
 
+
+
+
+        [Route("api/Quiz/DeleteQuestion")]
+        [HttpPost]
+        public IHttpActionResult DeleteQuestion(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                try
+                {
+                    var compId = identity.CompId;
+                    var userId = identity.UserID;
+                    var questionId = 0; var isMandatory = true; var isMultiline = true;
+                    var contentId = 0; var title = ""; var qType = 0; 
+                    var isBox = false;
+                    var contentTypeId = Convert.ToInt32(Convert.ToString(requestParams["ContentTypeID"]));
+                    var action = Convert.ToInt32(Convert.ToString(requestParams["Action"]));
+                    var type = Convert.ToInt32(Convert.ToString(requestParams["Type"]));
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["QuestionID"])))
+                        questionId = Convert.ToInt32(requestParams["QuestionID"]);
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["ContentID"])))
+                        contentId = Convert.ToInt32(requestParams["ContentID"]);
+                                        
+                    var ds = QuizBL.ManageQuestion(compId, userId, questionId, contentId, isMandatory, isMultiline, title, qType, isBox, action);
+                    if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ReturnCode"].ToString() == "1")
+                    {
+                        var dsQuestion = QuizBL.ManageQuestion(compId, userId, questionId, contentId, isMandatory, isMultiline, title, qType, isBox, 4);
+                        data = Utility.ConvertDataSetToJSONString(dsQuestion);
+                        data = Utility.Successful(data);
+                    }
+                    else if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && ds.Tables[0].Rows[0]["ReturnCode"].ToString() != "1")
+                    {
+                        data = ds.Tables[0].Rows[0]["ReturnMessage"].ToString();
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+
+
+
         [Route("api/Quiz/ManageAnsOptions")]
         [HttpPost]
         public IHttpActionResult ManageAnsOptions(JObject requestParams)

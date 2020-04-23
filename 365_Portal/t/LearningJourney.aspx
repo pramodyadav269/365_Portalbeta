@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
-                    <a class="back" href="#"><i class="fas fa-arrow-left"></i>Dashboard</a>
+                    <%--<a class="back" href="#"><i class="fas fa-arrow-left"></i>Dashboard</a>--%>
                     <h4 class="title">Add Course</h4>
                 </div>
                 <div>
@@ -235,6 +235,7 @@
                                                 <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
                                                     <div id="txtResourcesDescription"></div>
                                                 </div>
+                                                <div style="display:none;" id="divResourcesAsHTML"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -371,14 +372,16 @@
             <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
 
             <%--Lesson--%>
-            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
-            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson"    onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
 
             <%--Content--%>
-            <a style="display: none;" class="btn btn-outline float-left black" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-            <a style="display: none;" class="btn btn-black float-right" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
-            <a style="display: none;" class="btn btn-black float-right btnSpace" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent"    onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
+            <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
 
             <%--Resource--%>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
@@ -518,12 +521,17 @@
         function ShowButtons(id, action) {
             if (id == 'pills-course') {
                 $('#btnAddCourse').show();
+
                 $('#btnAddMoreLesson').hide();
                 $('#btnAddLession').hide();
+                $('#btnSaveLesson').hide();
                 $('#btnCancelLesson').hide();
+
                 $('#btnAddMoreContent').hide();
                 $('#btnAddContent').hide();
+                $('#btnSaveContent').hide();
                 $('#btnCancelContent').hide();
+
                 $('#btnAddResource').hide();
                 //$('#btnAddMoreQuiz').hide();
                 $('#btnAddQuiz').hide();
@@ -531,25 +539,25 @@
             else if (id == 'pills-lesson') {
                 if (CourseFlag != '0') {
                     $('#btnAddCourse').hide();
-                    $('#btnAddMoreLesson').show();
+
+                    $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').show();
+                    $('#btnSaveLesson').show();
                     $('#btnCancelLesson').show();
+
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnSaveContent').hide();
                     $('#btnCancelContent').hide();
+
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
-                    if (divLessonFlag == 'new') {
-                        $('#btnAddLession').hide();
-                        $('#btnCancelLesson').hide();
-                        $('#divLessonAdd').hide();
-                        $('#divLessonGrid').show();
-                    }
-                    else if (divLessonFlag == 'add') {
-                        $('#btnAddMoreLesson').show();
+                    if (divLessonFlag == 'add') {
+                        $('#btnAddMoreLesson').hide();
                         $('#btnAddLession').show();
+                        $('#btnSaveLesson').show();
                         $('#btnCancelLesson').show();
 
                         $('#divLessonAdd').show();
@@ -558,6 +566,7 @@
                     else if (divLessonFlag == 'bindtile') {
                         $('#btnAddMoreLesson').show();
                         $('#btnAddLession').hide();
+                        $('#btnSaveLesson').hide();
                         $('#btnCancelLesson').hide();
 
                         $('#divLessonAdd').hide();
@@ -580,25 +589,25 @@
 
                 if (CourseFlag != '0' && LessonFlag != '0') {
                     $('#btnAddCourse').hide();
+
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnSaveLesson').hide();
                     $('#btnCancelLesson').hide();
-                    $('#btnAddMoreContent').show();
+
+                    $('#btnAddMoreContent').hide();
                     $('#btnAddContent').show();
+                    $('#btnSaveContent').show();
                     $('#btnCancelContent').show();
+
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
 
-                    if (divContentFlag == 'new') {
-                        $('#btnAddContent').hide();
-                        $('#btnCancelContent').hide();
-                        $('#divContentAdd').hide();
-                        $('#divContentGrid').show();
-                    }
-                    else if (divContentFlag == 'add') {
-                        $('#btnAddMoreContent').show();
+                    if (divContentFlag == 'add') {
+                        $('#btnAddMoreContent').hide();
                         $('#btnAddContent').show();
+                        $('#btnSaveContent').show();
                         $('#btnCancelContent').show();
 
                         $('#divContentAdd').show();
@@ -607,6 +616,7 @@
                     else if (divContentFlag == 'bindtile') {
                         $('#btnAddMoreContent').show();
                         $('#btnAddContent').hide();
+                        $('#btnSaveContent').hide();
                         $('#btnCancelContent').hide();
 
                         $('#divContentAdd').hide();
@@ -648,12 +658,17 @@
             else if (id == 'pills-resources') {
                 if (CourseFlag != '0' && LessonFlag != '0') {
                     $('#btnAddCourse').hide();
+
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnSaveLesson').hide();
                     $('#btnCancelLesson').hide();
+
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnSaveContent').hide();
                     $('#btnCancelContent').hide();
+
                     $('#btnAddResource').show();
                     //$('#btnAddMoreQuiz').hide();
                     $('#btnAddQuiz').hide();
@@ -682,14 +697,20 @@
                 }
             }
             else if (id == 'pills-quiz') {
+                debugger
                 if (CourseFlag != '0' && LessonFlag != '0') {
                     $('#btnAddCourse').hide();
+
                     $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').hide();
+                    $('#btnSaveLesson').hide();
                     $('#btnCancelLesson').hide();
+
                     $('#btnAddMoreContent').hide();
                     $('#btnAddContent').hide();
+                    $('#btnSaveContent').hide();
                     $('#btnCancelContent').hide();
+
                     $('#btnAddResource').hide();
                     //$('#btnAddMoreQuiz').show();
                     //$('#btnAddQuiz').show();
@@ -816,6 +837,7 @@
                     else {
                         $('#btnAddMoreLesson').show();
                         $('#btnAddLession').hide();
+                        $('#btnSaveLesson').hide();
                         $('#btnCancelLesson').hide();
 
                         $('#divLessonAdd').hide();
@@ -829,6 +851,7 @@
                     ClearFieldsAddLesson();
                     $('#btnAddMoreLesson').show();
                     $('#btnAddLession').hide();
+                    $('#btnSaveLesson').hide();
                     $('#btnCancelLesson').hide();
 
                     $('#divLessonAdd').hide();
@@ -837,8 +860,9 @@
                 }
                 else {
                     ClearFieldsAddLesson();
-                    $('#btnAddMoreLesson').show();
+                    $('#btnAddMoreLesson').hide();
                     $('#btnAddLession').show();
+                    $('#btnSaveLesson').show();
                     $('#btnCancelLesson').show();
 
                     $('#divLessonAdd').show();
@@ -847,6 +871,9 @@
                     divLessonFlag = 'add';
                     LessonFlag = '0';
                 }
+
+                LessonFlag = '0';
+                ContentFlag = '0';
             }
             else if (id == 'btnAddMoreContent') {
                 if (AddMoreContentFlag == 'add') {
@@ -863,6 +890,7 @@
                     else {
                         $('#btnAddMoreContent').show();
                         $('#btnAddContent').hide();
+                        $('#btnSaveContent').hide();
                         $('#btnCancelContent').hide();
 
                         $('#divContentAdd').hide();
@@ -876,6 +904,7 @@
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').show();
                     $('#btnAddContent').hide();
+                    $('#btnSaveContent').hide();
                     $('#btnCancelContent').hide();
 
                     $('#divContentAdd').hide();
@@ -884,8 +913,9 @@
                 }
                 else {
                     ClearFieldsAddContent();
-                    $('#btnAddMoreContent').show();
+                    $('#btnAddMoreContent').hide();
                     $('#btnAddContent').show();
+                    $('#btnSaveContent').show();
                     $('#btnCancelContent').show();
 
                     $('#divContentAdd').show();
@@ -894,6 +924,8 @@
                     divContentFlag = 'add';
                     ContentFlag = '0';
                 }
+
+                ContentFlag = '0';
             }
             /*
             else if (id == 'btnAddMoreQuiz') {
@@ -1593,7 +1625,7 @@
         }
 
         function EditLessionFromTile(obj, id) {
-            
+            //debugger
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
             //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
 
@@ -1669,6 +1701,7 @@
                                             }).then((value) => {
                                                 if (value) {
                                                     LessonFlag = '0';
+                                                    ContentFlag = '0';
                                                     BindLesson('addmore');
                                                 }
                                             });
@@ -1801,6 +1834,8 @@
         }
 
         function ShowLessonTile() {
+            LessonFlag = '0';
+            ContentFlag = '0';
             AddMoreLessonFlag = 'bindtile';
             AddMore('btnAddMoreLesson');
         }
@@ -2117,7 +2152,7 @@
 
         function BindContent(flag) {
             var getUrl = "/API/Content/GetContentList";
-            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag, ContentTypeID: "", IsGift: "true", Flag: 'learningjourney' };
+            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag, ContentTypeID: ContentContentTypeID, IsGift: "true", Flag: 'learningjourney' };
             $.ajax({
                 type: "POST",
                 url: getUrl,
@@ -2128,7 +2163,7 @@
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
-                        debugger
+                        //debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
 
@@ -2203,6 +2238,7 @@
         }
 
         function ShowContentTile() {
+            ContentFlag = '0';
             AddMoreContentFlag = 'bindtile';
             AddMore('btnAddMoreContent');
         }
@@ -2242,7 +2278,7 @@
                 ShowLoader();
                 var Description = editorResourcesDesc.value;
                 var getUrl = "/API/Content/UpdateResource";
-
+                
                 try {
                     var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
 
@@ -2362,7 +2398,10 @@
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
                                     //$('#divResourcesDescription').find('.jodit_wysiwyg').text(DataSet.Data[0].Resource);
-                                    editorResourcesDesc.value = DataSet.Data[0].Resource;
+                                    //debugger
+                                    //editorResourcesDesc.value = unescape(DataSet.Data[0].Resource);
+                                    $('#divResourcesAsHTML').html(DataSet.Data[0].Resource);
+                                    editorResourcesDesc.value = $('#divResourcesAsHTML').text();
                                 }
                             }
                             else {
@@ -2487,7 +2526,7 @@
 
         function BindQuiz() {
 
-            ClearFieldsAddResource();
+            ClearFieldsAddQuiz();
             ShowLoader();
             var getUrl = "/API/Quiz/GetContentList";
 
@@ -2505,7 +2544,7 @@
                             var DataSet = $.parseJSON(response);
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-
+                                    debugger
                                     if (DataSet.Data.length != 0) {
                                         QuizFlag = DataSet.Data[0].ContentID;
 
@@ -2548,7 +2587,7 @@
                                             $("#dvQuizDone").show();
                                         }
 
-                                        BindQuestion(Questions);
+                                        BindQuestion(Questions);``
                                     }
 
                                 }
@@ -2782,6 +2821,7 @@
 
         var lastQuestionIndex = 0;
         function BindQuestion(questions) {
+            debugger
             // Bind Questions..
             var divQuestionTile = "";
             $.grep(questions, function (n, i) {
@@ -2792,7 +2832,7 @@
                 divQuestionTile = divQuestionTile + '<span class="sr" id="spQuestionId">Q' + (i + 1) + ' <i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>';
                 divQuestionTile = divQuestionTile + '<div class="col-sm-8 col-md-10">';
                 divQuestionTile = divQuestionTile + '<h5 class="font-weight-bold" id="spQuestion">' + n.Title + '</h5>';
-                divQuestionTile = divQuestionTile + '</div><a onclick="ShowQuestionInEditMode(' + n.QuestionID + ')"><i class="fas fa-pen"></i></a></div>';
+                divQuestionTile = divQuestionTile + '</div><a onclick="ShowQuestionInEditMode(' + n.QuestionID + ')"><i class="fas fa-pen"></i></a><a onclick="DeleteQuestion(' + n.QuestionID + ')"><i class="fas fa-trash-alt"></i></a></div>';
                 divQuestionTile = divQuestionTile + '</div></div>';
                 lastQuestionIndex = i + 1;
             });
@@ -2964,6 +3004,72 @@
             }
 
             ShowQuestion(qtype, question);
+        }
+
+        function DeleteQuestion(questionId)
+        {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete ? Yes or No !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    debugger
+                    ShowLoader();
+                    var requestParams = { "Action": 3, "Type": "0", "ContentTypeID": QuizContentTypeID, "QuestionID": questionId, ContentID: QuizFlag };
+                    var getUrl = "/API/Quiz/DeleteQuestion";
+
+                    try {                        
+                        $.ajax({
+                            type: "POST",
+                            url: getUrl,
+                            headers: { "Authorization": "Bearer " + accessToken },
+                            data: JSON.stringify(requestParams),
+                            contentType: "application/json",
+                            success: function (response) {
+                                try {
+                                    var DataSet = $.parseJSON(response);
+                                    debugger
+                                    if (DataSet != null && DataSet != "")
+                                    {
+                                        if (DataSet.StatusCode == "1")
+                                        {
+                                            BindQuestion(DataSet.Data.Data);
+                                        }
+                                        else {
+                                            Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                        }
+                                    }
+                                    else {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                    }
+                                }
+                                catch (e) {
+                                    HideLoader();
+                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                }
+                            },
+                            complete: function () {
+                                HideLoader();
+                            },
+                            failure: function (response) {
+                                HideLoader();
+                                alert(response.data);
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        });
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+                    }
+                }
+            });
         }
 
         function changeAnsFlag(obj) {
