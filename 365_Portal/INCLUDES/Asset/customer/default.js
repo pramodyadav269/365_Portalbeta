@@ -444,7 +444,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             });
 
             $rootScope.DraftTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.IsPublished == "0";
+                return v.IsPublished == "0" && v.CanEdit == "1";
             });
             $("#pills-tab-courses").show();
 
