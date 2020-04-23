@@ -2084,6 +2084,7 @@
     <Content Include="INCLUDES\Asset\images\diamond.png" />
     <Content Include="INCLUDES\Asset\images\didnt-like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\diploma.png" />
+    <Content Include="INCLUDES\Asset\images\dots-menu.svg" />
     <Content Include="INCLUDES\Asset\images\employee-illustration.svg" />
     <Content Include="INCLUDES\Asset\images\engager-icon.svg" />
     <Content Include="INCLUDES\Asset\images\exam.png" />
@@ -2119,6 +2120,7 @@
     <Content Include="INCLUDES\Asset\images\pdf-icon.svg" />
     <Content Include="INCLUDES\Asset\images\perfectionist-c-icon.svg" />
     <Content Include="INCLUDES\Asset\images\profile.png" />
+    <Content Include="INCLUDES\Asset\images\question-mark.svg" />
     <Content Include="INCLUDES\Asset\images\quiz-icon.svg" />
     <Content Include="INCLUDES\Asset\images\quiz-master-c-icon.svg" />
     <Content Include="INCLUDES\Asset\images\return.png" />

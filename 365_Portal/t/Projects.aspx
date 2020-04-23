@@ -571,10 +571,13 @@
                     });
                 },
                 complete: function () {
-                    BindtaskData(ajaxtaskResponse)
+                    BindtaskData(ajaxtaskResponse);
+                    //initDragDrop();
                 }
             });
+        }
 
+        function initDragDrop() {
             // for card drag and drop
             var adjustment;
             $("ol.section-sorting").sortable({
@@ -588,6 +591,7 @@
                     var ProjectId = $item.attr('project_Id');
                     var taskId = $item.attr('task_Id');
                     //alert("statusId:" + statusId + " ProjectId:" + ProjectId + " taskId:" + taskId);
+
                     UpdateTaskStatus(ProjectId, taskId, statusId);
                 },
                 // set $item relative to cursor position
@@ -608,6 +612,7 @@
                 }
             });
         }
+
 
         function bindTaskStatusCounts(jsonTaskList) {
             var TotalTasksCount = jsonTaskList.length;
@@ -1418,6 +1423,9 @@
                 contentType: "application/json",
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
+                beforeSend: function () {
+                    HideLoader();
+                },
                 success: function (response) {
                     HideLoader();
                     var UpdateTaskajaxdata = $.parseJSON(response);
@@ -1710,6 +1718,7 @@
                 cardHtml += '</div>';
             });
             $("#dvWebsiteRedesign").empty().html(cardHtml);
+            initDragDrop();
             HideLoader();
         }
 

@@ -4,11 +4,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="container courses">
+    <div class="container-fluid dashboard courses">
 
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
 
-            <ul class="nav nav-pills" style="display:none;" id="pills-tab-courses" role="tablist">
+            <ul class="nav nav-pills" style="display: none;" id="pills-tab-courses" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
                 </li>
@@ -25,11 +25,42 @@
                     <a class="nav-link" id="pills-drafts-tab" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
                 </li>
             </ul>
-            <div class="tab-content" id="pills-tabCoursesContent">
+            <div class="tab-content mt-3" id="pills-tabCoursesContent">
 
                 <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
-                   <%-- <h1>All Courses</h1>--%>
-                    <div class="row content">
+                    <%-- <h1>All Courses</h1>--%>
+
+                    <%-- Start new card style --%>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AllTopics">
+                            <div class="card card-with-img">
+                                <div class="action-icon dropdown">
+                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <div class="dropdown-menu br-0">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    </div>
+                                </div>
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                                <div class="card-body item">
+                                    <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                    <h6 class="card-title">{{topic.Title}}</h6>
+                                    <p class="card-text">{{topic.Description}}</p>
+                                </div>
+                                <div class="card-body profile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- End new card style --%>
+
+                    <%-- <div class="row content">
                         <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AllTopics">
                             <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                                 <div class="card-icon">
@@ -42,23 +73,49 @@
                                     <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                     <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                     <div class="action">
-                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
-
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-trash-alt"></i></span>
-                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>--%>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="tab-pane fade" id="pills-global" role="tabpanel" aria-labelledby="pills-global-tab">
-                   <%-- <h1>Global</h1>--%>
-                    <div class="row content">
+                    <%-- <h1>Global</h1>--%>
+                    <%-- Start new card style --%>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in GlobalTopics">
+                            <div class="card card-with-img">
+                                <div class="action-icon dropdown">
+                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <div class="dropdown-menu br-0">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    </div>
+                                </div>
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                                <div class="card-body item">
+                                    <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                    <h6 class="card-title">{{topic.Title}}</h6>
+                                    <p class="card-text">{{topic.Description}}</p>
+                                </div>
+                                <div class="card-body profile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- End new card style --%>
+
+                    <%--<div class="row content">
                         <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in GlobalTopics">
                             <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                                 <div class="card-icon">
@@ -71,22 +128,47 @@
                                     <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                     <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                     <div class="action">
-                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
-
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
-                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>--%>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="tab-pane fade" id="pills-published" role="tabpanel" aria-labelledby="pills-published-tab">
-                  <%--  <h1>Published</h1>--%>
-                    <div class="row content">
+                    <%--  <h1>Published</h1>--%>
+                    <%-- Start new card style --%>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PublishedTopics">
+                            <div class="card card-with-img">
+                                <div class="action-icon dropdown">
+                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <div class="dropdown-menu br-0">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    </div>
+                                </div>
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                                <div class="card-body item">
+                                    <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                    <h6 class="card-title">{{topic.Title}}</h6>
+                                    <p class="card-text">{{topic.Description}}</p>
+                                </div>
+                                <div class="card-body profile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- End new card style --%>
+
+                    <%--<div class="row content">
                         <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in PublishedTopics">
                             <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                                 <div class="card-icon">
@@ -99,22 +181,49 @@
                                     <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                     <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                     <div class="action">
-                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
-
+                                        
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
-                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>--%>
+                                  
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="tab-pane fade" id="pills-assigned" role="tabpanel" aria-labelledby="pills-assigned-tab">
-                  <%--  <h1>Assigned</h1>--%>
-                    <div class="row content">
+                    <%--  <h1>Assigned</h1>--%>
+                    <%-- Start new card style --%>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AssignedTopics">
+                            <div class="card card-with-img">
+                                <div class="action-icon dropdown">
+                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <div class="dropdown-menu br-0">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    </div>
+                                </div>
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                                <div class="card-body item">
+                                    <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                    <h6 class="card-title">{{topic.Title}}</h6>
+                                    <p class="card-text">{{topic.Description}}</p>
+                                </div>
+                                <div class="card-body profile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- End new card style --%>
+
+                    <%--<div class="row content">
                         <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in AssignedTopics">
                             <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                                 <div class="card-icon">
@@ -127,22 +236,47 @@
                                     <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                     <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                     <div class="action">
-                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
-
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
-                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>--%>
+                                       
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="tab-pane fade" id="pills-drafts" role="tabpanel" aria-labelledby="pills-drafts-tab">
-                 <%--   <h1>Drafts</h1>--%>
-                    <div class="row content">
+                    <%--   <h1>Drafts</h1>--%>
+                    <%-- Start new card style --%>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in DraftTopics">
+                            <div class="card card-with-img">
+                                <div class="action-icon dropdown">
+                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <div class="dropdown-menu br-0">
+                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    </div>
+                                </div>
+                                <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
+                                <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
+                                <div class="card-body item">
+                                    <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                    <h6 class="card-title">{{topic.Title}}</h6>
+                                    <p class="card-text">{{topic.Description}}</p>
+                                </div>
+                                <div class="card-body profile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- End new card style --%>
+                    <%--<div class="row content">
                         <div class="col-sm-12 col-md-4 content-item" ng-repeat="topic in DraftTopics">
                             <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                                 <div class="card-icon">
@@ -155,17 +289,14 @@
                                     <div class="mb-2"><span class="text-muted mr-2"><i class="fas fa-stopwatch"></i></span><span class="time text-muted">{{ GetTopicTime(topic.CourseTime) }}</span></div>
                                     <p class="card-text text-muted mb-4">{{topic.CategoryName}}</p>
                                     <div class="action">
-                                        <%-- <span ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="fas fa-heart"></i></span>--%>
-
+                                        
                                         <span ng-show="topic.CanEdit==1" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-edit"></i></span>
-                                        <%-- <span  class="play" ng-style="{'background-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }" ng-click="GetModulesByTopic(topic.TopicId,0);" style="cursor: pointer;">
-                                        <i class="fas fa-play"></i>
-                                    </span>--%>
+                                    
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </section>
@@ -188,39 +319,39 @@
         });
 
         function InitSlickSlider(el) {
-            $(el).removeClass("slick-initialized");
-            $(el).removeClass("slick-slider");
-            $(el).slick({
-                dots: false,
-                infinite: false,
-                speed: 300,
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                centerMode: false,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
+            //$(el).removeClass("slick-initialized");
+            //$(el).removeClass("slick-slider");
+            //$(el).slick({
+            //    dots: false,
+            //    infinite: false,
+            //    speed: 300,
+            //    slidesToShow: 3,
+            //    slidesToScroll: 1,
+            //    centerMode: false,
+            //    responsive: [
+            //        {
+            //            breakpoint: 1024,
+            //            settings: {
+            //                slidesToShow: 3,
+            //                slidesToScroll: 1
+            //            }
+            //        },
+            //        {
+            //            breakpoint: 600,
+            //            settings: {
+            //                slidesToShow: 2,
+            //                slidesToScroll: 1
+            //            }
+            //        },
+            //        {
+            //            breakpoint: 480,
+            //            settings: {
+            //                slidesToShow: 1,
+            //                slidesToScroll: 1
+            //            }
+            //        }
+            //    ]
+            //});
         }
 
         //This code loads the IFrame Player API code asynchronously.
