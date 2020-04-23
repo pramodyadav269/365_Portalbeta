@@ -72,6 +72,7 @@ body {
     }
 }
 
+
 a {
     cursor: pointer;
 }
@@ -606,8 +607,11 @@ main {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }
-/* scroll bar */
 
+.modal {
+    z-index: 99998;
+}
+/* scroll bar */
 .sidenav {
     position: fixed;
     top: 64px;

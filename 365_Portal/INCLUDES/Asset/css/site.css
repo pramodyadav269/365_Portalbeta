@@ -443,6 +443,9 @@ main.fix {
   background-color: darkgrey;
   outline: 1px solid slategrey; }
 
+.modal {
+  z-index: 99998; }
+
 /* scroll bar */
 .sidenav {
   position: fixed;
