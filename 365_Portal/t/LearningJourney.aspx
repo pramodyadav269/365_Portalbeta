@@ -973,10 +973,12 @@
             QuizFlag = '0';
             //End Added on 23 APR 20 
 
-
             $("#dvQuizCongratulationScreen").hide();
             //ShowButtons('pills-lesson', 'tabclick');
-            nextTab('pills-lesson-tab');
+
+            //nextTab('pills-lesson-tab');
+            BindLesson('afterquiz');
+            
         }
 
         function RedirectToNewCourse() {
@@ -1744,6 +1746,12 @@
                                     divLessonFlag = 'bindtile';
                                     AddMore('btnAddMoreLesson');
                                     nextTab('pills-course-tab');
+                                }
+                                else if (flag == 'afterquiz') {
+                                    AddMoreLessonFlag = 'bindtile';
+                                    divLessonFlag = 'bindtile';
+                                    AddMore('btnAddMoreLesson');
+                                    nextTab('pills-lesson-tab');
                                 }
                                 else if (flag == 'nexttab') {
                                     AddMoreLessonFlag = 'bindtile';
