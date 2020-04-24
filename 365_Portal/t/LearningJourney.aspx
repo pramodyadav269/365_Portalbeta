@@ -1948,6 +1948,8 @@
                                         icon: "success"
                                     });
                                 }
+
+                                IsCoursePublishable();
                             }
                             else {
                                 HideLoader();
@@ -2284,6 +2286,8 @@
                                                 }
                                             });
                                         }
+
+                                        IsCoursePublishable();
                                     }
                                     else {
                                         Swal.fire({

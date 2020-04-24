@@ -283,7 +283,7 @@ namespace _365_Portal.Code.DAL
                 string stm = "spIsCoursePublishable";
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("p_compid", TopicID);
+                cmd.Parameters.AddWithValue("p_compid", CompID);
                 cmd.Parameters.AddWithValue("p_topicid", TopicID);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
