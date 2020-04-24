@@ -563,7 +563,7 @@ namespace _365_Portal.ControllersReOrderContent
 
                         if (!string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()))
                         {
-                            content.ModuleOverview = requestParams["ModuleOverview"].ToString();
+                            content.ModuleOverview = System.Net.WebUtility.HtmlDecode(requestParams["ModuleOverview"].ToString());
                         }
                         else
                         {
@@ -699,7 +699,8 @@ namespace _365_Portal.ControllersReOrderContent
 
                         if (!string.IsNullOrEmpty(requestParams["ModuleOverview"].ToString()))
                         {
-                            content.ModuleOverview = requestParams["ModuleOverview"].ToString();
+                            //content.ModuleOverview = requestParams["ModuleOverview"].ToString();
+                            content.ModuleOverview = System.Net.WebUtility.HtmlDecode(requestParams["ModuleOverview"].ToString());
                         }
                         else
                         {
@@ -1097,7 +1098,7 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                             if (!string.IsNullOrEmpty(httpRequest.Form["Description"].ToString()))
                             {
-                                content.ContentDescription = httpRequest.Form["Description"].ToString();
+                                content.ContentDescription = System.Net.WebUtility.HtmlDecode(httpRequest.Form["Description"].ToString());
                             }
                             else
                             {
@@ -1367,7 +1368,7 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                             if (!string.IsNullOrEmpty(httpRequest.Form["Description"].ToString()))
                             {
-                                content.ContentDescription = httpRequest.Form["Description"].ToString();
+                                content.ContentDescription = System.Net.WebUtility.HtmlDecode(httpRequest.Form["Description"].ToString());
                             }
                             else
                             {
@@ -1908,7 +1909,12 @@ namespace _365_Portal.ControllersReOrderContent
 
                         int TopicID = Convert.ToInt32(requestParams["TopicID"]);
                         int ModuleID = Convert.ToInt32(requestParams["ModuleID"]);
-                        string Description = Convert.ToString(requestParams["Description"]);
+
+                        string Description = string.Empty;
+                        if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Description"])))
+                        {
+                            Description = System.Net.WebUtility.HtmlDecode(requestParams["Description"].ToString());
+                        }
 
                         var ds = ContentBL.ResourceCRUD(Convert.ToInt32(ConstantMessages.Action.MODIFY), CompID, UserID, TopicID, ModuleID, Description);
                         if (ds != null)
