@@ -729,6 +729,18 @@ main {
                             display: none
                         }
                     }
+
+                    &.content-menu {
+
+                        &::before {
+                            position: absolute;
+                            font-family: "Font Awesome 5 Free";
+                            font-weight: 700;
+                            content: "\f054";
+                            right: 14px;
+                            font-size: 13px;
+                        }
+                    }
                 }
 
                 &.side-menu {
@@ -825,6 +837,11 @@ main {
                 font-size: 10px;
                 text-transform: uppercase;
                 margin: 0;
+                margin-top: 2rem;
+
+                &:first-child {
+                    margin: 0;
+                }
             }
 
             .sidenav-item {
@@ -841,6 +858,7 @@ main {
                     color: rgba(221, 221, 221, 0.65);
                     display: block;
                     padding: 8px 1rem 8px 1rem;
+                    position: relative;
 
                     &:hover {
                         color: #fff;
