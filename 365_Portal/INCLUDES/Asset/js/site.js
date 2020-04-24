@@ -110,7 +110,7 @@ function QueryStringValue(param) {
 }
 
 function ToggleNav() {
-    if ($("#sideNav").width() === 214) {
+    if (Math.round($("#sideNav").width()) === 214) {
         closeNav();
     } else {
         openNav();

@@ -2626,11 +2626,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .card-with-img {
 
     &.card {
-        width: 292px;
+        /*width: 292px;
 
         @media #{$small-and-down} {
             width: auto;
-        }
+        }*/
 
         margin-bottom: 1.75rem;
         border-radius: 0;

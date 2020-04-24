@@ -1800,15 +1800,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           margin-right: .5rem; }
 
 .card-with-img.card {
-  width: 292px;
+  /*width: 292px;
+
+        @media only screen and (max-width : 600px) {
+            width: auto;
+        }*/
   margin-bottom: 1.75rem;
   border-radius: 0;
   border-bottom-left-radius: .1rem;
   border-bottom-right-radius: .1rem;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
-  @media only screen and (max-width: 600px) {
-    .card-with-img.card {
-      width: auto; } }
   .card-with-img.card .card-img-top {
     border-radius: 0;
     height: 168px; }
