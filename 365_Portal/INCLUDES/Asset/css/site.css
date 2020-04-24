@@ -1538,6 +1538,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           color: #2DCD7A; }
         .module .quiz-wrapper .ans .checked-icon .svg-inline--fa.wrong {
           color: #ED5F5F; }
+      .module .quiz-wrapper .ans .checked-icon.delete {
+        position: absolute;
+        right: 4px;
+        margin: 0;
+        cursor: pointer; }
+        .module .quiz-wrapper .ans .checked-icon.delete .svg-inline--fa {
+          font-size: 18px;
+          color: #ED5F5F; }
 
 .card {
   margin-bottom: 1rem; }

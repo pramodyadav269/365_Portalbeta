@@ -2214,6 +2214,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         color: $red-color;
                     }
                 }
+
+                &.delete {
+                    position: absolute;
+                    right: 4px;
+                    margin: 0;
+                    cursor: pointer;
+
+                    .svg-inline--fa {
+                        font-size: 18px;
+                        color: $red-color;
+                    }
+                }
             }
         }
     }
