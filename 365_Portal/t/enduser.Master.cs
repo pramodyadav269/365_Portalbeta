@@ -165,6 +165,19 @@ namespace _365_Portal.Admin
                         dvDiscoverLearning.Visible = true;
                         dvTopics.Visible = true;
 
+                        dvCoursesInsights.Visible = true;
+                        dvCoursesSettings.Visible = true;
+
+                        dvAllCourses.Visible = true;
+                        dvSubMenu_Organizations.Visible = true;
+
+                        dvProjects.Visible = true;
+                        dvTaskInsights.Visible = true;
+                        dvTaskSettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvOnyxU.Visible = true;
+
                         dvUsersNTeams.Visible = true;
                         dvUsers.Visible = true;
                         dvOrganizations.Visible = true;
@@ -184,6 +197,7 @@ namespace _365_Portal.Admin
                         dvSessions.Visible = true;
                         dvActivityLogs.Visible = true;
                         dvBilling.Visible = true;
+                        dvEmail.Visible = true;
 
                         dvHelp.Visible = true;
                         dvSubMenu_HelpCenter.Visible = true;
@@ -209,6 +223,16 @@ namespace _365_Portal.Admin
                         dvReport1.Visible = true;
                         dvReport2.Visible = true;
 
+                        dvCoursesInsights.Visible = true;
+                        dvCoursesSettings.Visible = true;
+
+                        dvProjects.Visible = true;
+                        dvTaskInsights.Visible = true;
+                        dvTaskSettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvOnyxU.Visible = true;
+
                         dvUsersNTeams.Visible = true;
                         dvUsers.Visible = true;
                         dvGroups.Visible = true;
@@ -220,6 +244,7 @@ namespace _365_Portal.Admin
                         dvSessions.Visible = true;
                         dvActivityLogs.Visible = true;
                         dvBilling.Visible = true;
+                        dvEmail.Visible = true;
                         dvCustomize.Visible = true;
                         dvIntegrations.Visible = true;
                         dvAccountSettings.Visible = true;
@@ -255,6 +280,16 @@ namespace _365_Portal.Admin
                         dvAdminConsole.Visible = true;
                         dvContent.Visible = true;
 
+                        dvCoursesInsights.Visible = true;
+                        dvCoursesSettings.Visible = true;
+
+                        dvProjects.Visible = true;
+                        dvTaskInsights.Visible = true;
+                        dvTaskSettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvOnyxU.Visible = true;
+
                         dvSettings.Visible = true;
                         dvMyAccount.Visible = true;
                         dvLanguages.Visible = true;
@@ -268,12 +303,23 @@ namespace _365_Portal.Admin
                     {
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
+
+                        dvCoursesInsights.Visible = true;
+                        dvCoursesSettings.Visible = true;
+
+                        dvProjects.Visible = true;
+                        dvTaskInsights.Visible = true;
+                        dvTaskSettings.Visible = true;
+
+                        dvCommunity.Visible = true;
+                        dvOnyxU.Visible = true;
+
                         dvAllCourses.Visible = true;
                         dvCommunity.Visible = true;
                         dvConnectWithOtherLearners.Visible = true;
                         dvDiscoverNewOpportunities.Visible = true;
                         dvFunWithQuizzes.Visible = true;
-                        dvSettings.Visible = true;
+                        //dvSettings.Visible = true;
                         dvMyAccount.Visible = true;
                         dvLanguages.Visible = true;
                         dvNotifications.Visible = true;
