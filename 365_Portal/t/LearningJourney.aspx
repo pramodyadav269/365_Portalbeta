@@ -916,7 +916,7 @@
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
-                }
+                }                
                 else {
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').hide();
@@ -1601,15 +1601,13 @@
             LessonFlag = id;
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
-            nextTab('pills-lesson-tab');
-
-            if (IsQueryString == '1')
-            {
-                //BindContent('addmore');
-            }
+                        
+            BindContent('');
 
             BindResource();
             BindQuiz();
+
+            nextTab('pills-lesson-tab');
         }
 
         function DeleteLessionFromTile(obj, id) {
@@ -2114,7 +2112,7 @@
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: JSON.stringify(requestParams),
                 contentType: "application/json",
-                //async: false,//Added on 18 APR
+                //async: true,//Added on 18 APR
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
