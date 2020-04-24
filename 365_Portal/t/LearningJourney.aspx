@@ -1521,6 +1521,8 @@
                                             icon: "success"
                                         });
                                     }
+
+                                    IsCoursePublishable();
                                 }
                                 else {
                                     Swal.fire({
@@ -1604,8 +1606,12 @@
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
                         
-            BindContent('');
 
+            ClearFieldsAddResource();
+            ClearFieldsAddContent();
+            ClearFieldsAddQuiz();
+
+            BindContent('');
             BindResource();
             BindQuiz();
 
