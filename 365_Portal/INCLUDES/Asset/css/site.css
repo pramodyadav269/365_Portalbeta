@@ -51,7 +51,7 @@ nav.nav-fix {
   position: fixed;
   width: 100%;
   /*height: 66px;*/
-  z-index: 99998;
+  z-index: 1050;
   box-shadow: 0 0.125rem 0.13rem rgba(0, 0, 0, 0.2);
   padding: 8px 18px 16px 18px; }
 
@@ -447,9 +447,9 @@ main.fix {
 .sidenav {
   position: fixed;
   top: 64px;
-  width: 210px;
+  width: 214px;
   height: 100%;
-  z-index: 99991;
+  z-index: 1050;
   background-color: #212338;
   overflow-x: hidden;
   transition: 0.5s;
@@ -486,6 +486,8 @@ main.fix {
     list-style: none;
     margin: 0;
     padding: 0; }
+    .sidenav .sidenav-content .sidenav-nav:first-child .sidenav-item .sidenav-link {
+      padding-top: 14px; }
     .sidenav .sidenav-content .sidenav-nav .sidenav-item {
       cursor: pointer;
       /*font-size: 1rem;*/
@@ -500,13 +502,13 @@ main.fix {
         padding-top: 14px; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item:last-child {
         border: none; }
-      .sidenav .sidenav-content .sidenav-nav .sidenav-item.active, .sidenav .sidenav-content .sidenav-nav .sidenav-item:hover {
+      .sidenav .sidenav-content .sidenav-nav .sidenav-item.active .sidenav-link {
         color: #fff; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link {
         width: 100%;
         padding: 22px 1rem;
         color: rgba(221, 221, 221, 0.65); }
-        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.active, .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link:hover {
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link:hover {
           color: #fff; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon {
           margin-right: .5rem; }
@@ -531,6 +533,14 @@ main.fix {
             position: absolute;
             top: 20px;
             right: 12px; }
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title.icon-right {
+          color: rgba(221, 221, 221, 0.65);
+          font-size: 11px;
+          position: absolute;
+          top: 18px;
+          right: 12px; }
+          .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title.icon-right:hover {
+            color: #fff; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav {
           padding: 0; }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item {
@@ -543,12 +553,45 @@ main.fix {
               padding-top: 22px; }
             .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item:last-child .sidenav-link {
               padding-bottom: 22px; }
+  .sidenav .sidenav-content-menu {
+    position: absolute;
+    width: 168px;
+    top: 44px;
+    bottom: 0;
+    background-color: #2f3147;
+    -webkit-transform: translate3d(220px, 0, 0);
+    transform: translate3d(220px, 0, 0);
+    -webkit-transition: -webkit-transform 150ms ease-in-out;
+    transition: -webkit-transform 150ms ease-in-out;
+    transition: transform 150ms ease-in-out;
+    transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out; }
+    .sidenav .sidenav-content-menu .sidenav-nav {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 2rem; }
+      .sidenav .sidenav-content-menu .sidenav-nav .menu-title {
+        color: rgba(221, 221, 221, 0.65);
+        padding: 1rem 0 0 1rem;
+        font-size: 10px;
+        text-transform: uppercase;
+        margin: 0; }
+      .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item.active .sidenav-link {
+        color: #fff; }
+      .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item .sidenav-link {
+        font-size: 13px;
+        width: 100%;
+        color: rgba(221, 221, 221, 0.65);
+        display: block;
+        padding: 8px 1rem 8px 1rem; }
+        .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item .sidenav-link:hover {
+          color: #fff; }
 
 /* main */
 main {
   position: relative;
   top: 66px;
-  margin-left: 210px;
+  margin-left: 214px;
   transition: 0.5s; }
   @media only screen and (max-width: 600px) {
     main {
