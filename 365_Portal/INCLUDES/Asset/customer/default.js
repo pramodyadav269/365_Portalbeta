@@ -468,7 +468,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $("#dvTopicContainer").show();
             var responseData = response.data;
             $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
-            if ($rootScope.InProgressTopics.length == 0) {
+            if ($rootScope.InProgressTopics != null && $rootScope.InProgressTopics.length == 0) {
                 $("#dvInProgressTitle").hide();
                 $("#dvInProgressTopics").hide();
             }
@@ -478,7 +478,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.MyCourses = responseData.Data.Data1; // My Courses except in-complete courses..
-            if ($rootScope.MyCourses.length == 0) {
+            if ($rootScope.MyCourses != null && $rootScope.MyCourses.length == 0) {
                 $("#dvMyTopicsTitle").hide();
                 $("#dvMyTopics").hide();
             }
@@ -488,7 +488,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.RecommendedCourses = responseData.Data.Data2; // Recommended Courses
-            if ($rootScope.RecommendedCourses.length == 0) {
+            if ($rootScope.RecommendedCourses != null && $rootScope.RecommendedCourses.length == 0) {
                 $("#dvRecommendedTopicsTitle").hide();
                 $("#dvRecommendedTopics").hide();
             }
@@ -499,7 +499,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
 
 
             $rootScope.LatestCourses = responseData.Data.Data3; // Latest Courses
-            if ($rootScope.LatestCourses.length == 0) {
+            if ($rootScope.LatestCourses != null && $rootScope.LatestCourses.length == 0) {
                 $("#dvLatestTopicsTitle").hide();
                 $("#dvLatestTopics").hide();
             }
@@ -509,7 +509,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.PopularCourses = responseData.Data.Data4; // Popular Courses
-            if ($rootScope.PopularCourses.length == 0) {
+            if ($rootScope.PopularCourses != null && $rootScope.PopularCourses.length == 0) {
                 $("#dvPopularTopicsTitle").hide();
                 $("#dvPopularTopics").hide();
             }
@@ -519,11 +519,16 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             var allTopics = [];
-            $.merge(allTopics, $rootScope.InProgressTopics);
-            $.merge(allTopics, $rootScope.MyCourses);
-            $.merge(allTopics, $rootScope.RecommendedCourses);
-            $.merge(allTopics, $rootScope.LatestCourses);
-            $.merge(allTopics, $rootScope.PopularCourses);
+            if ($rootScope.InProgressTopics != null)
+                $.merge(allTopics, $rootScope.InProgressTopics);
+            if ($rootScope.MyCourses != null)
+                $.merge(allTopics, $rootScope.MyCourses);
+            if ($rootScope.RecommendedCourses != null)
+                $.merge(allTopics, $rootScope.RecommendedCourses);
+            if ($rootScope.LatestCourses != null)
+                $.merge(allTopics, $rootScope.LatestCourses);
+            if ($rootScope.PopularCourses != null)
+                $.merge(allTopics, $rootScope.PopularCourses);
 
             if (userRole == "enduser") {
                 $rootScope.AllTopics = allTopics;
