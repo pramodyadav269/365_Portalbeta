@@ -731,14 +731,15 @@ main {
                     }
 
                     &.content-menu {
-
-                        &::before {
-                            position: absolute;
-                            font-family: "Font Awesome 5 Free";
-                            font-weight: 700;
-                            content: "\f054";
-                            right: 14px;
-                            font-size: 13px;
+                        .link-text {
+                            &::before {
+                                position: absolute;
+                                font-family: "Font Awesome 5 Free";
+                                font-weight: 700;
+                                content: "\f054";
+                                right: 14px;
+                                font-size: 13px;
+                            }
                         }
                     }
                 }

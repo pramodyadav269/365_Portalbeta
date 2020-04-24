@@ -61,19 +61,17 @@ $(document).ready(function () {
     //side nav menu content
     $('.sidenav-item .sidenav-link').click(function () {
         $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
-        $('.sidenav-item').removeClass('active');
-        if ($(this).hasClass('content-menu')) {
-            $(this).parent().addClass('active');
 
+        if ($(this).hasClass('content-menu')) {
+            $('.sidenav-content .sidenav-item').find('.sidenav-link').addClass('cu-tooltiptext');
             $('.sidenav-content-menu .sidenav-nav#' + $(this).attr('menu-data')).removeClass('d-none');
 
-            $('.sidenav-content-menu').css({ "transform": "translate3d(58px, 0, 0)" });
-            $('.sidenav-nav .link-text').hide();
-            $('.sidenav-nav .menu-title.icon-right').hide();
+            $('.sidenav-content-menu').css({ "transform": "translate3d(46px, 0, 0)" });
+           
         } else {
+            $('.sidenav-content .sidenav-item').find('.sidenav-link').removeClass('cu-tooltiptext');
             $('.sidenav-content-menu').css({ "transform": "translate3d(220px, 0, 0)" });
-            $('.sidenav-nav .link-text').show();
-            $('.sidenav-nav .menu-title.icon-right').show();
+           
         }
         $('#' + $(this).attr('sidenav-id')).removeClass('d-none');
     });

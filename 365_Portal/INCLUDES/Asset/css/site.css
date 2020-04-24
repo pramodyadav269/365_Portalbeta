@@ -517,7 +517,7 @@ main.fix {
           @media only screen and (max-width: 600px) {
             .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
               display: none; } }
-        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.content-menu::before {
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.content-menu .link-text::before {
           position: absolute;
           font-family: "Font Awesome 5 Free";
           font-weight: 700;
