@@ -608,9 +608,6 @@ main {
     outline: 1px solid slategrey;
 }
 
-.modal {
-    z-index: 99998;
-}
 /* scroll bar */
 .sidenav {
     position: fixed;
@@ -674,14 +671,21 @@ main {
                 cursor: pointer;
                 /*font-size: 1rem;*/
                 color: rgba(221, 221, 221, .65);
-                height: 38px;
+                /*height: 38px;*/
                 align-items: center;
                 display: flex;
-                padding: 22px 0;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 
                 &.border-0 {
-                    padding-bottom: 16px;
+                    .sidenav-link {
+                        padding-bottom: 14px;
+                    }
+
+                    + .sidenav-item {
+                        .sidenav-link {
+                            padding-top: 14px;
+                        }
+                    }
                 }
 
                 &:last-child {
@@ -693,7 +697,13 @@ main {
                 }
 
                 .sidenav-link {
-                    padding-left: 1rem;
+                    width: 100%;
+                    padding: 22px 1rem;
+                    color: rgba(221, 221, 221, .65);
+
+                    &.active, &:hover {
+                        color: #fff;
+                    }
 
                     .link-icon {
                         margin-right: .5rem;
@@ -741,14 +751,25 @@ main {
 
                         .sidenav-item {
                             border: none;
-                            padding: 22px 0;
+
+                            .sidenav-link {
+                                padding-top: 12px;
+                                padding-bottom: 12px;
+                            }
 
                             &:first-child {
-                                padding-top: 28px;
+
+                                .sidenav-link {
+                                    padding-bottom: 12px;
+                                    padding-top: 22px;
+                                }
                             }
 
                             &:last-child {
-                                padding-bottom: 28px;
+
+                                .sidenav-link {
+                                    padding-bottom: 22px;
+                                }
                             }
                         }
                     }
@@ -757,8 +778,6 @@ main {
         }
     }
 }
-
-
 /* main */
 main {
     position: relative;
@@ -944,7 +963,6 @@ main {
         }
     }
 }
-
 /* spinner style*/
 .spinner-center {
     position: fixed;

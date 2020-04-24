@@ -443,9 +443,6 @@ main.fix {
   background-color: darkgrey;
   outline: 1px solid slategrey; }
 
-.modal {
-  z-index: 99998; }
-
 /* scroll bar */
 .sidenav {
   position: fixed;
@@ -493,19 +490,24 @@ main.fix {
       cursor: pointer;
       /*font-size: 1rem;*/
       color: rgba(221, 221, 221, 0.65);
-      height: 38px;
+      /*height: 38px;*/
       align-items: center;
       display: flex;
-      padding: 22px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
-      .sidenav .sidenav-content .sidenav-nav .sidenav-item.border-0 {
-        padding-bottom: 16px; }
+      .sidenav .sidenav-content .sidenav-nav .sidenav-item.border-0 .sidenav-link {
+        padding-bottom: 14px; }
+      .sidenav .sidenav-content .sidenav-nav .sidenav-item.border-0 + .sidenav-item .sidenav-link {
+        padding-top: 14px; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item:last-child {
         border: none; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item.active, .sidenav .sidenav-content .sidenav-nav .sidenav-item:hover {
         color: #fff; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link {
-        padding-left: 1rem; }
+        width: 100%;
+        padding: 22px 1rem;
+        color: rgba(221, 221, 221, 0.65); }
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.active, .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link:hover {
+          color: #fff; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon {
           margin-right: .5rem; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
@@ -532,12 +534,15 @@ main.fix {
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav {
           padding: 0; }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item {
-            border: none;
-            padding: 22px 0; }
-            .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item:first-child {
-              padding-top: 28px; }
-            .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item:last-child {
-              padding-bottom: 28px; }
+            border: none; }
+            .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item .sidenav-link {
+              padding-top: 12px;
+              padding-bottom: 12px; }
+            .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item:first-child .sidenav-link {
+              padding-bottom: 12px;
+              padding-top: 22px; }
+            .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item:last-child .sidenav-link {
+              padding-bottom: 22px; }
 
 /* main */
 main {

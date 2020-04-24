@@ -8,8 +8,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
     <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" />
-        <h4 class="nature" id="dvUserName" runat="server">Welcome User! Let's learn something new today :)</h4>
+        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" style="display:none;" />
+        <h4 class="nature" id="dvUserName" style="display:none;" runat="server">Welcome User! Let's learn something new today :)</h4>
     </div>
 
     <%-- beta view lesson start --%>
@@ -284,8 +284,9 @@
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img src="../INCLUDES/Asset/images/profile.png" />
-                                <h6 class="card-title">Jeff Dujohn</h6>
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
@@ -345,8 +346,9 @@
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img src="../INCLUDES/Asset/images/profile.png" />
-                                <h6 class="card-title">Jeff Dujohn</h6>
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
@@ -405,8 +407,9 @@
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img src="../INCLUDES/Asset/images/profile.png" />
-                                <h6 class="card-title">Jeff Dujohn</h6>
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
@@ -460,8 +463,9 @@
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img src="../INCLUDES/Asset/images/profile.png" />
-                                <h6 class="card-title">Jeff Dujohn</h6>
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
@@ -516,9 +520,10 @@
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
-                            <div class="card-body profile">
-                                <img src="../INCLUDES/Asset/images/profile.png" />
-                                <h6 class="card-title">Jeff Dujohn</h6>
+                           <div class="card-body profile">
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
