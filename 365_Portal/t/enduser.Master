@@ -285,7 +285,7 @@
                                 <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="tooltiptext">Organizations</span><span class="link-text">Organizations</span></a>
                             </li>
                             <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="tooltiptext">Billing</span><span class="link-text">Billing</span></a>
                             </li>
                             <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="tooltiptext">Email</span><span class="link-text">Email</span></a>

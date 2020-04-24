@@ -59,6 +59,8 @@ $(document).ready(function () {
     });
 
     //side nav menu content
+    
+    
     $('.sidenav-item .sidenav-link').click(function () {
         $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
 
@@ -120,7 +122,6 @@ function ToggleNav() {
 function openNav() {
     $("#sideNav").css("width", "214px");
     $("main").css("margin-left", "214px");
-
     setTimeout(function () {
         $('.sidenav-nav .link-text').show();
         $('.sidenav-nav .menu-title.icon-right').show();
@@ -129,8 +130,8 @@ function openNav() {
 }
 
 function closeNav() {
-    $("#sideNav").css("width", "60px");
-    $("main").css("margin-left", "60px");
+    $("#sideNav").css("width", "48px");
+    $("main").css("margin-left", "48px");
 
     $('.sidenav-nav .link-text').hide();
     $('.sidenav-nav .menu-title.icon-right').hide();
