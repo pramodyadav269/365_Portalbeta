@@ -219,7 +219,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body id="dvBody" runat="server" ng-app="MasterPage" ng-controller="DefaultController">
-    <form id="form1" runat="server">
+  <form id="form1" runat="server">
 
         <div class="spinner-center d-none">
             <div class="spinner">
@@ -247,7 +247,7 @@
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="link-text">Courses</span></a>
-                        <a class="menu-title icon-right" href="#"><i class="fas fa-plus-circle"></i></a>
+                        <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourney.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="link-text">Courses Insights</span></a>
@@ -259,7 +259,7 @@
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="link-text">Tasks</span></a>
-                        <a class="menu-title icon-right" href="#"><i class="fas fa-plus-circle"></i></a>
+                        <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="link-text">Tasks Insights</span></a>
@@ -270,7 +270,7 @@
                         </ul>
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="link-text">Community</span></a>
+                        <a class="sidenav-link  content-menu" href="#"  menu-data="ulCommunity"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="link-text">Community</span></a>
                     </li>
                     <li class="sidenav-item" id="dvOnyxU" runat="server" visible="false">
                         <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-university"></i></span><span class="link-text">OnyxU</span></a>
@@ -285,7 +285,7 @@
                                 <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="link-text">Organizations</span></a>
                             </li>
                             <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link content-menu" href="#" menu-data="ulBilling"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
                             </li>
                             <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="link-text">Email</span></a>
@@ -334,20 +334,18 @@
                     </li>--%>
                 </ul>
             </div>
-
-
-
             <div class="sidenav-content-menu">
+
                 <%-- start beta --%>
                 <ul class="sidenav-nav d-none" id="ulUsersGroups">
                     <h4 class="menu-title">Users</h4>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="#" onclick="">Learners</a>
+                        <a class="sidenav-link" id="dvUsers" runat="server" visible="false" href="Users.aspx" onclick="">Users</a>
                     </li>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="#" onclick="">Creators</a>
+                        <a class="sidenav-link" id="dvUserGroupMpng" runat="server" visible="false" href="UserGroupMapping.aspx" onclick="">Users & Groups Mapping</a>
                     </li>
-                    <li class="sidenav-item">
+                    <%--  <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Supervisors</a>
                     </li>
                     <li class="sidenav-item">
@@ -355,19 +353,22 @@
                     </li>
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Global Admin</a>
-                    </li>
+                    </li>--%>
                     <h4 class="menu-title">Groups</h4>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="#" onclick="">Groups</a>
+                        <a class="sidenav-link" id="dvGroups" runat="server" visible="false" href="Groups.aspx" onclick="">Groups</a>
                     </li>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="#" onclick="">Teams</a>
+                        <a class="sidenav-link" id="dvTeam" runat="server" visible="false" href="AddTeam.aspx" onclick="">Teams</a>
                     </li>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="#" onclick="">Departments</a>
+                        <a class="sidenav-link" id="dvDepartment" runat="server" visible="false" href="Departments.aspx" onclick="">Departments</a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" id="dvCourseCategory" runat="server" visible="false" href="AddCategory.aspx" onclick="">Course Category</a>
                     </li>
                 </ul>
-                <ul class="sidenav-nav d-none" id="ulBilling">
+                <%--<ul class="sidenav-nav d-none" id="ulBilling">
                     <h4 class="menu-title">Billing</h4>
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">A</a>
@@ -375,34 +376,54 @@
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">B</a>
                     </li>
+                </ul>--%>
+
+                <ul class="sidenav-nav d-none" id="ulCommunity">
+                    <h4 class="menu-title">Community</h4>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" id="dvLearnNewSkills" runat="server" visible="false" href="#" onclick="">Learn New Skills</a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" id="dvConnectWithOtherLearners" runat="server" visible="false" href="#" onclick="">Connect with other Learners</a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" id="dvDiscoverNewOpportunities" runat="server" visible="false" href="#" onclick="">Discover new opportunities</a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" id="dvFunWithQuizzes" runat="server" visible="false" href="#" onclick="">Fun with Quizzes</a>
+                    </li>
                 </ul>
+
                 <%-- end beta --%>
-
-
-
-
-
-
-
 
 
                 <ul class="sidenav-nav d-none" id="sidenav_Directory">
                     <h4 class="menu-title">Directory</h4>
-
+                    <%--<li class="sidenav-item " id="dvSubMenu_Organizations" runat="server" visible="false" onclick="location.href='organization.aspx';">
+                        <a class="sidenav-link">Organizations</a>
+                    </li>--%>
                     <li class="sidenav-item " id="dvSubMenu_Users" runat="server" onclick="location.href='users.aspx';">
-                        <a class="sidenav-link" href="#">Users</a>
+                        <a class="sidenav-link">Users</a>
                     </li>
                     <li class="sidenav-item" id="dvSubMenu_Groups" runat="server" onclick="location.href='groups.aspx';">
-                        <a class="sidenav-link" href="#">Groups</a>
+                        <a class="sidenav-link">Groups</a>
                     </li>
                     <li class="sidenav-item" id="dvSubMenu_UserGroupMapSettings" runat="server" onclick="location.href='UserGroupMapping.aspx';">
-                        <a class="sidenav-link" href="#">User Group Mapping</a>
+                        <a class="sidenav-link">User Group Mapping</a>
                     </li>
                     <li class="sidenav-item" id="dvSubMenu_DirectorySettings" runat="server" onclick="location.href='comingsoon.aspx';">
-                        <a class="sidenav-link" href="#">Directory Settings</a>
+                        <a class="sidenav-link">Directory Settings</a>
                     </li>
                 </ul>
-
+                <%--  <ul class="sidenav-nav d-none" id="sidenav_me">
+                    <h4 class="menu-title">Me</h4>
+                    <li class="sidenav-item " id="dvSubMenu_MyProfile" onclick="location.href='profile.aspx';">
+                        <a class="sidenav-link">My Profile</a>
+                    </li>
+                    <li class="sidenav-item" id="dvSubMenu_MyLearning" runat="server" onclick="location.href='default.aspx';">
+                        <a class="sidenav-link">My Learning</a>
+                    </li>
+                </ul>--%>
                 <ul class="sidenav-nav d-none" id="sidenav_Integrations">
                     <h4 class="menu-title">Integrations</h4>
                     <li class="sidenav-item " id="dvSubMenu_IntegrationSettings" onclick="location.href='comingsoon.aspx';">
@@ -434,6 +455,15 @@
                     </li>
                 </ul>
 
+                <%-- <ul class="sidenav-nav d-none" id="sidenav_learing">
+                    <h4 class="menu-title">Learning</h4>
+                    <li class="sidenav-item" id="dvSubMenu_Learning" onclick="location.href='topics.aspx';">
+                        <a class="sidenav-link">Learning</a>
+                    </li>
+                    <li class="sidenav-item" id="dvSubMenu_AssignTopics" runat="server" visible="false" onclick="location.href='assign_topics.aspx';">
+                        <a class="sidenav-link">Assign Topics</a>
+                    </li>
+                </ul>--%>
                 <ul class="sidenav-nav d-none" id="sidenav_settings">
                     <h4 class="menu-title">Settings</h4>
                     <li class="sidenav-item" id="dvSubMenu_Settings" onclick="location.href='settings.aspx';">
@@ -441,7 +471,10 @@
                     </li>
                     <li class="sidenav-item" id="dvSubMenu_Notifications" onclick="location.href='settings.aspx';">
                         <a class="sidenav-link">Notifications</a>
-
+                    </li>
+                    <%-- <li class="sidenav-item" id="dvSubMenu_MsgNotifications" onclick="location.href='MsgNotification.aspx';">
+                        <a class="sidenav-link">Msg Notifications</a>
+                    </li>--%>
                     <li class="sidenav-item" id="dvSubMenu_Roles" runat="server" visible="false" onclick="location.href='roles.aspx';">
                         <a class="sidenav-link">Roles</a>
                     </li>
@@ -450,6 +483,18 @@
                     </li>
 
                 </ul>
+                <%-- <ul class="sidenav-nav d-none" id="sidenav_Help">
+                    <h4 class="menu-title">Help</h4>
+                    <li class="sidenav-item" id="dvSubMenu_HelpCenter" onclick="location.href='http://support.365staffapp.com/en';">
+                        <a class="sidenav-link">Help Center</a>
+                    </li>
+                    <li class="sidenav-item" id="dvSubMenu_Support" onclick="location.href='http://support.365staffapp.com/en';">
+                        <a class="sidenav-link">Support</a>
+                    </li>
+                    <li class="sidenav-item" id="dvSubMenu_Chat" onclick="location.href='comingsoon.aspx';">
+                        <a class="sidenav-link">Chat</a>
+                    </li>
+                </ul>--%>
             </div>
         </div>
 
@@ -647,7 +692,7 @@
                         <div class="list-group">
                             <a class="list-group-item" href="#" runat="server" id="dvMyLearning" visible="false">My Learning</a>
                             <a class="list-group-item" href="#" runat="server" id="dvTeamLearning" visible="false">Team Learning</a>
-                            <a class="list-group-item" href="#" runat="server" id="dvLearnNewSkills" visible="false">Learn New Skills</a>
+                            <a class="list-group-item" href="#" runat="server" id="dvLearnNewSkills1" visible="false">Learn New Skills</a>
                             <a class="list-group-item" href="#" runat="server" id="dvDiscoverLearning" visible="false">Discover Learning</a>
                         </div>
                     </div>
@@ -657,7 +702,7 @@
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
                             <%--   <a class="list-group-item" href="courses.aspx" runat="server" id="dvAllCourses" visible="false">All Courses</a>--%>
-                            <a class="list-group-item" href="learningjourney.aspx" runat="server" id="dvAddNewCourse" visible="false">Add new course</a>
+                            <a class="list-group-item" href="learningjourney.aspx" runat="server" id="dvAddNewCourse1" visible="false">Add new course</a>
                             <a class="list-group-item" href="assign_topics.aspx" runat="server" id="dvAssignCourses" visible="false">Assign Courses</a>
                         </div>
                     </div>
@@ -667,11 +712,11 @@
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
                             <a class="list-group-item" id="dvOrganizations" runat="server" visible="false" href="Organization.aspx">Organizations</a>
-                            <a class="list-group-item" id="dvUsers" runat="server" visible="false" href="Users.aspx">Users</a>
-                            <a class="list-group-item" id="dvGroups" runat="server" visible="false" href="Groups.aspx">Groups</a>
-                            <a class="list-group-item" id="dvUserGroupMpng" runat="server" visible="false" href="UserGroupMapping.aspx">User Group Mapping</a>
-                            <a class="list-group-item" id="dvTeam" runat="server" visible="false" href="AddTeam.aspx">Team</a>
-                            <a class="list-group-item" id="dvDepartment" runat="server" visible="false" href="Departments.aspx">Department</a>
+                            <a class="list-group-item" id="dvUsers1" runat="server" visible="false" href="Users.aspx">Users</a>
+                            <a class="list-group-item" id="dvGroups1" runat="server" visible="false" href="Groups.aspx">Groups</a>
+                            <a class="list-group-item" id="dvUserGroupMpng1" runat="server" visible="false" href="UserGroupMapping.aspx">User Group Mapping</a>
+                            <a class="list-group-item" id="dvTeam1" runat="server" visible="false" href="AddTeam.aspx">Team</a>
+                            <a class="list-group-item" id="dvDepartment1" runat="server" visible="false" href="Departments.aspx">Department</a>
                             <a class="list-group-item" id="dvDirectorySettings" runat="server" visible="false" href="comingsoon.aspx">Directory Settings</a>
                         </div>
                     </div>
@@ -681,9 +726,9 @@
                     <%--  <a class="nav-link" href="#" id="dvCommunity" runat="server" visible="false">Community</a>--%>
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
-                            <a class="list-group-item" href="#" id="dvConnectWithOtherLearners" runat="server" visible="false">Connect with other Learners</a>
-                            <a class="list-group-item" href="#" id="dvDiscoverNewOpportunities" runat="server" visible="false">Discover new opportunities</a>
-                            <a class="list-group-item" href="#" id="dvFunWithQuizzes" runat="server" visible="false">Fun with Quizzes</a>
+                            <a class="list-group-item" href="#" id="dvConnectWithOtherLearners1" runat="server" visible="false">Connect with other Learners</a>
+                            <a class="list-group-item" href="#" id="dvDiscoverNewOpportunities1" runat="server" visible="false">Discover new opportunities</a>
+                            <a class="list-group-item" href="#" id="dvFunWithQuizzes1" runat="server" visible="false">Fun with Quizzes</a>
                         </div>
                     </div>
                 </li>

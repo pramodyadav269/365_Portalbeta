@@ -1,6 +1,121 @@
 ﻿<%@ Page Title="Task" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Projects.aspx.cs" Inherits="_365_Portal.t.Projects" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+        .board {
+            position: relative;
+            margin-left: 1%;
+        }
+
+        .board-column {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 30%;
+            margin: 0 1.5%;
+            background: #f0f0f0;
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+            .board-column.muuri-item-releasing {
+                z-index: 2;
+            }
+
+            .board-column.muuri-item-dragging {
+                z-index: 3;
+                cursor: move;
+            }
+
+        .board-column-header {
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            overflow: hidden;
+            padding: 0 20px;
+            text-align: center;
+            background: #333;
+            color: #fff;
+            border-radius: 3px 3px 0 0;
+        }
+
+        @media (max-width: 600px) {
+            .board-column-header {
+                text-indent: -1000px;
+            }
+        }
+
+        .board-column.todo .board-column-header {
+            background: #4A9FF9;
+        }
+
+        .board-column.working .board-column-header {
+            background: #f9944a;
+        }
+
+        .board-column.done .board-column-header {
+            background: #2ac06d;
+        }
+        /* This is the secret sauce,
+   always use a wrapper for setting
+   the "overflow: scroll/auto" */
+        .board-column-content-wrapper {
+            position: relative;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        /* Never ever set "overflow: auto/scroll"
+   to the muuri element, stuff will break */
+        .board-column-content {
+            position: relative;
+            border: 10px solid transparent;
+            min-height: 95px;
+        }
+
+        .board-item {
+            position: absolute;
+            width: 100%;
+            margin: 5px 0;
+        }
+
+            .board-item.muuri-item-releasing {
+                z-index: 9998;
+            }
+
+            .board-item.muuri-item-dragging {
+                z-index: 9999;
+                cursor: move;
+            }
+
+            .board-item.muuri-item-hidden {
+                z-index: 0;
+            }
+
+        .board-item-content {
+            position: relative;
+            padding: 20px;
+            background: #fff;
+            border-radius: 4px;
+            font-size: 17px;
+            cursor: pointer;
+            -webkit-box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+            box-shadow: 0px 1px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .board-item-content {
+                text-align: center;
+            }
+
+                .board-item-content span {
+                    display: none;
+                }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <style>
@@ -85,7 +200,7 @@
                 </ul>
             </div>
             <div class="col-10 pr-5">
-                <div class="row website-redesign" id="dvWebsiteRedesign">
+                <div class="row website-redesign board" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
                             <div class="card-body">
@@ -580,6 +695,7 @@
         function initDragDrop() {
             // for card drag and drop
             var adjustment;
+            $('.section-sorting').sortable('refresh')
             $("ol.section-sorting").sortable({
                 group: 'section-sorting',
                 pullPlaceholder: false,
@@ -591,7 +707,6 @@
                     var ProjectId = $item.attr('project_Id');
                     var taskId = $item.attr('task_Id');
                     //alert("statusId:" + statusId + " ProjectId:" + ProjectId + " taskId:" + taskId);
-
                     UpdateTaskStatus(ProjectId, taskId, statusId);
                 },
                 // set $item relative to cursor position
@@ -1618,11 +1733,20 @@
 
             var jsonTaskList = $.parseJSON(response).Data;
             bindTaskStatusCounts(jsonTaskList.Data);
+
+            var newCardHtml = '';
+
             var cardHtml = '';
             $.each(jsonStatusList, function (indxStatus, objStatus) {
                 var statusWiseTaskList = $.grep(jsonTaskList.Data, function (n) {
                     return n.Status == objStatus.StatusID;
                 });
+
+                newCardHtml += '  <div class="board-column">';
+                newCardHtml += '   <div class="board-column-header">' + objStatus.StatusName + '</div>';
+                newCardHtml += '    <div class="board-column-content-wrapper">';
+                newCardHtml += '      <div class="board-column-content" MasterStatusID="' + objStatus.StatusID + '">';
+
                 // Repeat Status
                 cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                 cardHtml += '<div class="card shadow">';
@@ -1646,8 +1770,13 @@
                         cardHtml += '</div></div>';
                         cardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
+                        newCardHtml += '<div class="board-item">';
+                        newCardHtml += '<div class="board-item-content" status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '"><span>' + objTask.TaskName + ' -  Item #</span>' + objTask.TaskID + '</div>';
+                        newCardHtml += ' </div>';
+
                         //Bind Task Assignee
                         //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" title="raj pawar"  /><span class="anchar-title development">Test team</span></div>';
+
                         var requestParams = {
                             t_Action: "6"
                             , t_ProjectID: ProjectID
@@ -1710,16 +1839,114 @@
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
+
+                newCardHtml += ' </div>';
+                newCardHtml += ' </div>';
+                newCardHtml += ' </div>';
+                newCardHtml += ' </div>';
+
             });
+            $("#dvWebsiteRedesign").html("")
             $("#dvWebsiteRedesign").empty().html(cardHtml);
-            initDragDrop();
+
+            $("#dvWebsiteRedesign").empty().html(newCardHtml);
+            InitializeCardsDraggableView();
+            // initDragDrop();
             HideLoader();
+        }
+
+        function InitializeCardsDraggableView() {
+            var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
+            var columnGrids = [];
+            var boardGrid;
+
+            // Define the column grids so we can drag those
+            // items around.
+            itemContainers.forEach(function (container) {
+                // Instantiate column grid.
+                var grid = new Muuri(container, {
+                    items: '.board-item',
+                    layoutDuration: 400,
+                    layoutEasing: 'ease',
+                    dragEnabled: true,
+                    dragSort: function () {
+                        return columnGrids;
+                    },
+                    dragSortInterval: 0,
+                    dragContainer: document.body,
+                    dragReleaseDuration: 400,
+                    dragReleaseEasing: 'ease',
+                    MasterStatusID: $(container).attr("MasterStatusID")
+                })
+                    .on('dragStart', function (item) {
+                        // Let's set fixed widht/height to the dragged item
+                        // so that it does not stretch unwillingly when
+                        // it's appended to the document body for the
+                        // duration of the drag.
+                        item.getElement().style.width = item.getWidth() + 'px';
+                        item.getElement().style.height = item.getHeight() + 'px';
+                    })
+                    .on('dragReleaseEnd', function (item) {
+                        // Let's remove the fixed width/height from the
+                        // dragged item now that it is back in a grid
+                        // column and can freely adjust to it's
+                        // surroundings.
+
+                        var taskId = $(item._element).children().attr("task_id");
+                        var ProjectId = $(item._element).children().attr("project_Id");
+                        var statusId = $(item._element).children().attr("status_id");
+                        // columnGrids
+
+                        //draggableContainer.MasterStatusID
+                        var draggableContainer = $(columnGrids).filter(function (i, n) {
+                            return n._id === item._gridId;
+                        })[0];
+
+                        if (draggableContainer._settings.MasterStatusID != statusId) {
+                            UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID);
+                        }
+
+                        item.getElement().style.width = '';
+                        item.getElement().style.height = '';
+                        // Just in case, let's refresh the dimensions of all items
+                        // in case dragging the item caused some other items to
+                        // be different size.
+                        columnGrids.forEach(function (grid) {
+                            grid.refreshItems();
+                        });
+                    })
+                    .on('layoutStart', function () {
+                        // Let's keep the board grid up to date with the
+                        // dimensions changes of column grids.
+                        boardGrid.refreshItems().layout();
+                    });
+
+                // Add the column grid reference to the column grids
+                // array, so we can access it later on.
+                columnGrids.push(grid);
+
+            });
+
+            // Instantiate the board grid so we can drag those
+            // columns around.
+            boardGrid = new Muuri('.board', {
+                layoutDuration: 400,
+                layoutEasing: 'ease',
+                dragEnabled: true,
+                dragSortInterval: 0,
+                dragStartPredicate: {
+                    handle: '.board-column-header'
+                },
+                dragReleaseDuration: 400,
+                dragReleaseEasing: 'ease'
+            });
         }
 
         function BindProjectData(response) {

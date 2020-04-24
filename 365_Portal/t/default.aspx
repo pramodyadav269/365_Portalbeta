@@ -8,8 +8,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
     <div class="theme-section" ng-if="ActiveContainer =='Topic'">
-        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" style="display:none;" />
-        <h4 class="nature" id="dvUserName" style="display:none;" runat="server">Welcome User! Let's learn something new today :)</h4>
+        <img src="../INCLUDES/Asset/images/theme_nature_header.svg" style="display: none;" />
+        <h4 class="nature" id="dvUserName" style="display: none;" runat="server">Welcome User! Let's learn something new today :)</h4>
     </div>
 
     <%-- beta view lesson start --%>
@@ -260,20 +260,22 @@
 
         <div class="container-fluid dashboard">
             <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
-                <h4 class="section-title" id="dvInProgressTitle">In Progress</h4>
+                <h4 class="section-title" id="dvInProgressTitle" style="display:none;">In Progress Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvInProgressTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsFavourite !=1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsFavourite ==1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="far fa-bookmark"></i>Remove from Favorites</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsBookmark ==1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i>Remove from Learning Path</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -290,11 +292,11 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <%-- End new card style --%>
 
-              <%--  <div id="dvInProgressTopics" class="content d-none">
+                <%--  <div id="dvInProgressTopics" class="content d-none">
                     <div class="content-item card-fix" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">
@@ -321,21 +323,22 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvMyTopicsTitle">My Courses</h4>
-
+                <h4 class="section-title" id="dvMyTopicsTitle" style="display:none;">My Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvMyTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in MyCourses" my-topic-repeat-directive>
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsFavourite !=1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="far fa-bookmark"></i>Add to Favorites</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsFavourite ==1" ng-click="ChangeTopicProperty(topic,1,topic.TopicId,!topic.IsFavourite)"><i class="far fa-bookmark"></i>Remove from Favorites</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsBookmark !=1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i>Add to Learning Path</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.IsBookmark ==1" ng-click="ChangeTopicProperty(topic,3,topic.TopicId,!topic.IsBookmark)"><i class="fas fa-plus"></i>Remove from Learning Path</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -352,7 +355,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <%-- End new card style --%>
 
@@ -383,20 +386,18 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvRecommendedTopicsTitle">Recommended</h4>
+                <h4 class="section-title" id="dvRecommendedTopicsTitle" style="display:none;">Recommended Courses</h4>
 
-                 <%-- Start new card style --%>
+                <%-- Start new card style --%>
                 <div class="row" id="dvRecommendedTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -413,7 +414,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <%-- End new card style --%>
 
@@ -439,20 +440,18 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvLatestTopicsTitle">Latest</h4>
+                <h4 class="section-title" id="dvLatestTopicsTitle" style="display:none;">Latest Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvLatestTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                                <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                               <div class="dropdown-menu br-0">
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -469,7 +468,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <%-- End new card style --%>
 
@@ -497,20 +496,18 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvPopularTopicsTitle">Popular</h4>
+                <h4 class="section-title" id="dvPopularTopicsTitle" style="display:none;">Popular Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvPopularTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3"  ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
+                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
-                                    <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                    <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -520,18 +517,18 @@
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text">{{topic.Description}}</p>
                             </div>
-                           <div class="card-body profile">
+                            <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <%-- End new card style --%>
 
-              <%--  <div id="dvPopularTopics" class="content">
+                <%--  <div id="dvPopularTopics" class="content">
                     <div class="content-item card-fix" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card" ng-style="{'border-color' : (topic.CategoryColor ==null || topic.CategoryColor =='')  ? '#2D7DD2' : topic.CategoryColor }">
                             <div class="card-icon">

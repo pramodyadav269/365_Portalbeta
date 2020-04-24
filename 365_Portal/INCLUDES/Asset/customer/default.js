@@ -7,7 +7,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
     var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
     objDs = DataService;
-
+    $scope.UserRole = userRole;
     if (currentPage.indexOf('courses.aspx') > -1) {
         if (userRole == "enduser") {
             objDs.DS_GetUserTopics("", userRole);
@@ -468,7 +468,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $("#dvTopicContainer").show();
             var responseData = response.data;
             $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
-            if ($rootScope.InProgressTopics != null && $rootScope.InProgressTopics.length == 0) {
+            if ($rootScope.InProgressTopics == null || $rootScope.InProgressTopics.length == 0) {
                 $("#dvInProgressTitle").hide();
                 $("#dvInProgressTopics").hide();
             }
@@ -478,7 +478,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.MyCourses = responseData.Data.Data1; // My Courses except in-complete courses..
-            if ($rootScope.MyCourses != null && $rootScope.MyCourses.length == 0) {
+            if ($rootScope.MyCourses == null || $rootScope.MyCourses.length == 0) {
                 $("#dvMyTopicsTitle").hide();
                 $("#dvMyTopics").hide();
             }
@@ -488,7 +488,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.RecommendedCourses = responseData.Data.Data2; // Recommended Courses
-            if ($rootScope.RecommendedCourses != null && $rootScope.RecommendedCourses.length == 0) {
+            if ($rootScope.RecommendedCourses == null || $rootScope.RecommendedCourses.length == 0) {
                 $("#dvRecommendedTopicsTitle").hide();
                 $("#dvRecommendedTopics").hide();
             }
@@ -499,7 +499,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
 
 
             $rootScope.LatestCourses = responseData.Data.Data3; // Latest Courses
-            if ($rootScope.LatestCourses != null && $rootScope.LatestCourses.length == 0) {
+            if ($rootScope.LatestCourses == null || $rootScope.LatestCourses.length == 0) {
                 $("#dvLatestTopicsTitle").hide();
                 $("#dvLatestTopics").hide();
             }
@@ -509,7 +509,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
 
             $rootScope.PopularCourses = responseData.Data.Data4; // Popular Courses
-            if ($rootScope.PopularCourses != null && $rootScope.PopularCourses.length == 0) {
+            if ($rootScope.PopularCourses == null || $rootScope.PopularCourses.length == 0) {
                 $("#dvPopularTopicsTitle").hide();
                 $("#dvPopularTopics").hide();
             }
