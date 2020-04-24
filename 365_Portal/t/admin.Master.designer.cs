@@ -85,6 +85,15 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAllCourses;
         
         /// <summary>
+        /// dvAddNewCourse control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAddNewCourse;
+        
+        /// <summary>
         /// dvCoursesInsights control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,15 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvProjects;
+        
+        /// <summary>
+        /// dvAddNewTask control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAddNewTask;
         
         /// <summary>
         /// dvTaskInsights control.
@@ -191,6 +209,96 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvEmail;
+        
+        /// <summary>
+        /// dvUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUsers;
+        
+        /// <summary>
+        /// dvUserGroupMpng control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUserGroupMpng;
+        
+        /// <summary>
+        /// dvGroups control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvGroups;
+        
+        /// <summary>
+        /// dvTeam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTeam;
+        
+        /// <summary>
+        /// dvDepartment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDepartment;
+        
+        /// <summary>
+        /// dvCourseCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvCourseCategory;
+        
+        /// <summary>
+        /// dvLearnNewSkills control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvLearnNewSkills;
+        
+        /// <summary>
+        /// dvConnectWithOtherLearners control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvConnectWithOtherLearners;
+        
+        /// <summary>
+        /// dvDiscoverNewOpportunities control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDiscoverNewOpportunities;
+        
+        /// <summary>
+        /// dvFunWithQuizzes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvFunWithQuizzes;
         
         /// <summary>
         /// dvSubMenu_Users control.
@@ -382,13 +490,13 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTeamLearning;
         
         /// <summary>
-        /// dvLearnNewSkills control.
+        /// dvLearnNewSkills1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvLearnNewSkills;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvLearnNewSkills1;
         
         /// <summary>
         /// dvDiscoverLearning control.
@@ -409,13 +517,13 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTopics;
         
         /// <summary>
-        /// dvAddNewCourse control.
+        /// dvAddNewCourse1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAddNewCourse;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvAddNewCourse1;
         
         /// <summary>
         /// dvAssignCourses control.
@@ -445,49 +553,49 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvOrganizations;
         
         /// <summary>
-        /// dvUsers control.
+        /// dvUsers1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUsers;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUsers1;
         
         /// <summary>
-        /// dvGroups control.
+        /// dvGroups1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvGroups;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvGroups1;
         
         /// <summary>
-        /// dvUserGroupMpng control.
+        /// dvUserGroupMpng1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUserGroupMpng;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvUserGroupMpng1;
         
         /// <summary>
-        /// dvTeam control.
+        /// dvTeam1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTeam;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvTeam1;
         
         /// <summary>
-        /// dvDepartment control.
+        /// dvDepartment1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDepartment;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDepartment1;
         
         /// <summary>
         /// dvDirectorySettings control.
@@ -499,31 +607,31 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDirectorySettings;
         
         /// <summary>
-        /// dvConnectWithOtherLearners control.
+        /// dvConnectWithOtherLearners1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvConnectWithOtherLearners;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvConnectWithOtherLearners1;
         
         /// <summary>
-        /// dvDiscoverNewOpportunities control.
+        /// dvDiscoverNewOpportunities1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDiscoverNewOpportunities;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvDiscoverNewOpportunities1;
         
         /// <summary>
-        /// dvFunWithQuizzes control.
+        /// dvFunWithQuizzes1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvFunWithQuizzes;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvFunWithQuizzes1;
         
         /// <summary>
         /// dvAdminConsole control.

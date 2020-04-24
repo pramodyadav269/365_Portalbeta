@@ -225,17 +225,31 @@ namespace _365_Portal.Admin
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;
+                        dvAddNewTask.Visible = true;
 
                         dvProjects.Visible = true;
                         dvTaskInsights.Visible = true;
                         dvTaskSettings.Visible = true;
 
+                        dvGroups.Visible = true;
+                        dvTeam.Visible = true;
+                        dvDepartment.Visible = true;
+                        dvCourseCategory.Visible = true;
+                        dvUserGroupMpng.Visible = true;
+                        dvUsers.Visible = true;
+
+                        dvAddNewCourse.Visible = true;
+                        dvAddNewTask.Visible = true;
+
                         dvCommunity.Visible = true;
+                        dvLearnNewSkills.Visible = true;
+                        dvConnectWithOtherLearners.Visible = true;
+                        dvDiscoverNewOpportunities.Visible = true;
+                        dvFunWithQuizzes.Visible = true;
+
                         dvOnyxU.Visible = true;
 
                         dvUsersNTeams.Visible = true;
-                        dvUsers.Visible = true;
-                        dvGroups.Visible = true;
                         dvUserGroupMpng.Visible = true;
                         dvTeam.Visible = true;
                         dvDepartment.Visible = true;
@@ -279,6 +293,9 @@ namespace _365_Portal.Admin
 
                         dvAdminConsole.Visible = true;
                         dvContent.Visible = true;
+
+                        dvAddNewCourse.Visible = true;
+                        dvAddNewTask.Visible = true;
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;

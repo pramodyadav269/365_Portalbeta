@@ -393,6 +393,13 @@
     <Compile Include="t\AddTeam.aspx.designer.cs">
       <DependentUpon>AddTeam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\card_drag.aspx.cs">
+      <DependentUpon>card_drag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\card_drag.aspx.designer.cs">
+      <DependentUpon>card_drag.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\enduser.Master.cs">
       <DependentUpon>enduser.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2421,6 +2428,7 @@
     <Content Include="t\AddTeam.aspx" />
     <Content Include="t\assign_topics.aspx" />
     <Content Include="t\bulkupload.aspx" />
+    <Content Include="t\card_drag.aspx" />
     <Content Include="t\ChangePassword.aspx" />
     <Content Include="t\comingsoon.aspx" />
     <Content Include="t\ContentList.aspx" />

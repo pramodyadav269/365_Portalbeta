@@ -34,14 +34,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AllTopics">
                             <div class="card card-with-img">
-                                <div class="action-icon dropdown">
+                                <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     <div class="dropdown-menu br-0">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
+                                        <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -52,8 +52,9 @@
                                     <p class="card-text">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -89,14 +90,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in GlobalTopics">
                             <div class="card card-with-img">
-                                <div class="action-icon dropdown">
+                                <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     <div class="dropdown-menu br-0">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
+                                        <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -107,8 +108,9 @@
                                     <p class="card-text">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -142,14 +144,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PublishedTopics">
                             <div class="card card-with-img">
-                                <div class="action-icon dropdown">
+                                <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     <div class="dropdown-menu br-0">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <%--   <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
+                                        <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -160,8 +162,9 @@
                                     <p class="card-text">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -197,14 +200,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AssignedTopics">
                             <div class="card card-with-img">
-                                <div class="action-icon dropdown">
+                                <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     <div class="dropdown-menu br-0">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <%--    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
+                                        <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -215,8 +218,9 @@
                                     <p class="card-text">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -251,14 +255,14 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in DraftTopics">
                             <div class="card card-with-img">
-                                <div class="action-icon dropdown">
+                                <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                                     <div class="dropdown-menu br-0">
-                                        <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                        <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-pen"></i>Manage</a>
+                                        <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
+                                        <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
@@ -269,8 +273,9 @@
                                     <p class="card-text">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">Jeff Dujohn</h6>
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
+                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
