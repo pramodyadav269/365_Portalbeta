@@ -246,8 +246,8 @@
                         <a class="sidenav-link" id="dvUserDashboard" runat="server" visible="false" href="default.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="link-text">Courses</span></a>
-                        <a class="menu-title icon-right" href="#"><i class="fas fa-plus-circle"></i></a>
+                        <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
+                       <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourney.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
@@ -258,8 +258,8 @@
                         </ul>
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="link-text">Tasks</span></a>
-                        <a class="menu-title icon-right" href="#"><i class="fas fa-plus-circle"></i></a>
+                        <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Tasks</span><span class="link-text">Tasks</span></a>
+                         <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
@@ -270,7 +270,7 @@
                         </ul>
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="link-text">Community</span></a>
+                        <a class="sidenav-link content-menu" href="#"  menu-data="ulCommunity"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Community</span><span class="link-text">Community</span></a>
                     </li>
                     <li class="sidenav-item" id="dvOnyxU" runat="server" visible="false">
                         <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-university"></i></span><span class="tooltiptext">OnyxU</span><span class="link-text">OnyxU</span></a>
@@ -285,7 +285,7 @@
                                 <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="tooltiptext">Organizations</span><span class="link-text">Organizations</span></a>
                             </li>
                             <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link content-menu" href="#" menu-data="ulBilling"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
                             </li>
                             <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="tooltiptext">Email</span><span class="link-text">Email</span></a>
