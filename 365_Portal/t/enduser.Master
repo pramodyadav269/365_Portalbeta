@@ -279,13 +279,13 @@
                         <a class="sidenav-link menu-title" id="dvSettings" runat="server" visible="false"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="link-text">Settings</span></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvUsersNTeams" runat="server" visible="false">
-                                <a class="sidenav-link content-menu" href="#"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="link-text">Users & Groups</span></a>
+                                <a class="sidenav-link content-menu" href="#" menu-data="ulUsersGroups"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="link-text">Users & Groups</span></a>
                             </li>
                             <li class="sidenav-item" id="dvSubMenu_Organizations" runat="server" visible="false">
                                 <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="link-text">Organizations</span></a>
                             </li>
                             <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
+                                <a class="sidenav-link content-menu" href="#" menu-data="ulBilling"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
                             </li>
                             <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="link-text">Email</span></a>
@@ -339,7 +339,7 @@
 
             <div class="sidenav-content-menu">
                 <%-- start beta --%>
-                <ul class="sidenav-nav">
+                <ul class="sidenav-nav d-none" id="ulUsersGroups">
                     <h4 class="menu-title">Users</h4>
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Learners</a>
@@ -356,8 +356,6 @@
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Global Admin</a>
                     </li>
-                </ul>
-                <ul class="sidenav-nav">
                     <h4 class="menu-title">Groups</h4>
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Groups</a>
@@ -367,6 +365,15 @@
                     </li>
                     <li class="sidenav-item">
                         <a class="sidenav-link" href="#" onclick="">Departments</a>
+                    </li>
+                </ul>
+                <ul class="sidenav-nav d-none" id="ulBilling">
+                    <h4 class="menu-title">Billing</h4>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" href="#" onclick="">A</a>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" href="#" onclick="">B</a>
                     </li>
                 </ul>
                 <%-- end beta --%>

@@ -60,14 +60,12 @@ $(document).ready(function () {
 
     //side nav menu content
     $('.sidenav-item .sidenav-link').click(function () {
-
-        //  if (!$(this).parent().hasClass('active')) {
+        $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
         $('.sidenav-item').removeClass('active');
-        //  }
-
         if ($(this).hasClass('content-menu')) {
-
             $(this).parent().addClass('active');
+
+            $('.sidenav-content-menu .sidenav-nav#' + $(this).attr('menu-data')).removeClass('d-none');
 
             $('.sidenav-content-menu').css({ "transform": "translate3d(58px, 0, 0)" });
             $('.sidenav-nav .link-text').hide();

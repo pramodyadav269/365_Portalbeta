@@ -517,6 +517,13 @@ main.fix {
           @media only screen and (max-width: 600px) {
             .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
               display: none; } }
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.content-menu::before {
+          position: absolute;
+          font-family: "Font Awesome 5 Free";
+          font-weight: 700;
+          content: "\f054";
+          right: 14px;
+          font-size: 13px; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu {
         display: inline-table;
         width: 100%;
@@ -575,7 +582,10 @@ main.fix {
         padding: 1rem 0 0 1rem;
         font-size: 10px;
         text-transform: uppercase;
-        margin: 0; }
+        margin: 0;
+        margin-top: 2rem; }
+        .sidenav .sidenav-content-menu .sidenav-nav .menu-title:first-child {
+          margin: 0; }
       .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item.active .sidenav-link {
         color: #fff; }
       .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item .sidenav-link {
@@ -583,7 +593,8 @@ main.fix {
         width: 100%;
         color: rgba(221, 221, 221, 0.65);
         display: block;
-        padding: 8px 1rem 8px 1rem; }
+        padding: 8px 1rem 8px 1rem;
+        position: relative; }
         .sidenav .sidenav-content-menu .sidenav-nav .sidenav-item .sidenav-link:hover {
           color: #fff; }
 
