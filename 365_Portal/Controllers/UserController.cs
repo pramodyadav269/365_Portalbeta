@@ -1449,7 +1449,7 @@ namespace _365_Portal.Controllers
                         string Title = string.Empty;
                         Title = requestParams["Title"].ToString();
 
-                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, true);
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.INSERT, identity.CompId, 0, Title, string.Empty, identity.UserID, false);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)
@@ -1522,7 +1522,7 @@ namespace _365_Portal.Controllers
                             Title = requestParams["Title"].ToString();
                         }
 
-                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.MODIFY, identity.CompId, ID, Title, string.Empty, identity.UserID, true);
+                        var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.MODIFY, identity.CompId, ID, Title, string.Empty, identity.UserID, false);
 
                         if (ds.Tables.Count > 0)
                         {
@@ -1574,7 +1574,7 @@ namespace _365_Portal.Controllers
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.VIEW, identity.CompId, 0, string.Empty, string.Empty, identity.UserID, true);
+                    var ds = UserBL.CategoryCRUD((int)ConstantMessages.Action.VIEW, identity.CompId, 0, string.Empty, string.Empty, identity.UserID, false);
                     DataTable dt = ds.Tables["Data"];
                     if (dt != null)
                     {

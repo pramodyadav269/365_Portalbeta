@@ -204,7 +204,7 @@
                 if (result.value) {
                     ShowLoader();
                     try {
-                        var requestParams = { ID: id, IsActive: 0 };
+                        var requestParams = { ID: id, IsActive: 1 };
                         var getUrl = "/API/User/DeleteCategory";
 
                         $.ajax({

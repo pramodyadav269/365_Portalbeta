@@ -451,6 +451,8 @@
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
+        var IsQueryString = '0';//To identify whether page load from query string or not
+
         var CourseFlag = '0';
         var LessonFlag = '0';
         var ContentFlag = '0';
@@ -474,6 +476,7 @@
             ""
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
+                IsQueryString = '1';
                 EditCourse();
 
                 if (readQueryString()["module"] != undefined && readQueryString()["module"] != '') {
@@ -754,6 +757,9 @@
                         }
                     });
                 }
+
+                $('#dvQuizCongratulationScreen').hide();
+
             }
             else {
                 location.reload();
@@ -958,6 +964,16 @@
         }
 
         function RedirectToNewLesson() {
+
+            //Added on 23 APR 20 
+            ClearFieldsAddLesson();
+            LessonFlag = '0';
+            ContentFlag = '0';
+            ResourceFlag = '0';
+            QuizFlag = '0';
+            //End Added on 23 APR 20 
+
+
             $("#dvQuizCongratulationScreen").hide();
             //ShowButtons('pills-lesson', 'tabclick');
             nextTab('pills-lesson-tab');
@@ -1555,75 +1571,6 @@
             }
         }
 
-        function EditLesson() {
-            ""
-            ClearFieldsAddLesson();
-
-            ShowLoader();
-            var getUrl = "/API/Content/EditModule";
-            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
-            $.ajax({
-                type: "POST",
-                url: getUrl,
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: JSON.stringify(requestParams),
-                //async: false,//Added on 18 APR
-                contentType: "application/json",
-                success: function (response) {
-                    try {
-                        var DataSet = $.parseJSON(response);
-                        HideLoader();
-                        if (DataSet.StatusCode == "1") {
-                            ""
-                            var EditModule = DataSet.Data.Data;
-
-                            $('#txtLessonTitle').val(EditModule[0].Title);
-                            
-                            //$('#divLessonDescription').find('.jodit_wysiwyg').text('');
-                            //$('#divLessonDescription').find('.jodit_wysiwyg').text(EditModule[0].Overview);
-                            editorLessonDesc.value = EditModule[0].Overview;
-
-                            if (EditModule[0].CourseTime != '' && EditModule[0].CourseTime.split(":").length > 0) {
-                                $('#txtHour').val(EditModule[0].CourseTime.split(":")[0]);
-                                if (EditModule[0].CourseTime.split(":").length > 1) {
-                                    $('#txtMin').val(EditModule[0].CourseTime.split(":")[1]);
-                                }
-                                else {
-                                    $('#txtMin').val('00');
-                                }
-                            }
-                            else {
-                                $('#txtHour').val('');
-                                $('#txtMin').val('');
-                            }
-
-                            $('#txtPoint').val(EditModule[0].Points);
-
-                            nextTab('pills-lesson-tab');
-                        }
-                        else {
-                            if (DataSet.Data != undefined && DataSet.Data.length > 0) {
-                                Swal.fire(DataSet.Data[0].ReturnMessage, {
-                                    icon: "error",
-                                });
-                            }
-                            else {
-                                Swal.fire(DataSet.StatusDescription, {
-                                    icon: "error",
-                                });
-                            }
-                        }
-                    }
-                    catch (e) {
-                        HideLoader();
-                    }
-                },
-                failure: function (response) {
-                    HideLoader();
-                }
-            });
-        }
-
         function EditLessionFromTile(obj, id) {
             //debugger
             $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
@@ -1655,6 +1602,11 @@
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
             nextTab('pills-lesson-tab');
+
+            if (IsQueryString == '1')
+            {
+                //BindContent('addmore');
+            }
 
             BindResource();
             BindQuiz();
@@ -1782,7 +1734,7 @@
                                     }
                                 }
                                 else {
-                                    tblModules = tblModules + '<div class="container"><h3>Lesson Not Found</h3></div>';
+                                    tblModules = tblModules + '<div class="container"><h6>No lesson added yet</h6></div>';
                                 }
                                 $('#divLessonGrid').append(tblModules);
 
@@ -1836,6 +1788,9 @@
         function ShowLessonTile() {
             LessonFlag = '0';
             ContentFlag = '0';
+
+            $('#divContentGrid').empty().append('<div class="container"><h6>No content added yet</h6></div>');
+
             AddMoreLessonFlag = 'bindtile';
             AddMore('btnAddMoreLesson');
         }
@@ -2194,7 +2149,7 @@
                                     }
                                 }
                                 else {
-                                    tblContents = tblContents + '<div class="container"><h3>Content Not Found</h3></div>';
+                                    tblContents = tblContents + '<div class="container"><h6>No content added yet</h6></div>';
                                 }
                                 $('#divContentGrid').append(tblContents);
 
@@ -2705,6 +2660,7 @@
                 $('#divQuestionType').hide();
                 $('#dvQuizDone').hide();
                 $('#dvCancelQuestion').hide();
+
                 return;
             }
 
