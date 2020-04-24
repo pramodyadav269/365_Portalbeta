@@ -92,7 +92,7 @@ nav {
         position: fixed;
         width: 100%;
         /*height: 66px;*/
-        z-index: 99998;
+        z-index: 1050;
         box-shadow: 0 0.125rem 0.13rem rgba(0, 0, 0, 0.2);
         padding: 8px 18px 16px 18px;
     }
@@ -612,9 +612,9 @@ main {
 .sidenav {
     position: fixed;
     top: 64px;
-    width: 210px;
+    width: 214px;
     height: 100%;
-    z-index: 99991;
+    z-index: 1050;
     background-color: #212338;
     overflow-x: hidden;
     transition: 0.5s;
@@ -667,6 +667,14 @@ main {
             margin: 0;
             padding: 0;
 
+            &:first-child {
+                .sidenav-item {
+                    .sidenav-link {
+                        padding-top: 14px;
+                    }
+                }
+            }
+
             .sidenav-item {
                 cursor: pointer;
                 /*font-size: 1rem;*/
@@ -692,8 +700,10 @@ main {
                     border: none;
                 }
 
-                &.active, &:hover {
-                    color: #fff;
+                &.active {
+                    .sidenav-link {
+                        color: #fff;
+                    }
                 }
 
                 .sidenav-link {
@@ -701,7 +711,7 @@ main {
                     padding: 22px 1rem;
                     color: rgba(221, 221, 221, .65);
 
-                    &.active, &:hover {
+                    &:hover {
                         color: #fff;
                     }
 
@@ -744,6 +754,18 @@ main {
                                 right: 12px;
                             }
                         }
+
+                        &.icon-right {
+                            color: rgba(221, 221, 221, .65);
+                            font-size: 11px;
+                            position: absolute;
+                            top: 18px;
+                            right: 12px;
+
+                            &:hover {
+                                color: #fff;
+                            }
+                        }
                     }
 
                     .sub-sidenav-nav {
@@ -777,12 +799,62 @@ main {
             }
         }
     }
+
+    .sidenav-content-menu {
+        position: absolute;
+        width: 168px;
+        top: 44px;
+        bottom: 0;
+        background-color: #2f3147;
+        -webkit-transform: translate3d(220px, 0, 0);
+        transform: translate3d(220px, 0, 0);
+        -webkit-transition: -webkit-transform 150ms ease-in-out;
+        transition: -webkit-transform 150ms ease-in-out;
+        transition: transform 150ms ease-in-out;
+        transition: transform 150ms ease-in-out, -webkit-transform 150ms ease-in-out;
+
+        .sidenav-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 2rem;
+
+            .menu-title {
+                color: rgba(221, 221, 221, 0.65);
+                padding: 1rem 0 0 1rem;
+                font-size: 10px;
+                text-transform: uppercase;
+                margin: 0;
+            }
+
+            .sidenav-item {
+
+                &.active {
+                    .sidenav-link {
+                        color: #fff;
+                    }
+                }
+
+                .sidenav-link {
+                    font-size: 13px;
+                    width: 100%;
+                    color: rgba(221, 221, 221, 0.65);
+                    display: block;
+                    padding: 8px 1rem 8px 1rem;
+
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
 }
 /* main */
 main {
     position: relative;
     top: 66px;
-    margin-left: 210px;
+    margin-left: 214px;
     transition: 0.5s;
 
     @media #{$small-and-down} {
@@ -2139,6 +2211,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     }
 
                     &.wrong {
+                        color: $red-color;
+                    }
+                }
+
+                &.delete {
+                    position: absolute;
+                    right: 4px;
+                    margin: 0;
+                    cursor: pointer;
+
+                    .svg-inline--fa {
+                        font-size: 18px;
                         color: $red-color;
                     }
                 }

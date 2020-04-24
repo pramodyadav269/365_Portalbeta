@@ -3062,7 +3062,7 @@
                 '<input type="text" id="txtScore" class="form-control" value="0" />' +
                 '</div></div></div></div>' +
                 '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                '<span class="checked-icon"><i class="fa fa-trash-alt fa-w-16" id="ansFlag" value="true" onclick="DeleteAnsOption(this)"></i></span>' +
+                '<span class="checked-icon delete"><i class="fa fa-trash-alt fa-w-16" id="ansFlag" value="true" onclick="DeleteAnsOption(this)"></i></span>' +
                 '</div>';
             $('#divAnswer').append(AddAnswer);
         }
