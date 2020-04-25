@@ -5,15 +5,24 @@ var allContents = [];
 // CONTROLLER FUNCTIONS
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
 
+    var searchText = GetParameterValues("t");
+    $scope.SearchText = (searchText == "" || searchText == null) ? "" : searchText;
+    $("#txtTopicSearchText").val($scope.SearchText);
     var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
     objDs = DataService;
     $scope.UserRole = userRole;
+    if (userRole == "enduser") {
+        $("#dvAddNewCourse_Floating").hide();
+    }
+    else {
+        $("#dvAddNewCourse_Floating").show();
+    }
     if (currentPage.indexOf('courses.aspx') > -1) {
         if (userRole == "enduser") {
-            objDs.DS_GetUserTopics("", userRole);
+            objDs.DS_GetUserTopics($scope.SearchText, userRole);
         }
         else {
-            objDs.DS_GetAllTopics("");
+            objDs.DS_GetAllTopics($scope.SearchText);
 
         }
     }
@@ -28,7 +37,13 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     $scope.ColorIndex = 1;
 
     $scope.SearchTopics = function () {
-        objDs.DS_GetUserTopics($scope.SearchText, "");
+        if ($scope.SearchText == "" || $scope.SearchText == null) {
+            window.location.href = 'courses.aspx';
+        }
+        else {
+            window.location.href = 'courses.aspx?t=' + $scope.SearchText;
+        }
+        // objDs.DS_GetUserTopics($scope.SearchText, "");
     }
 
     $scope.trustAsHtml = function (html) {
@@ -432,21 +447,42 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $rootScope.AllTopics = responseData.Data;
 
             $rootScope.GlobalTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.Accessibility == "1";
+                return v.Accessibility == "1" && v.IsActive == "1";
             });
 
             $rootScope.PublishedTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.IsPublished == "1";
+                return v.IsPublished == "1" && v.IsActive == "1";
             });
 
             $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.Accessibility == "3";
+                return v.Accessibility == "3" && v.IsActive == "1";
+            });
+
+            $rootScope.LearningPathTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsBookmark == "1" && v.IsActive == "1";
+            });
+
+            $rootScope.FavouriteTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsFavourite == "1" && v.IsActive == "1";
+            });
+
+            $rootScope.OrganizationTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "2" && v.IsActive == "1";
             });
 
             $rootScope.DraftTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.IsPublished == "0" && v.CanEdit == "1";
+                return v.IsPublished == "0" && v.CanEdit == "1" && v.IsActive == "1";
             });
-            $("#pills-tab-courses").show();
+
+            $rootScope.ArchivedTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsActive == "0";
+            });
+
+            //$("#pills-tab-courses").show();
+
+            $("#pills-published-tab").show();
+            $("#pills-drafts-tab").show();
+            $("#pills-Archieved-tab").show();
 
         });
     }
@@ -532,12 +568,32 @@ app.service("DataService", function ($http, $rootScope, $compile) {
 
             if (userRole == "enduser") {
                 $rootScope.AllTopics = allTopics;
-                angular.forEach(jsonObject, function (value, key) {
+                angular.forEach($rootScope.AllTopics, function (value, key) {
                     value.CanEdit = 0;
                 });
             }
             else
                 $rootScope.Topics = allTopics;
+
+            $rootScope.GlobalTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "1";
+            });
+
+            $rootScope.OrganizationTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "2";
+            });
+
+            $rootScope.LearningPathTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsBookmark == "1";
+            });
+
+            $rootScope.FavouriteTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.IsFavourite == "1";
+            });
+
+            $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
+                return v.Accessibility == "3";
+            });
 
             $rootScope.$apply();
 

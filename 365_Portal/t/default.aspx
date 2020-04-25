@@ -15,8 +15,8 @@
     <%-- beta view lesson start --%>
     <div class="dashboard">
 
-        <%-- floating button --%>
-        <a href="#" class="btn btn-float bottom-right">
+         <%-- floating button --%>
+        <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
             <i class="fa fa-plus"></i>
         </a>
 

@@ -577,10 +577,10 @@
 
             <%-- Search --%>
             <div class="form-inline input-group col-12 col-sm-4 col-md-5 col-lg-6 p-0">
-                <div class="input-group-append" ng-click="SearchTopics()">
+                <div class="input-group-append" onclick="SearchTopics(this)">
                     <span class="input-group-text"><i class="fas fa-search"></i></span>
                 </div>
-                <input class="form-control" type="text" placeholder="Search here..." ng-model="SearchText">
+                <input class="form-control" id="txtTopicSearchText" type="text" placeholder="Search here...">
             </div>
             <%-- phase2 --%>
 
@@ -817,6 +817,16 @@
                 if (urlparam[0] == param) {
                     return urlparam[1];
                 }
+            }
+        }
+
+        function SearchTopics(cntrl) {
+            var searchText = $("#txtTopicSearchText").val();
+            if (searchText == "" || searchText == null) {
+                window.location.href = 'courses.aspx';
+            }
+            else {
+                window.location.href = 'courses.aspx?t=' + searchText;
             }
         }
 
