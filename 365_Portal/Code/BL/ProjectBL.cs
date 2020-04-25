@@ -29,5 +29,20 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+
+        public static DataSet ProjectStatusCRUD(TaskStatus taskStatus)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ProjectDAL.ProjectStatusCRUD(taskStatus);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw ex;
+            }
+            return ds;
+        }
     }
 }

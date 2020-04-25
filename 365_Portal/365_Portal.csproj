@@ -330,6 +330,7 @@
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\ResponseBase.cs" />
     <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\TaskStatus.cs" />
     <Compile Include="Models\WebServiceLog.cs" />
     <Compile Include="MyAuthorizationServerProvider.cs" />
     <Compile Include="Phase2\Dashboard.aspx.cs">
