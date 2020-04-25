@@ -253,7 +253,7 @@
                                 <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses Insights"><i class="fas fa-home"></i></span><span class="link-text">Courses Insights</span></a>
                             </li>
                             <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses Settings"><i class="fas fa-cog"></i></span><span class="link-text">Courses Settings</span></a>
+                                <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses Settings"><i class="fas fa-cog"></i></span><span class="link-text">Courses Settings</span></a>
                             </li>
                         </ul>
                     </li>
