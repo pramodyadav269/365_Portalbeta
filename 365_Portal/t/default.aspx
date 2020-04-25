@@ -14,6 +14,12 @@
 
     <%-- beta view lesson start --%>
     <div class="dashboard">
+
+        <%-- floating button --%>
+        <a href="#" class="btn btn-float bottom-right">
+            <i class="fa fa-plus"></i>
+        </a>
+
         <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
             <div class="card text-white bg-dark-blue course-header">
                 <div class="card-body">
@@ -260,7 +266,7 @@
 
         <div class="container-fluid dashboard">
             <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
-                <h4 class="section-title" id="dvInProgressTitle" style="display:none;">In Progress Courses</h4>
+                <h4 class="section-title" id="dvInProgressTitle" style="display: none;">In Progress Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvInProgressTopics">
@@ -323,7 +329,7 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvMyTopicsTitle" style="display:none;">My Courses</h4>
+                <h4 class="section-title" id="dvMyTopicsTitle" style="display: none;">My Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvMyTopics">
@@ -386,7 +392,7 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvRecommendedTopicsTitle" style="display:none;">Recommended Courses</h4>
+                <h4 class="section-title" id="dvRecommendedTopicsTitle" style="display: none;">Recommended Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvRecommendedTopics">
@@ -440,7 +446,7 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvLatestTopicsTitle" style="display:none;">Latest Courses</h4>
+                <h4 class="section-title" id="dvLatestTopicsTitle" style="display: none;">Latest Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvLatestTopics">
@@ -448,7 +454,7 @@
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                               <div class="dropdown-menu br-0">
+                                <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
@@ -496,7 +502,7 @@
                     </div>
                 </div>--%>
 
-                <h4 class="section-title" id="dvPopularTopicsTitle" style="display:none;">Popular Courses</h4>
+                <h4 class="section-title" id="dvPopularTopicsTitle" style="display: none;">Popular Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvPopularTopics">

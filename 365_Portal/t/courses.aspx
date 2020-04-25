@@ -6,6 +6,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div class="container-fluid dashboard courses">
 
+        <%-- floating button --%>
+        <a href="#" class="btn btn-float bottom-right">
+            <i class="fa fa-plus"></i>
+        </a>
+
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
 
             <ul class="nav nav-pills" style="display: none;" id="pills-tab-courses" role="tablist">

@@ -322,7 +322,7 @@ namespace _365_Portal.Admin
                         dvTopics.Visible = true;
 
                         dvCoursesInsights.Visible = true;
-                        dvCoursesSettings.Visible = true;
+                        dvCoursesSettings.Visible = false;
 
                         dvProjects.Visible = true;
                         dvTaskInsights.Visible = true;

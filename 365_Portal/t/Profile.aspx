@@ -16,9 +16,9 @@
                         <div class="card-body mb-2">
                             <li class="media align-items-center mb-3">
                                 <div class="mr-4 position-relative">
-                                    <img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic" id="imgUserProfile">
+                                    <img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic" id="imgUserProfile" >
                                     <div class="custom-file upload">
-                                        <input type="file" class="custom-file-input" id="fileUserProfile" onchange="encodeImagetoBase64(this,'userpic')">
+                                        <input type="file" class="custom-file-input" id="fileUserProfile" onchange="encodeImagetoBase64(this,'userpic');" >
                                         <label class="custom-file-label" for="fileUserProfile"></label>
                                     </div>
                                 </div>
@@ -1122,50 +1122,52 @@
             });
         }
 
-        var base64UserProfileString = '';
+        var base64UserProfileString = '';        
         function encodeImagetoBase64(element, flag) {
-
+            debugger            
             var file = element.files[0];
             var size = file.size;
             if (file.size != undefined) {
                 if (file.size < 5000000) {
                     var reader = new FileReader();
                     reader.onloadend = function () {
+                        debugger
                         base64UserProfileString = reader.result;
+                        $("#imgUserProfile").attr("src", reader.result);
+                        ShowLoader();
+                        var getUrl = "/API/User/UpdateProfilePic";
+                        var jsonResult = { UserProfileImageBase64: base64UserProfileString };
+
+                        $.ajax({
+                            type: "POST",
+                            url: getUrl,
+                            headers: { "Authorization": "Bearer " + accessToken },
+                            data: JSON.stringify(jsonResult),
+                            contentType: "application/json",
+                            success: function (response) {
+                                HideLoader();
+                                try {
+                                    var DataSet = $.parseJSON(response);
+                                    HideLoader();
+                                    if (DataSet.StatusCode == "1") {
+                                        $("#imgUserProfile").attr("src", base64UserProfileString);
+                                    }
+                                    else {
+                                        Swal.fire(DataSet.StatusDescription, {
+                                            icon: "error",
+                                        });
+                                    }
+                                }
+                                catch (e) {
+                                    HideLoader();
+                                }
+                            },
+                            failure: function (response) {
+                                HideLoader();
+                            }
+                        });
                     }
                     reader.readAsDataURL(file);
-                    ShowLoader();
-                    var getUrl = "/API/User/UpdateProfilePic";
-                    var jsonResult = { UserProfileImageBase64: base64UserProfileString };
-
-                    $.ajax({
-                        type: "POST",
-                        url: getUrl,
-                        headers: { "Authorization": "Bearer " + accessToken },
-                        data: JSON.stringify(jsonResult),
-                        contentType: "application/json",
-                        success: function (response) {
-                            HideLoader();
-                            try {
-                                var DataSet = $.parseJSON(response);
-                                HideLoader();
-                                if (DataSet.StatusCode == "1") {
-                                    $("#imgUserProfile").attr("src", base64UserProfileString);
-                                }
-                                else {
-                                    Swal.fire(DataSet.StatusDescription, {
-                                        icon: "error",
-                                    });
-                                }
-                            }
-                            catch (e) {
-                                HideLoader();
-                            }
-                        },
-                        failure: function (response) {
-                            HideLoader();
-                        }
-                    });
                 }
                 else {
                     Swal.fire("File size should not be greater than 5MB", {
@@ -1177,7 +1179,7 @@
                 Swal.fire("Invalid File", {
                     icon: "error",
                 });
-            }
+            }            
         }
 
         function SubmitUserStatus() {
