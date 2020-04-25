@@ -15,8 +15,8 @@
     <%-- beta view lesson start --%>
     <div class="dashboard">
 
-         <%-- floating button --%>
-        <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
+        <%-- floating button --%>
+        <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display: none" class="btn btn-float bottom-right">
             <i class="fa fa-plus"></i>
         </a>
 
@@ -126,7 +126,7 @@
                                 <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
                                 <div class="next shadow-sm" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                    ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
+                                    ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
                                     Quiz
                                 </div>
                             </div>
@@ -162,21 +162,18 @@
                     </div>
                     <div class="col-sm-12 col-md-7 col-lg-8 p-0">
                         <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
-                            <div class="lesson-content" id="list-item-1">
+                            <%-- <div class="lesson-content" id="list-item-1">
                                 <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
                                 <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>
-                                <%--Display Content here..--%>
                                 <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
+                            
+                            </div>--%>
 
-                                <%--  <div class="col-sm-12 mb-3" id="textContent" ng-show="SpecialContents.DocType == 'TEXT'">
-                                        <div class="col-sm-12 mt-4 overview text-left">
-                                            <h5 class="font-weight-bold text-uppercase">{{SelectedContent.Title}}</h5>
-                                            <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
-                                        </div>
-                                        <div class="text-center mt-5">
-                                            <a class="btn btn-custom bg-blue font-weight-bold text-white" ng-click="NextContent(SpecialContents.ContentID)">Continue</a>
-                                        </div>
-                                    </div>--%>
+                            <div class="lesson-content" id="list-item-1" ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems">
+                                <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
+                                <h4 class="lesson-content-title">{{content.Title}}</h4>
+                                <%--Display Content here..--%>
+                                <p ng-bind-html="trustAsHtml(content.Description)"></p>
                             </div>
                         </div>
                         <div class="lesson-scrollspy" ng-if="SubContainer =='ContentQuizView'">

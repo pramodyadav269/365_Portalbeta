@@ -135,14 +135,12 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.ViewContent = function (cntrl, topicId, moduleId, contentId, moduleName, type) {
-        $(".list-group-item-action").removeClass("active");
-        $(cntrl).addClass("active");
         $scope.ContentGoBackText = "Back to contents";
         $scope.SelectedContent = $rootScope.Content.UnlockedItems.filter(function (v) {
             return contentId == v.ContentID;
         })[0];
         $("#dvContentViewer").show();
-        objDs.DS_GetContentDetails(topicId, moduleId, contentId);
+        //objDs.DS_GetContentDetails(topicId, moduleId, contentId);
         if (type.toLowerCase() == 'survey') {
             //  $scope.ActiveContainer = "ContentSurveyView";
         }
@@ -152,9 +150,11 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         else if (type.toLowerCase() == 'finalquiz') {
             // $scope.ActiveContainer = "ContentQuizView";
             $scope.SubContainer = "ContentQuizView";
-            $("#dvContentViewer").hide();
+            //$("#dvContentViewer").hide();
         }
         else {
+            $(".list-group-item-action").removeClass("active");
+            $(cntrl).addClass("active");
             $scope.SubContainer = "";
             //Unlock Next Content
             objDs.DS_UpdateContent("Content", topicId, moduleId, contentId);
