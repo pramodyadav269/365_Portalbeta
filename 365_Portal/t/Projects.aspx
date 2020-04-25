@@ -5,7 +5,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
+    <%--<script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>--%>
+    <script src="../INCLUDES/Asset/js/muuri.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <style>
@@ -89,7 +90,7 @@
                     <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
-            <div class="col-10 pr-5">
+            <div class="col-10 pr-5 drag-drop-card">
                 <div class="row website-redesign board" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
@@ -473,7 +474,7 @@
     </div>
 
     <div class="modal fade p-0" id="modalStatusInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-lg shadow modal-right">
+        <div class="modal-dialog shadow">
             <div class="modal-content rounded">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
                     <img src="../Asset/images/close-button.png" class="close" /></a>
@@ -1747,8 +1748,8 @@
                 else {
                     cardHtml += '<div class="col-12"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
                 }
-                newCardHtml += ' </div>';
-                newCardHtml += ' </div>';
+                newCardHtml += '</div>';
+                newCardHtml += '</div>';
 
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
@@ -1761,11 +1762,17 @@
                 cardHtml += '</div>';
                 cardHtml += '</div>';
 
-                newCardHtml += ' </div>';
+                newCardHtml += '</div>';
 
             });
 
-            newCardHtml += '<div class="board-column"><a class="btn bg-light-tr rounded w-100" onclick="onOpenAddtaskModal();"><i class="fas fa-plus"></i>Add New Status</a><div>';
+            //newCardHtml += '<div class="board-column"><a class="btn bg-light-tr rounded w-100" onclick="onOpenAddtaskModal();"><i class="fas fa-plus"></i>Add New Status</a><div>';
+
+
+            newCardHtml += '<div class="board-column">';
+            newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddtaskModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
+            newCardHtml += '</div>';
+
 
             $("#dvWebsiteRedesign").html("")
             $("#dvWebsiteRedesign").empty().html(cardHtml);
@@ -1940,7 +1947,7 @@
                     });
                 },
                 complete: function () {
-                   // HideLoader();
+                    // HideLoader();
                 }
             });
 

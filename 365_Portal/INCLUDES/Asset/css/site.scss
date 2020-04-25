@@ -1153,6 +1153,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     margin-bottom: 2rem;
 }
 
+.website-redesign .card.add-status {
+    margin: 0 !important;
+}
+
 .website-redesign .card.add-status .card-body {
     text-align: center;
     padding: 3rem 0;
@@ -3048,24 +3052,36 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     position: relative;
 }
 
+.drag-drop-card {
+    max-width: 82%;
+    overflow-x: auto;
+    overflow-y:hidden;
+}
+
+.website-redesign {
+    width: 1944px;
+}
+
 .board-column {
     position: absolute;
     left: 0;
     right: 0;
-    width: 30%;
-    margin: 0 1.5%;
+    width: 364px;
+    margin: 0 10px;
     background: #fff;
     z-index: 1;
     border-radius: .75rem;
     -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-
-    &:first-child {
+    margin-bottom: 20px;
+    /*transform: none !important;
+    position: relative !important;*/
+    /*&:first-child {
         margin-left: 0;
-    }
-
+    }*/
     &:last-child {
-        margin-right: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
     }
 }
 
@@ -3109,6 +3125,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .board-column-content-wrapper {
     position: relative;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .board-column-content {
