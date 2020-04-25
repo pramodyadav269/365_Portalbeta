@@ -1264,6 +1264,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .btn.btn-black {
     background-color: #000;
     color: #fff !important; }
+  .btn.btn-float {
+    position: fixed;
+    width: 54px;
+    height: 54px;
+    padding: 16px;
+    background-color: #FAC900;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px rgba(153, 153, 153, 0.42);
+    z-index: 1024; }
+    .btn.btn-float.bottom-right {
+      bottom: 40px;
+      right: 40px; }
+    .btn.btn-float .svg-inline--fa {
+      margin: 0;
+      font-size: 18px; }
 
 .module {
   padding-bottom: 4rem; }
