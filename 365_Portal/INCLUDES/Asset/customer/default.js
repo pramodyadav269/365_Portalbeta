@@ -7,9 +7,16 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
     var searchText = GetParameterValues("t");
     $scope.SearchText = (searchText == "" || searchText == null) ? "" : searchText;
+    $("#txtTopicSearchText").val($scope.SearchText);
     var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
     objDs = DataService;
     $scope.UserRole = userRole;
+    if (userRole == "enduser") {
+        $("#dvAddNewCourse_Floating").hide();
+    }
+    else {
+        $("#dvAddNewCourse_Floating").show();
+    }
     if (currentPage.indexOf('courses.aspx') > -1) {
         if (userRole == "enduser") {
             objDs.DS_GetUserTopics($scope.SearchText, userRole);

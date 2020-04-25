@@ -7,7 +7,7 @@
     <div class="container-fluid dashboard courses">
 
         <%-- floating button --%>
-        <a href="#" class="btn btn-float bottom-right">
+        <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
             <i class="fa fa-plus"></i>
         </a>
 
@@ -59,6 +59,7 @@
                                         <a class="dropdown-item" href="#"><i class="far fa-bookmark"></i>Add to Favorites</a>
                                         <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
                                         <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
+                                       <%-- <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Archive</a>--%>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
