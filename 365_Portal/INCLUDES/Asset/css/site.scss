@@ -1699,6 +1699,29 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         background-color: #000;
         color: #fff !important;
     }
+
+    &.btn-float {
+        position: fixed;
+        width: 54px;
+        height: 54px;
+        padding: 16px;
+        background-color: $yellow-color;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        box-shadow: 2px 2px 3px rgba(153, 153, 153, 0.42);
+        z-index: 1024;
+
+        &.bottom-right {
+            bottom: 40px;
+            right: 40px;
+        }
+
+        .svg-inline--fa {
+            margin: 0;
+            font-size: 18px;
+        }
+    }
 }
 
 .module {
