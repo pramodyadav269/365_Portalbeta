@@ -471,6 +471,32 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade p-0" id="modalStatusInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg shadow modal-right">
+            <div class="modal-content rounded">
+                <a class="close-modal" data-dismiss="modal" aria-label="Close">
+                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                <div class="modal-body p-5">
+                    <h4 class="mb-4 font-weight-bold">Add Status</h4>
+                    <div class="row input-validation-modal input-form-2">
+                        <div class="col-12 col-sm-12 mb-3">
+                            <div class="form-group">
+                                <label for="txtTaskName">Status Name</label>
+                                <%--<input type="hidden" id="hdnTaskId" />--%>
+                                <input type="text" class="form-control required" id="txtStatusName" placeholder="Status Name" />
+                                <div class="w-100"></div>
+                                <div class="col-12 col-sm-12 mt-4 text-right">
+                                    <a class="btn bg-yellow" onclick="SaveUpdateStatus(this)">Submit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         var accessToken = '<%=Session["access_token"]%>';
         var Role = '<%=Session["RoleName"]%>';
@@ -491,7 +517,8 @@
             if (Role == "enduser") {
                 RoleWaiseHideControls();
             }
-            BindStatusMaster();
+            //BindStatusMaster();
+            BindProjects();
             BindTeamMembers()
 
             $('#dvDueDate').datetimepicker({
@@ -1433,10 +1460,10 @@
                 },
                 success: function (response) {
                     HideLoader();
-                    var UpdateTaskajaxdata = $.parseJSON(response);
-                    if (UpdateTaskajaxdata.StatusCode > 0) {
-                        BindCards();
-                    }
+                    //var UpdateTaskajaxdata = $.parseJSON(response);
+                    //if (UpdateTaskajaxdata.StatusCode > 0) {
+                    //    BindCards();
+                    //}
                 },
                 failure: function (response) {
                     Swal.fire({
@@ -1482,26 +1509,17 @@
 
         function BindStatusMaster() {
             var requestParams = {
-                t_Action: "5"
-                , t_ProjectID: "0"
-                , t_CompID: "0"
-                , t_TaskID: "0"
-                , t_TaskName: ""
-                , t_TaskSummary: ""
-                , t_DueDate: new Date()
-                , t_PrivateNotes: ""
-                , t_UserId: "0"
-                , t_TaskAssignees_UserIds: "" //varchar(500), #(Userids comma separated)
-                , t_TagIds: "" //varchar(500), (comma separated)
-                , t_FileIds: "" //varchar(500), #(comma separated)
-                , t_SubTasks: "" //longtext, #(delimeter | separated)
-                , t_StatusID: "0"
-                , t_Comments: ""
+                p_Action: "4"
+                , p_CompID: "0"
+                , p_StatusName: "0"
+                , p_SrNo: "0"
+                , p_UserId: "0"
+                , p_ProjectID: ProjectID
             };
             $.ajax({
                 type: "POST",
                 async: false,
-                url: "../api/Task/TaskCRUD",
+                url: "../api/Project/ProjectStatusCRUD",
                 contentType: "application/json",
                 headers: { "Authorization": "Bearer " + accessToken },
                 data: requestParams != null ? JSON.stringify(requestParams) : null,
@@ -1510,7 +1528,7 @@
                     if (jsonTaskdetails != null && jsonTaskdetails.length > 0) {
                         var jsonstatusHtml = '';
                         $.each(jsonTaskdetails, function (indx, objstatus) {
-                            jsonstatusHtml += '<option value="' + objstatus.StatusID + '">' + objstatus.StatusName + '</option>';
+                            jsonstatusHtml += '<option value="' + objstatus.StatusID + '">' + objstatus.Status + '</option>';
                         });
                         $("#ddlStatus").empty().html(jsonstatusHtml);
                     }
@@ -1525,7 +1543,7 @@
                     });
                 },
                 complete: function () {
-                    BindProjects();
+                    // BindProjects();
                 }
             });
         }
@@ -1538,6 +1556,7 @@
             $(objthis).parent().addClass('active');
             setcontentTitle($(objthis).text());
             ProjectID = $(objthis).attr("id");
+            BindStatusMaster();
             BindCards();
             BindTeam(ProjectID);
             BindAssignee(ProjectID);
@@ -1633,18 +1652,16 @@
                 });
 
                 newCardHtml += '<div class="board-column">';
-                newCardHtml += '<div class="board-column-header">' + objStatus.StatusName + '</div>';
+                newCardHtml += '<div class="board-column-header">' + objStatus.Status + '</div>';
                 newCardHtml += '<div class="board-column-content-wrapper">';
                 newCardHtml += '<div class="board-column-content" MasterStatusID="' + objStatus.StatusID + '">';
-
-
                 // Repeat Status
                 cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                 cardHtml += '<div class="card shadow">';
                 cardHtml += '<div class="card-body">';
                 cardHtml += '<div class="row">';
                 cardHtml += '<div class="col-12 mb-3 d-flex justify-content-between align-items-center">';
-                cardHtml += '<h5 class="font-weight-bold">' + objStatus.StatusName + '</h5>';
+                cardHtml += '<h5 class="font-weight-bold">' + objStatus.Status + '</h5>';
                 cardHtml += '</div>';
                 cardHtml += '<ol class="col-12 section-sorting" status_id="' + objStatus.StatusID + '">';
                 if (statusWiseTaskList.length > 0) {
@@ -1666,14 +1683,7 @@
                         newCardHtml += '</div></div>';
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
-                       
-
-
-                       
-
                         //Bind Task Assignee
-                        //cardHtml += '<div><img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" title="raj pawar"  /><span class="anchar-title development">Test team</span></div>';
-
                         var requestParams = {
                             t_Action: "6"
                             , t_ProjectID: ProjectID
@@ -1754,6 +1764,9 @@
                 newCardHtml += ' </div>';
 
             });
+
+            newCardHtml += '<div class="board-column"><a class="btn bg-light-tr rounded w-100" onclick="onOpenAddtaskModal();"><i class="fas fa-plus"></i>Add New Status</a><div>';
+
             $("#dvWebsiteRedesign").html("")
             $("#dvWebsiteRedesign").empty().html(cardHtml);
 
@@ -1866,6 +1879,7 @@
                         if ((ProjectID != "" && objProject.ProjectID == ProjectID) || (ProjectID == "" && indxProject == 0)) {
                             activeClass = 'active';
                             ProjectID = objProject.ProjectID;
+                            BindStatusMaster();
                             BindCards();
                             setcontentTitle(objProject.ProjectName);
                             BindTeam(objProject.ProjectID);
@@ -1888,6 +1902,48 @@
                 }
                 $("#ulProjects").empty().html(projectHtml);
             }
+        }
+
+        function onOpenAddtaskModal() {
+            $('#modalStatusInfo').modal('show');
+        };
+
+        function SaveUpdateStatus() {
+            ShowLoader();
+            var requestParams = {
+                p_Action: "2"
+                , p_CompID: "0"
+                , p_StatusName: $('#txtStatusName').val()
+                , p_SrNo: jsonStatusList.length + 1
+                , p_UserId: "0"
+                , p_ProjectID: ProjectID
+            };
+            $.ajax({
+                type: "POST",
+                url: "../api/Project/ProjectStatusCRUD",
+                contentType: "application/json",
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: requestParams != null ? JSON.stringify(requestParams) : null,
+                success: function (response) {
+                    BindStatusMaster();
+                    BindCards();
+                    BindTeam(ProjectID);
+                    BindAssignee(ProjectID);
+                    $('#modalStatusInfo').modal('hide');
+                },
+                failure: function (response) {
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error",
+                        button: "Ok",
+                    });
+                },
+                complete: function () {
+                   // HideLoader();
+                }
+            });
+
         }
     </script>
 </asp:Content>

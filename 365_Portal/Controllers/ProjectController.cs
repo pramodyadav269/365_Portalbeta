@@ -61,5 +61,45 @@ namespace _365_Portal.Controllers
             }
             return new APIResult(Request, data);
         }
+
+        [Route("api/Project/ProjectStatusCRUD")]
+        [HttpPost]
+        public IHttpActionResult ProjectStatusCRUD(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                try
+                {
+                    //Deserialize JSON data into calss object
+                    TaskStatus taskStatus = requestParams.ToObject<TaskStatus>();
+                    taskStatus.p_CompID = identity.CompId;
+                    taskStatus.p_UserId = Convert.ToInt32(identity.UserID);
+
+                    if (taskStatus.p_Action == 1)//View Action
+                    {
+                        if (identity.Role != "enduser")
+                        {
+                            taskStatus.p_UserId = 0;
+                        }
+                    }
+
+                    var ds = ProjectBL.ProjectStatusCRUD(taskStatus);
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
     }
 }
