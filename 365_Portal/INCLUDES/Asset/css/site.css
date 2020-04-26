@@ -1264,26 +1264,32 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .btn.btn-yellow {
     background-color: #FAC900;
     color: #000; }
+  .btn.btn-orange {
+    background-color: #FF7F45;
+    color: #fff; }
   .btn.btn-black {
     background-color: #000;
     color: #fff !important; }
   .btn.btn-float {
     position: fixed;
-    width: 54px;
-    height: 54px;
-    padding: 16px;
     background-color: #FAC900;
     color: #FFF;
-    border-radius: 50px;
     text-align: center;
     box-shadow: 2px 2px 3px rgba(153, 153, 153, 0.42);
-    z-index: 1024; }
+    z-index: 1024;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: row; }
     .btn.btn-float.bottom-right {
       bottom: 40px;
       right: 40px; }
     .btn.btn-float .svg-inline--fa {
-      margin: 0;
-      font-size: 18px; }
+      font-size: 26px;
+      margin: 0; }
+      .btn.btn-float .svg-inline--fa + span {
+        margin-left: .75rem; }
 
 .module {
   padding-bottom: 4rem; }
@@ -1814,7 +1820,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: 0;
   border-bottom-left-radius: .1rem;
   border-bottom-right-radius: .1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  /*.img-swap {
+            display: flex;
+            flex-direction: row;
+
+            .card-img-top {
+                border-radius: 0;
+                height: 100%;
+
+                &.img-fluid {
+                    max-width: 20%;
+                }
+            }
+        }*/ }
   .card-with-img.card .card-img-top {
     border-radius: 0;
     height: 168px; }
@@ -2175,3 +2194,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   cursor: move;
   background: rgba(0, 0, 0, 0.04);
   border-radius: .25rem; }
+
+.help.card .btn {
+  border-radius: 50px; }
+
+.help.card .card-body .help-content {
+  height: 248px;
+  padding: 0 36px; }
+
+.help.card .card-body .card-img-top {
+  height: 100px;
+  margin-top: 1rem;
+  margin-bottom: 3rem; }
+
+.help.card .card-body .card-title {
+  color: rgba(0, 0, 0, 0.6); }
+
+.help.card .card-body .card-text {
+  color: rgba(0, 0, 0, 0.5); }

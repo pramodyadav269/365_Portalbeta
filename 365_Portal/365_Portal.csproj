@@ -877,6 +877,9 @@
     <Content Include="INCLUDES\Asset\fonts\gijgo-material.woff" />
     <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-700.woff2" />
     <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-regular.woff2" />
+    <Content Include="INCLUDES\Asset\images\001-seo.svg" />
+    <Content Include="INCLUDES\Asset\images\002-support-ticket.svg" />
+    <Content Include="INCLUDES\Asset\images\003-video-chat.svg" />
     <Content Include="INCLUDES\Asset\images\add-people.png" />
     <Content Include="INCLUDES\Asset\images\arrow-down-sign-to-navigate.png" />
     <Content Include="INCLUDES\Asset\images\badges\149-JG\001-first-place.svg" />

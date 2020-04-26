@@ -1382,5 +1382,5 @@ table tr.tDnD_whileDrag {
 
         .button-color a.dark, .btn.dark {
             background: red !important;
-            color: #000 !important;
+            color: #fff !important;
         }
