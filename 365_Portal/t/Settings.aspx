@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="row settings">
+    <div class="container-fluid row settings">
         <div class="col-md-12 header mb-4">
             <a class="back" href="Default.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
             <h2 class="text-center font-weight-bold">Your Profile</h2>
@@ -25,7 +25,7 @@
                     <div class="tab-content mt-5" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
-                            <div class="row input-validation">
+                            <div class="mb-3">
                                 <h3 id="hdrOrganization"></h3>
                             </div>
 
