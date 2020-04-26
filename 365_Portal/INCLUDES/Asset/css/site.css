@@ -1820,7 +1820,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: 0;
   border-bottom-left-radius: .1rem;
   border-bottom-right-radius: .1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  /*.img-swap {
+            display: flex;
+            flex-direction: row;
+
+            .card-img-top {
+                border-radius: 0;
+                height: 100%;
+
+                &.img-fluid {
+                    max-width: 20%;
+                }
+            }
+        }*/ }
   .card-with-img.card .card-img-top {
     border-radius: 0;
     height: 168px; }

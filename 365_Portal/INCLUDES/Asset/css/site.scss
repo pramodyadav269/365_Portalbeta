@@ -2640,6 +2640,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             height: 168px;
         }
 
+        /*.img-swap {
+            display: flex;
+            flex-direction: row;
+
+            .card-img-top {
+                border-radius: 0;
+                height: 100%;
+
+                &.img-fluid {
+                    max-width: 20%;
+                }
+            }
+        }*/
+
         .action-icon {
             position: absolute;
             right: 12px;
