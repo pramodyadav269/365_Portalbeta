@@ -8,7 +8,7 @@
 
         <%-- floating button --%>
         <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
-            <i class="fa fa-plus"></i>
+             <i class="fa fa-plus"></i><span>Compose</span>
         </a>
 
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
@@ -49,7 +49,7 @@
 
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AllTopics">
+                        <div class="col-sm-12" ng-repeat="topic in AllTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -106,7 +106,7 @@
                     <%-- <h1>Global</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in GlobalTopics">
+                        <div class="col-sm-12" ng-repeat="topic in GlobalTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -160,7 +160,7 @@
                     <%--  <h1>Published</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PublishedTopics">
+                        <div class="col-sm-12" ng-repeat="topic in PublishedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -216,7 +216,7 @@
                     <%--  <h1>Assigned</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in OrganizationTopics">
+                        <div class="col-sm-12" ng-repeat="topic in OrganizationTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -250,7 +250,7 @@
                     <%--  <h1>Assigned</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AssignedTopics">
+                        <div class="col-sm-12" ng-repeat="topic in AssignedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -305,7 +305,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in DraftTopics">
+                        <div class="col-sm-12" ng-repeat="topic in DraftTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -360,7 +360,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in FavouriteTopics">
+                        <div class="col-sm-12" ng-repeat="topic in FavouriteTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -394,7 +394,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LearningPathTopics">
+                        <div class="col-sm-12" ng-repeat="topic in LearningPathTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -428,7 +428,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in ArchivedTopics">
+                        <div class="col-sm-12" ng-repeat="topic in ArchivedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>

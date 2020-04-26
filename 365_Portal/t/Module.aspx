@@ -3,7 +3,57 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="container module">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 text-center mt-5 mb-3">
+                <h4 class="font-weight-bold mb-3">Need Help?</h4>
+                <p class="mb-3">We're here for you. Search our help guides, or get in touch with our Customer Care team. </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="card help shadow-sm">
+                    <div class="card-body text-center">
+                        <img src="../INCLUDES/Asset/images/001-seo.svg" class="card-img-top">
+                        <div class="help-content">
+                            <h6 class="card-title">Search Our knowlegde Base</h6>
+                            <p class="card-text">Learn how to use Teachable at your own pace.</p>
+                        </div>
+                        <a href="https://help.onyxflow.com" target="_blank" class="btn btn-orange">Find Answers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                 <div class="card help shadow-sm">
+                    <div class="card-body text-center">
+                        <img src="../INCLUDES/Asset/images/002-support-ticket.svg" class="card-img-top">
+                        <div class="help-content">
+                            <h6 class="card-title">Create a Support Ticket</h6>
+                            <p class="card-text">Send us a message and raed our response on your on time.</p>
+                            <p class="card-text">7 Days a week</p>
+                            <p class="card-text">8 AM - 8 PM EST (GMT-5)</p>
+                        </div>
+                        <a href="https://help.onyxflow.com" target="_blank" class="btn btn-orange">Create a Ticket</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                 <div class="card help shadow-sm">
+                    <div class="card-body text-center">
+                        <img src="../INCLUDES/Asset/images/003-video-chat.svg" class="card-img-top">
+                        <div class="help-content">
+                            <h6 class="card-title">Live Chat with Someone on Our Team</h6>
+                            <p class="card-text">Start a conversation and get your answers in real time.</p>
+                            <p class="card-text">Monday - Friday</p>
+                            <p class="card-text">10 AM - 5 PM EST (GMT-5)</p>
+                        </div>
+                        <a href="https://help.onyxflow.com" target="_blank" class="btn btn-orange">Chat Offline</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container module d-none">
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
