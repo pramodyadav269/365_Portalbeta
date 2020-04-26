@@ -329,7 +329,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             objTopic.IsDeleted = flag;
 
         objDs.DS_ChangeTopicProperty(type, topicId, flag);
-    }
+    }    
 
     $scope.GetFormattedDate = function (date) {
         //return date.split("/").reverse().join("-");
@@ -423,6 +423,12 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     $scope.EditTopic = function (topicId) {
         window.location.href = 'LearningJourney.aspx?topic=' + topicId;
     }
+
+    //Added by Pramod on 25 APR 20
+    $scope.ArchiveUnArchiveTopic = function (topicId, flag) {        
+        objDs.ArchiveUnArchiveTopic(topicId, flag);
+    }
+    //End Added by Pramod on 25 APR 20
 });
 
 //COMMON SERVICE OPERATIONS
@@ -852,6 +858,60 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             //  HideLoader();
         });
     }
+
+    ds.ArchiveUnArchiveTopic = function (topicId, flag) {
+        debugger
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to delete ? Yes or No !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                ShowLoader();
+                var requestParams = { TopicID: topicId, IsActive: flag };
+                $http({
+                    method: "POST",
+                    url: "../api/Content/DeleteTopic",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        "Authorization": "Bearer " + accessToken
+                    },
+                    data: requestParams,
+                }).then(function success(response) {
+                    debugger
+                    var DataSet = response.data;
+                    HideLoader();
+
+                    if (DataSet != null && DataSet != "") {
+                        if (DataSet.StatusCode == "1") {
+                            Swal.fire({
+                                title: "Success",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "success"
+                            }).then((value) => {
+                                if (value) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: DataSet.StatusDescription,
+                                icon: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 });
 
 app.directive('myPostRepeatDirective', function () {

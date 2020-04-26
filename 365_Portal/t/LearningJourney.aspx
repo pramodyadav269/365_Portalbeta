@@ -1,4 +1,4 @@
-﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -235,7 +235,7 @@
                                                 <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
                                                     <div id="txtResourcesDescription"></div>
                                                 </div>
-                                                <div style="display:none;" id="divResourcesAsHTML"></div>
+                                                <div style="display: none;" id="divResourcesAsHTML"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -373,13 +373,13 @@
 
             <%--Lesson--%>
             <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson"    onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
 
             <%--Content--%>
             <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent"    onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
 
@@ -828,7 +828,7 @@
             }
         }
 
-        function AddMore(id) {            
+        function AddMore(id) {
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -916,7 +916,7 @@
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
-                }                
+                }
                 else {
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').hide();
@@ -978,7 +978,7 @@
 
             //nextTab('pills-lesson-tab');
             BindLesson('afterquiz');
-            
+
         }
 
         function RedirectToNewCourse() {
@@ -1299,6 +1299,7 @@
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
+                        debugger
                         HideLoader();
                         if (DataSet.StatusCode == "1") {
                             var EditTopic = DataSet.Data.Data;
@@ -1331,6 +1332,8 @@
                             nextTab('pills-course-tab');
                         }
                         else {
+                            CourseFlag = '0';
+
                             if (DataSet.Data != undefined && DataSet.Data.length > 0) {
                                 Swal.fire(DataSet.Data[0].ReturnMessage, {
                                     icon: "error",
@@ -1431,7 +1434,7 @@
         }
 
         function AddLession(flag) {
-            
+
             var getUrl;
             //ShowLoader();
             var _Topic_Id = CourseFlag;
@@ -1605,7 +1608,7 @@
             LessonFlag = id;
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
-                        
+
 
             ClearFieldsAddResource();
             ClearFieldsAddContent();
@@ -2212,7 +2215,7 @@
             AddMore('btnAddMoreContent');
         }
 
-               
+
 
         function ClearFieldsAddResource() {
             //$('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
@@ -2247,7 +2250,7 @@
                 ShowLoader();
                 var Description = editorResourcesDesc.value;
                 var getUrl = "/API/Content/UpdateResource";
-                
+
                 try {
                     var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
 
@@ -2558,7 +2561,7 @@
                                             $("#dvQuizDone").show();
                                         }
 
-                                        BindQuestion(Questions);``
+                                        BindQuestion(Questions); ``
                                     }
 
                                 }
@@ -2978,8 +2981,7 @@
             ShowQuestion(qtype, question);
         }
 
-        function DeleteQuestion(questionId)
-        {
+        function DeleteQuestion(questionId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -2995,7 +2997,7 @@
                     var requestParams = { "Action": 3, "Type": "0", "ContentTypeID": QuizContentTypeID, "QuestionID": questionId, ContentID: QuizFlag };
                     var getUrl = "/API/Quiz/DeleteQuestion";
 
-                    try {                        
+                    try {
                         $.ajax({
                             type: "POST",
                             url: getUrl,
@@ -3006,10 +3008,8 @@
                                 try {
                                     var DataSet = $.parseJSON(response);
                                     debugger
-                                    if (DataSet != null && DataSet != "")
-                                    {
-                                        if (DataSet.StatusCode == "1")
-                                        {
+                                    if (DataSet != null && DataSet != "") {
+                                        if (DataSet.StatusCode == "1") {
                                             BindQuestion(DataSet.Data.Data);
                                         }
                                         else {
@@ -3402,7 +3402,7 @@
         }
 
         function isNumberKey(flag, e) {
-            
+
             var result = false;
             try {
                 var charCode = (e.which) ? e.which : e.keyCode;

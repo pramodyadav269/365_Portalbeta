@@ -27,7 +27,9 @@ namespace _365_Portal.ControllersReOrderContent
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    if ((
+                    if (identity.Role == ConstantMessages.Roles.companyadmin)
+                    {
+                        if ((
                         !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicTitle"]))
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["TopicDescription"]))
                         //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
@@ -38,123 +40,129 @@ namespace _365_Portal.ControllersReOrderContent
                         //&& !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["Accessibility"]))
                         ))
-                    {
-                        content.CompID = identity.CompId;
-                        content.CreatedBy = identity.UserID;
+                        {
+                            content.CompID = identity.CompId;
+                            content.CreatedBy = identity.UserID;
 
-                        if (!string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()))
-                        {
-                            content.TopicTitle = requestParams["TopicTitle"].ToString();
-                        }
-                        else
-                        {
-                            content.TopicTitle = null;
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()))
-                        {
-                            content.TopicDescription = requestParams["TopicDescription"].ToString();
-                        }
-                        else
-                        {
-                            content.TopicDescription = null;
-                        }
-
-                        //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
-                        //{
-                        //    content.IsPublished = (bool)requestParams["IsPublished"];
-                        //}
-                        if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
-                        {
-                            content.IsActive = (bool)requestParams["IsActive"];
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["MinUnlockedModules"].ToString()))
-                        {
-                            content.MinUnlockedModules = requestParams["MinUnlockedModules"].ToString();
-                        }
-                        else
-                        {
-                            content.MinUnlockedModules = null;
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
-                        {
-                            content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
-                        }
-
-
-                        if (!string.IsNullOrEmpty(requestParams["CourseCategory"].ToString()))
-                        {
-                            content.CourseCategory = Convert.ToInt32(requestParams["CourseCategory"].ToString());
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["CategoryColor"].ToString()))
-                        {
-                            content.CategoryColor = requestParams["CategoryColor"].ToString();
-                        }
-                        else
-                        {
-                            content.CategoryColor = null;
-                        }
-                        //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
-                        //{
-                        //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
-                        //}
-                        //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
-                        //{
-                        //    content.CourseTime = requestParams["CourseTime"].ToString();
-                        //}
-                        //else
-                        //{
-                        //    content.CourseTime = null;
-                        //}
-                        //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
-                        //{
-                        //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
-                        //}
-                        if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
-                        {
-                            content.Accessibility = Convert.ToInt32(requestParams["Accessibility"].ToString());
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["selectedTags"].ToString()))
-                        {
-                            content.selectedTags = requestParams["selectedTags"].ToString();
-                        }
-
-                        string CourseLogoBase64 = Convert.ToString(requestParams.SelectToken("CourseLogoBase64"));
-                        if (!string.IsNullOrEmpty(CourseLogoBase64))
-                        {
-                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
-                            if (files.Count() == 1)
-                                CourseLogoBase64 = files[0];
-                            else
-                                CourseLogoBase64 = files[1];
-
-                            byte[] imageBytes = Convert.FromBase64String(CourseLogoBase64);
-                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(CourseLogoBase64);
-                            string filePath = HttpContext.Current.Server.MapPath("~/Files/CourseLogo/" + fileName);
-                            File.WriteAllBytes(filePath, imageBytes);
-
-                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/CourseLogo/"), false, "CourseLogo");
-                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            if (!string.IsNullOrEmpty(requestParams["TopicTitle"].ToString()))
                             {
-                                content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                content.TopicTitle = requestParams["TopicTitle"].ToString();
                             }
-                        }
-
-                        var ds = ContentBL.CreateTopic(content);
-
-                        if (ds != null)
-                        {
-                            if (ds.Tables.Count > 0)
+                            else
                             {
-                                DataTable dt = ds.Tables["Data"];
-                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                content.TopicTitle = null;
+                            }
+                            if (!string.IsNullOrEmpty(requestParams["TopicDescription"].ToString()))
+                            {
+                                content.TopicDescription = requestParams["TopicDescription"].ToString();
+                            }
+                            else
+                            {
+                                content.TopicDescription = null;
+                            }
+
+                            //if (!string.IsNullOrEmpty(requestParams["IsPublished"].ToString()))
+                            //{
+                            //    content.IsPublished = (bool)requestParams["IsPublished"];
+                            //}
+                            if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                            {
+                                content.IsActive = (bool)requestParams["IsActive"];
+                            }
+                            if (!string.IsNullOrEmpty(requestParams["MinUnlockedModules"].ToString()))
+                            {
+                                content.MinUnlockedModules = requestParams["MinUnlockedModules"].ToString();
+                            }
+                            else
+                            {
+                                content.MinUnlockedModules = null;
+                            }
+                            if (!string.IsNullOrEmpty(requestParams["SrNo"].ToString()))
+                            {
+                                content.SrNo = Convert.ToInt32(requestParams["SrNo"]);
+                            }
+
+
+                            if (!string.IsNullOrEmpty(requestParams["CourseCategory"].ToString()))
+                            {
+                                content.CourseCategory = Convert.ToInt32(requestParams["CourseCategory"].ToString());
+                            }
+                            if (!string.IsNullOrEmpty(requestParams["CategoryColor"].ToString()))
+                            {
+                                content.CategoryColor = requestParams["CategoryColor"].ToString();
+                            }
+                            else
+                            {
+                                content.CategoryColor = null;
+                            }
+                            //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
+                            //{
+                            //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
+                            //}
+                            //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
+                            //{
+                            //    content.CourseTime = requestParams["CourseTime"].ToString();
+                            //}
+                            //else
+                            //{
+                            //    content.CourseTime = null;
+                            //}
+                            //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
+                            //{
+                            //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
+                            //}
+                            if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
+                            {
+                                content.Accessibility = Convert.ToInt32(requestParams["Accessibility"].ToString());
+                            }
+                            if (!string.IsNullOrEmpty(requestParams["selectedTags"].ToString()))
+                            {
+                                content.selectedTags = requestParams["selectedTags"].ToString();
+                            }
+
+                            string CourseLogoBase64 = Convert.ToString(requestParams.SelectToken("CourseLogoBase64"));
+                            if (!string.IsNullOrEmpty(CourseLogoBase64))
+                            {
+                                var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                                if (files.Count() == 1)
+                                    CourseLogoBase64 = files[0];
+                                else
+                                    CourseLogoBase64 = files[1];
+
+                                byte[] imageBytes = Convert.FromBase64String(CourseLogoBase64);
+                                string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(CourseLogoBase64);
+                                string filePath = HttpContext.Current.Server.MapPath("~/Files/CourseLogo/" + fileName);
+                                File.WriteAllBytes(filePath, imageBytes);
+
+                                DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/CourseLogo/"), false, "CourseLogo");
+                                if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
                                 {
-                                    data = Utility.ConvertDataSetToJSONString(dt);
-                                    data = Utility.Successful(data);
+                                    content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                }
+                            }
+
+                            var ds = ContentBL.CreateTopic(content);
+
+                            if (ds != null)
+                            {
+                                if (ds.Tables.Count > 0)
+                                {
+                                    DataTable dt = ds.Tables["Data"];
+                                    if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                    {
+                                        data = Utility.ConvertDataSetToJSONString(dt);
+                                        data = Utility.Successful(data);
+                                    }
+                                    else
+                                    {
+
+                                        data = dt.Rows[0]["ReturnMessage"].ToString();
+                                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                    }
                                 }
                                 else
                                 {
-
-                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = ConstantMessages.WebServiceLog.GenericErrorMsg;
                                     data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                                 }
                             }
@@ -166,16 +174,14 @@ namespace _365_Portal.ControllersReOrderContent
                         }
                         else
                         {
-                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = ConstantMessages.WebServiceLog.InValidValues;
                             data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                         }
                     }
                     else
                     {
-                        data = ConstantMessages.WebServiceLog.InValidValues;
-                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        data = Utility.API_Status("3", "You do not have access for this functionality");
                     }
-
                 }
                 else
                 {
@@ -467,7 +473,9 @@ namespace _365_Portal.ControllersReOrderContent
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
+                    content.UserID = Convert.ToInt32(identity.UserID);
                     content.CompID = identity.CompId;
+
                     var ds = ContentBL.GetTopics(content);
                     if (ds != null)
                     {
@@ -1721,8 +1729,16 @@ namespace _365_Portal.ControllersReOrderContent
                     if (!string.IsNullOrEmpty(requestParams["TopicID"].ToString()))
                     {
                         var ds = ContentBL.EditTopics(identity.CompId, identity.UserID, identity.Role, requestParams["TopicID"].ToString());
-                        data = Utility.ConvertDataSetToJSONString(ds);
-                        data = Utility.Successful(data);
+                        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                        {
+                            data = Utility.ConvertDataSetToJSONString(ds);
+                            data = Utility.Successful(data);
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
                     }
                     else
                     {

@@ -9,6 +9,7 @@ namespace _365_Portal
     public class ContentBO
     {
         public  int CompID { get; set; }
+        public int UserID { get; set; }
         public  int ContentID { get; set; }
         public int ParentSrNo { get; set; }
         public  int ContentTypeID { get; set; }
