@@ -170,7 +170,7 @@
         }
 
         function BindBadgesAndPoints() {
-            debugger
+            //debugger
             var getUrl = "/API/Trainning/GetBadgesAndPoints";
             $.ajax({
                 type: "POST",
@@ -179,7 +179,7 @@
                 contentType: "application/json",
                 success: function (response) {
                     try {
-                        debugger
+                        //debugger
                         var DataSet = $.parseJSON(response);
                         //HideLoader();
                         if (DataSet.StatusCode == "1") {

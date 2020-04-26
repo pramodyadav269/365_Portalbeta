@@ -13,5 +13,6 @@ namespace _365_Portal.Models
         public int p_SrNo { get; set; }
         public int p_UserId { get; set; }
         public int p_ProjectID { get; set; }
+        public int p_StatusId { get; set; }
     }
 }

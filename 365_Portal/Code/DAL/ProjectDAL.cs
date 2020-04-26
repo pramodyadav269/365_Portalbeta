@@ -37,6 +37,8 @@ namespace _365_Portal.Code.DAL
             cmd.Parameters.AddWithValue("p_SrNo", taskStatus.p_SrNo);
             cmd.Parameters.AddWithValue("p_UserId", taskStatus.p_UserId);
             cmd.Parameters.AddWithValue("p_ProjectID", taskStatus.p_ProjectID);
+            cmd.Parameters.AddWithValue("p_StatusId", taskStatus.p_StatusId);
+            
             return cmd;
         }
 
@@ -53,7 +55,7 @@ namespace _365_Portal.Code.DAL
                 cmd = mySqlCommandParameters(cmd, project); // setting values to the procedure parameters
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
-                return ds;
+                //return ds;
             }
             catch (Exception ex)
             {
@@ -80,7 +82,7 @@ namespace _365_Portal.Code.DAL
                 cmd = mySqlCommandParameters(cmd, taskStatus); // setting values to the procedure parameters
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
-                return ds;
+                //return ds;
             }
             catch (Exception ex)
             {
