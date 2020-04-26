@@ -144,7 +144,12 @@ namespace _365_Portal.ControllersReOrderContent
 
                             if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
                             {
-                                content.InstructorName = requestParams["InstructorName"].ToString();
+                                content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                                content.InstructorName = requestParams["InstructorName"].ToString();                                
+                            }
+                            else
+                            {
+                                content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
                             }
 
 
@@ -333,6 +338,17 @@ namespace _365_Portal.ControllersReOrderContent
                             {
                                 content.CourseLogoFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
                             }
+                        }
+
+
+                        if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
+                        {
+                            content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                            content.InstructorName = requestParams["InstructorName"].ToString();
+                        }
+                        else
+                        {
+                            content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
                         }
 
 

@@ -65,7 +65,10 @@ namespace _365_Portal
         public int AchievementBadge { get; set; }
         public int Accessibility { get; set; }
         public int CourseLogoFileID { get; set; }
-        public string selectedTags { get; set; }        
+        public string selectedTags { get; set; }
+
+        public int IsCourseCreator { get; set; }
+        public string InstructorName { get; set; }
     }
 
     public class FlashcarIntro

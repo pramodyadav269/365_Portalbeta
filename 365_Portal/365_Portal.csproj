@@ -301,10 +301,10 @@
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
+    <Compile Include="Controllers\s.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TrainningController.cs" />
     <Compile Include="Controllers\UserController.cs" />
