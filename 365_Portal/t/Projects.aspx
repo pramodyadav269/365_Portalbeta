@@ -1961,11 +1961,11 @@
                 var StatusId = $(objthis).attr("statusid");
                 var StatusName = $(objthis).attr("statusname");
                 var editstatusHTML = '';
-                //editstatusHTML += '<div class="board-column-header"';
-                editstatusHTML += '<input type="text" class="form-control required" id="txtStatusNameEdit" placeholder="Status Name">';
+                editstatusHTML += '<div class="d-flex justify-content-between align-items-center p-3">';
+                editstatusHTML += '<input type="text" class="form-control required col-9" id="txtStatusNameEdit" placeholder="Status Name">';
                 //editstatusHTML += '<textbox  id="txtStatusNameEdit" > ' + StatusName + ' </textbox>';
-                editstatusHTML += '<a onclick="SaveUpdateStatus(' + StatusId + ')"> save </a> | <a onclick="TaskStatusEditable(this,0)"> cancel </a> '
-                //editstatusHTML += '</div>'
+                editstatusHTML += '<div class="float-right"><i class="fas fa-check" onclick="SaveUpdateStatus(' + StatusId + ')"></i>|<i class="fas fa-times" onclick="TaskStatusEditable(this,0)"></i></div>'
+                editstatusHTML += '</div>'
                 $(objthis).parent().parent().replaceWith(editstatusHTML);
                 $("#txtStatusNameEdit").val(StatusName);
             }

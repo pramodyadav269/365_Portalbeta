@@ -2131,6 +2131,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .board-column:last-child {
     -webkit-box-shadow: none;
     box-shadow: none; }
+  .board-column .float-right {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px; }
+    .board-column .float-right .svg-inline--fa {
+      cursor: pointer;
+      margin: 0 0.5rem; }
 
 .board-column.muuri-item-releasing {
   z-index: 2; }
@@ -2148,6 +2154,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   overflow: hidden;
   padding: 0 20px;
   color: #000; }
+  .board-column-header .float-right {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px; }
+    .board-column-header .float-right .svg-inline--fa {
+      cursor: pointer;
+      margin: 0 0.5rem; }
 
 @media (max-width: 600px) {
   .board-column-header {

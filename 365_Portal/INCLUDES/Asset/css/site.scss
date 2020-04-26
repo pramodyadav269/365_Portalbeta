@@ -2639,7 +2639,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             border-radius: 0;
             height: 168px;
         }
-
         /*.img-swap {
             display: flex;
             flex-direction: row;
@@ -2653,7 +2652,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
             }
         }*/
-
         .action-icon {
             position: absolute;
             right: 12px;
@@ -3107,6 +3105,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         -webkit-box-shadow: none;
         box-shadow: none;
     }
+
+    .float-right {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 14px;
+
+        .svg-inline--fa {
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+    }
 }
 
 .board-column.muuri-item-releasing {
@@ -3127,6 +3135,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     overflow: hidden;
     padding: 0 20px;
     color: #000;
+
+    .float-right {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 14px;
+
+        .svg-inline--fa {
+            cursor: pointer;
+            margin: 0 0.5rem;
+        }
+    }
 }
 
 @media (max-width: 600px) {
