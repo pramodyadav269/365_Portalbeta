@@ -1,20 +1,46 @@
 ﻿/* colors */
 /* media */
 /* heebo-regular - latin */
-@font-face {
-  font-family: 'Heebo';
-  font-style: normal;
-  font-weight: normal;
-  src: local("Heebo"), local("Heebo-Regular"), url("../fonts/heebo-v5-latin-regular.woff2") format("woff2"); }
+/*@font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Heebo'), local('Heebo-Regular'), url('../fonts/heebo-v5-latin-regular.woff2') format('woff2');
+}
 
 @font-face {
-  font-family: 'TeachableSans-Medium';
-  src: url("../fonts/teachable/TeachableSans-Medium.woff") format("woff"), url("../fonts/teachable/TeachableSans-Medium.eot") format("embedded-opentype"), url("../fonts/teachable/TeachableSans-Medium.ttf") format("truetype"); }
+    font-family: 'TeachableSans-Medium';
+    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'),
+    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), 
+    url('../fonts/teachable/TeachableSans-Medium.ttf') format('truetype');
+}
+
+body {
+    font-size: 14px;
+    font-family: 'TeachableSans-Medium' !important;
+}*/
+@font-face {
+  font-family: 'OpenSans-Light';
+  src: url("../fonts/Open_Sans/OpenSans-Light.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url("../fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: url("../fonts/Open_Sans/OpenSans-SemiBold.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'OpenSans-Bold';
+  src: url("../fonts/Open_Sans/OpenSans-Bold.ttf") format("truetype"); }
 
 body {
   font-size: 14px;
-  background: #F5F6F7;
-  font-family: 'TeachableSans-Medium' !important; }
+  font-family: 'OpenSans-Regular' !important; }
+
+body {
+  background: #F5F6F7; }
 
 .bg-dark-blue {
   background-color: #12217F; }
@@ -1869,8 +1895,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       font-size: 14px;
       margin: 0; }
   .card-with-img.card .dropdown .dropdown-menu {
-    transform: translate3d(-176px, 26px, 0px) !important;
-    min-width: 184px; }
+    transform: translate3d(-214px, 26px, 0px) !important;
+    min-width: 224px; }
     .card-with-img.card .dropdown .dropdown-menu .dropdown-item {
       font-size: 13px;
       color: #4F5F83;

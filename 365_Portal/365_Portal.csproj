@@ -878,6 +878,7 @@
     <Content Include="INCLUDES\Asset\fonts\gijgo-material.woff" />
     <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-700.woff2" />
     <Content Include="INCLUDES\Asset\fonts\heebo-v5-latin-regular.woff2" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\LICENSE.txt" />
     <Content Include="INCLUDES\Asset\images\001-seo.svg" />
     <Content Include="INCLUDES\Asset\images\002-support-ticket.svg" />
     <Content Include="INCLUDES\Asset\images\003-video-chat.svg" />
@@ -2417,6 +2418,16 @@
     <Content Include="INCLUDES\Asset\fonts\teachable\TeachableSans-Medium.eot" />
     <Content Include="INCLUDES\Asset\fonts\teachable\TeachableSans-Medium.ttf" />
     <Content Include="INCLUDES\Asset\fonts\teachable\TeachableSans-Medium.woff" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-Bold.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-BoldItalic.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-ExtraBold.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-Italic.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-Light.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-LightItalic.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-Regular.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-SemiBold.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-SemiBoldItalic.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
