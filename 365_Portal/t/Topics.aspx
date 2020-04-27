@@ -12,7 +12,12 @@
         <div class="col-md-12" id="divGird">
             <div class="card shadow border-0 border-radius-0">
                 <div class="card-body">
-                    <a class="btn bg-yellow float-left " onclick="AddNew();">Add New</a> <a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveGrid();">Save Reordering</a>
+                    <a class="btn bg-yellow float-left " onclick="AddNew();" style="display:none;">Add New</a> 
+                    <a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveGrid();">Save Reordering</a>
+
+                    <a onclick="ArchiveUnArchiveTopic(0);" id="btnArchive" style="display:none;"><i class="fas fa-trash-alt"></i>Archive</a>
+                    <a onclick="ArchiveUnArchiveTopic(1);" id="btnUnArchive" style="display:none;"><i class="fas fa-trash-alt"></i>Un-Archive</a> 
+
                     <div class="w-100"></div>
                     <div id="divTable" class="mt-5 table-responsive"></div>
                 </div>
@@ -127,14 +132,14 @@
     </div>
     <script>
 
+        var accessToken = '<%=Session["access_token"]%>';
+        var id;
+
         $(document).ready(function () {
             //var s; $('#tblGird').find('tr').each(function i(i, index) { if (this.id != "") { s = s + this.id + ','; } console.log(this.id); }); console.log(s.length);
             View();
             GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
         });
-
-        var accessToken = '<%=Session["access_token"]%>';
-        var id;
 
         function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, AchievementBadgeID, TagID) {
             var getUrl = "/API/Content/GetCourseCategoryTagsAndBadge";
@@ -507,7 +512,7 @@
                 if (result.value) {
                     ShowLoader();
                     try {
-                        var requestParams = { TopicID: id, IsActive: 0 };
+                        var requestParams = { TopicID: id, IsActive: 0, Action: 2 };
                         var getUrl = "/API/Content/DeleteTopic";
 
                         $.ajax({
@@ -684,6 +689,10 @@
         }
 
         function View() {
+
+            $('#btnArchive').hide();
+            $('#btnUnArchive').hide();
+
             var url = "/API/Content/GetTopics";
 
             try {
@@ -702,8 +711,9 @@
                         var tbl = '<table id="tblGird" class="table table-bordered" style="width: 100%">';
                         tbl += '<thead><tr>';
                         tbl += '<th>Sr.No.';
+                        tbl += '<th>';
                         tbl += '<th>Title';
-                        tbl += '<th>Description';
+                        tbl += '<th>Category';
                         tbl += '<th>Is Published';
                         tbl += '<th>Total Lessons';
                         tbl += '<th>Action';
@@ -723,14 +733,22 @@
 
                                             tbl += '<tr id="' + data.TopicID + '">';
                                             tbl += '<td>' + (i + 1);
+                                            
+                                            if (data.IsActive == '1') {
+                                                tbl += '<td><input type="checkbox" onclick="SelectCourse(' + data.TopicID + ');" name="' + data.TopicID + '" id="cbxArchiveorUnArchive" checked>';
+                                            }
+                                            else {
+                                                tbl += '<td><input type="checkbox" onclick="SelectCourse(' + data.TopicID + ');" name="' + data.TopicID + '" id="cbxArchiveorUnArchive" >';
+                                            }
 
                                             tbl += '<td title="' + data.Title + '" class="title">' + data.Title;
-                                            tbl += '<td title="' + data.Description + '" class="description">' + data.Description;
-                                            tbl += '<td title="' + data.IsPublished + '" class="isPublished">' + data.IsPublished;
+                                            //tbl += '<td title="' + data.Description + '" class="description">' + data.Description;
+                                            tbl += '<td title="' + data.CategoryName + '" class="CategoryName">' + data.CategoryName;
+                                            tbl += '<td title="' + data.IsPublished + '" class="isPublished">' + data.IsPublished;                                            
                                             tbl += '<td title="' + data.ModuleCount + '"><a href=Modules.aspx?Id=' + data.TopicID + '>' + data.ModuleCount + '</a>';
                                             //tbl += '<td><i title="Edit" onclick="Edit(' + data.TopicID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.TopicID + ');" class="fas fa-trash text-danger"></i>';
-                                            tbl += '<td><i title="Edit" onclick="Edit_New(' + data.TopicID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.TopicID + ');" class="fas fa-trash text-danger"></i>';
-
+                                            tbl += '<td><i title="Edit" onclick="Edit_New(' + data.TopicID + ');" class="fas fa-edit text-warning"></i>';
+                                            //<i title="Delete" onclick="Delete(' + data.TopicID + ');" class="fas fa-trash text-danger"></i>';
                                         });
                                     }
                                 }
@@ -766,8 +784,7 @@
                         $('#tblGird').DataTable();
                         $('#tblGird').tableDnD({
                             onDragStart: function (table, row) {
-                                $('#savereorder').show();
-                               
+                                $('#savereorder').show();  
                             }
                         });
                     },
@@ -783,6 +800,113 @@
                     text: "Please try Again",
                     icon: "error"
                 });
+            }
+        }
+
+        
+        function SelectCourse(TopicID)
+        {
+            if (selected.length > 0) {
+                $('#btnArchive').show();
+                $('#btnUnArchive').show();
+            }
+            else {
+                $('#btnArchive').hide();
+                $('#btnUnArchive').hide();
+            }
+        }
+
+        function ArchiveUnArchiveTopic(ArchiveFlag)
+        {                     
+            var selected = new Array();
+            $('#tblGird input[type="checkbox"]:checked').each(function () {
+                selected.push($(this).attr('name'));
+            });
+
+            if (selected.length > 0)
+            {
+                var TopicIDs = ''
+                for (var a = 0; a < selected.length; a++) {
+                    TopicIDs = TopicIDs + selected[a] + ',';
+                }
+
+                TopicIDs = TopicIDs.replace(/,\s*$/, "");
+
+                var text = '';
+                var confirmButtonText = '';
+                if (ArchiveFlag == 0) {
+                    text = 'Do you want to archive ? Yes or No !';
+                    confirmButtonText = 'Yes, archive it!';
+                }
+                else {
+                    text = 'Do you want to un-archive ? Yes or No !';
+                    confirmButtonText = 'Yes, un-archive it!';
+                }
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: text,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: confirmButtonText
+                }).then((result) => {
+                    if (result.value) {
+                        ShowLoader();
+                        try {
+                            var requestParams = { TopicIDs: TopicIDs, IsActive: ArchiveFlag, Action: 3 };
+                            var getUrl = "/API/Content/DeleteTopicMultiple";
+
+                            $.ajax({
+                                type: "POST",
+                                url: getUrl,
+                                headers: { "Authorization": "Bearer " + accessToken },
+                                data: JSON.stringify(requestParams),
+                                contentType: "application/json",
+                                success: function (response) {
+                                    try {
+                                        var DataSet = $.parseJSON(response);
+                                        if (DataSet != null && DataSet != "") {
+                                            if (DataSet.StatusCode == "1") {
+                                                HideLoader();
+                                                Swal.fire({ title: "Success", text: DataSet.Data[0].ReturnMessage, icon: "success" });
+                                                View();
+                                            }
+                                            else {
+                                                HideLoader();
+                                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                            }
+                                        }
+                                        else {
+                                            HideLoader();
+                                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                        }
+                                    }
+                                    catch (e) {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                    }
+                                },
+                                complete: function () {
+                                    HideLoader();
+                                },
+                                failure: function (response) {
+                                    HideLoader();
+                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                }
+                            });
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Alert", text: "Please try again", icon: "error" });
+                        }
+                    }
+                });
+
+            }
+            else {
+                Swal.fire({ title: "Failure", text: "! Please select Course", icon: "error" });
             }
         }
 

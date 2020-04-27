@@ -44,12 +44,12 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
-        public static DataSet DeleteTopic(ContentBO content)
+        public static DataSet DeleteTopic(ContentBO content, int Action)
         {
             DataSet ds = new DataSet();
             try
             {
-                ds = ContentDAL.DeleteTopic(content);
+                ds = ContentDAL.DeleteTopic(content, Action);
             }
             catch (Exception ex)
             {

@@ -86,9 +86,11 @@
 
 
                                                 <div class="col-sm-6 mt-3">
-                                                    <div class="form-group">
-                                                        <input type="checkbox" id="cbxInstructorName" checked>
-                                                        <label for="cbxInstructorName"> Is Course Creator </label><br>
+                                                    <div class="form-group checkbox required">
+                                                        <div class="custom-control custom-checkbox custom-control-inline">
+                                                            <input type="checkbox" id="cbxInstructorName" class="custom-control-input" checked>
+                                                            <label for="cbxInstructorName" class="custom-control-label"> Is Course Creator </label>
+                                                        </div>                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 mt-3" style="display:none;" id="divInstructorName">
@@ -99,8 +101,6 @@
                                                         </small>
                                                     </div>
                                                 </div>
-                                                
-
 
                                                 <div class="col-sm-12 sharing">
                                                     <div class="form-group radio">
@@ -1364,7 +1364,7 @@
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
                             }
 
-                            if (EditTopic[0].IsCourseCreator == '0') {
+                            if (EditTopic[0].InstructorName != undefined && EditTopic[0].InstructorName != null) {
                                 $("#cbxInstructorName").prop("checked", false)
                                 $("#divInstructorName").show();
                                 $("#txtInstructorName").val(EditTopic[0].InstructorName);
