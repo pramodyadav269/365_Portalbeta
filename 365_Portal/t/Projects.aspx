@@ -1326,6 +1326,7 @@
 
         function call_Notification(responsedata, callerinfo = "") {
             // alert(callerinfo);
+            HideLoader();
             if (responsedata != null) {
                 var swaltitle = "";
                 var swalicon = "";
@@ -1653,6 +1654,7 @@
                 });
 
                 newCardHtml += '<div class="board-column">';
+                newCardHtml += '<div id="divheaderStatus">';
                 newCardHtml += '<div class="board-column-header">' + objStatus.Status;
                 newCardHtml += '<div class="float-right">';
                 if (Role != "enduser") {
@@ -1660,6 +1662,7 @@
                     newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ');"></i>';
                 }
                 newCardHtml += '</div></div>';
+                newCardHtml += '</div>';
 
                 newCardHtml += '<div class="board-column-content-wrapper">';
                 newCardHtml += '<div class="board-column-content" MasterStatusID="' + objStatus.StatusID + '">';
@@ -1689,61 +1692,24 @@
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
                         //Bind Task Assignee
-                        var requestParams = {
-                            t_Action: "6"
-                            , t_ProjectID: ProjectID
-                            , t_CompID: "0"
-                            , t_TaskID: objTask.TaskID
-                            , t_TaskName: ""
-                            , t_TaskSummary: ""
-                            , t_DueDate: new Date()
-                            , t_PrivateNotes: ""
-                            , t_UserId: "0"
-                            , t_TaskAssignees_UserIds: "" //varchar(500), #(Userids comma separated)
-                            , t_TagIds: "" //varchar(500), (comma separated)
-                            , t_FileIds: "" //varchar(500), #(comma separated)
-                            , t_SubTasks: "" //longtext, #(delimeter | separated)
-                            , t_StatusID: "0"
-                            , t_Comments: ""
-                        };
-                        $.ajax({
-                            type: "POST",
-                            url: "../api/Task/TaskCRUD",
-                            contentType: "application/json",
-                            headers: { "Authorization": "Bearer " + accessToken },
-                            async: false,
-                            data: requestParams != null ? JSON.stringify(requestParams) : null,
-                            success: function (response) {
-                                var jsonTaskAssigneelist = $.parseJSON(response).Data.Data;
-                                if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
-                                    if (jsonTaskAssigneelist[0].Message == null) {
-                                        $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
-                                            var profilepicpath = '';
-                                            if (objMember.FilePath != null && objMember.FilePath != "") {
-                                                profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
-                                            } else {
-                                                profilepicpath = "../INCLUDES/Asset/images/profile.png";
-                                            }
-                                            newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
-                                        });
+                        var jsonTaskAssigneelist = gettaskassignees(objTask.TaskAsginee);
+                        if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
+                            if (jsonTaskAssigneelist[0].Message == null) {
+                                $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
+                                    var profilepicpath = '';
+                                    if (objMember.FilePath != null && objMember.FilePath != "") {
+                                        profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
+                                    } else {
+                                        profilepicpath = "../INCLUDES/Asset/images/profile.png";
                                     }
-                                }
-                            },
-                            failure: function (response) {
-                                Swal.fire({
-                                    title: "Failure",
-                                    text: "Please try Again",
-                                    icon: "error",
-                                    button: "Ok",
+                                    newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
                                 });
                             }
-                        });
-
+                        }
                         newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
                         cardHtml += '</li>';
-
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
                     });
@@ -1765,14 +1731,14 @@
                 cardHtml += '</div>';
                 cardHtml += '</div>';
                 cardHtml += '</div>';
-
                 newCardHtml += '</div>';
-
             });
 
-            newCardHtml += '<div class="board-column">';
-            newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddtaskModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
-            newCardHtml += '</div>';
+            if (jsonStatusList.length < 6) {
+                newCardHtml += '<div class="board-column">';
+                newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
+                newCardHtml += '</div>';
+            }
 
             $("#dvWebsiteRedesign").html("")
             $("#dvWebsiteRedesign").empty().html(cardHtml);
@@ -1909,48 +1875,74 @@
             }
         }
 
-        function onOpenAddtaskModal() {
-            $('#txtStatusName').val();
+        function onOpenAddStatusModal() {
+            $('#txtStatusName').val("");
             $('#modalStatusInfo').modal('show');
         };
 
         function SaveUpdateStatus(StatusId = 0) {
-            ShowLoader();
-            var actionID = StatusId != null && StatusId != '' && StatusId != 0 ? 3 : 2;
-            var requestParams = {
-                p_Action: actionID
-                , p_CompID: "0"
-                , p_StatusName: actionID == 2 ? $('#txtStatusName').val() : $("#txtStatusNameEdit").val()
-                , p_SrNo: jsonStatusList.length + 1
-                , p_UserId: "0"
-                , p_ProjectID: ProjectID
-                , p_StatusId: StatusId
-            };
-            $.ajax({
-                type: "POST",
-                url: "../api/Project/ProjectStatusCRUD",
-                contentType: "application/json",
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: requestParams != null ? JSON.stringify(requestParams) : null,
-                success: function (response) {
-                    BindStatusMaster();
-                    BindCards();
-                    BindTeam(ProjectID);
-                    BindAssignee(ProjectID);
-                    $('#modalStatusInfo').modal('hide');
-                },
-                failure: function (response) {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please try Again",
-                        icon: "error",
-                        button: "Ok",
-                    });
-                },
-                complete: function () {
-                    // HideLoader();
-                }
-            });
+            ShowLoader
+            var txtStatusName = $('#txtStatusName').val();
+            var txtStatusNameEdit = $('#txtStatusNameEdit').val();
+
+            if (txtStatusName != null && txtStatusName != '' || txtStatusNameEdit != null && txtStatusNameEdit != '') {
+                var actionID = StatusId != null && StatusId != '' && StatusId != 0 ? 3 : 2;
+                var requestParams = {
+                    p_Action: actionID
+                    , p_CompID: "0"
+                    , p_StatusName: actionID == 2 ? txtStatusName : txtStatusNameEdit
+                    , p_SrNo: jsonStatusList.length + 1
+                    , p_UserId: "0"
+                    , p_ProjectID: ProjectID
+                    , p_StatusId: StatusId
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "../api/Project/ProjectStatusCRUD",
+                    contentType: "application/json",
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: requestParams != null ? JSON.stringify(requestParams) : null,
+                    success: function (response) {
+                        var responseData = $.parseJSON(response);
+                        if (responseData.StatusCode > 0) {
+                            BindStatusMaster();
+                            BindCards();
+                            BindTeam(ProjectID);
+                            BindAssignee(ProjectID);
+                            $('#modalStatusInfo').modal('hide');
+
+                            if (actionID == "2") {
+                                responseData.StatusDescription = "Status added successfully";
+                            }
+                            else if (actionID == "3") {
+                                responseData.StatusDescription = "Status updated successfully";
+                            }
+                        }
+
+                        call_Notification(responseData);
+                    },
+                    failure: function (response) {
+                        debugger;
+                        Swal.fire({
+                            title: "Failure",
+                            text: "Please try Again",
+                            icon: "error",
+                            button: "Ok",
+                        });
+                    },
+                    complete: function () {
+                        // HideLoader();
+                    }
+                });
+            }
+            else {
+                Swal.fire({
+                    title: "Warning",
+                    text: "Status name cannot be blank",
+                    icon: "warning",
+                    button: "Ok",
+                });
+            }
 
         }
 
@@ -1969,16 +1961,15 @@
                 $(objthis).parent().parent().replaceWith(editstatusHTML);
                 $("#txtStatusNameEdit").val(StatusName);
             }
-            //else { //cancel
-            //    if (ActualStatusHTML != "") {
-            //        $(objthis).parent().parent().replaceWith(ActualStatusHTML);
-            //    }
-            //    ActualStatusHTML = "";
-            //}
+            else if (type == 0) { //cancel
+                if (ActualStatusHTML != "") {
+                    $(objthis).parent().parent().replaceWith(ActualStatusHTML);
+                }
+                ActualStatusHTML = "";
+            }
         }
 
         function DeleteTaskStatus(StatusId) {
-            alert(StatusId)
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Status, all Tasks under this Status will be deleted too !",
@@ -2024,6 +2015,22 @@
                     });
                 }
             })
+        }
+
+        function gettaskassignees(assigneesData) {
+            var TaskAssinees = [];
+            var TaskAssigneeRows = assigneesData.split('|');
+            $.each(TaskAssigneeRows, function (index, objrow) {
+                var TaskAssigneeCols = objrow.split(',');
+                var Taskassigneesparam = {
+                    FirstName: TaskAssigneeCols[0]
+                    , LastName: TaskAssigneeCols[1]
+                    , TeamName: TaskAssigneeCols[2]
+                    , FilePath: TaskAssigneeCols[3]
+                };
+                TaskAssinees.push(Taskassigneesparam);
+            });
+            return TaskAssinees;
         }
     </script>
 </asp:Content>
