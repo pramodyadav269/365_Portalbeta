@@ -24,7 +24,7 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 
 /* heebo-regular - latin */
-@font-face {
+/*@font-face {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
@@ -33,15 +33,39 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 @font-face {
     font-family: 'TeachableSans-Medium';
-    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'), /* */
-    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), /* */
+    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'),
+    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), 
     url('../fonts/teachable/TeachableSans-Medium.ttf') format('truetype');
 }
 
 body {
     font-size: 14px;
-    background: #F5F6F7;
     font-family: 'TeachableSans-Medium' !important;
+}*/
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('../fonts/Open_Sans/OpenSans-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'OpenSans-SemiBold';
+    src: url('../fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+}
+
+body {
+    font-size: 14px;
+    font-family: 'OpenSans-Regular' !important;
+}
+
+body {
+    background: #F5F6F7;
 }
 
 .bg-dark-blue {
@@ -2705,8 +2729,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .dropdown {
             .dropdown-menu {
-                transform: translate3d(-176px, 26px, 0px) !important;
-                min-width: 184px;
+                transform: translate3d(-214px, 26px, 0px) !important;
+                min-width: 224px;
 
                 .dropdown-item {
                     font-size: 13px;
