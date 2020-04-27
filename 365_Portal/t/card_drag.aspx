@@ -14,7 +14,7 @@
         .board-column {
             position: absolute;
             left: 0;
-            right: 0;
+            /*right: 0;*/
             width: 30%;
             margin: 0 1.5%;
             background: #f0f0f0;

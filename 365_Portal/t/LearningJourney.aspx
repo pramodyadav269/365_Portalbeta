@@ -58,7 +58,7 @@
                                                     <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
                                                         <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier to find
-                                                    <span class="float-right">0 / 100</span>
+                                                        <span class="float-right">0 / 100</span>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -79,13 +79,29 @@
                                                 <div class="col-sm-12 col-md-6">
                                                     <div class="form-group">
                                                         <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
-                                                            <%--<option></option>
-                                                            <option value="1">Category 1</option>
-                                                            <option value="2">Category 2</option>
-                                                            <option value="3">Category 3</option>--%>
                                                         </select>
                                                     </div>
                                                 </div>
+
+
+
+                                                <div class="col-sm-6 mt-3">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" id="cbxInstructorName" checked>
+                                                        <label for="cbxInstructorName"> Is Course Creator </label><br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mt-3" style="display:none;" id="divInstructorName">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control required" placeholder="Instructor Name *" maxlength="100" id="txtInstructorName" onkeyup="setTextCount(this)" aria-describedby="txtInstructorNameHelp" />
+                                                        <small id="txtInstructorNameHelp" class="form-text">Course Creator Name
+                                                        <span class="float-right">0 / 100</span>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                
+
+
                                                 <div class="col-sm-12 sharing">
                                                     <div class="form-group radio">
                                                         <label>Sharing</label>
@@ -1075,10 +1091,16 @@
             $("#rbGlobal").prop("checked", true)
             $('#txtCourseThemeColor').val('#161E98');
             $("#ddlTags option:selected").prop("selected", false);
+            
+            $("#cbxInstructorName").prop("checked", true)
+            $("#divInstructorName").hide();
+            $("#txtInstructorName").val('');
+
             selectInit('#ddlTags ', 'Select Tag');
         }
 
         function validateAddCourse() {
+            debugger
             if ($("#txtCourseTitle").val() == undefined || $("#txtCourseTitle").val() == '') {
                 return { error: true, msg: "Please enter Course Title" };
             }
@@ -1093,6 +1115,12 @@
             }
             else if ($("#rbGlobal").prop("checked") == false && $("#rbOrganization").prop("checked") == false && $("#rbAssigned").prop("checked") == false) {
                 return { error: true, msg: "Please select sharing option" };
+            }
+
+            else if ($("#cbxInstructorName").prop('checked') == false) {
+                if ($("#txtInstructorName").val() == undefined || $("#txtInstructorName").val() == '') {
+                    return { error: true, msg: "Please enter course creator name" };
+                }
             }
             return true;
         }
@@ -1152,6 +1180,14 @@
                     _selectedTags = _selectedTags.replace(/,\s*$/, "");
                 }
 
+                var _IsCourseCreator = '1';
+                var _InstructorName = '';
+                if ($("#cbxInstructorName").prop('checked') == false) {
+                    _IsCourseCreator = '0';
+                    _InstructorName = $("#txtInstructorName").val();
+                }
+
+
                 if (CourseFlag == '0') {
                     getUrl = "/API/Content/CreateTopic";
 
@@ -1163,7 +1199,8 @@
                 //requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, AchievementBadge: _AchievementBadge, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags };
                 requestParams = {
                     TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory
-                    , CategoryColor: _CategoryColor, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags
+                    , CategoryColor: _CategoryColor, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags, IsCourseCreator: _IsCourseCreator
+                    , InstructorName: _InstructorName
                 };
 
                 try {
@@ -1320,11 +1357,22 @@
                             else {
                                 $("#rbGlobal").prop("checked", true)
                             }
-
+                            debugger
                             if (EditTopic[0].FilePath != undefined && EditTopic[0].FilePath != null && EditTopic[0].FilePath != '') {
                                 $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
                                 $("#divCourseLogo").addClass('img');
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
+                            }
+
+                            if (EditTopic[0].IsCourseCreator == '0') {
+                                $("#cbxInstructorName").prop("checked", false)
+                                $("#divInstructorName").show();
+                                $("#txtInstructorName").val(EditTopic[0].InstructorName);
+                            }
+                            else {
+                                $("#cbxInstructorName").prop("checked", true)
+                                $("#divInstructorName").hide();
+                                $("#txtInstructorName").val('');
                             }
 
                             GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
@@ -3435,6 +3483,18 @@
             }
             return result;
         }
+
+
+        $("#cbxInstructorName").click(function () {
+            debugger
+            if ($("#cbxInstructorName").prop('checked') == true) {
+                $("#divInstructorName").hide();
+            }
+            else {
+                $("#divInstructorName").show();
+                $("#txtInstructorName").val('');
+            }
+        })
 
     </script>
 </asp:Content>

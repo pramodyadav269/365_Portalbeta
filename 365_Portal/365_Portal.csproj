@@ -255,6 +255,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Code\ActiveUsersCache.cs" />
+    <Compile Include="Code\ActivityLog.cs" />
     <Compile Include="Code\BL\AchivementBL.cs" />
     <Compile Include="Code\BL\CommonBL.cs" />
     <Compile Include="Code\BL\ContentBL.cs" />
@@ -301,10 +302,10 @@
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
+    <Compile Include="Controllers\s.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TrainningController.cs" />
     <Compile Include="Controllers\UserController.cs" />
