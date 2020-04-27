@@ -110,7 +110,10 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_CourseLogoFileID", content.CourseLogoFileID);
                 cmd.Parameters.AddWithValue("p_AchievementBadgeID", content.AchievementBadge);
                 cmd.Parameters.AddWithValue("p_Accessibility", content.Accessibility);
-                cmd.Parameters.AddWithValue("p_selectedTags", content.selectedTags);                
+                cmd.Parameters.AddWithValue("p_selectedTags", content.selectedTags);
+
+                cmd.Parameters.AddWithValue("p_IsCourseCreator", content.IsCourseCreator);
+                cmd.Parameters.AddWithValue("p_InstructorName", content.InstructorName);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
@@ -183,6 +186,7 @@ namespace _365_Portal.Code.DAL
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("p_CompID", content.CompID);
+                cmd.Parameters.AddWithValue("p_UserID", content.UserID);
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;

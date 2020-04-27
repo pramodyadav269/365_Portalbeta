@@ -5,7 +5,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-    <script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>
+    <%--<script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>--%>
+    <script src="../INCLUDES/Asset/js/muuri.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <style>
@@ -89,7 +90,7 @@
                     <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
-            <div class="col-10 pr-5">
+            <div class="col-10 pr-5 drag-drop-card">
                 <div class="row website-redesign board" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
@@ -473,7 +474,7 @@
     </div>
 
     <div class="modal fade p-0" id="modalStatusInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-lg shadow modal-right">
+        <div class="modal-dialog shadow">
             <div class="modal-content rounded">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
                     <img src="../Asset/images/close-button.png" class="close" /></a>
@@ -487,7 +488,7 @@
                                 <input type="text" class="form-control required" id="txtStatusName" placeholder="Status Name" />
                                 <div class="w-100"></div>
                                 <div class="col-12 col-sm-12 mt-4 text-right">
-                                    <a class="btn bg-yellow" onclick="SaveUpdateStatus(this)">Submit</a>
+                                    <a class="btn bg-yellow" onclick="SaveUpdateStatus(0)">Submit</a>
                                 </div>
                             </div>
                         </div>
@@ -1652,7 +1653,14 @@
                 });
 
                 newCardHtml += '<div class="board-column">';
-                newCardHtml += '<div class="board-column-header">' + objStatus.Status + '</div>';
+                newCardHtml += '<div class="board-column-header">' + objStatus.Status;
+                newCardHtml += '<div class="float-right">';
+                if (Role != "enduser") {
+                    newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
+                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ');"></i>';
+                }
+                newCardHtml += '</div></div>';
+
                 newCardHtml += '<div class="board-column-content-wrapper">';
                 newCardHtml += '<div class="board-column-content" MasterStatusID="' + objStatus.StatusID + '">';
                 // Repeat Status
@@ -1668,11 +1676,8 @@
                     // Repeat Tasks
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
                         var duedate = new Date(objTask.DueDate);
-
                         newCardHtml += '<div class="board-item">';
                         newCardHtml += '<div class="board-item-content" status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '">';
-
-
                         cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         newCardHtml += '<div class="wr-content">';
                         newCardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
@@ -1747,8 +1752,8 @@
                 else {
                     cardHtml += '<div class="col-12"><h6 class="font-weight-bold">No Tasks Found</h5></div>';
                 }
-                newCardHtml += ' </div>';
-                newCardHtml += ' </div>';
+                newCardHtml += '</div>';
+                newCardHtml += '</div>';
 
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
@@ -1761,18 +1766,18 @@
                 cardHtml += '</div>';
                 cardHtml += '</div>';
 
-                newCardHtml += ' </div>';
+                newCardHtml += '</div>';
 
             });
 
-            newCardHtml += '<div class="board-column"><a class="btn bg-light-tr rounded w-100" onclick="onOpenAddtaskModal();"><i class="fas fa-plus"></i>Add New Status</a><div>';
+            newCardHtml += '<div class="board-column">';
+            newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddtaskModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
+            newCardHtml += '</div>';
 
             $("#dvWebsiteRedesign").html("")
             $("#dvWebsiteRedesign").empty().html(cardHtml);
-
             $("#dvWebsiteRedesign").empty().html(newCardHtml);
             InitializeCardsDraggableView();
-            // initDragDrop();
             HideLoader();
         }
 
@@ -1905,18 +1910,21 @@
         }
 
         function onOpenAddtaskModal() {
+            $('#txtStatusName').val();
             $('#modalStatusInfo').modal('show');
         };
 
-        function SaveUpdateStatus() {
+        function SaveUpdateStatus(StatusId = 0) {
             ShowLoader();
+            var actionID = StatusId != null && StatusId != '' && StatusId != 0 ? 3 : 2;
             var requestParams = {
-                p_Action: "2"
+                p_Action: actionID
                 , p_CompID: "0"
-                , p_StatusName: $('#txtStatusName').val()
+                , p_StatusName: actionID == 2 ? $('#txtStatusName').val() : $("#txtStatusNameEdit").val()
                 , p_SrNo: jsonStatusList.length + 1
                 , p_UserId: "0"
                 , p_ProjectID: ProjectID
+                , p_StatusId: StatusId
             };
             $.ajax({
                 type: "POST",
@@ -1940,10 +1948,82 @@
                     });
                 },
                 complete: function () {
-                   // HideLoader();
+                    // HideLoader();
                 }
             });
 
+        }
+
+        var ActualStatusHTML = "";
+        function TaskStatusEditable(objthis, type) {
+            if (type == 1) { //edit 
+                ActualStatusHTML = $(objthis).parent().parent().parent().html();
+                var StatusId = $(objthis).attr("statusid");
+                var StatusName = $(objthis).attr("statusname");
+                var editstatusHTML = '';
+                editstatusHTML += '<div class="d-flex justify-content-between align-items-center p-3">';
+                editstatusHTML += '<input type="text" class="form-control required col-9" id="txtStatusNameEdit" placeholder="Status Name">';
+                //editstatusHTML += '<textbox  id="txtStatusNameEdit" > ' + StatusName + ' </textbox>';
+                editstatusHTML += '<div class="float-right"><i class="fas fa-check" onclick="SaveUpdateStatus(' + StatusId + ')"></i>|<i class="fas fa-times" onclick="TaskStatusEditable(this,0)"></i></div>'
+                editstatusHTML += '</div>'
+                $(objthis).parent().parent().replaceWith(editstatusHTML);
+                $("#txtStatusNameEdit").val(StatusName);
+            }
+            //else { //cancel
+            //    if (ActualStatusHTML != "") {
+            //        $(objthis).parent().parent().replaceWith(ActualStatusHTML);
+            //    }
+            //    ActualStatusHTML = "";
+            //}
+        }
+
+        function DeleteTaskStatus(StatusId) {
+            alert(StatusId)
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete Status, all Tasks under this Status will be deleted too !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    var requestParams = {
+                        p_Action: "5"
+                        , p_CompID: "0"
+                        , p_StatusName: ""
+                        , p_SrNo: "0"
+                        , p_UserId: "0"
+                        , p_ProjectID: ProjectID
+                        , p_StatusId: StatusId
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "../api/Project/ProjectStatusCRUD",
+                        contentType: "application/json",
+                        headers: { "Authorization": "Bearer " + accessToken },
+                        data: requestParams != null ? JSON.stringify(requestParams) : null,
+                        success: function (response) {
+                            BindStatusMaster();
+                            BindCards();
+                            BindTeam(ProjectID);
+                            BindAssignee(ProjectID);
+                        },
+                        failure: function (response) {
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error",
+                                button: "Ok",
+                            });
+                        },
+                        complete: function () {
+                            // HideLoader();
+                        }
+                    });
+                }
+            })
         }
     </script>
 </asp:Content>

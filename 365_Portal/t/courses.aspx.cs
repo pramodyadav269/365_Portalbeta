@@ -10,11 +10,11 @@ namespace Life
         {
             if (Session["UserId"] != null)
             {
-                if (Convert.ToString(Session["RoleName"]) == "superadmin")
-                {
-                    Response.Redirect("~/t/dashboard.aspx");
-                }
-                else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.companyadmin)
+                //if (Convert.ToString(Session["RoleName"]) == "superadmin")
+                //{
+                //    Response.Redirect("~/t/dashboard.aspx");
+                //}
+                if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.companyadmin)
                 {
                     //dvAdminTasks.Visible = true;
                 }

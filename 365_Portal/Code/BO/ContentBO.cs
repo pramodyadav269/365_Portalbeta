@@ -9,6 +9,7 @@ namespace _365_Portal
     public class ContentBO
     {
         public  int CompID { get; set; }
+        public int UserID { get; set; }
         public  int ContentID { get; set; }
         public int ParentSrNo { get; set; }
         public  int ContentTypeID { get; set; }
@@ -64,7 +65,10 @@ namespace _365_Portal
         public int AchievementBadge { get; set; }
         public int Accessibility { get; set; }
         public int CourseLogoFileID { get; set; }
-        public string selectedTags { get; set; }        
+        public string selectedTags { get; set; }
+
+        public int IsCourseCreator { get; set; }
+        public string InstructorName { get; set; }
     }
 
     public class FlashcarIntro

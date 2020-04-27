@@ -834,6 +834,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: .75rem;
   margin-bottom: 2rem; }
 
+.website-redesign .card.add-status {
+  margin: 0 !important; }
+
 .website-redesign .card.add-status .card-body {
   text-align: center;
   padding: 3rem 0;
@@ -1261,26 +1264,32 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .btn.btn-yellow {
     background-color: #FAC900;
     color: #000; }
+  .btn.btn-orange {
+    background-color: #FF7F45;
+    color: #fff; }
   .btn.btn-black {
     background-color: #000;
     color: #fff !important; }
   .btn.btn-float {
     position: fixed;
-    width: 54px;
-    height: 54px;
-    padding: 16px;
     background-color: #FAC900;
     color: #FFF;
-    border-radius: 50px;
     text-align: center;
     box-shadow: 2px 2px 3px rgba(153, 153, 153, 0.42);
-    z-index: 1024; }
+    z-index: 1024;
+    font-size: 18px;
+    border-radius: 50px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: row; }
     .btn.btn-float.bottom-right {
       bottom: 40px;
       right: 40px; }
     .btn.btn-float .svg-inline--fa {
-      margin: 0;
-      font-size: 18px; }
+      font-size: 26px;
+      margin: 0; }
+      .btn.btn-float .svg-inline--fa + span {
+        margin-left: .75rem; }
 
 .module {
   padding-bottom: 4rem; }
@@ -1745,7 +1754,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       padding: 1rem; } }
   .dashboard .lesson-wrapper .lesson-scrollspy {
     position: relative;
-    /*height: 68vh;*/
+    height: 80vh;
     overflow: auto;
     margin-bottom: 2rem;
     margin-right: 2rem; }
@@ -1811,7 +1820,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: 0;
   border-bottom-left-radius: .1rem;
   border-bottom-right-radius: .1rem;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); }
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  /*.img-swap {
+            display: flex;
+            flex-direction: row;
+
+            .card-img-top {
+                border-radius: 0;
+                height: 100%;
+
+                &.img-fluid {
+                    max-width: 20%;
+                }
+            }
+        }*/ }
   .card-with-img.card .card-img-top {
     border-radius: 0;
     height: 168px; }
@@ -2081,21 +2103,40 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .board {
   position: relative; }
 
+.drag-drop-card {
+  max-width: 82%;
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.website-redesign {
+  width: 1944px; }
+
 .board-column {
   position: absolute;
   left: 0;
   right: 0;
-  width: 30%;
-  margin: 0 1.5%;
+  width: 364px;
+  margin: 0 10px;
   background: #fff;
   z-index: 1;
   border-radius: .75rem;
   -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
-  .board-column:first-child {
-    margin-left: 0; }
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  /*transform: none !important;
+    position: relative !important;*/
+  /*&:first-child {
+        margin-left: 0;
+    }*/ }
   .board-column:last-child {
-    margin-right: 0; }
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+  .board-column .float-right {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px; }
+    .board-column .float-right .svg-inline--fa {
+      cursor: pointer;
+      margin: 0 0.5rem; }
 
 .board-column.muuri-item-releasing {
   z-index: 2; }
@@ -2113,6 +2154,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   overflow: hidden;
   padding: 0 20px;
   color: #000; }
+  .board-column-header .float-right {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 14px; }
+    .board-column-header .float-right .svg-inline--fa {
+      cursor: pointer;
+      margin: 0 0.5rem; }
 
 @media (max-width: 600px) {
   .board-column-header {
@@ -2128,7 +2175,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   background: #2ac06d; }
 
 .board-column-content-wrapper {
-  position: relative; }
+  position: relative;
+  max-height: 300px;
+  overflow-y: auto; }
 
 .board-column-content {
   position: relative;
@@ -2157,3 +2206,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   cursor: move;
   background: rgba(0, 0, 0, 0.04);
   border-radius: .25rem; }
+
+.help.card .btn {
+  border-radius: 50px; }
+
+.help.card .card-body .help-content {
+  height: 248px;
+  padding: 0 36px; }
+
+.help.card .card-body .card-img-top {
+  height: 100px;
+  margin-top: 1rem;
+  margin-bottom: 3rem; }
+
+.help.card .card-body .card-title {
+  color: rgba(0, 0, 0, 0.6); }
+
+.help.card .card-body .card-text {
+  color: rgba(0, 0, 0, 0.5); }

@@ -78,6 +78,7 @@ $(document).ready(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
     $('#sideNav').tooltip({ boundary: 'window' });
+
 });
 
 function closeDatetime() {

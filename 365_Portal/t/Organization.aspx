@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
 
-    <div class="row settings">
+    <div class="container-fluid row settings">
         <div class="col-md-12 header mb-4">
             <a class="back" href="dashboard.aspx"><i class="fas fa-arrow-left"></i>Back to Dashboard</a>
             <h2 class="text-center font-weight-bold" id="dvTitle">Organization</h2>
@@ -146,7 +146,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ddlEmployeeCount">No Of Employee</label>
-                                    <select class="form-control required" id="ddlEmployeeCount" style="width: 100% !important">
+                                    <select class="form-control select2 required" id="ddlEmployeeCount" style="width: 100% !important">
                                         <option></option>
                                         <option value="1">Just You</option>
                                         <option value="2">2-9</option>
@@ -158,7 +158,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ddlCountry">Country</label>
-                                    <select class="form-control required" id="ddlCountry" style="width: 100% !important">
+                                    <select class="form-control select2 required" id="ddlCountry" style="width: 100% !important">
                                     </select>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
 
                                 var Country = DataSet.Data;
                                 if (Country != undefined && Country.length > 0) {
-                                    $('#ddlCountry').empty().append('<option value="">Select Option</option>');
+                                    $('#ddlCountry').empty().append('<option></option>');
                                     for (var i = 0; i < Country.length; i++) {
                                         $('#ddlCountry').append('<option value="' + Country[i].Id + '">' + Country[i].CountryName + '</option>');
                                     }
@@ -535,8 +535,8 @@
                             $('#txtCustomFont').val(DataSet.Data[0].CompanyThemeColor4);
 
                             $('#txtBusinessName').val(DataSet.Data[0].BusinessName);
-                            $('#ddlEmployeeCount').val(DataSet.Data[0].NoOfEmployees);
-                            $('#ddlCountry').val(DataSet.Data[0].Country);
+                            $('#ddlEmployeeCount').val(DataSet.Data[0].NoOfEmployees).trigger('change');
+                            $('#ddlCountry').val(DataSet.Data[0].Country).trigger('change');
 
                             $('#ddlRole').val(DataSet.Data[0].RoleID);
                             $('#txtFname').val(DataSet.Data[0].FirstName);

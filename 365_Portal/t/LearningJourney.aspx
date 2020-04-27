@@ -1,4 +1,4 @@
-﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -58,7 +58,7 @@
                                                     <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
                                                         <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier to find
-                                                    <span class="float-right">0 / 100</span>
+                                                        <span class="float-right">0 / 100</span>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -79,13 +79,29 @@
                                                 <div class="col-sm-12 col-md-6">
                                                     <div class="form-group">
                                                         <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
-                                                            <%--<option></option>
-                                                            <option value="1">Category 1</option>
-                                                            <option value="2">Category 2</option>
-                                                            <option value="3">Category 3</option>--%>
                                                         </select>
                                                     </div>
                                                 </div>
+
+
+
+                                                <div class="col-sm-6 mt-3">
+                                                    <div class="form-group">
+                                                        <input type="checkbox" id="cbxInstructorName" checked>
+                                                        <label for="cbxInstructorName"> Is Course Creator </label><br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 mt-3" style="display:none;" id="divInstructorName">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control required" placeholder="Instructor Name *" maxlength="100" id="txtInstructorName" onkeyup="setTextCount(this)" aria-describedby="txtInstructorNameHelp" />
+                                                        <small id="txtInstructorNameHelp" class="form-text">Course Creator Name
+                                                        <span class="float-right">0 / 100</span>
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                                
+
+
                                                 <div class="col-sm-12 sharing">
                                                     <div class="form-group radio">
                                                         <label>Sharing</label>
@@ -235,7 +251,7 @@
                                                 <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
                                                     <div id="txtResourcesDescription"></div>
                                                 </div>
-                                                <div style="display:none;" id="divResourcesAsHTML"></div>
+                                                <div style="display: none;" id="divResourcesAsHTML"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -373,13 +389,13 @@
 
             <%--Lesson--%>
             <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson"    onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
 
             <%--Content--%>
             <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent"    onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
+            <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
             <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
 
@@ -828,7 +844,7 @@
             }
         }
 
-        function AddMore(id) {            
+        function AddMore(id) {
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -916,7 +932,7 @@
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
-                }                
+                }
                 else {
                     ClearFieldsAddContent();
                     $('#btnAddMoreContent').hide();
@@ -978,7 +994,7 @@
 
             //nextTab('pills-lesson-tab');
             BindLesson('afterquiz');
-            
+
         }
 
         function RedirectToNewCourse() {
@@ -1075,10 +1091,16 @@
             $("#rbGlobal").prop("checked", true)
             $('#txtCourseThemeColor').val('#161E98');
             $("#ddlTags option:selected").prop("selected", false);
+            
+            $("#cbxInstructorName").prop("checked", true)
+            $("#divInstructorName").hide();
+            $("#txtInstructorName").val('');
+
             selectInit('#ddlTags ', 'Select Tag');
         }
 
         function validateAddCourse() {
+            debugger
             if ($("#txtCourseTitle").val() == undefined || $("#txtCourseTitle").val() == '') {
                 return { error: true, msg: "Please enter Course Title" };
             }
@@ -1093,6 +1115,12 @@
             }
             else if ($("#rbGlobal").prop("checked") == false && $("#rbOrganization").prop("checked") == false && $("#rbAssigned").prop("checked") == false) {
                 return { error: true, msg: "Please select sharing option" };
+            }
+
+            else if ($("#cbxInstructorName").prop('checked') == false) {
+                if ($("#txtInstructorName").val() == undefined || $("#txtInstructorName").val() == '') {
+                    return { error: true, msg: "Please enter course creator name" };
+                }
             }
             return true;
         }
@@ -1152,6 +1180,14 @@
                     _selectedTags = _selectedTags.replace(/,\s*$/, "");
                 }
 
+                var _IsCourseCreator = '1';
+                var _InstructorName = '';
+                if ($("#cbxInstructorName").prop('checked') == false) {
+                    _IsCourseCreator = '0';
+                    _InstructorName = $("#txtInstructorName").val();
+                }
+
+
                 if (CourseFlag == '0') {
                     getUrl = "/API/Content/CreateTopic";
 
@@ -1163,7 +1199,8 @@
                 //requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, AchievementBadge: _AchievementBadge, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags };
                 requestParams = {
                     TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory
-                    , CategoryColor: _CategoryColor, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags
+                    , CategoryColor: _CategoryColor, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags, IsCourseCreator: _IsCourseCreator
+                    , InstructorName: _InstructorName
                 };
 
                 try {
@@ -1299,6 +1336,7 @@
                 success: function (response) {
                     try {
                         var DataSet = $.parseJSON(response);
+                        debugger
                         HideLoader();
                         if (DataSet.StatusCode == "1") {
                             var EditTopic = DataSet.Data.Data;
@@ -1319,11 +1357,22 @@
                             else {
                                 $("#rbGlobal").prop("checked", true)
                             }
-
+                            debugger
                             if (EditTopic[0].FilePath != undefined && EditTopic[0].FilePath != null && EditTopic[0].FilePath != '') {
                                 $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
                                 $("#divCourseLogo").addClass('img');
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
+                            }
+
+                            if (EditTopic[0].IsCourseCreator == '0') {
+                                $("#cbxInstructorName").prop("checked", false)
+                                $("#divInstructorName").show();
+                                $("#txtInstructorName").val(EditTopic[0].InstructorName);
+                            }
+                            else {
+                                $("#cbxInstructorName").prop("checked", true)
+                                $("#divInstructorName").hide();
+                                $("#txtInstructorName").val('');
                             }
 
                             GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
@@ -1331,6 +1380,8 @@
                             nextTab('pills-course-tab');
                         }
                         else {
+                            CourseFlag = '0';
+
                             if (DataSet.Data != undefined && DataSet.Data.length > 0) {
                                 Swal.fire(DataSet.Data[0].ReturnMessage, {
                                     icon: "error",
@@ -1431,7 +1482,7 @@
         }
 
         function AddLession(flag) {
-            
+
             var getUrl;
             //ShowLoader();
             var _Topic_Id = CourseFlag;
@@ -1605,7 +1656,7 @@
             LessonFlag = id;
             AddMoreLessonFlag = 'add';
             divLessonFlag = 'add';
-                        
+
 
             ClearFieldsAddResource();
             ClearFieldsAddContent();
@@ -2212,7 +2263,7 @@
             AddMore('btnAddMoreContent');
         }
 
-               
+
 
         function ClearFieldsAddResource() {
             //$('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
@@ -2247,7 +2298,7 @@
                 ShowLoader();
                 var Description = editorResourcesDesc.value;
                 var getUrl = "/API/Content/UpdateResource";
-                
+
                 try {
                     var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
 
@@ -2558,7 +2609,7 @@
                                             $("#dvQuizDone").show();
                                         }
 
-                                        BindQuestion(Questions);``
+                                        BindQuestion(Questions); ``
                                     }
 
                                 }
@@ -2978,8 +3029,7 @@
             ShowQuestion(qtype, question);
         }
 
-        function DeleteQuestion(questionId)
-        {
+        function DeleteQuestion(questionId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -2995,7 +3045,7 @@
                     var requestParams = { "Action": 3, "Type": "0", "ContentTypeID": QuizContentTypeID, "QuestionID": questionId, ContentID: QuizFlag };
                     var getUrl = "/API/Quiz/DeleteQuestion";
 
-                    try {                        
+                    try {
                         $.ajax({
                             type: "POST",
                             url: getUrl,
@@ -3006,10 +3056,8 @@
                                 try {
                                     var DataSet = $.parseJSON(response);
                                     debugger
-                                    if (DataSet != null && DataSet != "")
-                                    {
-                                        if (DataSet.StatusCode == "1")
-                                        {
+                                    if (DataSet != null && DataSet != "") {
+                                        if (DataSet.StatusCode == "1") {
                                             BindQuestion(DataSet.Data.Data);
                                         }
                                         else {
@@ -3402,7 +3450,7 @@
         }
 
         function isNumberKey(flag, e) {
-            
+
             var result = false;
             try {
                 var charCode = (e.which) ? e.which : e.keyCode;
@@ -3435,6 +3483,18 @@
             }
             return result;
         }
+
+
+        $("#cbxInstructorName").click(function () {
+            debugger
+            if ($("#cbxInstructorName").prop('checked') == true) {
+                $("#divInstructorName").hide();
+            }
+            else {
+                $("#divInstructorName").show();
+                $("#txtInstructorName").val('');
+            }
+        })
 
     </script>
 </asp:Content>
