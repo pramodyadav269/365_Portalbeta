@@ -1362,7 +1362,7 @@
                                 $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
                                 $("#divCourseLogo").addClass('img');
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
-                            }
+                            }                            
 
                             if (EditTopic[0].InstructorName != undefined && EditTopic[0].InstructorName != null) {
                                 $("#cbxInstructorName").prop("checked", false)

@@ -502,23 +502,16 @@ namespace _365_Portal.ControllersReOrderContent
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
-                    if ((!string.IsNullOrEmpty(requestParams["TopicIDs"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()) && !string.IsNullOrEmpty(requestParams["Action"].ToString()))
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicIDs"]))&& !string.IsNullOrEmpty(Convert.ToString(requestParams["IsActive"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Action"])))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
-                        if (!string.IsNullOrEmpty(requestParams["TopicIDs"].ToString()))
-                        {
-                            content.TopicIDs = Convert.ToString(requestParams["TopicIDs"]);
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
-                        {
-                            content.IsActive = (bool)requestParams["IsActive"];
-                        }
-                        if (!string.IsNullOrEmpty(requestParams["Action"].ToString()))
-                        {
-                            Action = Convert.ToInt32(requestParams["Action"]);
-                        }
 
+                        content.TopicIDs = Convert.ToString(requestParams["TopicIDs"]);
+                        content.IsActive = (bool)requestParams["IsActive"];
+                        Action = Convert.ToInt32(requestParams["Action"]);
+                        
                         var ds = ContentBL.DeleteTopic(content, Action);
                         if (ds != null)
                         {

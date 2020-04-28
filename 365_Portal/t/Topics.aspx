@@ -689,7 +689,7 @@
         }
 
         function View() {
-
+            
             $('#btnArchive').hide();
             $('#btnUnArchive').hide();
 
@@ -714,8 +714,11 @@
                         tbl += '<th>';
                         tbl += '<th>Title';
                         tbl += '<th>Category';
-                        tbl += '<th>Is Published';
+                        tbl += '<th>Instructor Name';
+                        tbl += '<th>Points';
                         tbl += '<th>Total Lessons';
+                        tbl += '<th>Is Published';
+                        tbl += '<th>Is Active';                        
                         tbl += '<th>Action';
                         tbl += '<tbody>';
                         if (response != null && response != undefined) {
@@ -731,21 +734,32 @@
                                                 data.IsPublished = "No";
                                             }
 
-                                            tbl += '<tr id="' + data.TopicID + '">';
-                                            tbl += '<td>' + (i + 1);
-                                            
-                                            if (data.IsActive == '1') {
-                                                tbl += '<td><input type="checkbox" onclick="SelectCourse(' + data.TopicID + ');" name="' + data.TopicID + '" id="cbxArchiveorUnArchive" checked>';
+                                            if (data.IsActive == "1") {
+                                                data.IsActive = "Yes";
                                             }
                                             else {
-                                                tbl += '<td><input type="checkbox" onclick="SelectCourse(' + data.TopicID + ');" name="' + data.TopicID + '" id="cbxArchiveorUnArchive" >';
+                                                data.IsActive = "No";
                                             }
 
+                                            tbl += '<tr id="' + data.TopicID + '">';
+                                            tbl += '<td>' + (i + 1);                                            
+                                            
+                                            if (data.CanEdit == "1") {
+                                                tbl += '<td><input type="checkbox" onclick="SelectCourse(' + data.TopicID + ');" name="' + data.TopicID + '" id="cbxArchiveorUnArchive" >';
+                                            }
+                                            else {
+                                                tbl += '<td>';
+                                            }
+                                            
+
                                             tbl += '<td title="' + data.Title + '" class="title">' + data.Title;
-                                            //tbl += '<td title="' + data.Description + '" class="description">' + data.Description;
                                             tbl += '<td title="' + data.CategoryName + '" class="CategoryName">' + data.CategoryName;
-                                            tbl += '<td title="' + data.IsPublished + '" class="isPublished">' + data.IsPublished;                                            
+                                            tbl += '<td title="' + data.InstructorName + '" class="CategoryName">' + data.InstructorName;
+                                            tbl += '<td title="' + data.Points + '" class="title">' + data.Points;                                            
                                             tbl += '<td title="' + data.ModuleCount + '"><a href=Modules.aspx?Id=' + data.TopicID + '>' + data.ModuleCount + '</a>';
+                                            tbl += '<td title="' + data.IsPublished + '" class="isPublished">' + data.IsPublished;
+                                            tbl += '<td title="' + data.IsActive + '" class="isActive">' + data.IsActive;                                            
+                                            //tbl += '<td title="' + data.Description + '" class="description">' + data.Description;
                                             //tbl += '<td><i title="Edit" onclick="Edit(' + data.TopicID + ');" class="fas fa-edit text-warning"></i><i title="Delete" onclick="Delete(' + data.TopicID + ');" class="fas fa-trash text-danger"></i>';
                                             tbl += '<td><i title="Edit" onclick="Edit_New(' + data.TopicID + ');" class="fas fa-edit text-warning"></i>';
                                             //<i title="Delete" onclick="Delete(' + data.TopicID + ');" class="fas fa-trash text-danger"></i>';
@@ -806,6 +820,10 @@
         
         function SelectCourse(TopicID)
         {
+            var selected = new Array();
+            $('#tblGird').DataTable().$('input[type="checkbox"]:checked').each(function () {
+                selected.push($(this).attr('name'));
+            });
             if (selected.length > 0) {
                 $('#btnArchive').show();
                 $('#btnUnArchive').show();
@@ -817,9 +835,10 @@
         }
 
         function ArchiveUnArchiveTopic(ArchiveFlag)
-        {                     
+        {
+            debugger
             var selected = new Array();
-            $('#tblGird input[type="checkbox"]:checked').each(function () {
+            $('#tblGird').DataTable().$('input[type="checkbox"]:checked').each(function () {
                 selected.push($(this).attr('name'));
             });
 
