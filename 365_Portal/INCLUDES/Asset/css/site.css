@@ -49,19 +49,41 @@ body {
   background-image: url("../images/theme_nature.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; }
+  background-size: cover;
+  height: 100vh; }
 
-.page-card .card-body {
-  padding: 1.25rem 3rem; }
+.page-card {
+  margin: 5.5rem 0; }
   @media only screen and (max-width: 600px) {
-    .page-card .card-body {
-      padding: 1rem; } }
-
-.page-card .card-form {
-  margin: 2.75rem 4rem; }
-  @media only screen and (max-width: 600px) {
-    .page-card .card-form {
-      margin: 2.75rem 1rem; } }
+    .page-card {
+      margin: 1rem 0; } }
+  .page-card .card {
+    max-width: 426px;
+    margin: auto;
+    border-radius: .2rem; }
+    .page-card .card span.back {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      cursor: pointer; }
+    .page-card .card .logo {
+      height: 34px; }
+    .page-card .card .card-body {
+      padding: 1.5rem 3rem; }
+      @media only screen and (max-width: 600px) {
+        .page-card .card .card-body {
+          padding: 1.5rem 1.25rem; } }
+      .page-card .card .card-body .card-text {
+        color: rgba(0, 0, 0, 0.5); }
+      .page-card .card .card-body .card-form .form-group label {
+        text-transform: capitalize;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 600; }
+      .page-card .card .card-body .card-form .form-group .form-control {
+        border: 1px solid #ced4da;
+        border-radius: .25rem; }
+    .page-card .card .btn-custom {
+      text-transform: capitalize; }
 
 a {
   cursor: pointer; }
