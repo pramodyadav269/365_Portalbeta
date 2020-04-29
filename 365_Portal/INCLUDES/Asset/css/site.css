@@ -547,16 +547,21 @@ main.fix {
       .sidenav .sidenav-content .sidenav-nav .sidenav-item.active .sidenav-link {
         color: #fff; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link {
-        padding: 0 10px 0 18px;
+        padding: 0;
         width: 100%;
         color: rgba(221, 221, 221, 0.65); }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link:hover {
           color: #fff; }
-        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon .svg-inline--fa {
-          font-size: 16px; }
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon {
+          display: inline-block;
+          width: 56px;
+          text-align: center; }
+          .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon .svg-inline--fa {
+            font-size: 16px;
+            margin: 0; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
           display: inline-block;
-          margin-left: .75rem; }
+          /*margin-left: .75rem;*/ }
           @media only screen and (max-width: 600px) {
             .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
               display: none; } }

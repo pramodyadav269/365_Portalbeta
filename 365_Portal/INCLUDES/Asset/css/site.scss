@@ -758,7 +758,7 @@ main {
                 }
 
                 .sidenav-link {
-                    padding: 0 10px 0 18px;
+                    padding: 0;
                     width: 100%;
                     color: rgba(221, 221, 221, .65);
 
@@ -767,15 +767,19 @@ main {
                     }
 
                     .link-icon {
+                        display: inline-block;
+                        width: 56px;
+                        text-align: center;
+
                         .svg-inline--fa {
                             font-size: 16px;
+                            margin: 0;
                         }
                     }
 
                     .link-text {
                         display: inline-block;
-                        margin-left: .75rem;
-
+                        /*margin-left: .75rem;*/
                         @media #{$small-and-down} {
                             display: none
                         }

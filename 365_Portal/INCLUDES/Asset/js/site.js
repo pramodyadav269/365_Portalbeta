@@ -60,7 +60,7 @@ $(document).ready(function () {
 
     //side nav menu content
     
-    
+    $('.sidenav-item .sidenav-link .link-icon').addClass('cu-tooltiptext');
     $('.sidenav-item .sidenav-link').click(function () {
         $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
 
@@ -131,8 +131,8 @@ function openNav() {
 }
 
 function closeNav() {
-    $("#sideNav").css("width", "54px");
-    $("main").css("margin-left", "54px");
+    $("#sideNav").css("width", "56px");
+    $("main").css("margin-left", "56px");
 
     $('.sidenav-nav .link-text').hide();
     $('.sidenav-nav .menu-title.icon-right').hide();
