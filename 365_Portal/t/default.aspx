@@ -121,11 +121,11 @@
 
                                 <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
                                     ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
-                                    class="list-group-item list-group-item-action" href="#">{{content.Title}}</a>
+                                    class="list-group-item list-group-item-action" href="{{'#list-item-' + content.ContentID }}">{{content.Title}}</a>
 
-                                <a class="list-group-item list-group-item-action" href="#" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
+                                <a class="list-group-item list-group-item-action" href="{{'#list-item-' + content.ContentID }}" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
-                                <div class="next shadow-sm" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                <div class="next shadow-sm" href="{{'#list-item-' + content.ContentID }}" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
                                     ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
                                     Quiz
                                 </div>
@@ -169,7 +169,7 @@
                             
                             </div>--%>
 
-                            <div class="lesson-content" id="list-item-1" ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems">
+                            <div class="lesson-content" id="{{'list-item-' + content.ContentID }}" ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems">
                                 <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
                                 <h4 class="lesson-content-title">{{content.Title}}</h4>
                                 <%--Display Content here..--%>

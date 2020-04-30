@@ -191,6 +191,7 @@ namespace _365_Portal.Admin
                         dvFunWithQuizzes.Visible = true;
 
                         dvSettings.Visible = true;
+                        dvSettingsParent.Visible = true;
                         dvMyAccount.Visible = true;
                         dvOrganizationSettings.Visible = true;
                         dvLanguages.Visible = true;
@@ -274,6 +275,7 @@ namespace _365_Portal.Admin
                         dvContent.Visible = true;
 
                         dvSettings.Visible = true;
+                        dvSettingsParent.Visible = true;
                         dvMyAccount.Visible = true;
                         dvLanguages.Visible = true;
                         dvNotifications.Visible = true;
@@ -310,6 +312,7 @@ namespace _365_Portal.Admin
                         dvOnyxU.Visible = true;
 
                         dvSettings.Visible = true;
+                        dvSettingsParent.Visible = true;
                         dvMyAccount.Visible = true;
                         dvLanguages.Visible = true;
                         dvNotifications.Visible = true;
