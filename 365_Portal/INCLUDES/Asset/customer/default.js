@@ -872,7 +872,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         }).then((result) => {
             if (result.value) {
                 ShowLoader();
-                var requestParams = { TopicID: topicId, IsActive: flag };
+                var requestParams = { TopicID: topicId, IsActive: flag, Action: 2 };
                 $http({
                     method: "POST",
                     url: "../api/Content/DeleteTopic",

@@ -413,13 +413,14 @@ namespace _365_Portal.ControllersReOrderContent
 
             var data = string.Empty;
             ContentBO content = new ContentBO();
+            int Action = 0;
             try
             {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
 
-                    if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                    if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()) && !string.IsNullOrEmpty(requestParams["Action"].ToString()))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
@@ -431,7 +432,12 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
                         }
-                        var ds = ContentBL.DeleteTopic(content);
+                        if (!string.IsNullOrEmpty(requestParams["Action"].ToString()))
+                        {
+                            Action = Convert.ToInt32(requestParams["Action"]);
+                        }
+
+                        var ds = ContentBL.DeleteTopic(content, Action);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)
@@ -481,7 +487,78 @@ namespace _365_Portal.ControllersReOrderContent
                 data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
             }
             return new APIResult(Request, data);
+        }
 
+        [HttpPost]
+        [Route("API/Content/DeleteTopicMultiple")]
+        public IHttpActionResult DeleteTopicMultiple(JObject requestParams)
+        {
+
+            var data = string.Empty;
+            ContentBO content = new ContentBO();
+            int Action = 0;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicIDs"]))&& !string.IsNullOrEmpty(Convert.ToString(requestParams["IsActive"])) 
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Action"])))
+                    {
+                        content.CompID = identity.CompId;
+                        content.CreatedBy = identity.UserID;
+
+                        content.TopicIDs = Convert.ToString(requestParams["TopicIDs"]);
+                        content.IsActive = (bool)requestParams["IsActive"];
+                        Action = Convert.ToInt32(requestParams["Action"]);
+                        
+                        var ds = ContentBL.DeleteTopic(content, Action);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
         }
 
         [HttpPost]

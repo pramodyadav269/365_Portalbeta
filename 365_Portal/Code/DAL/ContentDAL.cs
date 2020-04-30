@@ -135,7 +135,7 @@ namespace _365_Portal.Code.DAL
         /// </summary>
         /// <param name="contentBO"></param>
         /// <returns></returns>
-        public static DataSet DeleteTopic(ContentBO content)
+        public static DataSet DeleteTopic(ContentBO content,int Action)
         {
 
             DataSet ds = new DataSet();
@@ -149,7 +149,9 @@ namespace _365_Portal.Code.DAL
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.AddWithValue("p_Action", Action);
                 cmd.Parameters.AddWithValue("p_TopicID", content.TopicID);
+                cmd.Parameters.AddWithValue("p_TopicIDs", content.TopicIDs);                
                 cmd.Parameters.AddWithValue("p_CompID", content.CompID);
                 cmd.Parameters.AddWithValue("p_IsActive", Convert.ToInt32(content.IsActive));
                 cmd.Parameters.AddWithValue("p_CreatedBy", content.CreatedBy);

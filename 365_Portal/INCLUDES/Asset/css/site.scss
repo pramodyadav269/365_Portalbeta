@@ -24,7 +24,7 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 
 /* heebo-regular - latin */
-@font-face {
+/*@font-face {
     font-family: 'Heebo';
     font-style: normal;
     font-weight: normal;
@@ -33,15 +33,42 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
 
 @font-face {
     font-family: 'TeachableSans-Medium';
-    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'), /* */
-    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), /* */
+    src: url('../fonts/teachable/TeachableSans-Medium.woff') format('woff'),
+    url('../fonts/teachable/TeachableSans-Medium.eot') format('embedded-opentype'), 
     url('../fonts/teachable/TeachableSans-Medium.ttf') format('truetype');
 }
 
 body {
     font-size: 14px;
-    background: #F5F6F7;
     font-family: 'TeachableSans-Medium' !important;
+}*/
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('../fonts/Open_Sans/OpenSans-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('../fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-SemiBold';
+    src: url('../fonts/Open_Sans/OpenSans-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('../fonts/Open_Sans/OpenSans-Bold.ttf') format('truetype');
+}
+
+body {
+    font-size: 14px;
+    font-family: 'OpenSans-Regular' !important;
+}
+
+body {
+    background: #F5F6F7;
 }
 
 .bg-dark-blue {
@@ -53,26 +80,67 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    height: 100vh;
 }
 
 .page-card {
-    .card-body {
-        padding: 1.25rem 3rem;
+    margin: 5.5rem 0;
 
-        @media #{$small-and-down} {
-            padding: 1rem;
-        }
+    @media #{$small-and-down} {
+        margin: 1rem 0;
     }
 
-    .card-form {
-        margin: 2.75rem 4rem;
+    .card {
+        max-width: 426px;
+        margin: auto;
+        border-radius: .2rem;
 
-        @media #{$small-and-down} {
-            margin: 2.75rem 1rem;
+        span {
+            &.back {
+                position: absolute;
+                top: 8px;
+                left: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .logo {
+            height: 34px;
+        }
+
+        .card-body {
+            padding: 1.5rem 3rem;
+
+            @media #{$small-and-down} {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .card-text {
+                color: rgba(0, 0, 0, 0.5);
+            }
+
+
+            .card-form {
+                .form-group {
+                    label {
+                        text-transform: capitalize;
+                        color: rgba(0, 0, 0, 0.5);
+                        font-weight: 600;
+                    }
+
+                    .form-control {
+                        border: 1px solid #ced4da;
+                        border-radius: .25rem;
+                    }
+                }
+            }
+        }
+
+        .btn-custom {
+            text-transform: capitalize;
         }
     }
 }
-
 
 a {
     cursor: pointer;
@@ -690,7 +758,7 @@ main {
                 }
 
                 .sidenav-link {
-                    padding: 0 10px 0 18px;
+                    padding: 0;
                     width: 100%;
                     color: rgba(221, 221, 221, .65);
 
@@ -699,15 +767,19 @@ main {
                     }
 
                     .link-icon {
+                        display: inline-block;
+                        width: 56px;
+                        text-align: center;
+
                         .svg-inline--fa {
                             font-size: 16px;
+                            margin: 0;
                         }
                     }
 
                     .link-text {
                         display: inline-block;
-                        margin-left: .75rem;
-
+                        /*margin-left: .75rem;*/
                         @media #{$small-and-down} {
                             display: none
                         }
@@ -2705,8 +2777,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .dropdown {
             .dropdown-menu {
-                transform: translate3d(-176px, 26px, 0px) !important;
-                min-width: 184px;
+                transform: translate3d(-214px, 26px, 0px) !important;
+                min-width: 224px;
 
                 .dropdown-item {
                     font-size: 13px;

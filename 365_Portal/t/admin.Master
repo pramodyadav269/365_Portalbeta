@@ -242,53 +242,53 @@
                     <%-- start beta --%>
                     <li class="sidenav-item active">
                         <%-- <a class="sidenav-link"><span class="link-icon"><i class="fas fa-home"></i></span><span class="link-text">Home</span></a>--%>
-                        <a class="sidenav-link" id="dvDashboard" runat="server" visible="false" href="dashboard.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Home"><i class="fas fa-home"></i></span><span class="link-text">Home</span></a>
-                        <a class="sidenav-link" id="dvUserDashboard" runat="server" visible="false" href="default.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Home"><i class="fas fa-home"></i></span><span class="link-text">Home</span></a>
+                        <a class="sidenav-link" id="dvDashboard" runat="server" visible="false" href="dashboard.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
+                        <a class="sidenav-link" id="dvUserDashboard" runat="server" visible="false" href="default.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses"><i class="fas fa-clone"></i></span><span class="link-text">Courses</span></a>
+                        <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
                         <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourney.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses Insights"><i class="fas fa-home"></i></span><span class="link-text">Courses Insights</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
                             </li>
                             <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
-                                <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Courses Settings"><i class="fas fa-cog"></i></span><span class="link-text">Courses Settings</span></a>
+                                <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Courses Settings</span><span class="link-text">Courses Settings</span></a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Tasks"><i class="fas fa-tasks"></i></span><span class="link-text">Tasks</span></a>
+                        <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Tasks</span><span class="link-text">Tasks</span></a>
                         <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Tasks Insights"><i class="fas fa-home"></i></span><span class="link-text">Tasks Insights</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
                             </li>
                             <li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Tasks Settings"><i class="fas fa-cog"></i></span><span class="link-text">Tasks Settings</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Tasks Settings</span><span class="link-text">Tasks Settings</span></a>
                             </li>
                         </ul>
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
-                        <a class="sidenav-link content-menu" href="#" menu-data="ulCommunity"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Community"><i class="fas fa-user-friends"></i></span><span class="link-text">Community</span></a>
+                        <a class="sidenav-link content-menu" href="#" menu-data="ulCommunity"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Community</span><span class="link-text">Community</span></a>
                     </li>
                     <li class="sidenav-item" id="dvOnyxU" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="OnyxU"><i class="fas fa-university"></i></span><span class="link-text">OnyxU</span></a>
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-university"></i></span><span class="tooltiptext">OnyxU</span><span class="link-text">OnyxU</span></a>
                     </li>
                     <li class="sidenav-item side-menu" id="dvSettingsParent" runat="server" visible="false">
                         <a class="sidenav-link menu-title" id="dvSettings" runat="server" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></span><span class="link-text">Settings</span></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvUsersNTeams" runat="server" visible="false">
-                                <a class="sidenav-link content-menu" href="#" menu-data="ulUsersGroups"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Users & Groups"><i class="fas fa-user-friends"></i></span><span class="link-text">Users & Groups</span></a>
+                                <a class="sidenav-link content-menu" href="#" menu-data="ulUsersGroups"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Users & Groups</span><span class="link-text">Users & Groups</span></a>
                             </li>
                             <li class="sidenav-item" id="dvSubMenu_Organizations" runat="server" visible="false">
-                                <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Organizations"><i class="fas fa-building"></i></span><span class="link-text">Organizations</span></a>
+                                <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="tooltiptext">Organizations</span><span class="link-text">Organizations</span></a>
                             </li>
                             <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Billing"><i class="fas fa-file-invoice-dollar"></i></span><span class="link-text">Billing</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="tooltiptext">Billing</span><span class="link-text">Billing</span></a>
                             </li>
                             <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Email"><i class="far fa-envelope"></i></span><span class="link-text">Email</span></a>
+                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="tooltiptext">Email</span><span class="link-text">Email</span></a>
                             </li>
                         </ul>
                     </li>
