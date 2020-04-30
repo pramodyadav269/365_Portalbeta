@@ -2471,6 +2471,7 @@
         }
 
         function validateAddQuiz() {
+            debugger
             if ($("#txtQuizTitle").val() == undefined || $("#txtQuizTitle").val() == '') {
                 return { error: true, msg: "Please enter Quiz Title" };
             }
@@ -2480,6 +2481,10 @@
             else if ($("#txtPassingScorePercentage").val() == undefined || $("#txtPassingScorePercentage").val() == '') {
                 return { error: true, msg: "Please select Passing Percentage" };
             }
+            else if ($("#lblPassingScore").text() == undefined || $("#lblPassingScore").text() == '' ) {
+                return { error: true, msg: "Please select Passing Percentage" };
+            }
+
             return true;
         }
 
@@ -2660,6 +2665,7 @@
         }
 
         function AddQuiz(showLoader, flag) {
+            debugger
             if (showLoader)
                 ShowLoader();
             var Title = $("#txtQuizTitle").val();
@@ -2742,81 +2748,93 @@
                 });
             }
             else {
-                ShowLoader();
-                AddQuiz(false);
 
-
-                var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
-                var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
-                var answerIds = $("input[id='txtAnswer']").map(function () { return $(this).attr("answerid"); }).get();
-                var arrIsCorrect = $("svg[id='ansFlag']").map(function () { return $(this).attr("value"); }).get();
-
-                var AnswerOptions = [];
-                for (var i = 0; i < Score.length; i++) {
-                    var newAnsOption = {
-                        "ContentTypeID": QuizContentTypeID // Final Quiz
-                        , "SrNo": (i + 1)
-                        , "AnswerText": Answer[i]
-                        , "IsCorrect": arrIsCorrect[i]
-                        , "CorrectScore": Score[i]
-                        , "AnswerID": answerIds[i]
-                    };
-                    if (Answer[i] != "")
-                        AnswerOptions.push(newAnsOption);
+                var result = validateAddQuiz();
+                if (result.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: result.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
                 }
+                else {
+                    ShowLoader();
+                    AddQuiz(false);
 
-                var index = Questions.length + 1;
-                var newQuestion = {
-                    "ContentTypeID": QuizContentTypeID
-                    , Type: AnswerTypeCode
-                    , "QuestionID": gbl_QuestionID == null ? 0 : gbl_QuestionID
-                    , "ContentID": QuizFlag
-                    , "SrNo": index
-                    , "Title": Question
-                    , "QType": AnswerTypeCode
-                    , "IsBox": false
-                    , "MaxScore": GetMaxScore(AnswerOptions)
-                    , "AnswerOptions": AnswerOptions
-                    , "Action": actionType
-                };
 
-                var requestParams = newQuestion;
-                $.ajax({
-                    method: "POST",
-                    url: "../api/Quiz/ManageQuestion",
-                    headers: { "Authorization": "Bearer " + accessToken },
-                    data: JSON.stringify(requestParams),
-                    contentType: "application/json",
-                }).then(function success(response) {
-                    $('#divQuestionAdd').html("");
-                    IsCoursePublishable();
-                    ManageQuizButton('addquestion');
-                    if (type != "done") {
-                        BindQuiz();
-                        Swal.fire({
-                            title: 'Success',
-                            icon: 'success',
-                            html: "Question details updated successfully.",
-                            showConfirmButton: true,
-                            showCloseButton: true
-                        });
-                        $("#dvSaveQuestion").hide();
-                        $("#dvCancelQuestion").hide();
-                        $("#divQuestionType").show();
-                        $("#divAddQuestion").hide();
+                    var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
+                    var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
+                    var answerIds = $("input[id='txtAnswer']").map(function () { return $(this).attr("answerid"); }).get();
+                    var arrIsCorrect = $("svg[id='ansFlag']").map(function () { return $(this).attr("value"); }).get();
+
+                    var AnswerOptions = [];
+                    for (var i = 0; i < Score.length; i++) {
+                        var newAnsOption = {
+                            "ContentTypeID": QuizContentTypeID // Final Quiz
+                            , "SrNo": (i + 1)
+                            , "AnswerText": Answer[i]
+                            , "IsCorrect": arrIsCorrect[i]
+                            , "CorrectScore": Score[i]
+                            , "AnswerID": answerIds[i]
+                        };
+                        if (Answer[i] != "")
+                            AnswerOptions.push(newAnsOption);
                     }
-                    else {
-                        HideLoader();
-                        $("#dvQuizCongratulationScreen").show();
-                        $(".quiz-wrapper").hide();
-                        $("#divQuizAdd").hide();
 
-                        $('#divQuestionType').hide();
-                        $('#dvQuizDone').hide();
-                        $('#dvCancelQuestion').hide();
+                    var index = Questions.length + 1;
+                    var newQuestion = {
+                        "ContentTypeID": QuizContentTypeID
+                        , Type: AnswerTypeCode
+                        , "QuestionID": gbl_QuestionID == null ? 0 : gbl_QuestionID
+                        , "ContentID": QuizFlag
+                        , "SrNo": index
+                        , "Title": Question
+                        , "QType": AnswerTypeCode
+                        , "IsBox": false
+                        , "MaxScore": GetMaxScore(AnswerOptions)
+                        , "AnswerOptions": AnswerOptions
+                        , "Action": actionType
+                    };
 
-                    }
-                });
+                    var requestParams = newQuestion;
+                    $.ajax({
+                        method: "POST",
+                        url: "../api/Quiz/ManageQuestion",
+                        headers: { "Authorization": "Bearer " + accessToken },
+                        data: JSON.stringify(requestParams),
+                        contentType: "application/json",
+                    }).then(function success(response) {
+                        $('#divQuestionAdd').html("");
+                        IsCoursePublishable();
+                        ManageQuizButton('addquestion');
+                        if (type != "done") {
+                            BindQuiz();
+                            Swal.fire({
+                                title: 'Success',
+                                icon: 'success',
+                                html: "Question details updated successfully.",
+                                showConfirmButton: true,
+                                showCloseButton: true
+                            });
+                            $("#dvSaveQuestion").hide();
+                            $("#dvCancelQuestion").hide();
+                            $("#divQuestionType").show();
+                            $("#divAddQuestion").hide();
+                        }
+                        else {
+                            HideLoader();
+                            $("#dvQuizCongratulationScreen").show();
+                            $(".quiz-wrapper").hide();
+                            $("#divQuizAdd").hide();
+
+                            $('#divQuestionType').hide();
+                            $('#dvQuizDone').hide();
+                            $('#dvCancelQuestion').hide();
+
+                        }
+                    });
+                }
             }
         }
 
@@ -2875,139 +2893,148 @@
         function ShowQuestion(AnswerType, questionDetails) {
 
             // $("#divQuestionType").show();
-
-            $("#dvQuizDone").show();
-            if (questionDetails == null) {
-                AddQuiz('');
-                // Add New Question
-                $("#dvSaveQuestion").hide();
-                $("#divAddQuestion").show();
-                $("#dvCancelQuestion").show();
-                $('#divQuestionType').hide();
-                gbl_QuestionID = 0;
-            }
-            else {
-                // Edit Question
-                gbl_QuestionID = questionDetails.QuestionID;
-                $("#dvSaveQuestion").show();
-                $("#divAddQuestion").hide();
-                $("#dvCancelQuestion").show();
-                $('#divQuestionType').hide();
-            }
-            $(".quiz-wrapper").show();
-
-            // $('#divQuestionType').hide();
-            // $('#divAddQuestion').show();
-
-            if (AnswerType == 'multiple') {
-                addClass = 'far fa-check-square';
-                AnswerTypeCode = "1";
-            }
-            else if (AnswerType == 'dropdown') {
-                addClass = 'far fa-caret-square-down';
-                AnswerTypeCode = "2";
-            }
-            else if (AnswerType == 'radio') {
-                addClass = 'fas fa-dot-circle';
-                AnswerTypeCode = "3";
-            }
-            else {
-                Swal.fire({ title: "Alert", text: result.msg, icon: "error", button: "Ok" });
-                return false;
-            }
-
-            //ManageQuizButton('questiontype');
-
-            $('#txtQuestion').val('');
-
-            //Bind question text field
-            var divQuestionAdd = '<div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
-                '<span class="sr">Q' + (lastQuestionIndex + 1) + '<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>' +
-                '<div class="col-sm-8 col-md-10">' +
-                '<div class="form-group">' +
-                '<input type="text" class="form-control" value="' + (questionDetails == null ? "" : questionDetails.Title) + '" id="txtQuestion" placeholder="Enter Question"/>' +
-                '</div></div><span class="correct">Correct</span></div>';
-
-            //Bind Add dynamic answer text field
-            var dvAnswerOptions = '<div id="divAnswer">';
-            if (questionDetails != null) {
-                $.grep(questionDetails.AnswerOptions, function (answOption, indx) {
-                    //if (indx == 0) {
-                    //    ansOptions += "<tr><th>Sr No</th>";
-                    //    ansOptions += "<th>Answer Text</th>";
-                    //    if (contentType == 2 || contentType == 3) {
-                    //        ansOptions += "<th>Is Correct</th>";
-                    //    }
-                    //    if (contentType == 3) {
-                    //        ansOptions += "<th>Score</th></tr>";
-                    //    }
-                    //}
-                    //var checkedValue = "disabled " + (answOption.IsCorrect == true ? "Checked" : "");
-                    //ansOptions += "<tr><td>" + answOption.SortOrder + "</td>";
-                    //ansOptions += "<td>" + answOption.AnswerText + "</td>";
-                    //if (contentType == 2 || contentType == 3) {
-                    //    ansOptions += "<td>" + "<input index=" + answOption.AnswerID + " type='checkbox' " + checkedValue + " />" + "</td>";
-                    //}
-                    //if (contentType == 3) {
-                    //    ansOptions += "<td>" + answOption.CorrectScore + "</td></tr>";
-                    //}
-                    //answOption.IsCorrect
-
-                    var correctAnswerCSS = "fa fa-check-circle fa-w-16 correct";
-                    if (!answOption.IsCorrect) {
-                        correctAnswerCSS = "fa fa-times-circle fa-w-16 fal";
-                    }
-
-                    dvAnswerOptions = dvAnswerOptions + '' +
-                        '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                        '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
-                        '<div class="col-sm-8 col-md-10">' +
-                        '<div class="row">' +
-                        '<div class="col-sm-12 col-md-10">' +
-                        '<div class="form-group">' +
-                        '<input type="text" class="form-control" answerid="' + answOption.AnswerID + '" id="txtAnswer" value="' + answOption.AnswerText + '"/>' +
-                        '</div></div>' +
-                        '<div class="col-sm-3 col-md-2">' +
-                        '<div class="form-group">' +
-                        '<input type="text" id="txtScore" class="form-control" value="' + answOption.CorrectScore + '" />' +
-                        '</div></div></div></div>' +
-                        '<span class="checked-icon"><i class="' + correctAnswerCSS + '" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                        '</div>';
+            var result = validateAddQuiz();
+            if (result.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: result.msg,
+                    icon: "error",
+                    button: "Ok",
                 });
             }
             else {
-                $.grep([1, 2, 3], function (answOption, indx) {
-                    dvAnswerOptions = dvAnswerOptions + '' +
-                        '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                        '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
-                        '<div class="col-sm-8 col-md-10">' +
-                        '<div class="row">' +
-                        '<div class="col-sm-12 col-md-10">' +
-                        '<div class="form-group">' +
-                        '<input type="text" class="form-control" answerid="0" id="txtAnswer" value=""/>' +
-                        '</div></div>' +
-                        '<div class="col-sm-3 col-md-2">' +
-                        '<div class="form-group">' +
-                        '<input type="text" id="txtScore" class="form-control" value="0" />' +
-                        '</div></div></div></div>' +
-                        '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>'
-                        + '</div>';
-                });
+                $("#dvQuizDone").show();
+                if (questionDetails == null) {
+                    AddQuiz('');
+                    // Add New Question
+                    $("#dvSaveQuestion").hide();
+                    $("#divAddQuestion").show();
+                    $("#dvCancelQuestion").show();
+                    $('#divQuestionType').hide();
+                    gbl_QuestionID = 0;
+                }
+                else {
+                    // Edit Question
+                    gbl_QuestionID = questionDetails.QuestionID;
+                    $("#dvSaveQuestion").show();
+                    $("#divAddQuestion").hide();
+                    $("#dvCancelQuestion").show();
+                    $('#divQuestionType').hide();
+                }
+                $(".quiz-wrapper").show();
+
+                // $('#divQuestionType').hide();
+                // $('#divAddQuestion').show();
+
+                if (AnswerType == 'multiple') {
+                    addClass = 'far fa-check-square';
+                    AnswerTypeCode = "1";
+                }
+                else if (AnswerType == 'dropdown') {
+                    addClass = 'far fa-caret-square-down';
+                    AnswerTypeCode = "2";
+                }
+                else if (AnswerType == 'radio') {
+                    addClass = 'fas fa-dot-circle';
+                    AnswerTypeCode = "3";
+                }
+                else {
+                    Swal.fire({ title: "Alert", text: result.msg, icon: "error", button: "Ok" });
+                    return false;
+                }
+
+                //ManageQuizButton('questiontype');
+
+                $('#txtQuestion').val('');
+
+                //Bind question text field
+                var divQuestionAdd = '<div class="col-sm-12 mb-3 d-flex justify-content-between align-items-center ques">' +
+                    '<span class="sr">Q' + (lastQuestionIndex + 1) + '<i class="far fa-circle"></i><i class="fas fa-caret-down"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" value="' + (questionDetails == null ? "" : questionDetails.Title) + '" id="txtQuestion" placeholder="Enter Question"/>' +
+                    '</div></div><span class="correct">Correct</span></div>';
+
+                //Bind Add dynamic answer text field
+                var dvAnswerOptions = '<div id="divAnswer">';
+                if (questionDetails != null) {
+                    $.grep(questionDetails.AnswerOptions, function (answOption, indx) {
+                        //if (indx == 0) {
+                        //    ansOptions += "<tr><th>Sr No</th>";
+                        //    ansOptions += "<th>Answer Text</th>";
+                        //    if (contentType == 2 || contentType == 3) {
+                        //        ansOptions += "<th>Is Correct</th>";
+                        //    }
+                        //    if (contentType == 3) {
+                        //        ansOptions += "<th>Score</th></tr>";
+                        //    }
+                        //}
+                        //var checkedValue = "disabled " + (answOption.IsCorrect == true ? "Checked" : "");
+                        //ansOptions += "<tr><td>" + answOption.SortOrder + "</td>";
+                        //ansOptions += "<td>" + answOption.AnswerText + "</td>";
+                        //if (contentType == 2 || contentType == 3) {
+                        //    ansOptions += "<td>" + "<input index=" + answOption.AnswerID + " type='checkbox' " + checkedValue + " />" + "</td>";
+                        //}
+                        //if (contentType == 3) {
+                        //    ansOptions += "<td>" + answOption.CorrectScore + "</td></tr>";
+                        //}
+                        //answOption.IsCorrect
+
+                        var correctAnswerCSS = "fa fa-check-circle fa-w-16 correct";
+                        if (!answOption.IsCorrect) {
+                            correctAnswerCSS = "fa fa-times-circle fa-w-16 fal";
+                        }
+
+                        dvAnswerOptions = dvAnswerOptions + '' +
+                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                            '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                            '<div class="col-sm-8 col-md-10">' +
+                            '<div class="row">' +
+                            '<div class="col-sm-12 col-md-10">' +
+                            '<div class="form-group">' +
+                            '<input type="text" class="form-control" answerid="' + answOption.AnswerID + '" id="txtAnswer" value="' + answOption.AnswerText + '"/>' +
+                            '</div></div>' +
+                            '<div class="col-sm-3 col-md-2">' +
+                            '<div class="form-group">' +
+                            '<input type="text" id="txtScore" class="form-control" value="' + answOption.CorrectScore + '" />' +
+                            '</div></div></div></div>' +
+                            '<span class="checked-icon"><i class="' + correctAnswerCSS + '" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
+                            '</div>';
+                    });
+                }
+                else {
+                    $.grep([1, 2, 3], function (answOption, indx) {
+                        dvAnswerOptions = dvAnswerOptions + '' +
+                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                            '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+                            '<div class="col-sm-8 col-md-10">' +
+                            '<div class="row">' +
+                            '<div class="col-sm-12 col-md-10">' +
+                            '<div class="form-group">' +
+                            '<input type="text" class="form-control" answerid="0" id="txtAnswer" value=""/>' +
+                            '</div></div>' +
+                            '<div class="col-sm-3 col-md-2">' +
+                            '<div class="form-group">' +
+                            '<input type="text" id="txtScore" class="form-control" value="0" />' +
+                            '</div></div></div></div>' +
+                            '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>'
+                            + '</div>';
+                    });
+                }
+
+                dvAnswerOptions = dvAnswerOptions + "</div>";
+
+                // Bind Answer Options
+                divQuestionAdd = divQuestionAdd + dvAnswerOptions;
+
+                //Bind Add more answer button
+                divQuestionAdd = divQuestionAdd + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2">' +
+                    '<div class="form-group mt-2">' +
+                    '<a id="btnAddAnswer" onclick="AddAnswer();" class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>' +
+                    '</div></div>';
+                //Bind Entire Add question div
+                $('#divQuestionAdd').empty().append(divQuestionAdd);
             }
-
-            dvAnswerOptions = dvAnswerOptions + "</div>";
-
-            // Bind Answer Options
-            divQuestionAdd = divQuestionAdd + dvAnswerOptions;
-
-            //Bind Add more answer button
-            divQuestionAdd = divQuestionAdd + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2">' +
-                '<div class="form-group mt-2">' +
-                '<a id="btnAddAnswer" onclick="AddAnswer();" class="label"><i class="fas fa-plus-circle black"></i>Add Answer</a>' +
-                '</div></div>';
-            //Bind Entire Add question div
-            $('#divQuestionAdd').empty().append(divQuestionAdd);
-
         }
 
         function ShowQuestionInEditMode(questionId) {
