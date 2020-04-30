@@ -507,6 +507,13 @@
     <Compile Include="t\LearningJourney.aspx.designer.cs">
       <DependentUpon>LearningJourney.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\help.aspx.cs">
+      <DependentUpon>help.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\help.aspx.designer.cs">
+      <DependentUpon>help.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\Module.aspx.cs">
       <DependentUpon>Module.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2446,6 +2453,7 @@
     <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
     <Content Include="t\LearningJourney.aspx" />
+    <Content Include="t\help.aspx" />
     <Content Include="t\Module.aspx" />
     <Content Include="t\MsgNotification.aspx" />
     <Content Include="t\Projects.aspx" />

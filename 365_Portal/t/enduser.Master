@@ -275,7 +275,7 @@
                     <li class="sidenav-item" id="dvOnyxU" runat="server" visible="false">
                         <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="OnyxU"><i class="fas fa-university"></i></span><span class="link-text">OnyxU</span></a>
                     </li>
-                    <li class="sidenav-item side-menu">
+                    <li class="sidenav-item side-menu" id="dvSettingsParent" runat="server" visible="false">
                         <a class="sidenav-link menu-title" id="dvSettings" runat="server" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></span><span class="link-text">Settings</span></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvUsersNTeams" runat="server" visible="false">
@@ -291,6 +291,9 @@
                                 <a class="sidenav-link" href="#"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Email"><i class="far fa-envelope"></i></span><span class="link-text">Email</span></a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="sidenav-item">
+                        <a class="sidenav-link" href="help.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Help"><i class="fas fa-help"></i></span><span class="link-text">Help</span></a>
                     </li>
                     <%-- end beta --%>
 
