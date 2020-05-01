@@ -3206,8 +3206,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .svg-inline--fa {
             cursor: pointer;
             margin: 0 0.5rem;
+            touch-action: initial;
         }
     }
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .board-column.muuri-item-releasing {
