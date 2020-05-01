@@ -1,8 +1,6 @@
 ﻿<%@ Page Title="Task" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="Projects.aspx.cs" Inherits="_365_Portal.t.Projects" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
     <%--<script src="https://unpkg.com/muuri@0.6.3/dist/muuri.min.js"></script>--%>
@@ -12,6 +10,11 @@
     <style>
         .Project_items_Name {
             cursor: pointer !important;
+        }
+
+        .divDisable {
+            pointer-events: none;
+            cursor: not-allowed;
         }
         /*current code*/
     </style>
@@ -480,7 +483,7 @@
                     <img src="../Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body p-5">
                     <h4 class="mb-4 font-weight-bold">Add Status</h4>
-                    <div class="row input-validation-modal input-form-2">
+                    <div class="row input-form-2">
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtTaskName">Status Name</label>
@@ -824,7 +827,7 @@
                                 $.each(jsonTaskdetails.Data2, function (indx, objsubtask) {
                                     if (objsubtask.SubTaskName != null && objsubtask.SubTaskName != "") {
                                         // change by imtiyaz
-                                        var checked = objsubtask.Status == 3 ? 'checked' : '';
+                                        var checked = objsubtask.Status == 1 ? 'checked' : '';
                                         container += '<div class="custom-control custom-checkbox">';
                                         container += '<input type="checkbox" subtaskId="' + objsubtask.SubTaskID + '" name="subtask_' + objsubtask.SubTaskID + '" id="subtask_' + objsubtask.SubTaskID + '" value="' + objsubtask.SubTaskName + '" class="custom-control-input" ' + checked + '>';
                                         container += '<label class="custom-control-label" subtaskId="' + objsubtask.SubTaskID + '" for="subtask_' + objsubtask.SubTaskID + '">' + objsubtask.SubTaskName + '</label>';
@@ -917,10 +920,10 @@
                         if (parentstyle != 'none') {
                             var chekboxtext = objinputs.value;
                             if ($(this).prop("checked") == true) {
-                                chekboxtext = chekboxtext + "^" + "3";
+                                chekboxtext = chekboxtext + "^" + "1";
                             }
                             else {
-                                chekboxtext = chekboxtext + "^" + "1";
+                                chekboxtext = chekboxtext + "^" + "0";
                             }
                             StringSubtask = StringSubtask + chekboxtext + "|";
                         }
@@ -1656,7 +1659,7 @@
                 newCardHtml += '<div class="board-column">';
                 newCardHtml += '<div id="divheaderStatus">';
                 newCardHtml += '<div class="board-column-header">' + objStatus.Status;
-                newCardHtml += '<div class="float-right">';
+                newCardHtml += '<div class="float-right statusediticons">';
                 if (Role != "enduser") {
                     newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
                     newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ');"></i>';
@@ -1949,6 +1952,7 @@
         var ActualStatusHTML = "";
         function TaskStatusEditable(objthis, type) {
             if (type == 1) { //edit 
+                $(".statusediticons").addClass('divDisable');
                 ActualStatusHTML = $(objthis).parent().parent().parent().html();
                 var StatusId = $(objthis).attr("statusid");
                 var StatusName = $(objthis).attr("statusname");
@@ -1962,10 +1966,12 @@
                 $("#txtStatusNameEdit").val(StatusName);
             }
             else if (type == 0) { //cancel
+
                 if (ActualStatusHTML != "") {
                     $(objthis).parent().parent().replaceWith(ActualStatusHTML);
                 }
                 ActualStatusHTML = "";
+                $(".statusediticons").removeClass('divDisable');
             }
         }
 
