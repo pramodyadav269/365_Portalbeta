@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
