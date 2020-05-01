@@ -2743,10 +2743,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .card-body {
             &.item {
-                min-height: 176px;
+                min-height: 182px;
 
                 .card-text {
                     font-size: 13px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 4;
+                    -webkit-box-orient: vertical;
 
                     &.type {
                         font-size: 12px;

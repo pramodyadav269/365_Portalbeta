@@ -1904,9 +1904,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       color: #4F5F83;
       cursor: pointer; }
   .card-with-img.card .card-body.item {
-    min-height: 176px; }
+    min-height: 182px; }
     .card-with-img.card .card-body.item .card-text {
-      font-size: 13px; }
+      font-size: 13px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical; }
       .card-with-img.card .card-body.item .card-text.type {
         font-size: 12px;
         color: rgba(0, 0, 0, 0.5); }
