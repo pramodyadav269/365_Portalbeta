@@ -538,6 +538,8 @@
         }
 
         function ShowButtons(id, action) {
+            $('#dvSaveAsDraft').show();
+
             if (id == 'pills-course') {
                 $('#btnAddCourse').show();
 
@@ -602,6 +604,11 @@
                             nextTab('pills-course-tab');
                         }
                     });
+                }
+
+                if (divLessonFlag == 'bindtile')
+                {
+                    $('#dvSaveAsDraft').hide();
                 }
             }
             else if (id == 'pills-content') {
@@ -672,6 +679,10 @@
                             nextTab('pills-course-tab');
                         }
                     });
+                }
+
+                if (divContentFlag == 'bindtile') {
+                    $('#dvSaveAsDraft').hide();
                 }
             }
             else if (id == 'pills-resources') {
@@ -845,6 +856,8 @@
         }
 
         function AddMore(id) {
+            $('#dvSaveAsDraft').show();
+            debugger
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -879,6 +892,8 @@
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
                     AddMoreLessonFlag = 'more';
+
+                    $('#dvSaveAsDraft').hide();
                 }
                 else {
                     ClearFieldsAddLesson();
@@ -932,6 +947,8 @@
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
+
+                    $('#dvSaveAsDraft').hide();
                 }
                 else {
                     ClearFieldsAddContent();
@@ -1407,15 +1424,15 @@
         function CheckCoursePublishable(IsPublishable, IsPublished) {
             if (IsPublishable == 1 && IsPublished == 1) {
                 $("#dvPublishCourse").show();
-                // $("#dvSaveAsDraft").hide();
+                //$("#dvSaveAsDraft").hide();
             }
             else if (IsPublished == 0 && IsPublishable == 1) {
                 $("#dvPublishCourse").show();
-                $("#dvSaveAsDraft").show();
+                //$("#dvSaveAsDraft").show();
             }
             else {
                 $("#dvPublishCourse").hide();
-                $("#dvSaveAsDraft").show();
+                //$("#dvSaveAsDraft").show();
             }
             if (IsPublished == 1)
                 $("#dvPublishCourse").show();
