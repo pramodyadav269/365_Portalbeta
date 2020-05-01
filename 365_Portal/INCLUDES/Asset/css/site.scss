@@ -2747,11 +2747,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .card-text {
                     font-size: 13px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    display: -webkit-box;
-                    -webkit-line-clamp: 4;
-                    -webkit-box-orient: vertical;
+
+                    &.ellipsis {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 4;
+                        -webkit-box-orient: vertical;
+
+                        &:hover {
+                            overflow: unset;
+                            text-overflow: unset;
+                            display: unset;
+                            -webkit-line-clamp: unset;
+                            -webkit-box-orient: unset;
+                            transition: 0.5s;
+                        }
+                    }
 
                     &.type {
                         font-size: 12px;

@@ -1906,12 +1906,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .card-with-img.card .card-body.item {
     min-height: 182px; }
     .card-with-img.card .card-body.item .card-text {
-      font-size: 13px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical; }
+      font-size: 13px; }
+      .card-with-img.card .card-body.item .card-text.ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical; }
+        .card-with-img.card .card-body.item .card-text.ellipsis:hover {
+          overflow: unset;
+          text-overflow: unset;
+          display: unset;
+          -webkit-line-clamp: unset;
+          -webkit-box-orient: unset;
+          transition: 0.5s; }
       .card-with-img.card .card-body.item .card-text.type {
         font-size: 12px;
         color: rgba(0, 0, 0, 0.5); }
