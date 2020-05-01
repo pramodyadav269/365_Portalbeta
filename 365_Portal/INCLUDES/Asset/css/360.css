@@ -736,7 +736,7 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: #000;
 }*/
 
-.select2-container .select2-search--inline {
+/*.select2-container .select2-search--inline {
     float: none;
 }
 
@@ -748,7 +748,7 @@ input[type=checkbox] + label, input[type=radio] + label {
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     line-height: calc(1.5em + .75rem + 2px);
-}
+}*/
 
 .form-control:focus {
     box-shadow: none;
@@ -765,7 +765,7 @@ input[type=checkbox] + label, input[type=radio] + label {
     color: #000;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__clear {
+/*.select2-container--default .select2-selection--multiple .select2-selection__clear {
     margin-right: 0;
 }
 
@@ -779,7 +779,7 @@ input[type=checkbox] + label, input[type=radio] + label {
     border-color: #dc3545;
     padding-right: .75rem;
     background-image: none;
-}
+}*/
 
 .checkbox.box .is-invalid ~ label, .radio.box .is-invalid ~ label, .radio.rating .is-invalid ~ label {
     border-color: #dc3545;
