@@ -336,7 +336,7 @@
                                         </a>
                                     </div>
                                     <div class="col-sm-12 mt-3 dropright" id="dvSaveQuestion" style="display: none;">
-                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" id="btnSaveQuestion" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
                                         </a>
                                     </div>
                                     <div class="col-sm-12 mt-3 dropright" id="dvCancelQuestion" style="display: none;">
@@ -358,21 +358,6 @@
 
                                             <div class="mt-5"><a id="dvQuizAddCourse" class="btn btn-outline black mr-3" onclick="RedirectToNewCourse();">Add Course</a><a id="dvQuizAddLesson" class="btn btn-black" onclick="RedirectToNewLesson();">Add Lesson</a></div>
                                         </div>
-                                        <%-- Congratulations alert end --%>
-
-                                        <%--  You have successfully added course..
-                                             <div class="col-sm-12 mt-3 dropright" id="dvQuizAddCourse">
-                                                 <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                     onclick="RedirectToNewCourse();">
-                                                     <i class="fas fa-plus-circle"></i>Add Course
-                                                 </a>
-                                             </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="dvQuizAddLesson">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                onclick="RedirectToNewLesson();">
-                                                <i class="fas fa-plus-circle"></i>Add Lesson
-                                            </a>
-                                        </div>--%>
                                     </div>
                                 </div>
                             </div>
@@ -2823,6 +2808,9 @@
                         contentType: "application/json",
                     }).then(function success(response) {
                         $('#divQuestionAdd').html("");
+
+                        $("#btnSaveQuestion").hide();//Added on 01 MAY 20 after adding question
+
                         IsCoursePublishable();
                         ManageQuizButton('addquestion');
                         if (type != "done") {
