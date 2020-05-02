@@ -1768,7 +1768,7 @@
             var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
             var columnGrids = [];
             var boardGrid;
-
+            var activeItem;
             // Define the column grids so we can drag those
             // items around.
             itemContainers.forEach(function (container) {
@@ -1780,6 +1780,13 @@
                     dragEnabled: true,
                     dragSort: function () {
                         return columnGrids;
+                    },
+                    dragStartPredicate: function (item, event) {
+                        if (item === activeItem) {
+                            return Muuri.ItemDrag.defaultStartPredicate(item, event);
+                        } else {
+                            return false;
+                        }
                     },
                     dragSortInterval: 0,
                     dragContainer: document.body,
@@ -1796,6 +1803,7 @@
                         item.getElement().style.height = item.getHeight() + 'px';
                     })
                     .on('dragReleaseEnd', function (item) {
+                        activeItem = null;
                         // Let's remove the fixed width/height from the
                         // dragged item now that it is back in a grid
                         // column and can freely adjust to it's
@@ -1835,6 +1843,12 @@
                 // Add the column grid reference to the column grids
                 // array, so we can access it later on.
                 columnGrids.push(grid);
+
+                grid.getItems().forEach(function (item) {
+                    item.getElement().addEventListener('click', function () {
+                        activeItem = activeItem === null ? undefined : item;
+                    });
+                });
 
             });
 

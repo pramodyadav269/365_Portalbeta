@@ -293,7 +293,7 @@
                         </ul>
                     </li>
                     <li class="sidenav-item">
-                        <a class="sidenav-link" href="help.aspx"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Help"><i class="fas fa-help"></i></span><span class="link-text">Help</span></a>
+                        <a class="sidenav-link" href="help.aspx"><span class="link-icon"><i class="far fa-question-circle"></i></span><span class="tooltiptext">Help</span><span class="link-text">Help</span></a>
                     </li>
                     <%-- end beta --%>
 
