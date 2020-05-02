@@ -2302,74 +2302,100 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .help.card .card-body .card-text {
   color: rgba(0, 0, 0, 0.5); }
 
-.course-flow .header .title {
-  font-weight: 600;
-  color: #212338;
-  margin-left: 0;
-  font-size: 22px; }
-
-.course-flow .card {
-  border-radius: 3px;
-  box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.16); }
-  .course-flow .card .card-body {
-    padding: 28px 20px 24px 30px; }
-    .course-flow .card .card-body.right-side-content {
-      height: 100%;
-      padding: 22px 20px 24px 24px;
-      background: #FAFAFA; }
-
-.course-flow .form-group {
-  position: relative;
-  margin-bottom: 22px; }
-  .course-flow .form-group label {
-    display: none;
-    font-size: 10px;
+.course-flow {
+  padding: 0 60px 20px; }
+  @media only screen and (max-width: 600px) {
+    .course-flow {
+      margin: 0 15px 15px; } }
+  .course-flow .header .title {
     font-weight: 600;
-    color: rgba(33, 35, 56, 0.5);
-    margin-bottom: 0;
-    padding: 0 4px;
-    background: #fff;
-    position: absolute;
-    top: -7px;
-    left: 12px;
-    z-index: 1; }
-  .course-flow .form-group .form-control {
-    border: 1px solid #D2D2D8;
+    color: #212338;
+    margin-left: 0;
+    font-size: 22px; }
+  .course-flow .card {
     border-radius: 3px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #212338; }
-  .course-flow .form-group textarea {
-    resize: none; }
-  .course-flow .form-group ::placeholder {
-    font-size: 14px;
-    font-weight: 600;
-    color: #212338; }
-  .course-flow .form-group.asterisk::after {
-    content: "*";
-    color: #BE0808;
-    position: absolute;
-    font-weight: 600;
-    top: -2px;
-    left: -12px; }
-  .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple {
-    height: 74px;
-    max-height: 74px;
-    padding-left: 6px;
-    overflow-y: auto;
-    border: 1px solid #D2D2D8;
-    border-radius: 3px; }
-    .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered {
-      margin-top: 4px; }
-      .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
-        border: 1px solid #D2D2D8;
-        border-radius: 13px;
-        font-size: 11px;
-        color: #212338;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.16); }
+    .course-flow .card .card-body {
+      padding: 28px 20px 24px 30px; }
+      .course-flow .card .card-body.right-side-content {
+        height: 100%;
+        padding: 22px 20px 24px 24px;
+        background: #FAFAFA; }
+  .course-flow .form-group {
+    position: relative;
+    margin-bottom: 22px; }
+    .course-flow .form-group label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #212338;
+      margin-bottom: 10px; }
+      .course-flow .form-group label .svg-inline--fa {
+        font-size: 18px;
+        position: relative;
+        top: 2px;
+        margin-right: 10px; }
+      .course-flow .form-group label span {
+        margin-left: 14px;
+        font-size: 10px;
+        font-weight: normal;
+        color: #808080; }
+      .course-flow .form-group label.inline {
+        display: none;
+        font-size: 10px;
         font-weight: 600;
-        padding: 4px 10px;
-        background: #fff; }
-        .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove {
-          position: relative;
-          float: right;
-          right: -4px; }
+        color: rgba(33, 35, 56, 0.5);
+        margin-bottom: 0;
+        padding: 0 4px;
+        background: #fff;
+        position: absolute;
+        top: -7px;
+        left: 12px;
+        z-index: 1; }
+    .course-flow .form-group .form-control {
+      border: 1px solid #D2D2D8;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #212338; }
+    .course-flow .form-group textarea {
+      resize: none; }
+    .course-flow .form-group ::placeholder {
+      font-size: 14px;
+      font-weight: 600;
+      color: #212338; }
+    .course-flow .form-group.asterisk::after {
+      content: "*";
+      color: #BE0808;
+      position: absolute;
+      font-weight: 600;
+      top: -2px;
+      left: -12px; }
+    .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple {
+      height: 74px;
+      max-height: 74px;
+      padding-left: 6px;
+      overflow-y: auto;
+      border: 1px solid #D2D2D8;
+      border-radius: 3px; }
+      .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered {
+        margin-top: 4px; }
+        .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
+          border: 1px solid #D2D2D8;
+          border-radius: 13px;
+          font-size: 11px;
+          color: #212338;
+          font-weight: 600;
+          padding: 4px 10px;
+          background: #fff; }
+          .course-flow .form-group .select2-container .select2-selection.select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove {
+            position: relative;
+            float: right;
+            right: -4px; }
+    .course-flow .form-group.editor .jodit_container .jodit_toolbar {
+      border: 1px solid #D2D2D8;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px; }
+    .course-flow .form-group.editor .jodit_container .jodit_workplace {
+      border: 1px solid #D2D2D8;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px; }

@@ -1,16 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
-    <style>
-        .btnSpace {
-            margin-right: 10px;
-        }
-    </style>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="container course-flow">
+    <div class="course-flow">
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
@@ -38,28 +31,34 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group asterisk">
-                                            <label for="txtCourseTitle">Course Title</label>
+                                            <label for="txtCourseTitle" class="inline">Course Title</label>
                                             <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group asterisk">
-                                            <label for="txtCourseSummary">Course Description</label>
-                                            <textarea class="form-control required" id="txtCourseSummary" placeholder="Add Course Description"></textarea>
+                                            <label for="txtCourseDescription" class="inline">Course Description</label>
+                                            <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group asterisk">
-                                            <label for="ddlCourseCategory">Course Category</label>
+                                            <label for="ddlCourseCategory" class="inline">Course Category</label>
                                             <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important" multiple>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group asterisk">
-                                            <label for="ddlTags">Tags</label>
+                                            <label for="ddlTags" class="inline">Tags</label>
                                             <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group editor">
+                                            <label>Course Summary <span>Highlight why the course should be taken and who is the appropriate audience for the course.</span></label>
+                                            <div id="txtCourseSummary"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +66,17 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-5 col-lg-4 pl-0">
                             <div class="card-body right-side-content">
-                                <h1>shdlas</h1>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label><i class="fas fa-plus-circle"></i>Course Logo <span>Set the image for the course.</span></label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="imgCourseLogo">
+                                                <label class="custom-file-label" for="imgCourseLogo">Choose file</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -128,7 +137,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                  <%--  <div class="form-group">
+                                                    <%--  <div class="form-group">
                                                         <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
                                                         </select>
                                                     </div>--%>
@@ -177,13 +186,13 @@
                                         </div>
                                         <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-0 logo-tab">
                                             <div class="col-sm-12 mt-3 course-logo">
-                                                <div class="form-group m-0">
+<%--                                                <div class="form-group m-0">
                                                     <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
                                                     <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
                                                     <div class="custom-file">
                                                         <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
                                                     </div>
-                                                </div>
+                                                </div>--%>
                                                 <div class="logo-img" id="divCourseLogo"></div>
                                                 <%-- if image set then use this html --%>
                                                 <%--<div class="logo-img img">
@@ -192,7 +201,7 @@
                                             </div>
                                             <div class="col-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
-                                                  <%--  <label for="ddlTags">Tags</label>
+                                                    <%--  <label for="ddlTags">Tags</label>
                                                     <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
                                                     </select>--%>
                                                 </div>
@@ -511,9 +520,17 @@
 
     <script>
 
-        var editorLessonDesc = new Jodit('#txtLessonDescription');
-        var editorContentDesc = new Jodit('#txtContentDescription');
-        var editorResourcesDesc = new Jodit('#txtResourcesDescription');
+        //new code
+        var editorCourseSummary = new Jodit('#txtCourseSummary');
+
+
+
+
+
+        // old code
+        //var editorLessonDesc = new Jodit('#txtLessonDescription');
+        //var editorContentDesc = new Jodit('#txtContentDescription');
+        //var editorResourcesDesc = new Jodit('#txtResourcesDescription');
 
         var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
