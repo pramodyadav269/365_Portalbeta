@@ -1808,12 +1808,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
     }
+
+    &.dropdown-toggle {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 6px 30px;
+    }
 }
 
 .module {
     padding-bottom: 4rem;
-
-
 
     .nav-pills {
         .nav-link {
@@ -2739,10 +2743,27 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .card-body {
             &.item {
-                min-height: 176px;
+                min-height: 182px;
 
                 .card-text {
                     font-size: 13px;
+
+                    &.ellipsis {
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 4;
+                        -webkit-box-orient: vertical;
+
+                        &:hover {
+                            overflow: unset;
+                            text-overflow: unset;
+                            display: unset;
+                            -webkit-line-clamp: unset;
+                            -webkit-box-orient: unset;
+                            transition: 0.5s;
+                        }
+                    }
 
                     &.type {
                         font-size: 12px;
@@ -3185,8 +3206,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .svg-inline--fa {
             cursor: pointer;
             margin: 0 0.5rem;
+            touch-action: initial;
         }
     }
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .board-column.muuri-item-releasing {
@@ -3303,6 +3332,115 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
             .card-text {
                 color: rgba(0, 0, 0, 0.5);
+            }
+        }
+    }
+}
+
+.course-flow {
+
+    .header {
+
+        .title {
+            font-weight: 600;
+            color: #212338;
+            margin-left: 0;
+            font-size: 22px;
+        }
+    }
+
+    .card {
+        border-radius: 3px;
+        box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.16);
+
+        .card-body {
+            padding: 28px 20px 24px 30px;
+
+            &.right-side-content {
+                height: 100%;
+                padding: 22px 20px 24px 24px;
+                background: #FAFAFA;
+            }
+        }
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 22px;
+
+        label {
+            display: none;
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(33, 35, 56, 0.5);
+            margin-bottom: 0;
+            padding: 0 4px;
+            background: #fff;
+            position: absolute;
+            top: -7px;
+            left: 12px;
+            z-index: 1;
+        }
+
+        .form-control {
+            border: 1px solid #D2D2D8;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #212338;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        ::placeholder {
+            font-size: 14px;
+            font-weight: 600;
+            color: #212338;
+        }
+
+        &.asterisk {
+            &::after {
+                content: "*";
+                color: #BE0808;
+                position: absolute;
+                font-weight: 600;
+                top: -2px;
+                left: -12px;
+            }
+        }
+
+        .select2-container {
+            .select2-selection {
+                &.select2-selection--multiple {
+                    height: 74px;
+                    max-height: 74px;
+                    padding-left: 6px;
+                    overflow-y: auto;
+                    border: 1px solid #D2D2D8;
+                    border-radius: 3px;
+
+                    .select2-selection__rendered {
+                        margin-top: 4px;
+
+                        .select2-selection__choice {
+                            border: 1px solid #D2D2D8;
+                            border-radius: 13px;
+                            font-size: 11px;
+                            color: #212338;
+                            font-weight: 600;
+                            padding: 4px 10px;
+                            background: #fff;
+
+                            .select2-selection__choice__remove {
+                                position: relative;
+                                float: right;
+                                right: -4px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

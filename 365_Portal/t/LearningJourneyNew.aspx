@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourney.aspx.cs" Inherits="_365_Portal.t.LearningJourney" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -10,25 +10,76 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-    <div class="container module">
+    <div class="container course-flow">
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
-                    <%--<a class="back" href="#"><i class="fas fa-arrow-left"></i>Dashboard</a>--%>
                     <h4 class="title">Add Course</h4>
                 </div>
                 <div>
                     <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow" id="dvSaveAsDraft" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
+                    <a class="btn btn-yellow d-none" id="dvSaveAsDraft" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
                     <a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="PublishCourse('');">Publish</a>
+
+                    <div class="col dropdown p-0">
+                        <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">Save</a>
+                            <a class="dropdown-item">Save draft</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-12 col-sm-12 mt-4">
-                <div class="progress">
-                    <%--<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>--%>
-                    <div class="progress-bar" id="divProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="card">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-8 pr-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group asterisk">
+                                            <label for="txtCourseTitle">Course Title</label>
+                                            <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group asterisk">
+                                            <label for="txtCourseSummary">Course Description</label>
+                                            <textarea class="form-control required" id="txtCourseSummary" placeholder="Add Course Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group asterisk">
+                                            <label for="ddlCourseCategory">Course Category</label>
+                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important" multiple>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group asterisk">
+                                            <label for="ddlTags">Tags</label>
+                                            <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 pl-0">
+                            <div class="card-body right-side-content">
+                                <h1>shdlas</h1>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul class="nav nav-pills mb-2" id="pills-tab-course" role="tablist">
+
+
+
+
+                <%-- <div class="progress">
+                    <div class="progress-bar" id="divProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>--%>
+                <%--<ul class="nav nav-pills mb-2" id="pills-tab-course" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="pills-course-tab" data-toggle="pill" href="#pills-course" role="tab" aria-controls="pills-course" aria-selected="true" onclick="ShowButtons('pills-course','tabclick')">Course</a>
                     </li>
@@ -44,8 +95,8 @@
                     <li class="nav-item">
                         <a class="nav-link" id="pills-quiz-tab" data-toggle="pill" href="#pills-quiz" role="tab" aria-controls="pills-quiz" aria-selected="false" onclick="ShowButtons('pills-quiz','tabclick')">Quiz</a>
                     </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
+                </ul>--%>
+                <div class="tab-content d-none" id="pills-tabContent">
 
                     <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
                         <div class="card shadow-sm">
@@ -55,20 +106,20 @@
                                         <div class="col-12 col-sm-12 col-md-7 col-lg-8">
                                             <div class="row">
                                                 <div class="col-sm-12 mt-3">
-                                                    <div class="form-group">
+                                                    <%-- <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
                                                         <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier to find
                                                         <span class="float-right">0 / 100</span>
                                                         </small>
-                                                    </div>
+                                                    </div>--%>
                                                 </div>
                                                 <div class="col-sm-12">
-                                                    <div class="form-group">
+                                                    <%-- <div class="form-group">
                                                         <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Summary *" maxlength="200" id="txtCourseSummary" aria-describedby="txtCourseSummaryHelp" />
                                                         <small id="txtCourseSummaryHelp" class="form-text">Keep your description brief but compelling
                                                     <span class="float-right">0 / 200</span>
                                                         </small>
-                                                    </div>
+                                                    </div>--%>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
                                                     <div class="form-group color-picker">
@@ -77,10 +128,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6">
-                                                    <div class="form-group">
+                                                  <%--  <div class="form-group">
                                                         <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
                                                         </select>
-                                                    </div>
+                                                    </div>--%>
                                                 </div>
 
 
@@ -89,11 +140,11 @@
                                                     <div class="form-group checkbox required">
                                                         <div class="custom-control custom-checkbox custom-control-inline">
                                                             <input type="checkbox" id="cbxInstructorName" class="custom-control-input" checked>
-                                                            <label for="cbxInstructorName" class="custom-control-label"> Is Course Creator </label>
-                                                        </div>                                                        
+                                                            <label for="cbxInstructorName" class="custom-control-label">Is Course Creator </label>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 mt-3" style="display:none;" id="divInstructorName">
+                                                <div class="col-sm-6 mt-3" style="display: none;" id="divInstructorName">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control required" placeholder="Instructor Name *" maxlength="100" id="txtInstructorName" onkeyup="setTextCount(this)" aria-describedby="txtInstructorNameHelp" />
                                                         <small id="txtInstructorNameHelp" class="form-text">Course Creator Name
@@ -141,9 +192,9 @@
                                             </div>
                                             <div class="col-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
-                                                    <label for="ddlTags">Tags</label>
+                                                  <%--  <label for="ddlTags">Tags</label>
                                                     <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
-                                                    </select>
+                                                    </select>--%>
                                                 </div>
                                             </div>
 
@@ -336,7 +387,7 @@
                                         </a>
                                     </div>
                                     <div class="col-sm-12 mt-3 dropright" id="dvSaveQuestion" style="display: none;">
-                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" id="btnSaveQuestion" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
+                                        <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
                                         </a>
                                     </div>
                                     <div class="col-sm-12 mt-3 dropright" id="dvCancelQuestion" style="display: none;">
@@ -358,6 +409,21 @@
 
                                             <div class="mt-5"><a id="dvQuizAddCourse" class="btn btn-outline black mr-3" onclick="RedirectToNewCourse();">Add Course</a><a id="dvQuizAddLesson" class="btn btn-black" onclick="RedirectToNewLesson();">Add Lesson</a></div>
                                         </div>
+                                        <%-- Congratulations alert end --%>
+
+                                        <%--  You have successfully added course..
+                                             <div class="col-sm-12 mt-3 dropright" id="dvQuizAddCourse">
+                                                 <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                     onclick="RedirectToNewCourse();">
+                                                     <i class="fas fa-plus-circle"></i>Add Course
+                                                 </a>
+                                             </div>
+                                        <div class="col-sm-12 mt-3 dropright" id="dvQuizAddLesson">
+                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                onclick="RedirectToNewLesson();">
+                                                <i class="fas fa-plus-circle"></i>Add Lesson
+                                            </a>
+                                        </div>--%>
                                     </div>
                                 </div>
                             </div>
@@ -367,7 +433,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-12 mt-3">
+        <div class="col-12 col-sm-12 mt-3 d-none">
 
             <%--Course--%>
             <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
@@ -523,8 +589,6 @@
         }
 
         function ShowButtons(id, action) {
-            $('#dvSaveAsDraft').show();
-
             if (id == 'pills-course') {
                 $('#btnAddCourse').show();
 
@@ -589,11 +653,6 @@
                             nextTab('pills-course-tab');
                         }
                     });
-                }
-
-                if (divLessonFlag == 'bindtile')
-                {
-                    $('#dvSaveAsDraft').hide();
                 }
             }
             else if (id == 'pills-content') {
@@ -664,10 +723,6 @@
                             nextTab('pills-course-tab');
                         }
                     });
-                }
-
-                if (divContentFlag == 'bindtile') {
-                    $('#dvSaveAsDraft').hide();
                 }
             }
             else if (id == 'pills-resources') {
@@ -841,8 +896,6 @@
         }
 
         function AddMore(id) {
-            $('#dvSaveAsDraft').show();
-            debugger
             if (id == 'btnAddMoreLesson') {
                 if (AddMoreLessonFlag == 'add') {
                     var result = validateAddLesson();
@@ -877,8 +930,6 @@
                     $('#divLessonAdd').hide();
                     $('#divLessonGrid').show();
                     AddMoreLessonFlag = 'more';
-
-                    $('#dvSaveAsDraft').hide();
                 }
                 else {
                     ClearFieldsAddLesson();
@@ -932,8 +983,6 @@
                     $('#divContentAdd').hide();
                     $('#divContentGrid').show();
                     AddMoreContentFlag = 'more';
-
-                    $('#dvSaveAsDraft').hide();
                 }
                 else {
                     ClearFieldsAddContent();
@@ -1026,7 +1075,7 @@
                                 for (var i = 0; i < Tags.length; i++) {
                                     $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
                                 }
-                                selectInit('#ddlTags', 'Select Tag');
+                                selectInit('#ddlTags', 'Tags');
                             }
                             //if (AchievementBadge != undefined && AchievementBadge.length > 0) {
                             //    $('#ddlAchievementBadge').empty().append('<option></option>');
@@ -1036,11 +1085,11 @@
                             //    selectInit('#ddlAchievementBadge', 'Select Achievement Badge');
                             //}
                             if (CourseCategory != undefined && CourseCategory.length > 0) {
-                                $('#ddlCourseCategory').empty().append('<option></option>');
+                                $('#ddlCourseCategory').empty();
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }
-                                selectInit('#ddlCourseCategory', 'Select Course Category');
+                                selectInit('#ddlCourseCategory', 'Course Category');
                             }
                             if (flag == 'update') {
                                 ""
@@ -1093,12 +1142,12 @@
             $("#rbGlobal").prop("checked", true)
             $('#txtCourseThemeColor').val('#161E98');
             $("#ddlTags option:selected").prop("selected", false);
-            
+
             $("#cbxInstructorName").prop("checked", true)
             $("#divInstructorName").hide();
             $("#txtInstructorName").val('');
 
-            selectInit('#ddlTags ', 'Select Tag');
+            selectInit('#ddlTags ', 'Tags');
         }
 
         function validateAddCourse() {
@@ -1364,7 +1413,7 @@
                                 $("#imgCourseLogo").attr("src", "../Files/CourseLogo/" + EditTopic[0].FilePath);
                                 $("#divCourseLogo").addClass('img');
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
-                            }                            
+                            }
 
                             if (EditTopic[0].InstructorName != undefined && EditTopic[0].InstructorName != null) {
                                 $("#cbxInstructorName").prop("checked", false)
@@ -1409,15 +1458,15 @@
         function CheckCoursePublishable(IsPublishable, IsPublished) {
             if (IsPublishable == 1 && IsPublished == 1) {
                 $("#dvPublishCourse").show();
-                //$("#dvSaveAsDraft").hide();
+                // $("#dvSaveAsDraft").hide();
             }
             else if (IsPublished == 0 && IsPublishable == 1) {
                 $("#dvPublishCourse").show();
-                //$("#dvSaveAsDraft").show();
+                $("#dvSaveAsDraft").show();
             }
             else {
                 $("#dvPublishCourse").hide();
-                //$("#dvSaveAsDraft").show();
+                $("#dvSaveAsDraft").show();
             }
             if (IsPublished == 1)
                 $("#dvPublishCourse").show();
@@ -1444,15 +1493,15 @@
             if ($("#txtLessonTitle").val() == undefined || $("#txtLessonTitle").val() == '') {
                 return { error: true, msg: "Please enter Lesson Title" };
             }
-                //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
-                //    return { error: true, msg: "Please enter Learning Objectives" };
-                //}
+            //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
+            //    return { error: true, msg: "Please enter Learning Objectives" };
+            //}
             else if (editorLessonDesc.value == undefined || editorLessonDesc.value.trim() == '') {
                 return { error: true, msg: "Please enter Lesson Details" };
             }
-                //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
-                //    return { error: true, msg: "Please enter Estimate Time" };
-                //}
+            //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
+            //    return { error: true, msg: "Please enter Estimate Time" };
+            //}
             else if ($("#txtHour").val() == undefined || $("#txtHour").val() == '') {
                 return { error: true, msg: "Please enter Hour" };
             }
@@ -2483,7 +2532,7 @@
             else if ($("#txtPassingScorePercentage").val() == undefined || $("#txtPassingScorePercentage").val() == '') {
                 return { error: true, msg: "Please select Passing Percentage" };
             }
-            else if ($("#lblPassingScore").text() == undefined || $("#lblPassingScore").text() == '' ) {
+            else if ($("#lblPassingScore").text() == undefined || $("#lblPassingScore").text() == '') {
                 return { error: true, msg: "Please select Passing Percentage" };
             }
 
@@ -2808,9 +2857,6 @@
                         contentType: "application/json",
                     }).then(function success(response) {
                         $('#divQuestionAdd').html("");
-
-                        $("#btnSaveQuestion").hide();//Added on 01 MAY 20 after adding question
-
                         IsCoursePublishable();
                         ManageQuizButton('addquestion');
                         if (type != "done") {
@@ -3274,11 +3320,11 @@
                                         if (DataSet.Data.Data1 != undefined) {
                                             var Tags = DataSet.Data.Data1;
                                             if (Tags != undefined && Tags.length > 0) {
-                                                $('#ddlTags').empty().append('<option></option>');
+                                                $('#ddlTags').empty()
                                                 for (var i = 0; i < Tags.length; i++) {
                                                     $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
                                                 }
-                                                selectInit('#ddlTags', 'Select Tag');
+                                                selectInit('#ddlTags', 'Tags');
                                             }
                                         }
 
