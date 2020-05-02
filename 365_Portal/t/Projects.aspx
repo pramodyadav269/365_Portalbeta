@@ -319,7 +319,7 @@
                 <div class="row recent-activity d-none" id="dvRecentActivity">
                     <div class="col-12">
                         <div class="card">
-                            <div class="card-body">
+                            <div class="card-body" id="dvActivitybody">
                                 <div class="activity-wrapper">
                                     <div class="day">Today</div>
                                     <div class="activity">
@@ -399,6 +399,7 @@
                             <div class="form-group">
                                 <label for="ddlStatus">Status</label>
                                 <select class="form-control select2 required" id="ddlStatus" style="width: 100% !important">
+                                    <input type="hidden" id="hdntaskddlStatusId" />
                                 </select>
                             </div>
                         </div>
@@ -627,8 +628,9 @@
                     var statusId = container.el.attr('status_id');
                     var ProjectId = $item.attr('project_Id');
                     var taskId = $item.attr('task_Id');
+                    var taskName = $item.attr("task_Name");
                     //alert("statusId:" + statusId + " ProjectId:" + ProjectId + " taskId:" + taskId);
-                    UpdateTaskStatus(ProjectId, taskId, statusId);
+                    UpdateTaskStatus(ProjectId, taskId, statusId, taskName);
                 },
                 // set $item relative to cursor position
                 onDragStart: function ($item, container, _super) {
@@ -807,7 +809,8 @@
                         $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary);
                         var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
                         $("#txtDueDate").val(moment(dateTime).format("YYYY/MM/DD hh:mm a"));
-                        $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes)
+                        $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes);
+                        $("#hdntaskddlStatusId").val(jsonTaskdetails.Data[0].Status)
                         $('#ddlStatus').val(jsonTaskdetails.Data[0].Status);
                         $('#ddlStatus').select2().trigger('change');
                         if (jsonTaskdetails.Data1 != null && jsonTaskdetails.Data1.length > 0) {
@@ -910,8 +913,9 @@
             if (inputValidation('.input-validation-modal')) {
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
-                var arraySubtask = [];
                 var StringSubtask = "";
+
+                var taskStatusId = $("#ddlStatus").val();
                 var container = $('#cblist');
                 var inputs = container.find('input');
                 if (inputs.length > 0) {
@@ -944,7 +948,7 @@
                     , t_TagIds: "" //varchar(500), (comma separated)
                     , t_FileIds: base64UserProfileString //varchar(500), #(comma separated)
                     , t_SubTasks: StringSubtask //longtext, #(delimeter | separated)
-                    , t_StatusID: $("#ddlStatus").val()
+                    , t_StatusID: taskStatusId
                     , t_Comments: $("#txtTaskComments").val()
                     , t_FileName: FileName
                 };
@@ -964,6 +968,12 @@
                             $("#modalTaskInfo").modal("hide");
                             BindCards();
                             ClearTaskForm();
+
+                            var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
+                            if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
+                                UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName);
+                            }
+
                             if (task_ActionId == "2") {
                                 userlistAPIresponse.StatusDescription = "Task details added successfully";
                             }
@@ -983,10 +993,12 @@
                         });
                     }
                 });
+
+
             }
         }
 
-        function DeleteTaskBYTaskId(TaskId) {
+        function DeleteTaskBYTaskId(TaskId, TaskName) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Task!",
@@ -1003,7 +1015,7 @@
                         , t_ProjectID: ProjectID
                         , t_CompID: "0"
                         , t_TaskID: TaskId
-                        , t_TaskName: ""
+                        , t_TaskName: TaskName
                         , t_TaskSummary: ""
                         , t_DueDate: new Date()
                         , t_PrivateNotes: ""
@@ -1060,7 +1072,8 @@
         function onClickRecentActivity() {
             toggle('dvRecentActivity', 'dvWebsiteRedesign');
             prevTitle = $('#contentTitle').html();
-            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvRecentActivity&#34;);"></i>Recent Activity</h5>')
+            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvRecentActivity&#34;);"></i>Recent Activity</h5>');
+            ajacallActivityLogs();
         }
 
         function onClickAddProject() {
@@ -1261,7 +1274,7 @@
             }
         }
 
-        function DeleteProjectBYProjectId(projectId) {
+        function DeleteProjectBYProjectId(projectId, projectname) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Project !",
@@ -1276,7 +1289,7 @@
                         p_Action: "4"
                         , p_CompID: "0"
                         , p_ProjectID: projectId
-                        , p_ProjectName: ""
+                        , p_ProjectName: projectname
                         , p_ProjectGoal: ""
                         , p_UserId: "0"
                         , p_ProjectMembers_UserIds: ""
@@ -1442,7 +1455,7 @@
             $('#txtAddSubTask').val("");
         }
 
-        function UpdateTaskStatus(ProjectID, TaskID, StatusID) {
+        function UpdateTaskStatus(ProjectID, TaskID, StatusID, taskName) {
 
             var requestParams = {
                 Param_ProjectID: ProjectID,
@@ -1451,7 +1464,8 @@
                 Param_SubTaskIds: "", //#(completed taskIds comma separated)
                 Param_StatusID: StatusID,
                 Param_Comments: "",
-                Param_UserID: "0"
+                Param_UserID: "0",
+                Param_TaskName: taskName
             }
 
             $.ajax({
@@ -1662,7 +1676,7 @@
                 newCardHtml += '<div class="float-right statusediticons">';
                 if (Role != "enduser") {
                     newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
-                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ');"></i>';
+                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status +'\');"></i>';
                 }
                 newCardHtml += '</div></div>';
                 newCardHtml += '</div>';
@@ -1683,13 +1697,13 @@
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
                         var duedate = new Date(objTask.DueDate);
                         newCardHtml += '<div class="board-item">';
-                        newCardHtml += '<div class="board-item-content" status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '">';
+                        newCardHtml += '<div class="board-item-content"  status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '" task_Name="' + objTask.TaskName + '">';
                         cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         newCardHtml += '<div class="wr-content">';
                         newCardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
                         newCardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYTaskId(' + objTask.TaskID + ')"></i>';
                         if (Role != "enduser") {
-                            newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ');"></i>';
+                            newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ',\'' + objTask.TaskName + '\');"></i>';
                         }
                         newCardHtml += '</div></div>';
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
@@ -1790,6 +1804,8 @@
                         var taskId = $(item._element).children().attr("task_id");
                         var ProjectId = $(item._element).children().attr("project_Id");
                         var statusId = $(item._element).children().attr("status_id");
+                        var taskName = $(item._element).children().attr("task_Name");
+
                         // columnGrids
 
                         //draggableContainer.MasterStatusID
@@ -1798,7 +1814,7 @@
                         })[0];
 
                         if (draggableContainer._settings.MasterStatusID != statusId) {
-                            UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID);
+                            UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID, taskName);
                         }
 
                         item.getElement().style.width = '';
@@ -1866,7 +1882,7 @@
                         }
                         projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
                         projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
-                        projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ')">Delete</a>';
+                        projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ',\'' + objProject.ProjectName + '\')">Delete</a>';
                         projectHtml += '</div></li>';
                         projectHtml += '</div></li>';
                     });
@@ -1884,7 +1900,7 @@
         };
 
         function SaveUpdateStatus(StatusId = 0) {
-            ShowLoader
+            ShowLoader();
             var txtStatusName = $('#txtStatusName').val();
             var txtStatusNameEdit = $('#txtStatusNameEdit').val();
 
@@ -1975,7 +1991,7 @@
             }
         }
 
-        function DeleteTaskStatus(StatusId) {
+        function DeleteTaskStatus(StatusId,Statusname) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Status, all Tasks under this Status will be deleted too !",
@@ -1989,7 +2005,7 @@
                     var requestParams = {
                         p_Action: "5"
                         , p_CompID: "0"
-                        , p_StatusName: ""
+                        , p_StatusName: Statusname
                         , p_SrNo: "0"
                         , p_UserId: "0"
                         , p_ProjectID: ProjectID
@@ -2038,5 +2054,124 @@
             });
             return TaskAssinees;
         }
+
+
+        function ajacallActivityLogs() {
+            ShowLoader();
+            var requestParams = {
+                p_Action: "1"
+                , p_ActivityMasterId: "0"
+                , p_CompID: "0"
+                , p_UserId: "0"
+                , p_UserName: ""
+                , p_Message: ""
+                , p_IPAddress: ""
+                , p_MethodName: ""
+            };
+
+            var ajaxActivityadata;
+            $.ajax({
+                type: "POST",
+                url: "../api/ActivityLog/GetActivityLog",
+                contentType: "application/json",
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: requestParams != null ? JSON.stringify(requestParams) : null,
+                beforeSend: function () {
+                    //ShowLoader();
+                },
+                success: function (response) {
+                    ajaxActivityadata = response;
+                },
+                failure: function (response) {
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error",
+                        button: "Ok",
+                    });
+                },
+                complete: function () {
+                    BindActivityLogs(ajaxActivityadata);
+                }
+            });
+        }
+
+        function BindActivityLogs(response) {
+
+            if (response != null) {
+                var jsonActivityList = $.parseJSON(response).Data.Data;
+                var DistinctDates = GetDistinctDates(jsonActivityList);
+                var Html = '';
+                Html += '<div class="activity-wrapper">';
+                $.each(DistinctDates, function (index, objdates) {
+                    Html += '<div class="day">' + objdates.formateddate + '</div>';
+
+                    var DateWiseActivities = $.grep(jsonActivityList, function (n) {
+                        var listdate = moment(n.CreatedDate).format("MMM DD YYYY");
+                        return listdate == objdates.formateddate;
+                    });
+
+                    $.each(DateWiseActivities, function (index, objactivity) {
+                        Html += '<div class="activity">';
+                        if (objactivity.ActivityMasterId == 201 || objactivity.ActivityMasterId == 204 || objactivity.ActivityMasterId == 211) {
+                            Html += '<div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>';
+                        }
+                        else if (objactivity.ActivityMasterId == 202 || objactivity.ActivityMasterId == 205 || objactivity.ActivityMasterId == 212 || objactivity.ActivityMasterId == 207) {
+                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-pencil-alt"></i></span></div>';
+                        }
+                        else if (objactivity.ActivityMasterId == 203 || objactivity.ActivityMasterId == 206 || objactivity.ActivityMasterId == 213) {
+                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-trash-alt"></i></span></div>';
+                        }
+                        else {
+                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-list-alt"></i></span></div>';
+                        }
+                        Html += '<div class="col-12 col-md-8 col-lg-10 content">';
+                        Html += objactivity.Message;
+                        Html += '</div>';
+                        Html += '<div class="time">' + moment(objactivity.CreatedDate).format("HH:mm a") + '</div>';
+                        Html += '</div>';
+                    });
+                    Html += '</div>';
+                });
+                $("#dvActivitybody").empty().html(Html);
+                HideLoader();
+
+            }
+        }
+
+        function GetDistinctDates(data) {
+            var lookup = {};
+            var items = data;
+            var result = [];
+
+            for (var item, i = 0; item = items[i++];) {
+                var date = moment(item.CreatedDate).format("MMM DD YYYY");
+                var dateobject = { formateddate: moment(item.CreatedDate).format("MMM DD YYYY"), actualdate: item.CreatedDate }
+
+                if (!(date in lookup)) {
+                    lookup[date] = 1;
+                    result.push(dateobject);
+                }
+            }
+            return result;
+        }
+
+
+        //function BindTeamMaster(data) {
+        //    var lookup = {};
+        //    var items = data;
+        //    var result = [];
+
+        //    for (var item, i = 0; item = items[i++];) {
+        //        var name = item.TeamName;
+        //        var teamobject = { Id: item.Id, TeamName: item.TeamName }
+
+        //        if (!(name in lookup)) {
+        //            lookup[name] = 1;
+        //            result.push(teamobject);
+        //        }
+        //    }
+        //    return result;
+        //}
     </script>
 </asp:Content>

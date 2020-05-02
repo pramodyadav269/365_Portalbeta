@@ -255,7 +255,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Code\ActiveUsersCache.cs" />
-    <Compile Include="Code\ActivityLog.cs" />
+    <Compile Include="Code\BL\ActivityLogBL.cs" />
+    <Compile Include="Code\DAL\ActivityLogDAL.cs" />
     <Compile Include="Code\BL\AchivementBL.cs" />
     <Compile Include="Code\BL\CommonBL.cs" />
     <Compile Include="Code\BL\ContentBL.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\ResponseBase.cs" />
+    <Compile Include="Models\ActivityLog.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TaskStatus.cs" />
     <Compile Include="Models\WebServiceLog.cs" />

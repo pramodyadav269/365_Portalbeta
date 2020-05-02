@@ -98,6 +98,45 @@ namespace _365_Portal.Models
         {
             INSERT = 1, MODIFY = 2, DELETE = 3, VIEW = 4, EDIT = 5, EXCEPTION = 6, SEARCH = 7, SEARCH_2 = 8
         }
+        public enum Activity
+        {
+            Login = 1,
+            Logout = 2,
+            CourseAdded = 101,
+            CourseArchive = 102,
+            CourseUnArchive = 103,
+            CourseUpdated = 104,
+            CoursePublished = 105,
+
+            //Project
+            ProjectAdded = 201,
+            ProjectModified = 202,
+            projectDeleted = 203,
+
+            //Task
+            TaskAdded = 204,
+            TaskModified = 205,
+            TaskDeleted = 206,
+            TaskStatusChanged = 207,
+
+            ////Subtask
+            //SubTaskAdded = 208,
+            //SubTaskModified = 209,
+            //SubTaskDeleted = 210,
+
+            //Status
+            StatusAdded = 211,
+            StatusModified = 212,
+            StatusDeleted = 213
+
+        }
+
+        public enum Modules
+        {
+            Project
+            ,Task
+            ,Status
+        }
 
     }
 }
