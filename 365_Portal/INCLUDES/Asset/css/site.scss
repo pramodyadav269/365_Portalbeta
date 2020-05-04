@@ -3406,6 +3406,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 left: 12px;
                 z-index: 1;
             }
+
+            &.d-inline {
+                color: #6C6D70;
+                font-size: 18px;
+                font-weight: normal;
+                margin-right: 14px;
+
+                .svg-inline--fa {
+                    top: 0;
+                    color: #212338;
+                }
+
+                ~ ::placeholder {
+                    font-weight: normal;
+                    color: rgba(0, 0, 0, 0.3);
+                }
+            }
         }
 
         .form-control {
