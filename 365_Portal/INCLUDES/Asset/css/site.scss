@@ -3420,20 +3420,52 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             resize: none;
         }
 
-        ::placeholder {
-            font-size: 14px;
-            font-weight: 600;
-            color: #212338;
-        }
 
-        &.asterisk {
-            &::after {
-                content: "*";
-                color: #BE0808;
+        .instructor {
+            padding-left: 30px;
+
+            &.checkbox {
                 position: absolute;
-                font-weight: 600;
-                top: -2px;
-                left: -12px;
+                right: 0;
+
+                .custom-control-label {
+                    color: #808080;
+                    font-size: 10px;
+                    margin: 0;
+                    padding-top: 4px;
+
+                    &::before {
+                        width: 14px;
+                        height: 14px;
+                    }
+
+                    &::after {
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+            }
+
+            .form-control {
+                margin-bottom: 10px;
+            }
+
+            .custom-file {
+                .custom-file-input {
+                }
+
+                .custom-file-label {
+                    font-size: 12px;
+                    color: #FAC900;
+                    text-decoration: underline;
+                    border: 0;
+                    background: transparent;
+                    padding: 0;
+
+                    &::after {
+                        content: unset;
+                    }
+                }
             }
         }
 
@@ -3470,6 +3502,59 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
 
+        .logo {
+            &.custom-file {
+                height: 124px;
+
+                .custom-file-label {
+                    left: 30px;
+                    height: 124px;
+                    border: 2px dashed #BFBFBF;
+                    border-radius: 3px;
+                    text-align: center;
+                    color: #212338;
+                    font-size: 12px;
+                    padding: 16px 6px;
+
+                    &::before {
+                        position: relative;
+                        display: block;
+                        color: #BBBCC2;
+                        font-family: "Font Awesome 5 Free";
+                        font-weight: 600;
+                        content: "\f302";
+                        font-size: 26px;
+                    }
+
+                    &::after {
+                        color: #FAC900;
+                        text-decoration: underline;
+                        content: "Browse";
+                        border: 0;
+                        background: transparent;
+                        position: relative;
+                    }
+                }
+            }
+        }
+
+        ::placeholder {
+            font-size: 14px;
+            font-weight: 600;
+            color: #212338;
+        }
+
+        &.asterisk {
+            &::after {
+                content: "*";
+                color: #BE0808;
+                position: absolute;
+                font-weight: 600;
+                top: -2px;
+                left: -12px;
+            }
+        }
+
         &.editor {
 
             .jodit_container {
@@ -3483,6 +3568,48 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     border: 1px solid #D2D2D8;
                     border-bottom-left-radius: 3px;
                     border-bottom-right-radius: 3px;
+                }
+            }
+        }
+
+        .sharing {
+            padding-left: 30px;
+            display: flex;
+
+            .custom-control {
+                display: inline-block;
+
+                .custom-control-label {
+                    font-size: 12px;
+                    font-weight: normal;
+                    margin-bottom: 0;
+                    padding-top: 2px;
+                }
+
+                .custom-control-input {
+                    &:checked {
+                        + .custom-control-label {
+                            color: #000;
+                            font-weight: 600;
+                        }
+
+                        ~ .custom-control-label::before {
+                            color: #fff;
+                            border-color: $yellow-color;
+                            background-color: $yellow-color;
+                        }
+                    }
+                }
+
+                small {
+                    position: absolute;
+                    left: 0;
+                    top: 22px;
+                    font-size: 10px;
+
+                    &.form-text {
+                        color: #ADADAD;
+                    }
                 }
             }
         }

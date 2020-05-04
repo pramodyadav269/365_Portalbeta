@@ -82,9 +82,9 @@ $(document).ready(function () {
 
     $('.course-flow input[type="text"], .course-flow textarea, .course-flow select').on('blur focus input change', function () {
         if ($(this).val().length === 0) {
-            $('label[for=' + this.id + ']').hide();
+            $('label[for=' + this.id + '].inline').hide();
         } else {
-            $('label[for=' + this.id + ']').show();
+            $('label[for=' + this.id + '].inline').show();
         }
     });
 });
