@@ -26,7 +26,7 @@
             <div class="col-12 col-sm-12 mt-4">
                 <div class="card">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-7 col-lg-8 pr-0">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 pl-0">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
                             <div class="card-body right-side-content">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -113,6 +113,7 @@
                                                     <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
                                                     <label class="custom-control-label" for="rbAssigned">Assigned</label>
                                                     <small class="form-text">Only shared with assignees.</small>
+                                                    
                                                 </div>
                                             </div>
                                         </div>

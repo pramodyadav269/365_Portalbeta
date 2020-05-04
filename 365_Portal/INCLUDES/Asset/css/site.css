@@ -2454,9 +2454,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-bottom-right-radius: 3px; }
     .course-flow .form-group .sharing {
       padding-left: 30px;
-      display: flex; }
+      display: flex;
+      justify-content: space-between; }
+      @media only screen and (max-width: 600px) {
+        .course-flow .form-group .sharing {
+          flex-direction: column; } }
       .course-flow .form-group .sharing .custom-control {
-        display: inline-block; }
+        display: inline-block;
+        margin-bottom: 10px; }
         .course-flow .form-group .sharing .custom-control .custom-control-label {
           font-size: 12px;
           font-weight: normal;
@@ -2471,8 +2476,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           background-color: #FAC900; }
         .course-flow .form-group .sharing .custom-control small {
           position: absolute;
-          left: 0;
-          top: 22px;
+          position: relative;
+          left: -22px;
+          width: calc(100% + 22px);
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }
