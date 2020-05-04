@@ -134,11 +134,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="logo-img" id="divCourseLogo"></div>
-                                                <%-- if image set then use this html --%>
-                                                <%--<div class="logo-img img">
-                                                    <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
-                                                </div>--%>
                                             </div>
+
+
                                             <div class="col-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
                                                     <label for="ddlTags">Tags</label>
