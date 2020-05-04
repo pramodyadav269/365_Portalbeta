@@ -129,7 +129,9 @@
                 <div class="card">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8">
-                            <div class="card-body">
+                            <div class="card-body arrows">
+                                 <div class="tag main-card">Lesson 1</div>
+                                <div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group asterisk">

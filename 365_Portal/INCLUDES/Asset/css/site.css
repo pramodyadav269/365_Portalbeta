@@ -2321,6 +2321,33 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         height: 100%;
         padding: 22px 20px 24px 24px;
         background: #FAFAFA; }
+      .course-flow .card .card-body .tag {
+        position: absolute;
+        background-color: #FFF7E2;
+        color: #FAC900;
+        top: -6px;
+        left: 24px;
+        padding: 0 .5rem;
+        border-bottom-left-radius: .1rem;
+        border-bottom-right-radius: .1rem;
+        font-size: .8rem;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16); }
+        .course-flow .card .card-body .tag::after {
+          content: "";
+          border-left: 5px solid #B2984F;
+          border-top: 6px solid transparent;
+          position: absolute;
+          top: 0;
+          right: -5px; }
+        .course-flow .card .card-body .tag.main-card {
+          left: 82px; }
+      .course-flow .card .card-body.arrows {
+        display: flex;
+        padding: 28px 20px 24px 20px; }
+        .course-flow .card .card-body.arrows .arrows-icon {
+          margin-right: 24px; }
+          .course-flow .card .card-body.arrows .arrows-icon .svg-inline--fa {
+            font-size: 22px; }
   .course-flow .form-group {
     position: relative;
     margin-bottom: 22px; }
