@@ -184,6 +184,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     {
                                         data = Utility.ConvertDataSetToJSONString(dt);
                                         data = Utility.Successful(data);
+
+                                        ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                        , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                        var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                     }
                                     else
                                     {
@@ -385,6 +389,10 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -470,6 +478,17 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+
+                                    int ActivityAction = 4;
+                                    if(content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -545,6 +564,16 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    int ActivityAction = 4;
+                                    if (content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -645,6 +674,7 @@ namespace _365_Portal.ControllersReOrderContent
 
         }
         #endregion
+
         #region     Modules All CRUD
         [HttpPost]
         [Route("API/Content/CreateModule")]
@@ -737,6 +767,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -875,6 +909,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -957,6 +995,17 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+
+                                    int ActivityAction = 4;
+                                    if (content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -1071,6 +1120,7 @@ namespace _365_Portal.ControllersReOrderContent
         }
 
         #endregion
+
         #region Content all CRUD
         [HttpPost]
         [Route("API/Content/CreateContent")]
@@ -1305,6 +1355,10 @@ namespace _365_Portal.ControllersReOrderContent
                                         {
                                             data = Utility.ConvertDataSetToJSONString(dt);
                                             data = Utility.Successful(data);
+
+                                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                         }
                                         else
                                         {
@@ -1575,6 +1629,10 @@ namespace _365_Portal.ControllersReOrderContent
                                         {
                                             data = Utility.ConvertDataSetToJSONString(dt);
                                             data = Utility.Successful(data);
+
+                                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                         }
                                         else
                                         {
@@ -1653,9 +1711,12 @@ namespace _365_Portal.ControllersReOrderContent
                         DataTable dt = ds.Tables["Data"];
                         if (ds.Tables.Count > 0)
                         {
-
                             data = Utility.ConvertDataSetToJSONString(dt);
                             data = Utility.Successful(data);
+
+                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 4, identity.CompId, Convert.ToInt32(identity.UserID)
+                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                         }
                         else
                         {
@@ -2065,6 +2126,10 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Resource.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, "");
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
