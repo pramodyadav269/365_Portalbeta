@@ -3406,6 +3406,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 left: 12px;
                 z-index: 1;
             }
+
+            &.d-inline {
+                color: #6C6D70;
+                font-size: 18px;
+                font-weight: normal;
+                margin-right: 14px;
+
+                .svg-inline--fa {
+                    top: 0;
+                    color: #212338;
+                }
+
+                ~ ::placeholder {
+                    font-weight: normal;
+                    color: rgba(0, 0, 0, 0.3);
+                }
+            }
         }
 
         .form-control {
@@ -3575,9 +3592,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .sharing {
             padding-left: 30px;
             display: flex;
+            justify-content: space-between;
+
+            @media #{$small-and-down} {
+                flex-direction: column;
+            }
 
             .custom-control {
                 display: inline-block;
+                margin-bottom: 10px;
 
                 .custom-control-label {
                     font-size: 12px;
@@ -3603,8 +3626,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 small {
                     position: absolute;
-                    left: 0;
-                    top: 22px;
+                    position: relative;
+                    left: -22px;
+                    width: calc(100% + 22px);
                     font-size: 10px;
 
                     &.form-text {

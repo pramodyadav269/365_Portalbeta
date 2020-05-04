@@ -2351,6 +2351,17 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         top: -7px;
         left: 12px;
         z-index: 1; }
+      .course-flow .form-group label.d-inline {
+        color: #6C6D70;
+        font-size: 18px;
+        font-weight: normal;
+        margin-right: 14px; }
+        .course-flow .form-group label.d-inline .svg-inline--fa {
+          top: 0;
+          color: #212338; }
+        .course-flow .form-group label.d-inline ~ ::placeholder {
+          font-weight: normal;
+          color: rgba(0, 0, 0, 0.3); }
     .course-flow .form-group .form-control {
       border: 1px solid #D2D2D8;
       border-radius: 3px;
@@ -2454,9 +2465,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-bottom-right-radius: 3px; }
     .course-flow .form-group .sharing {
       padding-left: 30px;
-      display: flex; }
+      display: flex;
+      justify-content: space-between; }
+      @media only screen and (max-width: 600px) {
+        .course-flow .form-group .sharing {
+          flex-direction: column; } }
       .course-flow .form-group .sharing .custom-control {
-        display: inline-block; }
+        display: inline-block;
+        margin-bottom: 10px; }
         .course-flow .form-group .sharing .custom-control .custom-control-label {
           font-size: 12px;
           font-weight: normal;
@@ -2471,8 +2487,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           background-color: #FAC900; }
         .course-flow .form-group .sharing .custom-control small {
           position: absolute;
-          left: 0;
-          top: 22px;
+          position: relative;
+          left: -22px;
+          width: calc(100% + 22px);
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }
