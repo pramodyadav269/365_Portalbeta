@@ -2516,6 +2516,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Content\" />
+    <Folder Include="Files\InspectorImage\" />
     <Folder Include="Files\Others\" />
     <Folder Include="Files\Task\" />
     <Folder Include="Views\Discussion\" />

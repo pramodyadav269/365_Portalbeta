@@ -69,6 +69,9 @@ namespace _365_Portal
 
         public int IsCourseCreator { get; set; }
         public string InstructorName { get; set; }
+
+        public int InspectorImageFileID { get; set; }
+        
     }
 
     public class FlashcarIntro

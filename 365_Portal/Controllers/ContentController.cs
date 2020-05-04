@@ -140,6 +140,27 @@ namespace _365_Portal.ControllersReOrderContent
                                 }
                             }
 
+                            string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
+                            if (!string.IsNullOrEmpty(InspectorImageBase64))
+                            {
+                                var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                                if (files.Count() == 1)
+                                    InspectorImageBase64 = files[0];
+                                else
+                                    InspectorImageBase64 = files[1];
+
+                                byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
+                                string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                                string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
+                                File.WriteAllBytes(filePath, imageBytes);
+
+                                DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                                if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                                {
+                                    content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                }
+                            }
+
 
                             if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
                             {
@@ -289,24 +310,7 @@ namespace _365_Portal.ControllersReOrderContent
                         else
                         {
                             content.CategoryColor = null;
-                        }
-                        //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
-                        //{
-                        //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
-                        //}
-                        //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
-                        //{
-                        //    content.CourseTime = requestParams["CourseTime"].ToString();
-                        //}
-                        //else
-                        //{
-                        //    content.CourseTime = null;
-                        //}
-
-                        //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
-                        //{
-                        //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
-                        //}
+                        }                        
 
                         if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
                         {
@@ -339,6 +343,26 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                         }
 
+                        string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
+                        if (!string.IsNullOrEmpty(InspectorImageBase64))
+                        {
+                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                            if (files.Count() == 1)
+                                InspectorImageBase64 = files[0];
+                            else
+                                InspectorImageBase64 = files[1];
+
+                            byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
+                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                            string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
+                            File.WriteAllBytes(filePath, imageBytes);
+
+                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            {
+                                content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                            }
+                        }
 
                         if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
                         {
