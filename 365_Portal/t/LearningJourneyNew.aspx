@@ -26,7 +26,7 @@
             <div class="col-12 col-sm-12 mt-4">
                 <div class="card">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
                             <div class="card-body right-side-content">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -129,9 +129,9 @@
             <div class="col-12 col-sm-12 mt-4">
                 <div class="card">
                     <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
                             <div class="card-body arrows">
-                                 <div class="tag main-card">Lesson 1</div>
+                                <div class="tag lesson main-card">Lesson 1</div>
                                 <div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -148,6 +148,7 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group asterisk">
+                                            <div class="tag content">Content 1</div>
                                             <label for="txtContentTitle" class="inline">Content Title</label>
                                             <input type="text" class="form-control required" id="txtContentTitle" placeholder="Content Title" />
                                         </div>
@@ -159,8 +160,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="action-btn">
+                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add New Content</a>
+                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Resources</a>
+                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Assignment</a>
+                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
                             <div class="card-body right-side-content">
                                 <div class="row">
                                     <div class="col-sm-12 mb-4">
@@ -182,30 +189,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-12 mt-2 mb-5">
+                 <a class="btn btn-black"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+            </div>
         </div>
     </div>
 
 
-    <%-- <div class="progress">
-                    <div class="progress-bar" id="divProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>--%>
-    <%--<ul class="nav nav-pills mb-2" id="pills-tab-course" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-course-tab" data-toggle="pill" href="#pills-course" role="tab" aria-controls="pills-course" aria-selected="true" onclick="ShowButtons('pills-course','tabclick')">Course</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-lesson-tab" data-toggle="pill" href="#pills-lesson" role="tab" aria-controls="pills-lesson" aria-selected="false" onclick="ShowButtons('pills-lesson','tabclick')">Lesson</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-content-tab" data-toggle="pill" href="#pills-content" role="tab" aria-controls="pills-content" aria-selected="false" onclick="ShowButtons('pills-content','tabclick')">Content</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-resources-tab" data-toggle="pill" href="#pills-resources" role="tab" aria-controls="pills-resources" aria-selected="false" onclick="ShowButtons('pills-resources','tabclick')">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-quiz-tab" data-toggle="pill" href="#pills-quiz" role="tab" aria-controls="pills-quiz" aria-selected="false" onclick="ShowButtons('pills-quiz','tabclick')">Quiz</a>
-                    </li>
-                </ul>--%>
+    <%-- old code --%>
     <div class="tab-content d-none" id="pills-tabContent">
 
         <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
@@ -352,7 +344,7 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
                                 <div class="col-sm-12 mt-3">
-                                 <%--   <div class="form-group">
+                                    <%--   <div class="form-group">
                                         <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
                                         <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
                                         <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
@@ -360,7 +352,7 @@
                                 </div>
                                 <div class="col-sm-12 mt-5">
                                     <div class="form-group">
-                                     <%--   <label><i class="fas fa-plus-circle black"></i>Point</label>
+                                        <%--   <label><i class="fas fa-plus-circle black"></i>Point</label>
                                         <input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="100" onkeyup="return isNumberKey('txtPoint',event);" />--%>
                                     </div>
                                 </div>

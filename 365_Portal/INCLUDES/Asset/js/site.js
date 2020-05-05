@@ -83,8 +83,11 @@ $(document).ready(function () {
     $('.course-flow input[type="text"], .course-flow textarea, .course-flow select').on('blur focus input change', function () {
         if ($(this).val().length === 0) {
             $('label[for=' + this.id + '].inline').hide();
+            $(this).parents('.form-group').find('.tag.content').removeClass('label');
+
         } else {
             $('label[for=' + this.id + '].inline').show();
+            $(this).parents('.form-group').find('.tag.content').addClass('label');
         }
     });
 });

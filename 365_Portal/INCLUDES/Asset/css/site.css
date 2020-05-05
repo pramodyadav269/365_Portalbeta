@@ -1306,7 +1306,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     margin-left: 1.5rem; }
 
 .btn {
-  font-size: .9rem;
+  font-size: 14px;
   padding: .4rem 1.2rem;
   border-radius: .15rem; }
   .btn.btn-outline {
@@ -1314,6 +1314,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     color: rgba(0, 0, 0, 0.5) !important; }
     .btn.btn-outline.black {
       color: #000 !important; }
+    .btn.btn-outline .svg-inline--fa {
+      font-size: 18px;
+      position: relative;
+      top: 2px; }
+  .btn.blod {
+    font-weight: 600; }
   .btn.btn-yellow {
     background-color: #FAC900;
     color: #000; }
@@ -2317,12 +2323,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     border-radius: 3px;
     box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.16); }
     .course-flow .card .card-body {
-      padding: 28px 20px 24px 30px; }
+      padding: 28px 20px 0 30px; }
       .course-flow .card .card-body.right-side-content {
         height: 100%;
         padding: 22px 20px 24px 24px;
         background: #FAFAFA; }
       .course-flow .card .card-body .tag {
+        font-size: 12px;
+        font-weight: 600;
         position: absolute;
         background-color: #FFF7E2;
         color: #FAC900;
@@ -2331,7 +2339,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         padding: 0 .5rem;
         border-bottom-left-radius: .1rem;
         border-bottom-right-radius: .1rem;
-        font-size: .8rem;
         box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16); }
         .course-flow .card .card-body .tag::after {
           content: "";
@@ -2340,15 +2347,33 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           position: absolute;
           top: 0;
           right: -5px; }
+        .course-flow .card .card-body .tag.lesson {
+          background-color: #FFF7E2;
+          color: #FAC900; }
+        .course-flow .card .card-body .tag.content {
+          background-color: #EBF1FF;
+          color: #1E3B80;
+          top: -10px;
+          left: 14px; }
+          .course-flow .card .card-body .tag.content.label {
+            left: 110px; }
+          .course-flow .card .card-body .tag.content::after {
+            border-left: 5px solid #1E3B80;
+            border-top: 11px solid transparent; }
         .course-flow .card .card-body .tag.main-card {
           left: 82px; }
       .course-flow .card .card-body.arrows {
         display: flex;
-        padding: 28px 20px 24px 20px; }
+        padding: 28px 20px 0 20px; }
         .course-flow .card .card-body.arrows .arrows-icon {
           margin-right: 24px; }
           .course-flow .card .card-body.arrows .arrows-icon .svg-inline--fa {
             font-size: 22px; }
+  .course-flow .btn-black {
+    font-size: 18px; }
+  .course-flow .action-btn {
+    border-top: 1px solid rgba(112, 112, 112, 0.45);
+    padding: 14px 20px 14px 64px; }
   .course-flow .form-group {
     position: relative;
     margin-bottom: 22px; }

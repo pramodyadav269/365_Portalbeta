@@ -4,6 +4,7 @@ $yellow-color: #FAC900 !default;
 $red-color: #ED5F5F !default;
 $green-color: #2DCD7A !default;
 $orange-color: #FF7F45 !default;
+$blue-color: #1E3B80 !default;
 
 
 
@@ -1752,7 +1753,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .btn {
-    font-size: .9rem;
+    font-size: 14px;
     padding: .4rem 1.2rem;
     border-radius: .15rem;
 
@@ -1764,6 +1765,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         &.black {
             color: #000 !important;
         }
+
+        .svg-inline--fa {
+            font-size: 18px;
+            position: relative;
+            top: 2px;
+        }
+    }
+
+    &.blod {
+        font-weight: 600;
     }
 
     &.btn-yellow {
@@ -2754,7 +2765,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         display: -webkit-box;
                         -webkit-line-clamp: 4;
                         -webkit-box-orient: vertical;
-
                         /*&:hover {
                             overflow: unset;
                             text-overflow: unset;
@@ -3359,7 +3369,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.16);
 
         .card-body {
-            padding: 28px 20px 24px 30px;
+            padding: 28px 20px 0 30px;
 
             &.right-side-content {
                 height: 100%;
@@ -3368,6 +3378,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
 
             .tag {
+                font-size: 12px;
+                font-weight: 600;
                 position: absolute;
                 background-color: #FFF7E2;
                 color: $yellow-color;
@@ -3376,7 +3388,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 padding: 0 .5rem;
                 border-bottom-left-radius: .1rem;
                 border-bottom-right-radius: .1rem;
-                font-size: .8rem;
                 box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.16);
 
                 &::after {
@@ -3388,6 +3399,27 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     right: -5px;
                 }
 
+                &.lesson {
+                    background-color: #FFF7E2;
+                    color: $yellow-color;
+                }
+
+                &.content {
+                    background-color: #EBF1FF;
+                    color: $blue-color;
+                    top: -10px;
+                    left: 14px;
+
+                    &.label {
+                        left: 110px;
+                    }
+
+                    &::after {
+                        border-left: 5px solid $blue-color;
+                        border-top: 11px solid transparent;
+                    }
+                }
+
                 &.main-card {
                     left: 82px;
                 }
@@ -3395,7 +3427,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
             &.arrows {
                 display: flex;
-                padding: 28px 20px 24px 20px;
+                padding: 28px 20px 0 20px;
 
                 .arrows-icon {
                     margin-right: 24px;
@@ -3406,6 +3438,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
             }
         }
+    }
+
+    .btn-black {
+        font-size: 18px;
+    }
+
+    .action-btn {
+        border-top: 1px solid rgba(112, 112, 112, 0.45);
+        padding: 14px 20px 14px 64px;
     }
 
     .form-group {
