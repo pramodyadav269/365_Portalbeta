@@ -165,7 +165,16 @@ function loader(acion) {
 
 function toggle(view, hide) {
     $('#' + view).removeClass('d-none');
-    $('#' + hide).addClass('d-none');
+
+    if (hide.indexOf(',') !== -1) {
+        $.each(hide.split(','), function (i, data) {
+            $('#' + data).addClass('d-none');
+        })
+    } else {
+        $('#' + hide).addClass('d-none');
+    }
+
+
 }
 
 

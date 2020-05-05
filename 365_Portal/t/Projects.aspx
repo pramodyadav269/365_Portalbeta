@@ -562,7 +562,7 @@
 
         function onClickBack(view, hide) {
             toggle(view, hide);
-            $('#contentTitle').empty().append(prevTitle);
+            $('#contentTitle').empty().append('<h5 class="content-title">' + $('#ulProjects .task-item.active .Project_items_Name').text() + '</h5>');
             $('#contentTitle + .col-auto').removeClass('d-none');
         }
 
@@ -1070,9 +1070,9 @@
         //Project Functions
 
         function onClickRecentActivity() {
-            toggle('dvRecentActivity', 'dvWebsiteRedesign');
+            toggle('dvRecentActivity', 'dvWebsiteRedesign,dvCreateProject');
             prevTitle = $('#contentTitle').html();
-            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvRecentActivity&#34;);"></i>Recent Activity</h5>');
+            $('#contentTitle').empty().append('<h5 class="content-title"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvRecentActivity,dvCreateProject&#34;);"></i>Recent Activity</h5>');
             ajacallActivityLogs();
         }
 
@@ -1082,9 +1082,9 @@
         }
 
         function openProjectForm() {
-            toggle('dvCreateProject', 'dvWebsiteRedesign');
+            toggle('dvCreateProject', 'dvWebsiteRedesign,dvRecentActivity');
             prevTitle = $('#contentTitle').html();
-            $('#contentTitle').empty().append('<h5 class="content-title" id="headingProjectName"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>New Project</h5>')
+            $('#contentTitle').empty().append('<h5 class="content-title" id="headingProjectName"><i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject,dvRecentActivity&#34;);"></i>New Project</h5>')
 
             $('#contentTitle + .col-auto').addClass('d-none');
         }
@@ -1162,7 +1162,7 @@
         }
 
         function setcontentTitle(tilename, isEdit = false) {
-            var closeButton = isEdit ? '<i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject&#34;);"></i>' : '';
+            var closeButton = isEdit ? '<i class="fas fa-times c-pointer" onclick="onClickBack(&#34;dvWebsiteRedesign&#34;, &#34;dvCreateProject,dvRecentActivity&#34;);"></i>' : '';
             prevTitle = $('#contentTitle').html();
             $('#contentTitle').empty().append('<h5 class="content-title"> ' + closeButton + tilename + '</h5>')
         }
@@ -1203,7 +1203,7 @@
                             ddlProjectMembers.append(option).trigger('change');
                         });
                     }
-                    toggle('dvCreateProject', 'dvWebsiteRedesign');
+                    toggle('dvCreateProject', 'dvWebsiteRedesign,dvRecentActivity');
                     setcontentTitle($("#txtProjectName").val(), true);
                     $('#contentTitle + .col-auto').addClass('d-none');
                     HideLoader();
@@ -1251,7 +1251,8 @@
                         if (ProjectCRUDAPIData.StatusCode > 0) {
                             ClearProjectForm();
                             BindProjects();
-                            onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+
+                            onClickBack("dvWebsiteRedesign", "dvCreateProject,dvRecentActivity");//Closing Project Form
                             if (Project_actionId == "2") {
                                 ProjectCRUDAPIData.StatusDescription = "Project details added successfully";
                             }
@@ -1570,7 +1571,7 @@
         function SelectProject(objthis) {
             //ShowLoader();
             setTimeout(function () { ShowLoader }, 10000);
-            onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
+            onClickBack("dvWebsiteRedesign", "dvCreateProject,dvRecentActivity");//Closing Project Form
             $(objthis).parent().parent().find('li.active').removeClass('active');
             $(objthis).parent().addClass('active');
             setcontentTitle($(objthis).text());
@@ -1676,7 +1677,7 @@
                 newCardHtml += '<div class="float-right statusediticons">';
                 if (Role != "enduser") {
                     newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
-                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status +'\');"></i>';
+                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status + '\');"></i>';
                 }
                 newCardHtml += '</div></div>';
                 newCardHtml += '</div>';
@@ -1752,7 +1753,7 @@
             });
 
             if (jsonStatusList.length < 6) {
-                newCardHtml += '<div class="board-column">';
+                newCardHtml += '<div class="board-column add-card">';
                 newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
                 newCardHtml += '</div>';
             }
@@ -1768,7 +1769,7 @@
             var itemContainers = [].slice.call(document.querySelectorAll('.board-column-content'));
             var columnGrids = [];
             var boardGrid;
-            var activeItem;
+            //var activeItem;
             // Define the column grids so we can drag those
             // items around.
             itemContainers.forEach(function (container) {
@@ -1777,17 +1778,17 @@
                     items: '.board-item',
                     layoutDuration: 400,
                     layoutEasing: 'ease',
-                    dragEnabled: true,
+                    dragEnabled: false,
                     dragSort: function () {
                         return columnGrids;
                     },
-                    dragStartPredicate: function (item, event) {
-                        if (item === activeItem) {
-                            return Muuri.ItemDrag.defaultStartPredicate(item, event);
-                        } else {
-                            return false;
-                        }
-                    },
+                    //dragStartPredicate: function (item, event) {
+                    //    if (item === activeItem) {
+                    //        return Muuri.ItemDrag.defaultStartPredicate(item, event);
+                    //    } else {
+                    //        return false;
+                    //    }
+                    //},
                     dragSortInterval: 0,
                     dragContainer: document.body,
                     dragReleaseDuration: 400,
@@ -1803,7 +1804,8 @@
                         item.getElement().style.height = item.getHeight() + 'px';
                     })
                     .on('dragReleaseEnd', function (item) {
-                        activeItem = null;
+                        //activeItem = null;
+
                         // Let's remove the fixed width/height from the
                         // dragged item now that it is back in a grid
                         // column and can freely adjust to it's
@@ -1844,11 +1846,11 @@
                 // array, so we can access it later on.
                 columnGrids.push(grid);
 
-                grid.getItems().forEach(function (item) {
-                    item.getElement().addEventListener('click', function () {
-                        activeItem = activeItem === null ? undefined : item;
-                    });
-                });
+                //grid.getItems().forEach(function (item) {
+                //    item.getElement().addEventListener('click', function () {
+                //        activeItem = activeItem === null ? undefined : item;
+                //    });
+                //});
 
             });
 
@@ -1857,7 +1859,7 @@
             boardGrid = new Muuri('.board', {
                 layoutDuration: 400,
                 layoutEasing: 'ease',
-                dragEnabled: true,
+                dragEnabled: false,
                 dragSortInterval: 0,
                 dragStartPredicate: {
                     handle: '.board-column-header'
@@ -2005,7 +2007,7 @@
             }
         }
 
-        function DeleteTaskStatus(StatusId,Statusname) {
+        function DeleteTaskStatus(StatusId, Statusname) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Status, all Tasks under this Status will be deleted too !",

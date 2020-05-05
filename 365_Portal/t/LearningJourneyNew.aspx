@@ -125,6 +125,7 @@
                 </div>
             </div>
 
+            <%-- in progresss --%>
             <div class="col-12 col-sm-12 mt-4">
                 <div class="card">
                     <div class="row">
@@ -183,6 +184,8 @@
             </div>
         </div>
     </div>
+
+
     <%-- <div class="progress">
                     <div class="progress-bar" id="divProgressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>--%>

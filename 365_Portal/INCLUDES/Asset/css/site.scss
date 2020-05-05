@@ -2755,14 +2755,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         -webkit-line-clamp: 4;
                         -webkit-box-orient: vertical;
 
-                        &:hover {
+                        /*&:hover {
                             overflow: unset;
                             text-overflow: unset;
                             display: unset;
                             -webkit-line-clamp: unset;
                             -webkit-box-orient: unset;
                             transition: 0.5s;
-                        }
+                        }*/
                     }
 
                     &.type {
@@ -2803,7 +2803,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .dropdown-item {
                     font-size: 13px;
-                    color: #4F5F83;
+                    color: #000;
                     border: 0;
                     padding: .5rem .75rem;
 
@@ -3174,7 +3174,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .website-redesign {
-    width: 1944px;
+    width: 2320px;
 }
 
 .board-column {
@@ -3194,7 +3194,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     /*&:first-child {
         margin-left: 0;
     }*/
-    &:last-child {
+    &.add-card {
         -webkit-box-shadow: none;
         box-shadow: none;
     }
