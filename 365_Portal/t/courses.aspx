@@ -68,7 +68,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -125,7 +125,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -180,7 +180,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -237,7 +237,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -272,7 +272,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -328,7 +328,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -384,7 +384,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -419,7 +419,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -454,7 +454,7 @@
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                     <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />

@@ -14,7 +14,6 @@ namespace _365_Portal.ControllersReOrderContent
 {
     public class ContentController : ApiController
     {
-
         #region Topics All CRUD
         [HttpPost]
         [Route("API/Content/CreateTopic")]
@@ -23,7 +22,7 @@ namespace _365_Portal.ControllersReOrderContent
             var data = string.Empty;
             ContentBO content = new ContentBO();
             try
-            { 
+            {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
@@ -141,10 +140,36 @@ namespace _365_Portal.ControllersReOrderContent
                                 }
                             }
 
+                            string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
+                            if (!string.IsNullOrEmpty(InspectorImageBase64))
+                            {
+                                var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                                if (files.Count() == 1)
+                                    InspectorImageBase64 = files[0];
+                                else
+                                    InspectorImageBase64 = files[1];
+
+                                byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
+                                string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                                string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
+                                File.WriteAllBytes(filePath, imageBytes);
+
+                                DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                                if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                                {
+                                    content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                }
+                            }
+
 
                             if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
                             {
+                                content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
                                 content.InstructorName = requestParams["InstructorName"].ToString();
+                            }
+                            else
+                            {
+                                content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
                             }
 
 
@@ -159,6 +184,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     {
                                         data = Utility.ConvertDataSetToJSONString(dt);
                                         data = Utility.Successful(data);
+
+                                        ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                        , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                        var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                     }
                                     else
                                     {
@@ -285,24 +314,7 @@ namespace _365_Portal.ControllersReOrderContent
                         else
                         {
                             content.CategoryColor = null;
-                        }
-                        //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
-                        //{
-                        //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
-                        //}
-                        //if (!string.IsNullOrEmpty(requestParams["CourseTime"].ToString()))
-                        //{
-                        //    content.CourseTime = requestParams["CourseTime"].ToString();
-                        //}
-                        //else
-                        //{
-                        //    content.CourseTime = null;
-                        //}
-
-                        //if (!string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString()))
-                        //{
-                        //    content.AchievementBadge = Convert.ToInt32(requestParams["AchievementBadge"].ToString());
-                        //}
+                        }                        
 
                         if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
                         {
@@ -335,6 +347,37 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                         }
 
+                        string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
+                        if (!string.IsNullOrEmpty(InspectorImageBase64))
+                        {
+                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                            if (files.Count() == 1)
+                                InspectorImageBase64 = files[0];
+                            else
+                                InspectorImageBase64 = files[1];
+
+                            byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
+                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                            string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
+                            File.WriteAllBytes(filePath, imageBytes);
+
+                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            {
+                                content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                            }
+                        }
+
+                        if (Convert.ToString(requestParams["IsCourseCreator"]) == "0")
+                        {
+                            content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                            content.InstructorName = requestParams["InstructorName"].ToString();
+                        }
+                        else
+                        {
+                            content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                        }
+
 
                         var ds = ContentBL.ModifyTopic(content);
                         if (ds != null)
@@ -346,6 +389,10 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -397,13 +444,14 @@ namespace _365_Portal.ControllersReOrderContent
 
             var data = string.Empty;
             ContentBO content = new ContentBO();
+            int Action = 0;
             try
             {
                 var identity = MyAuthorizationServerProvider.AuthenticateUser();
                 if (identity != null)
                 {
 
-                    if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()))
+                    if ((!string.IsNullOrEmpty(requestParams["TopicID"].ToString())) && !string.IsNullOrEmpty(requestParams["IsActive"].ToString()) && !string.IsNullOrEmpty(requestParams["Action"].ToString()))
                     {
                         content.CompID = identity.CompId;
                         content.CreatedBy = identity.UserID;
@@ -415,7 +463,12 @@ namespace _365_Portal.ControllersReOrderContent
                         {
                             content.IsActive = (bool)requestParams["IsActive"];
                         }
-                        var ds = ContentBL.DeleteTopic(content);
+                        if (!string.IsNullOrEmpty(requestParams["Action"].ToString()))
+                        {
+                            Action = Convert.ToInt32(requestParams["Action"]);
+                        }
+
+                        var ds = ContentBL.DeleteTopic(content, Action);
                         if (ds != null)
                         {
                             if (ds.Tables.Count > 0)
@@ -425,6 +478,17 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+
+                                    int ActivityAction = 4;
+                                    if(content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -465,7 +529,88 @@ namespace _365_Portal.ControllersReOrderContent
                 data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
             }
             return new APIResult(Request, data);
+        }
 
+        [HttpPost]
+        [Route("API/Content/DeleteTopicMultiple")]
+        public IHttpActionResult DeleteTopicMultiple(JObject requestParams)
+        {
+
+            var data = string.Empty;
+            ContentBO content = new ContentBO();
+            int Action = 0;
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicIDs"])) && !string.IsNullOrEmpty(Convert.ToString(requestParams["IsActive"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Action"])))
+                    {
+                        content.CompID = identity.CompId;
+                        content.CreatedBy = identity.UserID;
+
+                        content.TopicIDs = Convert.ToString(requestParams["TopicIDs"]);
+                        content.IsActive = (bool)requestParams["IsActive"];
+                        Action = Convert.ToInt32(requestParams["Action"]);
+
+                        var ds = ContentBL.DeleteTopic(content, Action);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0)
+                            {
+                                DataTable dt = ds.Tables["Data"];
+                                if (dt.Rows[0]["ReturnCode"].ToString() == "1")
+                                {
+                                    data = Utility.ConvertDataSetToJSONString(dt);
+                                    data = Utility.Successful(data);
+
+                                    int ActivityAction = 4;
+                                    if (content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Project.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.TopicTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
+                                }
+                                else
+                                {
+                                    data = dt.Rows[0]["ReturnMessage"].ToString();
+                                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                                }
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
         }
 
         [HttpPost]
@@ -529,6 +674,7 @@ namespace _365_Portal.ControllersReOrderContent
 
         }
         #endregion
+
         #region     Modules All CRUD
         [HttpPost]
         [Route("API/Content/CreateModule")]
@@ -621,6 +767,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -759,6 +909,10 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -841,6 +995,17 @@ namespace _365_Portal.ControllersReOrderContent
                                     ContentBL.UpdateCourseTime(Convert.ToInt32(ConstantMessages.Action.MODIFY), content.TopicID, 0);
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+
+                                    int ActivityAction = 4;
+                                    if (content.IsActive)
+                                    {
+                                        ActivityAction = 5;
+                                    }
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Lesson.ToString(), ActivityAction, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ModuleTitle);
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -955,6 +1120,7 @@ namespace _365_Portal.ControllersReOrderContent
         }
 
         #endregion
+
         #region Content all CRUD
         [HttpPost]
         [Route("API/Content/CreateContent")]
@@ -1189,6 +1355,10 @@ namespace _365_Portal.ControllersReOrderContent
                                         {
                                             data = Utility.ConvertDataSetToJSONString(dt);
                                             data = Utility.Successful(data);
+
+                                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 2, identity.CompId, Convert.ToInt32(identity.UserID)
+                                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                         }
                                         else
                                         {
@@ -1459,6 +1629,10 @@ namespace _365_Portal.ControllersReOrderContent
                                         {
                                             data = Utility.ConvertDataSetToJSONString(dt);
                                             data = Utility.Successful(data);
+
+                                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                         }
                                         else
                                         {
@@ -1537,9 +1711,12 @@ namespace _365_Portal.ControllersReOrderContent
                         DataTable dt = ds.Tables["Data"];
                         if (ds.Tables.Count > 0)
                         {
-
                             data = Utility.ConvertDataSetToJSONString(dt);
                             data = Utility.Successful(data);
+
+                            ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Content.ToString(), 4, identity.CompId, Convert.ToInt32(identity.UserID)
+                            , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, content.ContentTitle);
+                            var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                         }
                         else
                         {
@@ -1949,6 +2126,10 @@ namespace _365_Portal.ControllersReOrderContent
                                 {
                                     data = Utility.ConvertDataSetToJSONString(dt);
                                     data = Utility.Successful(data);
+
+                                    ActivityLog objlog = ActivityLogBL.ActivityLogMapper(ConstantMessages.Modules.Resource.ToString(), 3, identity.CompId, Convert.ToInt32(identity.UserID)
+                                    , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, "");
+                                    var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                                 }
                                 else
                                 {
@@ -2201,6 +2382,5 @@ namespace _365_Portal.ControllersReOrderContent
             }
             return new APIResult(Request, data);
         }
-
     }
 }

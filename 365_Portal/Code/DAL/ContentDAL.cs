@@ -114,6 +114,7 @@ namespace _365_Portal.Code.DAL
 
                 cmd.Parameters.AddWithValue("p_IsCourseCreator", content.IsCourseCreator);
                 cmd.Parameters.AddWithValue("p_InstructorName", content.InstructorName);
+                cmd.Parameters.AddWithValue("p_InspectorImageFileID", content.InspectorImageFileID);
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");

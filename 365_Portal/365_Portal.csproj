@@ -255,7 +255,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Code\ActiveUsersCache.cs" />
-    <Compile Include="Code\ActivityLog.cs" />
+    <Compile Include="Code\BL\ActivityLogBL.cs" />
+    <Compile Include="Code\DAL\ActivityLogDAL.cs" />
     <Compile Include="Code\BL\AchivementBL.cs" />
     <Compile Include="Code\BL\CommonBL.cs" />
     <Compile Include="Code\BL\ContentBL.cs" />
@@ -299,13 +300,13 @@
     <Compile Include="Common\JSONHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchievementController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\DiscussionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\QuizController.cs" />
-    <Compile Include="Controllers\s.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TrainningController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\RequestBase.cs" />
     <Compile Include="Models\ResponseBase.cs" />
+    <Compile Include="Models\ActivityLog.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\TaskStatus.cs" />
     <Compile Include="Models\WebServiceLog.cs" />
@@ -499,6 +501,13 @@
     </Compile>
     <Compile Include="t\flashcards.aspx.designer.cs">
       <DependentUpon>flashcards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="t\LearningJourneyNew.aspx.cs">
+      <DependentUpon>LearningJourneyNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\LearningJourneyNew.aspx.designer.cs">
+      <DependentUpon>LearningJourneyNew.aspx</DependentUpon>
     </Compile>
     <Compile Include="t\LearningJourney.aspx.cs">
       <DependentUpon>LearningJourney.aspx</DependentUpon>
@@ -2463,6 +2472,7 @@
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
     <Content Include="t\flashcards.aspx" />
+    <Content Include="t\LearningJourneyNew.aspx" />
     <Content Include="t\LearningJourney.aspx" />
     <Content Include="t\help.aspx" />
     <Content Include="t\Module.aspx" />
@@ -2506,6 +2516,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\Content\" />
+    <Folder Include="Files\InspectorImage\" />
     <Folder Include="Files\Others\" />
     <Folder Include="Files\Task\" />
     <Folder Include="Views\Discussion\" />

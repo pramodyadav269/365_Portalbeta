@@ -59,7 +59,7 @@ $(document).ready(function () {
     });
 
     //side nav menu content
-    
+
     $('.sidenav-item .sidenav-link .link-icon').addClass('cu-tooltiptext');
     $('.sidenav-item .sidenav-link').click(function () {
         $('.sidenav-content-menu .sidenav-nav').addClass('d-none');
@@ -68,10 +68,10 @@ $(document).ready(function () {
             $('.sidenav-content-menu .sidenav-nav#' + $(this).attr('menu-data')).removeClass('d-none');
 
             $('.sidenav-content-menu').css({ "transform": "translate3d(54px, 0, 0)" });
-           
+
         } else {
             $('.sidenav-content-menu').css({ "transform": "translate3d(220px, 0, 0)" });
-           
+
         }
         $('#' + $(this).attr('sidenav-id')).removeClass('d-none');
     });
@@ -79,6 +79,14 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
     $('#sideNav').tooltip({ boundary: 'window' });
 
+
+    $('.course-flow input[type="text"], .course-flow textarea, .course-flow select').on('blur focus input change', function () {
+        if ($(this).val().length === 0) {
+            $('label[for=' + this.id + '].inline').hide();
+        } else {
+            $('label[for=' + this.id + '].inline').show();
+        }
+    });
 });
 
 function closeDatetime() {

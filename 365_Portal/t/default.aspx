@@ -270,7 +270,7 @@
                             <div class="card-body item" style="cursor:pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
-                                <p class="card-text">{{topic.Description}}</p>
+                                <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -333,7 +333,7 @@
                             <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
-                                <p class="card-text">{{topic.Description}}</p>
+                                <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -392,7 +392,7 @@
                             <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
-                                <p class="card-text">{{topic.Description}}</p>
+                                <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -446,7 +446,7 @@
                             <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
-                                <p class="card-text">{{topic.Description}}</p>
+                                <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -502,7 +502,7 @@
                             <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
-                                <p class="card-text">{{topic.Description}}</p>
+                                <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
                                 <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -806,7 +806,7 @@
                                     <img class="card-mask-bottom" src="{{topic.BottomClass}}" />
                                     <div class="card-body">
                                         <h5 class="card-title">{{topic.Title}}</h5>
-                                        <p class="card-text">{{topic.Description}}</p>
+                                        <p class="card-text ellipsis">{{topic.Description}}</p>
                                         <p ng-if="topic.IsCompleted == '1'" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
                                         <p ng-if="topic.IsCompleted != '1'" class="text-right anchor">{{topic.CompletedModules + '/' + topic.TotalModules}}</p>
                                     </div>
