@@ -150,6 +150,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         else if (type.toLowerCase() == 'finalquiz') {
             // $scope.ActiveContainer = "ContentQuizView";
             $scope.SubContainer = "ContentQuizView";
+            objDs.DS_GetContentDetails(topicId, moduleId, contentId);
             //$("#dvContentViewer").hide();
         }
         else {

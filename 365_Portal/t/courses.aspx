@@ -8,7 +8,7 @@
 
         <%-- floating button --%>
         <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
-             <i class="fa fa-plus"></i><span>Compose</span>
+             <i class="fa fa-plus"></i><span>Create</span>
         </a>
 
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
