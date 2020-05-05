@@ -98,6 +98,11 @@ namespace _365_Portal.Models
         {
             INSERT = 1, MODIFY = 2, DELETE = 3, VIEW = 4, EDIT = 5, EXCEPTION = 6, SEARCH = 7, SEARCH_2 = 8
         }
+
+        public enum TaskAction
+        {
+            INSERT = 2, MODIFY = 3, DELETE = 4, STATUSCHANGED = 10, FILEADDED = 11, COMMENTSADDED = 12
+        }
         public enum Activity
         {
             Login = 1,
@@ -136,8 +141,6 @@ namespace _365_Portal.Models
             QuestionModified = 162,
             QuestionDeleted = 163,
 
-
-
             //Project
             ProjectAdded = 201,
             ProjectModified = 202,
@@ -148,6 +151,8 @@ namespace _365_Portal.Models
             TaskModified = 205,
             TaskDeleted = 206,
             TaskStatusChanged = 207,
+            TaskFileAdded = 208,
+            TaskCommentAdded = 209,
 
             ////Subtask
             //SubTaskAdded = 208,
@@ -163,15 +168,15 @@ namespace _365_Portal.Models
         public enum Modules
         {
             Project
-            ,Task
-            ,Status
-            
-            ,Course
-            ,Lesson
-            ,Content
-            ,Resource
-            ,Quiz
-            ,Question
+            , Task
+            , Status
+
+            , Course
+            , Lesson
+            , Content
+            , Resource
+            , Quiz
+            , Question
         }
 
     }
