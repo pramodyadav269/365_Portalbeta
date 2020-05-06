@@ -1752,7 +1752,7 @@
                 newCardHtml += '</div>';
             });
 
-            if (jsonStatusList.length < 5) {
+            if (jsonStatusList.length < 5 && Role != "enduser") {
                 newCardHtml += '<div class="board-column add-card">';
                 newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
                 newCardHtml += '</div>';
@@ -2119,7 +2119,7 @@
                 var jsonActivityList = $.parseJSON(response).Data.Data;
                 var DistinctDates = GetDistinctDates(jsonActivityList);
                 var Html = '';
-
+                iF(DistinctDates != null && DistinctDates.length > 0)
                 $.each(DistinctDates, function (index, objdates) {
                     Html += '<div class="activity-wrapper">';
                     Html += '<div class="day">' + objdates.formateddate + '</div>';
