@@ -1752,7 +1752,7 @@
                 newCardHtml += '</div>';
             });
 
-            if (jsonStatusList.length < 6) {
+            if (jsonStatusList.length < 5) {
                 newCardHtml += '<div class="board-column add-card">';
                 newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
                 newCardHtml += '</div>';
@@ -1916,11 +1916,12 @@
         };
 
         function SaveUpdateStatus(StatusId = 0) {
-            ShowLoader();
+
             var txtStatusName = $('#txtStatusName').val();
             var txtStatusNameEdit = $('#txtStatusNameEdit').val();
 
-            if (txtStatusName != null && txtStatusName != '' || txtStatusNameEdit != null && txtStatusNameEdit != '') {
+            if ((txtStatusName != null && txtStatusName != '') || (txtStatusNameEdit != null && txtStatusNameEdit != '')) {
+                ShowLoader();
                 var actionID = StatusId != null && StatusId != '' && StatusId != 0 ? 3 : 2;
                 var requestParams = {
                     p_Action: actionID
@@ -2118,8 +2119,9 @@
                 var jsonActivityList = $.parseJSON(response).Data.Data;
                 var DistinctDates = GetDistinctDates(jsonActivityList);
                 var Html = '';
-                Html += '<div class="activity-wrapper">';
+
                 $.each(DistinctDates, function (index, objdates) {
+                    Html += '<div class="activity-wrapper">';
                     Html += '<div class="day">' + objdates.formateddate + '</div>';
 
                     var DateWiseActivities = $.grep(jsonActivityList, function (n) {
@@ -2137,6 +2139,12 @@
                         }
                         else if (objactivity.ActivityMasterId == 203 || objactivity.ActivityMasterId == 206 || objactivity.ActivityMasterId == 213) {
                             Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-trash-alt"></i></span></div>';
+                        }
+                        else if (objactivity.ActivityMasterId == 208) {
+                            Html += '<div class="pre-icon"><span class="upload"><i class="fas fa-upload"></i></span></div>';
+                        }
+                        else if (objactivity.ActivityMasterId == 209) {
+                            Html += '<div class="pre-icon"><span class="comment"><i class="fas fa-comment-alt"></i></span></div>';
                         }
                         else {
                             Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-list-alt"></i></span></div>';
@@ -2171,23 +2179,5 @@
             }
             return result;
         }
-
-
-        //function BindTeamMaster(data) {
-        //    var lookup = {};
-        //    var items = data;
-        //    var result = [];
-
-        //    for (var item, i = 0; item = items[i++];) {
-        //        var name = item.TeamName;
-        //        var teamobject = { Id: item.Id, TeamName: item.TeamName }
-
-        //        if (!(name in lookup)) {
-        //            lookup[name] = 1;
-        //            result.push(teamobject);
-        //        }
-        //    }
-        //    return result;
-        //}
     </script>
 </asp:Content>
