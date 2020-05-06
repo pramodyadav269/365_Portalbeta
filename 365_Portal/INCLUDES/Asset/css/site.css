@@ -2327,7 +2327,27 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       .course-flow .card .card-body.right-side-content {
         height: 100%;
         padding: 22px 20px 24px 24px;
-        background: #FAFAFA; }
+        background: #FAFAFA;
+        position: relative; }
+        .course-flow .card .card-body.right-side-content .lesson-action {
+          background-color: #fff;
+          display: inline-block;
+          box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+          border-radius: 0px 0px 6px 6px;
+          padding: 10px;
+          position: absolute;
+          top: 0;
+          right: 0; }
+          .course-flow .card .card-body.right-side-content .lesson-action a {
+            padding: 4px 16px;
+            border-right: 1px solid rgba(112, 112, 112, 0.24); }
+            .course-flow .card .card-body.right-side-content .lesson-action a .svg-inline--fa {
+              font-size: 16px;
+              color: rgba(112, 112, 112, 0.42); }
+            .course-flow .card .card-body.right-side-content .lesson-action a:last-child {
+              border-right: none; }
+              .course-flow .card .card-body.right-side-content .lesson-action a:last-child .svg-inline--fa {
+                color: #000; }
       .course-flow .card .card-body .tag {
         font-size: 12px;
         font-weight: 600;
@@ -2413,14 +2433,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           top: 0;
           color: #212338; }
         .course-flow .form-group label.d-inline ~ ::placeholder {
-          font-weight: normal;
           color: rgba(0, 0, 0, 0.3); }
     .course-flow .form-group .form-control {
       border: 1px solid #D2D2D8;
       border-radius: 3px;
       font-size: 14px;
       font-weight: 600;
-      color: #212338; }
+      color: #212338;
+      background-color: transparent; }
     .course-flow .form-group textarea {
       resize: none; }
     .course-flow .form-group .instructor {
@@ -2471,6 +2491,22 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             position: relative;
             float: right;
             right: -4px; }
+    .course-flow .form-group .select2-container .select2-selection.select2-selection--single {
+      height: 74px;
+      max-height: 74px;
+      padding-left: 6px;
+      overflow-y: auto;
+      border: 1px solid #D2D2D8;
+      border-radius: 3px; }
+      .course-flow .form-group .select2-container .select2-selection.select2-selection--single .select2-selection__rendered {
+        margin-top: 4px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #212338; }
+        .course-flow .form-group .select2-container .select2-selection.select2-selection--single .select2-selection__rendered .select2-selection__placeholder {
+          color: #212338; }
+      .course-flow .form-group .select2-container .select2-selection.select2-selection--single .select2-selection__arrow {
+        display: none; }
     .course-flow .form-group .logo.custom-file {
       height: 124px; }
       .course-flow .form-group .logo.custom-file .custom-file-label {
@@ -2481,7 +2517,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         text-align: center;
         color: #212338;
         font-size: 12px;
-        padding: 16px 6px; }
+        padding: 16px 6px;
+        background-color: transparent; }
         .course-flow .form-group .logo.custom-file .custom-file-label::before {
           position: relative;
           display: block;
@@ -2546,3 +2583,27 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }
+  .course-flow .builder {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px; }
+    .course-flow .builder .builder-title img {
+      height: 24px;
+      margin-right: 6px; }
+    .course-flow .builder .builder-title span {
+      color: #212338;
+      font-size: 18px;
+      font-weight: 600;
+      position: relative;
+      top: 2px; }
+    .course-flow .builder .builder-action span {
+      cursor: pointer;
+      color: #212338;
+      font-size: 12px;
+      font-weight: 600;
+      position: relative;
+      top: 3px;
+      padding: 0 18px;
+      border-right: 1px solid rgba(112, 112, 112, 0.24); }
+      .course-flow .builder .builder-action span:last-child {
+        border-right: none; }
