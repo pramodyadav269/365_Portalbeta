@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew1.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
+
     <div class="course-flow">
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
@@ -44,7 +44,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group asterisk">
                                             <label for="ddlCourseCategory" class="inline">Course Category</label>
-                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important" multiple>
+                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
                                             </select>
                                         </div>
                                     </div>
@@ -124,493 +124,8 @@
                     </div>
                 </div>
             </div>
-
-            <%-- in progresss --%>
-            <div class="col-12 col-sm-12 mt-4">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
-                            <div class="card-body arrows">
-                                <div class="tag lesson main-card">Lesson 1</div>
-                                <div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtLessonTitle" class="inline">Lesson Title</label>
-                                            <input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtLessonDescription" class="inline">Lesson Description</label>
-                                            <textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <div class="tag content">Content 1</div>
-                                            <label for="txtContentTitle" class="inline">Content Title</label>
-                                            <input type="text" class="form-control required" id="txtContentTitle" placeholder="Content Title" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group editor asterisk">
-                                            <div id="txtContentDescription"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="action-btn">
-                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add New Content</a>
-                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Resources</a>
-                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Assignment</a>
-                                <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
-                            <div class="card-body right-side-content">
-                                <div class="row">
-                                    <div class="col-sm-12 mb-4">
-                                        <div class="form-group">
-                                            <label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>
-                                            <input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
-                                            <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>
-                                            <input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey('txtPoint',event);" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-12 mt-2 mb-5">
-                 <a class="btn btn-black"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
-            </div>
         </div>
     </div>
-
-
-    <%-- old code --%>
-    <div class="tab-content d-none" id="pills-tabContent">
-
-        <div class="tab-pane fade show active edit" id="pills-course" role="tabpanel" aria-labelledby="pills-course-tab">
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-                    <div class="col-12 col-sm-12">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-md-7 col-lg-8">
-                                <div class="row">
-                                    <div class="col-sm-12 mt-3">
-                                        <%-- <div class="form-group">
-                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Title *" maxlength="100" id="txtCourseTitle" aria-describedby="txtCourseTitleHelp" />
-                                                        <small id="txtCourseTitleHelp" class="form-text">Keep your names short so they are easier to find
-                                                        <span class="float-right">0 / 100</span>
-                                                        </small>
-                                                    </div>--%>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <%-- <div class="form-group">
-                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Course Summary *" maxlength="200" id="txtCourseSummary" aria-describedby="txtCourseSummaryHelp" />
-                                                        <small id="txtCourseSummaryHelp" class="form-text">Keep your description brief but compelling
-                                                    <span class="float-right">0 / 200</span>
-                                                        </small>
-                                                    </div>--%>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="form-group color-picker">
-                                            <label for="txtThemeColor">Theme Color</label>
-                                            <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <%--  <div class="form-group">
-                                                        <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
-                                                        </select>
-                                                    </div>--%>
-                                    </div>
-
-
-
-                                    <%--<div class="col-sm-6 mt-3">
-                                                    <div class="form-group checkbox required">
-                                                        <div class="custom-control custom-checkbox custom-control-inline">
-                                                            <input type="checkbox" id="cbxInstructorName" class="custom-control-input" checked>
-                                                            <label for="cbxInstructorName" class="custom-control-label">Is Course Creator </label>
-                                                        </div>
-                                                    </div>
-                                                </div>--%>
-                                    <%--<div class="col-sm-6 mt-3" style="display: none;" id="divInstructorName">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control required" placeholder="Instructor Name *" maxlength="100" id="txtInstructorName" onkeyup="setTextCount(this)" aria-describedby="txtInstructorNameHelp" />
-                                                        <small id="txtInstructorNameHelp" class="form-text">Course Creator Name
-                                                        <span class="float-right">0 / 100</span>
-                                                        </small>
-                                                    </div>
-                                                </div>--%>
-
-                                    <%-- <div class="col-sm-12 sharing">
-                                                    <div class="form-group radio">
-                                                        <label>Sharing</label>
-                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
-                                                            <label class="custom-control-label" for="rbGlobal">Global</label>
-                                                            <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
-                                                        </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
-                                                            <label class="custom-control-label" for="rbOrganization">Organization</label>
-                                                            <small class="form-text">Anyone within this organization can find and access this course.</small>
-                                                        </div>
-                                                        <div class="custom-control custom-radio custom-control-inline">
-                                                            <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
-                                                            <label class="custom-control-label" for="rbAssigned">Assigned</label>
-                                                            <small class="form-text">Only shared with assignees.</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>--%>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-0 logo-tab">
-                                    <div class="col-sm-12 mt-3 course-logo">
-                                        <%--                                                <div class="form-group m-0">
-                                                    <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
-                                                    <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
-                                                    <div class="custom-file">
-                                                        <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
-                                                    </div>
-                                                </div>--%>
-                                        <div class="logo-img" id="divCourseLogo"></div>
-                                        <%-- if image set then use this html --%>
-                                        <%--<div class="logo-img img">
-                                                    <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
-                                                </div>--%>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-12">
-                                        <div class="form-group">
-                                            <%--  <label for="ddlTags">Tags</label>
-                                                    <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
-                                                    </select>--%>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-sm-12 col-md-9">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-black" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();">
-                                                Manage Tags
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="pills-lesson" role="tabpanel" aria-labelledby="pills-lesson-tab">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="col-12 col-sm-12 lesson-wrapper">
-                        <div class="row" id="divLessonAdd">
-                            <div class="col-12 col-sm-12 col-md-8 col-lg-9">
-                                <div class="row">
-                                    <div class="col-sm-12 mt-3">
-                                        <%--<div class="form-group">
-                                            <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Lesson Title *" maxlength="100" id="txtLessonTitle" aria-describedby="txtLessonTitleHelp" />
-                                            <small id="txtLessonTitleHelp" class="form-text">Keep your names short so they are easier to find
-                                                    <span class="float-right">0 / 100</span>
-                                            </small>
-                                        </div>--%>
-                                    </div>
-                                    <%--<div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Learning Objectives *" maxlength="200" id="txtLearningObjectives" aria-describedby="txtLearningObjectivesHelp" />
-                                                        <small id="txtLearningObjectivesHelp" class="form-text">Keep your description brief but compelling
-                                                    <span class="float-right">0 / 200</span>
-                                                        </small>
-                                                    </div>
-                                                </div>--%>
-                                    <%--<div class="col-sm-12" id="divLessonDescription">
-                                        <div id="txtLessonDescription"></div>
-                                    </div>--%>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab">
-                                <div class="col-sm-12 mt-3">
-                                    <%--   <div class="form-group">
-                                        <label><i class="fas fa-plus-circle black"></i>Estimated Time</label>
-                                        <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
-                                        <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
-                                    </div>--%>
-                                </div>
-                                <div class="col-sm-12 mt-5">
-                                    <div class="form-group">
-                                        <%--   <label><i class="fas fa-plus-circle black"></i>Point</label>
-                                        <input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="100" onkeyup="return isNumberKey('txtPoint',event);" />--%>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="divLessonGrid" style="display: none;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="pills-content" role="tabpanel" aria-labelledby="pills-content-tab">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <div class="col-12 col-sm-12 lesson-wrapper">
-                        <div class="row" id="divContentAdd">
-                            <div class="col-12 col-sm-12">
-                                <div class="row">
-                                    <div class="col-sm-12 mt-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Content Header *" maxlength="200" id="txtContentHeader" />
-                                        </div>
-                                    </div>
-                                    <%--<div class="col-sm-12" id="divContentDescription">
-                                        <div id="txtContentDescription"></div>
-                                    </div>--%>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="divContentGrid" style="display: none;">
-
-                            <%--Bind Content--%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="pills-resources" role="tabpanel" aria-labelledby="pills-resources-tab">
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-                    <div class="col-12 col-sm-12">
-                        <div class="row">
-                            <div class="col-12 col-sm-12">
-                                <div class="row">
-                                    <div class="col-sm-12 mt-3 mb-3" id="divResourcesDescription">
-                                        <div id="txtResourcesDescription"></div>
-                                    </div>
-                                    <div style="display: none;" id="divResourcesAsHTML"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="pills-quiz" role="tabpanel" aria-labelledby="pills-quiz-tab">
-            <div class="card shadow-sm">
-                <div class="card-body p-0">
-
-                    <div class="col-12 col-sm-12">
-
-                        <div class="row" id="divQuizAdd">
-                            <div class="col-12 col-sm-12 col-md-8 col-lg-9">
-                                <div class="row">
-                                    <div class="col-sm-12 mt-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control required" placeholder="Quiz Title" id="txtQuizTitle" aria-describedby="txtQuizTitleHelp" />
-                                            <small id="txtQuizTitleHelp" class="form-text">Keep your names short so they are easier to find</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control required" placeholder="Quiz Description" maxlength="200" id="txtQuizDescription" aria-describedby="txtQuizDescriptionHelp" />
-                                            <small id="txtQuizDescriptionHelp" class="form-text">Keep your description brief but compelling</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <%--  <div class="col-md-3">
-                                                <div class="form-group">
-                                                    Passing Percentage
-                                                      
-                                                </div>
-                                            </div>--%>
-                            </div>
-                            <div class="col-12 col-sm-12 col-md-6 col-lg-3 p-0 logo-tab" id="trScoreSummary">
-                                <div class="col-sm-12 mt-3">
-                                    <div class="form-group">
-                                        <label class="float-left" style="display: none;">Total Score: <span id="lblTotalScore">0</span></label>
-                                        <span class="float-right" id="lblPassingScore" style="display: none;"></span>
-                                        <label><i class="fas fa-plus-circle black"></i>Passing Percentage</label>
-                                        <%--                             <input type="text" class="form-control required" id="txtPassingPercentage" placeholder="+100" />--%>
-                                        <div class="custom-range-label">
-                                            <span id="lblPercentage" class="range-label">0%</span>
-                                            <input type="range" class="custom-range required" min="0" max="100" step="5" id="txtPassingScorePercentage" onchange="ChangePercentage(this.value);">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div id="divQuestion">
-                        <div class="col-sm-12 quiz-wrapper">
-                            <div class="d-flex justify-content-between">
-                                <h5 class="font-weight-bold">Quiz</h5>
-                                <%--<div class="percentage-text">Passing Percentage <span>74</span></div>--%>
-                            </div>
-
-                            <div id="divQuestionTile"></div>
-                            <div id="divQuestionAdd" style="margin-top: 12px"></div>
-
-                        </div>
-
-                        <div class="col-sm-12 mt-3 dropright" id="divQuestionType">
-                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-plus-circle"></i>New Question
-                            </a>
-                            <div class="dropdown-menu quiz-element">
-                                <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square"></i>Multiple Choice</a>
-                                <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle"></i>Radio Button</a>
-                                <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down"></i>Dropdown</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 mt-3 dropright" id="divAddQuestion" style="display: none;">
-                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1');">
-                                <i class="fas fa-plus-circle"></i>Add Question
-                            </a>
-                        </div>
-                        <div class="col-sm-12 mt-3 dropright" id="dvSaveQuestion" style="display: none;">
-                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'2');">Save Question
-                            </a>
-                        </div>
-                        <div class="col-sm-12 mt-3 dropright" id="dvCancelQuestion" style="display: none;">
-                            <a class="btn btn-outline float-left black mb-3" style="margin-left: 10px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="CancelQuestion(this,'0');">Cancel
-                            </a>
-                        </div>
-                        <div class="col-sm-12 mt-3 dropright" id="dvQuizDone" style="display: none;">
-                            <a class="btn btn-black float-right auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="AddQuestion(this,'1','done');">Done
-                            </a>
-                        </div>
-                        <div id="dvQuizCongratulationScreen" style="display: none;">
-
-                            <%-- Congratulations alert start --%>
-                            <div class="col-sm-12 alert">
-                                <i class="fas fa-check-circle icon"></i>
-                                <h3 class="mt-3 mb-3">Congratulations</h3>
-                                <h5>You have successfully added lesson</h5>
-                                <h5><b>you may contine to add more Lesson or create a new Course</b></h5>
-
-                                <div class="mt-5"><a id="dvQuizAddCourse" class="btn btn-outline black mr-3" onclick="RedirectToNewCourse();">Add Course</a><a id="dvQuizAddLesson" class="btn btn-black" onclick="RedirectToNewLesson();">Add Lesson</a></div>
-                            </div>
-                            <%-- Congratulations alert end --%>
-
-                            <%--  You have successfully added course..
-                                             <div class="col-sm-12 mt-3 dropright" id="dvQuizAddCourse">
-                                                 <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                     onclick="RedirectToNewCourse();">
-                                                     <i class="fas fa-plus-circle"></i>Add Course
-                                                 </a>
-                                             </div>
-                                        <div class="col-sm-12 mt-3 dropright" id="dvQuizAddLesson">
-                                            <a class="btn btn-outline float-left black mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                                onclick="RedirectToNewLesson();">
-                                                <i class="fas fa-plus-circle"></i>Add Lesson
-                                            </a>
-                                        </div>--%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-    <div class="col-12 col-sm-12 mt-3 d-none">
-
-        <%--Course--%>
-        <a style="display: none;" class="btn btn-black float-right" id="btnAddCourse" onclick="AddCourseFromLesson();">Add Lesson</a>
-
-        <%--Lesson--%>
-        <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Add More Lesson</a>
-        <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveLesson" onclick="AddMore('btnAddMoreLesson');"><i class="fas fa-plus-circle"></i>Save Lesson</a>
-        <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelLesson" onclick="ShowLessonTile();">Cancel</a>
-        <a style="display: none;" class="btn btn-black float-right" id="btnAddLession" onclick="AddLessionFromContent();">Add Content</a>
-
-        <%--Content--%>
-        <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnAddMoreContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Add More Content</a>
-        <a style="display: none;" class="btn btn-outline float-left black btnSpace" id="btnSaveContent" onclick="AddMore('btnAddMoreContent');"><i class="fas fa-plus-circle"></i>Save Content</a>
-        <a style="display: none;" class="btn btn-outline float-left black" id="btnCancelContent" onclick="ShowContentTile();">Cancel</a>
-        <a style="display: none;" class="btn btn-black float-right" id="btnAddContent" onclick="AddContentFromResource();">Add Resource</a>
-
-        <%--Resource--%>
-        <a style="display: none;" class="btn btn-black float-right" id="btnAddResource" onclick="AddResourceFromQuiz();">Add Quiz</a>
-
-        <%--Quiz--%>
-        <%--<a style="display:none;" class="btn btn-outline float-left black" id="btnAddMoreQuiz" onclick="AddMore('btnAddMoreQuiz');"><i class="fas fa-plus-circle"></i>Add More Quiz</a>--%>
-        <a style="display: none;" class="btn btn-black float-right" id="btnAddQuiz" onclick="AddQuizFinal();">Add Quiz</a>
-
-    </div>
-
-
-
-    <%--Modal popup region--%>
-    <div class="modal fade" id="modalAddTag" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Add Tag</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-12 mt-3">
-                            <div class="form-group">
-                                <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
-                                <small id="txtTagNameHelp" class="form-text">Add tag name
-                                        <span class="float-right">0 / 100</span>
-                                </small>
-                            </div>
-                        </div>
-
-                        <%--<div class="col-sm-12 mt-4">                            
-                                <div class="form-group">
-                                    <label>Tags</label>
-                                    <div>
-                                        <span class="Tag">Admin<a class="close" onclick="DeleteTag(1);" alt="Delete tag">  X</a></span>
-                                        <span class="Tag">Developer</span>
-                                        <span class="Tag">Beginner</span>
-                                        <span class="Tag">Database</span>
-                                        <span class="Tag">Salesforce Platform</span>
-                                    </div>
-                                </div>
-                            </div>--%>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="AddTag();" class="btn btn-primary">Add</button>
-                    <%--<a id="btnAddTag" onclick="AddTag();" class="btn btn-primary">Add</a>--%>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <%--End Modal popup region--%>
 
 
     <script>
@@ -1112,31 +627,7 @@
                 }
 
                 ContentFlag = '0';
-            }
-            /*
-            else if (id == 'btnAddMoreQuiz') {
-                $('#btnAddMoreQuiz').show();
-                $('#btnAddQuiz').hide();
- 
-                if (AddMoreQuizFlag == 'add') {
-                    //AddQuiz();
- 
-                    //OnSuccess
-                    $('#divQuizAdd').hide();
-                    $('#divQuizGrid').show();
-                    AddMoreQuizFlag = 'more';
-                }
-                else {
-                    ClearFieldsAddQuiz();                    
-                    $('#btnAddMoreQuiz').show();
-                    $('#btnAddQuiz').show();
- 
-                    $('#divQuizAdd').show();
-                    $('#divQuizGrid').hide();
-                    AddMoreQuizFlag = 'add';
-                }
-            }
-            */
+            }            
         }
 
         function nextTab(tabID) {
@@ -1190,30 +681,26 @@
                                 }
                                 selectInit('#ddlTags', 'Tags');
                             }
-                            //if (AchievementBadge != undefined && AchievementBadge.length > 0) {
-                            //    $('#ddlAchievementBadge').empty().append('<option></option>');
-                            //    for (var i = 0; i < AchievementBadge.length; i++) {
-                            //        $('#ddlAchievementBadge').append('<option value="' + AchievementBadge[i].BadgeID + '">' + AchievementBadge[i].BadgeName + '</option>');
-                            //    }
-                            //    selectInit('#ddlAchievementBadge', 'Select Achievement Badge');
-                            //}
+
                             if (CourseCategory != undefined && CourseCategory.length > 0) {
-                                $('#ddlCourseCategory').empty();
+                                $('#ddlCourseCategory').empty().append('<option></option>');
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }
-                                selectInit('#ddlCourseCategory', 'Course Category');
+                                selectInit('#ddlCourseCategory', 'Select Course Category');
                             }
                             if (flag == 'update') {
                                 ""
-                                $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');
-                                //$('#ddlAchievementBadge').val(AchievementBadgeID).trigger('change');
-
-                                if (TagID != undefined) {
-                                    for (i = 0; i < 1; i++) {
-                                        if (TagID.includes(',,')) {
+                                $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');                                
+                                if (TagID != undefined)
+                                {
+                                    for (i = 0; i < 1; i++)
+                                    {
+                                        if (TagID.includes(',,'))
+                                        {
                                             TagID = TagID.replace(",,", ",");
-                                            if (TagID.includes(',,')) {
+                                            if (TagID.includes(',,'))
+                                            {
                                                 i--;
                                             }
                                         }
@@ -1317,12 +804,6 @@
 
                 var _CategoryColor = $('#txtCourseThemeColor').val();
                 var _CourseCategory = $("#ddlCourseCategory option:selected").val();
-
-                //var _Points = $('#txtPoints').val();
-                //var _CourseTime = $('#txtCourseTime').val();
-                //var _IsGlobal = $('#cbIsGlobal').prop('checked');
-                //var _AchievementBadge = $("#ddlAchievementBadge option:selected").val();
-                //var _Accessibility = $("#ddlAccessibility option:selected").val();
 
                 var _Accessibility = '';
                 if ($("#rbGlobal").prop("checked") == true) {
