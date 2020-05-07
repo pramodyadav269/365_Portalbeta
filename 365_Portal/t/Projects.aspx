@@ -2119,7 +2119,7 @@
                 var jsonActivityList = $.parseJSON(response).Data.Data;
                 var DistinctDates = GetDistinctDates(jsonActivityList);
                 var Html = '';
-                iF(DistinctDates != null && DistinctDates.length > 0)
+                if(DistinctDates != null && DistinctDates.length > 0)
                 $.each(DistinctDates, function (index, objdates) {
                     Html += '<div class="activity-wrapper">';
                     Html += '<div class="day">' + objdates.formateddate + '</div>';
