@@ -44,7 +44,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group asterisk">
                                             <label for="ddlCourseCategory" class="inline">Course Category</label>
-                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important" multiple>
+                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
                                             </select>
                                         </div>
                                     </div>
@@ -127,7 +127,13 @@
 
             <%-- in progresss --%>
             <div class="col-12 col-sm-12 mt-4">
-                <div class="card">
+                <div class="builder">
+                    <div class="builder-title">
+                        <img src="../INCLUDES/Asset/images/builder.png" /><span>Course Builder</span>
+                    </div>
+                    <div class="builder-action"><span>Expand All</span><span>Collapse All</span></div>
+                </div>
+                <div class="card mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
                             <div class="card-body arrows">
@@ -169,8 +175,13 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
                             <div class="card-body right-side-content">
-                                <div class="row">
-                                    <div class="col-sm-12 mb-4">
+                                <div class="lesson-action">
+                                    <a><i class="fas fa-pen"></i></a>
+                                    <a><i class="fas fa-trash-alt"></i></a>
+                                    <a><i class="fas fa-chevron-down"></i></a>
+                                </div>
+                                <div class="row mt-5">
+                                    <div class="col-sm-12 mt-4 mb-4">
                                         <div class="form-group">
                                             <label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>
                                             <input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
@@ -190,8 +201,8 @@
                 </div>
             </div>
 
-            <div class="col-12 mt-2 mb-5">
-                 <a class="btn btn-black"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+            <div class="col-12 mb-5">
+                <a class="btn btn-black"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
             </div>
         </div>
     </div>
@@ -1198,7 +1209,7 @@
                             //    selectInit('#ddlAchievementBadge', 'Select Achievement Badge');
                             //}
                             if (CourseCategory != undefined && CourseCategory.length > 0) {
-                                $('#ddlCourseCategory').empty();
+                                $('#ddlCourseCategory').empty().append('<option></option>');
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }

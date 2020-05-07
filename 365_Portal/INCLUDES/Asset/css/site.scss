@@ -3375,6 +3375,36 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 height: 100%;
                 padding: 22px 20px 24px 24px;
                 background: #FAFAFA;
+                position: relative;
+
+                .lesson-action {
+                    background-color: #fff;
+                    display: inline-block;
+                    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+                    border-radius: 0px 0px 6px 6px;
+                    padding: 10px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+
+                    a {
+                        padding: 4px 16px;
+                        border-right: 1px solid rgba(112, 112, 112, 0.24);
+
+                        .svg-inline--fa {
+                            font-size: 16px;
+                            color: rgba(112, 112, 112, 0.42);
+                        }
+
+                        &:last-child {
+                            border-right: none;
+
+                            .svg-inline--fa {
+                                color: #000;
+                            }
+                        }
+                    }
+                }
             }
 
             .tag {
@@ -3499,7 +3529,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
 
                 ~ ::placeholder {
-                    font-weight: normal;
                     color: rgba(0, 0, 0, 0.3);
                 }
             }
@@ -3511,6 +3540,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             font-size: 14px;
             font-weight: 600;
             color: #212338;
+            background-color: transparent;
         }
 
         textarea {
@@ -3596,6 +3626,30 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         }
                     }
                 }
+
+                &.select2-selection--single {
+                    height: 74px;
+                    max-height: 74px;
+                    padding-left: 6px;
+                    overflow-y: auto;
+                    border: 1px solid #D2D2D8;
+                    border-radius: 3px;
+
+                    .select2-selection__rendered {
+                        margin-top: 4px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #212338;
+
+                        .select2-selection__placeholder {
+                            color: #212338;
+                        }
+                    }
+
+                    .select2-selection__arrow {
+                        display: none;
+                    }
+                }
             }
         }
 
@@ -3612,6 +3666,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     color: #212338;
                     font-size: 12px;
                     padding: 16px 6px;
+                    background-color: transparent;
 
                     &::before {
                         position: relative;
@@ -3714,6 +3769,44 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     &.form-text {
                         color: #ADADAD;
                     }
+                }
+            }
+        }
+    }
+
+    .builder {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 14px;
+
+        .builder-title {
+            img {
+                height: 24px;
+                margin-right: 6px;
+            }
+
+            span {
+                color: #212338;
+                font-size: 18px;
+                font-weight: 600;
+                position: relative;
+                top: 2px;
+            }
+        }
+
+        .builder-action {
+            span {
+                cursor: pointer;
+                color: #212338;
+                font-size: 12px;
+                font-weight: 600;
+                position: relative;
+                top: 3px;
+                padding: 0 18px;
+                border-right: 1px solid rgba(112, 112, 112, 0.24);
+
+                &:last-child {
+                    border-right: none;
                 }
             }
         }
