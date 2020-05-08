@@ -28,6 +28,7 @@ namespace _365_Portal
         public  string TopicTitle { get; set; }
         public  string TopicName { get; set; }
         public  string TopicDescription { get; set; }
+        public string TopicSummary { get; set; }
         public  string TopicOverview { get; set; }
         public int ModuleID { get; set; }
         public  string ModuleTitle { get; set; }
@@ -70,8 +71,7 @@ namespace _365_Portal
         public int IsCourseCreator { get; set; }
         public string InstructorName { get; set; }
 
-        public int InspectorImageFileID { get; set; }
-        
+        public int InstructorImageFileID { get; set; }
     }
 
     public class FlashcarIntro

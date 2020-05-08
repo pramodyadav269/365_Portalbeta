@@ -34,6 +34,7 @@ namespace _365_Portal.ControllersReOrderContent
                         //&& !string.IsNullOrEmpty(requestParams["IsPublished"].ToString())
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseCategory"]))
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["CategoryColor"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Summary"]))
                         //&& !string.IsNullOrEmpty(requestParams["Points"].ToString())
                         //&& !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
                         //&& !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
@@ -94,6 +95,16 @@ namespace _365_Portal.ControllersReOrderContent
                             {
                                 content.CategoryColor = null;
                             }
+
+                            if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Summary"])))
+                            {
+                                content.TopicSummary = System.Net.WebUtility.HtmlDecode(requestParams["Summary"].ToString());
+                            }
+                            else
+                            {
+                                content.TopicSummary = null;
+                            }
+
                             //if (!string.IsNullOrEmpty(requestParams["Points"].ToString()))
                             //{
                             //    content.Points = Convert.ToDouble(requestParams["Points"].ToString());
@@ -140,24 +151,24 @@ namespace _365_Portal.ControllersReOrderContent
                                 }
                             }
 
-                            string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
-                            if (!string.IsNullOrEmpty(InspectorImageBase64))
+                            string InstructorImageBase64 = Convert.ToString(requestParams.SelectToken("InstructorPhotoBase64"));
+                            if (!string.IsNullOrEmpty(InstructorImageBase64))
                             {
                                 var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
                                 if (files.Count() == 1)
-                                    InspectorImageBase64 = files[0];
+                                    InstructorImageBase64 = files[0];
                                 else
-                                    InspectorImageBase64 = files[1];
+                                    InstructorImageBase64 = files[1];
 
-                                byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
-                                string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                                byte[] imageBytes = Convert.FromBase64String(InstructorImageBase64);
+                                string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InstructorImageBase64);
                                 string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
                                 File.WriteAllBytes(filePath, imageBytes);
 
                                 DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
                                 if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
                                 {
-                                    content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                    content.InstructorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
                                 }
                             }
 
@@ -170,6 +181,8 @@ namespace _365_Portal.ControllersReOrderContent
                             else
                             {
                                 content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                                content.InstructorName = string.Empty;
+                                content.InstructorImageFileID = 0;
                             }
 
 
@@ -253,6 +266,7 @@ namespace _365_Portal.ControllersReOrderContent
                         && !string.IsNullOrEmpty(requestParams["SrNo"].ToString())
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["CourseCategory"]))
                         && !string.IsNullOrEmpty(Convert.ToString(requestParams["CategoryColor"]))
+                        && !string.IsNullOrEmpty(Convert.ToString(requestParams["Summary"]))
                         //&& !string.IsNullOrEmpty(requestParams["Points"].ToString())
                         //&& !string.IsNullOrEmpty(requestParams["CourseTime"].ToString())
                         //&& !string.IsNullOrEmpty(requestParams["AchievementBadge"].ToString())
@@ -314,7 +328,16 @@ namespace _365_Portal.ControllersReOrderContent
                         else
                         {
                             content.CategoryColor = null;
-                        }                        
+                        }
+
+                        if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Summary"])))
+                        {
+                            content.TopicSummary = System.Net.WebUtility.HtmlDecode(requestParams["Summary"].ToString());
+                        }
+                        else
+                        {
+                            content.TopicSummary = null;
+                        }
 
                         if (!string.IsNullOrEmpty(requestParams["Accessibility"].ToString()))
                         {
@@ -347,24 +370,24 @@ namespace _365_Portal.ControllersReOrderContent
                             }
                         }
 
-                        string InspectorImageBase64 = Convert.ToString(requestParams.SelectToken("InspectorImageBase64"));
-                        if (!string.IsNullOrEmpty(InspectorImageBase64))
+                        string InstructorImageBase64 = Convert.ToString(requestParams.SelectToken("InstructorPhotoBase64"));
+                        if (!string.IsNullOrEmpty(InstructorImageBase64))
                         {
                             var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
                             if (files.Count() == 1)
-                                InspectorImageBase64 = files[0];
+                                InstructorImageBase64 = files[0];
                             else
-                                InspectorImageBase64 = files[1];
+                                InstructorImageBase64 = files[1];
 
-                            byte[] imageBytes = Convert.FromBase64String(InspectorImageBase64);
-                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InspectorImageBase64);
+                            byte[] imageBytes = Convert.FromBase64String(InstructorImageBase64);
+                            string fileName = identity.UserID + "_" + Guid.NewGuid() + "." + Utility.GetFileExtension(InstructorImageBase64);
                             string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
                             File.WriteAllBytes(filePath, imageBytes);
 
                             DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
                             if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
                             {
-                                content.InspectorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                content.InstructorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
                             }
                         }
 
@@ -376,6 +399,8 @@ namespace _365_Portal.ControllersReOrderContent
                         else
                         {
                             content.IsCourseCreator = Convert.ToInt32(requestParams["IsCourseCreator"]);
+                            content.InstructorName = string.Empty;
+                            content.InstructorImageFileID = 0;
                         }
 
 
@@ -1993,25 +2018,22 @@ namespace _365_Portal.ControllersReOrderContent
                     objUser.Role = identity.Role;
 
                     var dsTags = CommonBL.BindDropDown(objUser, "tag", ConstantMessages.Procedures.spBindDropdown);
-                    var dsBadge = CommonBL.BindDropDown(objUser, "badge", ConstantMessages.Procedures.spBindDropdown);
+                    //var dsBadge = CommonBL.BindDropDown(objUser, "badge", ConstantMessages.Procedures.spBindDropdown);
                     var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory", ConstantMessages.Procedures.spBindDropdown);
 
-                    DataTable dtTags = new DataTable();
-                    DataTable dtBadge = new DataTable();
+                    //DataTable dtBadge = new DataTable();
+                    //dtBadge = dsBadge.Tables[0].Copy();
+                    DataTable dtTags = new DataTable();                    
                     DataTable dtCourseCategory = new DataTable();
-                    dtTags = dsTags.Tables[0].Copy();
-                    dtBadge = dsBadge.Tables[0].Copy();
+                    dtTags = dsTags.Tables[0].Copy();                    
                     dtCourseCategory = dsCourseCategory.Tables[0].Copy();
 
                     DataSet ds = new DataSet();
                     ds.Tables.Add(dtTags);
                     ds.Tables[0].TableName = "Tag";
 
-                    ds.Tables.Add(dtBadge);
-                    ds.Tables[1].TableName = "AchievementBadge";
-
                     ds.Tables.Add(dtCourseCategory);
-                    ds.Tables[2].TableName = "CourseCategory";
+                    ds.Tables[1].TableName = "CourseCategory";
 
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);

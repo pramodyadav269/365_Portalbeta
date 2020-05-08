@@ -5,6 +5,7 @@
 
     <div class="course-flow">
         <div class="row">
+
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
                     <h4 class="title">Add Course</h4>
@@ -23,6 +24,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-sm-12 mt-4">
                 <div class="card">
                     <div class="row">
@@ -55,7 +57,19 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+
+                                    <%--<div class="col-sm-6">--%>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group color-picker">
+                                            <label for="txtThemeColor">Theme Color</label>
+                                            <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a id="btnManageTags" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();" href="#"><u>Manage Tags</u></a>
+                                    </div>
+
+                                    <div class="col-sm-12">                                    
                                         <div class="form-group editor">
                                             <label>Course Summary </label><%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
                                             <div id="txtCourseSummary"></div>
@@ -71,25 +85,28 @@
                                         <div class="form-group">
                                             <label><i class="fas fa-plus-circle"></i>Course Logo </label><%--<span>Set the image for the course.</span>--%>
                                             <div class="custom-file logo">
-                                                <input type="file" class="custom-file-input" id="imgCourseLogo">
+                                                <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="encodeImagetoBase64(this,'CourseLogo')">
                                                 <label class="custom-file-label" for="imgCourseLogo">Drop your image here or </label>
-                                            </div>
+                                            </div>                                            
                                         </div>
+
+                                        <div class="logo-img" id="divCourseLogo"></div>
+
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <div class="instructor checkbox">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" class="custom-control-input" checked>
+                                                    <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" onclick="ManageInstructor();" class="custom-control-input" checked>
                                                     <label class="custom-control-label" for="cbxInstructorName">Same as Admin</label>
                                                 </div>
                                             </div>
                                             <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
-                                            <div class="instructor">
+                                            <div class="instructor" style="display:none;" id="divInstructorName">
                                                 <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
 
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="imgInstructorPhoto">
+                                                    <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="encodeImagetoBase64(this,'InstructorPhoto')">
                                                     <label class="custom-file-label" for="imgInstructorPhoto">Add Image</label>
                                                 </div>
                                             </div>
@@ -124,26 +141,54 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-12 mb-5">
+                <a class="btn btn-black" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Add Course</a>
+            </div>
+
         </div>
     </div>
 
 
+    <%--Modal popup region--%>
+
+    <div class="modal fade" id="modalAddTag" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add Tag</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12 mt-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
+                                <small id="txtTagNameHelp" class="form-text">Add tag name
+                                        <span class="float-right">0 / 100</span>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="AddTag();" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%--End Modal popup region--%>
+    
     <script>
 
         //new code
         var editorCourseSummary = new Jodit('#txtCourseSummary');
-        var editorContentDescription = new Jodit('#txtContentDescription');
+        //var editorContentDescription = new Jodit('#txtContentDescription');
 
-
-
-
-
-        // old code
-        //var editorLessonDesc = new Jodit('#txtLessonDescription');
-        //var editorContentDesc = new Jodit('#txtContentDescription');
-        //var editorResourcesDesc = new Jodit('#txtResourcesDescription');
-
-        var allowedExtensions = ['pdf', 'mp4', 'avi', 'flv', 'wmv', 'mov', '3gp', 'webm', 'wav'];
         var accessToken = '<%=Session["access_token"]%>';
 
         var IsQueryString = '0';//To identify whether page load from query string or not
@@ -167,43 +212,19 @@
         var passingScore = 0;
         var pasingPercentage = 0;
 
-        $(document).ready(function () {
-            ""
-            if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
+        $(document).ready(function ()
+        {
+            debugger
+            if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
+            {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
                 EditCourse();
-
-                if (readQueryString()["module"] != undefined && readQueryString()["module"] != '') {
-                    LessonFlag = readQueryString()["module"];
-
-                    if (readQueryString()["content"] != undefined && readQueryString()["content"] != '') {
-                        ContentFlag = readQueryString()["content"];
-                        //BindContent();
-                    }
-                    if (readQueryString()["resource"] != undefined && readQueryString()["resource"] != '') {
-                        ResourceFlag = readQueryString()["resource"];
-                    }
-                    if (readQueryString()["quiz"] != undefined && readQueryString()["quiz"] != '') {
-                        QuizFlag = readQueryString()["quiz"];
-                    }
-                }
-                if (CourseFlag != '0' && LessonFlag == '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
-                    BindLesson('fromtopic');
-                }
-                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag == '0' && ResourceFlag == '0' && QuizFlag == '0') {
-                    BindLesson('frommodule');
-                }
-                else if (CourseFlag != '0' && LessonFlag != '0' && ContentFlag != '0' && ResourceFlag == '0' && QuizFlag == '0') {
-                    BindContent('fromcontent');
-                }
             }
             else {
-                ShowButtons('pills-course', 'tabclick');
                 GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
             }
         });
-
 
         function readQueryString() {
             var vars = [], hash;
@@ -216,448 +237,9 @@
             return vars;
         }
 
-        function ShowButtons(id, action) {
-            if (id == 'pills-course') {
-                $('#btnAddCourse').show();
 
-                $('#btnAddMoreLesson').hide();
-                $('#btnAddLession').hide();
-                $('#btnSaveLesson').hide();
-                $('#btnCancelLesson').hide();
-
-                $('#btnAddMoreContent').hide();
-                $('#btnAddContent').hide();
-                $('#btnSaveContent').hide();
-                $('#btnCancelContent').hide();
-
-                $('#btnAddResource').hide();
-                //$('#btnAddMoreQuiz').hide();
-                $('#btnAddQuiz').hide();
-            }
-            else if (id == 'pills-lesson') {
-                if (CourseFlag != '0') {
-                    $('#btnAddCourse').hide();
-
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').show();
-                    $('#btnSaveLesson').show();
-                    $('#btnCancelLesson').show();
-
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnSaveContent').hide();
-                    $('#btnCancelContent').hide();
-
-                    $('#btnAddResource').hide();
-                    //$('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
-
-                    if (divLessonFlag == 'add') {
-                        $('#btnAddMoreLesson').hide();
-                        $('#btnAddLession').show();
-                        $('#btnSaveLesson').show();
-                        $('#btnCancelLesson').show();
-
-                        $('#divLessonAdd').show();
-                        $('#divLessonGrid').hide();
-                    }
-                    else if (divLessonFlag == 'bindtile') {
-                        $('#btnAddMoreLesson').show();
-                        $('#btnAddLession').hide();
-                        $('#btnSaveLesson').hide();
-                        $('#btnCancelLesson').hide();
-
-                        $('#divLessonAdd').hide();
-                        $('#divLessonGrid').show();
-                    }
-                }
-                else {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please add course to proceed",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-course-tab');
-                        }
-                    });
-                }
-            }
-            else if (id == 'pills-content') {
-
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').hide();
-                    $('#btnSaveLesson').hide();
-                    $('#btnCancelLesson').hide();
-
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').show();
-                    $('#btnSaveContent').show();
-                    $('#btnCancelContent').show();
-
-                    $('#btnAddResource').hide();
-                    //$('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
-
-                    if (divContentFlag == 'add') {
-                        $('#btnAddMoreContent').hide();
-                        $('#btnAddContent').show();
-                        $('#btnSaveContent').show();
-                        $('#btnCancelContent').show();
-
-                        $('#divContentAdd').show();
-                        $('#divContentGrid').hide();
-                    }
-                    else if (divContentFlag == 'bindtile') {
-                        $('#btnAddMoreContent').show();
-                        $('#btnAddContent').hide();
-                        $('#btnSaveContent').hide();
-                        $('#btnCancelContent').hide();
-
-                        $('#divContentAdd').hide();
-                        $('#divContentGrid').show();
-                    }
-                    else if (divContentFlag == 'bindtileafterlessonadd') {
-                        //$('#btnAddMoreContent').show();
-                        //$('#btnAddContent').hide();
-
-                        //$('#divContentAdd').hide();
-                        //$('#divContentGrid').show();
-
-                        BindContent('addmore');
-                    }
-                }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please select lesson to proceed further.",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-lesson-tab');
-                        }
-                    });
-                }
-                else {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please add course to proceed",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-course-tab');
-                        }
-                    });
-                }
-            }
-            else if (id == 'pills-resources') {
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').hide();
-                    $('#btnSaveLesson').hide();
-                    $('#btnCancelLesson').hide();
-
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnSaveContent').hide();
-                    $('#btnCancelContent').hide();
-
-                    $('#btnAddResource').show();
-                    //$('#btnAddMoreQuiz').hide();
-                    $('#btnAddQuiz').hide();
-                }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please select lesson to proceed further.",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-lesson-tab');
-                        }
-                    });
-                }
-                else {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please add course to proceed",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-course-tab');
-                        }
-                    });
-                }
-            }
-            else if (id == 'pills-quiz') {
-                debugger
-                if (CourseFlag != '0' && LessonFlag != '0') {
-                    $('#btnAddCourse').hide();
-
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').hide();
-                    $('#btnSaveLesson').hide();
-                    $('#btnCancelLesson').hide();
-
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').hide();
-                    $('#btnSaveContent').hide();
-                    $('#btnCancelContent').hide();
-
-                    $('#btnAddResource').hide();
-                    //$('#btnAddMoreQuiz').show();
-                    //$('#btnAddQuiz').show();
-
-                    //if (divQuizFlag == 'question')
-                    //{
-                    //    $('#btnAddQuiz').hide();
-                    //    $('#divQuestionTile').show();
-                    //    $('#divQuestionAdd').show();
-                    //}
-                    //else if (divQuizFlag == 'quiz') {
-                    //    $('#btnAddQuiz').show();
-                    //    $('#divQuestionTile').hide();
-                    //    $('#divQuestionAdd').hide();
-                    //}
-
-                    BindQuiz();
-                    $("#divQuizAdd").show();
-                    $("#divQuestionType").show();
-
-                }
-                else if (CourseFlag != '0' && LessonFlag == '0') {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please select lesson to proceed further.",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-lesson-tab');
-                        }
-                    });
-                }
-                else {
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please add course to proceed",
-                        icon: "error"
-                    }).then((value) => {
-                        if (value) {
-                            nextTab('pills-course-tab');
-                        }
-                    });
-                }
-
-                $('#dvQuizCongratulationScreen').hide();
-
-            }
-            else {
-                location.reload();
-            }
-        }
-
-        function SaveAsDraft(el) {
-            ""
-            //var active_button = $('#pills-tabContent div#pills-course');
-            //var activeTabID = $(active_button).attr('id');
-            var activeTabID = $('#pills-tabContent div.active').attr('id');
-
-            if (activeTabID == 'pills-course') {
-                AddCourse('redirect');
-            }
-            else if (activeTabID == 'pills-lesson') {
-
-                var result = validateAddLesson();
-                if (result.error) {
-                    Swal.fire({
-                        title: "Alert",
-                        text: result.msg,
-                        icon: "error",
-                        button: "Ok",
-                    });
-                }
-                else {
-                    AddLession('redirect');
-                }
-            }
-            else if (activeTabID == 'pills-content') {
-                var result = validateAddContent();
-                if (result.error) {
-                    Swal.fire({
-                        title: "Alert",
-                        text: result.msg,
-                        icon: "error",
-                        button: "Ok",
-                    });
-                }
-                else {
-                    AddContent('redirect');
-                }
-            }
-            else if (activeTabID == 'pills-resources') {
-                var result = validateAddResource();
-                if (result.error) {
-                    Swal.fire({
-                        title: "Alert",
-                        text: result.msg,
-                        icon: "error",
-                        button: "Ok",
-                    });
-                }
-                else {
-                    AddResource('redirect');
-                }
-            }
-            else if (activeTabID == 'pills-quiz') {
-                AddQuiz(true, 'redirect');
-            }
-            else {
-                Swal.fire("Oops! Something went wrong. Please try again", {
-                    icon: "error",
-                });
-            }
-        }
-
-        function AddMore(id) {
-            if (id == 'btnAddMoreLesson') {
-                if (AddMoreLessonFlag == 'add') {
-                    var result = validateAddLesson();
-                    if (result.error) {
-                        Swal.fire({
-                            title: "Alert",
-                            text: result.msg,
-                            icon: "error",
-                            button: "Ok",
-                        });
-                    }
-                    else {
-                        $('#btnAddMoreLesson').show();
-                        $('#btnAddLession').hide();
-                        $('#btnSaveLesson').hide();
-                        $('#btnCancelLesson').hide();
-
-                        $('#divLessonAdd').hide();
-                        $('#divLessonGrid').show();
-                        AddMoreLessonFlag = 'more';
-
-                        AddLession('addmore');
-                    }
-                }
-                else if (AddMoreLessonFlag == 'bindtile') {
-                    ClearFieldsAddLesson();
-                    $('#btnAddMoreLesson').show();
-                    $('#btnAddLession').hide();
-                    $('#btnSaveLesson').hide();
-                    $('#btnCancelLesson').hide();
-
-                    $('#divLessonAdd').hide();
-                    $('#divLessonGrid').show();
-                    AddMoreLessonFlag = 'more';
-                }
-                else {
-                    ClearFieldsAddLesson();
-                    $('#btnAddMoreLesson').hide();
-                    $('#btnAddLession').show();
-                    $('#btnSaveLesson').show();
-                    $('#btnCancelLesson').show();
-
-                    $('#divLessonAdd').show();
-                    $('#divLessonGrid').hide();
-                    AddMoreLessonFlag = 'add';
-                    divLessonFlag = 'add';
-                    LessonFlag = '0';
-                }
-
-                LessonFlag = '0';
-                ContentFlag = '0';
-            }
-            else if (id == 'btnAddMoreContent') {
-                if (AddMoreContentFlag == 'add') {
-
-                    var result = validateAddContent();
-                    if (result.error) {
-                        Swal.fire({
-                            title: "Alert",
-                            text: result.msg,
-                            icon: "error",
-                            button: "Ok",
-                        });
-                    }
-                    else {
-                        $('#btnAddMoreContent').show();
-                        $('#btnAddContent').hide();
-                        $('#btnSaveContent').hide();
-                        $('#btnCancelContent').hide();
-
-                        $('#divContentAdd').hide();
-                        $('#divContentGrid').show();
-                        AddMoreContentFlag = 'more';
-
-                        AddContent('addmore');
-                    }
-                }
-                else if (AddMoreContentFlag == 'bindtile') {
-                    ClearFieldsAddContent();
-                    $('#btnAddMoreContent').show();
-                    $('#btnAddContent').hide();
-                    $('#btnSaveContent').hide();
-                    $('#btnCancelContent').hide();
-
-                    $('#divContentAdd').hide();
-                    $('#divContentGrid').show();
-                    AddMoreContentFlag = 'more';
-                }
-                else {
-                    ClearFieldsAddContent();
-                    $('#btnAddMoreContent').hide();
-                    $('#btnAddContent').show();
-                    $('#btnSaveContent').show();
-                    $('#btnCancelContent').show();
-
-                    $('#divContentAdd').show();
-                    $('#divContentGrid').hide();
-                    AddMoreContentFlag = 'add';
-                    divContentFlag = 'add';
-                    ContentFlag = '0';
-                }
-
-                ContentFlag = '0';
-            }            
-        }
-
-        function nextTab(tabID) {
-            $("#" + tabID).click();
-        }
-
-        function RedirectToNewLesson() {
-
-            //Added on 23 APR 20 
-            ClearFieldsAddLesson();
-            LessonFlag = '0';
-            ContentFlag = '0';
-            ResourceFlag = '0';
-            QuizFlag = '0';
-            //End Added on 23 APR 20 
-
-            $("#dvQuizCongratulationScreen").hide();
-            //ShowButtons('pills-lesson', 'tabclick');
-
-            //nextTab('pills-lesson-tab');
-            BindLesson('afterquiz');
-
-        }
-
-        function RedirectToNewCourse() {
-            window.location.href = 'LearningJourney.aspx';
-        }
-
-
-        function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, AchievementBadgeID, TagID) {
+        function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, TagID)
+        {
             var getUrl = "/API/Content/GetCourseCategoryTagsAndBadge";
             $.ajax({
                 type: "POST",
@@ -666,41 +248,40 @@
                 contentType: "application/json",
                 success: function (response) {
                     try {
+                        
                         var DataSet = $.parseJSON(response);
                         HideLoader();
-                        if (DataSet.StatusCode == "1") {
+                        if (DataSet.StatusCode == "1")
+                        {
                             var Tags = DataSet.Data.Tag;
-                            var AchievementBadge = DataSet.Data.AchievementBadge;
                             var CourseCategory = DataSet.Data.CourseCategory;
 
-                            if (Tags != undefined && Tags.length > 0) {
-                                //$('#ddlTags').empty().append('<option></option>');
+                            if (Tags != undefined && Tags.length > 0)
+                            {
                                 $('#ddlTags').empty();
                                 for (var i = 0; i < Tags.length; i++) {
                                     $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
                                 }
                                 selectInit('#ddlTags', 'Tags');
                             }
-
-                            if (CourseCategory != undefined && CourseCategory.length > 0) {
+                            if (CourseCategory != undefined && CourseCategory.length > 0)
+                            {
                                 $('#ddlCourseCategory').empty().append('<option></option>');
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }
-                                selectInit('#ddlCourseCategory', 'Select Course Category');
+                                selectInit('#ddlCourseCategory', 'Course Category');
                             }
-                            if (flag == 'update') {
+                            if (flag == 'edit')
+                            {
                                 ""
-                                $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');                                
-                                if (TagID != undefined)
-                                {
-                                    for (i = 0; i < 1; i++)
-                                    {
-                                        if (TagID.includes(',,'))
-                                        {
+                                $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');
+
+                                if (TagID != undefined) {
+                                    for (i = 0; i < 1; i++) {
+                                        if (TagID.includes(',,')) {
                                             TagID = TagID.replace(",,", ",");
-                                            if (TagID.includes(',,'))
-                                            {
+                                            if (TagID.includes(',,')) {
                                                 i--;
                                             }
                                         }
@@ -734,20 +315,33 @@
             });
         }
 
+        function ManageInstructor() {
+            if ($("#cbxInstructorName").prop('checked') == true) {
+                $("#divInstructorName").hide();
+            }
+            else {
+                $("#divInstructorName").show();
+                $("#txtInstructorName").val('');
+            }
+        }
+
         function ClearFieldsAddCourse() {
-            $('#txtCourseTitle').val('');
-            $('#txtCourseSummary').val('');
-            $('#txtCourseThemeColor').val('');
-            $('#ddlCourseCategory').val('').trigger('change');
-            $("#rbGlobal").prop("checked", true)
-            $('#txtCourseThemeColor').val('#161E98');
+            debugger
+            $('#txtCourseTitle').val('');            
+            $('#txtCourseDescription').val('');
+
+            //$('#ddlCourseCategory').val('').trigger('change');
+            $("#ddlCourseCategory option:selected").prop("selected", false);
+            selectInit('#ddlCourseCategory ', 'CourseCategory');
+
             $("#ddlTags option:selected").prop("selected", false);
-
-            $("#cbxInstructorName").prop("checked", true)
-            $("#divInstructorName").hide();
-            $("#txtInstructorName").val('');
-
             selectInit('#ddlTags ', 'Tags');
+
+            $('#txtCourseThemeColor').val('#161E98');
+            editorCourseSummary.value = '';
+                       
+            $("#rbGlobal").prop("checked", true)            
+            $("#cbxInstructorName").click();            
         }
 
         function validateAddCourse() {
@@ -755,34 +349,32 @@
             if ($("#txtCourseTitle").val() == undefined || $("#txtCourseTitle").val() == '') {
                 return { error: true, msg: "Please enter Course Title" };
             }
-            else if ($("#txtCourseSummary").val() == undefined || $("#txtCourseSummary").val() == '') {
-                return { error: true, msg: "Please enter Course Summary" };
-            }
-            else if ($("#txtCourseThemeColor").val() == undefined || $("#txtCourseThemeColor").val() == '') {
-                return { error: true, msg: "Please enter Course Theme color" };
+            else if ($("#txtCourseDescription").val() == undefined || $("#txtCourseDescription").val() == '') {
+                return { error: true, msg: "Please enter Course Description" };
             }
             else if ($("#ddlCourseCategory option:selected").val() == undefined || $("#ddlCourseCategory option:selected").val() == '') {
                 return { error: true, msg: "Please select Course Category" };
             }
+            else if ($("#txtCourseThemeColor").val() == undefined || $("#txtCourseThemeColor").val() == '') {
+                return { error: true, msg: "Please enter Course Theme color" };
+            }            
+            else if (editorCourseSummary.value == undefined || editorCourseSummary.value.trim() == '') {
+                return { error: true, msg: "Please enter Course Summary" };
+            }
+            else if ($("#cbxInstructorName").prop('checked') == false) {
+                if ($("#txtInstructorName").val() == undefined || $("#txtInstructorName").val() == '') {
+                    return { error: true, msg: "Please enter instructor name" };
+                }
+            }
             else if ($("#rbGlobal").prop("checked") == false && $("#rbOrganization").prop("checked") == false && $("#rbAssigned").prop("checked") == false) {
                 return { error: true, msg: "Please select sharing option" };
             }
-
-            else if ($("#cbxInstructorName").prop('checked') == false) {
-                if ($("#txtInstructorName").val() == undefined || $("#txtInstructorName").val() == '') {
-                    return { error: true, msg: "Please enter course creator name" };
-                }
-            }
+            
             return true;
         }
-
-        function AddCourseFromLesson() {
-            ""
-            AddCourse('nexttab');
-        }
-
+        
         function AddCourse(flag) {
-            ""
+            debugger
             var getUrl;
             var requestParams;
             var result = validateAddCourse();
@@ -799,11 +391,27 @@
                 var _Topic_Id;
                 var _SrNo = "1";
                 var _Title = $('#txtCourseTitle').val();
-                var _Description = $('#txtCourseSummary').val();
-                //var _IsPublished = $('#cbIsPublished').prop('checked');
+                var _Description = $('#txtCourseDescription').val();
+                var _CourseCategory = $("#ddlCourseCategory option:selected").val();
+
+                var selectedTagsArray = $('#ddlTags').val();
+                var _selectedTags = '';
+                if (selectedTagsArray.length > 0) {
+                    for (i = 0; i < selectedTagsArray.length; i++) {
+                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
+                    }
+                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                }
 
                 var _CategoryColor = $('#txtCourseThemeColor').val();
-                var _CourseCategory = $("#ddlCourseCategory option:selected").val();
+                var _Summary = editorCourseSummary.value;
+
+                var _IsCourseCreator = '1';
+                var _InstructorName = '';
+                if ($("#cbxInstructorName").prop('checked') == false) {
+                    _IsCourseCreator = '0';
+                    _InstructorName = $("#txtInstructorName").val();
+                }
 
                 var _Accessibility = '';
                 if ($("#rbGlobal").prop("checked") == true) {
@@ -816,23 +424,6 @@
                     _Accessibility = $("#rbAssigned").val();
                 }
 
-                var selectedTagsArray = $('#ddlTags').val();
-                var _selectedTags = '';
-                if (selectedTagsArray.length > 0) {
-                    for (i = 0; i < selectedTagsArray.length; i++) {
-                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
-                    }
-                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
-                }
-
-                var _IsCourseCreator = '1';
-                var _InstructorName = '';
-                if ($("#cbxInstructorName").prop('checked') == false) {
-                    _IsCourseCreator = '0';
-                    _InstructorName = $("#txtInstructorName").val();
-                }
-
-
                 if (CourseFlag == '0') {
                     getUrl = "/API/Content/CreateTopic";
 
@@ -841,11 +432,10 @@
                     getUrl = "/API/Content/ModifyTopic";
                 }
 
-                //requestParams = { TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, IsPublished: _IsPublished, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory, CategoryColor: _CategoryColor, Points: _Points, CourseTime: _CourseTime, AchievementBadge: _AchievementBadge, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags };
                 requestParams = {
-                    TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true, CourseCategory: _CourseCategory
-                    , CategoryColor: _CategoryColor, Accessibility: _Accessibility, CourseLogoBase64: base64CourseLogo, selectedTags: _selectedTags, IsCourseCreator: _IsCourseCreator
-                    , InstructorName: _InstructorName
+                    TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, CourseCategory: _CourseCategory, selectedTags: _selectedTags, CategoryColor: _CategoryColor, Summary: _Summary
+                    , CourseLogoBase64: base64CourseLogo, IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: base64InstructorPhoto
+                    , Accessibility: _Accessibility, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true
                 };
 
                 try {
@@ -990,8 +580,9 @@
                             CheckCoursePublishable(DataSet.Data.Data1[0].IsPublishable, DataSet.Data.Data1[0].IsPublished)
 
                             $('#txtCourseTitle').val(EditTopic[0].Title);
-                            $('#txtCourseSummary').val(EditTopic[0].Description);
+                            $('#txtCourseDescription').val(EditTopic[0].Description);
                             $('#txtCourseThemeColor').val(EditTopic[0].CategoryColor);
+                            editorCourseSummary.value = EditTopic[0].Summary;
 
                             if (EditTopic[0].Accessibility == '2') {
                                 $("#rbOrganization").prop("checked", true)
@@ -1020,9 +611,7 @@
                                 $("#txtInstructorName").val('');
                             }
 
-                            GetCourseCategoryTagsAndBadge('update', EditTopic[0].CategoryID, 0, EditTopic[0].TagID);
-
-                            nextTab('pills-course-tab');
+                            GetCourseCategoryTagsAndBadge('edit', EditTopic[0].CategoryID, EditTopic[0].TagID);
                         }
                         else {
                             CourseFlag = '0';
@@ -1049,21 +638,147 @@
             });
         }
 
-        function CheckCoursePublishable(IsPublishable, IsPublished) {
-            if (IsPublishable == 1 && IsPublished == 1) {
-                $("#dvPublishCourse").show();
-                // $("#dvSaveAsDraft").hide();
-            }
-            else if (IsPublished == 0 && IsPublishable == 1) {
-                $("#dvPublishCourse").show();
-                $("#dvSaveAsDraft").show();
+        function clearModalText() {
+            $('#txtTagName').val('');
+        }
+
+        function AddTag() {
+            var getUrl;
+            var requestParams;
+            ShowLoader();
+            if ($('#txtTagName').val() != '' && $('#txtTagName').val() != undefined) {
+                var _Title = $('#txtTagName').val();
+                var _Description = '';
+
+                var selectedTagsArray = $('#ddlTags').val();
+                var _selectedTags = '';
+                if (selectedTagsArray.length > 0) {
+                    for (i = 0; i < selectedTagsArray.length; i++) {
+                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
+                    }
+                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                }
+
+                var getUrl = "/API/Content/MasterAdd";
+                var requestParams = { Title: _Title, Description: _Description, type: 'tag' };
+
+                try {
+                    $.ajax({
+                        type: "POST",
+                        url: getUrl,
+                        headers: { "Authorization": "Bearer " + accessToken },
+                        data: JSON.stringify(requestParams),
+                        contentType: "application/json",
+                        success: function (response) {
+                            try {
+                                if (response != null) {
+                                    var DataSet = $.parseJSON(response);                                    
+                                    HideLoader();
+                                    if (DataSet.StatusCode == "1") {
+                                        if (DataSet.Data.Data1 != undefined) {
+                                            var Tags = DataSet.Data.Data1;
+                                            if (Tags != undefined && Tags.length > 0) {
+                                                $('#ddlTags').empty()
+                                                for (var i = 0; i < Tags.length; i++) {
+                                                    $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
+                                                }
+                                                selectInit('#ddlTags', 'Tags');
+                                            }
+                                        }
+
+                                        if (_selectedTags != undefined) {
+                                            for (i = 0; i < 1; i++) {
+                                                if (_selectedTags.includes(',,')) {
+                                                    _selectedTags = _selectedTags.replace(",,", ",");
+                                                    if (_selectedTags.includes(',,')) {
+                                                        i--;
+                                                    }
+                                                }
+                                            }
+                                            _selectedTags = _selectedTags.replace(/,\s*$/, "");
+                                            var selectedTagsArray = _selectedTags.split(',');
+                                            $("#ddlTags").val(selectedTagsArray).trigger('change');
+                                        }
+                                        //$('#txtTagName').val();
+
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: DataSet.Data.Data[0].ReturnMessage,
+                                            icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+                                                $('#modalAddTag').modal('toggle');
+                                            }
+                                        });
+                                    }
+                                    else if (DataSet.StatusCode == '0') {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error", button: "Ok" });
+                                    }
+                                    else {
+                                        HideLoader();
+                                        Swal.fire({
+                                            title: "Failure",
+                                            text: DataSet.Data.Data[0].ReturnMessage,
+                                            icon: "error",
+                                            button: "Ok",
+                                        });
+                                    }
+                                }
+                                else {
+                                    HideLoader();
+                                    Swal.fire({
+                                        title: "Failure",
+                                        text: "Please try Again",
+                                        icon: "error",
+                                        button: "Ok",
+                                    });
+
+                                }
+                            }
+                            catch (e) {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: "Please try Again",
+                                    icon: "error",
+                                    button: "Ok",
+                                });
+                            }
+                        },
+                        complete: function () {
+                            HideLoader();
+                        },
+                        failure: function (response) {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error",
+                                button: "Ok",
+                            });
+                        }
+                    });
+                }
+                catch (e) {
+                    HideLoader();
+                    Swal.fire({
+                        title: "Alert",
+                        text: "Oops! An Occured. Please try again",
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
             }
             else {
-                $("#dvPublishCourse").hide();
-                $("#dvSaveAsDraft").show();
+                HideLoader();
+                Swal.fire({
+                    title: "Alert",
+                    text: "Fill tag name",
+                    icon: "error",
+                    button: "Ok",
+                });
             }
-            if (IsPublished == 1)
-                $("#dvPublishCourse").show();
         }
 
 
@@ -1783,38 +1498,6 @@
             });
         }
 
-        function is_valid_url(url) {
-            return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(url);
-        }
-
-        function BindURL(Description) {
-            var FilePath = "";
-            var returnString = ''
-
-            if (Description != "" && Description != undefined) {
-                if (Description.split('.')[1] != undefined) {
-                    if (allowedExtensions.indexOf(Description.split('.')[1]) != -1) {
-                        FilePath = Description;
-                    }
-                    else {
-                        FilePath = Description;
-                    }
-                }
-                else {
-                    FilePath = Description;
-                }
-            }
-            if (FilePath != '' && FilePath != undefined) {
-                if (is_valid_url(FilePath)) {
-                    returnString += "<a href=" + FilePath + " target=_blank data-action='navigate'>" + FilePath + "</a>";
-                }
-                else {
-                    returnString += "<a href=" + FilePath + " target=_blank>File</a>";
-                }
-            }
-            return returnString;
-        }
-
         function BindContent(flag) {
             var getUrl = "/API/Content/GetContentList";
             var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag, ContentTypeID: ContentContentTypeID, IsGift: "true", Flag: 'learningjourney' };
@@ -1845,7 +1528,6 @@
                                         tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
                                         tblContents = tblContents + '<div class="row">';
                                         tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
-                                        //tblContents = tblContents + '<h5 class="card-title" id="spOverview">' + BindURL(Contents[i].Description) + '</h5>';//BindURL(Contents[i].Description)
                                         tblContents = tblContents + '<h5 class="card-title" id="spTitle">' + Contents[i].Title + '</h5>';
                                         tblContents = tblContents + '<a style="display:none;" target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
 
@@ -2842,8 +2524,9 @@
 
 
         var base64CourseLogo = '';
+        var base64InstructorPhoto = '';
         function encodeImagetoBase64(element, flag) {
-            //""
+            debugger
             var file = element.files[0];
             var size = file.size;
             if (file.size != undefined) {
@@ -2854,6 +2537,10 @@
                         if (flag == 'CourseLogo') {
                             base64CourseLogo = reader.result;
                             $("#imgCourseLogo").attr("src", base64CourseLogo);
+                        }
+                        else if (flag == 'InstructorPhoto') {
+                            base64InstructorPhoto = reader.result;
+                            $("#imgInstructorPhoto").attr("src", base64InstructorPhoto);
                         }
                     }
                     reader.readAsDataURL(file);
@@ -2870,207 +2557,6 @@
                 });
             }
 
-        }
-
-        function clearModalText() {
-            $('#txtTagName').val('');
-        }
-
-        function AddTag() {
-            var getUrl;
-            var requestParams;
-            ShowLoader();
-            if ($('#txtTagName').val() != '' && $('#txtTagName').val() != undefined) {
-                var _Title = $('#txtTagName').val();
-                var _Description = '';
-
-                var selectedTagsArray = $('#ddlTags').val();
-                var _selectedTags = '';
-                if (selectedTagsArray.length > 0) {
-                    for (i = 0; i < selectedTagsArray.length; i++) {
-                        _selectedTags = _selectedTags + selectedTagsArray[i] + ',';
-                    }
-                    _selectedTags = _selectedTags.replace(/,\s*$/, "");
-                }
-
-
-                var getUrl = "/API/Content/MasterAdd";
-                var requestParams = { Title: _Title, Description: _Description, type: 'tag' };
-
-                try {
-                    $.ajax({
-                        type: "POST",
-                        url: getUrl,
-                        headers: { "Authorization": "Bearer " + accessToken },
-                        data: JSON.stringify(requestParams),
-                        contentType: "application/json",
-                        success: function (response) {
-                            try {
-                                if (response != null) {
-                                    var DataSet = $.parseJSON(response);
-                                    ""
-                                    HideLoader();
-                                    if (DataSet.StatusCode == "1") {
-                                        if (DataSet.Data.Data1 != undefined) {
-                                            var Tags = DataSet.Data.Data1;
-                                            if (Tags != undefined && Tags.length > 0) {
-                                                $('#ddlTags').empty()
-                                                for (var i = 0; i < Tags.length; i++) {
-                                                    $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
-                                                }
-                                                selectInit('#ddlTags', 'Tags');
-                                            }
-                                        }
-
-                                        if (_selectedTags != undefined) {
-                                            for (i = 0; i < 1; i++) {
-                                                if (_selectedTags.includes(',,')) {
-                                                    _selectedTags = _selectedTags.replace(",,", ",");
-                                                    if (_selectedTags.includes(',,')) {
-                                                        i--;
-                                                    }
-                                                }
-                                            }
-                                            _selectedTags = _selectedTags.replace(/,\s*$/, "");
-                                            var selectedTagsArray = _selectedTags.split(',');
-                                            $("#ddlTags").val(selectedTagsArray).trigger('change');
-                                        }
-                                        //$('#txtTagName').val();
-
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-                                                $('#modalAddTag').modal('toggle');
-                                            }
-                                        });
-                                    }
-                                    else if (DataSet.StatusCode == '0') {
-                                        HideLoader();
-                                        Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error", button: "Ok" });
-                                    }
-                                    else {
-                                        HideLoader();
-                                        Swal.fire({
-                                            title: "Failure",
-                                            text: DataSet.Data.Data[0].ReturnMessage,
-                                            icon: "error",
-                                            button: "Ok",
-                                        });
-                                    }
-                                }
-                                else {
-                                    HideLoader();
-                                    Swal.fire({
-                                        title: "Failure",
-                                        text: "Please try Again",
-                                        icon: "error",
-                                        button: "Ok",
-                                    });
-
-                                }
-                            }
-                            catch (e) {
-                                HideLoader();
-                                Swal.fire({
-                                    title: "Failure",
-                                    text: "Please try Again",
-                                    icon: "error",
-                                    button: "Ok",
-                                });
-                            }
-                        },
-                        complete: function () {
-                            HideLoader();
-                        },
-                        failure: function (response) {
-                            HideLoader();
-                            Swal.fire({
-                                title: "Failure",
-                                text: "Please try Again",
-                                icon: "error",
-                                button: "Ok",
-                            });
-                        }
-                    });
-                }
-                catch (e) {
-                    HideLoader();
-                    Swal.fire({
-                        title: "Alert",
-                        text: "Oops! An Occured. Please try again",
-                        icon: "error",
-                        button: "Ok",
-                    });
-                }
-            }
-            else {
-                HideLoader();
-                Swal.fire({
-                    title: "Alert",
-                    text: "Fill tag name",
-                    icon: "error",
-                    button: "Ok",
-                });
-            }
-        }
-
-
-        function PublishCourse(flag) {
-            ShowLoader();
-            var TopicID = CourseFlag;
-            var getUrl = "/API/Content/PublishCourse";
-
-            try {
-                var requestParams = { TopicID: CourseFlag };
-
-                $.ajax({
-                    type: "POST",
-                    url: getUrl,
-                    headers: { "Authorization": "Bearer " + accessToken },
-                    data: JSON.stringify(requestParams),
-                    contentType: "application/json",
-                    //async: false,//Added on 18 APR
-                    success: function (response) {
-                        try {
-                            var DataSet = $.parseJSON(response);
-                            if (DataSet != null && DataSet != "") {
-                                Swal.fire({
-                                    title: "Success",
-                                    text: "Course has been published",
-                                    icon: "success"
-                                }).then((value) => {
-                                    if (value) {
-                                        document.location = 'courses.aspx';
-                                    }
-                                });
-                            }
-                            else {
-                                HideLoader();
-                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                            }
-                        }
-                        catch (e) {
-                            HideLoader();
-                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                        }
-                    },
-                    complete: function () {
-                        HideLoader();
-                    },
-                    failure: function (response) {
-                        HideLoader();
-                        alert(response.data);
-                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                    }
-                });
-            }
-            catch (e) {
-                HideLoader();
-                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
-            }
         }
 
         function IsCoursePublishable(flag) {
@@ -3157,16 +2643,80 @@
         }
 
 
-        $("#cbxInstructorName").click(function () {
-            debugger
-            if ($("#cbxInstructorName").prop('checked') == true) {
-                $("#divInstructorName").hide();
+        function PublishCourse(flag) {
+            ShowLoader();
+            var TopicID = CourseFlag;
+            var getUrl = "/API/Content/PublishCourse";
+
+            try {
+                var requestParams = { TopicID: CourseFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    //async: false,//Added on 18 APR
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            if (DataSet != null && DataSet != "") {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Course has been published",
+                                    icon: "success"
+                                }).then((value) => {
+                                    if (value) {
+                                        document.location = 'courses.aspx';
+                                    }
+                                });
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+        function CheckCoursePublishable(IsPublishable, IsPublished) {
+            if (IsPublishable == 1 && IsPublished == 1) {
+                $("#dvPublishCourse").show();
+                // $("#dvSaveAsDraft").hide();
+            }
+            else if (IsPublished == 0 && IsPublishable == 1) {
+                $("#dvPublishCourse").show();
+                $("#dvSaveAsDraft").show();
             }
             else {
-                $("#divInstructorName").show();
-                $("#txtInstructorName").val('');
+                $("#dvPublishCourse").hide();
+                $("#dvSaveAsDraft").show();
             }
-        })
+            if (IsPublished == 1)
+                $("#dvPublishCourse").show();
+        }
+
+
 
     </script>
+
 </asp:Content>

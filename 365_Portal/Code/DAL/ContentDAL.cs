@@ -20,9 +20,9 @@ namespace _365_Portal.Code.DAL
         /// <summary>
         /// Data Access Layer for Topic Creation and Modification
         /// </summary>
+
         public static DataSet CreateTopic(int Action, ContentBO content)
         {
-
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
 
@@ -33,15 +33,7 @@ namespace _365_Portal.Code.DAL
                 string stm = "spCreateTopic";
                 MySqlCommand cmd = new MySqlCommand(stm, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("p_Action", Action);
-                //if (!string.IsNullOrEmpty(content.UserIDs))
-                //{
-                //    cmd.Parameters.AddWithValue("p_UserID", content.UserIDs);
-                //}
-                //else
-                //{
-                //    cmd.Parameters.AddWithValue("p_UserID", DBNull.Value);
-                //}
+                cmd.Parameters.AddWithValue("p_Action", Action);               
                 cmd.Parameters.AddWithValue("p_TopicID", content.TopicID);
                 cmd.Parameters.AddWithValue("p_CompID", content.CompID);
                 if (!string.IsNullOrEmpty(content.TopicTitle))
@@ -60,14 +52,15 @@ namespace _365_Portal.Code.DAL
                 {
                     cmd.Parameters.AddWithValue("p_Description", DBNull.Value);
                 }
-                //if (!string.IsNullOrEmpty(content.TopicOverview))
-                //{
-                //    cmd.Parameters.AddWithValue("p_TopicOverview", content.TopicOverview);
-                //}
-                //else
-                //{
-                //    cmd.Parameters.AddWithValue("p_TopicOverview", DBNull.Value);
-                //}
+                if (!string.IsNullOrEmpty(content.TopicSummary))
+                {
+                    cmd.Parameters.AddWithValue("p_Summary", content.TopicSummary);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_Summary", DBNull.Value);
+                }
+                
                 if (!string.IsNullOrEmpty(content.SrNo.ToString()))
                 {
                     cmd.Parameters.AddWithValue("p_SrNo", content.SrNo);
@@ -98,6 +91,7 @@ namespace _365_Portal.Code.DAL
                 {
                     cmd.Parameters.AddWithValue("p_CategoryColor", DBNull.Value);
                 }
+
                 cmd.Parameters.AddWithValue("p_Points", content.Points);
                 if (!string.IsNullOrEmpty(content.CourseTime))
                 {
@@ -107,14 +101,31 @@ namespace _365_Portal.Code.DAL
                 {
                     cmd.Parameters.AddWithValue("p_CourseTime", DBNull.Value);
                 }
-                cmd.Parameters.AddWithValue("p_CourseLogoFileID", content.CourseLogoFileID);
+                
+                if (content.CourseLogoFileID > 0)
+                {
+                    cmd.Parameters.AddWithValue("p_CourseLogoFileID", content.CourseLogoFileID);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_CourseLogoFileID", DBNull.Value);
+                }
+
                 cmd.Parameters.AddWithValue("p_AchievementBadgeID", content.AchievementBadge);
                 cmd.Parameters.AddWithValue("p_Accessibility", content.Accessibility);
                 cmd.Parameters.AddWithValue("p_selectedTags", content.selectedTags);
 
                 cmd.Parameters.AddWithValue("p_IsCourseCreator", content.IsCourseCreator);
                 cmd.Parameters.AddWithValue("p_InstructorName", content.InstructorName);
-                cmd.Parameters.AddWithValue("p_InspectorImageFileID", content.InspectorImageFileID);
+                
+                if (content.InstructorImageFileID > 0)
+                {
+                    cmd.Parameters.AddWithValue("p_InstructorImageFileID", content.InstructorImageFileID);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("p_InstructorImageFileID", DBNull.Value);
+                }
 
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");

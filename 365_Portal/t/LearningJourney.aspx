@@ -130,7 +130,7 @@
                                                     <label><i class="fas fa-plus-circle black"></i>Course Logo</label>
                                                     <a class="rounded-icon" onclick="editCourseLogo('.course-logo');"><i class="fas fa-pen"></i></a>
                                                     <div class="custom-file">
-                                                        <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
+                                                        <input type="file" id="imgCourseLogo" onchange="encodeImagetoBase64(this,'CourseLogo')">
                                                     </div>
                                                 </div>
                                                 <div class="logo-img" id="divCourseLogo"></div>
