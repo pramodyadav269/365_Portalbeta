@@ -3653,6 +3653,28 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
 
+        .logo-img {
+            position: absolute;
+            left: 16px;
+
+            img {
+                height: 124px;
+            }
+
+            &.img {
+                & + .custom-file {
+                    .custom-file-label {
+                        border: none;
+                        color: transparent;
+
+                        &::before {
+                            content: unset;
+                        }
+                    }
+                }
+            }
+        }
+
         .logo {
             &.custom-file {
                 height: 124px;
@@ -3665,7 +3687,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     text-align: center;
                     color: #212338;
                     font-size: 12px;
-                    padding: 16px 6px;
+                    padding: 26px 6px;
                     background-color: transparent;
 
                     &::before {
@@ -3684,7 +3706,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         content: "Browse";
                         border: 0;
                         background: transparent;
-                        position: relative;
+                        position: absolute;
+                        top: -38px;
+                        right: -10px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -3769,6 +3794,30 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     &.form-text {
                         color: #ADADAD;
                     }
+                }
+            }
+        }
+
+        &.color-picker {
+            display: flex;
+
+            .form-control {
+                width: 30px;
+                border: none;
+                padding: 0;
+                position: relative;
+                top: -6px;
+                left: 14px;
+                cursor: pointer;
+
+                &::after {
+                    font-family: "Font Awesome 5 Free";
+                    font-weight: 600;
+                    content: "\f304";
+                    color: rgba(0, 0, 0, 0.4);
+                    position: absolute;
+                    top: 6px;
+                    right: -26px;
                 }
             }
         }

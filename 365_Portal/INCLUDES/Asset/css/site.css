@@ -2507,6 +2507,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           color: #212338; }
       .course-flow .form-group .select2-container .select2-selection.select2-selection--single .select2-selection__arrow {
         display: none; }
+    .course-flow .form-group .logo-img {
+      position: absolute;
+      left: 16px; }
+      .course-flow .form-group .logo-img img {
+        height: 124px; }
+      .course-flow .form-group .logo-img.img + .custom-file .custom-file-label {
+        border: none;
+        color: transparent; }
+        .course-flow .form-group .logo-img.img + .custom-file .custom-file-label::before {
+          content: unset; }
     .course-flow .form-group .logo.custom-file {
       height: 124px; }
       .course-flow .form-group .logo.custom-file .custom-file-label {
@@ -2517,7 +2527,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         text-align: center;
         color: #212338;
         font-size: 12px;
-        padding: 16px 6px;
+        padding: 26px 6px;
         background-color: transparent; }
         .course-flow .form-group .logo.custom-file .custom-file-label::before {
           position: relative;
@@ -2533,7 +2543,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           content: "Browse";
           border: 0;
           background: transparent;
-          position: relative; }
+          position: absolute;
+          top: -38px;
+          right: -10px;
+          cursor: pointer; }
     .course-flow .form-group ::placeholder {
       font-size: 14px;
       font-weight: 600;
@@ -2583,6 +2596,24 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }
+    .course-flow .form-group.color-picker {
+      display: flex; }
+      .course-flow .form-group.color-picker .form-control {
+        width: 30px;
+        border: none;
+        padding: 0;
+        position: relative;
+        top: -6px;
+        left: 14px;
+        cursor: pointer; }
+        .course-flow .form-group.color-picker .form-control::after {
+          font-family: "Font Awesome 5 Free";
+          font-weight: 600;
+          content: "\f304";
+          color: rgba(0, 0, 0, 0.4);
+          position: absolute;
+          top: 6px;
+          right: -26px; }
   .course-flow .builder {
     display: flex;
     justify-content: space-between;

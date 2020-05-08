@@ -41,7 +41,7 @@
                                             <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12 col-md-6">
                                         <div class="form-group asterisk">
                                             <label for="ddlCourseCategory" class="inline">Course Category</label>
                                             <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
@@ -55,9 +55,16 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="form-group color-picker">
+                                            <label for="txtCourseThemeColor">Theme Color</label>
+                                            <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                        </div>
+                                    </div>
                                     <div class="col-sm-12">
                                         <div class="form-group editor">
-                                            <label>Course Summary </label><%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
+                                            <label>Course Summary </label>
+                                            <%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
                                             <div id="txtCourseSummary"></div>
                                         </div>
                                     </div>
@@ -69,12 +76,17 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label><i class="fas fa-plus-circle"></i>Course Logo </label><%--<span>Set the image for the course.</span>--%>
+                                            <label><i class="fas fa-plus-circle"></i>Course Logo </label>
+                                            <%--<span>Set the image for the course.</span>--%>
+                                            <div class="logo-img" id="divCourseLogo"></div>
                                             <div class="custom-file logo">
-                                                <input type="file" class="custom-file-input" id="imgCourseLogo">
-                                                <label class="custom-file-label" for="imgCourseLogo">Drop your image here or </label>
+                                                <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
+                                                <%--<img src=""/>--%>
+                                                <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
                                             </div>
+                                            
                                         </div>
+                                        
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -235,10 +247,10 @@
                                                     </div>--%>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                        <div class="form-group color-picker">
+                                      <%--  <div class="form-group color-picker">
                                             <label for="txtThemeColor">Theme Color</label>
                                             <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
-                                        </div>
+                                        </div>--%>
                                     </div>
                                     <div class="col-sm-12 col-md-6">
                                         <%--  <div class="form-group">
@@ -297,7 +309,7 @@
                                                         <input type="file" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
                                                     </div>
                                                 </div>--%>
-                                        <div class="logo-img" id="divCourseLogo"></div>
+                                        <%--<div class="logo-img" id="divCourseLogo"></div>--%>
                                         <%-- if image set then use this html --%>
                                         <%--<div class="logo-img img">
                                                     <img src="../INCLUDES/Asset/images/sun.png" class="img-fluid" />
