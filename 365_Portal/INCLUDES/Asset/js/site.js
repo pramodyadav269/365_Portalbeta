@@ -90,7 +90,17 @@ $(document).ready(function () {
             $(this).parents('.form-group').find('.tag.content').addClass('label');
         }
     });
+
+    $('.collapse').collapse();
 });
+
+function collapseToggle(el, flag) {
+    if (flag === 1) {
+        $(el).collapse('show');
+    } else if (flag === 0) {
+        $(el).collapse('hide');
+    }
+}
 
 function closeDatetime() {
     $('.inline-picker').addClass('d-none');
