@@ -91,6 +91,15 @@ $(document).ready(function () {
         }
     });
 
+   
+
+    if ($('#headingCourse h5').text() === "") {
+        $('#headingCourse').hide();
+    } else {
+        $('.course-collapse .collapse').removeClass('in');
+        $('.course-collapse .collapse').addClass('show');
+    }
+
     $('.collapse').collapse();
 });
 

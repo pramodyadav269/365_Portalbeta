@@ -23,109 +23,118 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 mt-4">
+
+            <div class="col-12 col-sm-12 mt-4 accordion course-collapse">
                 <div class="card">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtCourseTitle" class="inline">Course Title</label>
-                                            <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
+                    <div class="card-header" id="headingCourse">
+                        <h5></h5>
+                        <a data-toggle="collapse" data-target="#collapseCourse" aria-expanded="true" aria-controls="collapseCourse">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                    <div id="collapseCourse" class="collapse in" aria-labelledby="headingCourse">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group asterisk">
+                                                <label for="txtCourseTitle" class="inline">Course Title</label>
+                                                <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtCourseDescription" class="inline">Course Description</label>
-                                            <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
+                                        <div class="col-sm-12">
+                                            <div class="form-group asterisk">
+                                                <label for="txtCourseDescription" class="inline">Course Description</label>
+                                                <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="form-group asterisk">
-                                            <label for="ddlCourseCategory" class="inline">Course Category</label>
-                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
-                                            </select>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group asterisk">
+                                                <label for="ddlCourseCategory" class="inline">Course Category</label>
+                                                <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group asterisk">
-                                            <label for="ddlTags" class="inline">Tags</label>
-                                            <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group asterisk">
+                                                <label for="ddlTags" class="inline">Tags</label>
+                                                <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="form-group color-picker">
-                                            <label for="txtCourseThemeColor">Theme Color</label>
-                                            <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group color-picker">
+                                                <label for="txtCourseThemeColor">Theme Color</label>
+                                                <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group editor">
-                                            <label>Course Summary </label>
-                                            <%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
-                                            <div id="txtCourseSummary"></div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group editor">
+                                                <label>Course Summary </label>
+                                                <%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
+                                                <div id="txtCourseSummary"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
-                            <div class="card-body right-side-content">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label><i class="fas fa-plus-circle"></i>Course Logo </label>
-                                            <%--<span>Set the image for the course.</span>--%>
-                                            <div class="logo-img" id="divCourseLogo"></div>
-                                            <div class="custom-file logo">
-                                                <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
-                                                <%--<img src=""/>--%>
-                                                <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
+                                <div class="card-body right-side-content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label><i class="fas fa-plus-circle"></i>Course Logo </label>
+                                                <%--<span>Set the image for the course.</span>--%>
+                                                <div class="logo-img" id="divCourseLogo"></div>
+                                                <div class="custom-file logo">
+                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURL(this, '.logo-img');encodeImagetoBase64(this,'CourseLogo')">
+                                                    <%--<img src=""/>--%>
+                                                    <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
+                                                </div>
+
                                             </div>
 
                                         </div>
-
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="instructor checkbox">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" class="custom-control-input" checked>
-                                                    <label class="custom-control-label" for="cbxInstructorName">Same as Admin</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="instructor checkbox">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="cbxInstructorName">Same as Admin</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
-                                            <div class="instructor">
-                                                <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
+                                                <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
+                                                <div class="instructor">
+                                                    <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
 
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="imgInstructorPhoto">
-                                                    <label class="custom-file-label" for="imgInstructorPhoto">Add Image</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto">
+                                                        <label class="custom-file-label" for="imgInstructorPhoto">Add Image</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group radio">
-                                            <label><i class="fas fa-share-alt-square"></i>Sharing</label>
-                                            <div class="sharing">
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
-                                                    <label class="custom-control-label" for="rbGlobal">Global</label>
-                                                    <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
-                                                    <label class="custom-control-label" for="rbOrganization">Organization</label>
-                                                    <small class="form-text">Anyone within this organization can find and access this course.</small>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
-                                                    <label class="custom-control-label" for="rbAssigned">Assigned</label>
-                                                    <small class="form-text">Only shared with assignees.</small>
+                                        <div class="col-sm-12">
+                                            <div class="form-group radio">
+                                                <label><i class="fas fa-share-alt-square"></i>Sharing</label>
+                                                <div class="sharing">
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="rbGlobal">Global</label>
+                                                        <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
+                                                        <label class="custom-control-label" for="rbOrganization">Organization</label>
+                                                        <small class="form-text">Anyone within this organization can find and access this course.</small>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
+                                                        <label class="custom-control-label" for="rbAssigned">Assigned</label>
+                                                        <small class="form-text">Only shared with assignees.</small>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,12 +147,12 @@
             </div>
 
             <%-- in progresss --%>
-            <div class="col-12 col-sm-12 mt-4 course-collapse">
+            <div class="col-12 col-sm-12 mt-4 course-content-collapse">
                 <div class="builder">
                     <div class="builder-title">
                         <img src="../INCLUDES/Asset/images/builder.png" /><span>Course Builder</span>
                     </div>
-                    <div class="builder-action"><span onclick="collapseToggle('.course-collapse .collapse',1);">Expand All</span><span onclick="collapseToggle('.course-collapse .collapse',0);">Collapse All</span></div>
+                    <div class="builder-action"><span onclick="collapseToggle('.course-content-collapse .collapse',1);">Expand All</span><span onclick="collapseToggle('.course-content-collapse .collapse',0);">Collapse All</span></div>
                 </div>
                 <div class="card mb-4">
                     <div class="row">
@@ -942,7 +951,7 @@
         var pasingPercentage = 0;
 
         $(document).ready(function () {
-            ""
+
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
@@ -3594,8 +3603,8 @@
         }
 
         function AddAnswer() {
-         
-            var addAns = '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">'+
+
+            var addAns = '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
                 '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>' +
                 '<div class="col-sm-8 col-md-10">' +
                 '    <div class="row">' +
@@ -3603,7 +3612,7 @@
                 '            <div class="form-group">' +
                 '                <input type="text" class="form-control" placeholder="Answer Option" />' +
                 '            </div>' +
-            '        </div>' +
+                '        </div>' +
                 '        <div class="col-sm-3 col-md-2">' +
                 '            <div class="form-group">' +
                 '                <input type="text" class="form-control" placeholder="Assign Score" />' +
@@ -3613,7 +3622,7 @@
                 '</div>' +
                 '<span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>' +
                 '<span class="checked-icon delete"><i class="fa fa-trash-alt" onclick="DeleteAnsOption(this)"></i></span>' +
-            '</div>';
+                '</div>';
 
 
 

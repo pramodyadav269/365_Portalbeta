@@ -2656,7 +2656,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   .course-flow .accordion .card {
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
     border-radius: 3px;
-    margin-bottom: 34px;
     overflow: unset; }
     .course-flow .accordion .card .card-header {
       background-color: #fff;
@@ -2667,7 +2666,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         font-size: 16px;
         font-weight: bold;
         margin: 0; }
-    .course-flow .accordion .card .card-body {
+  .course-flow .course-content-collapse .accordion {
+    margin-bottom: 34px; }
+    .course-flow .course-content-collapse .accordion .card .card-body {
       padding: 14px 16px; }
   .course-flow label {
     font-size: 14px;
