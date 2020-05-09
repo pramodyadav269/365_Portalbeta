@@ -614,44 +614,6 @@
             });
         }
 
-        function initDragDrop() {
-            // for card drag and drop
-            var adjustment;
-            $('.section-sorting').sortable('refresh')
-            $("ol.section-sorting").sortable({
-                group: 'section-sorting',
-                pullPlaceholder: false,
-                // animation on drop
-                onDrop: function ($item, container, _super) {
-                    _super($item, container);
-                    // added by imtiyaz (statusId)
-                    var statusId = container.el.attr('status_id');
-                    var ProjectId = $item.attr('project_Id');
-                    var taskId = $item.attr('task_Id');
-                    var taskName = $item.attr("task_Name");
-                    //alert("statusId:" + statusId + " ProjectId:" + ProjectId + " taskId:" + taskId);
-                    UpdateTaskStatus(ProjectId, taskId, statusId, taskName);
-                },
-                // set $item relative to cursor position
-                onDragStart: function ($item, container, _super) {
-                    var offset = $item.offset(),
-                        pointer = container.rootGroup.pointer;
-                    adjustment = {
-                        left: pointer.left - offset.left,
-                        top: pointer.top - offset.top
-                    };
-                    _super($item, container);
-                },
-                onDrag: function ($item, position) {
-                    $item.css({
-                        left: position.left - adjustment.left,
-                        top: position.top - adjustment.top
-                    });
-                }
-            });
-        }
-
-
         function bindTaskStatusCounts(jsonTaskList) {
             var TotalTasksCount = jsonTaskList.length;
             $("#spnTotalTasksCount").html(TotalTasksCount);
@@ -771,6 +733,7 @@
         }
 
         function BindTaskDetailsBYTaskId(TaskId) {
+            //alert(TaskId);
             ClearTaskForm();
             var requestParams = {
                 t_Action: "1"
@@ -999,6 +962,7 @@
         }
 
         function DeleteTaskBYTaskId(TaskId, TaskName) {
+           // alert(TaskId + TaskName);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Task!",
@@ -1702,9 +1666,9 @@
                         cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         newCardHtml += '<div class="wr-content">';
                         newCardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
-                        newCardHtml += '<i class="fas fa-pen" onclick="BindTaskDetailsBYTaskId(' + objTask.TaskID + ')"></i>';
+                        newCardHtml += '<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '"  clickevent="edit" >Edit</a>';
                         if (Role != "enduser") {
-                            newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskBYTaskId(' + objTask.TaskID + ',\'' + objTask.TaskName + '\');"></i>';
+                            newCardHtml += '|<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '" clickevent="delete">Delete</a>';
                         }
                         newCardHtml += '</div></div>';
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
@@ -1778,7 +1742,7 @@
                     items: '.board-item',
                     layoutDuration: 400,
                     layoutEasing: 'ease',
-                    dragEnabled: false,
+                    dragEnabled: true,
                     dragSort: function () {
                         return columnGrids;
                     },
@@ -1859,10 +1823,27 @@
             boardGrid = new Muuri('.board', {
                 layoutDuration: 400,
                 layoutEasing: 'ease',
-                dragEnabled: false,
+                dragEnabled: true,
                 dragSortInterval: 0,
-                dragStartPredicate: {
-                    handle: '.board-column-header'
+                dragStartPredicate: function (item, event) {
+                    if (event.target.nodeName == 'A') {
+                        var taskId = event.target.attributes.task_Id.value;
+                        var taskName = event.target.attributes.task_name.value;
+                        var taskEvent = event.target.attributes.clickevent.value;
+                        if (taskEvent == 'edit') {
+                            BindTaskDetailsBYTaskId(taskId);
+                        }
+                        else if (taskEvent == 'delete') {
+                            DeleteTaskBYTaskId(taskId, taskName);
+                        }
+                        return false;
+                    }
+
+                    return Muuri.ItemDrag.defaultStartPredicate(item, event, {
+                        distance: 400, //How many pixels must be dragged before the dragging starts.
+                        delay: 1000, // How long (in milliseconds) the user must drag before the dragging starts.
+                        handle: '.board-column-header'
+                    });
                 },
                 dragReleaseDuration: 400,
                 dragReleaseEasing: 'ease'
@@ -2119,44 +2100,44 @@
                 var jsonActivityList = $.parseJSON(response).Data.Data;
                 var DistinctDates = GetDistinctDates(jsonActivityList);
                 var Html = '';
-                if(DistinctDates != null && DistinctDates.length > 0)
-                $.each(DistinctDates, function (index, objdates) {
-                    Html += '<div class="activity-wrapper">';
-                    Html += '<div class="day">' + objdates.formateddate + '</div>';
+                if (DistinctDates != null && DistinctDates.length > 0)
+                    $.each(DistinctDates, function (index, objdates) {
+                        Html += '<div class="activity-wrapper">';
+                        Html += '<div class="day">' + objdates.formateddate + '</div>';
 
-                    var DateWiseActivities = $.grep(jsonActivityList, function (n) {
-                        var listdate = moment(n.CreatedDate).format("MMM DD YYYY");
-                        return listdate == objdates.formateddate;
-                    });
+                        var DateWiseActivities = $.grep(jsonActivityList, function (n) {
+                            var listdate = moment(n.CreatedDate).format("MMM DD YYYY");
+                            return listdate == objdates.formateddate;
+                        });
 
-                    $.each(DateWiseActivities, function (index, objactivity) {
-                        Html += '<div class="activity">';
-                        if (objactivity.ActivityMasterId == 201 || objactivity.ActivityMasterId == 204 || objactivity.ActivityMasterId == 211) {
-                            Html += '<div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>';
-                        }
-                        else if (objactivity.ActivityMasterId == 202 || objactivity.ActivityMasterId == 205 || objactivity.ActivityMasterId == 212 || objactivity.ActivityMasterId == 207) {
-                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-pencil-alt"></i></span></div>';
-                        }
-                        else if (objactivity.ActivityMasterId == 203 || objactivity.ActivityMasterId == 206 || objactivity.ActivityMasterId == 213) {
-                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-trash-alt"></i></span></div>';
-                        }
-                        else if (objactivity.ActivityMasterId == 208) {
-                            Html += '<div class="pre-icon"><span class="upload"><i class="fas fa-upload"></i></span></div>';
-                        }
-                        else if (objactivity.ActivityMasterId == 209) {
-                            Html += '<div class="pre-icon"><span class="comment"><i class="fas fa-comment-alt"></i></span></div>';
-                        }
-                        else {
-                            Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-list-alt"></i></span></div>';
-                        }
-                        Html += '<div class="col-12 col-md-8 col-lg-10 content">';
-                        Html += objactivity.Message;
-                        Html += '</div>';
-                        Html += '<div class="time">' + moment(objactivity.CreatedDate).format("HH:mm a") + '</div>';
+                        $.each(DateWiseActivities, function (index, objactivity) {
+                            Html += '<div class="activity">';
+                            if (objactivity.ActivityMasterId == 201 || objactivity.ActivityMasterId == 204 || objactivity.ActivityMasterId == 211) {
+                                Html += '<div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>';
+                            }
+                            else if (objactivity.ActivityMasterId == 202 || objactivity.ActivityMasterId == 205 || objactivity.ActivityMasterId == 212 || objactivity.ActivityMasterId == 207) {
+                                Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-pencil-alt"></i></span></div>';
+                            }
+                            else if (objactivity.ActivityMasterId == 203 || objactivity.ActivityMasterId == 206 || objactivity.ActivityMasterId == 213) {
+                                Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-trash-alt"></i></span></div>';
+                            }
+                            else if (objactivity.ActivityMasterId == 208) {
+                                Html += '<div class="pre-icon"><span class="upload"><i class="fas fa-upload"></i></span></div>';
+                            }
+                            else if (objactivity.ActivityMasterId == 209) {
+                                Html += '<div class="pre-icon"><span class="comment"><i class="fas fa-comment-alt"></i></span></div>';
+                            }
+                            else {
+                                Html += '<div class="pre-icon"><span class="pencil"><i class="fas fa-list-alt"></i></span></div>';
+                            }
+                            Html += '<div class="col-12 col-md-8 col-lg-10 content">';
+                            Html += objactivity.Message;
+                            Html += '</div>';
+                            Html += '<div class="time">' + moment(objactivity.CreatedDate).format("HH:mm a") + '</div>';
+                            Html += '</div>';
+                        });
                         Html += '</div>';
                     });
-                    Html += '</div>';
-                });
                 $("#dvActivitybody").empty().html(Html);
                 HideLoader();
 
