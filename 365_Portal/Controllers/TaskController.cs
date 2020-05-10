@@ -11,10 +11,12 @@ namespace _365_Portal.Controllers
     public class TaskController : ApiController
     {
         private System.Web.Script.Serialization.JavaScriptSerializer jsSerializer;
+        private string UserName = string.Empty;
 
         private TaskController()
         {
             jsSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            UserName = Convert.ToString(System.Web.HttpContext.Current.Session["UserFullName"]);
         }
 
         [Route("api/Task/TaskCRUD")]
@@ -40,13 +42,13 @@ namespace _365_Portal.Controllers
                     if (task.t_Action == 2 || task.t_Action == 3 || task.t_Action == 4)
                     {
                         ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), task.t_Action, task.t_CompID, task.t_UserId
-                          , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName);
+                          , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName);
                         var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
 
                         if (!string.IsNullOrEmpty(task.t_FileName))
                         {
                             ActivityLog objlogfie = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), (int)TaskAction.FILEADDED, task.t_CompID, task.t_UserId
-                       , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName, task.t_FileName);
+                       , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName, task.t_FileName);
                             var dsActivityLogfile = ActivityLogBL.LogCRUD(objlogfie);
 
                         }
@@ -54,7 +56,7 @@ namespace _365_Portal.Controllers
                         if (!string.IsNullOrEmpty(task.t_Comments))
                         {
                             ActivityLog objlogcomments = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), (int)TaskAction.COMMENTSADDED, task.t_CompID, task.t_UserId
-                       , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName, task.t_Comments);
+                       , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName, task.t_Comments);
                             var dsActivityLogfile = ActivityLogBL.LogCRUD(objlogcomments);
 
                         }
@@ -91,7 +93,7 @@ namespace _365_Portal.Controllers
                     data = Utility.Successful(data);
 
                     ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), 10, task.Param_CompID, task.Param_UserID
-                      , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.Param_TaskName);
+                      , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.Param_TaskName,"",task.Param_ProjectName,task.Param_StatusName);
                     var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                 }
                 catch (Exception ex)

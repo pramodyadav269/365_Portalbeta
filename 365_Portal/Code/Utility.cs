@@ -439,6 +439,7 @@ namespace _365_Portal.Code
             System.Web.HttpContext.Current.Session["FirstName"] = FirstName;
             System.Web.HttpContext.Current.Session["LastName"] = LastName;
             System.Web.HttpContext.Current.Session["EmailID"] = emailId;
+            System.Web.HttpContext.Current.Session["UserFullName"] = FirstName +" " + LastName;
         }
         public static void CreateProfileAndThemeSession(string ProfilePicFileID, string CompanyProfilePicFileID, string ThemeColor)
         {

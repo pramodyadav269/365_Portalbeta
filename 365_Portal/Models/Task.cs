@@ -36,7 +36,10 @@ namespace _365_Portal.Models
         public string Param_Comments { get; set; }
         public int Param_UserID { get; set; }
 
+        public string Param_ProjectName { get; set; }
         public string Param_TaskName { get; set; }
+        public string Param_StatusName { get; set; }
+
 
     }
 }
