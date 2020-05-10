@@ -100,6 +100,14 @@ $(document).ready(function () {
         $('.course-collapse .collapse').addClass('show');
     }
 
+    if ($('#headingLesson h5').text() === "") {
+        $('#headingLesson').hide();
+
+    } else {
+        $('#collapseLesson.collapse').removeClass('in');
+        $('#collapseLesson.collapse').addClass('show');
+    }
+
     $('.collapse').collapse();
 });
 
