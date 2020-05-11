@@ -1,11 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew1.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .btnSpace {
+            margin-bottom: 10px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-
     <div class="course-flow">
         <div class="row">
-
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
                     <h4 class="title">Add Course</h4>
@@ -25,112 +29,127 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-12 mt-4">
+            <div class="col-12 col-sm-12 mt-4 accordion course-collapse">
                 <div class="card">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtCourseTitle" class="inline">Course Title</label>
-                                            <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
+                    <div class="card-header" id="headingCourse">
+                        <%--<h5>hdfhadfhsdhffldsdhfkf</h5>--%><%--keep some text in this heading if want to collapse.The code is written in site.js file in ready function at line no 96--%>
+                        <h5></h5>
+                        <a data-toggle="collapse" data-target="#collapseCourse" aria-expanded="true" aria-controls="collapseCourse">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                    <div id="collapseCourse" class="collapse in" aria-labelledby="headingCourse">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group asterisk">
+                                                <label for="txtCourseTitle" class="inline">Course Title</label>
+                                                <input type="text" class="form-control required" id="txtCourseTitle" placeholder="Add New Course Title" />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group asterisk">
-                                            <label for="txtCourseDescription" class="inline">Course Description</label>
-                                            <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
+                                        <div class="col-sm-12">
+                                            <div class="form-group asterisk">
+                                                <label for="txtCourseDescription" class="inline">Course Description</label>
+                                                <textarea class="form-control required" id="txtCourseDescription" placeholder="Add Course Description"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group asterisk">
-                                            <label for="ddlCourseCategory" class="inline">Course Category</label>
-                                            <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
-                                            </select>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group asterisk">
+                                                <label for="ddlCourseCategory" class="inline">Course Category</label>
+                                                <select class="form-control select2 required" id="ddlCourseCategory" style="width: 100% !important">
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group asterisk">
-                                            <label for="ddlTags" class="inline">Tags</label>
-                                            <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
-                                            </select>
+                                        <div class="col-sm-6">
+                                            <div class="form-group asterisk">
+                                                <label for="ddlTags" class="inline">Tags</label>
+                                                <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
+                                                </select>
+                                            </div>
+                                        </div>                                        
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="form-group color-picker">
+                                                <label for="txtCourseThemeColor">Theme Color</label>
+                                                <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <a id="btnManageTags" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();" href="#"><u>Manage Tags</u></a>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group editor">
+                                                <label>Course Summary </label>
+                                                <%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
+                                                <div id="txtCourseSummary"></div>
+                                            </div>
+                                        </div>
 
-                                    <%--<div class="col-sm-6">--%>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="form-group color-picker">
-                                            <label for="txtThemeColor">Theme Color</label>
-                                            <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
+                                        <div class="col-sm-12 col-md-6 btnSpace">
+                                            <a class="btn btn-black" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Add Course</a>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <a id="btnManageTags" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();" href="#"><u>Manage Tags</u></a>
-                                    </div>
 
-                                    <div class="col-sm-12">                                    
-                                        <div class="form-group editor">
-                                            <label>Course Summary </label><%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
-                                            <div id="txtCourseSummary"></div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
-                            <div class="card-body right-side-content">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label><i class="fas fa-plus-circle"></i>Course Logo </label><%--<span>Set the image for the course.</span>--%>
-                                            <div class="custom-file logo">
-                                                <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="encodeImagetoBase64(this,'CourseLogo')">
-                                                <label class="custom-file-label" for="imgCourseLogo">Drop your image here or </label>
-                                            </div>                                            
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
+                                <div class="card-body right-side-content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label><i class="fas fa-plus-circle"></i>Course Logo </label>
+                                                <%--<span>Set the image for the course.</span>--%>
+                                                <div class="logo-img course-logo" id="divCourseLogo"></div>
+                                                <div class="custom-file logo">
+                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURL(this, '.course-logo');encodeImagetoBase64(this,'CourseLogo')">
+                                                    <%--<img src=""/>--%>
+                                                    <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
+                                                </div>
+
+                                            </div>
+
                                         </div>
-
-                                        <div class="logo-img" id="divCourseLogo"></div>
-
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="instructor checkbox">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" onclick="ManageInstructor();" class="custom-control-input" checked>
-                                                    <label class="custom-control-label" for="cbxInstructorName">Same as Admin</label>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="instructor checkbox">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" id="cbxInstructorName" name="cbxInstructorName" onclick="ManageInstructor();" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="cbxInstructorName">Same as Admin</label>
+                                                    </div>
+                                                </div>
+                                                <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
+                                                <div class="instructor" style="display:none;" id="divInstructorName">
+                                                    <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
+                                                    
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURL(this, '.instructor-photo');encodeImagetoBase64(this,'InstructorPhoto')">
+                                                        <label class="custom-file-label" for="imgInstructorPhoto" id="lblInstructorPhoto">Add Image</label>
+                                                    </div>
+                                                    <div class="logo-img instructor-photo position-relative" id="divInstructorPhoto"></div>
                                                 </div>
                                             </div>
-                                            <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
-                                            <div class="instructor" style="display:none;" id="divInstructorName">
-                                                <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
-
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="encodeImagetoBase64(this,'InstructorPhoto')">
-                                                    <label class="custom-file-label" for="imgInstructorPhoto">Add Image</label>
-                                                </div>
-                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group radio">
-                                            <label><i class="fas fa-share-alt-square"></i>Sharing</label>
-                                            <div class="sharing">
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
-                                                    <label class="custom-control-label" for="rbGlobal">Global</label>
-                                                    <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
-                                                    <label class="custom-control-label" for="rbOrganization">Organization</label>
-                                                    <small class="form-text">Anyone within this organization can find and access this course.</small>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
-                                                    <label class="custom-control-label" for="rbAssigned">Assigned</label>
-                                                    <small class="form-text">Only shared with assignees.</small>
+                                        <div class="col-sm-12">
+                                            <div class="form-group radio">
+                                                <label><i class="fas fa-share-alt-square"></i>Sharing</label>
+                                                <div class="sharing">
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbGlobal" value="1" name="rgSharing" class="custom-control-input" checked>
+                                                        <label class="custom-control-label" for="rbGlobal">Global</label>
+                                                        <small class="form-text">Anyone within 365 Staff can find and access this course.</small>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
+                                                        <label class="custom-control-label" for="rbOrganization">Organization</label>
+                                                        <small class="form-text">Anyone within this organization can find and access this course.</small>
+                                                    </div>
+                                                    <div class="custom-control custom-radio custom-control-inline">
+                                                        <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
+                                                        <label class="custom-control-label" for="rbAssigned">Assigned</label>
+                                                        <small class="form-text">Only shared with assignees.</small>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,10 +161,34 @@
                 </div>
             </div>
 
-            <div class="col-12 mb-5">
-                <a class="btn btn-black" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Add Course</a>
+
+
+
+
+            <%-- in progresss --%>
+            <div class="col-12 col-sm-12 mt-4 course-content-collapse" style="display:none;" id="divLessonMain">
+
+                <div class="builder" id="divCourseBuilder">
+                    <div class="builder-title">
+                        <img src="../INCLUDES/Asset/images/builder.png" /><span>Course Builder</span>
+                    </div>
+                    <div class="builder-action"><span onclick="collapseToggle('.course-content-collapse .collapse',1);">Expand All</span><span onclick="collapseToggle('.course-content-collapse .collapse',0);">Collapse All</span></div>
+                </div>
+
+                
+                <div class="card mb-4" id="dvLessonViewParentView">                    
+                </div>
+
+
+                <div class="card mb-4" id="dvLessonViewParentEdit">
+                    
+                </div>
+
             </div>
 
+            <div class="col-12 mb-5" id="divAddMoreLesson">
+                <a class="btn btn-black" id="btnAddMoreLesson" onclick="AddMoreLesson();"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+            </div>
         </div>
     </div>
 
@@ -187,7 +230,9 @@
 
         //new code
         var editorCourseSummary = new Jodit('#txtCourseSummary');
-        //var editorContentDescription = new Jodit('#txtContentDescription');
+        var editorContentDescription = '';
+        var editorResourcesDescription = '';
+
 
         var accessToken = '<%=Session["access_token"]%>';
 
@@ -199,27 +244,59 @@
         var ResourceFlag = '0';
         var QuizFlag = '0';
 
-        var AddMoreLessonFlag = 'add';
-        var AddMoreContentFlag = 'add';
-        var AddMoreQuizFlag = 'add';
-
-        var divLessonFlag = 'add';
-        var divContentFlag = 'add';
-        var divQuizFlag = 'question';//quiz
-
         var ContentContentTypeID = '1';
         var QuizContentTypeID = '5';
         var passingScore = 0;
         var pasingPercentage = 0;
 
+        var dvLessonEdit = '<div class="form-group asterisk">' +
+                                '<label for="txtLessonTitle" class="inline">Lesson Title</label>' +
+                                '<input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />' +
+                            '</div>' +
+                            '<div class="form-group asterisk">' +
+                                '<label for="txtLessonDescription" class="inline">Lesson Description</label>' +
+                                '<textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>' +
+                            '</div>';
+                                    
+        var dvLessonContentEdit = '<div class="form-group asterisk">'+
+                                        '<div class="tag content">Content</div>'+
+                                        '<label for="txtContentHeader" class="inline">Content Title</label>' +
+                                        '<input type="text" class="form-control required" id="txtContentHeader" placeholder="Content Title" />' +
+                                    '</div>'+
+                                    '<div class="form-group editor asterisk">'+
+                                        '<div id="txtContentDescription"></div>'+
+                                    '</div>';
+
+        var dvLessonResourceEdit = '<div class="form-group editor">' +
+                                    '<label>Resources</label>'+
+                                    '<div id="txtResourcesDescription"></div>'+
+                                '</div>';
+
+        var dvLessonQuizEdit = '<label>Quiz</label>'+
+                                '<div class="form-group asterisk">'+
+                                    '<label for="txtQuizTitle" class="inline">Quiz Title</label>'+
+                                    '<input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />'+
+                                '</div>'+
+                                '<div class="form-group asterisk">'+
+                                    '<label for="txtQuizDescription" class="inline">Quiz Description</label>'+
+                                    '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>'+
+                                '</div>';
+
+        
+
+
         $(document).ready(function ()
-        {
-            debugger
+        {            
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
             {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
                 EditCourse();
+
+                if (CourseFlag != '0')
+                {
+                    BindLessonGrid();
+                }
             }
             else {
                 GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
@@ -235,6 +312,128 @@
                 vars[hash[0]] = hash[1];
             }
             return vars;
+        }
+
+        function BindQuizView(Title, Description) {
+
+            if (Title == undefined || Title == null)
+            {
+                Title = '';
+            }
+            if (Description == undefined || Description == null) {
+                Description = '';
+            }
+
+            var Quiz = '<label>Quiz</label>' +
+                        '<div class="accordion">' +
+                            '<div class="card">' +
+                                '<div class="card-header" id="headingLessonQuiz">' +
+                                    '<h5>' + Title + '</h5>' +
+                                    '<a data-toggle="collapse" data-target="#collapseLessonQuiz" aria-expanded="true" aria-controls="collapseLessonQuiz">' +
+                                        '<i class="fas fa-chevron-down"></i>' +
+                                    '</a>' +
+                                '</div>' +
+                                '<div id="collapseLessonQuiz" class="collapse show" aria-labelledby="headingLessonQuiz">' +
+                                    '<div class="card-body">' +
+                                        Description
+                                    '</div>' +
+                               '</div>' +
+                           '</div>' +
+                        '</div>';
+
+            $('#dvLessonQuizView').empty().append(Quiz);
+        }
+
+        function ShowQuestion(flag) {
+            debugger
+            var className = ''
+
+            if (flag == 'multiple') {
+                className = 'far fa-check-square';
+            }
+            else if (flag == 'dropdown') {
+                className = 'far fa-caret-square-down';
+            }
+            else if (flag == 'radio') {
+                className = 'fas fa-dot-circle';
+            }
+
+            var QuestionType = '<div id="dvLessonQues" class="col-sm-12 quiz-wrapper">' +
+                                    '<div class="row quiz">' +
+                                        '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                                            '<span class="sr">Q1<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
+                                            '<div class="col-sm-8 col-md-10">' +
+                                                '<div class="form-group">' +
+                                                    '<input type="text" class="form-control" placeholder="Add Question Text" />' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<span class="correct">Correct</span>' +
+                                        '</div>' +
+                                        '<div class="row" id="divAnswer">' +
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Answer Option" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Assign Score" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>' +
+                                            '</div>' +
+
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Answer Option" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Assign Score" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>' +
+                                            '</div>' +
+
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Answer Option" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" placeholder="Assign Score" />' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>' +
+                                            '</div>' +
+                                        '</div>' +
+                                        '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
+                                            '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>';
+
+            $('#dvLessonQues').append(QuestionType);
         }
 
 
@@ -315,22 +514,25 @@
             });
         }
 
-        function ManageInstructor() {
+        function ManageInstructor() {            
             if ($("#cbxInstructorName").prop('checked') == true) {
                 $("#divInstructorName").hide();
             }
             else {
                 $("#divInstructorName").show();
                 $("#txtInstructorName").val('');
+                $("#imgInstructorPhoto").removeAttr("src");
+                $("#lblInstructorPhoto").text("Add Image");
+                $("#divInstructorPhoto").removeClass('img');
+                $("#divInstructorPhoto").empty();                
             }
         }
 
-        function ClearFieldsAddCourse() {
-            debugger
+        function ClearFieldsAddCourse()
+        {
             $('#txtCourseTitle').val('');            
             $('#txtCourseDescription').val('');
 
-            //$('#ddlCourseCategory').val('').trigger('change');
             $("#ddlCourseCategory option:selected").prop("selected", false);
             selectInit('#ddlCourseCategory ', 'CourseCategory');
 
@@ -428,6 +630,8 @@
                     getUrl = "/API/Content/CreateTopic";
 
                 } else {
+
+                    flag = 'update';
                     _Topic_Id = CourseFlag;
                     getUrl = "/API/Content/ModifyTopic";
                 }
@@ -451,7 +655,8 @@
                                     ""
                                     var DataSet = $.parseJSON(response);
                                     if (DataSet != null && DataSet != "") {
-                                        if (DataSet.StatusCode == "1") {
+                                        if (DataSet.StatusCode == "1")
+                                        {
                                             if (flag == 'redirect') {
                                                 Swal.fire({
                                                     title: "Success",
@@ -463,14 +668,39 @@
                                                     }
                                                 });
                                             }
-                                            else if (flag == 'nexttab') {
+                                            else if (flag == 'add') {
+
+                                                $("#divLessonMain").show();
+                                                AddMoreLesson();
+                                                
                                                 HideLoader();
                                                 if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                                     CourseFlag = DataSet.Data[0].InsertedID;
                                                 }
 
                                                 SetProgressBar();
-                                                //ClearFieldsAddCourse();
+                                                
+                                                Swal.fire({
+                                                    title: "Success",
+                                                    text: DataSet.Data[0].ReturnMessage,
+                                                    icon: "success"
+                                                }).then((value) => {
+                                                    if (value) {
+                                                        
+                                                    }
+                                                });
+                                            }
+                                            else if (flag == 'update') {
+
+                                                $("#divLessonMain").show();
+                                                BindLessonGrid('update');
+
+                                                HideLoader();
+                                                if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                                    CourseFlag = DataSet.Data[0].InsertedID;
+                                                }
+
+                                                SetProgressBar();
 
                                                 Swal.fire({
                                                     title: "Success",
@@ -478,8 +708,7 @@
                                                     icon: "success"
                                                 }).then((value) => {
                                                     if (value) {
-                                                        ""
-                                                        nextTab('pills-lesson-tab');
+
                                                     }
                                                 });
                                             }
@@ -600,10 +829,18 @@
                                 $("#divCourseLogo").append('<img src="../Files/CourseLogo/' + EditTopic[0].FilePath + '" alt="Course Logo" class="img-fluid">');
                             }
 
+
                             if (EditTopic[0].InstructorName != undefined && EditTopic[0].InstructorName != null) {
                                 $("#cbxInstructorName").prop("checked", false)
                                 $("#divInstructorName").show();
                                 $("#txtInstructorName").val(EditTopic[0].InstructorName);
+
+                                debugger
+                                if (EditTopic[0].InstructorImageFile != undefined && EditTopic[0].InstructorImageFile != null && EditTopic[0].InstructorImageFile != '') {
+                                    $("#imgInstructorPhoto").attr("src", "../Files/InspectorImage/" + EditTopic[0].InstructorImageFile);
+                                    $("#divInstructorPhoto").addClass('img');
+                                    $("#divInstructorPhoto").append('<img src="../Files/InspectorImage/' + EditTopic[0].InstructorImageFile + '" alt="Inspector Image" class="img-fluid">');
+                                }
                             }
                             else {
                                 $("#cbxInstructorName").prop("checked", true)
@@ -636,6 +873,41 @@
                     HideLoader();
                 }
             });
+        }
+
+        function ManageLesson(flag)
+        {            
+            if (flag == 'editbind')
+            {
+                $('#dvLessonEdit').empty().append(dvLessonEdit);                
+            }
+            else if (flag == 'editclear')
+            {
+                $('#dvLessonEdit').empty();
+            }            
+        }
+
+        function ManageContent(flag)
+        {
+            if (flag == 'editbind')
+            {
+                $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
+                editorContentDescription = new Jodit('#txtContentDescription');                
+            }
+            else if (flag == 'editclear')
+            {
+                $('#dvLessonContentEdit').empty();
+            }
+        }
+
+        function ManageResource(flag) {
+            if (flag == 'editbind') {
+                $('#dvLessonResourceEdit').empty().append(dvLessonResourceEdit);
+                editorResourcesDescription = new Jodit('#txtResourcesDescription');
+            }
+            else if (flag == 'editclear') {
+                $('#dvLessonResourceEdit').empty();
+            }
         }
 
         function clearModalText() {
@@ -782,35 +1054,242 @@
         }
 
 
-        function ClearFieldsAddLesson() {
-            $('#txtLessonTitle').val('');
-            //$('#txtLearningObjectives').val('');
-            //$('#divLessonDescription').empty().append('<div id="txtLessonDescription"></div>');
-            //var editorContentDesc = new Jodit('#txtLessonDescription');
+        function BindLessonGrid(flag) {
+            debugger
+            ShowLoader();
+            var getUrl = "/API/Content/GetModules";
+            var requestParams = { TopicID: CourseFlag, Flag: 'learningjourney' };
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(requestParams),
+                contentType: "application/json",
+                //async: false,//Added on 18 APR
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        debugger
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+                                var LessonTable = DataSet.Data;                                
+                                debugger
+                                $('#divLessonMain').show();
 
-            editorLessonDesc.value = '';
-
-            //$('#divLessonDescription').find('.jodit_placeholder').text('')
-            //editorContentDesc.value = '';
-            //$('#txtEstimatedTime').val('');
-            $('#txtHour').val('');
-            $('#txtMin').val('');
-            $('#txtPoint').val('');
+                                var Lesson = '';
+                                if (LessonTable != undefined && LessonTable.length > 0) {
+                                    for (var i = 0; i < LessonTable.length; i++) {
+                                        Lesson = Lesson + '<div class="row">' +
+	                                                        '<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pr-0">' + LessonTable[i].Title + '</div>' +
+                                                            '<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pr-0">' +
+                                                            '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i>' +
+                                                            '</div>' +
+                                                            '<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pr-0">' +
+                                                            '<i class="fas fa-edit" title="Edit" id="spId" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i>' +
+                                                            '</div>'+
+                                                            '<span style="display:none;" id="spTitle">' + LessonTable[i].Title + '</span>' +
+                                                            '<span style="display:none;" id="spOverview">' + LessonTable[i].Overview + '</span>' +
+                                                            '<span style="display:none;" id="spCourseTime">' + LessonTable[i].CourseTime + '</span>' +
+                                                            '<span style="display:none;" id="spPoints">' + LessonTable[i].Points + '</span>' +                                                            
+                                                        '</div>';
+                                    }
+                                                                        
+                                    $('#dvLessonViewParentView').empty().append(Lesson);
+                                    $('#dvLessonViewParentEdit').empty();
+                                    //AddMoreLesson();
+                                }
+                                else {
+                                    //ManageLesson('editbind');
+                                    //ManageContent('editbind');                                    
+                                    AddMoreLesson();
+                                }
+                            }
+                            else {
+                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                }
+            });
         }
+
+        function DeleteLessionFromTile(obj, id) {
+            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete ? Yes or No !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    debugger
+                    LessonFlag = id;
+                    ShowLoader();
+                    var getUrl = "/API/Content/DeleteModule";
+
+                    try {
+                        var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, IsActive: 0 };
+
+                        $.ajax({
+                            type: "POST",
+                            url: getUrl,
+                            headers: { "Authorization": "Bearer " + accessToken },
+                            data: JSON.stringify(requestParams),
+                            contentType: "application/json",
+                            //async: false,//Added on 18 APR
+                            success: function (response) {
+                                try {
+                                    var DataSet = $.parseJSON(response);
+                                    debugger
+                                    if (DataSet != null && DataSet != "") {
+                                        if (DataSet.StatusCode == "1") {
+
+                                            Swal.fire({
+                                                title: "Success",
+                                                text: DataSet.Data[0].ReturnMessage,
+                                                icon: "success"
+                                            }).then((value) => {
+                                                if (value) {
+                                                    LessonFlag = '0';
+                                                    ContentFlag = '0';
+                                                    BindLessonGrid('');
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                        }
+                                    }
+                                    else {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                    }
+                                }
+                                catch (e) {
+                                    HideLoader();
+                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                }
+                            },
+                            complete: function () {
+                                HideLoader();
+                            },
+                            failure: function (response) {
+                                HideLoader();
+                                alert(response.data);
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        });
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+                    }
+                }
+            });
+        }
+
+        function EditLessionFromTile(obj, id) {
+            debugger            
+            //$('#dvLessonViewParentEdit').show();
+            AddMoreLesson();
+
+            ManageLesson('editbind');
+
+            $('#txtLessonTitle').val($(obj).parent().parent().find('#spTitle').text());
+            $('#txtLessonDescription').val($(obj).parent().parent().find('#spOverview').text());
+
+            if ($(obj).parent().parent().find('#spCourseTime').text() != undefined
+                && $(obj).parent().parent().find('#spCourseTime').text() != ''
+                && $(obj).parent().parent().find('#spCourseTime').text().split(":").length > 0
+            ) {
+                $('#txtHour').val($(obj).parent().parent().find('#spCourseTime').text().split(":")[0]);
+                if ($(obj).parent().parent().find('#spCourseTime').text().split(":").length > 1) {
+                    $('#txtMin').val($(obj).parent().parent().find('#spCourseTime').text().split(":")[1]);
+                }
+            }
+            else {
+                $('#txtHour').val('');
+                $('#txtMin').val('');
+            }
+
+            $('#txtPoint').val($(obj).parent().parent().find('#spPoints').text());
+
+            LessonFlag = id;
+            ContentFlag = '0';
+            BindContentGrid('');
+            BindResourceGrid('');
+            //BindQuiz();
+
+            $('#dvbtnSaveLesson').show();
+        }
+
+        function SaveLesson()
+        {
+            debugger
+            var resultLesson = validateAddLesson();
+            if (resultLesson.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: resultLesson.msg,
+                    icon: "error",
+                    button: "Ok",
+                });
+                return false;
+            }
+            $('#dvbtnSaveLesson').hide();
+            AddLession('savelesson');
+        }
+
+        function BindLessonAfterSave(_Title,_Overview)
+        {
+            var Lesson = '';
+
+            Lesson = Lesson + '<div class="accordion">' +
+                                '<div class="card">' +
+                                    '<div class="card-header" id="headingLesson">' +
+                                        '<h5 id="hdgLessonTitle">' + _Title + '</h5>' +
+                                        '<a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="true" aria-controls="collapseLesson">' +
+                                            '<i class="fas fa-chevron-down"></i>' +
+                                        '</a>' +
+                                    '</div>' +
+                                    '<div id="collapseLesson" class="collapse show" aria-labelledby="headingLesson">' +
+                                        '<div class="card-body" id="divLessonOverview">' + _Overview +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>';
+                
+
+                $('#dvLessonView').empty().append(Lesson);
+                ManageLesson('editclear');            
+        }
+
 
         function validateAddLesson() {
             if ($("#txtLessonTitle").val() == undefined || $("#txtLessonTitle").val() == '') {
                 return { error: true, msg: "Please enter Lesson Title" };
             }
-            //else if ($("#txtLearningObjectives").val() == undefined || $("#txtLearningObjectives").val() == '') {
-            //    return { error: true, msg: "Please enter Learning Objectives" };
-            //}
-            else if (editorLessonDesc.value == undefined || editorLessonDesc.value.trim() == '') {
-                return { error: true, msg: "Please enter Lesson Details" };
+            else if ($("#txtLessonDescription").val() == undefined || $("#txtLessonDescription").val() == '') {
+                return { error: true, msg: "Please enter Lesson Description" };
             }
-            //else if ($("#txtEstimatedTime").val() == undefined || $("#txtEstimatedTime").val() == '') {
-            //    return { error: true, msg: "Please enter Estimate Time" };
-            //}
             else if ($("#txtHour").val() == undefined || $("#txtHour").val() == '') {
                 return { error: true, msg: "Please enter Hour" };
             }
@@ -826,34 +1305,146 @@
             return true;
         }
 
-        function AddLessionFromContent() {
-            var result = validateAddLesson();
-            if (result.error) {
-                Swal.fire({
-                    title: "Alert",
-                    text: result.msg,
-                    icon: "error",
-                    button: "Ok",
-                });
+        function validateAddContent(flag) {
+            if ($("#txtContentHeader").val() == undefined || $("#txtContentHeader").val() == '') {
+                return { error: true, msg: "Please enter Content Title" };
             }
-            else {
-                AddLession('nexttab');
+            else if (editorContentDescription.value == undefined || editorContentDescription.value.trim() == '') {
+                return { error: true, msg: "Please enter Content Details" };
+            }
+            else if (flag == 'onlycontent' && (CourseFlag == '0' || LessonFlag == '0')) {
+                return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
+            }
+            else if (flag == 'withcontent' && (CourseFlag == '0')) {
+                return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
+            }
+            return true;
+        }
+
+        function AddLessonWithOthers(flag)
+        {
+            flag = $(flag).attr('name');
+
+            if (flag == "btnAddContent")
+            {
+                if ($('#txtLessonTitle').val() != undefined && $('#txtContentHeader').val() != undefined) {
+                    var resultLesson = validateAddLesson();
+                    if (resultLesson.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultLesson.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    var resultContent = validateAddContent('withcontent');
+                    if (resultContent.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultContent.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    AddLession('withcontent');
+
+                }
+                else if ($('#txtLessonTitle').val() == undefined && $('#txtContentHeader').val() != undefined) {
+
+                    var resultContentOnly = validateAddContent('onlycontent');
+                    if (resultContentOnly.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultContentOnly.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    AddContent('onlycontent');
+                }
+                else if ($('#txtLessonTitle').val() != undefined && $('#txtContentHeader').val() == undefined) {
+                    var resultLesson = validateAddLesson();
+                    if (resultLesson.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultLesson.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+                    AddLession('onlylesson');
+                }
+                else if ($('#txtLessonTitle').val() == undefined && $('#txtContentHeader').val() == undefined) {                    
+                    ManageContent('editbind');
+                }
+            }
+            else if (flag == "btnAddResource") {
+
+                if ($('#txtLessonTitle').val() == undefined && $('#txtResourcesDescription').val() == undefined)
+                {                    
+                    ManageContent('editclear');
+                    $('#dvLessonResourceEdit').empty().append(dvLessonResourceEdit);
+                    editorResourcesDescription = new Jodit('#txtResourcesDescription');
+                }                
+                else if ($('#txtLessonTitle').val() != undefined && $('#txtResourcesDescription').val() != undefined)
+                {
+                    var resultLesson = validateAddLesson();
+                    if (resultLesson.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultLesson.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    var resultResource = validateAddResource();
+                    if (resultResource.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultResource.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    AddLession('withresource');
+                }
+                else if ($('#txtLessonTitle').val() == undefined && $('#txtResourcesDescription').val() != undefined)
+                {
+                    var resultResourceOnly = validateAddResource();
+                    if (resultResourceOnly.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultResourceOnly.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+
+                    AddResource('onlyresource');
+                }
             }
         }
 
         function AddLession(flag) {
 
+            ShowLoader();
             var getUrl;
-            //ShowLoader();
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
-            //var _Overview = $('#txtLearningObjectives').val();
-            var _Overview = editorLessonDesc.value;
-            //var _Description = $('#txtDescription').val();
-            //var _IsPublished = $('#cbIsPublished').prop('checked');
-
+            var _Overview = $('#txtLessonDescription').val();
             var _Points = $('#txtPoint').val();
-            //var _CourseTime = $('#txtEstimatedTime').val();
             var _CourseTime = $('#txtHour').val() + ':' + $('#txtMin').val();
 
             var ID;
@@ -868,6 +1459,606 @@
             var _SrNo = "";
             try {
                 var requestParams = { TopicID: _Topic_Id, ModuleTitle: _Title, ModuleOverview: _Overview, SrNo: _SrNo, UserID: "", IsActive: true, ModuleID: ID, Points: _Points, CourseTime: _CourseTime };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            debugger
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+                                    if (flag == 'redirect') {
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: DataSet.Data[0].ReturnMessage,
+                                            icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+                                                document.location = 'courses.aspx';
+                                            }
+                                        });
+                                    }
+                                    else if (flag == 'withcontent') {
+                                        HideLoader();
+                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                            LessonFlag = DataSet.Data[0].InsertedID;
+                                        }
+
+                                        AddContent('withlesson');
+                                    }
+                                    else if (flag == 'onlylesson') {
+                                        HideLoader();
+                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                            LessonFlag = DataSet.Data[0].InsertedID;
+                                        }
+
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: DataSet.Data[0].ReturnMessage,
+                                            icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+                                                BindLessonGrid('');
+                                            }
+                                        });                                        
+                                    }
+                                    else if (flag == 'savelesson') {
+                                        HideLoader();
+                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                            LessonFlag = DataSet.Data[0].InsertedID;
+                                        }
+
+                                        BindLessonAfterSave(_Title, _Overview);
+                                    }
+                                    
+                                    IsCoursePublishable();
+                                }
+                                else {
+                                    Swal.fire({
+                                        title: "Failure",
+                                        text: DataSet.StatusDescription,
+                                        icon: "error"
+                                    });
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: "Please try Again",
+                                    icon: "error"
+                                });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error"
+                            });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({
+                            title: "Failure",
+                            text: "Please try Again",
+                            icon: "error"
+                        });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({
+                    title: "Alert",
+                    text: "Oops! An Occured. Please try again",
+                    icon: "error"
+
+                });
+            }
+        }
+
+        function AddMoreLesson()
+        {                                    
+            LessonFlag = '0';
+            var dvLessonViewParentEdit = '<div class="row">'+
+                        '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">'+
+                            '<div class="card-body arrows">'+
+                                '<div class="tag lesson main-card">Lesson</div>'+
+                                '<div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>'+
+                                '<div class="row" id="divLessonJourney">'+
+                                    '<div class="col-sm-12" id="dvLessonView">'+
+                                    '</div>'+
+                                    '<div class="col-sm-12" id="dvLessonEdit"></div>'+
+                                    '<div class="col-sm-12" id="dvbtnSaveLesson" style="display:none">'+
+                                        '<a class="btn btn-black btnSpace" onclick="SaveLesson();"><i class="fas fa-plus-circle"></i>Save Lesson</a>'+
+                                    '</div>'+
+
+                                    '<div class="col-sm-12" id="dvLessonContentView">'+
+                                    '</div>'+
+                                    '<div class="col-sm-12" id="dvLessonContentEdit"></div>'+
+
+                                    '<div class="col-sm-12" id="dvLessonResourceView">'+
+                                    '</div>'+
+                                    '<div class="col-sm-12" id="dvLessonResourceEdit"></div>'+
+
+                                    '<div class="col-sm-12" id="dvLessonQuizEdit"></div>'+
+                                    '<div class="col-sm-12" id="dvLessonQuizView"></div>'+
+
+                                    '<div class="col-sm-12 mb-4 dropright" id="divQuestionType">'+
+                                        '<a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+
+                                            '<i class="fas fa-plus-circle"></i>New Question'+
+                                        '</a>'+
+                                        '<div class="dropdown-menu quiz-element">'+
+                                            '<a class="dropdown-item" name="multiple" onclick="ShowQuestion(this);"><i class="far fa-check-square"></i>Multiple Choice</a>' +
+                                            '<a class="dropdown-item" name="radio" onclick="ShowQuestion(this);"><i class="fas fa-dot-circle"></i>Radio Button</a>' +
+                                            '<a class="dropdown-item" name="dropdown" onclick="ShowQuestion(this);"><i class="far fa-caret-square-down"></i>Dropdown</a>' +
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">'+
+                            '<div class="card-body right-side-content">'+
+                                '<div class="lesson-action">'+
+                                    '<a><i class="fas fa-pen"></i></a>'+
+                                    '<a><i class="fas fa-trash-alt"></i></a>'+
+                                    '<a><i class="fas fa-chevron-down"></i></a>'+
+                                '</div>'+
+                                '<div class="row mt-5">'+
+                                    '<div class="col-sm-12 mt-4 mb-4">'+
+                                        '<div class="form-group">'+
+                                            '<label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>'+
+                                            '<input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />'+
+                                            '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(txtMin,event);" />'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<div class="col-sm-12">'+
+                                        '<div class="form-group">'+
+                                            '<label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>'+
+                                            '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(txtPoint,event);" />'+
+                                        '</div>'+
+                                    '</div>'+
+
+                                    '<div class="col-sm-12 mt-5">'+
+                                        '<div class="form-group">'+
+                                            '<label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>'+
+                                            '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" onkeyup="return isNumberKey(txtPassingScorePercentage,event);" />'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        
+                        '<div class="w-100"></div>'+
+
+                        '<div id="dvLessonQues" class="col-sm-12 quiz-wrapper">'+
+                        '</div>'+
+
+                        '<div class="w-100"></div>'+
+
+                        '<div class="action-btn">'+
+                            '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
+                            '<a class="btn btn-outline blod black" id="btnAddResource" name="btnAddResource" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Resources</a>' +
+                            '<a class="btn btn-outline blod black" id="btnAddQuiz"     name="btnAddQuiz" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>' +
+                        '</div>'+
+                    '</div>';
+                    
+            $('#dvLessonViewParentEdit').show();
+            $('#dvLessonViewParentEdit').empty().append(dvLessonViewParentEdit);
+            ManageLesson('editbind');
+            ManageContent('editbind');
+        }
+
+
+        function AddContent(flag) {
+            ShowLoader();
+            var getURL = '';
+            var regex = '';
+            var formdata = new FormData();
+            var selectedDocType = 'TEXT';
+            var isUrl = '';
+            var index = 1;
+            var ContentID = '';
+
+            if (ContentFlag == '0') {
+                getURL = "/API/Content/CreateContent";
+            }
+            else {
+                ContentID = ContentFlag;
+                getURL = "/API/Content/ModifyContent";
+            }
+
+            formdata.append("ContentID", ContentID);
+            formdata.append("SrNo", index);
+            formdata.append("DocType", selectedDocType);
+            formdata.append("Title", $("#txtContentHeader").val());
+            formdata.append("Description", editorContentDescription.value);
+            formdata.append("Overview", "");
+            formdata.append("IsGift", "");
+            formdata.append("IsPublished", "");
+            formdata.append("CourseTime", "");
+            formdata.append("TopicID", CourseFlag);
+            formdata.append("ModuleID", LessonFlag);
+            formdata.append("TypeID", "1");
+            formdata.append("FlashcardTitle", "");
+            formdata.append("IsActive", "");
+            formdata.append("TotalScore", "");
+            formdata.append("PassingPercent", "");
+            formdata.append("PassingScore", "");
+            formdata.append("FlashcardHighlights", "");
+            formdata.append("SkipFlashcards", "");
+            formdata.append("IsURL", isUrl);
+            ShowLoader();
+
+            $.ajax({
+                type: "POST",
+                url: getURL,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: formdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    try {
+                        ""
+                        var DataSet = $.parseJSON(response);
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1")
+                            {
+                                HideLoader();
+
+                                if (flag == 'redirect') {
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            document.location = 'courses.aspx';
+                                        }
+                                    });
+                                }
+                                else if (flag == 'withlesson') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    BindLessonGrid();
+                                    BindContentGrid('withlesson');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+                                            
+                                        }
+                                    });
+                                }
+                                else if (flag == 'onlycontent') {
+                                    HideLoader();                                    
+
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        //ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    ContentFlag = '0';
+                                    BindContentGrid('onlycontent');
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    }).then((value) => {
+                                        if (value) {
+
+                                        }
+                                    });
+                                }
+                                
+                                IsCoursePublishable();
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: DataSet.StatusDescription,
+                                    icon: "error"
+                                });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: "Please try Again",
+                                icon: "error"
+                            });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({
+                            title: "Failure",
+                            text: "Please try Again",
+                            icon: "error"
+                        });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    alert(response.data);
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error"
+                    });
+                }
+            });
+        }
+
+        function BindContentGrid(flag) {
+            var getUrl = "/API/Content/GetContentList";
+            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag, ContentTypeID: ContentContentTypeID, IsGift: "true", Flag: 'learningjourney' };
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(requestParams),
+                contentType: "application/json",
+                //async: true,//Added on 18 APR
+                success: function (response) {
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        debugger
+                        if (DataSet != null && DataSet != "") {
+                            if (DataSet.StatusCode == "1") {
+
+                                var ContentTable = DataSet.Data;
+                                var Content = '';
+                                if (ContentTable.length > 0)
+                                {
+                                    for (var i = 0; i < ContentTable.length; i++) {
+                                        Content = Content + '<div class="accordion">' +
+                                                                '<div class="card">' +
+                                                                    '<div class="tag content">Content</div>' +
+                                                                    '<div class="card-header" id="headingLessonContent' + i + '">' +
+                                                                        '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
+
+                                                                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
+                                                                        '<i class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
+
+                                                                        '<a data-toggle="collapse" data-target="#collapseLessonContent' + i + '" aria-expanded="true" aria-controls="collapseLessonContent' + i + '">' +
+                                                                            '<i class="fas fa-chevron-down"></i>' +
+                                                                        '</a>' +
+                                                                    '</div>' +
+                                                                    '<div id="collapseLessonContent' + i + '" class="collapse show" aria-labelledby="headingLessonContent' + i + '">' +
+                                                                        '<div class="card-body" id="divContentDescription">' + ContentTable[i].Description +
+                                                                        '</div>' +
+                                                                    '</div>' +
+                                                                '</div>' +
+                                                            '</div>';
+                                    }
+                                    $('#dvLessonContentView').empty().append(Content);
+
+                                    ManageContent('editclear');                                  
+                                }
+                            }
+                            else {
+                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                            }
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                },
+                complete: function () {
+                    HideLoader();
+                },
+                failure: function (response) {
+                    HideLoader();
+                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                }
+            });
+        }
+
+        function EditContentFromTile(obj, id) {
+            debugger            
+            ManageContent('editbind');
+
+            $('#txtContentHeader').val($(obj).parent().parent().find('#hdgContentTitle').text());
+            editorContentDescription.value = $(obj).parent().parent().find('#divContentDescription').text();
+
+            ContentFlag = id;
+        }
+
+        function DeleteContentFromTile(obj, id) {
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to delete ? Yes or No !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    ContentFlag = id;
+                    ShowLoader();
+                    var getUrl = "/API/Content/DeleteContent";
+
+                    try {
+                        var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, p_ContentID: ContentFlag, IsActive: 0 };
+
+                        $.ajax({
+                            type: "POST",
+                            url: getUrl,
+                            headers: { "Authorization": "Bearer " + accessToken },
+                            data: JSON.stringify(requestParams),
+                            contentType: "application/json",
+                            //async: false,
+                            success: function (response) {
+                                try {
+                                    var DataSet = $.parseJSON(response);
+                                    ""
+                                    if (DataSet != null && DataSet != "") {
+                                        if (DataSet.StatusCode == "1") {
+
+                                            Swal.fire({
+                                                title: "Success",
+                                                text: DataSet.Data[0].ReturnMessage,
+                                                icon: "success"
+                                            }).then((value) => {
+                                                if (value) {
+                                                    ContentFlag = '0';
+                                                    BindContentGrid('');
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                        }
+                                    }
+                                    else {
+                                        HideLoader();
+                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                    }
+                                }
+                                catch (e) {
+                                    HideLoader();
+                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                                }
+                            },
+                            complete: function () {
+                                HideLoader();
+                            },
+                            failure: function (response) {
+                                HideLoader();
+                                alert(response.data);
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        });
+                    }
+                    catch (e) {
+                        HideLoader();
+                        Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+                    }
+                }
+            });
+        }
+
+
+        function validateAddResource() {
+            if (editorResourcesDescription.value == undefined || editorResourcesDescription.value.trim() == '') {
+                return { error: true, msg: "Please enter Resource Details" };
+            }
+            return true;
+        }
+
+        function BindResourceGrid(flag)
+        {
+            ShowLoader();
+            var getUrl = "/API/Content/GetResource";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag };
+
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            ""
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+
+                                    var Resource = '';
+                                    Resource = Resource + '<div class="accordion">' +
+                                                            '<div class="card">' +
+                                                                '<div class="tag resource">Resource</div>' +
+                                                                '<div class="card-header" id="headingLessonResource">' +
+                                                                    '<h5 id="hdgResourceTitle">Resources</h5>' +
+
+                                                                    '<i class="fas fa-edit" title="Edit"  onclick="EditResourceFromTile(this,' + LessonFlag + ')";></i>' +
+
+                                                                    '<a data-toggle="collapse" data-target="#collapseLessonResource" aria-expanded="true" aria-controls="collapseLessonResource">' +
+                                                                        '<i class="fas fa-chevron-down"></i>' +
+                                                                    '</a>' +
+                                                                '</div>' +
+                                                                '<div id="collapseLessonResource" class="collapse show" aria-labelledby="headingLessonResource">' +
+                                                                    '<div class="card-body" id="divResourceDescription">' + DataSet.Data[0].Resource +
+                                                                    '</div>' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                        '</div>';
+
+                                    $('#dvLessonResourceView').empty().append(Resource);
+                                    $('#btnAddResource').hide();
+
+                                    ManageResource('editclear');
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
+        }
+
+        function AddResource(flag) {
+            
+            ShowLoader();
+            var Description = editorResourcesDescription.value;
+            var getUrl = "/API/Content/UpdateResource";
+
+            try {
+                var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
 
                 $.ajax({
                     type: "POST",
@@ -893,43 +2084,37 @@
                                             }
                                         });
                                     }
-                                    else if (flag == 'nexttab') {
+                                    else if (flag == 'withresource') {
                                         HideLoader();
-                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                            LessonFlag = DataSet.Data[0].InsertedID;
-                                        }
+                                        ResourceFlag = LessonFlag;
 
-                                        SetProgressBar();
-                                        //ClearFieldsAddLesson();
-                                        //BindLesson('nexttab');
-                                        BindContent('addmore');
-
+                                        BindLessonGrid();
+                                        BindResourceGrid('withlesson');                                        
+                                        
                                         Swal.fire({
                                             title: "Success",
                                             text: DataSet.Data[0].ReturnMessage,
                                             icon: "success"
                                         }).then((value) => {
                                             if (value) {
-                                                if (AddMoreLessonFlag == 'add') {
-                                                    nextTab('pills-content-tab');
-                                                }
+                                                
                                             }
                                         });
                                     }
-                                    else if (flag == 'addmore') {
+                                    else if (flag == 'onlyresource') {
                                         HideLoader();
-                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                            LessonFlag = DataSet.Data[0].InsertedID;
-                                        }
+                                        ResourceFlag = LessonFlag;
 
-                                        SetProgressBar();
-                                        ClearFieldsAddLesson();
-                                        BindLesson('addmore');
-
+                                        BindResourceGrid('onlyresource');
+                                        
                                         Swal.fire({
                                             title: "Success",
                                             text: DataSet.Data[0].ReturnMessage,
                                             icon: "success"
+                                        }).then((value) => {
+                                            if (value) {
+
+                                            }
                                         });
                                     }
 
@@ -984,128 +2169,47 @@
 
                 });
             }
+            
         }
 
-        function EditLessionFromTile(obj, id) {
-            //debugger
-            $('#txtLessonTitle').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
-            //$('#txtLearningObjectives').val($(obj).parent().parent().parent().parent().find('#spOverview').text());
+        function EditResourceFromTile(obj, id) {
+            debugger
+            ManageResource('editbind');
+            editorResourcesDescription.value = $(obj).parent().parent().find('#divResourceDescription').text();
+            $('#btnAddResource').show();
+            ResourceFlag = id;
+        }
 
-            //$('#divLessonDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
-            editorLessonDesc.value = $(obj).parent().parent().parent().parent().find('#spOverview').text();
 
-            //$('#txtEstimatedTime').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text());
 
-            if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text() != undefined
-                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text() != ''
-                && $(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 0
-            ) {
-                $('#txtHour').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[0]);
-                if ($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":").length > 1) {
-                    $('#txtMin').val($(obj).parent().parent().parent().parent().find('#spCourseTime').text().split(":")[1]);
-                }
+
+
+
+        //Old
+
+
+        function ClearFieldsAddLesson() {
+            $('#txtLessonTitle').val('');            
+            editorLessonDesc.value = '';
+            $('#txtHour').val('');
+            $('#txtMin').val('');
+            $('#txtPoint').val('');
+        }
+
+        function AddLessionFromContent() {
+            var result = validateAddLesson();
+            if (result.error) {
+                Swal.fire({
+                    title: "Alert",
+                    text: result.msg,
+                    icon: "error",
+                    button: "Ok",
+                });
             }
             else {
-                $('#txtHour').val('');
-                $('#txtMin').val('');
+                AddLession('nexttab');
             }
-
-
-            $('#txtPoint').val($(obj).parent().parent().parent().parent().find('#spPoints').text());
-
-            LessonFlag = id;
-            AddMoreLessonFlag = 'add';
-            divLessonFlag = 'add';
-
-
-            ClearFieldsAddResource();
-            ClearFieldsAddContent();
-            ClearFieldsAddQuiz();
-
-            BindContent('');
-            BindResource();
-            BindQuiz();
-
-            nextTab('pills-lesson-tab');
-        }
-
-        function DeleteLessionFromTile(obj, id) {
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to delete ? Yes or No !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-
-                    LessonFlag = id;
-                    ShowLoader();
-                    var getUrl = "/API/Content/DeleteModule";
-
-                    try {
-                        var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, IsActive: 0 };
-
-                        $.ajax({
-                            type: "POST",
-                            url: getUrl,
-                            headers: { "Authorization": "Bearer " + accessToken },
-                            data: JSON.stringify(requestParams),
-                            contentType: "application/json",
-                            //async: false,//Added on 18 APR
-                            success: function (response) {
-                                try {
-                                    var DataSet = $.parseJSON(response);
-                                    ""
-                                    if (DataSet != null && DataSet != "") {
-                                        if (DataSet.StatusCode == "1") {
-
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    LessonFlag = '0';
-                                                    ContentFlag = '0';
-                                                    BindLesson('addmore');
-                                                }
-                                            });
-                                        }
-                                        else {
-                                            Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                                        }
-                                    }
-                                    else {
-                                        HideLoader();
-                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                                    }
-                                }
-                                catch (e) {
-                                    HideLoader();
-                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                                }
-                            },
-                            complete: function () {
-                                HideLoader();
-                            },
-                            failure: function (response) {
-                                HideLoader();
-                                alert(response.data);
-                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                            }
-                        });
-                    }
-                    catch (e) {
-                        HideLoader();
-                        Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
-                    }
-                }
-            });
-        }
+        }        
 
         function BindLesson(flag) {
             var getUrl = "/API/Content/GetModules";
@@ -1228,20 +2332,7 @@
             //$('#divContentDescription').find('.jodit_placeholder').text('')
 
             //Added on 19 APR 20
-            editorContentDesc.value = '';
-        }
-
-        function validateAddContent() {
-            if ($("#txtContentHeader").val() == undefined || $("#txtContentHeader").val() == '') {
-                return { error: true, msg: "Please enter Content Header" };
-            }
-            else if (editorContentDesc.value == undefined || editorContentDesc.value.trim() == '') {
-                return { error: true, msg: "Please enter Content Details" };
-            }
-            else if (CourseFlag == '0' || LessonFlag == '0') {
-                return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
-            }
-            return true;
+            editorContentDescription.value = '';
         }
 
         function AddContentFromResource() {
@@ -1260,330 +2351,6 @@
             }
         }
 
-        function AddContent(flag) {
-            ""
-            var getURL = '';
-            var regex = '';
-            var formdata = new FormData();
-            var selectedDocType = 'TEXT';
-            var isUrl = '';
-            var index = 1;
-            var ContentID = '';
-
-            if (ContentFlag == '0') {
-                getURL = "/API/Content/CreateContent";
-            }
-            else {
-                ContentID = ContentFlag;
-                getURL = "/API/Content/ModifyContent";
-            }
-
-            formdata.append("ContentID", ContentID);
-            formdata.append("SrNo", index);
-            formdata.append("DocType", selectedDocType);
-            formdata.append("Title", $("#txtContentHeader").val());
-            formdata.append("Description", editorContentDesc.value);
-            formdata.append("Overview", "");
-            formdata.append("IsGift", "");
-            formdata.append("IsPublished", "");
-            formdata.append("CourseTime", "");
-            formdata.append("TopicID", CourseFlag);
-            formdata.append("ModuleID", LessonFlag);
-            formdata.append("TypeID", "1");
-            formdata.append("FlashcardTitle", "");
-            formdata.append("IsActive", "");
-            formdata.append("TotalScore", "");
-            formdata.append("PassingPercent", "");
-            formdata.append("PassingScore", "");
-            formdata.append("FlashcardHighlights", "");
-            formdata.append("SkipFlashcards", "");
-            formdata.append("IsURL", isUrl);
-            ShowLoader();
-
-            $.ajax({
-                type: "POST",
-                url: getURL,
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: formdata,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    try {
-                        ""
-                        var DataSet = $.parseJSON(response);
-                        if (DataSet != null && DataSet != "") {
-                            if (DataSet.StatusCode == "1") {
-                                ClearFieldsAddContent();
-                                HideLoader();
-
-                                if (flag == 'redirect') {
-                                    Swal.fire({
-                                        title: "Success",
-                                        text: DataSet.Data[0].ReturnMessage,
-                                        icon: "success"
-                                    }).then((value) => {
-                                        if (value) {
-                                            document.location = 'courses.aspx';
-                                        }
-                                    });
-                                }
-                                else if (flag == 'nexttab') {
-                                    HideLoader();
-                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                        ContentFlag = DataSet.Data[0].InsertedID;
-                                    }
-
-                                    SetProgressBar();
-                                    ContentFlag = '0';
-                                    BindContent('nexttab');
-
-                                    Swal.fire({
-                                        title: "Success",
-                                        text: DataSet.Data[0].ReturnMessage,
-                                        icon: "success"
-                                    }).then((value) => {
-                                        if (value) {
-                                            if (AddMoreContentFlag == 'add') {
-                                                nextTab('pills-resources-tab');
-                                            }
-                                        }
-                                    });
-                                }
-                                else if (flag == 'addmore') {
-                                    HideLoader();
-                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                        ContentFlag = DataSet.Data[0].InsertedID;
-                                    }
-
-                                    SetProgressBar();
-                                    ContentFlag = '0';
-                                    BindContent('addmore');
-
-                                    Swal.fire({
-                                        title: "Success",
-                                        text: DataSet.Data[0].ReturnMessage,
-                                        icon: "success"
-                                    });
-                                }
-
-                                IsCoursePublishable();
-                            }
-                            else {
-                                HideLoader();
-                                Swal.fire({
-                                    title: "Failure",
-                                    text: DataSet.StatusDescription,
-                                    icon: "error"
-                                });
-                            }
-                        }
-                        else {
-                            HideLoader();
-                            Swal.fire({
-                                title: "Failure",
-                                text: "Please try Again",
-                                icon: "error"
-                            });
-                        }
-                    }
-                    catch (e) {
-                        HideLoader();
-                        Swal.fire({
-                            title: "Failure",
-                            text: "Please try Again",
-                            icon: "error"
-                        });
-                    }
-                },
-                complete: function () {
-                    HideLoader();
-                },
-                failure: function (response) {
-                    HideLoader();
-                    alert(response.data);
-                    Swal.fire({
-                        title: "Failure",
-                        text: "Please try Again",
-                        icon: "error"
-                    });
-                }
-            });
-        }
-
-        function EditContentFromTile(obj, id) {
-            ""
-            $('#txtContentHeader').val($(obj).parent().parent().parent().parent().find('#spTitle').text());
-            //$('#divContentDescription').find('.jodit_wysiwyg').text($(obj).parent().parent().parent().parent().find('#spOverview').text());
-            editorContentDesc.value = $(obj).parent().parent().parent().parent().find('#spOverview').text();
-
-            ContentFlag = id;
-            AddMoreContentFlag = 'add';
-            divContentFlag = 'add';
-            nextTab('pills-content-tab');
-        }
-
-        function DeleteContentFromTile(obj, id) {
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to delete ? Yes or No !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    ContentFlag = id;
-                    ShowLoader();
-                    var getUrl = "/API/Content/DeleteContent";
-
-                    try {
-                        var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, p_ContentID: ContentFlag, IsActive: 0 };
-
-                        $.ajax({
-                            type: "POST",
-                            url: getUrl,
-                            headers: { "Authorization": "Bearer " + accessToken },
-                            data: JSON.stringify(requestParams),
-                            contentType: "application/json",
-                            //async: false,
-                            success: function (response) {
-                                try {
-                                    var DataSet = $.parseJSON(response);
-                                    ""
-                                    if (DataSet != null && DataSet != "") {
-                                        if (DataSet.StatusCode == "1") {
-
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    ContentFlag = '0';
-                                                    BindContent('addmore');
-                                                }
-                                            });
-                                        }
-                                        else {
-                                            Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                                        }
-                                    }
-                                    else {
-                                        HideLoader();
-                                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                                    }
-                                }
-                                catch (e) {
-                                    HideLoader();
-                                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                                }
-                            },
-                            complete: function () {
-                                HideLoader();
-                            },
-                            failure: function (response) {
-                                HideLoader();
-                                alert(response.data);
-                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                            }
-                        });
-                    }
-                    catch (e) {
-                        HideLoader();
-                        Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
-                    }
-                }
-            });
-        }
-
-        function BindContent(flag) {
-            var getUrl = "/API/Content/GetContentList";
-            var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: ContentFlag, ContentTypeID: ContentContentTypeID, IsGift: "true", Flag: 'learningjourney' };
-            $.ajax({
-                type: "POST",
-                url: getUrl,
-                headers: { "Authorization": "Bearer " + accessToken },
-                data: JSON.stringify(requestParams),
-                contentType: "application/json",
-                //async: true,//Added on 18 APR
-                success: function (response) {
-                    try {
-                        var DataSet = $.parseJSON(response);
-                        //debugger
-                        if (DataSet != null && DataSet != "") {
-                            if (DataSet.StatusCode == "1") {
-
-                                var Contents = DataSet.Data;
-                                var tblContents = '';
-                                $('#divContentGrid').empty();
-                                if (Contents != undefined && Contents.length > 0) {
-
-                                    for (var i = 0; i < Contents.length; i++) {
-
-                                        tblContents = tblContents + '<div class="card shadow-sm" id="divContentTile"><div class="card-body">';
-                                        tblContents = tblContents + '<div class="tag">Content</div>';
-                                        //tblContents = tblContents + '<div class="tag" ><span id="spTitle" >' + Contents[i].Title + '</span></div>';
-                                        tblContents = tblContents + '<i class="fas fa-grip-vertical grid-icon"></i>';
-                                        tblContents = tblContents + '<div class="row">';
-                                        tblContents = tblContents + '<div class="col-sm-12 col-md-9 col-lg-10">';
-                                        tblContents = tblContents + '<h5 class="card-title" id="spTitle">' + Contents[i].Title + '</h5>';
-                                        tblContents = tblContents + '<a style="display:none;" target="_blank" href="' + Contents[i].Description + '"><h5 class="card-title" id="spOverview">' + Contents[i].Description + '</h5></a>';
-
-                                        //tblContents = tblContents + '<p class="card-text">~' + Contents[i].CourseTime + ' mins</p>';
-                                        tblContents = tblContents + '</div>';
-                                        tblContents = tblContents + '<div class="col-sm-12 col-md-3 col-lg-2"><div class="action">';
-                                        //tblContents = tblContents + '<i class="far fa-eye"></i>';
-                                        tblContents = tblContents + '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + Contents[i].ContentID + ')";></i><span></span>';
-                                        tblContents = tblContents + '<i class="fas fa-edit" title="Edit" onclick="EditContentFromTile(this,' + Contents[i].ContentID + ')";></i>';
-                                        tblContents = tblContents + '</div></div></div></div></div>';
-                                    }
-                                }
-                                else {
-                                    tblContents = tblContents + '<div class="container"><h6>No content added yet</h6></div>';
-                                }
-                                $('#divContentGrid').append(tblContents);
-
-                                if (flag == 'fromcontent') {
-                                    $("#sp" + ContentFlag).click();
-                                }
-                                else if (flag == 'nexttab') {
-                                    AddMoreContentFlag = 'bindtile';
-                                    divContentFlag = 'bindtile';
-                                    AddMore('btnAddMoreContent');
-                                    nextTab('pills-resources-tab');
-                                }
-                                else if (flag == 'addmore') {
-                                    AddMoreContentFlag = 'bindtile';
-                                    divContentFlag = 'bindtile';
-                                    AddMore('btnAddMoreContent');
-                                }
-                            }
-                            else {
-                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                            }
-                        }
-                        else {
-                            HideLoader();
-                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                        }
-                    }
-                    catch (e) {
-                        HideLoader();
-                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                    }
-                },
-                complete: function () {
-                    HideLoader();
-                },
-                failure: function (response) {
-                    HideLoader();
-                    Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
-                }
-            });
-        }
-
         function ShowContentTile() {
             ContentFlag = '0';
             AddMoreContentFlag = 'bindtile';
@@ -1596,134 +2363,16 @@
             //$('#divResourcesDescription').empty().append('<div id="txtResourcesDescription"></div>');
             //var editorResourcesDesc = new Jodit('#txtResourcesDescription');
             //$('#divResourcesDescription').find('.jodit_placeholder').text('')
-            editorResourcesDesc.value = '';
+            editorResourcesDescription.value = '';
         }
 
-        function validateAddResource() {
-            if (editorResourcesDesc.value == undefined || editorResourcesDesc.value.trim() == '') {
-                return { error: true, msg: "Please enter Resource Details" };
-            }
-            return true;
-        }
+        
 
         function AddResourceFromQuiz() {
             AddResource('samepage');
         }
 
-        function AddResource(flag) {
-            ""
-            var result = validateAddResource();
-            if (result.error) {
-                Swal.fire({
-                    title: "Alert",
-                    text: result.msg,
-                    icon: "error",
-                    button: "Ok",
-                });
-            }
-            else {
-                ShowLoader();
-                var Description = editorResourcesDesc.value;
-                var getUrl = "/API/Content/UpdateResource";
-
-                try {
-                    var requestParams = { TopicID: CourseFlag, ModuleID: LessonFlag, Description: Description };
-
-                    $.ajax({
-                        type: "POST",
-                        url: getUrl,
-                        headers: { "Authorization": "Bearer " + accessToken },
-                        data: JSON.stringify(requestParams),
-                        contentType: "application/json",
-                        //async: false,//Added on 18 APR
-                        success: function (response) {
-                            try {
-                                var DataSet = $.parseJSON(response);
-                                ""
-                                if (DataSet != null && DataSet != "") {
-                                    if (DataSet.StatusCode == "1") {
-                                        if (flag == 'redirect') {
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    document.location = 'courses.aspx';
-                                                }
-                                            });
-                                        }
-                                        else if (flag == 'samepage') {
-                                            HideLoader();
-                                            ResourceFlag = LessonFlag;
-
-                                            SetProgressBar();
-                                            //ClearFieldsAddResource();
-
-                                            Swal.fire({
-                                                title: "Success",
-                                                text: DataSet.Data[0].ReturnMessage,
-                                                icon: "success"
-                                            }).then((value) => {
-                                                if (value) {
-                                                    nextTab('pills-quiz-tab');
-                                                }
-                                            });
-                                        }
-
-                                        IsCoursePublishable();
-                                    }
-                                    else {
-                                        Swal.fire({
-                                            title: "Failure",
-                                            text: DataSet.StatusDescription,
-                                            icon: "error"
-                                        });
-                                    }
-                                }
-                                else {
-                                    HideLoader();
-                                    Swal.fire({
-                                        title: "Failure",
-                                        text: "Please try Again",
-                                        icon: "error"
-                                    });
-                                }
-                            }
-                            catch (e) {
-                                HideLoader();
-                                Swal.fire({
-                                    title: "Failure",
-                                    text: "Please try Again",
-                                    icon: "error"
-                                });
-                            }
-                        },
-                        complete: function () {
-                            HideLoader();
-                        },
-                        failure: function (response) {
-                            HideLoader();
-                            alert(response.data);
-                            Swal.fire({
-                                title: "Failure",
-                                text: "Please try Again",
-                                icon: "error"
-                            });
-                        }
-                    });
-                }
-                catch (e) {
-                    HideLoader();
-                    Swal.fire({
-                        title: "Alert",
-                        text: "Oops! An Occured. Please try again",
-                        icon: "error"
-
-                    });
-                }
-            }
-        }
+        
 
         function BindResource() {
             ""
@@ -1750,7 +2399,7 @@
                                     //debugger
                                     //editorResourcesDesc.value = unescape(DataSet.Data[0].Resource);
                                     $('#divResourcesAsHTML').html(DataSet.Data[0].Resource);
-                                    editorResourcesDesc.value = $('#divResourcesAsHTML').text();
+                                    editorResourcesDescription.value = $('#divResourcesAsHTML').text();
                                 }
                             }
                             else {
@@ -2468,23 +3117,30 @@
         }
 
         function AddAnswer() {
-            var AddAnswer = '';
-            AddAnswer = AddAnswer + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + addClass + '" aria-hidden="true"></i></span>' +
+
+            var addAns = '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>' +
                 '<div class="col-sm-8 col-md-10">' +
-                '<div class="row">' +
-                '<div class="col-sm-12 col-md-10">' +
-                '<div class="form-group">' +
-                '<input type="text" class="form-control" answerid="0" value="" id="txtAnswer"/>' +
-                '</div></div>' +
-                '<div class="col-sm-3 col-md-2">' +
-                '<div class="form-group">' +
-                '<input type="text" id="txtScore" class="form-control" value="0" />' +
-                '</div></div></div></div>' +
-                '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                '<span class="checked-icon delete"><i class="fa fa-trash-alt fa-w-16" id="ansFlag" value="true" onclick="DeleteAnsOption(this)"></i></span>' +
+                '    <div class="row">' +
+                '        <div class="col-sm-12 col-md-10">' +
+                '            <div class="form-group">' +
+                '                <input type="text" class="form-control" placeholder="Answer Option" />' +
+                '            </div>' +
+                '        </div>' +
+                '        <div class="col-sm-3 col-md-2">' +
+                '            <div class="form-group">' +
+                '                <input type="text" class="form-control" placeholder="Assign Score" />' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '</div>' +
+                '<span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>' +
+                '<span class="checked-icon delete"><i class="fa fa-trash-alt" onclick="DeleteAnsOption(this)"></i></span>' +
                 '</div>';
-            $('#divAnswer').append(AddAnswer);
+
+
+
+            $('#divAnswer').append(addAns);
         }
 
         function DeleteAnsOption(cntrl) {
@@ -2537,6 +3193,9 @@
                         if (flag == 'CourseLogo') {
                             base64CourseLogo = reader.result;
                             $("#imgCourseLogo").attr("src", base64CourseLogo);
+
+                            //$("#divCourseLogo").addClass('img');
+                            //$("#divCourseLogo").attr("src", base64CourseLogo);
                         }
                         else if (flag == 'InstructorPhoto') {
                             base64InstructorPhoto = reader.result;
@@ -2608,7 +3267,8 @@
         }
 
         function isNumberKey(flag, e) {
-
+            debugger
+            flag = $(flag).attr('id');
             var result = false;
             try {
                 var charCode = (e.which) ? e.which : e.keyCode;

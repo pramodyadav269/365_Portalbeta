@@ -476,6 +476,82 @@
                             </div>
                         </div>
 
+                        <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
+                            <div class="row quiz">
+                                <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
+                                    <span class="sr">Q1<i class="far fa-caret-square-down"></i><i class="fas fa-caret-down"></i></span>
+                                    <div class="col-sm-8 col-md-10">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Add Question Text" />
+                                        </div>
+                                    </div>
+                                    <span class="correct">Correct</span>
+                                </div>
+                                <div class="row" id="divAnswer">
+                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                        <span class="block"><i class="far fa-caret-square-down"></i></span>
+                                        <div class="col-sm-8 col-md-10">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-10">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
+                                    </div>
+
+                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                        <span class="block"><i class="far fa-caret-square-down"></i></span>
+                                        <div class="col-sm-8 col-md-10">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-10">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
+                                    </div>
+
+                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                        <span class="block"><i class="far fa-caret-square-down"></i></span>
+                                        <div class="col-sm-8 col-md-10">
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-10">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3 col-md-2">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
+                                    </div>
+                                </div>
+                                <div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">
+                                    <a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="w-100"></div>
                         <div class="action-btn">
                             <a class="btn btn-outline blod black"><i class="fas fa-plus-circle"></i>Add New Content</a>
