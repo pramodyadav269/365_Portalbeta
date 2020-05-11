@@ -539,19 +539,26 @@ main.fix {
       color: rgba(221, 221, 221, 0.65);
       align-items: center;
       display: flex;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15); }
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      /*&.active {
+                    .sidenav-link {
+                        color: #fff;
+                    }
+                }*/ }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-item {
         padding: 10px 0; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item:last-child {
         border: none; }
-      .sidenav .sidenav-content .sidenav-nav .sidenav-item.active .sidenav-link {
-        color: #fff; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link {
         padding: 0;
         width: 100%;
         color: rgba(221, 221, 221, 0.65); }
+        .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link.active {
+          color: #fff;
+          /*color: $yellow-color;*/ }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link:hover {
-          color: #fff; }
+          color: #fff;
+          /*color: $yellow-color;*/ }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon {
           display: inline-block;
           width: 56px;
@@ -593,7 +600,8 @@ main.fix {
           top: 12px;
           right: 12px; }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title.icon-right:hover {
-            color: #fff; }
+            color: #fff;
+            /*color: $yellow-color;*/ }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav {
           padding: 0; }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .sub-sidenav-nav .sidenav-item {

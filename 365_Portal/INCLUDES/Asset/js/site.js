@@ -1,6 +1,9 @@
 ﻿
 $(document).ready(function () {
 
+    $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
+    $('.sidenav-nav a.sidenav-link[href="' + window.location.href.split('/').pop() + '"]').addClass('active'); // add active class in current page
+
     bsCustomFileInput.init();
 
     $('.courses.dropdown .dropdown-menu').on("click", function (e) {
@@ -91,7 +94,7 @@ $(document).ready(function () {
         }
     });
 
-   
+
 
     if ($('#headingCourse h5').text() === "") {
         $('#headingCourse').hide();

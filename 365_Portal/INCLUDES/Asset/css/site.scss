@@ -756,20 +756,25 @@ main {
                 &:last-child {
                     border: none;
                 }
-
-                &.active {
+                /*&.active {
                     .sidenav-link {
                         color: #fff;
                     }
-                }
-
+                }*/
                 .sidenav-link {
                     padding: 0;
                     width: 100%;
                     color: rgba(221, 221, 221, .65);
 
+
+                    &.active {
+                        color: #fff;
+                        /*color: $yellow-color;*/
+                    }
+
                     &:hover {
                         color: #fff;
+                        /*color: $yellow-color;*/
                     }
 
                     .link-icon {
@@ -836,6 +841,7 @@ main {
 
                             &:hover {
                                 color: #fff;
+                                /*color: $yellow-color;*/
                             }
                         }
                     }
