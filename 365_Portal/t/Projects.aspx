@@ -1673,9 +1673,9 @@
                         cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         newCardHtml += '<div class="wr-content">';
                         newCardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
-                        newCardHtml += '<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '"  clickevent="edit" >Edit</a>';
+                        newCardHtml += '<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '"  clickevent="edit"></a>';
                         if (Role != "enduser") {
-                            newCardHtml += '|<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '" clickevent="delete">Delete</a>';
+                            newCardHtml += '|<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '" clickevent="delete"></a>';
                         }
                         newCardHtml += '</div></div>';
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';

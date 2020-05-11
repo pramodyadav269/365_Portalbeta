@@ -2230,8 +2230,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     font-size: 14px; }
     .board-column .float-right .svg-inline--fa {
       cursor: pointer;
-      margin: 0 0.5rem;
-      touch-action: initial; }
+      margin: 0 0.5rem; }
+    .board-column .float-right a[clickevent="edit"]::before {
+      position: relative;
+      color: rgba(0, 0, 0, 0.5);
+      font-family: "Font Awesome 5 Free";
+      font-weight: 600;
+      content: "\f304";
+      right: 6px; }
+    .board-column .float-right a[clickevent="delete"]::before {
+      position: relative;
+      color: rgba(0, 0, 0, 0.5);
+      font-family: "Font Awesome 5 Free";
+      font-weight: 600;
+      content: "\f2ed";
+      left: 6px; }
 
 .unselectable {
   -moz-user-select: none;
