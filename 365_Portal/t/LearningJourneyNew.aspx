@@ -27,7 +27,7 @@
             <div class="col-12 col-sm-12 mt-4 accordion course-collapse">
                 <div class="card">
                     <div class="card-header" id="headingCourse">
-                        <h5></h5>
+                        <h5>werwer</h5>
                         <a data-toggle="collapse" data-target="#collapseCourse" aria-expanded="true" aria-controls="collapseCourse">
                             <i class="fas fa-chevron-down"></i>
                         </a>
@@ -146,335 +146,336 @@
                 </div>
             </div>
 
-            <%-- in progresss --%>
-            <div class="col-12 col-sm-12 mt-4 course-content-collapse">
+            <div class="col-12 col-sm-12 mt-4 accordion course-content-collapse">
                 <div class="builder">
                     <div class="builder-title">
                         <img src="../INCLUDES/Asset/images/builder.png" /><span>Course Builder</span>
                     </div>
                     <div class="builder-action"><span onclick="collapseToggle('.course-content-collapse .collapse',1);">Expand All</span><span onclick="collapseToggle('.course-content-collapse .collapse',0);">Collapse All</span></div>
                 </div>
+
                 <div class="card mb-4">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
-                            <div class="card-body arrows">
-                                <div class="tag lesson main-card">Lesson 1</div>
-                                <div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>
-                                <div class="row">
+                    <%--<div class="tag lesson">Lesson 1</div>--%>
+                    <div class="card-header" id="headingLesson">
+                        <h5>wwewe</h5>
+                        <a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="true" aria-controls="collapseLesson">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </div>
+                    <div id="collapseLesson" class="collapse in" aria-labelledby="headingLesson">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">
+                                <div class="card-body arrows">
+                                    <div class="tag lesson main-card">Lesson 1</div>
+                                    <div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>
+                                    <div class="row">
+                                        <div class="col-sm-12" id="dvLesson1Edit">
+                                            <div class="form-group asterisk">
+                                                <label for="txtLessonTitle" class="inline">Lesson Title</label>
+                                                <input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />
+                                            </div>
 
-                                    <div class="col-sm-12" id="dvLesson1Edit">
-                                        <div class="form-group asterisk">
-                                            <label for="txtLessonTitle" class="inline">Lesson Title</label>
-                                            <input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />
-                                        </div>
-
-                                        <div class="form-group asterisk">
-                                            <label for="txtLessonDescription" class="inline">Lesson Description</label>
-                                            <textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12" id="dvLesson1View">
-                                        <div class="accordion">
-                                            <div class="card">
-                                                <div class="card-header" id="headingLesson1">
-                                                    <h5>Understand Custom & Standard Objects</h5>
-                                                    <a data-toggle="collapse" data-target="#collapseLesson1" aria-expanded="true" aria-controls="collapseLesson1">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </a>
-                                                </div>
-
-                                                <div id="collapseLesson1" class="collapse show" aria-labelledby="headingLesson1">
-                                                    <div class="card-body">
-                                                        After completing this unit, you’ll be able to:
-                                                        <br />
-                                                        Describe the perks of using objects on the Salesforce platform. Explain the difference between standard objects and custom objects
-                                                    </div>
-                                                </div>
+                                            <div class="form-group asterisk">
+                                                <label for="txtLessonDescription" class="inline">Lesson Description</label>
+                                                <textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-sm-12" id="dvLesson1Content1Edit">
-                                        <div class="form-group asterisk">
-                                            <div class="tag content">Content 1</div>
-                                            <label for="txtContentTitle" class="inline">Content Title</label>
-                                            <input type="text" class="form-control required" id="txtContentTitle" placeholder="Content Title" />
-                                        </div>
+                                        <div class="col-sm-12" id="dvLesson1View">
+                                                <div class="card">
+                                                    <div class="card-header" id="headingLesson1">
+                                                        <h5>Understand Custom & Standard Objects</h5>
+                                                        <a data-toggle="collapse" data-target="#collapseLesson1" aria-expanded="true" aria-controls="collapseLesson1">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </a>
+                                                    </div>
 
-                                        <div class="form-group editor asterisk">
-                                            <div id="txtContentDescription"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12" id="dvLesson1Content1View">
-                                        <div class="accordion">
-                                            <div class="card">
-                                                <div class="tag content">Content 1</div>
-                                                <div class="card-header" id="headingLesson1Content1">
-                                                    <h5>Overview of Objects</h5>
-                                                    <a data-toggle="collapse" data-target="#collapseLesson1Content1" aria-expanded="true" aria-controls="collapseLesson1Content1">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </a>
+                                                    <div id="collapseLesson1" class="collapse show" aria-labelledby="headingLesson1">
+                                                        <div class="card-body">
+                                                            After completing this unit, you’ll be able to:
+                                                        <br />
+                                                            Describe the perks of using objects on the Salesforce platform. Explain the difference between standard objects and custom objects
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                        </div>
 
-                                                <div id="collapseLesson1Content1" class="collapse show" aria-labelledby="headingLesson1Content1">
-                                                    <div class="card-body">
-                                                        DreamHouse is a realty company that provides a way for customers to shop for homes and contact real estate agents online.
+                                        <div class="col-sm-12" id="dvLesson1Content1Edit">
+                                            <div class="form-group asterisk">
+                                                <div class="tag content">Content 1</div>
+                                                <label for="txtContentTitle" class="inline">Content Title</label>
+                                                <input type="text" class="form-control required" id="txtContentTitle" placeholder="Content Title" />
+                                            </div>
+
+                                            <div class="form-group editor asterisk">
+                                                <div id="txtContentDescription"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12" id="dvLesson1Content1View">
+                                                <div class="card">
+                                                    <div class="tag content">Content 1</div>
+                                                    <div class="card-header" id="headingLesson1Content1">
+                                                        <h5>Overview of Objects</h5>
+                                                        <a data-toggle="collapse" data-target="#collapseLesson1Content1" aria-expanded="true" aria-controls="collapseLesson1Content1">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div id="collapseLesson1Content1" class="collapse show" aria-labelledby="headingLesson1Content1">
+                                                        <div class="card-body">
+                                                            DreamHouse is a realty company that provides a way for customers to shop for homes and contact real estate agents online.
                                                         <br />
-                                                        DreamHouse brokers use some of Salesforce’s standard functionality, like contacts and leads, to track home buyers.
+                                                            DreamHouse brokers use some of Salesforce’s standard functionality, like contacts and leads, to track home buyers.
                                                         <br />
-                                                        <br />
-                                                        But when it comes to selling houses, there are a lot more things they want to track. 
+                                                            <br />
+                                                            But when it comes to selling houses, there are a lot more things they want to track. 
                                                         For example, Salesforce doesn’t include a standard way to track properties. 
                                                         How is DreamHouse supposed to know which homes they have for sale or how much each home costs? 
                                                         Luckily, their Salesforce admin, D’Angelo, knows that the Salesforce platform offers a solution. 
                                                         We’ll work with D’Angelo to see what he’s building.
+                                                        </div>
                                                     </div>
                                                 </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group editor">
+                                                <label>Resources</label>
+                                                <div id="txtResourcesDescription"></div>
+                                            </div>
+                                            <%-- for edit rescription --%>
+                                            <%--$('#txtResourcesDescription').parent().find('.jodit_toolbar').show()--%>
+
+                                            <%-- for view rescription --%>
+                                            <%--$('#txtResourcesDescription').parent().find('.jodit_toolbar').hide()--%>
+                                        </div>
+
+                                        <div class="col-sm-12" id="dvLesson1QuizEdit">
+                                            <label>Quiz</label>
+                                            <div class="form-group asterisk">
+                                                <label for="txtQuizTitle" class="inline">Quiz Title</label>
+                                                <input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />
+                                            </div>
+
+                                            <div class="form-group asterisk">
+                                                <label for="txtQuizDescription" class="inline">Quiz Description</label>
+                                                <textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-12" id="dvLesson1QuizView">
+                                            <label>Quiz</label>
+                                                <div class="card">
+                                                    <div class="card-header" id="headingLesson1Quiz">
+                                                        <h5>Data Modeling Quiz</h5>
+                                                        <a data-toggle="collapse" data-target="#collapseLesson1Quiz" aria-expanded="true" aria-controls="collapseLesson1Quiz">
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </a>
+                                                    </div>
 
-                                    <div class="col-sm-12">
-                                        <div class="form-group editor">
-                                            <label>Resources</label>
-                                            <div id="txtResourcesDescription"></div>
-                                        </div>
-                                        <%-- for edit rescription --%>
-                                        <%--$('#txtResourcesDescription').parent().find('.jodit_toolbar').show()--%>
-
-                                        <%-- for view rescription --%>
-                                        <%--$('#txtResourcesDescription').parent().find('.jodit_toolbar').hide()--%>
-                                    </div>
-
-                                    <div class="col-sm-12" id="dvLesson1QuizEdit">
-                                        <label>Quiz</label>
-                                        <div class="form-group asterisk">
-                                            <label for="txtQuizTitle" class="inline">Quiz Title</label>
-                                            <input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />
-                                        </div>
-
-                                        <div class="form-group asterisk">
-                                            <label for="txtQuizDescription" class="inline">Quiz Description</label>
-                                            <textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12" id="dvLesson1QuizView">
-                                        <label>Quiz</label>
-                                        <div class="accordion">
-                                            <div class="card">
-                                                <div class="card-header" id="headingLesson1Quiz">
-                                                    <h5>Data Modeling Quiz</h5>
-                                                    <a data-toggle="collapse" data-target="#collapseLesson1Quiz" aria-expanded="true" aria-controls="collapseLesson1Quiz">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </a>
-                                                </div>
-
-                                                <div id="collapseLesson1Quiz" class="collapse show" aria-labelledby="headingLesson1Quiz">
-                                                    <div class="card-body">
-                                                        Give your data structure with objects, fields, and relationships.
+                                                    <div id="collapseLesson1Quiz" class="collapse show" aria-labelledby="headingLesson1Quiz">
+                                                        <div class="card-body">
+                                                            Give your data structure with objects, fields, and relationships.
+                                                        </div>
                                                     </div>
                                                 </div>
+                                        </div>
+
+                                        <div class="col-sm-12 mb-4 dropright" id="divQuestionType">
+                                            <a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-plus-circle"></i>New Question
+                                            </a>
+                                            <div class="dropdown-menu quiz-element">
+                                                <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square"></i>Multiple Choice</a>
+                                                <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle"></i>Radio Button</a>
+                                                <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down"></i>Dropdown</a>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-sm-12 mb-4 dropright" id="divQuestionType">
-                                        <a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-plus-circle"></i>New Question
-                                        </a>
-                                        <div class="dropdown-menu quiz-element">
-                                            <a class="dropdown-item" onclick="ShowQuestion('multiple');"><i class="far fa-check-square"></i>Multiple Choice</a>
-                                            <a class="dropdown-item" onclick="ShowQuestion('radio');"><i class="fas fa-dot-circle"></i>Radio Button</a>
-                                            <a class="dropdown-item" onclick="ShowQuestion('dropdown');"><i class="far fa-caret-square-down"></i>Dropdown</a>
-                                        </div>
                                     </div>
-
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
-                            <div class="card-body right-side-content">
-                                <div class="lesson-action">
-                                    <a><i class="fas fa-pen"></i></a>
-                                    <a><i class="fas fa-trash-alt"></i></a>
-                                    <a><i class="fas fa-chevron-down"></i></a>
-                                </div>
-                                <div class="row mt-5">
-                                    <div class="col-sm-12 mt-4 mb-4">
-                                        <div class="form-group">
-                                            <label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>
-                                            <input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
-                                            <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
-                                        </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">
+                                <div class="card-body right-side-content">
+                                    <div class="lesson-action">
+                                        <a><i class="fas fa-pen"></i></a>
+                                        <a><i class="fas fa-trash-alt"></i></a>
+                                        <a><i class="fas fa-chevron-down"></i></a>
                                     </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>
-                                            <input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey('txtPoint',event);" />
+                                    <div class="row mt-5">
+                                        <div class="col-sm-12 mt-4 mb-4">
+                                            <div class="form-group">
+                                                <label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>
+                                                <input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey('txtHour',event);" />
+                                                <input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey('txtMin',event);" />
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>
+                                                <input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey('txtPoint',event);" />
+                                            </div>
+                                        </div>
 
-                                    <div class="col-sm-12 mt-5">
-                                        <div class="form-group">
-                                            <label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>
-                                            <input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" onkeyup="return isNumberKey('txtPassingScorePercentage',event);" />
+                                        <div class="col-sm-12 mt-5">
+                                            <div class="form-group">
+                                                <label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>
+                                                <input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" onkeyup="return isNumberKey('txtPassingScorePercentage',event);" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div id="dvLesson1Ques1" class="col-sm-12 quiz-wrapper">
-                            <div class="row quiz">
-                                <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
-                                    <span class="sr">Q1<i class="fas fa-dot-circle"></i><i class="fas fa-caret-down"></i></span>
-                                    <div class="col-sm-8 col-md-10">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Add Question Text" />
-                                        </div>
-                                    </div>
-                                    <span class="correct">Correct</span>
-                                </div>
-                                <div class="row" id="divAnswer">
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
+                            <div class="w-100"></div>
+                            <div id="dvLesson1Ques1" class="col-sm-12 quiz-wrapper">
+                                <div class="row quiz">
+                                    <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
+                                        <span class="sr">Q1<i class="fas fa-dot-circle"></i><i class="fas fa-caret-down"></i></span>
                                         <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Add Question Text" />
+                                            </div>
+                                        </div>
+                                        <span class="correct">Correct</span>
+                                    </div>
+                                    <div class="row" id="divAnswer">
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
-                                    </div>
 
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
-                                        <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle correct" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle correct" onclick="changeAnsFlag(this)"></i></span>
-                                    </div>
 
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
-                                        <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="fas fa-dot-circle"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle wrong" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle wrong" onclick="changeAnsFlag(this)"></i></span>
                                     </div>
-                                </div>
-                                <div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">
-                                    <a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>
+                                    <div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">
+                                        <a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
-                            <div class="row quiz">
-                                <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
-                                    <span class="sr">Q1<i class="fas far fa-square"></i><i class="fas fa-caret-down"></i></span>
-                                    <div class="col-sm-8 col-md-10">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Add Question Text" />
-                                        </div>
-                                    </div>
-                                    <span class="correct">Correct</span>
-                                </div>
-                                <div class="row" id="divAnswer">
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas far fa-square"></i></span>
+                            <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
+                                <div class="row quiz">
+                                    <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
+                                        <span class="sr">Q1<i class="fas far fa-square"></i><i class="fas fa-caret-down"></i></span>
                                         <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Add Question Text" />
+                                            </div>
+                                        </div>
+                                        <span class="correct">Correct</span>
+                                    </div>
+                                    <div class="row" id="divAnswer">
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas far fa-square"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
-                                    </div>
 
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas far fa-square"></i></span>
-                                        <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas far fa-square"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
-                                    </div>
 
-                                    <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
-                                        <span class="block"><i class="fas far fa-square"></i></span>
-                                        <div class="col-sm-8 col-md-10">
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-10">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Answer Option" />
+                                        <div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">
+                                            <span class="block"><i class="fas far fa-square"></i></span>
+                                            <div class="col-sm-8 col-md-10">
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Answer Option" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3 col-md-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control" placeholder="Assign Score" />
+                                                    <div class="col-sm-3 col-md-2">
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" placeholder="Assign Score" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
                                         </div>
-                                        <span class="checked-icon"><i class="far fa-check-circle" onclick="changeAnsFlag(this)"></i></span>
                                     </div>
-                                </div>
-                                <div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">
-                                    <a onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>
+                                    <div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">
+                                        <a onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
                         <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
                             <div class="row quiz">

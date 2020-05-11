@@ -32,7 +32,7 @@ namespace _365_Portal.Code.BL
         }
 
         public static ActivityLog ActivityLogMapper(string ModuleName, int ActionId, int p_CompID, int p_UserId, string p_UserName
-            , string p_MethodName, string activitynameobject, string ExtraParam1 = "")
+            , string p_MethodName, string activitynameobject, string ExtraParam1 = "", string ProjectName = "", string StatusName = "")
         {
             int p_ActivityMasterId = 0;
             string p_Message = "";
@@ -44,27 +44,27 @@ namespace _365_Portal.Code.BL
                 {
                     case (int)TaskAction.INSERT:
                         p_ActivityMasterId = (int)Activity.TaskAdded;
-                        p_Message = "Task <b>" + activitynameobject + "</b> added Successfully";
+                        p_Message = p_UserName + " added <b>" + activitynameobject + "</b>";
                         break;
                     case (int)TaskAction.MODIFY:
                         p_ActivityMasterId = (int)Activity.TaskModified;
-                        p_Message = "Task <b>" + activitynameobject + "</b> updated Successfully";
+                        p_Message = p_UserName + " edited <b>" + activitynameobject + "</b>";
                         break;
                     case (int)TaskAction.DELETE:
                         p_ActivityMasterId = (int)Activity.TaskDeleted;
-                        p_Message = "Task <b>" + activitynameobject + "</b> Deleted";
+                        p_Message = p_UserName + "deleted <b>" + activitynameobject + "</b>";
                         break;
                     case 10:
                         p_ActivityMasterId = (int)Activity.TaskStatusChanged;
-                        p_Message = "Task <b>" + activitynameobject + "</b> status Changed";
+                        p_Message = p_UserName + " marked <b>" + activitynameobject + "</b> from project <b>" + ProjectName + "</b> as <b>" + StatusName + "</b>";
                         break;
                     case (int)TaskAction.FILEADDED:
                         p_ActivityMasterId = (int)Activity.TaskFileAdded;
-                        p_Message = "File <b>" + ExtraParam1 + "</b> added in Task <b>" + activitynameobject + "</b>";
+                        p_Message = p_UserName + " uploaded attachement to <b>" + activitynameobject + "</b>";
                         break;
                     case (int)TaskAction.COMMENTSADDED:
                         p_ActivityMasterId = (int)Activity.TaskCommentAdded;
-                        p_Message = "Commented \"" + ExtraParam1 + "\" on Task <b>" + activitynameobject + "</b>";
+                        p_Message = p_UserName + " Commented on <b>" + activitynameobject + "</b>";
                         break;
                     default:
                         p_ActivityMasterId = 0;
@@ -77,15 +77,15 @@ namespace _365_Portal.Code.BL
                 {
                     case 2:
                         p_ActivityMasterId = (int)Activity.ProjectAdded;
-                        p_Message = "Project <b>" + activitynameobject + "</b> added Successfully";
+                        p_Message = p_UserName + " added <b>" + activitynameobject + "</b>";
                         break;
                     case 3:
                         p_ActivityMasterId = (int)Activity.ProjectModified;
-                        p_Message = "Project <b>" + activitynameobject + "</b> updated Successfully";
+                        p_Message = p_UserName + " edited <b>" + activitynameobject + "</b>";
                         break;
                     case 4:
                         p_ActivityMasterId = (int)Activity.projectDeleted;
-                        p_Message = "Project <b>" + activitynameobject + "</b> deleted";
+                        p_Message = p_UserName + "deleted <b>" + activitynameobject + "</b>";
                         break;
                     default:
                         p_ActivityMasterId = 0;

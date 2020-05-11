@@ -17,10 +17,12 @@ namespace _365_Portal.Controllers
     public class ProjectController : ApiController
     {
         private System.Web.Script.Serialization.JavaScriptSerializer jsSerializer;
+        private string UserName = string.Empty;
 
         private ProjectController()
         {
             jsSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            UserName = Convert.ToString(System.Web.HttpContext.Current.Session["UserFullName"]);
         }
 
         [Route("api/Project/ProjectCRUD")]
@@ -55,7 +57,7 @@ namespace _365_Portal.Controllers
                     if (project.p_Action == 2 || project.p_Action == 3 || project.p_Action == 4)
                     {
                         ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Project.ToString(), project.p_Action, project.p_CompID, project.p_UserId
-                          , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, project.p_ProjectName);
+                          , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, project.p_ProjectName);
                         var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                     }
                 }
@@ -103,7 +105,7 @@ namespace _365_Portal.Controllers
                     if (taskStatus.p_Action == 2 || taskStatus.p_Action == 3 || taskStatus.p_Action == 5)
                     {
                         ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Status.ToString(), taskStatus.p_Action, taskStatus.p_CompID, taskStatus.p_UserId
-                          , identity.UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, taskStatus.p_StatusName);
+                          , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, taskStatus.p_StatusName);
                         var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                     }
                 }

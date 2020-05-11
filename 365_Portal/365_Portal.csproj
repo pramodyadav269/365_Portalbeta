@@ -2118,10 +2118,12 @@
     <Content Include="INCLUDES\Asset\images\CompanyLogo.png" />
     <Content Include="INCLUDES\Asset\images\contract-file.png" />
     <Content Include="INCLUDES\Asset\images\CourseLogo.png" />
+    <Content Include="INCLUDES\Asset\images\delete_forever-24px.svg" />
     <Content Include="INCLUDES\Asset\images\diamond.png" />
     <Content Include="INCLUDES\Asset\images\didnt-like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\diploma.png" />
     <Content Include="INCLUDES\Asset\images\dots-menu.svg" />
+    <Content Include="INCLUDES\Asset\images\edit-24px.svg" />
     <Content Include="INCLUDES\Asset\images\employee-illustration.svg" />
     <Content Include="INCLUDES\Asset\images\engager-icon.svg" />
     <Content Include="INCLUDES\Asset\images\exam.png" />

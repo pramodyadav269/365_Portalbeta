@@ -240,10 +240,10 @@
                 <ul class="sidenav-nav">
 
                     <%-- start beta --%>
-                    <li class="sidenav-item active">
+                    <li class="sidenav-item">
                         <%-- <a class="sidenav-link"><span class="link-icon"><i class="fas fa-home"></i></span><span class="link-text">Home</span></a>--%>
-                        <a class="sidenav-link" id="dvDashboard" runat="server" visible="false" href="dashboard.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
-                        <a class="sidenav-link" id="dvUserDashboard" runat="server" visible="false" href="default.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
+                        <a class="sidenav-link active" id="dvDashboard" runat="server" visible="false" href="dashboard.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
+                        <a class="sidenav-link active" id="dvUserDashboard" runat="server" visible="false" href="default.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Home</span><span class="link-text">Home</span></a>
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>

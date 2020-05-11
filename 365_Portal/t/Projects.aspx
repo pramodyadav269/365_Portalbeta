@@ -320,7 +320,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body" id="dvActivitybody">
-                                <div class="activity-wrapper">
+                                <%--<div class="activity-wrapper">
                                     <div class="day">Today</div>
                                     <div class="activity">
                                         <div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>
@@ -372,7 +372,7 @@
                                         </div>
                                         <div class="time">5:40 PM</div>
                                     </div>
-                                </div>
+                                </div>--%>
                             </div>
                         </div>
                     </div>
@@ -509,6 +509,7 @@
         var base64UserProfileString = "";
         var FileName = "";
         var ProjectID = "";
+        var ProjectName = "";
         var jsonTeam = [];
         var jsonStatusList = [];
 
@@ -518,6 +519,8 @@
         });
 
         $(document).ready(function () {
+            $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
+            $('.sidenav-nav a.sidenav-link[href="Projects.aspx"]').addClass('active'); // add active class in current page
             //ShowLoader();
             if (Role == "enduser") {
                 RoleWaiseHideControls();
@@ -798,7 +801,6 @@
                                         container += '<input type="checkbox" subtaskId="' + objsubtask.SubTaskID + '" name="subtask_' + objsubtask.SubTaskID + '" id="subtask_' + objsubtask.SubTaskID + '" value="' + objsubtask.SubTaskName + '" class="custom-control-input" ' + checked + '>';
                                         container += '<label class="custom-control-label" subtaskId="' + objsubtask.SubTaskID + '" for="subtask_' + objsubtask.SubTaskID + '">' + objsubtask.SubTaskName + '</label>';
                                         container += '<div class="custom-action"><i class="fas fa-pen" subtaskId="' + objsubtask.SubTaskID + '" onclick="EditSubTask(this);" ></i>|<i class="fas fa-trash-alt" id="subtask_' + objsubtask.SubTaskID + '" onclick="return DeleteSubTask(this);" ></i></div></div>';
-
                                     }
                                 });
                                 $('#cblist').empty().append(container);
@@ -877,8 +879,9 @@
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
                 var StringSubtask = "";
-
-                var taskStatusId = $("#ddlStatus").val();
+                debugger
+                var taskStatusId = $("#ddlStatus").children("option:selected").val();
+                var taskStatusName = $("#ddlStatus").children("option:selected").text();
                 var container = $('#cblist');
                 var inputs = container.find('input');
                 if (inputs.length > 0) {
@@ -934,7 +937,8 @@
 
                             var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
                             if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
-                                UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName);
+                                debugger;
+                                UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
                             }
 
                             if (task_ActionId == "2") {
@@ -962,7 +966,7 @@
         }
 
         function DeleteTaskBYTaskId(TaskId, TaskName) {
-           // alert(TaskId + TaskName);
+            // alert(TaskId + TaskName);
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete Task!",
@@ -1272,6 +1276,7 @@
                             var ProjectCRUDAPIData = $.parseJSON(response);
                             if (ProjectCRUDAPIData.StatusCode > 0) {
                                 ProjectID = "";
+                                ProjectName = "";
                                 //onClickBack("dvWebsiteRedesign", "dvCreateProject");//Closing Project Form
                                 BindProjects();
                                 ProjectCRUDAPIData.StatusDescription = "Project has been deleted.";
@@ -1411,17 +1416,17 @@
                 var id = inputs.length + 1;
                 var SubtaskControls = '';
                 SubtaskControls += '<div class="custom-control custom-checkbox">';
-                SubtaskControls += '<input type="checkbox" subtaskId="0"  name="subtask_' + id + '" id="subtask_' + id + '" value="' + name + '" class="custom-control-input" >';
-                SubtaskControls += '<label class="custom-control-label"  subtaskId="0"   for="subtask_' + id + '">' + name + '</label>';
-                SubtaskControls += '<div class="custom-action"><i class="fas fa-pen" subtaskId="0" id="subtask_' + id + '" onclick="EditSubTask(this);" ></i>|<i class="fas fa-trash-alt" id="subtask_' + id + '" onclick="return DeleteSubTask(this);" ></i></div></div>';
+                SubtaskControls += '<input type="checkbox" subtaskId="' + id + '"  name="subtask_' + id + '" id="subtask_' + id + '" value="' + name + '" class="custom-control-input" >';
+                SubtaskControls += '<label class="custom-control-label"  subtaskId="' + id + '"   for="subtask_' + id + '">' + name + '</label>';
+                SubtaskControls += '<div class="custom-action"><i class="fas fa-pen" subtaskId="' + id + '" id="subtask_' + id + '" onclick="EditSubTask(this);" ></i>|<i class="fas fa-trash-alt" id="subtask_' + id + '" onclick="return DeleteSubTask(this);" ></i></div></div>';
                 $('#cblist').append(SubtaskControls);
             }
 
             $('#txtAddSubTask').val("");
         }
 
-        function UpdateTaskStatus(ProjectID, TaskID, StatusID, taskName) {
-
+        function UpdateTaskStatus(ProjectID, TaskID, StatusID, taskName, StatusName) {
+            debugger;
             var requestParams = {
                 Param_ProjectID: ProjectID,
                 Param_TaskID: TaskID,
@@ -1430,7 +1435,9 @@
                 Param_StatusID: StatusID,
                 Param_Comments: "",
                 Param_UserID: "0",
-                Param_TaskName: taskName
+                Param_TaskName: taskName,
+                Param_ProjectName: ProjectName,
+                Param_StatusName: StatusName
             }
 
             $.ajax({
@@ -1540,6 +1547,7 @@
             $(objthis).parent().addClass('active');
             setcontentTitle($(objthis).text());
             ProjectID = $(objthis).attr("id");
+            ProjectName = objthis.innerHTML;
             BindStatusMaster();
             BindCards();
             BindTeam(ProjectID);
@@ -1647,7 +1655,7 @@
                 newCardHtml += '</div>';
 
                 newCardHtml += '<div class="board-column-content-wrapper">';
-                newCardHtml += '<div class="board-column-content" MasterStatusID="' + objStatus.StatusID + '">';
+                newCardHtml += '<div class="board-column-content" statusname="' + objStatus.Status + '" MasterStatusID="' + objStatus.StatusID + '">';
                 // Repeat Status
                 cardHtml += '<div class="col-12 col-sm-12 col-md-4">';
                 cardHtml += '<div class="card shadow">';
@@ -1662,13 +1670,13 @@
                     $.each(statusWiseTaskList, function (indxTask, objTask) {
                         var duedate = new Date(objTask.DueDate);
                         newCardHtml += '<div class="board-item">';
-                        newCardHtml += '<div class="board-item-content"  status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '" task_Name="' + objTask.TaskName + '">';
+                        newCardHtml += '<div class="board-item-content" status_name="' + objStatus.Status + '" status_id="' + objStatus.StatusID + '" task_Id="' + objTask.TaskID + '" project_Id="' + ProjectID + '" task_Name="' + objTask.TaskName + '">';
                         cardHtml += '<li class="col-12 mb-2 sortable-item" project_Id="' + ProjectID + '"  task_Id="' + objTask.TaskID + '" >';
                         newCardHtml += '<div class="wr-content">';
                         newCardHtml += '<div class="wr-content-title mb-2">' + objTask.TaskName + '<div class="float-right">';
-                        newCardHtml += '<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '"  clickevent="edit" >Edit</a>';
+                        newCardHtml += '<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '"  clickevent="edit"></a>';
                         if (Role != "enduser") {
-                            newCardHtml += '|<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '" clickevent="delete">Delete</a>';
+                            newCardHtml += '|<a task_Id="' + objTask.TaskID + '" task_name="' + objTask.TaskName + '" clickevent="delete"></a>';
                         }
                         newCardHtml += '</div></div>';
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
@@ -1768,6 +1776,7 @@
                         item.getElement().style.height = item.getHeight() + 'px';
                     })
                     .on('dragReleaseEnd', function (item) {
+                        debugger;
                         //activeItem = null;
 
                         // Let's remove the fixed width/height from the
@@ -1779,6 +1788,8 @@
                         var ProjectId = $(item._element).children().attr("project_Id");
                         var statusId = $(item._element).children().attr("status_id");
                         var taskName = $(item._element).children().attr("task_Name");
+                        var StatusName = item._element.parentElement.attributes.statusname.value;
+                        //var TaskstatusName = $(item._element).children().attr("status_name");
 
                         // columnGrids
 
@@ -1786,9 +1797,9 @@
                         var draggableContainer = $(columnGrids).filter(function (i, n) {
                             return n._id === item._gridId;
                         })[0];
-
+                        debugger;
                         if (draggableContainer._settings.MasterStatusID != statusId) {
-                            UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID, taskName);
+                            UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID, taskName, StatusName);
                         }
 
                         item.getElement().style.width = '';
@@ -1851,7 +1862,7 @@
         }
 
         function BindProjectData(response) {
-
+            debugger;
             if (response != null) {
                 var jsonProjectList = $.parseJSON(response).Data;
                 var projectHtml = '';
@@ -1866,6 +1877,7 @@
                         if ((ProjectID != "" && objProject.ProjectID == ProjectID) || (ProjectID == "" && indxProject == 0)) {
                             activeClass = 'active';
                             ProjectID = objProject.ProjectID;
+                            ProjectName = objProject.ProjectName;
                             BindStatusMaster();
                             BindCards();
                             setcontentTitle(objProject.ProjectName);
@@ -1939,7 +1951,7 @@
                         call_Notification(responseData);
                     },
                     failure: function (response) {
-                        debugger;
+
                         Swal.fire({
                             title: "Failure",
                             text: "Please try Again",
