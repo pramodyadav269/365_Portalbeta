@@ -519,7 +519,8 @@
         });
 
         $(document).ready(function () {
-            $("#dvProjects").addClass("active");
+            $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
+            $('.sidenav-nav a.sidenav-link[href="Projects.aspx"]').addClass('active'); // add active class in current page
             //ShowLoader();
             if (Role == "enduser") {
                 RoleWaiseHideControls();
