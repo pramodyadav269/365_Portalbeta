@@ -296,9 +296,9 @@
                                     '<i class="fas fa-plus-circle"></i>New Question' +
                                 '</a>' +
                                 '<div class="dropdown-menu quiz-element">' +
-                                    '<a class="dropdown-item" name="multiple" onclick="ShowQuestion(this);"><i class="far fa-check-square"></i>Multiple Choice</a>' +
-                                    '<a class="dropdown-item" name="radio" onclick="ShowQuestion(this);"><i class="fas fa-dot-circle"></i>Radio Button</a>' +
-                                    '<a class="dropdown-item" name="dropdown" onclick="ShowQuestion(this);"><i class="far fa-caret-square-down"></i>Dropdown</a>' +
+                                    '<a class="dropdown-item" name="multiple" onclick="ShowQuestion(\'multiple\',\'new\');"><i class="far fa-check-square"></i>Multiple Choice</a>' +
+                                    '<a class="dropdown-item" name="radio" onclick="ShowQuestion(\'radio\',\'new\');"><i class="fas fa-dot-circle"></i>Radio Button</a>' +
+                                    '<a class="dropdown-item" name="dropdown" onclick="ShowQuestion(\'dropdown\',\'new\');"><i class="far fa-caret-square-down"></i>Dropdown</a>' +
                                 '</div>' +
 
                                 '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
@@ -2352,7 +2352,7 @@
 
 
         //Question
-        function BindQuestion(flag, Questions) {
+        function BindQuestion(flag, Questions,) {
             debugger
             if (Questions.length > 0) {
                 var QuestionString = '';
@@ -2370,6 +2370,7 @@
                     }
 
                     QuestionString = QuestionString + '<div class="card">' +
+                                                         '<div class="tag question">Question</div>' +
 		                                                 '<div class="card-header" id="headingQuestion">' +
                                                          '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
 			                                             '<h5>' + Questions[i].Title + '</h5>' +
@@ -2384,106 +2385,193 @@
 
         var className = '';
         var AnswerTypeCode = '';
-        function ShowQuestion(flag) {
+        function ShowQuestion(cls,flag,QuestionAnswer) {
             debugger
-            flag = $(flag).attr('name');
 
-            if (flag == 'multiple') {
-                className = 'far fa-check-square';
-                AnswerTypeCode = "1";
-            }
-            else if (flag == 'dropdown') {
-                className = 'far fa-caret-square-down';
-                AnswerTypeCode = "2";
-            }
-            else if (flag == 'radio') {
-                className = 'fas fa-dot-circle';
-                AnswerTypeCode = "3";
-            }
+            if (flag != 'edit') {
 
-            var AnswerID = '0';
+                if (cls == 'multiple') {
+                    className = 'far fa-check-square';
+                    AnswerTypeCode = "1";
+                }
+                else if (cls == 'dropdown') {
+                    className = 'far fa-caret-square-down';
+                    AnswerTypeCode = "2";
+                }
+                else if (cls == 'radio') {
+                    className = 'fas fa-dot-circle';
+                    AnswerTypeCode = "3";
+                }
 
-            var QuestionType = '<div class="row quiz" id="dvQuestion">' +
-                                    '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                        '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
-                                        '<div class="col-sm-8 col-md-10">' +
-                                            '<div class="form-group">' +
-                                                '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" />' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<span class="correct">Correct</span>' +
-                                    '</div>' +
-                                    '<div class="row" id="divAnswer">' +
-                                        '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                            '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                var AnswerID = '0';
+
+                var QuestionType = '<div class="row quiz" id="dvQuestion">' +
+                                        '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                                            '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                                             '<div class="col-sm-8 col-md-10">' +
-                                                '<div class="row">' +
-                                                    '<div class="col-sm-12 col-md-10">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                                '<div class="form-group">' +
+                                                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" />' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<span class="correct">Correct</span>' +
+                                        '</div>' +
+                                        '<div class="row" id="divAnswer">' +
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                                            '</div>' +
                                                         '</div>' +
-                                                    '</div>' +
-                                                    '<div class="col-sm-3 col-md-2">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                            '</div>' +
                                                         '</div>' +
                                                     '</div>' +
                                                 '</div>' +
+                                                '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
                                             '</div>' +
-                                            '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                                        '</div>' +
 
-                                        '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                            '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                            '<div class="col-sm-8 col-md-10">' +
-                                                '<div class="row">' +
-                                                    '<div class="col-sm-12 col-md-10">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                                            '</div>' +
                                                         '</div>' +
-                                                    '</div>' +
-                                                    '<div class="col-sm-3 col-md-2">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                            '</div>' +
                                                         '</div>' +
                                                     '</div>' +
                                                 '</div>' +
+                                                '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
                                             '</div>' +
-                                            '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                                        '</div>' +
 
-                                        '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                            '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                            '<div class="col-sm-8 col-md-10">' +
-                                                '<div class="row">' +
-                                                    '<div class="col-sm-12 col-md-10">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                                                '<div class="col-sm-8 col-md-10">' +
+                                                    '<div class="row">' +
+                                                        '<div class="col-sm-12 col-md-10">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                                                            '</div>' +
                                                         '</div>' +
-                                                    '</div>' +
-                                                    '<div class="col-sm-3 col-md-2">' +
-                                                        '<div class="form-group">' +
-                                                            '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                        '<div class="col-sm-3 col-md-2">' +
+                                                            '<div class="form-group">' +
+                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                                                            '</div>' +
                                                         '</div>' +
                                                     '</div>' +
                                                 '</div>' +
+                                                '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
                                             '</div>' +
-                                            '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
                                         '</div>' +
-                                    '</div>' +
-                                    '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
-                                        '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
-                                    '</div>' +
-                                '</div>';
+                                        '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
+                                            '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
+                                        '</div>' +
+                                    '</div>';
 
-            $('#dvLessonQues').empty().append(QuestionType);
+                $('#dvLessonQues').empty().append(QuestionType);
 
-            var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                    '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,' + QuestionAction + ');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
-                                    '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
-                                  '</div>';
+                var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                                        '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,' + QuestionAction + ');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
+                                        '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
+                                      '</div>';
 
-            $('#dvQuestion').append(btnAddQuestion);
+                $('#dvQuestion').append(btnAddQuestion);
+
+                gbl_QuestionID = '0';
+            }
+            else {
+
+                if (QuestionAnswer[0].QuestionTypeID == '1') {
+                    className = 'far fa-check-square';
+                    AnswerTypeCode = "1";
+                }
+                else if (QuestionAnswer[0].QuestionTypeID == '2') {
+                    className = 'far fa-caret-square-down';
+                    AnswerTypeCode = "2";
+                }
+                else if (QuestionAnswer[0].QuestionTypeID == '3') {
+                    className = 'fas fa-dot-circle';
+                    AnswerTypeCode = "3";
+                }
+
+                var AnswerID = '0';
+                var QuestionType = '';
+
+                QuestionType = '<div class="row quiz" id="dvQuestion">' +
+                                        '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                                            '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
+                                            '<div class="col-sm-8 col-md-10">' +
+                                                '<div class="form-group">' +
+                                                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
+                                                '</div>' +
+                                            '</div>' +
+                                            '<span class="correct">Correct</span>' +
+                                        '</div>' +
+                                        '<div class="row" id="divAnswer">' ;
+
+                for(var i = 0; i < QuestionAnswer.length ; i++)
+                {
+                    var ansFlag = 'false';
+                    var ansClass = 'fa fa-times-circle fa-w-16 wrong fal';
+                    var ansMoreThanThree = '';
+                    if(QuestionAnswer[i].IsCorrect == '1')
+                    {
+                        ansFlag = 'true';
+                        ansClass = 'fa fa-check-circle fa-w-16 correct';
+                    }
+
+                    if(i > 2)
+                    {
+                        ansMoreThanThree = '<span class="checked-icon delete"><i class="fa fa-trash-alt" onclick="DeleteAnsOption(this)"></i></span>';
+                    }
+
+                    QuestionType = QuestionType + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                                                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                                                    '<div class="col-sm-8 col-md-10">' +
+                                                        '<div class="row">' +
+                                                            '<div class="col-sm-12 col-md-10">' +
+                                                                '<div class="form-group">' +
+                                                                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + QuestionAnswer[i].AnswerID + '" value="' + QuestionAnswer[i].AnswerText + '" placeholder="Answer Option" />' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                            '<div class="col-sm-3 col-md-2">' +
+                                                                '<div class="form-group">' +
+                                                                    '<input type="text" class="form-control" id="txtScore" value="' + QuestionAnswer[i].CorrectScore + '" placeholder="Assign Score" />' +
+                                                                '</div>' +
+                                                            '</div>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                    '<span class="checked-icon"><i class="'+ ansClass +'" id="ansFlag" value="'+ ansFlag +'" onclick="changeAnsFlag(this)"></i></span>' +
+                                                    ansMoreThanThree +
+                                                '</div>';    
+                }
+
+
+                QuestionType = QuestionType + '</div>' +
+                                                '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
+                                                    '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
+                                                '</div>' +
+                                              '</div>';
+
+                $('#dvLessonQues').empty().append(QuestionType);
+
+                var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                                        '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
+                                        '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
+                                      '</div>';
+
+                $('#dvQuestion').append(btnAddQuestion);
+            }
 
             //$('#btnQuestionDone').show();//This need to be show as per previous design
         }
@@ -2700,23 +2788,57 @@
             return maxScore;
         }
 
-        function ShowQuestionInEditMode(questionId) {
-            var question = $.grep(Questions, function (n, i) {
-                return n.QuestionID == parseInt(questionId);
-            })[0];
+        function ShowQuestionInEditMode(obj,questionId) {
+            
+            ShowLoader();
+            var getUrl = "/API/Quiz/GetQuestionAnswer";
+            try {
+                var requestParams = { QuestionID: questionId };
+                $.ajax({
+                    type: "POST",
+                    url: getUrl,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    success: function (response) {
+                        try {
+                            var DataSet = $.parseJSON(response);
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1" && DataSet.Data.Data.length > 0) {
+                                    debugger
+                                    var QuestionAnswer = DataSet.Data.Data;
+                                    if (QuestionAnswer.length > 0)
+                                    {
+                                        gbl_QuestionID = questionId;
+                                        ShowQuestion('','edit',QuestionAnswer);
+                                    }
+                                }
+                            }
+                            else {
+                                HideLoader();
+                                Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                            }
+                        }
+                        catch (e) {
+                            HideLoader();
+                            Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    },
+                    failure: function (response) {
+                        HideLoader();
+                        alert(response.data);
+                        Swal.fire({ title: "Failure", text: "Please try Again", icon: "error" });
+                    }
+                });
+            }
+            catch (e) {
+                HideLoader();
+                Swal.fire({ title: "Alert", text: "Oops! An Occured. Please try again", icon: "error" });
+            }
 
-            var qtype = "";
-            if (question.QuestionTypeID == 1) {
-                qtype = "multiple";
-            }
-            else if (question.QuestionTypeID == 2) {
-                qtype = "dropdown";
-            }
-            else if (question.QuestionTypeID == 3) {
-                qtype = "radio";
-            }
-
-            ShowQuestion(qtype, question);
         }
 
         function DeleteQuestion(obj,questionId) {

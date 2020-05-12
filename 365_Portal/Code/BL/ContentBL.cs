@@ -412,6 +412,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+        public static DataSet GetQuestionAnswer(int action, int CompID,int QuestionID, string UserID)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.GetQuestionAnswer(action, CompID, QuestionID, UserID);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
+
     }
 
 

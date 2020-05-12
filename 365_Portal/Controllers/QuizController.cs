@@ -637,5 +637,66 @@ namespace _365_Portal.Controllers
             }
             return new APIResult(Request, data);
         }
+
+
+
+        [HttpPost]
+        [Route("API/Quiz/GetQuestionAnswer")]
+        public IHttpActionResult GetQuestionAnswer(JObject requestParams)
+        {
+            var data = string.Empty;
+            ContentBO content = new ContentBO();
+
+            try
+            {
+                var identity = MyAuthorizationServerProvider.AuthenticateUser();
+                if (identity != null)
+                {
+                    if (!string.IsNullOrEmpty(Convert.ToString(requestParams["QuestionID"])))
+                    {
+                        int CompID = identity.CompId;
+                        string UserID = identity.UserID;
+                        int QuestionID = Convert.ToInt32(requestParams["QuestionID"]);
+
+                        var ds = ContentBL.GetQuestionAnswer(Convert.ToInt32(ConstantMessages.Action.VIEW), CompID, QuestionID, UserID);
+                        if (ds != null)
+                        {
+                            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                            {
+                                data = Utility.ConvertDataSetToJSONString(ds);
+                                data = Utility.Successful(data);
+                            }
+                            else
+                            {
+                                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                            }
+                        }
+                        else
+                        {
+                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
+                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                        }
+                    }
+                    else
+                    {
+                        data = ConstantMessages.WebServiceLog.InValidValues;
+                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                    }
+
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+                }
+            }
+            catch (Exception ex)
+            {
+                data = ex.Message;
+                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
+            }
+            return new APIResult(Request, data);
+        }
     }
 }

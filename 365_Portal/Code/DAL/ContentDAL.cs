@@ -809,5 +809,36 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+
+        public static DataSet GetQuestionAnswer(int action, int CompID,int QuestionID, string UserID)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            try
+            {
+                conn.Open();
+                string stm = "spGetQuestionAnswer";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_Action", action);
+                cmd.Parameters.AddWithValue("p_CompID", CompID);
+                cmd.Parameters.AddWithValue("p_QuestionID", QuestionID);
+                cmd.Parameters.AddWithValue("p_CreatedBy", UserID);
+
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
     }
 }
