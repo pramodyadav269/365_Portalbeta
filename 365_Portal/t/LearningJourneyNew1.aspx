@@ -2198,6 +2198,7 @@
                                                     '<div class="card">' +
                                                         '<div class="tag quiz">Quiz</div>' +
                                                         '<div class="card-header" id="headingLessonQuiz">' +
+
                                                             '<h5 id="hdgQuizTitle">' + DataSet.Data[0].Title + '</h5>' +
 
                                                             '<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
@@ -2356,8 +2357,21 @@
             if (Questions.length > 0) {
                 var QuestionString = '';
                 for (var i = 0; i < Questions.length ; i++) {
+
+                    var className = '';
+                    if (Questions[i].QuestionTypeID == '1') {
+                        className = 'far fa-check-square';
+                    }
+                    else if (Questions[i].QuestionTypeID == '2') {
+                        className = 'far fa-caret-square-down';
+                    }
+                    else if (Questions[i].QuestionTypeID == '3') {
+                        className = 'fas fa-dot-circle';
+                    }
+
                     QuestionString = QuestionString + '<div class="card">' +
-		                                                 '<div class="card-header" id="headingLessonQuiz">' +
+		                                                 '<div class="card-header" id="headingQuestion">' +
+                                                         '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
 			                                             '<h5>' + Questions[i].Title + '</h5>' +
                                                          '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
                                                          '<i class="fas fa-edit" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ')";></i>' +
@@ -2471,7 +2485,7 @@
 
             $('#dvQuestion').append(btnAddQuestion);
 
-            $('#btnQuestionDone').show();
+            //$('#btnQuestionDone').show();//This need to be show as per previous design
         }
 
         function AddQuestionCancel() {
@@ -2596,7 +2610,7 @@
             var Question = $("#txtQuestion").val();
 
             if (type == "done" && (Question == "" || Question == null || Question == undefined) && Questions.length > 0) {
-                $("#dvQuizCongratulationScreen").show();
+                //$("#dvQuizCongratulationScreen").show();
             }
 
             var result = validateAddQuestion(obj);
@@ -2670,7 +2684,7 @@
                     }
                     else {
                         HideLoader();
-                        $("#dvQuizCongratulationScreen").show();
+                        //$("#dvQuizCongratulationScreen").show();
                     }
                 });
             }
@@ -2705,7 +2719,7 @@
             ShowQuestion(qtype, question);
         }
 
-        function DeleteQuestion(questionId) {
+        function DeleteQuestion(obj,questionId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -2734,7 +2748,15 @@
                                     debugger
                                     if (DataSet != null && DataSet != "") {
                                         if (DataSet.StatusCode == "1") {
-                                            BindQuestion(DataSet.Data.Data);
+
+                                            Swal.fire({
+                                                title: 'Success',
+                                                icon: 'success',
+                                                html: "Question deleted successfully.",
+                                                showConfirmButton: true,
+                                                showCloseButton: true
+                                            });
+                                            BindQuestion('',DataSet.Data.Data);
                                         }
                                         else {
                                             Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
