@@ -105,8 +105,8 @@ namespace _365_Portal.Controllers
                     {
                         // Final Quiz
                         docType = "FINALQUIZ";
-                        totalScore = Convert.ToDouble(Convert.ToString(requestParams["TotalScore"]));
-                        passingScore = Convert.ToDouble(Convert.ToString(requestParams["PassingScore"]));
+                        //totalScore = Convert.ToDouble(Convert.ToString(requestParams["TotalScore"]));
+                        //passingScore = Convert.ToDouble(Convert.ToString(requestParams["PassingScore"]));
                         passingPercent = Convert.ToDouble(Convert.ToString(requestParams["PassingPercentage"]));
                     }
                     content.TotalScore = totalScore;

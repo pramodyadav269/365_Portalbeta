@@ -157,10 +157,10 @@
                 <div class="card mb-4">
                     <%--<div class="tag lesson">Lesson 1</div>--%>
                     <div class="card-header" id="headingLesson">
-                        <h5>wwewe</h5>
-                        <a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="true" aria-controls="collapseLesson">
-                            <i class="fas fa-chevron-down"></i>
-                        </a>
+	                    <h5>wwewe</h5>
+	                    <a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="true" aria-controls="collapseLesson">
+		                    <i class="fas fa-chevron-down"></i>
+	                    </a>
                     </div>
                     <div id="collapseLesson" class="collapse in" aria-labelledby="headingLesson">
                         <div class="row">
@@ -327,6 +327,25 @@
                                 </div>
                             </div>
                             <div class="w-100"></div>
+
+
+                            <div class="col-sm-12 quiz-wrapper" id="dvLesson1QuizView">
+	                            <div class="card">
+		                            <div class="card-header" id="headingLesson1Quiz">
+			                            <h5>Data Modeling Quiz</h5>		
+                                        <i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,'1')";></i>
+                                        <i class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,'1')";></i>
+		                            </div>
+	                            </div>
+                                <div class="card">
+		                            <div class="card-header" id="headingLesson1Quiz">
+			                            <h5>Data Modeling Quiz</h5>			                            
+		                            </div>
+	                            </div>
+                            </div>
+
+
+
                             <div id="dvLesson1Ques1" class="col-sm-12 quiz-wrapper">
                                 <div class="row quiz">
                                     <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
@@ -477,7 +496,7 @@
                                 </div>
                             </div>
 
-                        <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
+                            <div id="dvLesson1Ques2" class="col-sm-12 quiz-wrapper">
                             <div class="row quiz">
                                 <div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">
                                     <span class="sr">Q1<i class="far fa-caret-square-down"></i><i class="fas fa-caret-down"></i></span>
@@ -3659,6 +3678,7 @@
         }
 
         function changeAnsFlag(obj) {
+            debugger
             if ($(obj).hasClass('fa-check-circle')) {
                 $(obj).removeClass('far');
                 $(obj).removeClass('fa-check-circle');

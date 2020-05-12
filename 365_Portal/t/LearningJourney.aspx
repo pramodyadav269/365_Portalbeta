@@ -2717,7 +2717,7 @@
 
         var gbl_QuestionID = 0;
         function AddQuestion(obj, flag, type) {
-
+            debugger
             var actionType = flag;
             if (gbl_QuestionID != 0 && gbl_QuestionID != "") {
                 actionType = "2"; // Update
@@ -2762,7 +2762,7 @@
                     ShowLoader();
                     AddQuiz(false);
 
-
+                    debugger
                     var Answer = $("input[id='txtAnswer']").map(function () { return $(this).val(); }).get();
                     var Score = $("input[id='txtScore']").map(function () { return $(this).val(); }).get();
                     var answerIds = $("input[id='txtAnswer']").map(function () { return $(this).attr("answerid"); }).get();
