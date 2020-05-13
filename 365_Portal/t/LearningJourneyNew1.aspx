@@ -170,12 +170,12 @@
                 <div class="lesson-container">
                 </div>
 
-                <div id="dvLessonViewParentView"></div>
-                <div id="dvLessonViewParentEdit"></div>
+                <%--<div id="dvLessonViewParentView"></div>
+                <div id="dvLessonViewParentEdit"></div>--%>
             </div>
 
             <div class="col-12 mb-5" id="divAddMoreLesson">
-                <a class="btn btn-black" id="btnAddMoreLesson" onclick="AddMoreLesson();"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+                <a class="btn btn-black" id="btnAddMoreLesson" onclick="bindViewLessonContainer('.lesson-container', 0, 'edit');"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
             </div>
         </div>
     </div>
@@ -540,7 +540,7 @@
 
                                                 $("#divLessonMain").show();
                                                 //AddMoreLesson();
-                                                bindViewLessonContainer('#collapseLession1', 1, 'edit');
+                                                bindViewLessonContainer('.lesson-container', 0, 'edit');
 
                                                 HideLoader();
                                                 if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
@@ -1063,7 +1063,7 @@
                                     //ManageLesson('editbind');
                                     //ManageContent('editbind');                                    
                                     //AddMoreLesson();
-                                    bindViewLessonContainer('#collapseLession1', 1, 'edit');
+                                    bindViewLessonContainer('.lesson-container', 0, 'edit');
                                 }
                             }
                             else {
@@ -1092,7 +1092,16 @@
         }
 
         function bindViewLessonContainer(el, lessonId, action) {
-            html = '<div class="row">';
+
+            html = '';
+
+            if (lessonId === 0) {
+                html += '<div class="card mb-4">';
+            }
+
+
+
+            html += '<div class="row">';
             html += '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">';
             html += '<div class="card-body arrows">';
 
@@ -1357,15 +1366,21 @@
             html += '</div>';
             html += '</div>';
 
+            if (lessonId === 0) {
+                html += '</div>';
+            }
+
             $(el).append(html);
 
-            //new Jodit('#txtContentDescriptionLesson' + lessonId);
-            //new Jodit('#txtResourcesDescriptionLesson' + lessonId);
+            new Jodit('#txtContentDescriptionLesson' + lessonId);
+            new Jodit('#txtResourcesDescriptionLesson' + lessonId);
             inputInline();
 
-            if (lessonId === 1) {
-                $(el).find('.view').show();
-                $(el).find('.edit').hide();
+            if (lessonId === 0) {
+                $(el).find('.view').hide();
+                $(el).find('.edit').show();
+
+                $('#divLessonMain').show()
             }
         }
 
