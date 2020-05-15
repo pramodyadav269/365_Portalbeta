@@ -270,10 +270,10 @@
             '</div>' +
             '<div class="form-group editor asterisk">' +
             '<div id="txtContentDescription"></div>' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
-            '</div>';
+            '</div>' ;
+            //'<div class="form-group">' +
+            //'<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
+            //'</div>';
 
         var dvLessonResourceEdit = '<div class="form-group editor">' +
             '<label>Resources</label>' +
@@ -288,10 +288,10 @@
             '<div class="form-group asterisk">' +
             '<label for="txtQuizDescription" class="inline">Quiz Description</label>' +
             '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>' +
-            '</div>' +
-            '<div class="form-group">' +
-            '<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
-            '</div>';
+            '</div>' ;
+            //'<div class="form-group">' +
+            //'<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
+            //'</div>';
 
         var QuestionType = "done";
         var divQuestionType = '<a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
@@ -911,24 +911,30 @@
 
 
         //Lesson
-        function ManageLesson(flag) {
+        function ManageLesson(flag,source) {
             if (flag == 'editbind') {
-                $('#divLessonOverview').empty().append(dvLessonEdit);
-                //$('#dvLessonEdit').empty().append(dvLessonEdit);
+
+                if(source != undefined && source != '' && source == 'editfromgrid')
+                {
+                    $('#divLessonOverview').empty().append(dvLessonEdit);
+                }
+                else
+                {
+                    $('#dvLessonEdit').empty().append(dvLessonEdit);
+                }
             }
             else if (flag == 'editclear') {
                 $('#dvLessonEdit').empty();
             }
         }
 
-        function AddMoreLesson() {
+        function AddMoreLesson(id) {
             LessonFlag = '0';
-            var dvLessonViewParentEdit = '<div class="row">' +
+            var dvLessonViewParentEdit = '<div class="row" id="tempLessonGrid_'+ id +'">' +
 
                 //Right Pane
                 '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">' +
                 '<div class="card-body arrows">' +
-                '<div class="tag lesson main-card">Lesson</div>' +
                 '<div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>' +
                 '<div class="row" id="divLessonJourney">' +
                 '<div class="col-sm-12" id="dvLessonView">' +
@@ -1012,8 +1018,39 @@
                 '</div>' +
                 '</div>';
 
-            $('#dvLessonViewParentEdit').show();
-            $('#dvLessonViewParentEdit').empty().append(dvLessonViewParentEdit);
+
+            if(id != undefined && id != '')
+            {
+                var allLessonGrid = $("div[id^='tempLessonGrid_']");
+                if(allLessonGrid.length > 0)
+                {
+                    for(var i = 0; i < allLessonGrid.length; i++)
+                    {
+                        if(allLessonGrid[i].id != 'tempLessonGrid_'+id)
+                        {
+                            $('#'+ allLessonGrid[i].id).remove();
+                        }
+                    }
+                }
+
+
+
+                if ($('#tempLessonGrid_'+ id).length) 
+                {
+                    $('#tempLessonGrid_'+ id).remove();
+                    $('#dvLessonGrid_'+id).append(dvLessonViewParentEdit);
+                } 
+                else
+                {
+                    $('#dvLessonGrid_'+id).append(dvLessonViewParentEdit);
+                }
+            }
+            else
+            {
+                $('#dvLessonViewParentEdit').show();
+                $('#dvLessonViewParentEdit').empty().append(dvLessonViewParentEdit);
+            }
+
             ManageLesson('editbind');
             ManageContent('editbind');
         }
@@ -1065,17 +1102,7 @@
                                 if (LessonTable != undefined && LessonTable.length > 0) {
                                     for (var i = 0; i < LessonTable.length; i++) {
 
-                                        //Lesson = Lesson + '<div class="card-header">'+
-                                        //                    '<h5>' + LessonTable[i].Title + '</h5>'+
-                                        //                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i>'+
-                                        //                        '<i class="fas fa-edit" title="Edit" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i>' +
-                                        //                        '<span style="display:none;" id="spTitle">' + LessonTable[i].Title + '</span>' +
-                                        //                        '<span style="display:none;" id="spOverview">' + LessonTable[i].Overview + '</span>' +
-                                        //                        '<span style="display:none;" id="spCourseTime">' + LessonTable[i].CourseTime + '</span>' +
-                                        //                        '<span style="display:none;" id="spPoints">' + LessonTable[i].Points + '</span>' +
-                                        //                   '</div>';
-
-                                        Lesson = Lesson + '<div class="card mb-4">' +
+                                        Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_'+ LessonTable[i].ModuleID +'">' +
                                             '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
                                             '<div class="card-header">' +
                                             '<h5>' + LessonTable[i].Title + '</h5>' +
@@ -1364,7 +1391,7 @@
 
         function EditLessionFromTile(obj, id) {
             debugger
-            AddMoreLesson();
+            AddMoreLesson(id);
 
             var _Title = $(obj).parent().parent().parent().parent().find('#spTitle').text();
             var _Overview = $(obj).parent().parent().parent().parent().find('#spOverview').text();
@@ -1445,12 +1472,26 @@
 
             $('#dvLessonView').empty().append(Lesson);
             ManageLesson('editclear');
+
+            if (_CourseTime != undefined && _CourseTime != '' && _CourseTime.split(":").length > 0
+            ) {
+                $('#txtHour').val(_CourseTime.split(":")[0]);
+                if (_CourseTime.split(":").length > 1) {
+                    $('#txtMin').val(_CourseTime.split(":")[1]);
+                }
+            }
+            else {
+                $('#txtHour').val('');
+                $('#txtMin').val('');
+            }
+
+            $('#txtPoint').val(_Points);
         }
 
         //Marked as not in use
         function EditLessonFromSubTile(obj, id) {
             debugger
-            ManageLesson('editbind');
+            ManageLesson('editbind','editfromgrid');
 
             $('#txtLessonTitle').val($(obj).parent().find('#spSubTitle').text());
             $('#txtLessonDescription').val($(obj).parent().find('#spSubOverview').text());
@@ -1647,13 +1688,20 @@
 
 
         //Content
-        function ManageContent(flag, contentId) {
+        function ManageContent(flag, contentId,source) {
             if (flag == 'editbind') {
-                // Clear all open fields for content
-                $("[id^='divContentDescription_']").html("");
-                $('#divContentDescription_' + contentId).empty().append(dvLessonContentEdit);
-                $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
+                // Clear all open fields for content               
+                if(source != undefined && source !='' && source == 'editfromgrid')
+                {
+                    $("[id^='divContentDescription_']").html("");
+                    $('#divContentDescription_' + contentId).empty().append(dvLessonContentEdit);
+                }
+                else
+                {
+                    $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
+                }
                 editorContentDescription = new Jodit('#txtContentDescription');
+
             }
             else if (flag == 'editclear') {
                 $('#dvLessonContentEdit').empty();
@@ -1701,17 +1749,18 @@
                                         Content = Content + '' +
                                             '<div class="card">' +
                                             '<div class="tag content">Content</div>' +
-                                            '<div class="card-header" id="headingLessonContent' + i + '">' +
+                                            '<div class="card-header" id="headingLessonContent' + ContentTable[i].ContentID + '">' +
                                             '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
+                                            '<span style="display:none;" id="spContentDescription_'+ContentTable[i].ContentID+'">'+ ContentTable[i].Description +'</span>'+
 
                                             '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
                                             '<i style="display:none;" class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
 
-                                            '<a data-toggle="collapse" data-target="#collapseLessonContent' + i + '" aria-expanded="false" aria-controls="collapseLessonContent' + i + '" class="collapsed" onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";>' +
-                                            '<i class="fas fa-chevron-down"></i>' +
+                                            '<a data-toggle="collapse" data-target="#collapseLessonContent_' + ContentTable[i].ContentID + '" aria-expanded="false" aria-controls="collapseLessonContent_' + ContentTable[i].ContentID + '" class="collapsed" onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";>' +
+                                            '</i><i class="fas fa-chevron-down"></i>' +
                                             '</a>' +
                                             '</div>' +
-                                            '<div id="collapseLessonContent' + i + '" class="collapse" aria-labelledby="headingLessonContent' + i + '">' +
+                                            '<div id="collapseLessonContent_' + ContentTable[i].ContentID + '" class="collapse" aria-labelledby="headingLessonContent' + ContentTable[i].ContentID + '">' +
                                             '<div class="card-body" id="divContentDescription_' + ContentTable[i].ContentID + '">' + ContentTable[i].Description +
                                             '</div>' +
                                             '</div>' +
@@ -1747,6 +1796,7 @@
         }
 
         function AddContent(flag) {
+            debugger
             ShowLoader();
             var getURL = '';
             var regex = '';
@@ -1902,12 +1952,31 @@
 
         function EditContentFromTile(obj, id) {
             debugger
-            ManageContent('editbind', id);
 
-            $('#txtContentHeader').val($(obj).parent().parent().find('#hdgContentTitle').text());
-            editorContentDescription.value = $(obj).parent().parent().find('#divContentDescription').text();
+            var ContentHeader = $(obj).parent().parent().find('#hdgContentTitle').text();
+            var ContentDescription = $(obj).parent().parent().find('#spContentDescription_'+id).text();
+
+            ManageContent('editbind', id,'editfromgrid');
+
+            $('#txtContentHeader').val(ContentHeader);
+            editorContentDescription.value = ContentDescription;
 
             ContentFlag = id;
+
+
+            //Added to collapse other content accordion
+            var allContentList = $("div[id^='collapseLessonContent']");
+            if(allContentList.length > 0)
+            {
+                for(var i = 0; i < allContentList.length; i++)
+                {
+                    if(allContentList[i].id != 'collapseLessonContent_'+id)
+                    {
+                        $('#'+allContentList[i].id).removeClass('show');
+                    }
+                }
+            }
+            //End //Added to collapse other content accordion
         }
 
         function DeleteContentFromTile(obj, id) {
@@ -2053,7 +2122,7 @@
                                     ManageResource('editclear');
                                     */
                                     ManageResource('editbind');
-                                    editorResourcesDescription.value = DataSet.Data[0].Resource;
+                                    editorResourcesDescription.value = DataSet.Data.Data[0].Resource;
                                 }
                             }
                             else {
@@ -2217,14 +2286,20 @@
 
 
         //Quiz
-        function ManageQuiz(flag) {
+        function ManageQuiz(flag,source) {
             if (flag == 'editbind') {
-                $('#dvLessonQuizEdit').empty().append(dvLessonQuizEdit);
-                $('#divPassingPercentage').show();
+
+                if(source != undefined && source != '' && source == 'editfromgrid')
+                {
+                    $('#divQuizDescription').empty().append(dvLessonQuizEdit);    
+                }
+                else
+                {
+                    $('#dvLessonQuizEdit').empty().append(dvLessonQuizEdit);
+                }                
             }
             else if (flag == 'editclear') {
                 $('#dvLessonQuizEdit').empty();
-                $('#divPassingPercentage').hide();
             }
         }
 
@@ -2267,18 +2342,19 @@
                                         '<div class="card-header" id="headingLessonQuiz">' +
 
                                         '<h5 id="hdgQuizTitle">' + DataSet.Data[0].Title + '</h5>' +
+                                        '<span style="display:none;" id="spQuizDescription">'+ DataSet.Data[0].Description +'</span>' + 
+                                        '<span style="display:none;" id="spPassingPercent">' + DataSet.Data[0].PassingPercent + '</span>' +
 
-                                        '<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
+                                        //'<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
 
                                         '<a data-toggle="collapse" data-target="#collapseLessonQuiz" aria-expanded="false" aria-controls="collapseLessonQuiz" class="collapsed">' +
-                                        '<i class="fas fa-chevron-down" ></i>' +
+                                        '<i class="fas fa-chevron-down" onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
                                         '</a>' +
                                         '</div>' +
                                         '<div id="collapseLessonQuiz" class="collapse" aria-labelledby="headingLessonQuiz">' +
                                         '<div class="card-body" id="divQuizDescription">' + DataSet.Data[0].Description +
                                         '</div>' +
-                                        '</div>' +
-                                        '<span style="display:none;" id="spPassingPercent">' + DataSet.Data[0].PassingPercent + '</span>' +
+                                        '</div>' +                                        
                                         '</div>' +
                                         '';
 
@@ -2414,9 +2490,9 @@
 
         function EditQuizFromTile(obj, id) {
             debugger
-            ManageQuiz('editbind');
+            ManageQuiz('editbind','editfromgrid');
             $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text());
-            $('#txtQuizDescription').val($(obj).parent().parent().find('#divQuizDescription').text());
+            $('#txtQuizDescription').val($(obj).parent().parent().find('#spQuizDescription').text());
             $('#txtPassingScorePercentage').val($(obj).parent().parent().find('#spPassingPercent').text());
             $('#btnAddQuiz').show();
             QuizFlag = id;
