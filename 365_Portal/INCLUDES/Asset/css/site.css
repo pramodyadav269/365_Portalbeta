@@ -2675,19 +2675,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-right: 1px solid rgba(112, 112, 112, 0.24); }
       .course-flow .builder .builder-action span:last-child {
         border-right: none; }
-  .course-flow .accordion .card {
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
-    border-radius: 3px;
-    overflow: unset; }
-    .course-flow .accordion .card .card-header {
-      background-color: #fff;
-      display: flex;
-      justify-content: space-between;
-      padding: 14px; }
-      .course-flow .accordion .card .card-header h5 {
-        font-size: 16px;
-        font-weight: bold;
-        margin: 0; }
   .course-flow .course-content-collapse .accordion {
     margin-bottom: 34px; }
     .course-flow .course-content-collapse .accordion .card .card-body {
@@ -2698,11 +2685,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     color: #212338;
     margin-bottom: 10px; }
   .course-flow .quiz-wrapper {
-    padding: 20px 60px 20px 98px; }
+    padding: 20px 20px 20px 16px; }
     .course-flow .quiz-wrapper .quiz {
       border: 2px solid #E1E1E1B3;
       border-radius: 6px;
-      padding: 0 10px; }
+      padding: 0 10px;
+      margin-bottom: 20px; }
+      .course-flow .quiz-wrapper .quiz:last-child {
+        margin-bottom: 0; }
     .course-flow .quiz-wrapper .btn-link {
       color: rgba(0, 0, 0, 0.43); }
       .course-flow .quiz-wrapper .btn-link .svg-inline--fa {
@@ -2776,3 +2766,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .course-flow .quiz-wrapper .ans .checked-icon.delete .svg-inline--fa {
           font-size: 18px;
           color: #FF0000; }
+  .course-flow .accordion .card {
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+    overflow: unset; }
+    .course-flow .accordion .card .card-header {
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 14px; }
+      .course-flow .accordion .card .card-header h5 {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0; }
+    .course-flow .accordion .card .sr {
+      padding: 14px;
+      border-radius: 0;
+      box-shadow: none; }
