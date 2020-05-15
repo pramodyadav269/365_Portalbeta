@@ -299,6 +299,24 @@
             }
         });
 
+        var isLessonDetailsChanged = false;
+
+        // Event raised when Lesson Title, Description, Points, Hours & Minutues changed..
+        $(document).on('keyup', '#txtLessonTitle,#txtLessonDescription,#txtPoint,#txtHour,#txtMin', function () {
+            alert("changed");
+            isLessonDetailsChanged = true;
+        });
+
+        // Call this function when user click on Lesson (Accordion)
+        function CheckIfNewChanges() {
+            if (isLessonDetailsChanged) {
+                alert("Do you want to save the changes?");
+            }
+            else {
+                alert("No new changes found.");
+            }
+        }
+
         function readQueryString() {
             var vars = [], hash;
             var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -3483,6 +3501,7 @@
             if (IsPublished == 1)
                 $("#dvPublishCourse").show();
         }
+
 
     </script>
 
