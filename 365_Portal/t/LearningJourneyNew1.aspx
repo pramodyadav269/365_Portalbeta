@@ -1177,8 +1177,9 @@
 
             html += '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">';
             html += '<div class="card-body right-side-content">';
-            html += '<div class="lesson-action">';
-            html += '<a onclick="EditLessionFrom(this, ' + lessonId + ')";><i class="fas fa-pen"></i></a>';
+            html += '<div class="lesson-action">';            
+            html += '<a onclick="EditLessionFrom(this, ' + lessonId + ')";><i class="fas fa-check"></i></a>';
+            //html += '<a onclick="EditLessionFrom(this, ' + lessonId + ')";><i class="fas fa-pen"></i></a>';
             html += '<a onclick="DeleteLessionFrom(this, ' + lessonId + ')";><i class="fas fa-trash-alt"></i></a>';
             html += '<a><i class="fas fa-chevron-down"></i></a>';
             html += '</div>';

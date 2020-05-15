@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace _365_Portal
+namespace _365_Portal.t
 {
     public partial class LearningJourneyNew2 : System.Web.UI.Page
     {
