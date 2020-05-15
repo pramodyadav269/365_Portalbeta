@@ -154,7 +154,7 @@ namespace _365_Portal.ControllersReOrderContent
                             string InstructorImageBase64 = Convert.ToString(requestParams.SelectToken("InstructorPhotoBase64"));
                             if (!string.IsNullOrEmpty(InstructorImageBase64))
                             {
-                                var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                                var files = InstructorImageBase64.Split(new string[] { "," }, StringSplitOptions.None);
                                 if (files.Count() == 1)
                                     InstructorImageBase64 = files[0];
                                 else
@@ -165,10 +165,10 @@ namespace _365_Portal.ControllersReOrderContent
                                 string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
                                 File.WriteAllBytes(filePath, imageBytes);
 
-                                DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
-                                if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                                DataSet dsInstructorImage = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                                if (dsInstructorImage.Tables.Count > 0 && dsInstructorImage.Tables[0].Rows.Count > 0)
                                 {
-                                    content.InstructorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                    content.InstructorImageFileID = Convert.ToInt32(dsInstructorImage.Tables[0].Rows[0]["UniqueID"]);
                                 }
                             }
 
@@ -373,7 +373,7 @@ namespace _365_Portal.ControllersReOrderContent
                         string InstructorImageBase64 = Convert.ToString(requestParams.SelectToken("InstructorPhotoBase64"));
                         if (!string.IsNullOrEmpty(InstructorImageBase64))
                         {
-                            var files = CourseLogoBase64.Split(new string[] { "," }, StringSplitOptions.None);
+                            var files = InstructorImageBase64.Split(new string[] { "," }, StringSplitOptions.None);
                             if (files.Count() == 1)
                                 InstructorImageBase64 = files[0];
                             else
@@ -384,10 +384,10 @@ namespace _365_Portal.ControllersReOrderContent
                             string filePath = HttpContext.Current.Server.MapPath("~/Files/InspectorImage/" + fileName);
                             File.WriteAllBytes(filePath, imageBytes);
 
-                            DataSet dsCourseLogo = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
-                            if (dsCourseLogo.Tables.Count > 0 && dsCourseLogo.Tables[0].Rows.Count > 0)
+                            DataSet dsInstructorImage = UserBL.CreateFile(fileName, HttpContext.Current.Server.MapPath("~/Files/InspectorImage/"), false, "InspectorImage");
+                            if (dsInstructorImage.Tables.Count > 0 && dsInstructorImage.Tables[0].Rows.Count > 0)
                             {
-                                content.InstructorImageFileID = Convert.ToInt32(dsCourseLogo.Tables[0].Rows[0]["UniqueID"]);
+                                content.InstructorImageFileID = Convert.ToInt32(dsInstructorImage.Tables[0].Rows[0]["UniqueID"]);
                             }
                         }
 

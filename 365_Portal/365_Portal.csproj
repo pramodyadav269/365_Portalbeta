@@ -314,6 +314,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LearningJourneyNew2.aspx.cs">
+      <DependentUpon>LearningJourneyNew2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LearningJourneyNew2.aspx.designer.cs">
+      <DependentUpon>LearningJourneyNew2.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2288,6 +2295,7 @@
     <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.ttf" />
     <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff" />
     <Content Include="INCLUDES\Asset\webfonts\fa-solid-900.woff2" />
+    <Content Include="LearningJourneyNew2.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Phase2\Assets\css\site.css" />
     <Content Include="Phase2\Assets\css\all.css" />

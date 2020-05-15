@@ -324,6 +324,40 @@ namespace _365_Portal.Controllers
         }
 
 
+        [Route("api/Quiz/DeleteAnswer")]
+        [HttpPost]
+        public IHttpActionResult DeleteAnswer(JObject requestParams)
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                try
+                {
+                    var compId = identity.CompId;
+                    var userId = identity.UserID;
+                    var AnswerID = Convert.ToInt32(Convert.ToString(requestParams["AnswerID"]));
+                    var IsActive = Convert.ToInt32(Convert.ToString(requestParams["IsActive"]));
+                    if (AnswerID > 0)
+                    {
+                        var ds = ContentBL.DeleteAnswer(compId, userId, AnswerID, IsActive);
+                        data = Utility.ConvertDataSetToJSONString(ds);
+                        data = Utility.Successful(data);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    data = Utility.Exception(ex); ;
+                }
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
+
 
 
         [Route("api/Quiz/ManageAnsOptions")]

@@ -840,5 +840,35 @@ namespace _365_Portal.Code.DAL
 
             return ds;
         }
+
+        public static DataSet DeleteAnswer(int compId, string userId, int AnswerID, int IsActive)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            try
+            {
+                conn.Open();
+                string stm = "spDeleteAnswer";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_CompID", compId);
+                cmd.Parameters.AddWithValue("p_UserID", userId);
+                cmd.Parameters.AddWithValue("p_AnswerID", AnswerID);
+                cmd.Parameters.AddWithValue("p_IsActive", IsActive);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return ds;
+        }
     }
 }

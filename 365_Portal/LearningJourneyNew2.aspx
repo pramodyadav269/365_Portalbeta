@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew1.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew1" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew2.aspx.cs" Inherits="_365_Portal.LearningJourneyNew2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .btnSpace {
@@ -3195,5 +3194,4 @@
         }
 
     </script>
-
 </asp:Content>

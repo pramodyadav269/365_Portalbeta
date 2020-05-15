@@ -426,6 +426,20 @@ namespace _365_Portal.Code.BL
             return ds;
         }
 
+
+        public static DataSet DeleteAnswer(int compId, string userId, int AnswerID, int IsActive)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = ContentDAL.DeleteAnswer(compId, userId, AnswerID, IsActive);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
     }
 
 
