@@ -1,14 +1,19 @@
 
-Groups
-Users
 
-Topics
-Modules
+- Rename Add Course button text "Proceed to Course Builder"
+- Remove Add New Lesson button on 1st time
+- Course Title, Description entered text are in bold
+Lesson title, description entered text are in bold
+- Click on add course, failure msg came
+but course builder screen opens up
+- Lesson estimated time, points are not autofilled
+up
+- Once Lesson is in edit mode, no way to go back
+- Passing Percentage placeholder is wrong
+- Question design is not good
 
-Contents
-Survey
-Flashcard
-Flashcard Quiz
-Final Quiz
+- once click on "Add New Content" no way to go back to previous state,
+there should be cancel button as it was there in previous design
 
-Assign Topics
+
+Pencil Icon:
