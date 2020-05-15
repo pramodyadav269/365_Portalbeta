@@ -1,13 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew2.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <style>
+    <style>
         .btnSpace {
             margin-bottom: 10px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-        <div class="course-flow">
+    <div class="course-flow">
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
@@ -67,7 +68,7 @@
                                                 <select class="form-control select2 required" id="ddlTags" style="width: 100% !important" multiple>
                                                 </select>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                         <div class="col-sm-12 col-md-6">
                                             <div class="form-group color-picker">
                                                 <label for="txtCourseThemeColor">Theme Color</label>
@@ -118,9 +119,9 @@
                                                     </div>
                                                 </div>
                                                 <label for="txtInstructorName"><i class="fas fa-plus-circle"></i>Instructor Details</label>
-                                                <div class="instructor" style="display:none;" id="divInstructorName">
+                                                <div class="instructor" style="display: none;" id="divInstructorName">
                                                     <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
-                                                    
+
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURL(this, '.instructor-photo');encodeImagetoBase64(this,'InstructorPhoto')">
                                                         <label class="custom-file-label" for="imgInstructorPhoto" id="lblInstructorPhoto">Add Image</label>
@@ -166,7 +167,7 @@
 
 
             <%-- in progresss --%>
-            <div class="col-12 col-sm-12 mt-4 accordion course-content-collapse" style="display:none;" id="divLessonMain">
+            <div class="col-12 col-sm-12 mt-4 accordion course-content-collapse" style="display: none;" id="divLessonMain">
 
                 <div class="builder" id="divCourseBuilder">
                     <div class="builder-title">
@@ -175,19 +176,18 @@
                     <%--<div class="builder-action"><span onclick="collapseToggle('.course-content-collapse .collapse',1);">Expand All</span><span onclick="collapseToggle('.course-content-collapse .collapse',0);">Collapse All</span></div>--%>
                 </div>
 
-                
-                <div class="lesson-container" id="dvLessonViewParentView">                    
+
+                <div class="lesson-container" id="dvLessonViewParentView">
                 </div>
 
 
                 <div class="card mb-4" id="dvLessonViewParentEdit">
-                    
                 </div>
 
             </div>
 
             <div class="col-12 mb-5" id="divAddMoreLesson">
-                <a class="btn btn-black" id="btnAddMoreLesson" style="display:none;" onclick="AddMoreLesson();"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+                <a class="btn btn-black" id="btnAddMoreLesson" style="display: none;" onclick="AddMoreLesson();"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
             </div>
         </div>
     </div>
@@ -225,7 +225,7 @@
     </div>
 
     <%--End Modal popup region--%>
-    
+
     <script>
 
         //new code
@@ -252,69 +252,66 @@
         var QuestionAction = '1';
 
         var dvLessonEdit = '<div class="form-group asterisk">' +
-                                '<label for="txtLessonTitle" class="inline">Lesson Title</label>' +
-                                '<input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />' +
-                            '</div>' +
-                            '<div class="form-group asterisk">' +
-                                '<label for="txtLessonDescription" class="inline">Lesson Description</label>' +
-                                '<textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>' +
-                            '</div>' ;
-                            //'<div class="form-group">' +
-                            //    '<a class="btn btn-outline blod black" id="btnLessonCancel" onclick="LessonCancel(this);">Cancel</a>' +
-                            //'</div>';
-                                    
-        var dvLessonContentEdit = '<div class="form-group asterisk">'+
-                                        '<div class="tag content">Content</div>'+
-                                        '<label for="txtContentHeader" class="inline">Content Title</label>' +
-                                        '<input type="text" class="form-control required" id="txtContentHeader" placeholder="Content Title" />' +
-                                    '</div>'+
-                                    '<div class="form-group editor asterisk">'+
-                                        '<div id="txtContentDescription"></div>'+
-                                    '</div>' +
-                                    '<div class="form-group">' +
-                                        '<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
-                                    '</div>';
+            '<label for="txtLessonTitle" class="inline">Lesson Title</label>' +
+            '<input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />' +
+            '</div>' +
+            '<div class="form-group asterisk">' +
+            '<label for="txtLessonDescription" class="inline">Lesson Description</label>' +
+            '<textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>' +
+            '</div>';
+        //'<div class="form-group">' +
+        //    '<a class="btn btn-outline blod black" id="btnLessonCancel" onclick="LessonCancel(this);">Cancel</a>' +
+        //'</div>';
+
+        var dvLessonContentEdit = '<div class="form-group asterisk">' +
+            '<div class="tag content">Content</div>' +
+            '<label for="txtContentHeader" class="inline">Content Title</label>' +
+            '<input type="text" class="form-control required" id="txtContentHeader" placeholder="Content Title" />' +
+            '</div>' +
+            '<div class="form-group editor asterisk">' +
+            '<div id="txtContentDescription"></div>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
+            '</div>';
 
         var dvLessonResourceEdit = '<div class="form-group editor">' +
-                                        '<label>Resources</label>'+
-                                        '<div id="txtResourcesDescription"></div>'+
-                                    '</div>';
+            '<label>Resources</label>' +
+            '<div id="txtResourcesDescription"></div>' +
+            '</div>';
 
-        var dvLessonQuizEdit = ''+
-                                '<div class="form-group asterisk">'+
-                                    '<label for="txtQuizTitle" class="inline">Quiz Title</label>'+
-                                    '<input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />'+
-                                '</div>'+
-                                '<div class="form-group asterisk">'+
-                                    '<label for="txtQuizDescription" class="inline">Quiz Description</label>'+
-                                    '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>'+
-                                '</div>'+
-                                '<div class="form-group">' +
-                                        '<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
-                                '</div>';
+        var dvLessonQuizEdit = '' +
+            '<div class="form-group asterisk">' +
+            '<label for="txtQuizTitle" class="inline">Quiz Title</label>' +
+            '<input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />' +
+            '</div>' +
+            '<div class="form-group asterisk">' +
+            '<label for="txtQuizDescription" class="inline">Quiz Description</label>' +
+            '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
+            '</div>';
 
         var QuestionType = "done";
         var divQuestionType = '<a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
-                                    '<i class="fas fa-plus-circle"></i>New Question' +
-                                '</a>' +
-                                '<div class="dropdown-menu quiz-element">' +
-                                    '<a class="dropdown-item" name="multiple" onclick="ShowQuestion(\'multiple\',\'new\');"><i class="far fa-check-square"></i>Multiple Choice</a>' +
-                                    '<a class="dropdown-item" name="radio" onclick="ShowQuestion(\'radio\',\'new\');"><i class="fas fa-dot-circle"></i>Radio Button</a>' +
-                                    '<a class="dropdown-item" name="dropdown" onclick="ShowQuestion(\'dropdown\',\'new\');"><i class="far fa-caret-square-down"></i>Dropdown</a>' +
-                                '</div>' +
+            '<i class="fas fa-plus-circle"></i>New Question' +
+            '</a>' +
+            '<div class="dropdown-menu quiz-element">' +
+            '<a class="dropdown-item" name="multiple" onclick="ShowQuestion(\'multiple\',\'new\');"><i class="far fa-check-square"></i>Multiple Choice</a>' +
+            '<a class="dropdown-item" name="radio" onclick="ShowQuestion(\'radio\',\'new\');"><i class="fas fa-dot-circle"></i>Radio Button</a>' +
+            '<a class="dropdown-item" name="dropdown" onclick="ShowQuestion(\'dropdown\',\'new\');"><i class="far fa-caret-square-down"></i>Dropdown</a>' +
+            '</div>' +
 
-                                '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
+            '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
 
-        $(document).ready(function ()
-        {            
-            if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '')
-            {
+        $(document).ready(function () {
+            if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
                 EditCourse();
 
-                if (CourseFlag != '0')
-                {
+                if (CourseFlag != '0') {
                     BindLessonGrid();
                 }
             }
@@ -336,8 +333,7 @@
 
 
 
-        function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, TagID)
-        {
+        function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, TagID) {
             var getUrl = "/API/Content/GetCourseCategoryTagsAndBadge";
             $.ajax({
                 type: "POST",
@@ -346,32 +342,28 @@
                 contentType: "application/json",
                 success: function (response) {
                     try {
-                        
+
                         var DataSet = $.parseJSON(response);
                         HideLoader();
-                        if (DataSet.StatusCode == "1")
-                        {
+                        if (DataSet.StatusCode == "1") {
                             var Tags = DataSet.Data.Tag;
                             var CourseCategory = DataSet.Data.CourseCategory;
 
-                            if (Tags != undefined && Tags.length > 0)
-                            {
+                            if (Tags != undefined && Tags.length > 0) {
                                 $('#ddlTags').empty();
                                 for (var i = 0; i < Tags.length; i++) {
                                     $('#ddlTags').append('<option value="' + Tags[i].TagID + '">' + Tags[i].TagName + '</option>');
                                 }
                                 selectInit('#ddlTags', 'Tags');
                             }
-                            if (CourseCategory != undefined && CourseCategory.length > 0)
-                            {
+                            if (CourseCategory != undefined && CourseCategory.length > 0) {
                                 $('#ddlCourseCategory').empty().append('<option></option>');
                                 for (var i = 0; i < CourseCategory.length; i++) {
                                     $('#ddlCourseCategory').append('<option value="' + CourseCategory[i].CategoryID + '">' + CourseCategory[i].Title + '</option>');
                                 }
                                 selectInit('#ddlCourseCategory', 'Course Category');
                             }
-                            if (flag == 'edit')
-                            {
+                            if (flag == 'edit') {
                                 ""
                                 $('#ddlCourseCategory').val(CourseCategoryID).trigger('change');
 
@@ -413,7 +405,7 @@
             });
         }
 
-        function ManageInstructor() {            
+        function ManageInstructor() {
             if ($("#cbxInstructorName").prop('checked') == true) {
                 $("#divInstructorName").hide();
             }
@@ -423,13 +415,12 @@
                 $("#imgInstructorPhoto").removeAttr("src");
                 $("#lblInstructorPhoto").text("Add Image");
                 $("#divInstructorPhoto").removeClass('img');
-                $("#divInstructorPhoto").empty();                
+                $("#divInstructorPhoto").empty();
             }
         }
 
-        function ClearFieldsAddCourse()
-        {
-            $('#txtCourseTitle').val('');            
+        function ClearFieldsAddCourse() {
+            $('#txtCourseTitle').val('');
             $('#txtCourseDescription').val('');
 
             $("#ddlCourseCategory option:selected").prop("selected", false);
@@ -440,9 +431,9 @@
 
             $('#txtCourseThemeColor').val('#161E98');
             editorCourseSummary.value = '';
-                       
-            $("#rbGlobal").prop("checked", true)            
-            $("#cbxInstructorName").click();            
+
+            $("#rbGlobal").prop("checked", true)
+            $("#cbxInstructorName").click();
         }
 
         function validateAddCourse() {
@@ -458,7 +449,7 @@
             }
             else if ($("#txtCourseThemeColor").val() == undefined || $("#txtCourseThemeColor").val() == '') {
                 return { error: true, msg: "Please enter Course Theme color" };
-            }            
+            }
             else if (editorCourseSummary.value == undefined || editorCourseSummary.value.trim() == '') {
                 return { error: true, msg: "Please enter Course Summary" };
             }
@@ -470,10 +461,10 @@
             else if ($("#rbGlobal").prop("checked") == false && $("#rbOrganization").prop("checked") == false && $("#rbAssigned").prop("checked") == false) {
                 return { error: true, msg: "Please select sharing option" };
             }
-            
+
             return true;
         }
-        
+
         function AddCourse(flag) {
             debugger
             var getUrl;
@@ -557,8 +548,7 @@
 
                                         $('#btnAddMoreLesson').show();
 
-                                        if (DataSet.StatusCode == "1")
-                                        {
+                                        if (DataSet.StatusCode == "1") {
                                             if (flag == 'redirect') {
                                                 Swal.fire({
                                                     title: "Success",
@@ -574,19 +564,19 @@
 
                                                 $("#divLessonMain").show();
                                                 AddMoreLesson();
-                                                
+
                                                 HideLoader();
                                                 if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                                     CourseFlag = DataSet.Data[0].InsertedID;
-                                                }                                                
-                                                
+                                                }
+
                                                 Swal.fire({
                                                     title: "Success",
                                                     text: DataSet.Data[0].ReturnMessage,
                                                     icon: "success"
                                                 }).then((value) => {
                                                     if (value) {
-                                                        
+
                                                     }
                                                 });
                                             }
@@ -919,11 +909,12 @@
             }
         }
 
-        
+
         //Lesson
         function ManageLesson(flag) {
             if (flag == 'editbind') {
-                $('#dvLessonEdit').empty().append(dvLessonEdit);
+                $('#divLessonOverview').empty().append(dvLessonEdit);
+                //$('#dvLessonEdit').empty().append(dvLessonEdit);
             }
             else if (flag == 'editclear') {
                 $('#dvLessonEdit').empty();
@@ -934,92 +925,92 @@
             LessonFlag = '0';
             var dvLessonViewParentEdit = '<div class="row">' +
 
-                        //Right Pane
-                        '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">' +
-                            '<div class="card-body arrows">' +
-                                '<div class="tag lesson main-card">Lesson</div>' +
-                                '<div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>' +
-                                '<div class="row" id="divLessonJourney">' +
-                                    '<div class="col-sm-12" id="dvLessonView">' +
-                                    '</div>' +
-                                    '<div class="col-sm-12" id="dvLessonEdit"></div>' +
+                //Right Pane
+                '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">' +
+                '<div class="card-body arrows">' +
+                '<div class="tag lesson main-card">Lesson</div>' +
+                '<div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>' +
+                '<div class="row" id="divLessonJourney">' +
+                '<div class="col-sm-12" id="dvLessonView">' +
+                '</div>' +
+                '<div class="col-sm-12" id="dvLessonEdit"></div>' +
 
-                                    '<div class="col-sm-12 accordion view" id="dvLessonContentView">' +
-                                    '</div>' +
-                                    '<div class="col-sm-12" id="dvLessonContentEdit"></div>' +
+                '<div class="col-sm-12 accordion view" id="dvLessonContentView">' +
+                '</div>' +
+                '<div class="col-sm-12" id="dvLessonContentEdit"></div>' +
 
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        //End Right Panes
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                //End Right Panes
 
-                        //Left pane
-                        '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">' +
-                            '<div class="card-body right-side-content">' +
-                                '<div class="lesson-action">' +
-                                    '<a><i class="fas fa-check"></i></a>' +
-                                    '<a><i class="fas fa-trash-alt"></i></a>' +
-                                    '<a><i class="fas fa-chevron-down"></i></a>' +
-                                '</div>' +
-                                '<div class="row mt-4">' +
-                                    '<div class="col-sm-12 mt-2">' +
-                                        '<div class="form-group">' +
-                                            '<label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>' +
-                                            '<input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
-                                            '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(txtMin,event);" />' +
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="col-sm-12">' +
-                                        '<div class="form-group">' +
-                                            '<label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>' +
-                                            '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(txtPoint,event);" />' +
-                                        '</div>' +
-                                    '</div>' +
+                //Left pane
+                '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">' +
+                '<div class="card-body right-side-content">' +
+                '<div class="lesson-action">' +
+                '<a><i class="fas fa-check"></i></a>' +
+                '<a><i class="fas fa-trash-alt"></i></a>' +
+                '<a><i class="fas fa-chevron-down"></i></a>' +
+                '</div>' +
+                '<div class="row mt-4">' +
+                '<div class="col-sm-12 mt-2">' +
+                '<div class="form-group">' +
+                '<label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>' +
+                '<input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
+                '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(txtMin,event);" />' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-12">' +
+                '<div class="form-group">' +
+                '<label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>' +
+                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(txtPoint,event);" />' +
+                '</div>' +
+                '</div>' +
 
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
-                        //End Left pane
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                //End Left pane
 
 
-                        '<div class="w-100"></div>'+
-                            '<div class="col-12 col-sm-12">'+
-                                '<div class="card-body pl-5">'+
-                                    '<div class="col-sm-12" id="dvLessonResourceEdit">'+
-                                    '</div>' +
-                                    '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">'+
-                                        '<label>Quiz</label>'+
-                                        '<div class="form-group mb-2 d-flex justify-content-end">'+
-                                        '<label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>'+
-                                        '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" '+
-                                            'onkeyup="return isNumberKey(\'txtPassingScorePercentage\',event);" />'+
-                                        '</div>'+
-                                    '</div>'+
-                                    '<div class="col-sm-12 accordion view" id="dvLessonQuizView">'+
-                                    '</div>'+
-                                    '<div class="col-sm-12 edit" id="dvLessonQuizEdit"></div>'+
+                '<div class="w-100"></div>' +
+                '<div class="col-12 col-sm-12">' +
+                '<div class="card-body pl-5">' +
+                '<div class="col-sm-12" id="dvLessonResourceEdit">' +
+                '</div>' +
+                '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
+                '<label>Quiz</label>' +
+                '<div class="form-group mb-2 d-flex justify-content-end">' +
+                '<label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>' +
+                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" ' +
+                'onkeyup="return isNumberKey(\'txtPassingScorePercentage\',event);" />' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-sm-12 accordion view" id="dvLessonQuizView">' +
+                '</div>' +
+                '<div class="col-sm-12 edit" id="dvLessonQuizEdit"></div>' +
 
-                                    '<div class="col-sm-12 quiz-wrapper"></div>'+
-                        
-                                    '<div class="col-sm-12 quiz-wrapper" id="dvQuestionView">'+
-                                    '</div>'+
+                '<div class="col-sm-12 quiz-wrapper"></div>' +
 
-                                    '<div class="col-sm-12 quiz-wrapper" id="dvLessonQues">'+
-                                    '</div>'+
+                '<div class="col-sm-12 quiz-wrapper" id="dvQuestionView">' +
+                '</div>' +
 
-                                    '<div class="col-sm-12 mb-4 quiz-wrapper" id="divQuestionType">'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>'+
+                '<div class="col-sm-12 quiz-wrapper" id="dvLessonQues">' +
+                '</div>' +
 
-                        '<div class="w-100"></div>' +
+                '<div class="col-sm-12 mb-4 quiz-wrapper" id="divQuestionType">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
 
-                        '<div class="action-btn">' +
-                            '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
-                            '<a class="btn btn-outline blod black" id="btnAddResource" name="btnAddResource" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Resources</a>' +
-                            '<a class="btn btn-outline blod black" id="btnAddQuiz"     name="btnAddQuiz" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>' +
-                        '</div>' +
-                    '</div>';
+                '<div class="w-100"></div>' +
+
+                '<div class="action-btn">' +
+                '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
+                '<a class="btn btn-outline blod black" id="btnAddResource" name="btnAddResource" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Resources</a>' +
+                '<a class="btn btn-outline blod black" id="btnAddQuiz"     name="btnAddQuiz" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>' +
+                '</div>' +
+                '</div>';
 
             $('#dvLessonViewParentEdit').show();
             $('#dvLessonViewParentEdit').empty().append(dvLessonViewParentEdit);
@@ -1066,14 +1057,14 @@
                         debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
-                                var LessonTable = DataSet.Data;                                
+                                var LessonTable = DataSet.Data;
                                 debugger
                                 $('#divLessonMain').show();
 
                                 var Lesson = '';
                                 if (LessonTable != undefined && LessonTable.length > 0) {
                                     for (var i = 0; i < LessonTable.length; i++) {
-                                    
+
                                         //Lesson = Lesson + '<div class="card-header">'+
                                         //                    '<h5>' + LessonTable[i].Title + '</h5>'+
                                         //                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i>'+
@@ -1084,22 +1075,22 @@
                                         //                        '<span style="display:none;" id="spPoints">' + LessonTable[i].Points + '</span>' +
                                         //                   '</div>';
 
-                                        Lesson = Lesson + '<div class="card mb-4">'+
-                                                            '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
-                                                                '<div class="card-header">' +
-                                                                '<h5>' + LessonTable[i].Title + '</h5>' +
-                                                                '<div class="card-header-action">' +
-                                                                '<a><i class="fas fa-chevron-down" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
-                                                                '</div>' +
-                                                                '</div>' +
-                                                                '<span style="display:none;" id="spTitle">' + LessonTable[i].Title + '</span>' +
-                                                                '<span style="display:none;" id="spOverview">' + LessonTable[i].Overview + '</span>' +
-                                                                '<span style="display:none;" id="spCourseTime">' + LessonTable[i].CourseTime + '</span>' +
-                                                                '<span style="display:none;" id="spPoints">' + LessonTable[i].Points + '</span>' +
-                                                                '<div id="collapseLession' + LessonTable[i].ModuleID + '" class="collapse"></div></div>';
+                                        Lesson = Lesson + '<div class="card mb-4">' +
+                                            '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
+                                            '<div class="card-header">' +
+                                            '<h5>' + LessonTable[i].Title + '</h5>' +
+                                            '<div class="card-header-action">' +
+                                            '<a><i class="fas fa-chevron-down" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
+                                            '</div>' +
+                                            '</div>' +
+                                            '<span style="display:none;" id="spTitle">' + LessonTable[i].Title + '</span>' +
+                                            '<span style="display:none;" id="spOverview">' + LessonTable[i].Overview + '</span>' +
+                                            '<span style="display:none;" id="spCourseTime">' + LessonTable[i].CourseTime + '</span>' +
+                                            '<span style="display:none;" id="spPoints">' + LessonTable[i].Points + '</span>' +
+                                            '<div id="collapseLession' + LessonTable[i].ModuleID + '" class="collapse"></div></div>';
 
                                     }
-                                                                        
+
                                     $('#dvLessonViewParentView').empty().append(Lesson);
                                     $('#dvLessonViewParentEdit').empty();
                                     //AddMoreLesson();
@@ -1216,7 +1207,7 @@
                                             icon: "success"
                                         }).then((value) => {
                                             if (value) {
-                                                
+
                                                 //Marked as not in use
                                                 //BindLessonInSubTile(LessonFlag, _Title, _Overview);
                                             }
@@ -1286,8 +1277,7 @@
         }
 
         //Marked as not in use
-        function LessonCancel()
-        {
+        function LessonCancel() {
             $('#txtHour').val('');
             $('#txtMin').val('');
             $('#txtPoint').val('');
@@ -1295,7 +1285,7 @@
         }
 
         function DeleteLessionFromTile(obj, id) {
-            
+
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -1373,7 +1363,7 @@
         }
 
         function EditLessionFromTile(obj, id) {
-            debugger            
+            debugger
             AddMoreLesson();
 
             var _Title = $(obj).parent().parent().parent().parent().find('#spTitle').text();
@@ -1421,46 +1411,44 @@
             ////$('#dvbtnSaveLesson').show();
         }
 
-        
+
         //Marked as not in use
-        function BindLessonInSubTile(id, _Title, _Overview, _CourseTime, _Points)
-        {
+        function BindLessonInSubTile(id, _Title, _Overview, _CourseTime, _Points) {
             debugger
             var Lesson = '';
 
             Lesson = Lesson + '<div class="accordion">' +
-                                '<div class="card">' +
-                                    '<div class="card-header" id="headingLesson">' +
-                                        '<h5 id="hdgLessonTitle">' + _Title + '</h5>' +
+                '<div class="card">' +
+                '<div class="card-header" id="headingLesson">' +
+                '<h5 id="hdgLessonTitle">' + _Title + '</h5>' +
 
 
-                                        '<span style="display:none;" id="spSubTitle">' + _Title + '</span>' +
-                                        '<span style="display:none;" id="spSubOverview">' + _Overview + '</span>' +
-                                        '<span style="display:none;" id="spSubCourseTime">' + _CourseTime + '</span>' +
-                                        '<span style="display:none;" id="spSubPoints">' + _Points + '</span>' +
+                '<span style="display:none;" id="spSubTitle">' + _Title + '</span>' +
+                '<span style="display:none;" id="spSubOverview">' + _Overview + '</span>' +
+                '<span style="display:none;" id="spSubCourseTime">' + _CourseTime + '</span>' +
+                '<span style="display:none;" id="spSubPoints">' + _Points + '</span>' +
 
 
 
-                                        '<i class="fas fa-edit" title="Edit" onclick="EditLessonFromSubTile(this,' + id + ')";></i>' +
+                '<i style="display:none;" class="fas fa-edit" title="Edit" onclick="EditLessonFromSubTile(this,' + id + ')";></i>' +
 
-                                        '<a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="false" aria-controls="collapseLesson" class="collapsed">' +
-                                            '<i class="fas fa-chevron-down"></i>' +
-                                        '</a>' +
-                                    '</div>' +
-                                    '<div id="collapseLesson" class="collapse" aria-labelledby="headingLesson">' +
-                                        '<div class="card-body" id="divLessonOverview">' + _Overview +
-                                        '</div>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>';
-               
-                $('#dvLessonView').empty().append(Lesson);
-                ManageLesson('editclear');            
+                '<a data-toggle="collapse" data-target="#collapseLesson" aria-expanded="false" aria-controls="collapseLesson" class="collapsed"  onclick="EditLessonFromSubTile(this,' + id + ')";>' +
+                '<i class="fas fa-chevron-down"></i>' +
+                '</a>' +
+                '</div>' +
+                '<div id="collapseLesson" class="collapse" aria-labelledby="headingLesson">' +
+                '<div class="card-body" id="divLessonOverview">' + _Overview +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+
+            $('#dvLessonView').empty().append(Lesson);
+            ManageLesson('editclear');
         }
 
         //Marked as not in use
-        function EditLessonFromSubTile(obj, id)
-        {
+        function EditLessonFromSubTile(obj, id) {
             debugger
             ManageLesson('editbind');
 
@@ -1657,10 +1645,13 @@
             }
         }
 
-        
+
         //Content
-        function ManageContent(flag) {
+        function ManageContent(flag, contentId) {
             if (flag == 'editbind') {
+                // Clear all open fields for content
+                $("[id^='divContentDescription_']").html("");
+                $('#divContentDescription_' + contentId).empty().append(dvLessonContentEdit);
                 $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
                 editorContentDescription = new Jodit('#txtContentDescription');
             }
@@ -1708,23 +1699,23 @@
                                 if (ContentTable.length > 0) {
                                     for (var i = 0; i < ContentTable.length; i++) {
                                         Content = Content + '' +
-                                                                '<div class="card">' +
-                                                                    '<div class="tag content">Content</div>' +
-                                                                    '<div class="card-header" id="headingLessonContent' + i + '">' +
-                                                                        '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
+                                            '<div class="card">' +
+                                            '<div class="tag content">Content</div>' +
+                                            '<div class="card-header" id="headingLessonContent' + i + '">' +
+                                            '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
 
-                                                                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
-                                                                        '<i class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
+                                            '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
+                                            '<i style="display:none;" class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
 
-                                                                        '<a data-toggle="collapse" data-target="#collapseLessonContent' + i + '" aria-expanded="false" aria-controls="collapseLessonContent' + i + '" class="collapsed">' +
-                                                                            '<i class="fas fa-chevron-down"></i>' +
-                                                                        '</a>' +
-                                                                    '</div>' +
-                                                                    '<div id="collapseLessonContent' + i + '" class="collapse" aria-labelledby="headingLessonContent' + i + '">' +
-                                                                        '<div class="card-body" id="divContentDescription">' + ContentTable[i].Description +
-                                                                        '</div>' +
-                                                                    '</div>' +
-                                                                '</div>';                                                            
+                                            '<a data-toggle="collapse" data-target="#collapseLessonContent' + i + '" aria-expanded="false" aria-controls="collapseLessonContent' + i + '" class="collapsed" onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";>' +
+                                            '<i class="fas fa-chevron-down"></i>' +
+                                            '</a>' +
+                                            '</div>' +
+                                            '<div id="collapseLessonContent' + i + '" class="collapse" aria-labelledby="headingLessonContent' + i + '">' +
+                                            '<div class="card-body" id="divContentDescription_' + ContentTable[i].ContentID + '">' + ContentTable[i].Description +
+                                            '</div>' +
+                                            '</div>' +
+                                            '</div>';
                                     }
                                     $('#dvLessonContentView').empty().append(Content);
 
@@ -1807,8 +1798,7 @@
                         ""
                         var DataSet = $.parseJSON(response);
                         if (DataSet != null && DataSet != "") {
-                            if (DataSet.StatusCode == "1")
-                            {
+                            if (DataSet.StatusCode == "1") {
                                 HideLoader();
 
                                 if (flag == 'redirect') {
@@ -1837,12 +1827,12 @@
                                         icon: "success"
                                     }).then((value) => {
                                         if (value) {
-                                            
+
                                         }
                                     });
                                 }
                                 else if (flag == 'onlycontent') {
-                                    HideLoader();                                    
+                                    HideLoader();
 
                                     if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                         //ContentFlag = DataSet.Data[0].InsertedID;
@@ -1861,7 +1851,7 @@
                                         }
                                     });
                                 }
-                                
+
                                 IsCoursePublishable();
                             }
                             else {
@@ -1906,14 +1896,13 @@
             });
         }
 
-        function ContentCancel()
-        {
+        function ContentCancel() {
             ManageContent('editclear');
         }
 
         function EditContentFromTile(obj, id) {
-            debugger            
-            ManageContent('editbind');
+            debugger
+            ManageContent('editbind', id);
 
             $('#txtContentHeader').val($(obj).parent().parent().find('#hdgContentTitle').text());
             editorContentDescription.value = $(obj).parent().parent().find('#divContentDescription').text();
@@ -2016,8 +2005,7 @@
             return true;
         }
 
-        function BindResourceGrid(flag)
-        {
+        function BindResourceGrid(flag) {
             debugger
             ShowLoader();
             var getUrl = "/API/Content/GetResource";
@@ -2064,7 +2052,7 @@
                                     
                                     ManageResource('editclear');
                                     */
-                                    ManageResource('editbind');    
+                                    ManageResource('editbind');
                                     editorResourcesDescription.value = DataSet.Data[0].Resource;
                                 }
                             }
@@ -2095,7 +2083,7 @@
         }
 
         function AddResource(flag) {
-            
+
             ShowLoader();
             var Description = editorResourcesDescription.value;
             var getUrl = "/API/Content/UpdateResource";
@@ -2132,15 +2120,15 @@
                                         ResourceFlag = LessonFlag;
 
                                         BindLessonGrid();
-                                        BindResourceGrid('withlesson');                                        
-                                        
+                                        BindResourceGrid('withlesson');
+
                                         Swal.fire({
                                             title: "Success",
                                             text: DataSet.Data[0].ReturnMessage,
                                             icon: "success"
                                         }).then((value) => {
                                             if (value) {
-                                                
+
                                             }
                                         });
                                     }
@@ -2149,7 +2137,7 @@
                                         ResourceFlag = LessonFlag;
 
                                         BindResourceGrid('onlyresource');
-                                        
+
                                         Swal.fire({
                                             title: "Success",
                                             text: DataSet.Data[0].ReturnMessage,
@@ -2212,11 +2200,10 @@
 
                 });
             }
-            
+
         }
 
-        function ResourceCancel()
-        {
+        function ResourceCancel() {
             ManageResource('editclear');
         }
 
@@ -2228,7 +2215,7 @@
             ResourceFlag = id;
         }
 
-        
+
         //Quiz
         function ManageQuiz(flag) {
             if (flag == 'editbind') {
@@ -2254,7 +2241,7 @@
             }
             return true;
         }
-        
+
         function BindQuizGrid(flag) {
             ShowLoader();
             var getUrl = "/API/Quiz/GetContentList";
@@ -2276,24 +2263,24 @@
                                     QuizFlag = DataSet.Data[0].ContentID;
 
                                     var Quiz = '' +
-                                                    '<div class="card">' +
-                                                        '<div class="card-header" id="headingLessonQuiz">' +
+                                        '<div class="card">' +
+                                        '<div class="card-header" id="headingLessonQuiz">' +
 
-                                                            '<h5 id="hdgQuizTitle">' + DataSet.Data[0].Title + '</h5>' +
+                                        '<h5 id="hdgQuizTitle">' + DataSet.Data[0].Title + '</h5>' +
 
-                                                            '<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
+                                        '<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
 
-                                                            '<a data-toggle="collapse" data-target="#collapseLessonQuiz" aria-expanded="false" aria-controls="collapseLessonQuiz" class="collapsed">' +
-                                                                '<i class="fas fa-chevron-down" ></i>' +
-                                                            '</a>' +
-                                                        '</div>' +
-                                                        '<div id="collapseLessonQuiz" class="collapse" aria-labelledby="headingLessonQuiz">' +
-                                                            '<div class="card-body" id="divQuizDescription">' + DataSet.Data[0].Description +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                        '<span style="display:none;" id="spPassingPercent">' + DataSet.Data[0].PassingPercent + '</span>' +
-                                                    '</div>' +
-                                                '';
+                                        '<a data-toggle="collapse" data-target="#collapseLessonQuiz" aria-expanded="false" aria-controls="collapseLessonQuiz" class="collapsed">' +
+                                        '<i class="fas fa-chevron-down" ></i>' +
+                                        '</a>' +
+                                        '</div>' +
+                                        '<div id="collapseLessonQuiz" class="collapse" aria-labelledby="headingLessonQuiz">' +
+                                        '<div class="card-body" id="divQuizDescription">' + DataSet.Data[0].Description +
+                                        '</div>' +
+                                        '</div>' +
+                                        '<span style="display:none;" id="spPassingPercent">' + DataSet.Data[0].PassingPercent + '</span>' +
+                                        '</div>' +
+                                        '';
 
                                     $('#txtPassingScorePercentage').val(DataSet.Data[0].PassingPercent);
 
@@ -2305,13 +2292,13 @@
 
 
                                     Questions = DataSet.Data[0].Questions;
-                                    BindQuestion('',Questions);
+                                    BindQuestion('', Questions);
 
                                     //$('#divQuestionType').show();
                                     $('#divQuestionType').empty().append(divQuestionType);
 
                                     //BindQuestion(Questions);
-                                }                                
+                                }
                             }
                             else {
                                 HideLoader();
@@ -2340,13 +2327,13 @@
         }
 
         function AddQuiz(flag) {
-            debugger            
+            debugger
             var Title = $("#txtQuizTitle").val();
             var Description = $("#txtQuizDescription").val();
             var PassingPercentage = $("#txtPassingScorePercentage").val();
             //var TotalScore = $("#lblTotalScore").text();
             //var PassingScore = $("#lblPassingScore").text().replace("Passing Score: ", "");
-            
+
             var requestParams = {
                 TopicID: CourseFlag, ModuleID: LessonFlag, ContentID: QuizFlag, ContentTypeID: QuizContentTypeID, Title: Title, Description: Description, Points: '0', IsPublished: true
                 , SkipFlashcard: false, IsGift: false, TotalScore: '', PassingScore: '', PassingPercentage: PassingPercentage
@@ -2360,7 +2347,7 @@
                     data: JSON.stringify(requestParams),
                     contentType: "application/json",
                 }).then(function success(response) {
-                    
+
                     var DataSet = $.parseJSON(response);
                     if (DataSet != null && DataSet != "") {
                         if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
@@ -2399,7 +2386,7 @@
                             });
                         }
                         else if (flag == 'onlyquiz') {
-                            
+
                             BindQuizGrid('onlyquiz');
                             Swal.fire({
                                 title: "Success",
@@ -2420,8 +2407,7 @@
             }
         }
 
-        function QuizCancel()
-        {
+        function QuizCancel() {
             $('#txtPassingScorePercentage').val('');
             ManageQuiz('editclear');
         }
@@ -2429,7 +2415,7 @@
         function EditQuizFromTile(obj, id) {
             debugger
             ManageQuiz('editbind');
-            $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text()); 
+            $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text());
             $('#txtQuizDescription').val($(obj).parent().parent().find('#divQuizDescription').text());
             $('#txtPassingScorePercentage').val($(obj).parent().parent().find('#spPassingPercent').text());
             $('#btnAddQuiz').show();
@@ -2438,11 +2424,11 @@
 
 
         //Question
-        function BindQuestion(flag, Questions,) {
+        function BindQuestion(flag, Questions, ) {
             debugger
             if (Questions.length > 0) {
                 var QuestionString = '';
-                for (var i = 0; i < Questions.length ; i++) {
+                for (var i = 0; i < Questions.length; i++) {
 
                     var className = '';
                     if (Questions[i].QuestionTypeID == '1') {
@@ -2456,14 +2442,14 @@
                     }
 
                     QuestionString = QuestionString + '<div class="card">' +
-                                                         '<div class="tag question">Question</div>' +
-		                                                 '<div class="card-header" id="headingQuestion">' +
-                                                         '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
-			                                             '<h5>' + Questions[i].Title + '</h5>' +
-                                                         '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
-                                                         '<i class="fas fa-edit" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ')";></i>' +
-		                                                 '</div>' +
-	                                                  '</div>';
+                        '<div class="tag question">Question</div>' +
+                        '<div class="card-header" id="headingQuestion">' +
+                        '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
+                        '<h5>' + Questions[i].Title + '</h5>' +
+                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
+                        '<i class="fas fa-edit" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ')";></i>' +
+                        '</div>' +
+                        '</div>';
                 }
                 $('#dvQuestionView').empty().append(QuestionString);
             }
@@ -2471,7 +2457,7 @@
 
         var className = '';
         var AnswerTypeCode = '';
-        function ShowQuestion(cls,flag,QuestionAnswer) {
+        function ShowQuestion(cls, flag, QuestionAnswer) {
             debugger
 
             if (flag != 'edit') {
@@ -2492,91 +2478,90 @@
                 var AnswerID = '0';
 
                 var QuestionNumber = '1';
-                if(Questions != undefined && Questions != '')
-                {
+                if (Questions != undefined && Questions != '') {
                     QuestionNumber = (Questions.length + 1).toString();
                 }
-                
+
 
                 var QuestionType = '<div class="row quiz" id="dvQuestion">' +
-                                        '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                            '<span class="sr">Q' + QuestionNumber + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
-                                            '<div class="col-sm-8 col-md-10">' +
-                                                '<div class="form-group">' +
-                                                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" />' +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<span class="correct">Correct</span>' +
-                                        '</div>' +
-                                        '<div class="row" id="divAnswer">' +
-                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                                '<div class="col-sm-8 col-md-10">' +
-                                                    '<div class="row">' +
-                                                        '<div class="col-sm-12 col-md-10">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                        '<div class="col-sm-3 col-md-2">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
-                                            '</div>' +
+                    '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                    '<span class="sr">Q' + QuestionNumber + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" />' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="correct">Correct</span>' +
+                    '</div>' +
+                    '<div class="row" id="divAnswer">' +
+                    '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="row">' +
+                    '<div class="col-sm-12 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-3 col-md-2">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="checked-icon"><i class="fa fa-check-circle fa-w-16 correct" id="ansFlag" value="true" onclick="changeAnsFlag(this)"></i></span>' +
+                    '</div>' +
 
-                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                                '<div class="col-sm-8 col-md-10">' +
-                                                    '<div class="row">' +
-                                                        '<div class="col-sm-12 col-md-10">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                        '<div class="col-sm-3 col-md-2">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="false" onclick="changeAnsFlag(this)"></i></span>' +
-                                            '</div>' +
+                    '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="row">' +
+                    '<div class="col-sm-12 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-3 col-md-2">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="false" onclick="changeAnsFlag(this)"></i></span>' +
+                    '</div>' +
 
-                                            '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                                '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                                '<div class="col-sm-8 col-md-10">' +
-                                                    '<div class="row">' +
-                                                        '<div class="col-sm-12 col-md-10">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                        '<div class="col-sm-3 col-md-2">' +
-                                                            '<div class="form-group">' +
-                                                                '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                    '</div>' +
-                                                '</div>' +
-                                                '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="false" onclick="changeAnsFlag(this)"></i></span>' +
-                                            '</div>' +
-                                        '</div>' +
-                                        '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
-                                            '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
-                                        '</div>' +
-                                    '</div>';
+                    '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
+                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="row">' +
+                    '<div class="col-sm-12 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-3 col-md-2">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtScore" placeholder="Assign Score" />' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="checked-icon"><i class="fa fa-times-circle fa-w-16 wrong fal" id="ansFlag" value="false" onclick="changeAnsFlag(this)"></i></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
+                    '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
+                    '</div>' +
+                    '</div>';
 
                 $('#dvLessonQues').empty().append(QuestionType);
 
                 var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                        '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,' + QuestionAction + ');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
-                                        '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
-                                      '</div>';
+                    '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,' + QuestionAction + ');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
+                    '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
+                    '</div>';
 
                 $('#dvQuestion').append(btnAddQuestion);
 
@@ -2601,67 +2586,64 @@
                 var QuestionType = '';
 
                 QuestionType = '<div class="row quiz" id="dvQuestion">' +
-                                        '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                            '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
-                                            '<div class="col-sm-8 col-md-10">' +
-                                                '<div class="form-group">' +
-                                                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
-                                                '</div>' +
-                                            '</div>' +
-                                            '<span class="correct">Correct</span>' +
-                                        '</div>' +
-                                        '<div class="row" id="divAnswer">' ;
+                    '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                    '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
+                    '<div class="col-sm-8 col-md-10">' +
+                    '<div class="form-group">' +
+                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
+                    '</div>' +
+                    '</div>' +
+                    '<span class="correct">Correct</span>' +
+                    '</div>' +
+                    '<div class="row" id="divAnswer">';
 
-                for(var i = 0; i < QuestionAnswer.length ; i++)
-                {
+                for (var i = 0; i < QuestionAnswer.length; i++) {
                     var ansFlag = 'false';
                     var ansClass = 'fa fa-times-circle fa-w-16 wrong fal';
                     var ansMoreThanThree = '';
-                    if(QuestionAnswer[i].IsCorrect == '1')
-                    {
+                    if (QuestionAnswer[i].IsCorrect == '1') {
                         ansFlag = 'true';
                         ansClass = 'fa fa-check-circle fa-w-16 correct';
                     }
 
-                    if(i > 2)
-                    {
+                    if (i > 2) {
                         ansMoreThanThree = '<span class="checked-icon delete"><i class="fa fa-trash-alt" onclick="DeleteAnsOption(this)"></i></span>';
                     }
 
                     QuestionType = QuestionType + '<div class="offset-1 offset-sm-1 col-sm-11 mb-2 d-flex justify-content-between align-items-center ans">' +
-                                                    '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
-                                                    '<div class="col-sm-8 col-md-10">' +
-                                                        '<div class="row">' +
-                                                            '<div class="col-sm-12 col-md-10">' +
-                                                                '<div class="form-group">' +
-                                                                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + QuestionAnswer[i].AnswerID + '" value="' + QuestionAnswer[i].AnswerText + '" placeholder="Answer Option" />' +
-                                                                '</div>' +
-                                                            '</div>' +
-                                                            '<div class="col-sm-3 col-md-2">' +
-                                                                '<div class="form-group">' +
-                                                                    '<input type="text" class="form-control" id="txtScore" value="' + QuestionAnswer[i].CorrectScore + '" placeholder="Assign Score" />' +
-                                                                '</div>' +
-                                                            '</div>' +
-                                                        '</div>' +
-                                                    '</div>' +
-                                                    '<span class="checked-icon"><i class="'+ ansClass +'" id="ansFlag" value="'+ ansFlag +'" onclick="changeAnsFlag(this)"></i></span>' +
-                                                    ansMoreThanThree +
-                                                '</div>';    
+                        '<span class="block"><i class="fas fa-grip-vertical grid-icon"></i><i class="' + className + '"></i></span>' +
+                        '<div class="col-sm-8 col-md-10">' +
+                        '<div class="row">' +
+                        '<div class="col-sm-12 col-md-10">' +
+                        '<div class="form-group">' +
+                        '<input type="text" class="form-control" id="txtAnswer" answerid="' + QuestionAnswer[i].AnswerID + '" value="' + QuestionAnswer[i].AnswerText + '" placeholder="Answer Option" />' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col-sm-3 col-md-2">' +
+                        '<div class="form-group">' +
+                        '<input type="text" class="form-control" id="txtScore" value="' + QuestionAnswer[i].CorrectScore + '" placeholder="Assign Score" />' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<span class="checked-icon"><i class="' + ansClass + '" id="ansFlag" value="' + ansFlag + '" onclick="changeAnsFlag(this)"></i></span>' +
+                        ansMoreThanThree +
+                        '</div>';
                 }
 
 
                 QuestionType = QuestionType + '</div>' +
-                                                '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
-                                                    '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
-                                                '</div>' +
-                                              '</div>';
+                    '<div class="offset-1 offset-sm-1 col-sm-11 mt-2 mb-4">' +
+                    '<a id="btnAddAnswer" onclick="AddAnswer()" class="btn btn-link"><i class="fas fa-plus-circle"></i>Add Answer Option</a>' +
+                    '</div>' +
+                    '</div>';
 
                 $('#dvLessonQues').empty().append(QuestionType);
 
                 var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                                        '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
-                                        '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
-                                      '</div>';
+                    '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
+                    '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
+                    '</div>';
 
                 $('#dvQuestion').append(btnAddQuestion);
             }
@@ -2705,9 +2687,8 @@
             $(cntrl).parent().parent().remove();
 
             var AnsID = $(cntrl).parent().parent().find('#txtAnswer').attr('answerid');
-            if(AnsID != undefined && AnsID != '' && AnsID != '0')
-            {                
-                var requestParams = { "AnswerID": AnsID , "IsActive": 0};
+            if (AnsID != undefined && AnsID != '' && AnsID != '0') {
+                var requestParams = { "AnswerID": AnsID, "IsActive": 0 };
                 var getUrl = "/API/Quiz/DeleteAnswer";
 
                 try {
@@ -2720,7 +2701,7 @@
                         success: function (response) {
                             try {
                                 debugger
-                                var DataSet = $.parseJSON(response);                                
+                                var DataSet = $.parseJSON(response);
                             }
                             catch (e) {
                                 HideLoader();
@@ -2921,8 +2902,8 @@
             return maxScore;
         }
 
-        function ShowQuestionInEditMode(obj,questionId) {
-            
+        function ShowQuestionInEditMode(obj, questionId) {
+
             ShowLoader();
             var getUrl = "/API/Quiz/GetQuestionAnswer";
             try {
@@ -2940,10 +2921,9 @@
                                 if (DataSet.StatusCode == "1" && DataSet.Data.Data.length > 0) {
                                     debugger
                                     var QuestionAnswer = DataSet.Data.Data;
-                                    if (QuestionAnswer.length > 0)
-                                    {
+                                    if (QuestionAnswer.length > 0) {
                                         gbl_QuestionID = questionId;
-                                        ShowQuestion('','edit',QuestionAnswer);
+                                        ShowQuestion('', 'edit', QuestionAnswer);
                                     }
                                 }
                             }
@@ -2974,7 +2954,7 @@
 
         }
 
-        function DeleteQuestion(obj,questionId) {
+        function DeleteQuestion(obj, questionId) {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to delete ? Yes or No !",
@@ -3011,7 +2991,7 @@
                                                 showConfirmButton: true,
                                                 showCloseButton: true
                                             });
-                                            BindQuestion('',DataSet.Data.Data);
+                                            BindQuestion('', DataSet.Data.Data);
                                         }
                                         else {
                                             Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
