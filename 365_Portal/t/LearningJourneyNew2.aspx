@@ -931,11 +931,11 @@
             var deleteIsEnabled = '', tagStyle = '';
             if (id != '0') {
                 deleteIsEnabled = '<a><i class="fas fa-trash-alt" onclick="DeleteLessionFromTile(this,' + id + ')";></i></a>';
-            } else {
-                tagStyle = '<div class="tag lesson main-card">Lesson 1</div>';
             }
             else
             {
+                tagStyle = '<div class="tag lesson main-card">Lesson 1</div>';
+
                 LessonFlag = '0';
                 ContentFlag = '0';
                 ResourceFlag = '0';
@@ -2433,7 +2433,7 @@
             }
         }
 
-        function AddQuiz(flag)ready {
+        function AddQuiz(flag) {
             debugger
             var Title = $("#txtQuizTitle").val();
             var Description = $("#txtQuizDescription").val();
