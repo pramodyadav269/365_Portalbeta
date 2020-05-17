@@ -15,15 +15,11 @@
                     <h4 class="title">Add Course</h4>
                 </div>
                 <div>
-                    <%--<a class="btn btn-outline mr-3">Discard Draft</a>--%>
-                    <a class="btn btn-yellow d-none" id="dvSaveAsDraft" onclick="SaveAsDraft('.tab-pane.active');">Save as Draft</a>
-                    <%--<a class="btn btn-yellow" id="dvPublishCourse" style="display: none;" onclick="PublishCourse('');">Publish</a>--%>
-
-                    <div class="col dropdown p-0" id="dvPublishCourse">
+                    <div class="col dropdown p-0">
                         <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item">Publish</a>
-                            <a class="dropdown-item">Discard</a>
+                            <a class="dropdown-item" id="btnPublish" style="display:none;" onclick="PublishCourse('');">Publish</a>
+                            <a class="dropdown-item" id="btnDiscard" style="display:none;">Discard</a>
                         </div>
                     </div>
                 </div>
@@ -307,6 +303,7 @@
             '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
 
         $(document).ready(function () {
+            debugger
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
@@ -938,6 +935,13 @@
             {
                 deleteIsEnabled = '<a><i class="fas fa-trash-alt" onclick="DeleteLessionFromTile(this,' + id + ')";></i></a>';
             }
+            else
+            {
+                LessonFlag = '0';
+                ContentFlag = '0';
+                ResourceFlag = '0';
+                QuizFlag = '0';
+            }
 
             var dvLessonViewParentEdit = '<div class="row" id="tempLessonGrid_'+ id +'">' +
 
@@ -1018,10 +1022,8 @@
                 '</div>' +
 
                 '<div class="w-100"></div>' +
-                '<div class="action-btn">' +
-                '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
-                //'<a class="btn btn-outline blod black" id="btnAddResource" name="btnAddResource" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Resources</a>' +
-                //'<a class="btn btn-outline blod black" id="btnAddQuiz"     name="btnAddQuiz" onclick="AddLessonWithOthers(this);"><i class="fas fa-plus-circle"></i>Add Topic Quiz</a>' +
+                '<div class="action-btn" id="divAddContent">' +
+                    '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
                 '</div>' +
                 '</div>';
 
@@ -1049,6 +1051,10 @@
                 {
                     $('#dvLessonGrid_'+id).append(dvLessonViewParentEdit);
                 }
+
+                $('#divAddContent').show();
+                $('#btnAddMoreLesson').show();
+                $('#btnCancelLesson').hide();
             }
             else
             {
@@ -1068,6 +1074,8 @@
                 ManageQuiz('editbind');
 
 
+                $('#divAddContent').hide();
+                $('#btnAddMoreLesson').hide();
                 $('#btnCancelLesson').show();
             }
 
@@ -1076,9 +1084,22 @@
         }
 
         function ClearNewLesson()
-        {
-            $('#dvLessonViewParentEdit').empty();
-            $('#btnCancelLesson').hide();
+        {            
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to discard this lesson ? Yes or No !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, clear it!'
+            }).then((result) => {
+                if (result.value) {
+                    $('#dvLessonViewParentEdit').empty();
+                    $('#btnAddMoreLesson').show();
+                    $('#btnCancelLesson').hide();
+                }
+            });
         }
 
         function validateAddLesson() {
@@ -1146,6 +1167,9 @@
 
                                     $('#dvLessonViewParentView').empty().append(Lesson);
                                     $('#dvLessonViewParentEdit').empty();
+
+                                    $('#btnAddMoreLesson').show();
+                                    $('#btnCancelLesson').hide();
                                 }
                                 else {
                                     //ManageLesson('editbind');
@@ -2429,7 +2453,7 @@
             }
         }
 
-        function AddQuiz(flag)ready {
+        function AddQuiz(flag) {    
             debugger
             var Title = $("#txtQuizTitle").val();
             var Description = $("#txtQuizDescription").val();
@@ -2566,7 +2590,7 @@
                         '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
                         '<h5>' + Questions[i].Title + '</h5>' +
                         '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
-                        '<i class="fas fa-edit" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ')";></i>' +
+                        '<i class="fas fa-chevron-down" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ','+ (i + 1) +')";></i>' +
                         '</div>' +
                         '</div>' +
                         '<div id="dvLessonQues'+ Questions[i].QuestionID +'"></div>';
@@ -2577,7 +2601,7 @@
 
         var className = '';
         var AnswerTypeCode = '';
-        function ShowQuestion(cls, flag, QuestionAnswer) {
+        function ShowQuestion(cls, flag, QuestionAnswer,questionSrNo) {
             debugger
 
             var allLessonGrid = $("div[id^='dvLessonQues']");
@@ -2711,12 +2735,17 @@
                     AnswerTypeCode = "3";
                 }
 
+                if(questionSrNo == undefined || questionSrNo == '0')
+                {
+                    questionSrNo = '';
+                }
+
                 var AnswerID = '0';
                 var QuestionType = '';
 
                 QuestionType = '<div class="row quiz" id="dvQuestion">' +
                     '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                    '<span class="sr">Q1<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
+                    '<span class="sr">Q'+ questionSrNo +'<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                     '<div class="col-sm-8 col-md-10">' +
                     '<div class="form-group">' +
                     '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
@@ -3032,7 +3061,7 @@
             return maxScore;
         }
 
-        function ShowQuestionInEditMode(obj, questionId) {
+        function ShowQuestionInEditMode(obj, questionId,questionSrNo) {
 
             ShowLoader();
             var getUrl = "/API/Quiz/GetQuestionAnswer";
@@ -3053,7 +3082,7 @@
                                     var QuestionAnswer = DataSet.Data.Data;
                                     if (QuestionAnswer.length > 0) {
                                         gbl_QuestionID = questionId;
-                                        ShowQuestion('', 'edit', QuestionAnswer);
+                                        ShowQuestion('', 'edit', QuestionAnswer,questionSrNo);
                                     }
                                 }
                             }
@@ -3346,19 +3375,19 @@
 
         function CheckCoursePublishable(IsPublishable, IsPublished) {
             if (IsPublishable == 1 && IsPublished == 1) {
-                $("#dvPublishCourse").show();
-                // $("#dvSaveAsDraft").hide();
+                $("#btnPublish").show();
+                $("#btnDiscard").hide();
             }
             else if (IsPublished == 0 && IsPublishable == 1) {
-                $("#dvPublishCourse").show();
-                $("#dvSaveAsDraft").show();
+                $("#btnPublish").show();
+                $("#btnDiscard").show();
             }
             else {
-                $("#dvPublishCourse").hide();
-                $("#dvSaveAsDraft").show();
+                $("#btnPublish").hide();
+                $("#btnDiscard").show();
             }
-            if (IsPublished == 1)
-                $("#dvPublishCourse").show();
+            //if (IsPublished == 1)
+            //    $("#dvPublishCourse").show();
         }
 
     </script>
