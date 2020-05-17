@@ -965,9 +965,9 @@
                 //Left pane
                 '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">' +
                 '<div class="card-body right-side-content bg-white">' +
-                '<a class="lesson-save"><i class="fas fa-save"></i></a>' +
-                '<div class="lesson-action">' +
-                '<a><i class="fas fa-check" onclick="AddLessonWithOthers(this);"></i></a>' + deleteIsEnabled +
+                '<a class="lesson-save"><i class="fas fa-save" onclick="AddLessonWithOthers(this);"></i></a>' +
+                '<div class="lesson-action">' + deleteIsEnabled +
+                //'<a><i class="fas fa-check" onclick="AddLessonWithOthers(this);"></i></a>' + deleteIsEnabled +
                 //'<a><i class="fas fa-chevron-down"></i></a>' +
                 '</div>' +
                 '<div class="row mt-4">' +
@@ -975,15 +975,15 @@
                 '<div class="col-sm-3">' +
                 '<div class="form-group">' +
                 '<label class="inline active">Points</label>' +
-                '<input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(&#34;txtPoint&#34;,event);" />' +
+                '<input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-sm-5">' +
                 '<div class="form-group">' +
                 '<label class="inline active">Estimated Time</label>' +
-                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(&#34;txtHour&#34;,event);" />' +
-                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(&#34;txtMin&#34;,event);" />' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div' +
 
