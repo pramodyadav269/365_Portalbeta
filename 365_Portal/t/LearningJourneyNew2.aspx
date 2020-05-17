@@ -267,10 +267,10 @@
             '</div>' +
             '<div class="form-group editor asterisk">' +
             '<div id="txtContentDescription"></div>' +
-            '</div>' ;
-            //'<div class="form-group">' +
-            //'<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
-            //'</div>';
+            '</div>';
+        //'<div class="form-group">' +
+        //'<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
+        //'</div>';
 
         var dvLessonResourceEdit = '<div class="form-group editor">' +
             '<label>Resources</label>' +
@@ -285,10 +285,10 @@
             '<div class="form-group asterisk">' +
             '<label for="txtQuizDescription" class="inline">Quiz Description</label>' +
             '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>' +
-            '</div>' ;
-            //'<div class="form-group">' +
-            //'<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
-            //'</div>';
+            '</div>';
+        //'<div class="form-group">' +
+        //'<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
+        //'</div>';
 
         var QuestionType = "done";
         var divQuestionType = '<a class="btn btn-outline blod black rounded-pill" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
@@ -909,15 +909,13 @@
 
 
         //Lesson
-        function ManageLesson(flag,source) {
+        function ManageLesson(flag, source) {
             if (flag == 'editbind') {
 
-                if(source != undefined && source != '' && source == 'editfromgrid')
-                {
+                if (source != undefined && source != '' && source == 'editfromgrid') {
                     $('#divLessonOverview').empty().append(dvLessonEdit);
                 }
-                else
-                {
+                else {
                     $('#dvLessonEdit').empty().append(dvLessonEdit);
                 }
             }
@@ -930,10 +928,11 @@
             debugger
             LessonFlag = id;
 
-            var deleteIsEnabled = '';
-            if(id != '0')
-            {
+            var deleteIsEnabled = '', tagStyle = '';
+            if (id != '0') {
                 deleteIsEnabled = '<a><i class="fas fa-trash-alt" onclick="DeleteLessionFromTile(this,' + id + ')";></i></a>';
+            } else {
+                tagStyle = '<div class="tag lesson main-card">Lesson 1</div>';
             }
             else
             {
@@ -943,20 +942,20 @@
                 QuizFlag = '0';
             }
 
-            var dvLessonViewParentEdit = '<div class="row" id="tempLessonGrid_'+ id +'">' +
+            var dvLessonViewParentEdit = '<div class="row" id="tempLessonGrid_' + id + '">' +
 
                 //Right Pane
                 '<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 pr-0">' +
-                '<div class="card-body arrows">' +
-                '<div class="arrows-icon"><i class="fas fa-arrows-alt"></i></div>' +
-                '<div class="row" id="divLessonJourney">' +
+                '<div class="card-body arrows">' + tagStyle +
+                '<div class="arrows-icon"><i class="fas fa-grip-vertical"></i></div>' +
+                '<div class="row w-100" id="divLessonJourney">' +
                 '<div class="col-sm-12" id="dvLessonView">' +
                 '</div>' +
                 '<div class="col-sm-12" id="dvLessonEdit"></div>' +
 
-                '<div class="col-sm-12 accordion view" id="dvLessonContentView">' +
+                '<div class="col-sm-12" id="dvLessonContentView" style="padding-left: 52px;">' +
                 '</div>' +
-                '<div class="col-sm-12" id="dvLessonContentEdit"></div>' +
+                '<div class="col-sm-12" id="dvLessonContentEdit" style="padding-left: 52px;"></div>' +
 
                 '</div>' +
                 '</div>' +
@@ -965,26 +964,31 @@
 
                 //Left pane
                 '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">' +
-                '<div class="card-body right-side-content">' +
+                '<div class="card-body right-side-content bg-white">' +
+                '<a class="lesson-save"><i class="fas fa-save"></i></a>' +
                 '<div class="lesson-action">' +
                 '<a><i class="fas fa-check" onclick="AddLessonWithOthers(this);"></i></a>' + deleteIsEnabled +
                 //'<a><i class="fas fa-chevron-down"></i></a>' +
                 '</div>' +
                 '<div class="row mt-4">' +
-                '<div class="col-sm-12 mt-2">' +
+
+                '<div class="col-sm-3">' +
                 '<div class="form-group">' +
-                '<label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>' +
-                '<input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
-                '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(this,event);" />' +
-                '</div>' +
-                '</div>' +
-                '<div class="col-sm-12">' +
-                '<div class="form-group">' +
-                '<label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>' +
-                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(this,event);" />' +
+                '<label class="inline active">Points</label>' +
+                '<input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(&#34;txtPoint&#34;,event);" />' +
                 '</div>' +
                 '</div>' +
 
+                '<div class="col-sm-5">' +
+                '<div class="form-group">' +
+                '<label class="inline active">Estimated Time</label>' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(&#34;txtHour&#34;,event);" />' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(&#34;txtMin&#34;,event);" />' +
+                '</div>' +
+                '</div' +
+
+                '</div>' +
+                '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -994,7 +998,7 @@
                 '<div class="w-100"></div>' +
                 '<div class="col-12 col-sm-12">' +
                 '<div class="card-body pl-5">' +
-                '<div class="col-sm-12" id="dvLessonResourceEdit">' +
+                '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;">' +
                 '</div>' +
                 '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
                 '<label>Quiz</label>' +
@@ -1004,7 +1008,7 @@
                 'onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div>' +
-                '<div class="col-sm-12 accordion view" id="dvLessonQuizView">' +
+                '<div class="col-sm-12" id="dvLessonQuizView">' +
                 '</div>' +
                 '<div class="col-sm-12 edit" id="dvLessonQuizEdit"></div>' +
 
@@ -1028,42 +1032,33 @@
                 '</div>';
 
 
-            if(id != undefined && id != '' && id != '0')
-            {
+            if (id != undefined && id != '' && id != '0') {
                 var allLessonGrid = $("div[id^='tempLessonGrid_']");
-                if(allLessonGrid.length > 0)
-                {
-                    for(var i = 0; i < allLessonGrid.length; i++)
-                    {
-                        if(allLessonGrid[i].id != 'tempLessonGrid_'+id)
-                        {
-                            $('#'+ allLessonGrid[i].id).remove();
+                if (allLessonGrid.length > 0) {
+                    for (var i = 0; i < allLessonGrid.length; i++) {
+                        if (allLessonGrid[i].id != 'tempLessonGrid_' + id) {
+                            $('#' + allLessonGrid[i].id).remove();
                         }
                     }
                 }
 
-                if ($('#tempLessonGrid_'+ id).length) 
-                {
-                    $('#tempLessonGrid_'+ id).remove();
-                    $('#dvLessonGrid_'+id).append(dvLessonViewParentEdit);
-                } 
-                else
-                {
-                    $('#dvLessonGrid_'+id).append(dvLessonViewParentEdit);
+                if ($('#tempLessonGrid_' + id).length) {
+                    $('#tempLessonGrid_' + id).remove();
+                    $('#dvLessonGrid_' + id).append(dvLessonViewParentEdit);
+                }
+                else {
+                    $('#dvLessonGrid_' + id).append(dvLessonViewParentEdit);
                 }
 
                 $('#divAddContent').show();
                 $('#btnAddMoreLesson').show();
                 $('#btnCancelLesson').hide();
             }
-            else
-            {
+            else {
                 var allLessonGrid = $("div[id^='tempLessonGrid_']");
-                if(allLessonGrid.length > 0)
-                {
-                    for(var i = 0; i < allLessonGrid.length; i++)
-                    {
-                        $('#'+ allLessonGrid[i].id).remove();
+                if (allLessonGrid.length > 0) {
+                    for (var i = 0; i < allLessonGrid.length; i++) {
+                        $('#' + allLessonGrid[i].id).remove();
                     }
                 }
 
@@ -1080,7 +1075,8 @@
             }
 
             ManageLesson('editbind');
-            ManageContent('editbind');            
+            ManageContent('editbind');
+            inputInline();
         }
 
         function ClearNewLesson()
@@ -1149,7 +1145,7 @@
                                 if (LessonTable != undefined && LessonTable.length > 0) {
                                     for (var i = 0; i < LessonTable.length; i++) {
 
-                                        Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_'+ LessonTable[i].ModuleID +'">' +
+                                        Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_' + LessonTable[i].ModuleID + '">' +
                                             '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
                                             '<div class="card-header">' +
                                             '<h5>' + LessonTable[i].Title + '</h5>' +
@@ -1201,7 +1197,7 @@
             });
         }
 
-        function AddLession(flag,type) {
+        function AddLession(flag, type) {
 
             ShowLoader();
             var getUrl;
@@ -1255,15 +1251,13 @@
 
 
                                         //save all details
-                                        if(type == 'addnew')
-                                        {
+                                        if (type == 'addnew') {
                                             AddContent(flag);
                                             AddResource(flag);
                                             AddQuiz(flag);
                                         }
-                                        
-                                        if(flag == 'lastsavelesson')
-                                        {
+
+                                        if (flag == 'lastsavelesson') {
                                             Swal.fire({
                                                 title: "Success",
                                                 text: 'Lesson details added successfully.',
@@ -1468,9 +1462,8 @@
 
         function EditLessionFromTile(obj, id) {
             debugger
-            if ($('#tempLessonGrid_'+ id).length) 
-            {
-                $('#tempLessonGrid_'+ id).remove();
+            if ($('#tempLessonGrid_' + id).length) {
+                $('#tempLessonGrid_' + id).remove();
                 return false;
             }
 
@@ -1575,7 +1568,7 @@
         //Marked as not in use
         function EditLessonFromSubTile(obj, id) {
             debugger
-            ManageLesson('editbind','editfromgrid');
+            ManageLesson('editbind', 'editfromgrid');
 
             $('#txtLessonTitle').val($(obj).parent().find('#spSubTitle').text());
             $('#txtLessonDescription').val($(obj).parent().find('#spSubOverview').text());
@@ -1657,8 +1650,7 @@
                 LastSaveFlag = 'lastsavequiz';
             }
 
-            if(LessonFlag != '0')
-            {
+            if (LessonFlag != '0') {
                 if ($('#txtLessonTitle').val() != undefined) {
                     AddLession(LastSaveFlag);
                 }
@@ -1667,38 +1659,33 @@
                 }
                 if ($('#txtResourcesDescription').val() != undefined) {
                     AddResource(LastSaveFlag);
-                }                
+                }
                 if ($('#txtQuizTitle').val() != undefined) {
                     AddQuiz(LastSaveFlag);
                 }
             }
-            else
-            {
-                AddLession(LastSaveFlag,'addnew');
+            else {
+                AddLession(LastSaveFlag, 'addnew');
             }
         }
 
-        
+
 
         //Content
-        function ManageContent(flag, contentId,source) {
+        function ManageContent(flag, contentId, source) {
             if (flag == 'editbind') {
                 // Clear all open fields for content               
-                if(source != undefined && source !='' && source == 'editfromgrid')
-                {
+                if (source != undefined && source != '' && source == 'editfromgrid') {
                     $('#dvLessonContentEdit').empty();
                     $("[id^='divContentDescription_']").html("");
                     $('#divContentDescription_' + contentId).empty().append(dvLessonContentEdit);
                 }
-                else
-                {
+                else {
                     //This is collapse all content accordion
                     var allContentList = $("div[id^='collapseLessonContent']");
-                    if(allContentList.length > 0)
-                    {
-                        for(var i = 0; i < allContentList.length; i++)
-                        {
-                            $('#'+allContentList[i].id).removeClass('show');
+                    if (allContentList.length > 0) {
+                        for (var i = 0; i < allContentList.length; i++) {
+                            $('#' + allContentList[i].id).removeClass('show');
                         }
                     }
                     //End This is collapse all content accordion
@@ -1708,12 +1695,11 @@
                     $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
 
                     //This is to scroll up to new content screen
-                    if(source == 'addnew')
-                    {
+                    if (source == 'addnew') {
                         $('html, body').animate({
-                            scrollTop: $("#dvLessonContentEdit").offset().top- 150
-                        }, 2000);                    
-                    }                    
+                            scrollTop: $("#dvLessonContentEdit").offset().top - 150
+                        }, 2000);
+                    }
                 }
                 editorContentDescription = new Jodit('#txtContentDescription');
 
@@ -1766,14 +1752,15 @@
                                             '<div class="tag content">Content</div>' +
                                             '<div class="card-header" id="headingLessonContent' + ContentTable[i].ContentID + '">' +
                                             '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
-                                            '<span style="display:none;" id="spContentDescription_'+ContentTable[i].ContentID+'">'+ ContentTable[i].Description +'</span>'+
-
-                                            '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
-                                            '<i style="display:none;" class="fas fa-edit" title="Edit"  onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";></i>' +
+                                            '<span style="display:none;" id="spContentDescription_' + ContentTable[i].ContentID + '">' + ContentTable[i].Description + '</span>' +
+                                            '<div class="card-header-action">' +
+                                            '<a title="Delete" onclick="DeleteContentFromTile(this,' + ContentTable[i].ContentID + ')";><i class="fas fa-trash-alt"></i></a>' +
+                                            '<a style="display:none;" title="Edit" onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";><i class="fas fa-edit"></i></a>' +
 
                                             '<a data-toggle="collapse" data-target="#collapseLessonContent_' + ContentTable[i].ContentID + '" aria-expanded="false" aria-controls="collapseLessonContent_' + ContentTable[i].ContentID + '" class="collapsed" onclick="EditContentFromTile(this,' + ContentTable[i].ContentID + ')";>' +
                                             '</i><i class="fas fa-chevron-down"></i>' +
                                             '</a>' +
+                                            '</div>' +
                                             '</div>' +
                                             '<div id="collapseLessonContent_' + ContentTable[i].ContentID + '" class="collapse" aria-labelledby="headingLessonContent' + ContentTable[i].ContentID + '">' +
                                             '<div class="card-body" id="divContentDescription_' + ContentTable[i].ContentID + '">' + ContentTable[i].Description +
@@ -1883,8 +1870,7 @@
                                         ContentFlag = DataSet.Data[0].InsertedID;
                                     }
 
-                                    if(flag == 'lastsavecontent')
-                                    {
+                                    if (flag == 'lastsavecontent') {
                                         Swal.fire({
                                             title: "Success",
                                             text: 'Lesson details added successfully.',
@@ -1988,9 +1974,9 @@
             debugger
 
             var ContentHeader = $(obj).parent().parent().find('#hdgContentTitle').text();
-            var ContentDescription = $(obj).parent().parent().find('#spContentDescription_'+id).text();
+            var ContentDescription = $(obj).parent().parent().find('#spContentDescription_' + id).text();
 
-            ManageContent('editbind', id,'editfromgrid');
+            ManageContent('editbind', id, 'editfromgrid');
 
             $('#txtContentHeader').val(ContentHeader);
             editorContentDescription.value = ContentDescription;
@@ -2000,13 +1986,10 @@
 
             //Added to collapse other content accordion
             var allContentList = $("div[id^='collapseLessonContent']");
-            if(allContentList.length > 0)
-            {
-                for(var i = 0; i < allContentList.length; i++)
-                {
-                    if(allContentList[i].id != 'collapseLessonContent_'+id)
-                    {
-                        $('#'+allContentList[i].id).removeClass('show');
+            if (allContentList.length > 0) {
+                for (var i = 0; i < allContentList.length; i++) {
+                    if (allContentList[i].id != 'collapseLessonContent_' + id) {
+                        $('#' + allContentList[i].id).removeClass('show');
                     }
                 }
             }
@@ -2222,8 +2205,7 @@
                                         HideLoader();
                                         ResourceFlag = LessonFlag;
 
-                                        if(flag == 'lastsaveresource')
-                                        {
+                                        if (flag == 'lastsaveresource') {
                                             Swal.fire({
                                                 title: "Success",
                                                 text: 'Lesson details added successfully.',
@@ -2337,17 +2319,15 @@
 
 
         //Quiz
-        function ManageQuiz(flag,source) {
+        function ManageQuiz(flag, source) {
             if (flag == 'editbind') {
 
-                if(source != undefined && source != '' && source == 'editfromgrid')
-                {
-                    $('#divQuizDescription').empty().append(dvLessonQuizEdit);    
+                if (source != undefined && source != '' && source == 'editfromgrid') {
+                    $('#divQuizDescription').empty().append(dvLessonQuizEdit);
                 }
-                else
-                {
+                else {
                     $('#dvLessonQuizEdit').empty().append(dvLessonQuizEdit);
-                }                
+                }
             }
             else if (flag == 'editclear') {
                 $('#dvLessonQuizEdit').empty();
@@ -2393,7 +2373,7 @@
                                         '<div class="card-header" id="headingLessonQuiz">' +
 
                                         '<h5 id="hdgQuizTitle">' + DataSet.Data[0].Title + '</h5>' +
-                                        '<span style="display:none;" id="spQuizDescription">'+ DataSet.Data[0].Description +'</span>' + 
+                                        '<span style="display:none;" id="spQuizDescription">' + DataSet.Data[0].Description + '</span>' +
                                         '<span style="display:none;" id="spPassingPercent">' + DataSet.Data[0].PassingPercent + '</span>' +
 
                                         //'<i class="fas fa-edit" title="Edit"  onclick="EditQuizFromTile(this,' + DataSet.Data[0].ContentID + ')";></i>' +
@@ -2405,7 +2385,7 @@
                                         '<div id="collapseLessonQuiz" class="collapse" aria-labelledby="headingLessonQuiz">' +
                                         '<div class="card-body" id="divQuizDescription">' + DataSet.Data[0].Description +
                                         '</div>' +
-                                        '</div>' +                                        
+                                        '</div>' +
                                         '</div>' +
                                         '';
 
@@ -2453,7 +2433,7 @@
             }
         }
 
-        function AddQuiz(flag) {    
+        function AddQuiz(flag)ready {
             debugger
             var Title = $("#txtQuizTitle").val();
             var Description = $("#txtQuizDescription").val();
@@ -2499,9 +2479,8 @@
                         }
                         else if (flag.includes('lastsave')) {
                             HideLoader();
-                            
-                            if(flag == 'lastsavequiz')
-                            {
+
+                            if (flag == 'lastsavequiz') {
                                 Swal.fire({
                                     title: "Success",
                                     text: 'Lesson details added successfully.',
@@ -2557,7 +2536,7 @@
 
         function EditQuizFromTile(obj, id) {
             debugger
-            ManageQuiz('editbind','editfromgrid');
+            ManageQuiz('editbind', 'editfromgrid');
             $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text());
             $('#txtQuizDescription').val($(obj).parent().parent().find('#spQuizDescription').text());
             $('#txtPassingScorePercentage').val($(obj).parent().parent().find('#spPassingPercent').text());
@@ -2593,7 +2572,7 @@
                         '<i class="fas fa-chevron-down" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ','+ (i + 1) +')";></i>' +
                         '</div>' +
                         '</div>' +
-                        '<div id="dvLessonQues'+ Questions[i].QuestionID +'"></div>';
+                        '<div id="dvLessonQues' + Questions[i].QuestionID + '"></div>';
                 }
                 $('#dvQuestionView').empty().append(QuestionString);
             }
@@ -2605,11 +2584,9 @@
             debugger
 
             var allLessonGrid = $("div[id^='dvLessonQues']");
-            if(allLessonGrid.length > 0)
-            {
-                for(var i = 0; i < allLessonGrid.length; i++)
-                {
-                    $('#'+ allLessonGrid[i].id).empty();
+            if (allLessonGrid.length > 0) {
+                for (var i = 0; i < allLessonGrid.length; i++) {
+                    $('#' + allLessonGrid[i].id).empty();
                 }
             }
 
@@ -2796,7 +2773,7 @@
                     '</div>' +
                     '</div>';
 
-                $('#dvLessonQues'+gbl_QuestionID).empty().append(QuestionType);
+                $('#dvLessonQues' + gbl_QuestionID).empty().append(QuestionType);
 
                 var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
@@ -3292,11 +3269,9 @@
                             result = true;
                         }
                     }
-                    else if(flag == 'txtPassingScorePercentage')
-                    {
-                        var PassingPercent = $('#'+flag).val();
-                        if(PassingPercent != undefined && PassingPercent != '' && parseInt(PassingPercent) > 100)
-                        {
+                    else if (flag == 'txtPassingScorePercentage') {
+                        var PassingPercent = $('#' + flag).val();
+                        if (PassingPercent != undefined && PassingPercent != '' && parseInt(PassingPercent) > 100) {
                             $('#' + flag).val('');
                             Swal.fire({ title: "Failure", text: "! Passing percentage cannot exceed 100.", icon: "error" });
                         }

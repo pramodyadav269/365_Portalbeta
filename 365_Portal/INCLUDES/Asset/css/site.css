@@ -2362,8 +2362,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .course-flow .card .card-body.right-side-content .lesson-action {
           background-color: #fff;
           display: inline-block;
-          box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
-          border-radius: 0px 0px 6px 6px;
+          /*box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
+                    border-radius: 0px 0px 6px 6px;*/
           padding: 10px;
           position: absolute;
           top: 0;
@@ -2384,7 +2384,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .course-flow .card .card-body.arrows .arrows-icon {
           margin-right: 24px; }
           .course-flow .card .card-body.arrows .arrows-icon .svg-inline--fa {
-            font-size: 22px; }
+            font-size: 22px;
+            color: #707070; }
   .course-flow .tag {
     font-size: 12px;
     font-weight: 600;
@@ -2459,8 +2460,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         background: #fff;
         position: absolute;
         top: -7px;
-        left: 12px;
+        left: 8px;
         z-index: 1; }
+        .course-flow .form-group label.inline.active {
+          display: inline-block !important; }
       .course-flow .form-group label.d-inline {
         color: #6C6D70;
         font-size: 18px;
@@ -2783,3 +2786,19 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       padding: 14px;
       border-radius: 0;
       box-shadow: none; }
+  .course-flow .lesson-save {
+    position: absolute;
+    right: -26px;
+    top: 38px;
+    z-index: 1;
+    background: #fff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); }
+    .course-flow .lesson-save .svg-inline--fa {
+      position: absolute;
+      top: calc(50% - 12px);
+      left: calc(50% - 8px);
+      font-size: 22px;
+      color: #707070; }
