@@ -3120,6 +3120,8 @@
                                     if (DataSet != null && DataSet != "") {
                                         if (DataSet.StatusCode == "1") {
 
+                                            IsCoursePublishable();
+
                                             Swal.fire({
                                                 title: 'Success',
                                                 icon: 'success',
