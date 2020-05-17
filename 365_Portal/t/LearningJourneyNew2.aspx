@@ -22,8 +22,8 @@
                     <div class="col dropdown p-0" id="dvPublishCourse">
                         <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item">Save</a>
-                            <a class="dropdown-item">Save draft</a>
+                            <a class="dropdown-item">Publish</a>
+                            <a class="dropdown-item">Discard</a>
                         </div>
                     </div>
                 </div>
@@ -188,6 +188,7 @@
 
             <div class="col-12 mb-5" id="divAddMoreLesson">
                 <a class="btn btn-black" id="btnAddMoreLesson" style="display: none;" onclick="AddMoreLesson('0');"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
+                <a class="btn btn-outline black" id="btnCancelLesson" style="display: none;" onclick="ClearNewLesson();">Cancel</a>
             </div>
         </div>
     </div>
@@ -312,7 +313,7 @@
                 EditCourse();
 
                 if (CourseFlag != '0') {
-                    BindLessonGrid();
+                    BindLessonGrid('');
                 }
             }
             else {
@@ -970,13 +971,13 @@
                 '<div class="form-group">' +
                 '<label class="d-inline"><i class="fas fa-plus-circle"></i>Estimated Time</label>' +
                 '<input type="text" class="form-control required d-inline col-2 mr-2" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
-                '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(txtMin,event);" />' +
+                '<input type="text" class="form-control required d-inline col-2" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-12">' +
                 '<div class="form-group">' +
                 '<label class="d-inline"><i class="fas fa-plus-circle"></i>Points</label>' +
-                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(txtPoint,event);" />' +
+                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div>' +
 
@@ -995,8 +996,8 @@
                 '<label>Quiz</label>' +
                 '<div class="form-group mb-2 d-flex justify-content-end">' +
                 '<label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>' +
-                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="+100" ' +
-                'onkeyup="return isNumberKey(\'txtPassingScorePercentage\',event);" />' +
+                '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="100" ' +
+                'onkeyup="return isNumberKey(this,event);" />' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-12 accordion view" id="dvLessonQuizView">' +
@@ -1065,10 +1066,19 @@
 
                 ManageResource('editbind');
                 ManageQuiz('editbind');
+
+
+                $('#btnCancelLesson').show();
             }
 
             ManageLesson('editbind');
             ManageContent('editbind');            
+        }
+
+        function ClearNewLesson()
+        {
+            $('#dvLessonViewParentEdit').empty();
+            $('#btnCancelLesson').hide();
         }
 
         function validateAddLesson() {
@@ -1236,7 +1246,7 @@
                                                 icon: "success"
                                             }).then((value) => {
                                                 if (value) {
-                                                    BindLessonGrid('');
+                                                    BindLessonGrid(flag);
                                                 }
                                             });
                                         }
@@ -1857,7 +1867,7 @@
                                             icon: "success"
                                         }).then((value) => {
                                             if (value) {
-                                                BindLessonGrid('');
+                                                BindLessonGrid(flag);
                                             }
                                         });
                                     }
@@ -1868,7 +1878,7 @@
                                         ContentFlag = DataSet.Data[0].InsertedID;
                                     }
 
-                                    BindLessonGrid();
+                                    BindLessonGrid('');
                                     BindContentGrid('withlesson');
 
                                     Swal.fire({
@@ -2205,7 +2215,7 @@
                                         HideLoader();
                                         ResourceFlag = LessonFlag;
 
-                                        BindLessonGrid();
+                                        BindLessonGrid('');
                                         BindResourceGrid('withlesson');
 
                                         Swal.fire({
@@ -2419,7 +2429,7 @@
             }
         }
 
-        function AddQuiz(flag) {
+        function AddQuiz(flag)ready {
             debugger
             var Title = $("#txtQuizTitle").val();
             var Description = $("#txtQuizDescription").val();
@@ -2474,14 +2484,14 @@
                                     icon: "success"
                                 }).then((value) => {
                                     if (value) {
-                                        BindLessonGrid('');
+                                        BindLessonGrid(flag);
                                     }
                                 });
                             }
                         }
                         else if (flag == 'withlesson') {
 
-                            BindLessonGrid();
+                            BindLessonGrid('');
                             BindQuizGrid('withlesson');
 
                             Swal.fire({
@@ -2558,7 +2568,8 @@
                         '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
                         '<i class="fas fa-edit" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ')";></i>' +
                         '</div>' +
-                        '</div>';
+                        '</div>' +
+                        '<div id="dvLessonQues'+ Questions[i].QuestionID +'"></div>';
                 }
                 $('#dvQuestionView').empty().append(QuestionString);
             }
@@ -2568,6 +2579,15 @@
         var AnswerTypeCode = '';
         function ShowQuestion(cls, flag, QuestionAnswer) {
             debugger
+
+            var allLessonGrid = $("div[id^='dvLessonQues']");
+            if(allLessonGrid.length > 0)
+            {
+                for(var i = 0; i < allLessonGrid.length; i++)
+                {
+                    $('#'+ allLessonGrid[i].id).empty();
+                }
+            }
 
             if (flag != 'edit') {
 
@@ -2747,7 +2767,7 @@
                     '</div>' +
                     '</div>';
 
-                $('#dvLessonQues').empty().append(QuestionType);
+                $('#dvLessonQues'+gbl_QuestionID).empty().append(QuestionType);
 
                 var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
@@ -2760,8 +2780,9 @@
             //$('#btnQuestionDone').show();//This need to be show as per previous design
         }
 
-        function AddQuestionCancel() {
-            $('#dvLessonQues').empty();
+        function AddQuestionCancel(obj) {
+            debugger
+            $(obj).closest("div[id^='dvLessonQues']").empty();
         }
 
         function AddAnswer() {
@@ -3240,6 +3261,15 @@
                         }
                         else {
                             result = true;
+                        }
+                    }
+                    else if(flag == 'txtPassingScorePercentage')
+                    {
+                        var PassingPercent = $('#'+flag).val();
+                        if(PassingPercent != undefined && PassingPercent != '' && parseInt(PassingPercent) > 100)
+                        {
+                            $('#' + flag).val('');
+                            Swal.fire({ title: "Failure", text: "! Passing percentage cannot exceed 100.", icon: "error" });
                         }
                     }
                     else {
