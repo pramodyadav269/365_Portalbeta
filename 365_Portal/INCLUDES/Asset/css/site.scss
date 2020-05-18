@@ -3753,6 +3753,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     padding: 26px 6px;
                     background-color: transparent;
 
+
                     &::before {
                         position: relative;
                         display: block;
@@ -4099,7 +4100,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
             }
 
-            .sr {
+            .sr.head {
                 padding: 14px;
                 border-radius: 0;
                 box-shadow: none;
@@ -4126,4 +4127,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             color: #707070;
         }
     }
+}
+
+
+a,
+button,
+input,
+textarea,
+select {
+    outline: none !important;
+}
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
 }

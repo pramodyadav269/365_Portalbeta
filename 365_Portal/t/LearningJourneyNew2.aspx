@@ -2621,7 +2621,7 @@
                        
                         '<div class="card-header p-0">' +
                         '<div class="d-flex align-items-center ques">' +
-                        '<a class="sr" onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ',' + (i + 1) +')";>' +
+                        '<a class="sr head" onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ',' + (i + 1) +')";>' +
                         'Q' + (i + 1) + '<i class="' + className + ' m-0 ml-2"></i><i class="fas fa-caret-down m-0 ml-1"></i></a>' +
                         '<h5 class="ml-3 mr-5">' + Questions[i].Title + '</h5></div>' +
 
