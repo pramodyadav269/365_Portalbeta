@@ -18,8 +18,8 @@
                     <div class="col dropdown p-0">
                         <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" id="btnPublish" style="display:none;" onclick="PublishCourse('');">Publish</a>
-                            <a class="dropdown-item" id="btnDiscard" style="display:none;">Discard</a>
+                            <a class="dropdown-item" id="btnPublish" style="display: none;" onclick="PublishCourse('');">Publish</a>
+                            <a class="dropdown-item" id="btnDiscard" style="display: none;">Discard</a>
                         </div>
                     </div>
                 </div>
@@ -932,8 +932,7 @@
             if (id != '0') {
                 deleteIsEnabled = '<a><i class="fas fa-trash-alt" onclick="DeleteLessionFromTile(this,' + id + ')";></i></a>';
             }
-            else
-            {
+            else {
                 tagStyle = '<div class="tag lesson main-card">Lesson 1</div>';
 
                 LessonFlag = '0';
@@ -1011,9 +1010,6 @@
                 '<div class="col-sm-12" id="dvLessonQuizView">' +
                 '</div>' +
                 '<div class="col-sm-12 edit" id="dvLessonQuizEdit"></div>' +
-
-                '<div class="col-sm-12 quiz-wrapper"></div>' +
-
                 '<div class="col-sm-12 quiz-wrapper" id="dvQuestionView">' +
                 '</div>' +
 
@@ -1027,7 +1023,7 @@
 
                 '<div class="w-100"></div>' +
                 '<div class="action-btn" id="divAddContent">' +
-                    '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
+                '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
                 '</div>' +
                 '</div>';
 
@@ -1079,8 +1075,7 @@
             inputInline();
         }
 
-        function ClearNewLesson()
-        {            
+        function ClearNewLesson() {
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Do you want to discard this lesson ? Yes or No !",
@@ -1749,7 +1744,7 @@
                                     for (var i = 0; i < ContentTable.length; i++) {
                                         Content = Content + '' +
                                             '<div class="card">' +
-                                            '<div class="tag content">Content</div>' +
+                                            '<div class="tag content">Content ' + (i + 1) + '</div>' +
                                             '<div class="card-header" id="headingLessonContent' + ContentTable[i].ContentID + '">' +
                                             '<h5 id="hdgContentTitle">' + ContentTable[i].Title + '</h5>' +
                                             '<span style="display:none;" id="spContentDescription_' + ContentTable[i].ContentID + '">' + ContentTable[i].Description + '</span>' +
@@ -2564,13 +2559,25 @@
                     }
 
                     QuestionString = QuestionString + '<div class="card">' +
-                        '<div class="tag question">Question</div>' +
-                        '<div class="card-header" id="headingQuestion">' +
-                        '<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
-                        '<h5>' + Questions[i].Title + '</h5>' +
-                        '<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
-                        '<i class="fas fa-chevron-down" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ','+ (i + 1) +')";></i>' +
+                       
+                        '<div class="card-header p-0">' +
+                        '<div class="d-flex align-items-center ques">' +
+                        '<a class="sr" onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ',' + (i + 1) +')";>' +
+                        'Q' + (i + 1) + '<i class="' + className + ' m-0 ml-2"></i><i class="fas fa-caret-down m-0 ml-1"></i></a>' +
+                        '<h5 class="ml-3 mr-5">' + Questions[i].Title + '</h5></div>' +
+
+                        '<a title="Delete" class="p-2 align-self-center" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";><i class="fas fa-trash-alt"></i></a>' +
                         '</div>' +
+
+
+
+
+                        //'<div class="card-header" id="headingQuestion">' +
+                        //'<span class="sr">Q' + (i + 1) + '<i class="' + className + '"></i><i class="fas fa-caret-down"></i></span>' +
+                        //'<h5>' + Questions[i].Title + '</h5>' +
+                        //'<i class="fas fa-trash-alt" title="Delete" onclick="DeleteQuestion(this,' + Questions[i].QuestionID + ')";></i>' +
+                        //'<i class="fas fa-chevron-down" title="Edit"  onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ','+ (i + 1) +')";></i>' +
+                        //'</div>' +
                         '</div>' +
                         '<div id="dvLessonQues' + Questions[i].QuestionID + '"></div>';
                 }
@@ -2580,7 +2587,7 @@
 
         var className = '';
         var AnswerTypeCode = '';
-        function ShowQuestion(cls, flag, QuestionAnswer,questionSrNo) {
+        function ShowQuestion(cls, flag, QuestionAnswer, questionSrNo) {
             debugger
 
             var allLessonGrid = $("div[id^='dvLessonQues']");
@@ -2613,7 +2620,7 @@
                 }
 
 
-                var QuestionType = '<div class="row quiz" id="dvQuestion">' +
+                var QuestionType = '<div class="quiz mb-4" id="dvQuestion">' +
                     '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
                     '<span class="sr">Q' + QuestionNumber + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                     '<div class="col-sm-8 col-md-10">' +
@@ -2688,7 +2695,7 @@
 
                 $('#dvLessonQues').empty().append(QuestionType);
 
-                var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                var btnAddQuestion = '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,' + QuestionAction + ');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
                     '</div>';
@@ -2712,17 +2719,16 @@
                     AnswerTypeCode = "3";
                 }
 
-                if(questionSrNo == undefined || questionSrNo == '0')
-                {
+                if (questionSrNo == undefined || questionSrNo == '0') {
                     questionSrNo = '';
                 }
 
                 var AnswerID = '0';
                 var QuestionType = '';
 
-                QuestionType = '<div class="row quiz" id="dvQuestion">' +
+                QuestionType = '<div class="quiz mb-4" id="dvQuestion">' +
                     '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
-                    '<span class="sr">Q'+ questionSrNo +'<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
+                    '<span class="sr">Q' + questionSrNo + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                     '<div class="col-sm-8 col-md-10">' +
                     '<div class="form-group">' +
                     '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
@@ -2775,7 +2781,7 @@
 
                 $('#dvLessonQues' + gbl_QuestionID).empty().append(QuestionType);
 
-                var btnAddQuestion = '<div class="col-sm-4 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
+                var btnAddQuestion = '<div class="col-sm-12 mt-3 mb-3 d-flex justify-content-between align-items-center ques">' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestion" onclick="AddQuestion(this,\'2\');"><i class="fas fa-plus-circle"></i>Add Question</a>' +
                     '<a class="btn btn-outline blod black" id="btnAddQuestionCancel" onclick="AddQuestionCancel(this);">Cancel</a>' +
                     '</div>';
@@ -3038,7 +3044,7 @@
             return maxScore;
         }
 
-        function ShowQuestionInEditMode(obj, questionId,questionSrNo) {
+        function ShowQuestionInEditMode(obj, questionId, questionSrNo) {
 
             ShowLoader();
             var getUrl = "/API/Quiz/GetQuestionAnswer";
@@ -3059,7 +3065,7 @@
                                     var QuestionAnswer = DataSet.Data.Data;
                                     if (QuestionAnswer.length > 0) {
                                         gbl_QuestionID = questionId;
-                                        ShowQuestion('', 'edit', QuestionAnswer,questionSrNo);
+                                        ShowQuestion('', 'edit', QuestionAnswer, questionSrNo);
                                     }
                                 }
                             }
