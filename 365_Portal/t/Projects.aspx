@@ -519,6 +519,12 @@
         });
 
         $(document).ready(function () {
+
+            $('#sideNav').remove();
+            $('.navbar-brand .svg-inline--fa').remove();
+            $('main').css({ 'margin-left': '0' });
+
+
             $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
             $('.sidenav-nav a.sidenav-link[href="Projects.aspx"]').addClass('active'); // add active class in current page
             //ShowLoader();

@@ -2782,7 +2782,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         font-size: 16px;
         font-weight: bold;
         margin: 0; }
-    .course-flow .accordion .card .sr {
+    .course-flow .accordion .card .sr.head {
       padding: 14px;
       border-radius: 0;
       box-shadow: none; }
@@ -2802,3 +2802,17 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       left: calc(50% - 8px);
       font-size: 22px;
       color: #707070; }
+
+a,
+button,
+input,
+textarea,
+select {
+  outline: none !important; }
+
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none !important; }
