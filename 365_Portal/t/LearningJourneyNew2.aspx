@@ -16,11 +16,14 @@
                 </div>
                 <div>
                     <div class="col dropdown p-0">
-                        <a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
+                        <a class="btn btn-yellow" id="btnPublish" style="display: none;" onclick="PublishCourse('');">Publish</a>
+                        <a class="btn btn-yellow" id="btnDiscard" style="display: none;">Discard</a>
+
+                        <%--<a class="btn btn-yellow dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publish</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" id="btnPublish" style="display: none;" onclick="PublishCourse('');">Publish</a>
                             <a class="dropdown-item" id="btnDiscard" style="display: none;">Discard</a>
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>
@@ -316,6 +319,12 @@
             else {
                 GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
             }
+
+            if(CourseFlag == '0')
+            {
+                $("#btnPublish").hide();
+                $("#btnDiscard").hide();
+            }            
         });
 
         function readQueryString() {
@@ -547,6 +556,9 @@
                                         $('#btnAddMoreLesson').show();
 
                                         if (DataSet.StatusCode == "1") {
+
+                                            $("#btnDiscard").show();
+
                                             if (flag == 'redirect') {
                                                 Swal.fire({
                                                     title: "Success",
@@ -1456,6 +1468,18 @@
         }
 
         function EditLessionFromTile(obj, id) {
+
+            if($(obj).hasClass('fa-chevron-down'))
+            {
+                $(obj).removeClass('fa-chevron-down');
+                $(obj).addClass('fa-chevron-up')
+            }
+            else
+            {
+                $(obj).removeClass('fa-chevron-up');
+                $(obj).addClass('fa-chevron-down')
+            }
+
             debugger
             if ($('#tempLessonGrid_' + id).length) {
                 $('#tempLessonGrid_' + id).remove();
@@ -1563,6 +1587,18 @@
         //Marked as not in use
         function EditLessonFromSubTile(obj, id) {
             debugger
+
+            //if($(obj).hasClass('fa-chevron-down'))
+            //{
+            //    $(obj).removeClass('fa-chevron-down');
+            //    $(obj).addClass('fa-chevron-up')
+            //}
+            //else
+            //{
+            //    $(obj).removeClass('fa-chevron-up');
+            //    $(obj).addClass('fa-chevron-down')
+            //}
+
             ManageLesson('editbind', 'editfromgrid');
 
             $('#txtLessonTitle').val($(obj).parent().find('#spSubTitle').text());
@@ -1967,6 +2003,17 @@
 
         function EditContentFromTile(obj, id) {
             debugger
+
+            //if($(obj).hasClass('fa-chevron-down'))
+            //{
+            //    $(obj).removeClass('fa-chevron-down');
+            //    $(obj).addClass('fa-chevron-up')
+            //}
+            //else
+            //{
+            //    $(obj).removeClass('fa-chevron-up');
+            //    $(obj).addClass('fa-chevron-down')
+            //}
 
             var ContentHeader = $(obj).parent().parent().find('#hdgContentTitle').text();
             var ContentDescription = $(obj).parent().parent().find('#spContentDescription_' + id).text();
@@ -2531,6 +2578,18 @@
 
         function EditQuizFromTile(obj, id) {
             debugger
+
+            if($(obj).hasClass('fa-chevron-down'))
+            {
+                $(obj).removeClass('fa-chevron-down');
+                $(obj).addClass('fa-chevron-up')
+            }
+            else
+            {
+                $(obj).removeClass('fa-chevron-up');
+                $(obj).addClass('fa-chevron-down')
+            }
+
             ManageQuiz('editbind', 'editfromgrid');
             $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text());
             $('#txtQuizDescription').val($(obj).parent().parent().find('#spQuizDescription').text());
