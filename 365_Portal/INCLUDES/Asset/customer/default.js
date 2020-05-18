@@ -422,7 +422,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.EditTopic = function (topicId) {
-        window.location.href = 'LearningJourney.aspx?topic=' + topicId;
+        window.location.href = 'LearningJourneynew2.aspx?topic=' + topicId;
     }
 
     //Added by Pramod on 25 APR 20

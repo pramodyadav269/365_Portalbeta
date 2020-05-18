@@ -247,7 +247,7 @@
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
-                        <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourney.aspx"><i class="fas fa-plus-circle"></i></a>
+                        <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourneynew2.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
@@ -705,7 +705,7 @@
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
                             <%--   <a class="list-group-item" href="courses.aspx" runat="server" id="dvAllCourses" visible="false">All Courses</a>--%>
-                            <a class="list-group-item" href="learningjourney.aspx" runat="server" id="dvAddNewCourse1" visible="false">Add new course</a>
+                            <a class="list-group-item" href="learningjourneynew2.aspx" runat="server" id="dvAddNewCourse1" visible="false">Add new course</a>
                             <a class="list-group-item" href="assign_topics.aspx" runat="server" id="dvAssignCourses" visible="false">Assign Courses</a>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
     <div class="container-fluid dashboard courses">
 
         <%-- floating button --%>
-        <a href="LearningJourney.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
+        <a href="LearningJourneynew2.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
              <i class="fa fa-plus"></i><span>Create</span>
         </a>
 
