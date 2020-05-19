@@ -885,7 +885,7 @@
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
                 var StringSubtask = "";
-                debugger
+                
                 var taskStatusId = $("#ddlStatus").children("option:selected").val();
                 var taskStatusName = $("#ddlStatus").children("option:selected").text();
                 var container = $('#cblist');
@@ -943,7 +943,7 @@
 
                             var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
                             if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
-                                debugger;
+                                
                                 UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
                             }
 
@@ -1432,7 +1432,6 @@
         }
 
         function UpdateTaskStatus(ProjectID, TaskID, StatusID, taskName, StatusName) {
-            debugger;
             var requestParams = {
                 Param_ProjectID: ProjectID,
                 Param_TaskID: TaskID,
@@ -1782,7 +1781,6 @@
                         item.getElement().style.height = item.getHeight() + 'px';
                     })
                     .on('dragReleaseEnd', function (item) {
-                        debugger;
                         //activeItem = null;
 
                         // Let's remove the fixed width/height from the
@@ -1803,7 +1801,6 @@
                         var draggableContainer = $(columnGrids).filter(function (i, n) {
                             return n._id === item._gridId;
                         })[0];
-                        debugger;
                         if (draggableContainer._settings.MasterStatusID != statusId) {
                             UpdateTaskStatus(ProjectId, taskId, draggableContainer._settings.MasterStatusID, taskName, StatusName);
                         }
@@ -1868,7 +1865,6 @@
         }
 
         function BindProjectData(response) {
-            debugger;
             if (response != null) {
                 var jsonProjectList = $.parseJSON(response).Data;
                 var projectHtml = '';
