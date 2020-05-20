@@ -1891,8 +1891,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           margin-right: .5rem; }
 
 .card-with-img.card {
-  /*width: 292px;
-
+  width: 270px;
+  height: 406px;
+  /*
         @media only screen and (max-width : 600px) {
             width: auto;
         }*/
@@ -1916,7 +1917,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         }*/ }
   .card-with-img.card .card-img-top {
     border-radius: 0;
-    height: 168px; }
+    height: 194px;
+    display: flex; }
+    .card-with-img.card .card-img-top img {
+      width: 100%;
+      height: 100%; }
   .card-with-img.card .action-icon {
     position: absolute;
     right: 12px;
@@ -1927,9 +1932,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       color: #4F5F83;
       cursor: pointer; }
   .card-with-img.card .card-body.item {
-    min-height: 190px; }
+    height: 164px; }
     .card-with-img.card .card-body.item .card-text {
-      font-size: 13px; }
+      font-size: 11px;
+      color: #707070; }
       .card-with-img.card .card-body.item .card-text.ellipsis {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -1945,22 +1951,25 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                             transition: 0.5s;
                         }*/ }
       .card-with-img.card .card-body.item .card-text.type {
-        font-size: 12px;
-        color: rgba(0, 0, 0, 0.5); }
+        font-size: 10px;
+        color: #707070; }
     .card-with-img.card .card-body.item .card-title {
-      font-size: 14px;
-      color: #4F5F83; }
+      font-size: 12px;
+      color: #000000;
+      font-weight: bold; }
   .card-with-img.card .card-body.profile {
-    padding: 0 1.25rem 1.25rem 1.25rem;
+    padding: 0 1.25rem 1rem 1.25rem;
     display: flex;
     align-items: center; }
     .card-with-img.card .card-body.profile img {
-      height: 28px;
-      width: 28px;
+      height: 23px;
+      width: 23px;
       border-radius: 50%;
       margin-right: 8px; }
     .card-with-img.card .card-body.profile .card-title {
-      font-size: 14px;
+      font-size: 11px;
+      color: #000000;
+      font-weight: bold;
       margin: 0; }
   .card-with-img.card .dropdown .dropdown-menu {
     transform: translate3d(-214px, 26px, 0px) !important;
@@ -1972,7 +1981,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       padding: .5rem .75rem; }
       .card-with-img.card .dropdown .dropdown-menu .dropdown-item .svg-inline--fa {
         font-size: 13px;
-        color: #4F5F83; }
+        color: #000; }
 
 .dropright .dropdown-menu {
   padding: 0;

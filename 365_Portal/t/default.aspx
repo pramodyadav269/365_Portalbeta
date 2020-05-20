@@ -16,7 +16,7 @@
     <div class="dashboard">
 
         <%-- floating button --%>
-       <%-- <a href="LearningJourneynew2.aspx" id="dvAddNewCourse_Floating" style="display: none" class="btn btn-float bottom-right">
+        <%-- <a href="LearningJourneynew2.aspx" id="dvAddNewCourse_Floating" style="display: none" class="btn btn-float bottom-right">
             <i class="fa fa-plus"></i><span>Compose</span>
         </a>--%>
 
@@ -49,7 +49,7 @@
                                 <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
                                     <div class="card-body">
                                         <h5 class="card-title" ng-bind-html="trustAsHtml(module.Title)"></h5>
-                                       <%--  <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>--%>
+                                        <%--  <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>--%>
                                         <p class="card-text">~{{ GetTopicTime(module.LessonTime) }}</p>
                                     </div>
                                 </div>
@@ -127,42 +127,41 @@
                                 <a class="list-group-item list-group-item-action" href="#list-item-resources" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
                                 <a class="next shadow-sm  list-group-item list-group-item-action" href="#list-item-finalquiz" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                    ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">
-                                    Quiz
+                                    ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">Quiz
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-7 col-lg-8 p-0">
                         <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
-                          <div class="lesson-content" id="list-item-1">
+                            <div class="lesson-content" id="list-item-1">
                                 <h2 class="lesson-title">{{SelectedModule.Title}}</h2>
-         <%--                       <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>--%>
+                                <%--                       <h4 class="lesson-content-title">{{SelectedContent.Title}}</h4>--%>
                                 <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
                             </div>
 
-                             <div class="lesson-content" id="list-item-learningObjectives">
-                                 <h4 class="lesson-content-title">Learning Objectives</h4>
+                            <div class="lesson-content" id="list-item-learningObjectives">
+                                <h4 class="lesson-content-title">Learning Objectives</h4>
                                 <%--Display Content here..--%>
                                 <p ng-bind-html="trustAsHtml(SelectedModule.Overview)"></p>
                             </div>
 
                             <div class="lesson-content" id="{{'list-item-' + content.ContentID }}" ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems">
-                              <%--  <h2 class="lesson-title" ng-bind-html="trustAsHtml(SelectedModule.Title)"></h2>--%>
+                                <%--  <h2 class="lesson-title" ng-bind-html="trustAsHtml(SelectedModule.Title)"></h2>--%>
                                 <h4 class="lesson-content-title" ng-bind-html="trustAsHtml(content.Title)"></h4>
                                 <%--Display Content here..--%>
                                 <p ng-bind-html="trustAsHtml(content.Description)"></p>
                             </div>
 
-                             <div class="lesson-content" id="list-item-resources">
+                            <div class="lesson-content" id="list-item-resources">
                                 <%-- <h4 class="lesson-content-title">Resources</h4>--%>
                                 <%--Display Content here..--%>
                                 <p ng-bind-html="trustAsHtml(SelectedModule.Resources)"></p>
                             </div>
-                       <%-- </div>
+                            <%-- </div>
                         <div class="lesson-scrollspy">--%>
                             <div class="lesson-content" id="list-item-finalquiz">
-                               <%-- <h2 class="lesson-title" ng-bind-html="trustAsHtml(SelectedModule.Title)"></h2>--%>
+                                <%-- <h2 class="lesson-title" ng-bind-html="trustAsHtml(SelectedModule.Title)"></h2>--%>
                                 <h4 class="lesson-content-title" ng-bind-html="trustAsHtml(SelectedContent.Title)"></h4>
                                 <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
                                 <%-- <div class="col-sm-12 header">
@@ -265,9 +264,10 @@
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
+                           
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor:pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -328,9 +328,11 @@
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
+
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,0);">
+
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -389,7 +391,7 @@
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -443,7 +445,7 @@
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -499,7 +501,7 @@
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor:pointer"  ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
