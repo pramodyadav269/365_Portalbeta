@@ -963,11 +963,6 @@
                 '<div class="col-sm-12" id="dvLessonView">' +
                 '</div>' +
                 '<div class="col-sm-12" id="dvLessonEdit"></div>' +
-
-                '<div class="col-sm-12" id="dvLessonContentView" style="padding-left: 52px;">' +
-                '</div>' +
-                '<div class="col-sm-12" id="dvLessonContentEdit" style="padding-left: 52px;"></div>' +
-
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -981,7 +976,7 @@
                 //'<a><i class="fas fa-check" onclick="AddLessonWithOthers(this);"></i></a>' + deleteIsEnabled +
                 //'<a><i class="fas fa-chevron-down"></i></a>' +
                 '</div>' +
-                '<div class="row mt-4">' +
+                '<div class="row mt-2">' +
 
                 '<div class="col-sm-3">' +
                 '<div class="form-group">' +
@@ -1009,8 +1004,9 @@
                 '<div class="w-100"></div>' +
                 '<div class="col-12 col-sm-12">' +
                 '<div class="card-body pl-5">' +
-                '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;">' +
-                '</div>' +
+                '<div class="col-sm-12" id="dvLessonContentView" style="padding-left: 52px;"></div>' +
+                '<div class="col-sm-12" id="dvLessonContentEdit" style="padding-left: 52px;"></div>' +
+                '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;"></div>' +
                 '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
                 '<label>Quiz</label>' +
                 '<div class="form-group mb-2 d-flex justify-content-end">' +

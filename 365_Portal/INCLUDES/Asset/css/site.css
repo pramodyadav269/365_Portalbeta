@@ -2340,7 +2340,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   color: rgba(0, 0, 0, 0.5); }
 
 .course-flow {
-  padding: 0 60px 20px; }
+  padding: 0 60px 20px;
+  font-family: OpenSans-SemiBold; }
   @media only screen and (max-width: 600px) {
     .course-flow {
       margin: 0 15px 15px; } }
@@ -2492,7 +2493,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           color: #808080;
           font-size: 10px;
           margin: 0;
-          padding-top: 4px; }
+          padding-top: 4px;
+          font-family: OpenSans-Regular;
+          font-weight: normal; }
           .course-flow .form-group .instructor.checkbox .custom-control-label::before {
             width: 14px;
             height: 14px; }
@@ -2609,7 +2612,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     .course-flow .form-group .sharing {
       padding-left: 30px;
       display: flex;
-      justify-content: space-between; }
+      justify-content: space-between;
+      font-family: OpenSans-Regular; }
       @media only screen and (max-width: 600px) {
         .course-flow .form-group .sharing {
           flex-direction: column; } }
@@ -2623,7 +2627,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           padding-top: 2px; }
         .course-flow .form-group .sharing .custom-control .custom-control-input:checked + .custom-control-label {
           color: #000;
-          font-weight: 600; }
+          font-weight: 600;
+          font-family: OpenSans-Bold; }
         .course-flow .form-group .sharing .custom-control .custom-control-input:checked ~ .custom-control-label::before {
           color: #fff;
           border-color: #FAC900;
@@ -2803,16 +2808,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       font-size: 22px;
       color: #707070; }
 
-a,
-button,
-input,
-textarea,
-select {
-  outline: none !important; }
-
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none !important; }
+input, *:focus, *:active {
+  border: 0;
+  outline: none !important;
+  box-shadow: none; }

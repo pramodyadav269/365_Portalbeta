@@ -3396,6 +3396,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .course-flow {
     padding: 0 60px 20px;
+    font-family: OpenSans-SemiBold;
 
     @media #{$small-and-down} {
         margin: 0 15px 15px;
@@ -3623,6 +3624,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     font-size: 10px;
                     margin: 0;
                     padding-top: 4px;
+                    font-family: OpenSans-Regular;
+                    font-weight:normal;
 
                     &::before {
                         width: 14px;
@@ -3817,6 +3820,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             padding-left: 30px;
             display: flex;
             justify-content: space-between;
+            font-family: OpenSans-Regular;
 
             @media #{$small-and-down} {
                 flex-direction: column;
@@ -3838,6 +3842,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         + .custom-control-label {
                             color: #000;
                             font-weight: 600;
+                            font-family: OpenSans-Bold;
                         }
 
                         ~ .custom-control-label::before {
@@ -4130,18 +4135,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 
-a,
-button,
-input,
-textarea,
-select {
+input, *:focus, *:active {
+    border: 0;
     outline: none !important;
-}
-
-a:focus,
-button:focus,
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none !important;
+    box-shadow: none
 }
