@@ -971,10 +971,8 @@
                 //Left pane
                 '<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 pl-0">' +
                 '<div class="card-body right-side-content bg-white">' +
-                '<a class="lesson-save"><i class="fas fa-save" onclick="AddLessonWithOthers(this);"></i></a>' +
+                //'<a class="lesson-save"><i class="fas fa-save" onclick="AddLessonWithOthers(this);"></i></a>' +
                 '<div class="lesson-action">' + deleteIsEnabled +
-                //'<a><i class="fas fa-check" onclick="AddLessonWithOthers(this);"></i></a>' + deleteIsEnabled +
-                //'<a><i class="fas fa-chevron-down"></i></a>' +
                 '</div>' +
                 '<div class="row mt-2">' +
 
@@ -1006,6 +1004,17 @@
                 '<div class="card-body pl-5">' +
                 '<div class="col-sm-12" id="dvLessonContentView" style="padding-left: 52px;"></div>' +
                 '<div class="col-sm-12" id="dvLessonContentEdit" style="padding-left: 52px;"></div>' +
+
+
+                '<div class="col-sm-12" id="dvContentContent" style="padding-left: 52px;">'+
+                '<div class="form-group editor">'+
+                '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add Content</a>'+
+                '<a class="btn btn-outline blod black" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>'+
+                '<a class="btn btn-outline blod black" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>'+                
+                '</div>' +
+                '</div>' +
+
+
                 '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;"></div>' +
                 '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
                 '<label>Quiz</label>' +
@@ -1031,7 +1040,9 @@
 
                 '<div class="w-100"></div>' +
                 '<div class="action-btn" id="divAddContent">' +
-                '<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
+                //'<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
+                '<a class="btn btn-outline blod black float-right" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>'+
+                '<a class="btn btn-outline blod black float-right" id="btnCanelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
                 '</div>' +
                 '</div>';
 
@@ -1054,9 +1065,12 @@
                     $('#dvLessonGrid_' + id).append(dvLessonViewParentEdit);
                 }
 
-                $('#divAddContent').show();
                 $('#btnAddMoreLesson').show();
                 $('#btnCancelLesson').hide();
+
+                $('#btnNewContent').show();
+                $('#btnSaveContent').hide();
+                $('#btnCanelContent').hide();
             }
             else {
                 var allLessonGrid = $("div[id^='tempLessonGrid_']");
@@ -1072,10 +1086,12 @@
                 ManageResource('editbind');
                 ManageQuiz('editbind');
 
-
-                $('#divAddContent').hide();
                 $('#btnAddMoreLesson').hide();
                 $('#btnCancelLesson').show();
+
+                $('#btnNewContent').hide();
+                $('#btnSaveContent').show();
+                $('#btnCanelContent').show();
             }
 
             ManageLesson('editbind');
@@ -1094,9 +1110,19 @@
                 confirmButtonText: 'Yes, clear it!'
             }).then((result) => {
                 if (result.value) {
-                    $('#dvLessonViewParentEdit').empty();
-                    $('#btnAddMoreLesson').show();
-                    $('#btnCancelLesson').hide();
+                    debugger
+                    $("div[id^='tempLessonGrid_']").remove();                    
+
+                    if($('#btnEditLesson_'+LessonFlag).hasClass('fa-chevron-down'))
+                    {
+                        $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-down');
+                        $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-up');
+                    }
+                    else
+                    {
+                        $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-up');
+                        $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-down');
+                    }
                 }
             });
         }
@@ -1153,7 +1179,7 @@
                                             '<div class="card-header">' +
                                             '<h5>' + LessonTable[i].Title + '</h5>' +
                                             '<div class="card-header-action">' +
-                                            '<a><i class="fas fa-chevron-down" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
+                                            '<a><i class="fas fa-chevron-down" id="btnEditLesson_' + LessonTable[i].ModuleID + '" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
                                             '</div>' +
                                             '</div>' +
                                             '<span style="display:none;" id="spTitle">' + LessonTable[i].Title + '</span>' +
@@ -1271,6 +1297,14 @@
                                                 }
                                             });
                                         }
+                                    }
+                                    else if (flag == 'addcontent') {
+                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                            LessonFlag = DataSet.Data[0].InsertedID;
+                                        }
+
+                                        BindLessonGrid(flag);
+                                        AddContent(flag);
                                     }
                                     else if (flag == 'withcontent') {
                                         HideLoader();
@@ -1527,7 +1561,6 @@
             //BindContentGrid('');
             //BindResourceGrid('');
             //BindQuizGrid('');
-            ////$('#dvbtnSaveLesson').show();
         }
 
 
@@ -1699,6 +1732,73 @@
 
 
         //Content
+        function AddNewContent(obj)
+        {
+            debugger
+            ManageContent('editbind','','addnew');    
+
+            //if($("#txtContentHeader").val() == undefined)
+            //{
+            //    ManageContent('editbind','','addnew');    
+            //}
+            //else
+            //{
+            //    AddContent('addcontent');
+            //}
+        }
+
+        function SaveContent(obj)
+        {
+            var flag = 'addcontent';
+
+            if(LessonFlag == '0')
+            {
+                if ($('#txtLessonTitle').val() != undefined) {
+                    var resultLesson = validateAddLesson();
+                    if (resultLesson.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultLesson.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+                }
+                if ($('#txtContentHeader').val() != undefined) {
+                    var resultContent = validateAddContent('withcontent');
+                    if (resultContent.error) {
+                        Swal.fire({
+                            title: "Alert",
+                            text: resultContent.msg,
+                            icon: "error",
+                            button: "Ok",
+                        });
+                        return false;
+                    }
+                }
+
+                AddLession(flag);
+            }
+            else
+            {
+                var resultContent = validateAddContent('onlycontent');
+                if (resultContent.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: resultContent.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                    return false;
+                }
+                else
+                {
+                    AddContent(flag);
+                }
+            }
+        }
+
         function ManageContent(flag, contentId, source) {
             if (flag == 'editbind') {
                 // Clear all open fields for content               
@@ -1719,20 +1819,20 @@
 
                     ContentFlag = '0';//clear content because this div will be bind while new content creation
                     $("[id^='divContentDescription_']").empty();//to remove edit fields under accordion
-                    $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
-
-                    //This is to scroll up to new content screen
-                    if (source == 'addnew') {
-                        $('html, body').animate({
-                            scrollTop: $("#dvLessonContentEdit").offset().top - 150
-                        }, 2000);
-                    }
+                    $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);                    
                 }
                 editorContentDescription = new Jodit('#txtContentDescription');
 
+                $('#btnNewContent').hide();
+                $('#btnSaveContent').show();
+                $('#btnCanelContent').show();
             }
             else if (flag == 'editclear') {
                 $('#dvLessonContentEdit').empty();
+
+                $('#btnNewContent').show();
+                $('#btnSaveContent').hide();
+                $('#btnCanelContent').hide();
             }
         }
 
@@ -1746,7 +1846,7 @@
             else if (flag == 'onlycontent' && (CourseFlag == '0' || LessonFlag == '0')) {
                 return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
             }
-            else if (flag == 'withcontent' && (CourseFlag == '0')) {
+            else if (flag == 'withcontent' && CourseFlag == '0') {
                 return { error: true, msg: "Oops ! Something went wrong. PLease try again." };
             }
             return true;
@@ -1797,8 +1897,15 @@
                                     }
                                     $('#dvLessonContentView').empty().append(Content);
 
-                                    ManageContent('editclear');
-                                }
+                                    if(flag == 'addcontent')
+                                    {
+                                        ManageContent('editbind');
+                                    }
+                                    else
+                                    {
+                                        ManageContent('editclear');
+                                    }
+                                }                                
                             }
                             else {
                                 Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
@@ -1874,7 +1981,7 @@
                 processData: false,
                 success: function (response) {
                     try {
-                        ""
+                        debugger
                         var DataSet = $.parseJSON(response);
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
@@ -1909,44 +2016,20 @@
                                         });
                                     }
                                 }
-                                else if (flag == 'withlesson') {
+                                else if (flag == 'addcontent') {
                                     HideLoader();
                                     if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                         ContentFlag = DataSet.Data[0].InsertedID;
                                     }
 
-                                    BindLessonGrid('');
-                                    BindContentGrid('withlesson');
-
-                                    Swal.fire({
-                                        title: "Success",
-                                        text: DataSet.Data[0].ReturnMessage,
-                                        icon: "success"
-                                    }).then((value) => {
-                                        if (value) {
-
-                                        }
-                                    });
-                                }
-                                else if (flag == 'onlycontent') {
-                                    HideLoader();
-
-                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                        //ContentFlag = DataSet.Data[0].InsertedID;
-                                    }
-
                                     ContentFlag = '0';
-                                    BindContentGrid('onlycontent');
+                                    BindContentGrid(flag);
 
                                     Swal.fire({
                                         title: "Success",
                                         text: DataSet.Data[0].ReturnMessage,
                                         icon: "success"
-                                    }).then((value) => {
-                                        if (value) {
-
-                                        }
-                                    });
+                                    });                                    
                                 }
 
                                 IsCoursePublishable();
