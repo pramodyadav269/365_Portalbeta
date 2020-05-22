@@ -1701,7 +1701,7 @@
                                 });
                             }
                         }
-                        newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
+                        newCardHtml += '<div class="anchor-date d-none"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
                         cardHtml += '</li>';
