@@ -1678,13 +1678,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   min-height: 160px !important;
   max-height: 300px; }
 
+.courses-card {
+  margin-right: 20px; }
+
 .dashboard .course-wrapper .course-header.card {
-  border-radius: 0; }
+  border-radius: 0;
+  background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box; }
   .dashboard .course-wrapper .course-header.card .card-body {
     padding: 1.25rem; }
     @media only screen and (min-width: 601px) {
       .dashboard .course-wrapper .course-header.card .card-body {
         padding: 3rem 4rem 2rem 4rem; } }
+    .dashboard .course-wrapper .course-header.card .card-body .card-title {
+      font-family: OpenSans-SemiBold;
+      font-size: 38px;
+      color: #fff; }
     .dashboard .course-wrapper .course-header.card .card-body .card-text {
       color: rgba(255, 255, 255, 0.7); }
     .dashboard .course-wrapper .course-header.card .card-body .action span {

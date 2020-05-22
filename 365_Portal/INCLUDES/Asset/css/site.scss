@@ -1263,7 +1263,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     text-align: center;
     padding: 3rem 0;
     cursor: pointer;
-    font-family:OpenSans-SemiBold;
+    font-family: OpenSans-SemiBold;
 }
 
 .website-redesign .card.add-status .card-body .icon {
@@ -2397,17 +2397,28 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 }
 
+.courses-card {
+    margin-right:20px;
+}
+
 .dashboard {
     .course-wrapper {
         .course-header {
             &.card {
                 border-radius: 0;
+                background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box;
 
                 .card-body {
                     padding: 1.25rem;
 
                     @media #{$medium-and-up} {
                         padding: 3rem 4rem 2rem 4rem;
+                    }
+
+                    .card-title {
+                        font-family: OpenSans-SemiBold;
+                        font-size: 38px;
+                        color: #fff;
                     }
 
                     .card-text {

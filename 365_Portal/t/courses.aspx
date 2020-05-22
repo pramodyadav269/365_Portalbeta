@@ -49,7 +49,7 @@
 
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AllTopics">
+                        <div class="courses-card" ng-repeat="topic in AllTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -107,7 +107,7 @@
                     <%-- <h1>Global</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in GlobalTopics">
+                        <div class="courses-card" ng-repeat="topic in GlobalTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -162,7 +162,7 @@
                     <%--  <h1>Published</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PublishedTopics">
+                        <div class="courses-card" ng-repeat="topic in PublishedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -219,7 +219,7 @@
                     <%--  <h1>Assigned</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in OrganizationTopics">
+                        <div class="courses-card" ng-repeat="topic in OrganizationTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -254,7 +254,7 @@
                     <%--  <h1>Assigned</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AssignedTopics">
+                        <div class="courses-card" ng-repeat="topic in AssignedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -310,7 +310,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in DraftTopics">
+                        <div class="courses-card" ng-repeat="topic in DraftTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -366,7 +366,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in FavouriteTopics">
+                        <div class="courses-card" ng-repeat="topic in FavouriteTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -401,7 +401,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LearningPathTopics">
+                        <div class="courses-card" ng-repeat="topic in LearningPathTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -436,7 +436,7 @@
                     <%--   <h1>Drafts</h1>--%>
                     <%-- Start new card style --%>
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in ArchivedTopics">
+                        <div class="courses-card" ng-repeat="topic in ArchivedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
                                     <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
