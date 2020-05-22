@@ -1228,7 +1228,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .content-title {
-    color: rgba(0, 0, 0, 0.5);
+    color: #878787;
+    font-size: 18px;
+    font-family: OpenSans-SemiBold;
 }
 
 .content-title .svg-inline--fa {
@@ -1236,10 +1238,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .content-activity {
-    color: rgba(0, 0, 0, 0.5) !important;
+    color: #7A7A7A !important;
     margin-left: 2rem;
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-family: OpenSans-SemiBold;
     vertical-align: middle;
 }
 
@@ -1261,6 +1263,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     text-align: center;
     padding: 3rem 0;
     cursor: pointer;
+    font-family:OpenSans-SemiBold;
 }
 
 .website-redesign .card.add-status .card-body .icon {
@@ -1275,9 +1278,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 
 .wr-content {
-    background: rgba(0, 0, 0, 0.04);
-    padding: 1rem 1.5rem;
-    border-radius: .25rem;
+    background: #F3F5F7;
+    padding: 16px 20px;
+    border-radius: 6px;
 }
 
 .wr-content .content-img {
@@ -1285,8 +1288,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .wr-content .wr-content-title {
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.5);
+    font-family: OpenSans-SemiBold;
+    font-size: 16px;
+    color: #666666;
 }
 
 .wr-content .wr-content-anchar .anchar-profile-icon {
@@ -1301,6 +1305,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     padding: 2px 8px;
     border-radius: 2rem;
     text-transform: uppercase;
+    font-family: OpenSans-Bold;
 }
 
 .wr-content .wr-content-anchar .anchor-date {
@@ -3252,9 +3257,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     margin: 0 10px;
     background: #fff;
     z-index: 1;
-    border-radius: .75rem;
-    -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.16);
+    border-radius: 9px;
     margin-bottom: 20px;
     /*transform: none !important;
     position: relative !important;*/
@@ -3317,13 +3321,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .board-column-header {
     font-size: 1.25rem;
-    font-weight: 700;
     position: relative;
     height: 60px;
     line-height: 60px;
     overflow: hidden;
-    padding: 0 20px;
+    padding: 0 30px;
     color: #000;
+    font-family: OpenSans-Bold;
 
     .float-right {
         color: rgba(0, 0, 0, 0.5);
@@ -3363,7 +3367,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .board-column-content {
     position: relative;
     min-height: 95px;
-    border: 16px solid transparent;
+    border: 30px solid transparent;
     border-top: none;
     border-bottom: none;
 }
@@ -3392,6 +3396,26 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     cursor: move;
     background: rgba(0, 0, 0, 0.04);
     border-radius: .25rem;
+}
+
+.add-task {
+    padding: 0 30px;
+
+    .btn {
+        background: #F3F5F7;
+        border-radius: 6px;
+        font-size: 18px;
+        color: #131313;
+        font-family: OpenSans-SemiBold;
+
+        .svg-inline--fa {
+            position: relative;
+            top: -2px;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.56);
+            font-family: OpenSans-Regular;
+        }
+    }
 }
 
 
