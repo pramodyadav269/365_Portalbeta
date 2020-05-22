@@ -1263,7 +1263,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     text-align: center;
     padding: 3rem 0;
     cursor: pointer;
-    font-family:OpenSans-SemiBold;
+    font-family: OpenSans-SemiBold;
 }
 
 .website-redesign .card.add-status .card-body .icon {
@@ -2397,11 +2397,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 }
 
+
 .dashboard {
     .course-wrapper {
         .course-header {
             &.card {
                 border-radius: 0;
+                background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box;
 
                 .card-body {
                     padding: 1.25rem;
@@ -2410,8 +2412,16 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         padding: 3rem 4rem 2rem 4rem;
                     }
 
+                    .card-title {
+                        font-family: OpenSans-SemiBold;
+                        font-size: 38px;
+                        color: #fff;
+                    }
+
                     .card-text {
-                        color: rgba(255, 255, 255, 0.70);
+                        font-family: OpenSans-Regular;
+                        font-size: 18px;
+                        color: #fff;
                     }
 
                     .action {
@@ -2444,17 +2454,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .card {
                     cursor: pointer;
+                    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.07);
+                    border-radius: 3px;
 
                     .card-body {
-                        padding: .75rem 1.25rem;
+                        padding: 16px 30px;
 
                         .card-title {
-                            font-weight: bold;
+                            font-size: 20px;
+                            font-family: OpenSans-SemiBold;
+                            color: #1B1C21;
                             margin-bottom: .25rem;
                         }
 
                         .card-text {
-                            color: rgba(0, 0, 0, 0.4);
+                            font-size: 17px;
+                            font-family: OpenSans-Regular;
+                            color: #B5B5B5;
                         }
                     }
                 }
@@ -2620,7 +2636,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
     .breadcrumb {
         background-color: #FFFCE9;
-        padding-left: 300px;
+        padding-left: 68px;
         margin-bottom: 0;
 
         @media #{$medium-and-down} {
@@ -2660,7 +2676,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     .lesson-wrapper {
         position: relative;
         padding: 2rem;
-        padding-left: 300px;
+        padding-left: 68px;
         display: flex;
         flex-direction: row-reverse;
 
@@ -2673,7 +2689,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             height: 80vh;
             overflow: auto;
             margin-bottom: 2rem;
-            margin-right: 2rem;
+            margin-right: 1rem;
+            padding-right: 1rem;
 
             @media #{$small-and-down} {
                 margin-right: 0;
@@ -2755,6 +2772,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 }
 
+.courses-card {
+    margin-right: 20px;
+    margin-bottom: 1.75rem;
+}
+
 .card-with-img {
 
     &.card {
@@ -2764,7 +2786,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         @media #{$small-and-down} {
             width: auto;
         }*/
-        margin-bottom: 1.75rem;
         border-radius: 0;
         border-bottom-left-radius: .1rem;
         border-bottom-right-radius: .1rem;
@@ -2831,9 +2852,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     }
 
                     &.type {
-                        font-size: 10px;
+                        font-size: 11px;
                         color: #707070;
-                        font-family: OpenSans-Light;
+                        font-family: OpenSans-Regular;
                         margin-bottom: 20px;
                     }
                 }
@@ -2842,7 +2863,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     font-size: 12px;
                     color: #000000;
                     margin-bottom: 20px;
-                    font-family: OpenSans-SemiBold;
+                    font-family: OpenSans-Bold;
                 }
             }
 

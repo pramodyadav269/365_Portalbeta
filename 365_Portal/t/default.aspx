@@ -46,7 +46,7 @@
                         <div class="course-lesson">
                             <div class="lesson"></div>
                             <div class="lesson" ng-repeat="module in Module.UnlockedItems">
-                                <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
+                                <div class="card" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
                                     <div class="card-body">
                                         <h5 class="card-title" ng-bind-html="trustAsHtml(module.Title)"></h5>
                                         <%--  <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>--%>
@@ -250,7 +250,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvInProgressTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
+                    <div class="courses-card" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -314,7 +314,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvMyTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
+                    <div class="courses-card" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -379,7 +379,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvRecommendedTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
+                    <div class="courses-card" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -433,7 +433,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvLatestTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
+                    <div class="courses-card" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
@@ -489,7 +489,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvPopularTopics">
-                    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
+                    <div class="courses-card" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
