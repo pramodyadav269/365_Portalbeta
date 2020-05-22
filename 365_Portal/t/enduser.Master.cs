@@ -22,6 +22,7 @@ namespace _365_Portal.Admin
             {
                 if (HttpContext.Current.Session["UserId"] != null && HttpContext.Current.Session["CompId"] != null)
                 {
+
                     // Update Session Time
                     List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
                     if (Cache["ActiveUsers"] != null)
@@ -41,6 +42,8 @@ namespace _365_Portal.Admin
                     {
                         lblNotiCount.Text = "";
                     }
+
+
                 }
             }
 
@@ -152,7 +155,6 @@ namespace _365_Portal.Admin
                 }
                 */
 
-
                 if (HttpContext.Current.Session["RoleName"] != null)
                 {
                     if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.superadmin)
@@ -211,7 +213,7 @@ namespace _365_Portal.Admin
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
                         dvAllCourses.Visible = true;
-                        dvAddNewCourse.Visible = true;
+                        // dvAddNewCourse.Visible = true;
 
                         dvLearn.Visible = true;
                         dvMyLearning.Visible = true;
@@ -226,7 +228,7 @@ namespace _365_Portal.Admin
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;
-                        dvAddNewTask.Visible = true;
+                        //    dvAddNewTask.Visible = true;
 
                         dvProjects.Visible = true;
                         dvTaskInsights.Visible = true;
@@ -239,8 +241,8 @@ namespace _365_Portal.Admin
                         dvUserGroupMpng.Visible = true;
                         dvUsers.Visible = true;
 
-                        dvAddNewCourse.Visible = true;
-                        dvAddNewTask.Visible = true;
+                        //  dvAddNewCourse.Visible = true;
+                        //   dvAddNewTask.Visible = true;
 
                         dvCommunity.Visible = true;
                         dvLearnNewSkills.Visible = true;
@@ -287,7 +289,7 @@ namespace _365_Portal.Admin
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
                         dvAllCourses.Visible = true;
-                        dvAddNewCourse.Visible = true;
+                        //dvAddNewCourse.Visible = true;
                         dvCommunity.Visible = true;
                         dvConnectWithOtherLearners.Visible = true;
                         dvDiscoverNewOpportunities.Visible = true;
@@ -296,8 +298,8 @@ namespace _365_Portal.Admin
                         dvAdminConsole.Visible = true;
                         dvContent.Visible = true;
 
-                        dvAddNewCourse.Visible = true;
-                        dvAddNewTask.Visible = true;
+                        //  dvAddNewCourse.Visible = true;
+                        //dvAddNewTask.Visible = true;
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;
@@ -398,6 +400,7 @@ namespace _365_Portal.Admin
                         lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
                     }
                     objSession.KillSession(lstActiveUsers, Session.SessionID, null);
+
                     objRequest.UserID = Convert.ToString(HttpContext.Current.Session["UserId"]);
 
                     DataSet ds = UserDAL.UserLogout(Convert.ToInt32(HttpContext.Current.Session["CompId"]), objRequest.UserID, Utility.GetClientIPaddress());

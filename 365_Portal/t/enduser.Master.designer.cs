@@ -103,15 +103,6 @@ namespace _365_Portal.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCoursesInsights;
         
         /// <summary>
-        /// dvCoursesSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCoursesSettings;
-        
-        /// <summary>
         /// dvProjects control.
         /// </summary>
         /// <remarks>
@@ -137,15 +128,6 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTaskInsights;
-        
-        /// <summary>
-        /// dvTaskSettings control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTaskSettings;
         
         /// <summary>
         /// dvCommunity control.
@@ -181,7 +163,7 @@ namespace _365_Portal.Admin {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor dvSettings;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvSettings;
         
         /// <summary>
         /// dvUsersNTeams control.
@@ -272,6 +254,24 @@ namespace _365_Portal.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor dvCourseCategory;
+        
+        /// <summary>
+        /// dvCoursesSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvCoursesSettings;
+        
+        /// <summary>
+        /// dvTaskSettings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvTaskSettings;
         
         /// <summary>
         /// dvLearnNewSkills control.
