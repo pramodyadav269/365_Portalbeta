@@ -110,29 +110,27 @@
             </nav>
             <div class="col-12">
                 <div class="row lesson-wrapper">
-                    <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                        <div class="lesson-list shadow-sm">
-                            <div class="duration"><span>Time Estimate</span><span>About {{ GetTopicTime(SelectedModule.LessonTime) }}</span></div>
-                            <div class="header">Content</div>
-                            <div id="list-lesson" class="list-group">
-                                <a class="list-group-item list-group-item-action active" href="#list-item-learningObjectives" ng-click="DisplayLearningObjectives($event.currentTarget,'Learning Objectives',SelectedModule.Overview)">Learning Objectives</a>
-                                <%-- <a class="list-group-item list-group-item-action" href="#list-item-2">Overview of Objects</a>
+                    <div class="lesson-list shadow-sm">
+                        <div class="duration"><span>Time Estimate</span><span>About {{ GetTopicTime(SelectedModule.LessonTime) }}</span></div>
+                        <div class="header">Content</div>
+                        <div id="list-lesson" class="list-group">
+                            <a class="list-group-item list-group-item-action active" href="#list-item-learningObjectives" ng-click="DisplayLearningObjectives($event.currentTarget,'Learning Objectives',SelectedModule.Overview)">Learning Objectives</a>
+                            <%-- <a class="list-group-item list-group-item-action" href="#list-item-2">Overview of Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-3">Get to Know Objects</a>
                                     <a class="list-group-item list-group-item-action" href="#list-item-4">Create a Custom Object</a>--%>
 
-                                <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                    ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
-                                    class="list-group-item list-group-item-action" href="{{'#list-item-' + content.ContentID }}" ng-bind-html="trustAsHtml(content.Title)"></a>
+                            <a ng-if="content.ContentType != 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                ng-click="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)"
+                                class="list-group-item list-group-item-action" href="{{'#list-item-' + content.ContentID }}" ng-bind-html="trustAsHtml(content.Title)"></a>
 
-                                <a class="list-group-item list-group-item-action" href="#list-item-resources" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
+                            <a class="list-group-item list-group-item-action" href="#list-item-resources" ng-click="DisplayLearningObjectives($event.currentTarget,'Resources',SelectedModule.Resources)">Resources</a>
 
-                                <a class="next shadow-sm  list-group-item list-group-item-action" href="#list-item-finalquiz" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
-                                    ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">Quiz
-                                </a>
-                            </div>
+                            <a class="next shadow-sm  list-group-item list-group-item-action" href="#list-item-finalquiz" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems"
+                                ng-init="ViewContent($event.currentTarget,content.TopicID,content.ModuleID,content.ContentID,content.Title,content.ContentType)">Quiz
+                            </a>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-7 col-lg-8 p-0">
+                    <div class="col p-0">
                         <div id="dvContentViewer" data-spy="scroll" data-target="#list-lesson" data-offset="0" class="lesson-scrollspy">
                             <div class="lesson-content" id="list-item-1">
                                 <h2 class="lesson-title">{{SelectedModule.Title}}</h2>

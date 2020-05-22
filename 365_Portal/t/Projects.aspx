@@ -19,10 +19,10 @@
         /*current code*/
     </style>
     <div class="container-fluid">
-        <div class="row pt-4 pb-4">
+        <div class="row pt-4 pb-3">
             <div class="col-10 offset-2">
                 <div class="row">
-                    <div class="col-auto mr-auto" id="contentTitle">
+                    <div class="col-auto mr-auto pl-0" id="contentTitle">
                         <h5 id="headingProjectName" class="content-title"></h5>
                     </div>
                     <div class="col-auto pr-5">
@@ -36,9 +36,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2 pl-0 sub-side-menu">
+            <div class="sub-side-menu">
                 <ul class="list-group mb-4">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
                         <div class="task-summary"><span class="task-summary-count" id="spnTotalTasksCount">0</span><span class="task-summary-title">Total Tasks</span></div>
                         <%-- <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
                         <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>--%>
@@ -93,7 +93,7 @@
                     <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
-            <div class="col-10 pr-5 drag-drop-card">
+            <div class="drag-drop-card">
                 <div class="row website-redesign board" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
@@ -660,7 +660,7 @@
                             var TeamWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
                                 return n.Id == objTeam.Id;
                             });
-                            teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
+                            teamHtml += '<li class="list-group-item task-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
                             teamHtml += '<span>';
                             $.each(TeamWiseMembers, function (indxMember, objMember) {
                                 if (objMember.FilePath != null && objMember.FilePath != "") {
@@ -834,7 +834,7 @@
                                         container += '<div>';
                                         container += '<img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">' + objstatustracker.FirstName + '</span>';
                                         container += '</div>';
-                                        container += '<div class="anchor-date"><span>' + moment(objstatustracker.CreatedDate).format("MMM DD YYYY, HH:mm a") + '</span></div>';
+                                        container += '<div class="anchor-date d-none"><span>' + moment(objstatustracker.CreatedDate).format("MMM DD YYYY, HH:mm a") + '</span></div>';
                                         container += '</div>';
                                         container += '<div class="wr-content-title">' + objstatustracker.Comments + '</div>';
                                         container += '</div>';
@@ -885,7 +885,7 @@
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
                 var StringSubtask = "";
-                
+
                 var taskStatusId = $("#ddlStatus").children("option:selected").val();
                 var taskStatusName = $("#ddlStatus").children("option:selected").text();
                 var container = $('#cblist');
@@ -943,7 +943,7 @@
 
                             var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
                             if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
-                                
+
                                 UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
                             }
 
@@ -1701,7 +1701,7 @@
                                 });
                             }
                         }
-                        newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
+                        newCardHtml += '<div class="anchor-date d-none"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
                         cardHtml += '</li>';
@@ -1719,7 +1719,7 @@
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    newCardHtml += '<div class="col-12 mt-3 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
@@ -1731,7 +1731,7 @@
 
             if (jsonStatusList.length < 5 && Role != "enduser") {
                 newCardHtml += '<div class="board-column add-card">';
-                newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
+                newCardHtml += '<div class="add-status"><a class="btn w-100" onclick="onOpenAddStatusModal();"><i class="fas fa-plus"></i>Add another list</a></div>';
                 newCardHtml += '</div>';
             }
 
@@ -2053,7 +2053,7 @@
 
         function gettaskassignees(assigneesData) {
             var TaskAssinees = [];
-            var TaskAssigneeRows = assigneesData.split('|');
+            var TaskAssigneeRows = assigneesData !== null ? assigneesData.split('|') : '';
             $.each(TaskAssigneeRows, function (index, objrow) {
                 var TaskAssigneeCols = objrow.split(',');
                 var Taskassigneesparam = {
