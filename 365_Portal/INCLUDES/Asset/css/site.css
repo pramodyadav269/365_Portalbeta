@@ -1678,9 +1678,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   min-height: 160px !important;
   max-height: 300px; }
 
-.courses-card {
-  margin-right: 20px; }
-
 .dashboard .course-wrapper .course-header.card {
   border-radius: 0;
   background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box; }
@@ -1694,7 +1691,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       font-size: 38px;
       color: #fff; }
     .dashboard .course-wrapper .course-header.card .card-body .card-text {
-      color: rgba(255, 255, 255, 0.7); }
+      font-family: OpenSans-Regular;
+      font-size: 18px;
+      color: #fff; }
     .dashboard .course-wrapper .course-header.card .card-body .action span {
       cursor: pointer;
       padding: 0.3rem .45rem;
@@ -1714,14 +1713,20 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     padding-left: 2.75rem;
     border-left: 2px dashed rgba(0, 0, 0, 0.1); }
     .dashboard .course-wrapper .course-lesson .lesson .card {
-      cursor: pointer; }
+      cursor: pointer;
+      box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.07);
+      border-radius: 3px; }
       .dashboard .course-wrapper .course-lesson .lesson .card .card-body {
-        padding: .75rem 1.25rem; }
+        padding: 16px 30px; }
         .dashboard .course-wrapper .course-lesson .lesson .card .card-body .card-title {
-          font-weight: bold;
+          font-size: 20px;
+          font-family: OpenSans-SemiBold;
+          color: #1B1C21;
           margin-bottom: .25rem; }
         .dashboard .course-wrapper .course-lesson .lesson .card .card-body .card-text {
-          color: rgba(0, 0, 0, 0.4); }
+          font-size: 17px;
+          font-family: OpenSans-Regular;
+          color: #B5B5B5; }
     .dashboard .course-wrapper .course-lesson .lesson:first-child {
       border-left: 0; }
       .dashboard .course-wrapper .course-lesson .lesson:first-child::before {
@@ -1823,7 +1828,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .dashboard .breadcrumb {
   background-color: #FFFCE9;
-  padding-left: 300px;
+  padding-left: 68px;
   margin-bottom: 0; }
   @media only screen and (max-width: 992px) {
     .dashboard .breadcrumb {
@@ -1851,7 +1856,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .dashboard .lesson-wrapper {
   position: relative;
   padding: 2rem;
-  padding-left: 300px;
+  padding-left: 68px;
   display: flex;
   flex-direction: row-reverse; }
   @media only screen and (max-width: 992px) {
@@ -1862,7 +1867,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     height: 80vh;
     overflow: auto;
     margin-bottom: 2rem;
-    margin-right: 2rem; }
+    margin-right: 1rem;
+    padding-right: 1rem; }
     @media only screen and (max-width: 600px) {
       .dashboard .lesson-wrapper .lesson-scrollspy {
         margin-right: 0; } }
@@ -1915,6 +1921,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         .dashboard .lesson-wrapper .lesson-list .list-group .next .svg-inline--fa {
           margin-right: .5rem; }
 
+.courses-card {
+  margin-right: 20px;
+  margin-bottom: 1.75rem; }
+
 .card-with-img.card {
   width: 270px;
   height: 406px;
@@ -1922,7 +1932,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         @media only screen and (max-width : 600px) {
             width: auto;
         }*/
-  margin-bottom: 1.75rem;
   border-radius: 0;
   border-bottom-left-radius: .1rem;
   border-bottom-right-radius: .1rem;
@@ -1976,15 +1985,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                             transition: 0.5s;
                         }*/ }
       .card-with-img.card .card-body.item .card-text.type {
-        font-size: 10px;
+        font-size: 11px;
         color: #707070;
-        font-family: OpenSans-Light;
+        font-family: OpenSans-Regular;
         margin-bottom: 20px; }
     .card-with-img.card .card-body.item .card-title {
       font-size: 12px;
       color: #000000;
       margin-bottom: 20px;
-      font-family: OpenSans-SemiBold; }
+      font-family: OpenSans-Bold; }
   .card-with-img.card .card-body.profile {
     padding: 0 20px 20px 20px;
     display: flex;

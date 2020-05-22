@@ -46,7 +46,7 @@
                         <div class="course-lesson">
                             <div class="lesson"></div>
                             <div class="lesson" ng-repeat="module in Module.UnlockedItems">
-                                <div class="card shadow-sm" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
+                                <div class="card" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)">
                                     <div class="card-body">
                                         <h5 class="card-title" ng-bind-html="trustAsHtml(module.Title)"></h5>
                                         <%--  <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>--%>
