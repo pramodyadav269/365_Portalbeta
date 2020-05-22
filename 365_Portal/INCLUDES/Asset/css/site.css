@@ -2294,7 +2294,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   height: 60px;
   line-height: 60px;
   overflow: hidden;
-  padding: 0 30px;
+  padding: 0 18px;
   color: #000;
   font-family: OpenSans-Bold; }
   .board-column-header .float-right {
@@ -2325,7 +2325,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .board-column-content {
   position: relative;
   min-height: 95px;
-  border: 30px solid transparent;
+  border: 18px solid transparent;
   border-top: none;
   border-bottom: none; }
 
@@ -2351,7 +2351,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: .25rem; }
 
 .add-task {
-  padding: 0 30px; }
+  padding: 0 18px; }
   .add-task .btn {
     background: #F3F5F7;
     border-radius: 6px;
