@@ -330,7 +330,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             objTopic.IsDeleted = flag;
 
         objDs.DS_ChangeTopicProperty(type, topicId, flag);
-    }    
+    }
 
     $scope.GetFormattedDate = function (date) {
         //return date.split("/").reverse().join("-");
@@ -426,7 +426,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     //Added by Pramod on 25 APR 20
-    $scope.ArchiveUnArchiveTopic = function (topicId, flag) {        
+    $scope.ArchiveUnArchiveTopic = function (topicId, flag) {
         objDs.ArchiveUnArchiveTopic(topicId, flag);
     }
     //End Added by Pramod on 25 APR 20
@@ -861,15 +861,29 @@ app.service("DataService", function ($http, $rootScope, $compile) {
     }
 
     ds.ArchiveUnArchiveTopic = function (topicId, flag) {
-        debugger
+        //flag = 0 Archive
+        // flag = 1 Unarchieve
+        var txtMsg = "";
+        var txtConfirmButtonText = "";
+        if (flag == 0) {
+            // archieve
+            txtMsg = "Do you want to archive ? Yes or No !";
+            txtConfirmButtonText = 'Yes, archive it!';
+        }
+        else {
+           // Unarchieve
+            txtMsg = "Do you want to un-archive ? Yes or No !";
+            txtConfirmButtonText = 'Yes, un-archive it!';
+        }
+
         Swal.fire({
             title: 'Are you sure?',
-            text: "Do you want to delete ? Yes or No !",
+            text: txtMsg,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: txtConfirmButtonText
         }).then((result) => {
             if (result.value) {
                 ShowLoader();
