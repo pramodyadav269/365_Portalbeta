@@ -28,7 +28,7 @@
                             <a class="back c-yellow" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8">
-                            <h2 class="card-title">{{SelectedTopic.Title}}</h2>
+                            <h2 class="card-title"  ng-bind-html="trustAsHtml(SelectedTopic.Title)">{{SelectedTopic.Title}}</h2>
                             <p class="card-text">{{SelectedTopic.Description}}</p>
                             <div class="action">
                                 <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
@@ -941,7 +941,7 @@
                                                     <img ng-if="content.ContentType=='FINALQUIZ'" src="../includes/Asset/images/quiz-icon.svg" />
                                                 </div>
                                                 <div class="col-sm-9 col-md-9 col-lg-10">
-                                                    <h5 class="card-title">{{content.Title}}</h5>
+                                                    <h5 class="card-title" ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
                                                     <p ng-bind-html="trustAsHtml(content.Description)" class="card-text"></p>
                                                 </div>
                                                 <div class="col-sm-1 col-md-1 col-lg-1">
@@ -969,7 +969,7 @@
                                                     <img ng-if="content.ContentType=='FINALQUIZ'" src="../includes/Asset/images/quiz-icon.svg" />
                                                 </div>
                                                 <div class="col-sm-9 col-md-9 col-lg-10">
-                                                    <h5 class="card-title">{{content.Title}}</h5>
+                                                    <h5 class="card-title"  ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
                                                     <p ng-bind-html="trustAsHtml(content.Description)" class="card-text"></p>
                                                 </div>
                                                 <div class="col-sm-1 col-md-1 col-lg-1">
