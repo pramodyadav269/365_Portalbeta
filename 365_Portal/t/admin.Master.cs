@@ -213,7 +213,7 @@ namespace _365_Portal.Admin
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
                         dvAllCourses.Visible = true;
-                        dvAddNewCourse.Visible = true;
+                       // dvAddNewCourse.Visible = true;
 
                         dvLearn.Visible = true;
                         dvMyLearning.Visible = true;
@@ -228,7 +228,7 @@ namespace _365_Portal.Admin
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;
-                        dvAddNewTask.Visible = true;
+                    //    dvAddNewTask.Visible = true;
 
                         dvProjects.Visible = true;
                         dvTaskInsights.Visible = true;
@@ -241,8 +241,8 @@ namespace _365_Portal.Admin
                         dvUserGroupMpng.Visible = true;
                         dvUsers.Visible = true;
 
-                        dvAddNewCourse.Visible = true;
-                        dvAddNewTask.Visible = true;
+                      //  dvAddNewCourse.Visible = true;
+                     //   dvAddNewTask.Visible = true;
 
                         dvCommunity.Visible = true;
                         dvLearnNewSkills.Visible = true;
@@ -289,7 +289,7 @@ namespace _365_Portal.Admin
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
                         dvAllCourses.Visible = true;
-                        dvAddNewCourse.Visible = true;
+                        //dvAddNewCourse.Visible = true;
                         dvCommunity.Visible = true;
                         dvConnectWithOtherLearners.Visible = true;
                         dvDiscoverNewOpportunities.Visible = true;
@@ -298,8 +298,8 @@ namespace _365_Portal.Admin
                         dvAdminConsole.Visible = true;
                         dvContent.Visible = true;
 
-                        dvAddNewCourse.Visible = true;
-                        dvAddNewTask.Visible = true;
+                      //  dvAddNewCourse.Visible = true;
+                        //dvAddNewTask.Visible = true;
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;

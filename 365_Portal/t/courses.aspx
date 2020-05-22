@@ -67,8 +67,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)"></h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -124,8 +124,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -179,8 +179,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -236,8 +236,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -271,8 +271,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -327,13 +327,13 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
-                                    <h6 class="card-title">{{topic.InstructorName}}</h6>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.InstructorName)">{{topic.InstructorName}}</h6>
                                 </div>
                             </div>
                         </div>
@@ -383,8 +383,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -418,8 +418,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
@@ -453,8 +453,8 @@
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
                                     <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
-                                    <h6 class="card-title">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis">{{topic.Description}}</p>
+                                    <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
+                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
                                     <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />

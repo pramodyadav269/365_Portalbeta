@@ -247,14 +247,14 @@
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
-                        <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourneynew2.aspx"><i class="fas fa-plus-circle"></i></a>
+                        <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" style="display: none;" visible="false" href="LearningJourneynew2.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
                             <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
                             </li>
-                            <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
+                            <%-- <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
                                 <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Courses Settings</span><span class="link-text">Courses Settings</span></a>
-                            </li>
+                            </li>--%>
                         </ul>
                     </li>
                     <li class="sidenav-item side-menu">
@@ -264,9 +264,9 @@
                             <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
                             </li>
-                            <li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
+                            <%--<li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Tasks Settings</span><span class="link-text">Tasks Settings</span></a>
-                            </li>
+                            </li>--%>
                         </ul>
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
@@ -276,8 +276,11 @@
                         <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-university"></i></span><span class="tooltiptext">OnyxU</span><span class="link-text">OnyxU</span></a>
                     </li>
                     <li class="sidenav-item side-menu" id="dvSettingsParent" runat="server" visible="false">
-                        <a class="sidenav-link menu-title" id="dvSettings" runat="server" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></span><span class="link-text">Settings</span></a>
+                        <%--                        <a class="sidenav-link menu-title" id="dvSettings" runat="server" visible="false"><span class="link-icon" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fas fa-cog"></i></span><span class="link-text">Settings</span></a>--%>
                         <ul class="sub-sidenav-nav">
+                            <li class="sidenav-item" id="dvSettings" runat="server" visible="false">
+                                <a class="sidenav-link content-menu" href="#" menu-data="ulSettings"><span class="link-icon"><i class="fas fa-user-cog"></i></span><span class="tooltiptext">Settings</span><span class="link-text">Settings</span></a>
+                            </li>
                             <li class="sidenav-item" id="dvUsersNTeams" runat="server" visible="false">
                                 <a class="sidenav-link content-menu" href="#" menu-data="ulUsersGroups"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Users & Groups</span><span class="link-text">Users & Groups</span></a>
                             </li>
@@ -371,6 +374,17 @@
                         <a class="sidenav-link" id="dvCourseCategory" runat="server" visible="false" href="AddCategory.aspx" onclick="">Course Category</a>
                     </li>
                 </ul>
+
+                <ul class="sidenav-nav d-none" id="ulSettings">
+                    <h4 class="menu-title">Settings</h4>
+                    <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
+                        <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Courses Settings</span><span class="link-text">Courses Settings</span></a>
+                    </li>
+                    <li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Tasks Settings</span><span class="link-text">Tasks Settings</span></a>
+                    </li>
+                </ul>
+
                 <%--<ul class="sidenav-nav d-none" id="ulBilling">
                     <h4 class="menu-title">Billing</h4>
                     <li class="sidenav-item">
