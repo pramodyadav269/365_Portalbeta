@@ -253,7 +253,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
-                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
@@ -264,7 +264,7 @@
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
-                           
+
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
@@ -317,7 +317,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
-                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
@@ -382,7 +382,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
-                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>
@@ -436,7 +436,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
-                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>
@@ -492,7 +492,7 @@
                     <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
-                                <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                     <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>

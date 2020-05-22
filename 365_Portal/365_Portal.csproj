@@ -2129,6 +2129,7 @@
     <Content Include="INCLUDES\Asset\images\diamond.png" />
     <Content Include="INCLUDES\Asset\images\didnt-like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\diploma.png" />
+    <Content Include="INCLUDES\Asset\images\dot-more-vertical-menu.svg" />
     <Content Include="INCLUDES\Asset\images\dots-menu.svg" />
     <Content Include="INCLUDES\Asset\images\edit-24px.svg" />
     <Content Include="INCLUDES\Asset\images\employee-illustration.svg" />
@@ -2462,6 +2463,17 @@
     <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-SemiBold.ttf" />
     <Content Include="INCLUDES\Asset\fonts\Open_Sans\OpenSans-SemiBoldItalic.ttf" />
     <Content Include="INCLUDES\Asset\fonts\flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\Helvetica Neu Bold.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeue BlackCond.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeue Light.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeue Medium.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeue Thin.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeue.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeueBd.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeueHv.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeueIt.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeueLt.ttf" />
+    <Content Include="INCLUDES\Asset\fonts\helveticaneue\HelveticaNeueMed.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

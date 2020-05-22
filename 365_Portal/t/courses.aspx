@@ -52,7 +52,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AllTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -110,7 +110,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in GlobalTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -165,7 +165,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in PublishedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--   <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -222,7 +222,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in OrganizationTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -257,7 +257,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in AssignedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--    <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -313,7 +313,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in DraftTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -369,7 +369,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in FavouriteTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -404,7 +404,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in LearningPathTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
@@ -439,7 +439,7 @@
                         <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3" ng-repeat="topic in ArchivedTopics">
                             <div class="card card-with-img">
                                 <div class="action-icon dropdown" ng-show="topic.CanEdit==1 && UserRole !='enduser'">
-                                    <i class="fas fa-ellipsis-v" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                                    <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                     <div class="dropdown-menu br-0">
                                         <%--  <a class="dropdown-item" href="#"><i class="fas fa-graduation-cap"></i>Enroll</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-eye"></i>View more details</a>
