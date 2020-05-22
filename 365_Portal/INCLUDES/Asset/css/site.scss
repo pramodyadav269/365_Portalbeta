@@ -1362,7 +1362,6 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 #dvCreateProject .card .card-body {
     padding: 4rem;
-    height: 100vh
 }
 /* input-form-2 */
 .input-form-2 .form-group label {
@@ -3131,8 +3130,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }
 }
 
+.task-form {
+    width: calc(100% - 270px);
+}
+
 .recent-activity {
     margin-bottom: 2rem;
+    width: calc(100% - 270px);
 
     .card-body {
         padding: 2.2rem 3.5rem;

@@ -990,8 +990,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   background: rgba(20, 126, 251, 0.07); }
 
 #dvCreateProject .card .card-body {
-  padding: 4rem;
-  height: 100vh; }
+  padding: 4rem; }
 
 /* input-form-2 */
 .input-form-2 .form-group label {
@@ -2164,8 +2163,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .comment-history .wr-content .wr-content-anchar .anchor-date span {
   font-size: 14px !important; }
 
+.task-form {
+  width: calc(100% - 270px); }
+
 .recent-activity {
-  margin-bottom: 2rem; }
+  margin-bottom: 2rem;
+  width: calc(100% - 270px); }
   .recent-activity .card-body {
     padding: 2.2rem 3.5rem; }
     .recent-activity .card-body .activity-wrapper {

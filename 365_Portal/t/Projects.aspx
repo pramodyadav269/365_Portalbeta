@@ -281,46 +281,47 @@
                         </div>
                     </div>--%>
                 </div>
-                <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row input-validation">
-                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
-                                        <div class="form-group">
-                                            <input type="hidden" id="hdnProjectId" />
-                                            <label for="txtProjectName">Project Name</label>
-                                            <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
-                                        </div>
+            </div>
+            <div class="row input-validation input-form-2 task-form d-none" id="dvCreateProject">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row input-validation">
+                                <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <input type="hidden" id="hdnProjectId" />
+                                        <label for="txtProjectName">Project Name</label>
+                                        <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
-                                        <div class="form-group">
-                                            <label for="txtProjectGoal">Project Goal</label>
-                                            <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
-                                        </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <label for="txtProjectGoal">Project Goal</label>
+                                        <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-10">
-                                        <div class="form-group">
-                                            <label for="ddlProjectMembers">Project Members</label>
-                                            <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10">
+                                    <div class="form-group">
+                                        <label for="ddlProjectMembers">Project Members</label>
+                                        <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
+                                        </select>
                                     </div>
-                                    <div class="w-100"></div>
-                                    <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
-                                        <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
-                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
+                                    <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row recent-activity d-none" id="dvRecentActivity">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body" id="dvActivitybody">
-                                <%--<div class="activity-wrapper">
+            <div class="row recent-activity d-none" id="dvRecentActivity">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body" id="dvActivitybody">
+                            <%--<div class="activity-wrapper">
                                     <div class="day">Today</div>
                                     <div class="activity">
                                         <div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>
@@ -373,7 +374,6 @@
                                         <div class="time">5:40 PM</div>
                                     </div>
                                 </div>--%>
-                            </div>
                         </div>
                     </div>
                 </div>
