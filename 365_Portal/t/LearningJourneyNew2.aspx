@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <div class="form-group color-picker">
+                                            <div class="form-group color-picker" style="display:none;">
                                                 <label for="txtCourseThemeColor">Theme Color</label>
                                                 <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
                                             </div>
@@ -86,7 +86,7 @@
                                         </div>
 
                                         <div class="col-sm-12 col-md-6 btnSpace">
-                                            <a class="btn btn-black" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Proceed to Course Builder</a>
+                                            <a class="btn btn-black" id="btnAddCourse" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Save & Proceed</a>
                                         </div>
 
                                     </div>
@@ -187,7 +187,7 @@
 
             <div class="col-12 mb-5" id="divAddMoreLesson">
                 <a class="btn btn-black" id="btnAddMoreLesson" style="display: none;" onclick="AddMoreLesson('0');"><i class="fas fa-plus-circle"></i>Add New Lesson</a>
-                <a class="btn btn-outline black" id="btnCancelLesson" style="display: none;" onclick="ClearNewLesson();">Cancel</a>
+                <%--<a class="btn btn-outline black" id="btnCancelLesson" style="display: none;" onclick="ClearNewLesson();">Cancel</a>--%>
             </div>
         </div>
     </div>
@@ -310,6 +310,12 @@
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
+
+                if(CourseFlag != '0')
+                {
+                    $('#btnAddCourse').text('Save');
+                }
+
                 EditCourse();
 
                 if (CourseFlag != '0') {
@@ -324,7 +330,7 @@
             {
                 $("#btnPublish").hide();
                 $("#btnDiscard").hide();
-            }            
+            }     
         });
 
         function readQueryString() {
@@ -1033,7 +1039,7 @@
                 '<div class="col-sm-12 quiz-wrapper" id="dvLessonQues">' +
                 '</div>' +
 
-                '<div class="col-sm-12 mb-4" id="divQuestionType">' +
+                '<div class="col-sm-12 mb-4" id="divQuestionType">' + divQuestionType +
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -1042,7 +1048,7 @@
                 '<div class="action-btn" id="divAddContent">' +
                 //'<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
                 '<a class="btn btn-outline blod black float-right" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>'+
-                '<a class="btn btn-outline blod black float-right" id="btnCanelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
+                '<a class="btn btn-outline blod black float-right" id="btnCancelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
                 '</div>' +
                 '</div>';
 
@@ -1066,7 +1072,7 @@
                 }
 
                 $('#btnAddMoreLesson').show();
-                $('#btnCancelLesson').hide();
+                //$('#btnCancelLesson').hide();
 
                 $('#btnNewContent').show();
                 $('#btnSaveContent').hide();
@@ -1087,7 +1093,7 @@
                 ManageQuiz('editbind');
 
                 $('#btnAddMoreLesson').hide();
-                $('#btnCancelLesson').show();
+                //$('#btnCancelLesson').show();
 
                 $('#btnNewContent').hide();
                 $('#btnSaveContent').show();
@@ -1123,6 +1129,8 @@
                         $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-up');
                         $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-down');
                     }
+
+                    $('#btnAddMoreLesson').show();
                 }
             });
         }
@@ -1194,7 +1202,7 @@
                                     $('#dvLessonViewParentEdit').empty();
 
                                     $('#btnAddMoreLesson').show();
-                                    $('#btnCancelLesson').hide();
+                                    //$('#btnCancelLesson').hide();
                                 }
                                 else {
                                     //ManageLesson('editbind');
@@ -1228,7 +1236,11 @@
 
         function AddLession(flag, type) {
 
-            ShowLoader();
+            if(flag != 'withquiz')
+            {
+                ShowLoader();
+            }           
+            
             var getUrl;
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
@@ -1261,23 +1273,12 @@
                             debugger
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-                                    if (flag == 'redirect') {
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-                                                document.location = 'courses.aspx';
-                                            }
-                                        });
-                                    }
-                                    else if (flag.includes('lastsave')) {
+
+                                    if (flag.includes('lastsave')) {
                                         HideLoader();
                                         if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                             LessonFlag = DataSet.Data[0].InsertedID;
                                         }
-
 
                                         //save all details
                                         if (type == 'addnew') {
@@ -1303,60 +1304,19 @@
                                             LessonFlag = DataSet.Data[0].InsertedID;
                                         }
 
-                                        BindLessonGrid(flag);
+                                        BindLessonGrid(flag);//Need to enable this
                                         AddContent(flag);
-                                    }
-                                    else if (flag == 'withcontent') {
-                                        HideLoader();
-                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                            LessonFlag = DataSet.Data[0].InsertedID;
-                                        }
-
-                                        AddContent('withlesson');
-                                    }
-                                    else if (flag == 'onlylesson') {
-                                        HideLoader();
-                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                            LessonFlag = DataSet.Data[0].InsertedID;
-                                        }
-
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-                                                BindLessonGrid('');
-                                            }
-                                        });
-                                    }
-                                    else if (flag == 'savelesson') {
-                                        HideLoader();
-                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
-                                            LessonFlag = DataSet.Data[0].InsertedID;
-                                        }
-
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-
-                                                //Marked as not in use
-                                                //BindLessonInSubTile(LessonFlag, _Title, _Overview);
-                                            }
-                                        });
-                                    }
+                                    }                                    
                                     else if (flag == 'withquiz') {
-                                        HideLoader();
                                         if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                             LessonFlag = DataSet.Data[0].InsertedID;
                                         }
 
-                                        AddQuiz('withlesson');
+                                        if($('#txtQuizTitle').val() != undefined)
+                                        {
+                                            AddQuiz('');
+                                        }
                                     }
-
 
                                     IsCoursePublishable();
                                 }
@@ -1987,18 +1947,7 @@
                             if (DataSet.StatusCode == "1") {
                                 HideLoader();
 
-                                if (flag == 'redirect') {
-                                    Swal.fire({
-                                        title: "Success",
-                                        text: DataSet.Data[0].ReturnMessage,
-                                        icon: "success"
-                                    }).then((value) => {
-                                        if (value) {
-                                            document.location = 'courses.aspx';
-                                        }
-                                    });
-                                }
-                                else if (flag.includes('lastsave')) {
+                                if (flag.includes('lastsave')) {
                                     HideLoader();
                                     if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                         ContentFlag = DataSet.Data[0].InsertedID;
@@ -2260,7 +2209,14 @@
                                     ManageResource('editclear');
                                     */
                                     ManageResource('editbind');
-                                    editorResourcesDescription.value = DataSet.Data.Data[0].Resource;
+                                    if(DataSet.Data.Data[0].Resource == null || DataSet.Data.Data[0].Resource == undefined)
+                                    {
+                                        editorResourcesDescription.value = '';
+                                    }
+                                    else
+                                    {
+                                        editorResourcesDescription.value = DataSet.Data.Data[0].Resource;
+                                    }                                    
                                 }
                             }
                             else {
@@ -2311,18 +2267,8 @@
                             ""
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-                                    if (flag == 'redirect') {
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-                                                document.location = 'courses.aspx';
-                                            }
-                                        });
-                                    }
-                                    else if (flag.includes('lastsave')) {
+                                    
+                                    if (flag.includes('lastsave')) {
                                         HideLoader();
                                         ResourceFlag = LessonFlag;
 
@@ -2338,40 +2284,7 @@
                                             });
                                         }
                                     }
-                                    else if (flag == 'withresource') {
-                                        HideLoader();
-                                        ResourceFlag = LessonFlag;
-
-                                        BindLessonGrid('');
-                                        BindResourceGrid('withlesson');
-
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-
-                                            }
-                                        });
-                                    }
-                                    else if (flag == 'onlyresource') {
-                                        HideLoader();
-                                        ResourceFlag = LessonFlag;
-
-                                        BindResourceGrid('onlyresource');
-
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: DataSet.Data[0].ReturnMessage,
-                                            icon: "success"
-                                        }).then((value) => {
-                                            if (value) {
-
-                                            }
-                                        });
-                                    }
-
+                                    
                                     IsCoursePublishable();
                                 }
                                 else {
@@ -2522,10 +2435,12 @@
                                     Questions = DataSet.Data[0].Questions;
                                     BindQuestion('', Questions);
 
-                                    //$('#divQuestionType').show();
-                                    $('#divQuestionType').empty().append(divQuestionType);
-
-                                    //BindQuestion(Questions);
+                                    //$('#divQuestionType').empty().append(divQuestionType);
+                                }
+                                else
+                                {
+                                    ManageQuiz('editbind');
+                                    //$('#divQuestionType').empty().append(divQuestionType);
                                 }
                             }
                             else {
@@ -2583,22 +2498,8 @@
                         }
 
                         HideLoader();
-
-                        //$('#divQuestionType').show();
-                        $('#divQuestionType').empty().append(divQuestionType);
-
-                        if (flag == 'redirect') {
-                            Swal.fire({
-                                title: "Success",
-                                text: DataSet.Data[0].ReturnMessage,
-                                icon: "success"
-                            }).then((value) => {
-                                if (value) {
-                                    document.location = 'Courses.aspx';
-                                }
-                            });
-                        }
-                        else if (flag.includes('lastsave')) {
+                        
+                        if (flag.includes('lastsave')) {
                             HideLoader();
 
                             if (flag == 'lastsavequiz') {
@@ -2612,35 +2513,7 @@
                                     }
                                 });
                             }
-                        }
-                        else if (flag == 'withlesson') {
-
-                            BindLessonGrid('');
-                            BindQuizGrid('withlesson');
-
-                            Swal.fire({
-                                title: "Success",
-                                text: DataSet.Data[0].ReturnMessage,
-                                icon: "success"
-                            }).then((value) => {
-                                if (value) {
-
-                                }
-                            });
-                        }
-                        else if (flag == 'onlyquiz') {
-
-                            BindQuizGrid('onlyquiz');
-                            Swal.fire({
-                                title: "Success",
-                                text: DataSet.Data[0].ReturnMessage,
-                                icon: "success"
-                            }).then((value) => {
-                                if (value) {
-
-                                }
-                            });
-                        }
+                        }                        
                     }
                 });
             }
@@ -2727,6 +2600,42 @@
         var AnswerTypeCode = '';
         function ShowQuestion(cls, flag, QuestionAnswer, questionSrNo) {
             debugger
+
+            if($('#txtLessonTitle').val() != undefined)
+            {
+                var resultLesson = validateAddLesson();
+                if (resultLesson.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: resultLesson.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                    return false;
+                }
+            }
+            if($('#txtQuizTitle').val() != undefined)
+            {
+                var resultQuiz = validateAddQuiz();
+                if (resultQuiz.error) {
+                    Swal.fire({
+                        title: "Alert",
+                        text: resultQuiz.msg,
+                        icon: "error",
+                        button: "Ok",
+                    });
+                    return false;
+                }
+            }
+            if($('#txtLessonTitle').val() != undefined)
+            {
+                AddLession('withquiz');
+            }            
+            else if($('#txtQuizTitle').val() != undefined)
+            {
+                AddQuiz('');
+            }
+            
 
             var allLessonGrid = $("div[id^='dvLessonQues']");
             if (allLessonGrid.length > 0) {
