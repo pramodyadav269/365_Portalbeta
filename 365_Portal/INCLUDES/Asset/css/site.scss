@@ -4211,8 +4211,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 
-input, *:focus, *:active {
+:focus, :active {
     border: 0;
-    outline: none !important;
+    outline: 0 !important;
     box-shadow: none
 }

@@ -2869,7 +2869,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       font-size: 22px;
       color: #707070; }
 
-input, *:focus, *:active {
+:focus, :active {
   border: 0;
-  outline: none !important;
+  outline: 0 !important;
   box-shadow: none; }

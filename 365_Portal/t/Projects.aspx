@@ -406,20 +406,20 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtTopicSummary">Topic Summary</label>
-                                <textarea class="form-control required" placeholder="Topic Summary" id="txtTopicSummary"></textarea>
+                                <textarea class="form-control" placeholder="Topic Summary" id="txtTopicSummary"></textarea>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="ddlAddAssignee">Add Assignee</label>
-                                <select class="form-control select2 required" id="ddlAddAssignee" style="width: 100% !important" multiple>
+                                <select class="form-control select2" id="ddlAddAssignee" style="width: 100% !important" multiple>
                                 </select>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtDueDate">Set Due Date</label>
-                                <input type="text" readonly class="form-control required input-inline-picker" id="txtDueDate" placeholder="Select Date" />
+                                <input type="text" readonly class="form-control input-inline-picker" id="txtDueDate" placeholder="Select Date" />
                                 <div id="dvDueDate" class="inline-picker d-none"></div>
                             </div>
                         </div>
@@ -451,7 +451,7 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtAddPrivateNotes">Add Private Notes</label>
-                                <textarea class="form-control required" placeholder="Add Private Notes" id="txtAddPrivateNotes"></textarea>
+                                <textarea class="form-control" placeholder="Add Private Notes" id="txtAddPrivateNotes"></textarea>
                                 <div class="w-100"></div>
                             </div>
                         </div>
@@ -514,7 +514,6 @@
         var jsonStatusList = [];
 
         $(document).ajaxStart(function () {
-            //console.log('Ajax call started');
             ShowLoader();
         });
 
@@ -524,14 +523,13 @@
             $('.navbar-brand .svg-inline--fa').remove();
             $('main').css({ 'margin-left': '0' });
 
-
             $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
             $('.sidenav-nav a.sidenav-link[href="Projects.aspx"]').addClass('active'); // add active class in current page
-            //ShowLoader();
+
             if (Role == "enduser") {
                 RoleWaiseHideControls();
             }
-            //BindStatusMaster();
+
             BindProjects();
             BindTeamMembers()
 
@@ -563,10 +561,12 @@
             });
         });
 
-        function onOpenTaskInfoModal() {
+        function onOpenTaskInfoModal(statusId) {
             $('#modalTaskInfo').modal('show');
             clearFields('.input-validation-modal');
             ClearTaskForm();
+            $('#ddlStatus').val(statusId);
+            $('#ddlStatus').select2().trigger('change');
         }
 
         function onClickBack(view, hide) {
@@ -885,7 +885,7 @@
                 var hiddenTaskId = $("#hdnTaskId").val();
                 var duedate = $("#txtDueDate").val();
                 var StringSubtask = "";
-                
+
                 var taskStatusId = $("#ddlStatus").children("option:selected").val();
                 var taskStatusName = $("#ddlStatus").children("option:selected").text();
                 var container = $('#cblist');
@@ -913,7 +913,7 @@
                     , t_TaskID: hiddenTaskId != null && hiddenTaskId != "" ? hiddenTaskId : "0"
                     , t_TaskName: $("#txtTaskName").val()
                     , t_TaskSummary: $("#txtTopicSummary").val()
-                    , t_DueDate: moment(duedate).format("YYYY-MM-DDTHH:mm:ss")
+                    , t_DueDate: duedate != "" ? moment(duedate).format("YYYY-MM-DDTHH:mm:ss") : new Date()
                     , t_PrivateNotes: $("#txtAddPrivateNotes").val()
                     , t_UserId: "0"
                     , t_TaskAssignees_UserIds: $("#ddlAddAssignee").val().toString() //varchar(500), #(Userids comma separated)
@@ -943,7 +943,7 @@
 
                             var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
                             if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
-                                
+
                                 UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
                             }
 
@@ -1687,18 +1687,20 @@
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
                         //Bind Task Assignee
-                        var jsonTaskAssigneelist = gettaskassignees(objTask.TaskAsginee);
-                        if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
-                            if (jsonTaskAssigneelist[0].Message == null) {
-                                $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
-                                    var profilepicpath = '';
-                                    if (objMember.FilePath != null && objMember.FilePath != "") {
-                                        profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
-                                    } else {
-                                        profilepicpath = "../INCLUDES/Asset/images/profile.png";
-                                    }
-                                    newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
-                                });
+                        if (objTask.TaskAsginee != null) {
+                            var jsonTaskAssigneelist = gettaskassignees(objTask.TaskAsginee);
+                            if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
+                                if (jsonTaskAssigneelist[0].Message == null) {
+                                    $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
+                                        var profilepicpath = '';
+                                        if (objMember.FilePath != null && objMember.FilePath != "") {
+                                            profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
+                                        } else {
+                                            profilepicpath = "../INCLUDES/Asset/images/profile.png";
+                                        }
+                                        newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
+                                    });
+                                }
                             }
                         }
                         newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
@@ -1718,8 +1720,8 @@
 
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
-                    cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    newCardHtml += '<div class="col-12 mt-3 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal();"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12 mt-3 mb-4 add-task"><a class="btn w-100"  onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
@@ -1840,7 +1842,8 @@
                 dragEnabled: true,
                 dragSortInterval: 0,
                 dragStartPredicate: function (item, event) {
-                    if (event.target.nodeName == 'A') {
+
+                    if (event.target.nodeName == 'A' && event.target.hasAttribute("task_Id")) {
                         var taskId = event.target.attributes.task_Id.value;
                         var taskName = event.target.attributes.task_name.value;
                         var taskEvent = event.target.attributes.clickevent.value;
