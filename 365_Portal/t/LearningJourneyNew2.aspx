@@ -208,7 +208,7 @@
                     <div class="row">
                         <div class="col-sm-12 mt-3">
                             <div class="form-group">
-                                <input type="text" class="form-control required" onkeyup="setTextCount(this)" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
+                                <input type="text" class="form-control required" onkeyup="setTextCount(this);" placeholder="Tag Name *" maxlength="100" id="txtTagName" aria-describedby="txtTagNameHelp" />
                                 <small id="txtTagNameHelp" class="form-text">Add tag name
                                         <span class="float-right">0 / 100</span>
                                 </small>
@@ -244,6 +244,8 @@
         var ResourceFlag = '0';
         var QuizFlag = '0';
 
+        var tmpLessonId = '0';
+
         var ContentContentTypeID = '1';
         var QuizContentTypeID = '5';
         var passingScore = 0;
@@ -253,11 +255,11 @@
 
         var dvLessonEdit = '<div class="form-group asterisk">' +
             '<label for="txtLessonTitle" class="inline">Lesson Title</label>' +
-            '<input type="text" class="form-control required" id="txtLessonTitle" placeholder="Lesson Title" />' +
+            '<input type="text" class="form-control required" id="txtLessonTitle" onkeyup="IsChangedAnything(this);" placeholder="Lesson Title" />' +
             '</div>' +
             '<div class="form-group asterisk">' +
             '<label for="txtLessonDescription" class="inline">Lesson Description</label>' +
-            '<textarea class="form-control required" id="txtLessonDescription" placeholder="Add Lesson Description"></textarea>' +
+            '<textarea class="form-control required" id="txtLessonDescription" onkeyup="IsChangedAnything(this);" placeholder="Add Lesson Description"></textarea>' +
             '</div>';
         //'<div class="form-group">' +
         //    '<a class="btn btn-outline blod black" id="btnLessonCancel" onclick="LessonCancel(this);">Cancel</a>' +
@@ -266,7 +268,7 @@
         var dvLessonContentEdit = '<div class="form-group asterisk">' +
             '<div class="tag content">Content</div>' +
             '<label for="txtContentHeader" class="inline">Content Title</label>' +
-            '<input type="text" class="form-control required" id="txtContentHeader" placeholder="Content Title" />' +
+            '<input type="text" class="form-control required" id="txtContentHeader" onkeyup="IsChangedAnything(this);" placeholder="Content Title" />' +
             '</div>' +
             '<div class="form-group editor asterisk">' +
             '<div id="txtContentDescription"></div>' +
@@ -283,11 +285,11 @@
         var dvLessonQuizEdit = '' +
             '<div class="form-group asterisk">' +
             '<label for="txtQuizTitle" class="inline">Quiz Title</label>' +
-            '<input type="text" class="form-control required" id="txtQuizTitle" placeholder="Quiz Title" />' +
+            '<input type="text" class="form-control required" id="txtQuizTitle" onkeyup="IsChangedAnything(this);" placeholder="Quiz Title" />' +
             '</div>' +
             '<div class="form-group asterisk">' +
             '<label for="txtQuizDescription" class="inline">Quiz Description</label>' +
-            '<textarea class="form-control required" id="txtQuizDescription" placeholder="Quiz Description"></textarea>' +
+            '<textarea class="form-control required" id="txtQuizDescription" onkeyup="IsChangedAnything(this);" placeholder="Quiz Description"></textarea>' +
             '</div>';
         //'<div class="form-group">' +
         //'<a class="btn btn-outline blod black" id="btnQuizCancel" onclick="QuizCancel(this);">Cancel</a>' +
@@ -985,15 +987,15 @@
                 '<div class="col-sm-3">' +
                 '<div class="form-group">' +
                 '<label class="inline active">Points</label>' +
-                '<input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(this,event);" />' +
+                '<input type="text" class="form-control required" maxlength="5" id="txtPoint" placeholder="+100" onkeyup="return isNumberKey(this,event);IsChangedAnything(this);" />' +
                 '</div>' +
                 '</div>' +
 
                 '<div class="col-sm-5">' +
                 '<div class="form-group">' +
                 '<label class="inline active">Estimated Time</label>' +
-                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);" />' +
-                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(this,event);" />' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtHour" placeholder="HH" onkeyup="return isNumberKey(this,event);IsChangedAnything(this);" />' +
+                '<input type="text" class="form-control required d-inline col-5" maxlength="2" id="txtMin" placeholder="MM" onkeyup="return isNumberKey(this,event);IsChangedAnything(this);" />' +
                 '</div>' +
                 '</div' +
 
@@ -1014,7 +1016,7 @@
 
                 '<div class="col-sm-12" id="dvContentContent" style="padding-left: 52px;">'+
                 '<div class="form-group editor">'+
-                '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add Content</a>'+
+                '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add New Content</a>'+
                 '<a class="btn btn-outline blod black" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>'+
                 '<a class="btn btn-outline blod black" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>'+                
                 '</div>' +
@@ -1027,7 +1029,7 @@
                 '<div class="form-group mb-2 d-flex justify-content-end">' +
                 '<label class="d-inline"><i class="fas fa-plus-circle"></i>Passing Percentage</label>' +
                 '<input type="text" class="form-control required d-inline col-3" maxlength="5" id="txtPassingScorePercentage" placeholder="100" ' +
-                'onkeyup="return isNumberKey(this,event);" />' +
+                'onkeyup="IsChangedAnything(this);return isNumberKey(this,event); " />' +
                 '</div>' +
                 '</div>' +
                 '<div class="col-sm-12" id="dvLessonQuizView">' +
@@ -1106,33 +1108,43 @@
         }
 
         function ClearNewLesson() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to discard this lesson ? Yes or No !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, clear it!'
-            }).then((result) => {
-                if (result.value) {
-                    debugger
-                    $("div[id^='tempLessonGrid_']").remove();                    
 
-                    if($('#btnEditLesson_'+LessonFlag).hasClass('fa-chevron-down'))
-                    {
-                        $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-down');
-                        $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-up');
-                    }
-                    else
-                    {
-                        $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-up');
-                        $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-down');
-                    }
+            if(IsChangedField == '0')
+            {
+                $("div[id^='tempLessonGrid_']").remove();
+                $('#btnAddMoreLesson').show();
+            }
+            else
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to discard this lesson ? Yes or No !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, clear it!'
+                }).then((result) => {
+                    if (result.value) {
+                        debugger
+                        $("div[id^='tempLessonGrid_']").remove();                    
 
-                    $('#btnAddMoreLesson').show();
-                }
-            });
+                        //if($('#btnEditLesson_'+LessonFlag).hasClass('fa-chevron-down'))
+                        //{
+                        //    $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-down');
+                        //    $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-up');
+                        //}
+                        //else
+                        //{
+                        //    $('#btnEditLesson_'+LessonFlag).removeClass('fa-chevron-up');
+                        //    $('#btnEditLesson_'+LessonFlag).addClass('fa-chevron-down');
+                        //}
+
+                        $('#btnAddMoreLesson').show();
+                        IsChangedField = '0';
+                    }
+                });
+            }
         }
 
         function validateAddLesson() {
@@ -1174,8 +1186,7 @@
                         debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
-                                var LessonTable = DataSet.Data;
-                                debugger
+                                var LessonTable = DataSet.Data;                                
                                 $('#divLessonMain').show();
 
                                 var Lesson = '';
@@ -1202,12 +1213,14 @@
                                     $('#dvLessonViewParentEdit').empty();
 
                                     $('#btnAddMoreLesson').show();
-                                    //$('#btnCancelLesson').hide();
                                 }
                                 else {
-                                    //ManageLesson('editbind');
-                                    //ManageContent('editbind');                                    
                                     AddMoreLesson('0');
+                                }
+                                debugger
+                                if(flag== "addcontentandlesson")
+                                {
+                                    $("#btnEditLesson_"+tmpLessonId).click();
                                 }
                             }
                             else {
@@ -1306,7 +1319,16 @@
 
                                         BindLessonGrid(flag);//Need to enable this
                                         AddContent(flag);
-                                    }                                    
+                                    }
+                                    else if (flag == 'addcontentandlesson') {
+                                        if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                            LessonFlag = DataSet.Data[0].InsertedID;
+                                        }
+
+                                        tmpLessonId = LessonFlag;
+
+                                        AddContent(flag);                                        
+                                    }
                                     else if (flag == 'withquiz') {
                                         if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                             LessonFlag = DataSet.Data[0].InsertedID;
@@ -1459,23 +1481,35 @@
 
         function EditLessionFromTile(obj, id) {
 
-            if($(obj).hasClass('fa-chevron-down'))
-            {
-                $(obj).removeClass('fa-chevron-down');
-                $(obj).addClass('fa-chevron-up')
-            }
-            else
-            {
-                $(obj).removeClass('fa-chevron-up');
-                $(obj).addClass('fa-chevron-down')
-            }
-
             debugger
+            tmpLessonId = '0';
+            
             if ($('#tempLessonGrid_' + id).length) {
-                $('#tempLessonGrid_' + id).remove();
+
+                if(IsChangedField != '0')
+                {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Do you want to discard this lesson ? Yes or No !",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, clear it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            debugger
+                            $('#tempLessonGrid_' + id).remove();
+                            IsChangedField = '0';
+                        }
+                    });
+                }
+                else
+                {
+                    $('#tempLessonGrid_' + id).remove();
+                }                
                 return false;
             }
-
 
             AddMoreLesson(id);
 
@@ -1484,8 +1518,6 @@
             var _CourseTime = $(obj).parent().parent().parent().parent().find('#spCourseTime').text();
             var _Points = $(obj).parent().parent().parent().parent().find('#spPoints').text();
 
-
-
             LessonFlag = id;
             ContentFlag = '0';
 
@@ -1493,34 +1525,6 @@
             BindContentGrid('');
             BindResourceGrid('');
             BindQuizGrid('');
-
-
-
-            //ManageLesson('editbind');
-
-            //$('#txtLessonTitle').val(_Title);
-            //$('#txtLessonDescription').val(_Overview);
-
-            //if (_CourseTime != undefined && _CourseTime != '' && _CourseTime.split(":").length > 0
-            //) {
-            //    $('#txtHour').val(_CourseTime.split(":")[0]);
-            //    if (_CourseTime.split(":").length > 1) {
-            //        $('#txtMin').val(_CourseTime.split(":")[1]);
-            //    }
-            //}
-            //else {
-            //    $('#txtHour').val('');
-            //    $('#txtMin').val('');
-            //}
-
-            //$('#txtPoint').val(_Points);
-
-            //LessonFlag = id;
-            //ContentFlag = '0';
-
-            //BindContentGrid('');
-            //BindResourceGrid('');
-            //BindQuizGrid('');
         }
 
 
@@ -1576,18 +1580,6 @@
         //Marked as not in use
         function EditLessonFromSubTile(obj, id) {
             debugger
-
-            //if($(obj).hasClass('fa-chevron-down'))
-            //{
-            //    $(obj).removeClass('fa-chevron-down');
-            //    $(obj).addClass('fa-chevron-up')
-            //}
-            //else
-            //{
-            //    $(obj).removeClass('fa-chevron-up');
-            //    $(obj).addClass('fa-chevron-down')
-            //}
-
             ManageLesson('editbind', 'editfromgrid');
 
             $('#txtLessonTitle').val($(obj).parent().find('#spSubTitle').text());
@@ -1737,7 +1729,7 @@
                         return false;
                     }
                 }
-
+                flag = 'addcontentandlesson';
                 AddLession(flag);
             }
             else
@@ -1980,6 +1972,21 @@
                                         icon: "success"
                                     });                                    
                                 }
+                                else if (flag == 'addcontentandlesson') {
+                                    HideLoader();
+                                    if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
+                                        ContentFlag = DataSet.Data[0].InsertedID;
+                                    }
+
+                                    ContentFlag = '0';
+                                    BindLessonGrid(flag);                                    
+
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: DataSet.Data[0].ReturnMessage,
+                                        icon: "success"
+                                    });                                    
+                                }
 
                                 IsCoursePublishable();
                             }
@@ -2031,17 +2038,6 @@
 
         function EditContentFromTile(obj, id) {
             debugger
-
-            //if($(obj).hasClass('fa-chevron-down'))
-            //{
-            //    $(obj).removeClass('fa-chevron-down');
-            //    $(obj).addClass('fa-chevron-up')
-            //}
-            //else
-            //{
-            //    $(obj).removeClass('fa-chevron-up');
-            //    $(obj).addClass('fa-chevron-down')
-            //}
 
             var ContentHeader = $(obj).parent().parent().find('#hdgContentTitle').text();
             var ContentDescription = $(obj).parent().parent().find('#spContentDescription_' + id).text();
@@ -2531,17 +2527,6 @@
         function EditQuizFromTile(obj, id) {
             debugger
 
-            if($(obj).hasClass('fa-chevron-down'))
-            {
-                $(obj).removeClass('fa-chevron-down');
-                $(obj).addClass('fa-chevron-up')
-            }
-            else
-            {
-                $(obj).removeClass('fa-chevron-up');
-                $(obj).addClass('fa-chevron-down')
-            }
-
             ManageQuiz('editbind', 'editfromgrid');
             $('#txtQuizTitle').val($(obj).parent().parent().find('#hdgQuizTitle').text());
             $('#txtQuizDescription').val($(obj).parent().parent().find('#spQuizDescription').text());
@@ -2672,7 +2657,7 @@
                     '<span class="sr">Q' + QuestionNumber + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                     '<div class="col-sm-8 col-md-10">' +
                     '<div class="form-group">' +
-                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" />' +
+                    '<input type="text" class="form-control" id="txtQuestion" onkeyup="IsChangedAnything(this);" placeholder="Add Question Text" />' +
                     '</div>' +
                     '</div>' +
                     '<span class="correct">Correct</span>' +
@@ -2684,7 +2669,7 @@
                     '<div class="row">' +
                     '<div class="col-sm-12 col-md-10">' +
                     '<div class="form-group">' +
-                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '<input type="text" class="form-control" id="txtAnswer" onkeyup="IsChangedAnything(this);" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
                     '</div>' +
                     '</div>' +
                     '<div class="col-sm-3 col-md-2">' +
@@ -2703,7 +2688,7 @@
                     '<div class="row">' +
                     '<div class="col-sm-12 col-md-10">' +
                     '<div class="form-group">' +
-                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '<input type="text" class="form-control" id="txtAnswer" onkeyup="IsChangedAnything(this);" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
                     '</div>' +
                     '</div>' +
                     '<div class="col-sm-3 col-md-2">' +
@@ -2722,7 +2707,7 @@
                     '<div class="row">' +
                     '<div class="col-sm-12 col-md-10">' +
                     '<div class="form-group">' +
-                    '<input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                    '<input type="text" class="form-control" id="txtAnswer" onkeyup="IsChangedAnything(this);" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
                     '</div>' +
                     '</div>' +
                     '<div class="col-sm-3 col-md-2">' +
@@ -2778,7 +2763,7 @@
                     '<span class="sr">Q' + questionSrNo + '<i class="' + className + '" id="QuestionTypeClass"></i><i class="fas fa-caret-down"></i></span>' +
                     '<div class="col-sm-8 col-md-10">' +
                     '<div class="form-group">' +
-                    '<input type="text" class="form-control" id="txtQuestion" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
+                    '<input type="text" class="form-control" id="txtQuestion" onkeyup="IsChangedAnything(this);" placeholder="Add Question Text" value="' + QuestionAnswer[0].Title + '"/>' +
                     '</div>' +
                     '</div>' +
                     '<span class="correct">Correct</span>' +
@@ -2804,7 +2789,7 @@
                         '<div class="row">' +
                         '<div class="col-sm-12 col-md-10">' +
                         '<div class="form-group">' +
-                        '<input type="text" class="form-control" id="txtAnswer" answerid="' + QuestionAnswer[i].AnswerID + '" value="' + QuestionAnswer[i].AnswerText + '" placeholder="Answer Option" />' +
+                        '<input type="text" class="form-control" id="txtAnswer" onkeyup="IsChangedAnything(this);" answerid="' + QuestionAnswer[i].AnswerID + '" value="' + QuestionAnswer[i].AnswerText + '" placeholder="Answer Option" />' +
                         '</div>' +
                         '</div>' +
                         '<div class="col-sm-3 col-md-2">' +
@@ -2841,7 +2826,28 @@
 
         function AddQuestionCancel(obj) {
             debugger
-            $(obj).closest("div[id^='dvLessonQues']").empty();
+            if(IsChangedInQuizField != '0')
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to discard this question ? Yes or No !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, clear it!'
+                }).then((result) => {
+                    if (result.value) {
+                        debugger
+                        $(obj).closest("div[id^='dvLessonQues']").empty();
+                        IsChangedInQuizField = '0';
+                    }
+                });
+            }
+            else
+            {
+                $(obj).closest("div[id^='dvLessonQues']").empty();
+            }
         }
 
         function AddAnswer() {
@@ -2854,7 +2860,7 @@
                 '    <div class="row">' +
                 '        <div class="col-sm-12 col-md-10">' +
                 '            <div class="form-group">' +
-                '                <input type="text" class="form-control" id="txtAnswer" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
+                '                <input type="text" class="form-control" id="txtAnswer" onkeyup="IsChangedAnything(this);" answerid="' + AnswerID + '" placeholder="Answer Option" />' +
                 '            </div>' +
                 '        </div>' +
                 '        <div class="col-sm-3 col-md-2">' +
@@ -3419,6 +3425,26 @@
             //if (IsPublished == 1)
             //    $("#dvPublishCourse").show();
         }
+
+        var IsChangedField = '0';
+        var IsChangedInQuizField = '0';
+        function IsChangedAnything(obj)
+        {
+            debugger
+            var id = $(obj).attr('id');
+            if(id == 'txtQuestion' || id == 'txtAnswer' || id == 'txtScore')
+            {
+                IsChangedInQuizField = '1';
+            }
+
+            IsChangedField = '1';
+        }
+
+        //This is not working
+        $(".jodit_wysiwyg").keyup(function(){
+            debugger
+            IsChangedField = '1';
+        });
 
     </script>
 </asp:Content>
