@@ -948,6 +948,37 @@
             debugger
             LessonFlag = id;
 
+            if($("div[id^='tempLessonGrid_']").length > 0)
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to discard this lesson ? Yes or No !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, clear it!'
+                }).then((result) => {
+                    debugger
+                    if (result.value) {                        
+                        AddMoreLessonBind(id);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                });
+            }
+            else
+            {
+                AddMoreLessonBind(id);
+            }
+        }
+
+        function AddMoreLessonBind(id)
+        {
+            LessonFlag = id;
+
             var deleteIsEnabled = '', tagStyle = '';
             if (id != '0') {
                 deleteIsEnabled = '<a><i class="fas fa-trash-alt" onclick="DeleteLessionFromTile(this,' + id + ')";></i></a>';
@@ -3355,6 +3386,33 @@
         }
 
         function PublishCourse(flag) {
+
+            debugger
+            if(IsChangedField != '0')
+            {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Do you want to discard this lesson ? Yes or No !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, clear it!'
+                }).then((result) => {
+                    debugger
+                    if (result.value) {                        
+                        PublishCourseMain(flag);
+                    }                
+                });
+            }
+            else
+            {
+                PublishCourseMain(flag);
+            }
+        }
+
+        function PublishCourseMain(flag)
+        {
             ShowLoader();
             var TopicID = CourseFlag;
             var getUrl = "/API/Content/PublishCourse";
