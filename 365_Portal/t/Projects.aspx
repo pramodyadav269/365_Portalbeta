@@ -448,13 +448,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 mb-3">
+                        <%--<div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtAddPrivateNotes">Add Private Notes</label>
                                 <textarea class="form-control" placeholder="Add Private Notes" id="txtAddPrivateNotes"></textarea>
                                 <div class="w-100"></div>
                             </div>
-                        </div>
+                        </div>--%>
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="txtTaskComments">Comments</label>
@@ -779,9 +779,11 @@
                         $("#hdnTaskId").val(jsonTaskdetails.Data[0].TaskID);
                         $("#txtTaskName").val(jsonTaskdetails.Data[0].TaskName);
                         $("#txtTopicSummary").val(jsonTaskdetails.Data[0].TaskSummary);
-                        var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
-                        $("#txtDueDate").val(moment(dateTime).format("YYYY/MM/DD hh:mm a"));
-                        $("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes);
+                        if (jsonTaskdetails.Data[0].DueDate != null && jsonTaskdetails.Data[0].DueDate != "") {
+                            var dateTime = new Date(jsonTaskdetails.Data[0].DueDate);
+                            $("#txtDueDate").val(moment(dateTime).format("YYYY/MM/DD hh:mm a"));
+                        }
+                        //$("#txtAddPrivateNotes").val(jsonTaskdetails.Data[0].PrivateNotes);
                         $("#hdntaskddlStatusId").val(jsonTaskdetails.Data[0].Status)
                         $('#ddlStatus').val(jsonTaskdetails.Data[0].Status);
                         $('#ddlStatus').select2().trigger('change');
@@ -867,7 +869,7 @@
             $("#hdnTaskId").val("");
             $("#txtTaskName").val("");
             $("#txtTopicSummary").val("");
-            $("#txtAddPrivateNotes").val("");
+            //$("#txtAddPrivateNotes").val("");
             $("#txtTaskComments").val("");
             $('#ddlAddAssignee').val(null).trigger('change');
             $("#txtAddSubTask").val("");
@@ -913,8 +915,9 @@
                     , t_TaskID: hiddenTaskId != null && hiddenTaskId != "" ? hiddenTaskId : "0"
                     , t_TaskName: $("#txtTaskName").val()
                     , t_TaskSummary: $("#txtTopicSummary").val()
-                    , t_DueDate: duedate != "" ? moment(duedate).format("YYYY-MM-DDTHH:mm:ss") : new Date()
-                    , t_PrivateNotes: $("#txtAddPrivateNotes").val()
+                    , t_DueDate: duedate != "" ? moment(duedate).format("YYYY-MM-DDTHH:mm:ss") : ""
+                    //, t_PrivateNotes: $("#txtAddPrivateNotes").val()
+                    , t_PrivateNotes: ""
                     , t_UserId: "0"
                     , t_TaskAssignees_UserIds: $("#ddlAddAssignee").val().toString() //varchar(500), #(Userids comma separated)
                     , t_TagIds: "" //varchar(500), (comma separated)
@@ -1130,7 +1133,6 @@
                 },
                 complete: function () {
                     BindProjectData(ajaxprojectadata);
-
                 }
             });
         }
@@ -1152,8 +1154,6 @@
                 , p_UserId: "0"
                 , p_ProjectMembers_UserIds: ""
             };
-
-            //var projectajaxdata = call_ajaxfunction("../api/Project/ProjectCRUD", "POST", requestParams);
 
             $.ajax({
                 type: "POST",
@@ -1479,7 +1479,7 @@
             $("#txtTaskName").attr('readonly', true);
             $("#txtTopicSummary").attr('readonly', true);
             $('#ddlAddAssignee').attr('readonly', true);
-            $("#txtAddPrivateNotes").attr('readonly', true);
+            //$("#txtAddPrivateNotes").attr('readonly', true);
             $("#divSubtask").hide();
             $("#divfileAttachment").hide();
             $("#dvDueDate").hide();
@@ -1703,7 +1703,9 @@
                                 }
                             }
                         }
-                        newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
+                        if (objTask.DueDate != null && objTask.DueDate != "") {
+                            newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
+                        }
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
                         cardHtml += '</li>';

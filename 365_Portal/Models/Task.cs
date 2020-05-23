@@ -13,7 +13,7 @@ namespace _365_Portal.Models
         public int t_TaskID { get; set; }
         public string t_TaskName { get; set; }
         public string t_TaskSummary { get; set; }
-        public DateTime t_DueDate { get; set; }
+        public DateTime? t_DueDate { get; set; }
         public string t_PrivateNotes { get; set; }
         public int t_UserId { get; set; }
         public string t_TaskAssignees_UserIds { get; set; } //(Userids comma separated)
