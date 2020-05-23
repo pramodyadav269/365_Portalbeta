@@ -23,7 +23,7 @@ namespace _365_Portal.Models
         public int t_StatusID { get; set; }
         public string t_Comments { get; set; }
         public string t_FileName { get; set; } //(comma separated)
-
+        public bool t_IsFileUploaded { get; set; }
     }
 
     public class UpdateTaskManagement

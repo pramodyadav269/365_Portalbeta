@@ -907,6 +907,12 @@
                         }
                     });
                 }
+
+                var isfileuploaded = false;
+                if (FileName != $("#linkFileDownload").text()) {
+                    isfileuploaded = true;
+                }
+
                 var task_ActionId = hiddenTaskId != null && hiddenTaskId != "" ? "3" : "2";
                 var requestParams = {
                     t_Action: task_ActionId
@@ -926,6 +932,7 @@
                     , t_StatusID: taskStatusId
                     , t_Comments: $("#txtTaskComments").val()
                     , t_FileName: FileName
+                    , t_IsFileUploaded : isfileuploaded
                 };
 
                 $.ajax({

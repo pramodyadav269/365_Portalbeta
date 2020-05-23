@@ -45,7 +45,7 @@ namespace _365_Portal.Controllers
                           , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName);
                         var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
 
-                        if (!string.IsNullOrEmpty(task.t_FileName))
+                        if (!string.IsNullOrEmpty(task.t_FileName) && task.t_IsFileUploaded)
                         {
                             ActivityLog objlogfie = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), (int)TaskAction.FILEADDED, task.t_CompID, task.t_UserId
                        , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.t_TaskName, task.t_FileName);
