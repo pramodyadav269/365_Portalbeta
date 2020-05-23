@@ -799,12 +799,12 @@ main {
                         text-align: center;
 
                         .svg-inline--fa {
-                            font-size: 16px;
                             margin: 0;
                         }
                     }
 
                     .link-text {
+                        font-size: 15px;
                         display: inline-block;
                         /*margin-left: .75rem;*/
                         @media #{$small-and-down} {
@@ -820,7 +820,6 @@ main {
                                 font-weight: 700;
                                 content: "\f054";
                                 right: 14px;
-                                font-size: 13px;
                             }
                         }
                     }
@@ -838,9 +837,8 @@ main {
 
                     .menu-title {
                         .link-text {
-                            font-size: 14px;
+                            font-size: 15px;
                             /*text-transform: uppercase;*/
-
                             .svg-inline--fa {
                                 position: absolute;
                                 top: 20px;

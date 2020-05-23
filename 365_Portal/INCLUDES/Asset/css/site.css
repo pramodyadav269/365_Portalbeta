@@ -576,9 +576,9 @@ main.fix {
           width: 56px;
           text-align: center; }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-icon .svg-inline--fa {
-            font-size: 16px;
             margin: 0; }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item .sidenav-link .link-text {
+          font-size: 15px;
           display: inline-block;
           /*margin-left: .75rem;*/ }
           @media only screen and (max-width: 600px) {
@@ -589,8 +589,7 @@ main.fix {
           font-family: "Font Awesome 5 Free";
           font-weight: 700;
           content: "\f054";
-          right: 14px;
-          font-size: 13px; }
+          right: 14px; }
       .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu {
         display: inline-table;
         width: 100%;
@@ -599,7 +598,7 @@ main.fix {
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu:hover {
           color: rgba(221, 221, 221, 0.65); }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title .link-text {
-          font-size: 14px;
+          font-size: 15px;
           /*text-transform: uppercase;*/ }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title .link-text .svg-inline--fa {
             position: absolute;
