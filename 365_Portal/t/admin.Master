@@ -10,15 +10,15 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../includes/Asset/css/bootstrap.min.css?v=1" rel="stylesheet" />
-    <link href="../includes/Asset/css/all.css?v=1" rel="stylesheet" />
-    <link href="../includes/Asset/css/gijgo.min.css?v=1" rel="stylesheet" />
-    <link href="../Asset/css/select2.min.css?v=1" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css?v=1" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css?v=1" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=1" rel="stylesheet" />
-    <link href="../includes/Asset/css/360.css?v=1" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css?v=1" rel="stylesheet" />
+    <link href="../includes/Asset/css/bootstrap.min.css?v=23052020" rel="stylesheet" />
+    <link href="../includes/Asset/css/all.css?v=23052020" rel="stylesheet" />
+    <link href="../includes/Asset/css/gijgo.min.css?v=23052020" rel="stylesheet" />
+    <link href="../Asset/css/select2.min.css?v=23052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=23052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=23052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=23052020" rel="stylesheet" />
+    <link href="../includes/Asset/css/360.css?v=23052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=23052020" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../includes/Asset/js/angular.min.js"></script>
@@ -249,9 +249,7 @@
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
                         <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" style="display: none;" visible="false" href="LearningJourneynew2.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
-                            <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
-                            </li>
+
                             <%-- <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
                                 <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Courses Settings</span><span class="link-text">Courses Settings</span></a>
                             </li>--%>
@@ -261,13 +259,15 @@
                         <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Tasks</span><span class="link-text">Tasks</span></a>
                         <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
-                            <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
-                            </li>
+
                             <%--<li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
                                 <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Tasks Settings</span><span class="link-text">Tasks Settings</span></a>
                             </li>--%>
                         </ul>
+                    </li>
+                    <li class="sidenav-item side-menu">
+                        <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Insights</span><span class="link-text">Insights</span></a>
+
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
                         <a class="sidenav-link content-menu" href="#" menu-data="ulCommunity"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Community</span><span class="link-text">Community</span></a>
@@ -287,17 +287,12 @@
                             <li class="sidenav-item" id="dvSubMenu_Organizations" runat="server" visible="false">
                                 <a class="sidenav-link" onclick="location.href='organization.aspx';"><span class="link-icon"><i class="fas fa-building"></i></span><span class="tooltiptext">Organizations</span><span class="link-text">Organizations</span></a>
                             </li>
-                            <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="tooltiptext">Billing</span><span class="link-text">Billing</span></a>
-                            </li>
-                            <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
-                                <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="tooltiptext">Email</span><span class="link-text">Email</span></a>
-                            </li>
+
                         </ul>
                     </li>
-                    <li class="sidenav-item">
+                    <%-- <li class="sidenav-item">
                         <a class="sidenav-link" href="help.aspx"><span class="link-icon"><i class="far fa-question-circle"></i></span><span class="tooltiptext">Help</span><span class="link-text">Help</span></a>
-                    </li>
+                    </li>--%>
                     <%-- end beta --%>
 
                     <%--<li class="sidenav-item d-none" id="dvMenu_Dashboard" onclick="location.href='dashboard.aspx';">
@@ -377,13 +372,32 @@
 
                 <ul class="sidenav-nav d-none" id="ulSettings">
                     <h4 class="menu-title">Settings</h4>
+                    <li class="sidenav-item" id="dvOrganizationSettings" runat="server">
+                        <a class="sidenav-link" href="profile.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Organization Settings</span><span class="link-text">Organization Settings</span></a>
+                    </li>
                     <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
                         <a class="sidenav-link" href="assign_topics.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Courses Settings</span><span class="link-text">Courses Settings</span></a>
                     </li>
                     <li class="sidenav-item" id="dvTaskSettings" runat="server" visible="false">
                         <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Tasks Settings</span><span class="link-text">Tasks Settings</span></a>
                     </li>
+                    <li class="sidenav-item" id="dvBilling" runat="server" visible="false">
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-file-invoice-dollar"></i></span><span class="tooltiptext">Billing</span><span class="link-text">Billing</span></a>
+                    </li>
+                    <li class="sidenav-item" id="dvEmail" runat="server" visible="false">
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="far fa-envelope"></i></span><span class="tooltiptext">Email</span><span class="link-text">Email</span></a>
+                    </li>
                 </ul>
+                <ul class="sidenav-nav d-none" id="ulInsights">
+                    <h4 class="menu-title">Insights</h4>
+                    <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
+                    </li>
+                    <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
+                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
+                    </li>
+                </ul>
+
 
                 <%--<ul class="sidenav-nav d-none" id="ulBilling">
                     <h4 class="menu-title">Billing</h4>
@@ -634,7 +648,7 @@
                         <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
                     <li class="nav-item icon border-0 pr-0">
-                        <a>
+                        <a href="help.aspx">
                             <img src="../INCLUDES/Asset/images/question-mark.svg" /></a>
                     <li class="nav-item icon menu dropdown">
                         <a id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -771,7 +785,7 @@
                     <div class="dropdown-menu shadow">
                         <div class="list-group">
                             <a class="list-group-item" href="profile.aspx" id="dvMyAccount" runat="server" visible="false">My Account</a>
-                            <a class="list-group-item" href="#" id="dvOrganizationSettings" runat="server" visible="false">Organization Settings</a>
+                            <a class="list-group-item" href="#" id="dvOrganizationSettings1" runat="server" visible="false">Organization Settings</a>
                             <a class="list-group-item" href="#" id="dvLanguages" runat="server" visible="false">Languages</a>
                             <a class="list-group-item" href="#" id="dvAccountSettings" runat="server" visible="false">Account Settings</a>
                             <a class="list-group-item" href="#" id="dvIntegrations" runat="server" visible="false">Integrations</a>
