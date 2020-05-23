@@ -932,7 +932,7 @@
                     , t_StatusID: taskStatusId
                     , t_Comments: $("#txtTaskComments").val()
                     , t_FileName: FileName
-                    , t_IsFileUploaded : isfileuploaded
+                    , t_IsFileUploaded: isfileuploaded
                 };
 
                 $.ajax({
@@ -1875,44 +1875,45 @@
         }
 
         function BindProjectData(response) {
-            if (response != null) {
-                var jsonProjectList = $.parseJSON(response).Data;
-                var projectHtml = '';
-                projectHtml += '<li class="list-group-item task-title">Projects';
-                if (Role != "enduser") {
-                    projectHtml += '<a onclick="onClickAddProject();" class="task-item-action"><i class="fas fa-plus c-yellow"></i></a>';
-                }
-                projectHtml += ' </li>';
-                if (jsonProjectList.Data.length > 0) {
-                    $.each(jsonProjectList.Data, function (indxProject, objProject) {
-                        var activeClass = '';
-                        if ((ProjectID != "" && objProject.ProjectID == ProjectID) || (ProjectID == "" && indxProject == 0)) {
-                            activeClass = 'active';
-                            ProjectID = objProject.ProjectID;
-                            ProjectName = objProject.ProjectName;
-                            BindStatusMaster();
-                            BindCards();
-                            setcontentTitle(objProject.ProjectName);
-                            BindTeam(objProject.ProjectID);
-                            BindAssignee(ProjectID);
-                        }
-                        projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
-                        projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" onclick="SelectProject(this)" >' + objProject.ProjectName + '</span>';
-                        if (Role != "enduser") {
-                            projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
-                        }
-                        projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
-                        projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
-                        projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ',\'' + objProject.ProjectName + '\')">Delete</a>';
-                        projectHtml += '</div></li>';
-                        projectHtml += '</div></li>';
-                    });
-                }
-                else {
-                    projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
-                }
-                $("#ulProjects").empty().html(projectHtml);
+            var jsonProjectList = $.parseJSON(response).Data;
+            // if (jsonProjectList != undefined) {
+            var projectHtml = '';
+            projectHtml += '<li class="list-group-item task-title">Projects';
+            if (Role != "enduser") {
+                projectHtml += '<a onclick="onClickAddProject();" class="task-item-action"><i class="fas fa-plus c-yellow"></i></a>';
             }
+            projectHtml += ' </li>';
+            if (jsonProjectList != undefined && jsonProjectList.Data.length > 0) {
+                $.each(jsonProjectList.Data, function (indxProject, objProject) {
+                    var activeClass = '';
+                    if ((ProjectID != "" && objProject.ProjectID == ProjectID) || (ProjectID == "" && indxProject == 0)) {
+                        activeClass = 'active';
+                        ProjectID = objProject.ProjectID;
+                        ProjectName = objProject.ProjectName;
+                        BindStatusMaster();
+                        BindCards();
+                        setcontentTitle(objProject.ProjectName);
+                        BindTeam(objProject.ProjectID);
+                        BindAssignee(ProjectID);
+                    }
+                    projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
+                    projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" onclick="SelectProject(this)" >' + objProject.ProjectName + '</span>';
+                    if (Role != "enduser") {
+                        projectHtml += '<a class="task-item-action" id="taskMenu_' + indxProject + '" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+                    }
+                    projectHtml += '<div class="dropdown-menu" aria-labelledby="taskMenu_' + indxProject + '">';
+                    projectHtml += '<a class="dropdown-item" onclick="BindProjectDetailsBYProjectId(' + objProject.ProjectID + ')">Edit</a>';
+                    projectHtml += '<a class="dropdown-item" onclick="DeleteProjectBYProjectId(' + objProject.ProjectID + ',\'' + objProject.ProjectName + '\')">Delete</a>';
+                    projectHtml += '</div></li>';
+                    projectHtml += '</div></li>';
+                });
+            }
+            else {
+                projectHtml += '<li class="list-group-item task-item">No Projects Found</li>';
+                HideLoader();
+            }
+            $("#ulProjects").empty().html(projectHtml);
+            //}
         }
 
         function onOpenAddStatusModal() {
