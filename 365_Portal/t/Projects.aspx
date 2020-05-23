@@ -721,8 +721,9 @@
         }
 
         function BindProjectData(response) {
+
             var jsonProjectList = $.parseJSON(response).Data;
-            // if (jsonProjectList != undefined) {
+
             var projectHtml = '';
             projectHtml += '<li class="list-group-item task-title">Projects';
             if (Role != "enduser") {
@@ -736,11 +737,11 @@
                         activeClass = 'active';
                         ProjectID = objProject.ProjectID;
                         ProjectName = objProject.ProjectName;
-                        BindStatusMaster();
+                        //BindStatusMaster();
+                        BindProjectStatus(objProject.ProjectStatus);
                         BindCards();
                         setcontentTitle(objProject.ProjectName);
                         BindTeam(objProject.ProjectID);
-                        //BindAssignee(ProjectID);
                     }
                     projectHtml += '<li class="list-group-item task-item ' + activeClass + ' " >';
                     projectHtml += '<img class="task-icon" src="../INCLUDES/Asset/images/sun.png" /> <span class="Project_items_Name" id="' + objProject.ProjectID + '" onclick="SelectProject(this)" >' + objProject.ProjectName + '</span>';
@@ -1032,7 +1033,22 @@
 
 
         //Status Section
+
+        function BindProjectStatus(ProjetStatusData) {
+            var jsonTaskdetails = getProjectStatus(ProjetStatusData);
+            if (jsonTaskdetails != null && jsonTaskdetails.length > 0) {
+                var jsonstatusHtml = '';
+                $.each(jsonTaskdetails, function (indx, objstatus) {
+                    jsonstatusHtml += '<option value="' + objstatus.StatusID + '">' + objstatus.Status + '</option>';
+                });
+                $("#ddlStatus").empty().html(jsonstatusHtml);
+            }
+            jsonStatusList = jsonTaskdetails;
+        }
+
+
         function BindStatusMaster() {
+
             var requestParams = {
                 p_Action: "4"
                 , p_CompID: "0"
@@ -1066,9 +1082,6 @@
                         icon: "error",
                         button: "Ok",
                     });
-                },
-                complete: function () {
-                    // BindProjects();
                 }
             });
         }
@@ -1986,7 +1999,8 @@
         }
 
         function SelectProject(objthis) {
-            setTimeout(function () { ShowLoader }, 10000);
+            //setTimeout(function () { ShowLoader() }, 10000);
+            $('.spinner-center').removeClass('d-none');
             onClickBack("dvWebsiteRedesign", "dvCreateProject,dvRecentActivity");//Closing Project Form
             $(objthis).parent().parent().find('li.active').removeClass('active');
             $(objthis).parent().addClass('active');
@@ -1996,7 +2010,7 @@
             BindStatusMaster();
             BindCards();
             BindTeam(ProjectID);
-            BindAssignee(ProjectID);
+            //BindAssignee(ProjectID);
         }
 
         function EditSubTask(objthis) {
@@ -2051,6 +2065,21 @@
                 TaskAssinees.push(Taskassigneesparam);
             });
             return TaskAssinees;
+        }
+
+        function getProjectStatus(assigneesData) {
+            var StatusList = [];
+
+            var StatusListRows = assigneesData !== null ? assigneesData.split('|') : '';
+            $.each(StatusListRows, function (index, objrow) {
+                var StatusListCols = objrow.split(',');
+                var StatusListItems = {
+                    StatusID: StatusListCols[0]
+                    , Status: StatusListCols[1]
+                };
+                StatusList.push(StatusListItems);
+            });
+            return StatusList;
         }
 
         function GetDistinctDates(data) {
