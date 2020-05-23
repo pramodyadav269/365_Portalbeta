@@ -599,8 +599,8 @@ main.fix {
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu:hover {
           color: rgba(221, 221, 221, 0.65); }
         .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title .link-text {
-          font-size: 11px;
-          text-transform: uppercase; }
+          font-size: 14px;
+          /*text-transform: uppercase;*/ }
           .sidenav .sidenav-content .sidenav-nav .sidenav-item.side-menu .menu-title .link-text .svg-inline--fa {
             position: absolute;
             top: 20px;
@@ -2274,10 +2274,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .drag-drop-card {
   max-width: calc(100% - 280px);
-  height: calc(100vh - 190px);
   overflow-x: auto;
-  overflow-y: auto;
-  padding-left: 14px; }
+  padding-left: 14px;
+  overflow-y: hidden; }
 
 .website-redesign {
   width: 1664px; }
@@ -2366,7 +2365,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .board-column-content-wrapper {
   position: relative;
-  max-height: 382px;
+  max-height: 288px;
   overflow-y: auto; }
 
 .board-column-content {
