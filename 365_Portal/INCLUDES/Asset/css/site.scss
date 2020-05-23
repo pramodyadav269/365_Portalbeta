@@ -838,8 +838,8 @@ main {
 
                     .menu-title {
                         .link-text {
-                            font-size: 11px;
-                            text-transform: uppercase;
+                            font-size: 14px;
+                            /*text-transform: uppercase;*/
 
                             .svg-inline--fa {
                                 position: absolute;
@@ -3294,10 +3294,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .drag-drop-card {
     max-width: calc(100% - 280px);
-    height: calc(100vh - 190px);
     overflow-x: auto;
-    overflow-y: auto;
     padding-left: 14px;
+    overflow-y: hidden;
 }
 
 .website-redesign {
@@ -3415,7 +3414,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .board-column-content-wrapper {
     position: relative;
-    max-height: 382px;
+    max-height: 288px;
     overflow-y: auto;
 }
 
