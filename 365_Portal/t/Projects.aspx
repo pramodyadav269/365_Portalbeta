@@ -19,10 +19,10 @@
         /*current code*/
     </style>
     <div class="container-fluid">
-        <div class="row pt-4 pb-4">
+        <div class="row pt-4 pb-3">
             <div class="col-10 offset-2">
                 <div class="row">
-                    <div class="col-auto mr-auto" id="contentTitle">
+                    <div class="col-auto mr-auto pl-0" id="contentTitle">
                         <h5 id="headingProjectName" class="content-title"></h5>
                     </div>
                     <div class="col-auto pr-5">
@@ -36,9 +36,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2 pl-0 sub-side-menu">
+            <div class="sub-side-menu">
                 <ul class="list-group mb-4">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
                         <div class="task-summary"><span class="task-summary-count" id="spnTotalTasksCount">0</span><span class="task-summary-title">Total Tasks</span></div>
                         <%-- <div class="task-summary"><span class="task-summary-count" id="spnCompletedTasksCount">0</span><span class="task-summary-title">Completed Tasks</span></div>
                         <div class="task-summary"><span class="task-summary-count" id="spnOpenTasksCount">0</span><span class="task-summary-title">Open Tasks</span></div>--%>
@@ -93,7 +93,7 @@
                     <li class="list-group-item"><a class="c-yellow"><i class="fas fa-plus"></i>Add a Team</a></li>--%>
                 </ul>
             </div>
-            <div class="col-10 pr-5 drag-drop-card">
+            <div class="drag-drop-card">
                 <div class="row website-redesign board" id="dvWebsiteRedesign">
                     <%--<div class="col-12 col-sm-12 col-md-4">
                         <div class="card shadow">
@@ -281,46 +281,47 @@
                         </div>
                     </div>--%>
                 </div>
-                <div class="row input-validation input-form-2 d-none" id="dvCreateProject">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row input-validation">
-                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
-                                        <div class="form-group">
-                                            <input type="hidden" id="hdnProjectId" />
-                                            <label for="txtProjectName">Project Name</label>
-                                            <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
-                                        </div>
+            </div>
+            <div class="row input-validation input-form-2 task-form d-none" id="dvCreateProject">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row input-validation">
+                                <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <input type="hidden" id="hdnProjectId" />
+                                        <label for="txtProjectName">Project Name</label>
+                                        <input type="text" class="form-control required" id="txtProjectName" placeholder="Project Name" />
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-10 mb-3">
-                                        <div class="form-group">
-                                            <label for="txtProjectGoal">Project Goal</label>
-                                            <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
-                                        </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <label for="txtProjectGoal">Project Goal</label>
+                                        <textarea id="txtProjectGoal" class="form-control required" rows="3" placeholder="Project Goal"></textarea>
                                     </div>
-                                    <div class="col-12 col-sm-12 col-md-10">
-                                        <div class="form-group">
-                                            <label for="ddlProjectMembers">Project Members</label>
-                                            <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-10">
+                                    <div class="form-group">
+                                        <label for="ddlProjectMembers">Project Members</label>
+                                        <select class="form-control select2 required" id="ddlProjectMembers" style="width: 100% !important" multiple>
+                                        </select>
                                     </div>
-                                    <div class="w-100"></div>
-                                    <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
-                                        <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
-                                    </div>
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col-12 col-sm-12 col-md-10 mt-4 text-right">
+                                    <a class="btn bg-yellow" onclick="SaveUpdateProject(this)">Submit</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row recent-activity d-none" id="dvRecentActivity">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body" id="dvActivitybody">
-                                <%--<div class="activity-wrapper">
+            <div class="row recent-activity d-none" id="dvRecentActivity">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body" id="dvActivitybody">
+                            <%--<div class="activity-wrapper">
                                     <div class="day">Today</div>
                                     <div class="activity">
                                         <div class="pre-icon"><span class="check"><i class="fas fa-check"></i></span></div>
@@ -373,7 +374,6 @@
                                         <div class="time">5:40 PM</div>
                                     </div>
                                 </div>--%>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -660,7 +660,7 @@
                             var TeamWiseMembers = $.grep(jsonTeamMembers, function (n, i) {
                                 return n.Id == objTeam.Id;
                             });
-                            teamHtml += '<li class="list-group-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
+                            teamHtml += '<li class="list-group-item task-item d-flex justify-content-between align-items-center">' + objTeam.TeamName + '';
                             teamHtml += '<span>';
                             $.each(TeamWiseMembers, function (indxMember, objMember) {
                                 if (objMember.FilePath != null && objMember.FilePath != "") {
@@ -836,7 +836,7 @@
                                         container += '<div>';
                                         container += '<img class="anchar-profile-icon" src="../INCLUDES/Asset/images/profile.png" /><span class="anchar-title">' + objstatustracker.FirstName + '</span>';
                                         container += '</div>';
-                                        container += '<div class="anchor-date"><span>' + moment(objstatustracker.CreatedDate).format("MMM DD YYYY, HH:mm a") + '</span></div>';
+                                        container += '<div class="anchor-date d-none"><span>' + moment(objstatustracker.CreatedDate).format("MMM DD YYYY, HH:mm a") + '</span></div>';
                                         container += '</div>';
                                         container += '<div class="wr-content-title">' + objstatustracker.Comments + '</div>';
                                         container += '</div>';
@@ -1687,24 +1687,22 @@
                         newCardHtml += '<div class="wr-content-anchar d-flex justify-content-between align-items-center">';
 
                         //Bind Task Assignee
-                        if (objTask.TaskAsginee != null) {
-                            var jsonTaskAssigneelist = gettaskassignees(objTask.TaskAsginee);
-                            if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
-                                if (jsonTaskAssigneelist[0].Message == null) {
-                                    $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
-                                        var profilepicpath = '';
-                                        if (objMember.FilePath != null && objMember.FilePath != "") {
-                                            profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
-                                        } else {
-                                            profilepicpath = "../INCLUDES/Asset/images/profile.png";
-                                        }
-                                        newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
-                                    });
-                                }
+                        var jsonTaskAssigneelist = gettaskassignees(objTask.TaskAsginee);
+                        if (jsonTaskAssigneelist != null && jsonTaskAssigneelist.length > 0) {
+                            if (jsonTaskAssigneelist[0].Message == null) {
+                                $.each(jsonTaskAssigneelist, function (indxMember, objMember) {
+                                    var profilepicpath = '';
+                                    if (objMember.FilePath != null && objMember.FilePath != "") {
+                                        profilepicpath = '../Files/ProfilePic/' + objMember.FilePath;
+                                    } else {
+                                        profilepicpath = "../INCLUDES/Asset/images/profile.png";
+                                    }
+                                    newCardHtml += '<div><img class="anchar-profile-icon" src="' + profilepicpath + '" title="' + objMember.FirstName + ' ' + objMember.LastName + '"  /><span class="anchar-title development">' + objMember.TeamName + '</span></div>';
+                                });
                             }
                         }
                         if (objTask.DueDate != null && objTask.DueDate != "") {
-                            newCardHtml += '<div class="anchor-date"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
+                            newCardHtml += '<div class="anchor-date d-none"><i class="far fa-clock"></i><span>' + moment(duedate).format("MMM DD, HH:mm a") + '</span></div>';
                         }
                         newCardHtml += '</div>';
                         newCardHtml += '</div>';
@@ -1723,7 +1721,7 @@
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    newCardHtml += '<div class="col-12 mt-3 mb-4 add-task"><a class="btn w-100"  onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
@@ -1735,7 +1733,7 @@
 
             if (jsonStatusList.length < 5 && Role != "enduser") {
                 newCardHtml += '<div class="board-column add-card">';
-                newCardHtml += '<div class="card add-status"><div class="card-body" onclick="onOpenAddStatusModal();"><div class="icon mx-auto"><i class="fas fa-plus"></i></div><h3 class="mt-4">Add Status</h3></div></div>';
+                newCardHtml += '<div class="add-status"><a class="btn w-100" onclick="onOpenAddStatusModal();"><i class="fas fa-plus"></i>Add another list</a></div>';
                 newCardHtml += '</div>';
             }
 
@@ -2058,7 +2056,7 @@
 
         function gettaskassignees(assigneesData) {
             var TaskAssinees = [];
-            var TaskAssigneeRows = assigneesData.split('|');
+            var TaskAssigneeRows = assigneesData !== null ? assigneesData.split('|') : '';
             $.each(TaskAssigneeRows, function (index, objrow) {
                 var TaskAssigneeCols = objrow.split(',');
                 var Taskassigneesparam = {

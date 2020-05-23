@@ -10,19 +10,19 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../includes/Asset/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../includes/Asset/css/all.css" rel="stylesheet" />
-    <link href="../includes/Asset/css/gijgo.min.css" rel="stylesheet" />
-    <link href="../Asset/css/select2.min.css" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link href="../includes/Asset/css/360.css" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css" rel="stylesheet" />
+    <link href="../includes/Asset/css/bootstrap.min.css?v=1" rel="stylesheet" />
+    <link href="../includes/Asset/css/all.css?v=1" rel="stylesheet" />
+    <link href="../includes/Asset/css/gijgo.min.css?v=1" rel="stylesheet" />
+    <link href="../Asset/css/select2.min.css?v=1" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=1" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=1" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=1" rel="stylesheet" />
+    <link href="../includes/Asset/css/360.css?v=1" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=1" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../includes/Asset/js/angular.min.js"></script>
-    <script src="../INCLUDES/Asset/customer/default.js?t=1"></script>
+    <script src="../INCLUDES/Asset/customer/default.js?t=2"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
     <script src="../includes/Asset/js/jquery.min.js"></script>
