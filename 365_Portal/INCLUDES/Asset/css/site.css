@@ -2492,7 +2492,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         display: flex;
         padding: 28px 20px 0 20px; }
         .course-flow .card .card-body.arrows .arrows-icon {
-          margin-right: 24px; }
+          margin-right: 24px;
+          opacity: 0; }
           .course-flow .card .card-body.arrows .arrows-icon .svg-inline--fa {
             font-size: 22px;
             color: #707070; }
@@ -2901,6 +2902,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         font-size: 16px;
         font-weight: bold;
         margin: 0; }
+        .course-flow .accordion .card .card-header h5 .svg-inline--fa {
+          font-size: 20px;
+          color: #707070;
+          margin-right: 10px;
+          cursor: move; }
     .course-flow .accordion .card .sr.head {
       padding: 14px;
       border-radius: 0;

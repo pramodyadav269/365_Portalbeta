@@ -1234,7 +1234,7 @@
                                         Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_' + LessonTable[i].ModuleID + '">' +
                                             '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
                                             '<div class="card-header">' +
-                                            '<h5>' + LessonTable[i].Title + '</h5>' +
+                                            '<h5><i class="fas fa-grip-vertical"></i>' + LessonTable[i].Title + '</h5>' +
                                             '<div class="card-header-action">' +
                                             '<a><i class="fas fa-chevron-down" id="btnEditLesson_' + LessonTable[i].ModuleID + '" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
                                             '</div>' +

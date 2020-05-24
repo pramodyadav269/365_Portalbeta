@@ -3594,6 +3594,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .arrows-icon {
                     margin-right: 24px;
+                    opacity: 0;
 
                     .svg-inline--fa {
                         font-size: 22px;
@@ -4238,6 +4239,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     font-size: 16px;
                     font-weight: bold;
                     margin: 0;
+
+                    .svg-inline--fa {
+                        font-size: 20px;
+                        color: #707070;
+                        margin-right: 10px;
+                        cursor: move;
+                    }
                 }
             }
 
