@@ -2,8 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
-        .btnSpace {
-            margin-bottom: 10px;
+        .btnSpaceBottom {
+            margin-bottom: 1%;
+        }
+        .btnSpaceRight {
+            margin-right: 1%;
+        }.btnSpaceLeft {
+            margin-left: 1%;
         }
     </style>
 </asp:Content>
@@ -85,7 +90,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-12 col-md-6 btnSpace">
+                                        <div class="col-sm-12 col-md-6 btnSpaceBottom">
                                             <a class="btn btn-black" id="btnAddCourse" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Save & Proceed</a>
                                         </div>
 
@@ -948,7 +953,8 @@
             debugger
             LessonFlag = id;
 
-            if($("div[id^='tempLessonGrid_']").length > 0)
+            //if($("div[id^='tempLessonGrid_']").length > 0)
+            if(id == '0' && IsChangedField == '1')
             {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -960,7 +966,8 @@
                     confirmButtonText: 'Yes, clear it!'
                 }).then((result) => {
                     debugger
-                    if (result.value) {                        
+                    if (result.value) {  
+                        IsChangedField = '0';
                         AddMoreLessonBind(id);
                     }
                     else
@@ -1048,8 +1055,8 @@
                 '<div class="col-sm-12" id="dvContentContent" style="padding-left: 52px;">'+
                 '<div class="form-group editor">'+
                 '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add New Content</a>'+
-                '<a class="btn btn-outline blod black" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>'+
-                '<a class="btn btn-outline blod black" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>'+                
+                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>'+
+                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>'+                
                 '</div>' +
                 '</div>' +
 
@@ -1080,8 +1087,8 @@
                 '<div class="w-100"></div>' +
                 '<div class="action-btn" id="divAddContent">' +
                 //'<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
-                '<a class="btn btn-outline blod black float-right" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>'+
-                '<a class="btn btn-outline blod black float-right" id="btnCancelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
+                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>'+
+                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnCancelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
                 '</div>' +
                 '</div>';
 
@@ -1139,7 +1146,7 @@
         }
 
         function ClearNewLesson() {
-
+            debugger
             if(IsChangedField == '0')
             {
                 $("div[id^='tempLessonGrid_']").remove();
@@ -3372,7 +3379,7 @@
                         result = true;
                     }
                 }
-                else if (charCode == 8 || charCode == 9 || charCode == 13) {
+                else if (charCode == 8 || charCode == 9 || charCode == 13 || charCode == 90) {//this is for some basic key like 90-Ctrl+Z , 9-Tab ,8-Backspace
 
                 }
                 else {
@@ -3400,7 +3407,8 @@
                     confirmButtonText: 'Yes, clear it!'
                 }).then((result) => {
                     debugger
-                    if (result.value) {                        
+                    if (result.value) {          
+                        IsChangedField = '0';
                         PublishCourseMain(flag);
                     }                
                 });
