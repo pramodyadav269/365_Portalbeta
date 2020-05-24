@@ -2719,16 +2719,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-bottom-left-radius: 3px;
       border-bottom-right-radius: 3px; }
     .course-flow .form-group .sharing {
-      padding-left: 30px;
-      display: flex;
-      justify-content: space-between;
-      font-family: OpenSans-Regular; }
-      @media only screen and (max-width: 992px) {
-        .course-flow .form-group .sharing {
-          flex-direction: column; } }
+      padding-left: 16px;
+      /*display: flex;
+            justify-content: space-between;*/
+      font-family: OpenSans-Regular;
+      /*@media only screen and (max-width : 992px) {
+                flex-direction: column;
+            }*/ }
       .course-flow .form-group .sharing .custom-control {
-        display: inline-block;
-        margin-bottom: 10px; }
+        /*display: inline-block;*/
+        display: inline-grid;
+        margin-bottom: 10px;
+        margin-right: 0; }
         .course-flow .form-group .sharing .custom-control .custom-control-label {
           font-size: 12px;
           font-weight: normal;
@@ -2743,10 +2745,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           border-color: #FAC900;
           background-color: #FAC900; }
         .course-flow .form-group .sharing .custom-control small {
-          position: absolute;
+          /*position: relative;
+                    left: -22px;
+                    width: calc(100% + 22px);
+                    font-size: 10px;*/
           position: relative;
           left: -22px;
-          width: calc(100% + 22px);
+          width: 80px;
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }

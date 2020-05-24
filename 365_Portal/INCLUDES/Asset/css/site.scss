@@ -3950,18 +3950,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         }
 
         .sharing {
-            padding-left: 30px;
-            display: flex;
-            justify-content: space-between;
+            padding-left: 16px;
+            /*display: flex;
+            justify-content: space-between;*/
             font-family: OpenSans-Regular;
-
-            @media #{$medium-and-down} {
+            /*@media #{$medium-and-down} {
                 flex-direction: column;
-            }
-
+            }*/
             .custom-control {
-                display: inline-block;
+                /*display: inline-block;*/
+                display: inline-grid;
                 margin-bottom: 10px;
+                margin-right: 0;
 
                 .custom-control-label {
                     font-size: 12px;
@@ -3987,10 +3987,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
 
                 small {
-                    position: absolute;
-                    position: relative;
+                    /*position: relative;
                     left: -22px;
                     width: calc(100% + 22px);
+                    font-size: 10px;*/
+                    position: relative;
+                    left: -22px;
+                    width: 80px;
                     font-size: 10px;
 
                     &.form-text {
