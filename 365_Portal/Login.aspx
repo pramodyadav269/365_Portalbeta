@@ -13,7 +13,7 @@
     <link href="Asset/css/gijgo.min.css" rel="stylesheet" />
     <link href="Asset/css/select2.min.css" rel="stylesheet" />
     <link href="Asset/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="Asset/css/site.css" rel="stylesheet" />
+    <%--<link href="Asset/css/site.css" rel="stylesheet" />--%>
     <link href="INCLUDES/Asset/css/site.css" rel="stylesheet" />
 
     <%-- JS --%>
@@ -29,7 +29,7 @@
     <script src="Asset/js/jquery.dataTables.min.js"></script>
     <script src="Asset/js/dataTables.bootstrap4.min.js"></script>
     <script src="Asset/js/jquery.tablednd.js"></script>
-    <script src="Asset/js/site.js"></script>
+    <%--<script src="Asset/js/site.js"></script>--%>
     <script src="INCLUDES/Asset/js/site.js"></script>
 
     <style>

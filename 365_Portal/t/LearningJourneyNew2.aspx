@@ -1061,7 +1061,7 @@
                 '</div>' +
 
 
-                '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;"></div>' +
+                '<div class="col-sm-12" id="dvLessonResourceEdit"></div>' +
                 '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
                 '<label>Quiz</label>' +
                 '<div class="form-group mb-2 d-flex justify-content-end">' +
