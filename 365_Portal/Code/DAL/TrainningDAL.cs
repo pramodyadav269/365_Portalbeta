@@ -38,7 +38,7 @@ namespace _365_Portal.Code.DAL
             return ds;
         }
 
-        public static DataSet GetTopicsByUser(int compID, string userId,string searchText)
+        public static DataSet GetTopicsByUser(int compID, string userId, string searchText)
         {
             DataSet ds = new DataSet();
             MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
@@ -829,6 +829,38 @@ namespace _365_Portal.Code.DAL
                 cmd.Parameters.AddWithValue("p_Action", action);
                 cmd.Parameters.AddWithValue("p_CompID", compID);
                 cmd.Parameters.AddWithValue("p_UserID", userId);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                da.Fill(ds, "Data");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ds;
+        }
+
+        public static DataSet AddBadge(string badgeName, string description, int minPoints, string filePath, int srNo)
+        {
+            DataSet ds = new DataSet();
+            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+
+            try
+            {
+                conn.Open();
+                string stm = "spAddBadge";
+                MySqlCommand cmd = new MySqlCommand(stm, conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("p_BadgeName", badgeName);
+                cmd.Parameters.AddWithValue("p_Description", description);
+                cmd.Parameters.AddWithValue("p_MinPoints", minPoints);
+                cmd.Parameters.AddWithValue("p_FilePath", filePath);
+                cmd.Parameters.AddWithValue("p_SrNo", srNo);
+
                 MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                 da.Fill(ds, "Data");
                 return ds;

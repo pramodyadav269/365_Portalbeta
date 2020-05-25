@@ -201,7 +201,7 @@
                         </div>
                         <div class="learning-point">
                             <li class="media align-items-center">
-                                <img src="../INCLUDES/Asset/images/mobile-img_1.png" class="mr-4 learning-icon shadow-sm" alt="learning">
+                                <img id="imgRank" src="../Files/Ranks/1.Rookie.svg" class="mr-4 learning-icon shadow-sm" alt="learning">
                                 <div class="media-body">
                                     <div class="mb-3">
                                         <span class="count" id="spLearningBadge">0</span>
@@ -217,7 +217,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <span class="mt-3 outer-text">Earn 1 more badges and 200 more points</span>
+                            <span class="mt-3 outer-text" id="spnNextRankInfo"></span>
                         </div>
                         <a href="#" class="path">Go to Learning Path</a>
                     </div>

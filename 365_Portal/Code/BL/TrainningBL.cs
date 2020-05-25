@@ -647,5 +647,19 @@ namespace _365_Portal.Code.BL
             }
             return ds;
         }
+
+        public static DataSet AddBadge(string badgeName, string description, int minPoints, string filePath, int srNo)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                ds = TrainningDAL.AddBadge(badgeName, description, minPoints, filePath, srNo);
+            }
+            catch (Exception ex)
+            {
+                Log(ex, System.Reflection.MethodBase.GetCurrentMethod().Name);
+            }
+            return ds;
+        }
     }
 }

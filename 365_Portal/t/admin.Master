@@ -194,10 +194,26 @@
                             if (Points != undefined && Points != null && Points[0].PointsEarned != undefined && Points[0].PointsEarned != null) {
                                 //$('#spPoints').text(Points[0].PointsEarned + ' points');
 
-                                p = Badge[0].BadgeCount + ' points';
+                                p = Points[0].PointsEarned + ' points';
                             }
 
                             $('#spBadgePoints').text(b + ', ' + p);
+                            $('#imgRank').attr("src", DataSet.Data.Rank[0].FilePath);
+
+                            var requiredBadges = DataSet.Data.NextRank[0].MinBadges - Badge[0].BadgeCount;
+                            var requiredPoints = DataSet.Data.NextRank[0].MinPoints - Points[0].PointsEarned;
+
+                            var nextRankInfoHtml = "";
+                            if (requiredBadges > 0) {
+                                nextRankInfoHtml += "Earn " + requiredBadges + " more badges ";
+                                if (requiredPoints > 0) {
+                                    nextRankInfoHtml += " and " + requiredPoints + " more points to reach " + DataSet.Data.NextRank[0].RankName + " rank";
+                                }
+                            }
+                            else if (requiredPoints > 0) {
+                                nextRankInfoHtml += requiredPoints + " more points to reach " + DataSet.Data.NextRank[0].RankName + " rank";
+                            }
+                            $("#spnNextRankInfo").html(nextRankInfoHtml);
                         }
                         else {
                             Swal.fire(DataSet.StatusDescription, { icon: "error" });

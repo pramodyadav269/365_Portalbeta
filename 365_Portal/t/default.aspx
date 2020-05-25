@@ -180,10 +180,10 @@
                                                             <%--Checkbox List--%>
                                                             <div ng-if="question.QuestionTypeID == 1 ">
                                                                 <div class="custom-control custom-checkbox" ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="ansOption.AnswerText_1" value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="{{'ansOption.AnswerText_1_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                </div>
+                                                                </div> + 
                                                             </div>
 
                                                             <%--Dropdown List--%>
@@ -198,7 +198,7 @@
                                                             <%--Radio Button List--%>
                                                             <div ng-if="question.QuestionTypeID == 3 ">
                                                                 <div class="custom-control custom-radio" ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="ansOption.AnswerText_3" value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_3_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'rbSVAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
@@ -207,7 +207,7 @@
                                                             <%--Radio Button List with box--%>
                                                             <div ng-if="question.QuestionTypeID == 9 " class="box">
                                                                 <div ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text" name="ansOption.AnswerText_9" value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text"name="{{'ansOption.AnswerText_9_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
                                                                     <label for="{{'rbAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%--    IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>

@@ -779,6 +779,12 @@ namespace _365_Portal.Controllers
                 ds.Tables.Add(dtPoints);
                 ds.Tables[1].TableName = "Points";
 
+                ds.Tables.Add(dsBadges.Tables[1].Copy());
+                ds.Tables[2].TableName = "Rank";
+
+                ds.Tables.Add(dsBadges.Tables[2].Copy());
+                ds.Tables[3].TableName = "NextRank";
+
                 data = Utility.ConvertDataSetToJSONString(ds);
                 data = Utility.Successful(data);
             }

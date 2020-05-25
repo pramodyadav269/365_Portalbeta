@@ -194,10 +194,26 @@
                             if (Points != undefined && Points != null && Points[0].PointsEarned != undefined && Points[0].PointsEarned != null) {
                                 //$('#spPoints').text(Points[0].PointsEarned + ' points');
 
-                                p = Badge[0].BadgeCount + ' points';
+                                p = Points[0].PointsEarned + ' points';
                             }
 
                             $('#spBadgePoints').text(b + ' | ' + p);
+                            $('#imgRank').attr("src", DataSet.Data.Rank[0].FilePath);
+
+                            var requiredBadges = DataSet.Data.NextRank[0].MinBadges - Badge[0].BadgeCount;
+                            var requiredPoints = DataSet.Data.NextRank[0].MinPoints - Points[0].PointsEarned;
+
+                            var nextRankInfoHtml = "";
+                            if (requiredBadges > 0) {
+                                nextRankInfoHtml += "Earn " + requiredBadges + " more badges ";
+                                if (requiredPoints > 0) {
+                                    nextRankInfoHtml += " and " + requiredPoints + " more points to reach " + DataSet.Data.NextRank[0].RankName + " rank";
+                                }
+                            }
+                            else if (requiredPoints > 0) {
+                                nextRankInfoHtml += requiredPoints + " more points to reach " + DataSet.Data.NextRank[0].RankName + " rank";
+                            }
+                            $("#spnNextRankInfo").html(nextRankInfoHtml);
                         }
                         else {
                             Swal.fire(DataSet.StatusDescription, { icon: "error" });
@@ -248,12 +264,12 @@
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" href="courses.aspx" runat="server" id="dvAllCourses" visible="false"><span class="link-icon"><i class="fas fa-clone"></i></span><span class="tooltiptext">Courses</span><span class="link-text">Courses</span></a>
                         <a class="menu-title icon-right" id="dvAddNewCourse" runat="server" visible="false" href="LearningJourneynew2.aspx"><i class="fas fa-plus-circle"></i></a>
-                       
+
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Tasks</span><span class="link-text">Tasks</span></a>
                         <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
-                       
+
                     </li>
                     <li class="sidenav-item side-menu">
                         <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Insights</span><span class="link-text">Insights</span></a>
@@ -361,7 +377,7 @@
 
                 <ul class="sidenav-nav d-none" id="ulSettings">
                     <h4 class="menu-title">Settings</h4>
-                     <li class="sidenav-item" id="dvOrganizationSettings" runat="server">
+                    <li class="sidenav-item" id="dvOrganizationSettings" runat="server">
                         <a class="sidenav-link" href="profile.aspx"><span class="link-icon"><i class="fas fa-cog"></i></span><span class="tooltiptext">Organization Settings</span><span class="link-text">Organization Settings</span></a>
                     </li>
                     <li class="sidenav-item" id="dvCoursesSettings" runat="server" visible="false">
@@ -378,9 +394,9 @@
                     </li>
                 </ul>
 
-                 <ul class="sidenav-nav d-none" id="ulInsights">
+                <ul class="sidenav-nav d-none" id="ulInsights">
                     <h4 class="menu-title">Insights</h4>
-                      <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
+                    <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
                         <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
                     </li>
                     <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">

@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
 using System.Linq;
+using System.IO;
 using static _365_Portal.Models.Login;
 
 namespace _365_Portal
@@ -26,6 +27,35 @@ namespace _365_Portal
                 //HttpContext.Current.Session["UserId"] = null;
                 //HttpContext.Current.Session["RoleName"] = null;
                 Utility.DestroyAllSession();
+            }
+            //LoadBadges();
+        }
+
+        public void LoadBadges()
+        {
+            DirectoryInfo di = new DirectoryInfo(Server.MapPath("~/Files/Badges/"));
+            FileInfo[] files = di.GetFiles("*");
+            int srNo = 1;
+            foreach (var file in files)
+            {
+                string badgeName = file.Name;
+                badgeName = badgeName.Replace(".svg", "");
+                var badgeNameParts = badgeName.Split(new string[] { "-" }, StringSplitOptions.RemoveEmptyEntries);
+                if (badgeNameParts.Count() > 1)
+                {
+                    badgeName = badgeNameParts[1];
+                }
+                if (badgeNameParts.Count() > 2)
+                {
+                    badgeName = badgeNameParts[1] + "-" + badgeNameParts[2];
+                }
+                if (badgeNameParts.Count() > 3)
+                {
+                    badgeName = badgeNameParts[1] + "-" + badgeNameParts[1] + "-" + badgeNameParts[2];
+                }
+                string badgePath = @"\Files\Badges\" + file.Name;
+                TrainningBL.AddBadge(badgeName, badgeName, 500, badgePath, srNo);
+                srNo++;
             }
         }
 
