@@ -8,28 +8,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <%-- CSS --%>
-    <link href="Asset/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="Asset/css/all.css" rel="stylesheet" />
-    <link href="Asset/css/gijgo.min.css" rel="stylesheet" />
-    <link href="Asset/css/select2.min.css" rel="stylesheet" />
-    <link href="Asset/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="Asset/css/site.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/all.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/gijgo.min.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/select2.min.css" rel="stylesheet" />
+    <link href="INCLUDES/Asset/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="INCLUDES/Asset/css/site.css" rel="stylesheet" />
 
     <%-- JS --%>
-    <script src="Asset/js/jquery.min.js"></script>
-    <script src="Asset/js/popper.min.js"></script>
-    <script src="Asset/js/angular.min.js"></script>
-    <script src="Asset/js/bootstrap.min.js"></script>
-    <script src="Asset/js/all.js"></script>
-    <script src="Asset/js/gijgo.min.js"></script>
-    <script src="Asset/js/sweetalert2.js"></script>
-    <script src="Asset/js/bs-custom-file-input.min.js"></script>
-    <script src="Asset/js/select2.min.js"></script>
-    <script src="Asset/js/jquery.dataTables.min.js"></script>
-    <script src="Asset/js/dataTables.bootstrap4.min.js"></script>
-    <script src="Asset/js/jquery.tablednd.js"></script>
-    <script src="Asset/js/site.js"></script>
+    <script src="INCLUDES/Asset/js/jquery.min.js"></script>
+    <script src="INCLUDES/Asset/js/popper.min.js"></script>
+    <script src="INCLUDES/Asset/js/angular.min.js"></script>
+    <script src="INCLUDES/Asset/js/bootstrap.min.js"></script>
+    <script src="INCLUDES/Asset/js/all.js"></script>
+    <script src="INCLUDES/Asset/js/gijgo.min.js"></script>
+    <script src="INCLUDES/Asset/js/sweetalert2.js"></script>
+    <script src="INCLUDES/Asset/js/bs-custom-file-input.min.js"></script>
+    <script src="INCLUDES/Asset/js/select2.min.js"></script>
+    <script src="INCLUDES/Asset/js/jquery.dataTables.min.js"></script>
+    <script src="INCLUDES/Asset/js/dataTables.bootstrap4.min.js"></script>
+    <script src="INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="INCLUDES/Asset/js/site.js"></script>
 
     <style>

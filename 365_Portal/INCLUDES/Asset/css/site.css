@@ -1,5 +1,8 @@
 ﻿/* colors */
 /* media */
+.bg-yellow {
+  background-color: #FAC900; }
+
 /* heebo-regular - latin */
 /*@font-face {
     font-family: 'Heebo';
@@ -2489,7 +2492,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         display: flex;
         padding: 28px 20px 0 20px; }
         .course-flow .card .card-body.arrows .arrows-icon {
-          margin-right: 24px; }
+          margin-right: 24px;
+          opacity: 0; }
           .course-flow .card .card-body.arrows .arrows-icon .svg-inline--fa {
             font-size: 22px;
             color: #707070; }
@@ -2716,16 +2720,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border-bottom-left-radius: 3px;
       border-bottom-right-radius: 3px; }
     .course-flow .form-group .sharing {
-      padding-left: 30px;
-      display: flex;
-      justify-content: space-between;
-      font-family: OpenSans-Regular; }
-      @media only screen and (max-width: 600px) {
-        .course-flow .form-group .sharing {
-          flex-direction: column; } }
+      padding-left: 16px;
+      /*display: flex;
+            justify-content: space-between;*/
+      font-family: OpenSans-Regular;
+      /*@media only screen and (max-width : 992px) {
+                flex-direction: column;
+            }*/ }
       .course-flow .form-group .sharing .custom-control {
-        display: inline-block;
-        margin-bottom: 10px; }
+        /*display: inline-block;*/
+        display: inline-grid;
+        margin-bottom: 10px;
+        margin-right: 0; }
         .course-flow .form-group .sharing .custom-control .custom-control-label {
           font-size: 12px;
           font-weight: normal;
@@ -2740,10 +2746,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
           border-color: #FAC900;
           background-color: #FAC900; }
         .course-flow .form-group .sharing .custom-control small {
-          position: absolute;
+          /*position: relative;
+                    left: -22px;
+                    width: calc(100% + 22px);
+                    font-size: 10px;*/
           position: relative;
           left: -22px;
-          width: calc(100% + 22px);
+          width: 80px;
           font-size: 10px; }
           .course-flow .form-group .sharing .custom-control small.form-text {
             color: #ADADAD; }
@@ -2893,6 +2902,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         font-size: 16px;
         font-weight: bold;
         margin: 0; }
+        .course-flow .accordion .card .card-header h5 .svg-inline--fa {
+          font-size: 20px;
+          color: #707070;
+          margin-right: 10px;
+          cursor: move; }
     .course-flow .accordion .card .sr.head {
       padding: 14px;
       border-radius: 0;

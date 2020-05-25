@@ -29,6 +29,10 @@ $medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
 $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
 
 
+.bg-yellow {
+    background-color: $yellow-color;
+}
+
 /* heebo-regular - latin */
 /*@font-face {
     font-family: 'Heebo';
@@ -710,7 +714,7 @@ main {
     overflow-x: hidden;
     transition: 0.5s;
     padding-bottom: 80px;
-    font-family:OpenSans-SemiBold;
+    font-family: OpenSans-SemiBold;
 
     @media #{$small-and-down} {
         top: 158px;
@@ -3590,6 +3594,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                 .arrows-icon {
                     margin-right: 24px;
+                    opacity: 0;
 
                     .svg-inline--fa {
                         font-size: 22px;
@@ -3946,18 +3951,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         }
 
         .sharing {
-            padding-left: 30px;
-            display: flex;
-            justify-content: space-between;
+            padding-left: 16px;
+            /*display: flex;
+            justify-content: space-between;*/
             font-family: OpenSans-Regular;
-
-            @media #{$small-and-down} {
+            /*@media #{$medium-and-down} {
                 flex-direction: column;
-            }
-
+            }*/
             .custom-control {
-                display: inline-block;
+                /*display: inline-block;*/
+                display: inline-grid;
                 margin-bottom: 10px;
+                margin-right: 0;
 
                 .custom-control-label {
                     font-size: 12px;
@@ -3983,10 +3988,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
 
                 small {
-                    position: absolute;
-                    position: relative;
+                    /*position: relative;
                     left: -22px;
                     width: calc(100% + 22px);
+                    font-size: 10px;*/
+                    position: relative;
+                    left: -22px;
+                    width: 80px;
                     font-size: 10px;
 
                     &.form-text {
@@ -4231,6 +4239,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     font-size: 16px;
                     font-weight: bold;
                     margin: 0;
+
+                    .svg-inline--fa {
+                        font-size: 20px;
+                        color: #707070;
+                        margin-right: 10px;
+                        cursor: move;
+                    }
                 }
             }
 

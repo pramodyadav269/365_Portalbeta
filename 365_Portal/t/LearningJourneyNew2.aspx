@@ -1061,7 +1061,7 @@
                 '</div>' +
 
 
-                '<div class="col-sm-12" id="dvLessonResourceEdit" style="padding-left: 52px;"></div>' +
+                '<div class="col-sm-12" id="dvLessonResourceEdit"></div>' +
                 '<div class="col-sm-12 d-flex justify-content-between align-items-center" id="dvLessonPassingPercentage">' +
                 '<label>Quiz</label>' +
                 '<div class="form-group mb-2 d-flex justify-content-end">' +
@@ -1234,7 +1234,7 @@
                                         Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_' + LessonTable[i].ModuleID + '">' +
                                             '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
                                             '<div class="card-header">' +
-                                            '<h5>' + LessonTable[i].Title + '</h5>' +
+                                            '<h5><i class="fas fa-grip-vertical"></i>' + LessonTable[i].Title + '</h5>' +
                                             '<div class="card-header-action">' +
                                             '<a><i class="fas fa-chevron-down" id="btnEditLesson_' + LessonTable[i].ModuleID + '" onclick="EditLessionFromTile(this,' + LessonTable[i].ModuleID + ')";></i></a>' +
                                             '</div>' +

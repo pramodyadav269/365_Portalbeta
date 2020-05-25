@@ -10,39 +10,39 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../includes/Asset/css/bootstrap.min.css?v=24052020" rel="stylesheet" />
-    <link href="../includes/Asset/css/all.css?v=24052020" rel="stylesheet" />
-    <link href="../includes/Asset/css/gijgo.min.css?v=24052020" rel="stylesheet" />
-    <link href="../Asset/css/select2.min.css?v=24052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=24052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/all.css?v=24052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=24052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/select2.min.css?v=24052020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/jodit.min.css?v=24052020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/slick.css?v=24052020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=24052020" rel="stylesheet" />
-    <link href="../includes/Asset/css/360.css?v=24052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/360.css?v=24052020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/site.css?v=24052020" rel="stylesheet" />
 
     <%-- JS --%>
-    <script9q2 src="../includes/Asset/js/angular.min.js"></script9q2>
+    <script9q2 src="../INCLUDES/Asset/js/angular.min.js"></script9q2>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
-    <script src="../includes/Asset/js/jquery.min.js"></script>
-    <script src="../includes/Asset/js/popper.min.js"></script>
-    <script src="../includes/Asset/js/bootstrap.min.js"></script>
+    <script src="../INCLUDES/Asset/js/jquery.min.js"></script>
+    <script src="../INCLUDES/Asset/js/popper.min.js"></script>
+    <script src="../INCLUDES/Asset/js/bootstrap.min.js"></script>
     <script src="../INCLUDES/Asset/js/sortable_list.js"></script>
-    <script src="../includes/Asset/js/all.js"></script>
+    <script src="../INCLUDES/Asset/js/all.js"></script>
     <script src="../INCLUDES/Asset/js/moment.js"></script>
-    <script src="../includes/Asset/js/gijgo.min.js"></script>
-    <script src="../includes/Asset/js/sweetalert2.js"></script>
+    <script src="../INCLUDES/Asset/js/gijgo.min.js"></script>
+    <script src="../INCLUDES/Asset/js/sweetalert2.js"></script>
     <script src="../INCLUDES/Asset/js/bootstrap-datetimepicker.min.js"></script>
     <script src="../INCLUDES/Asset/js/jodit.min.js"></script>
     <script src="../INCLUDES/Asset/tinymce/tinymce.min.js"></script>
-    <script src="../includes/Asset/js/360.js"></script>
-    <script src="../includes/Asset/js/bs-custom-file-input.min.js"></script>
-    <script src="../includes/Asset/js/select2.min.js"></script>
-    <script src="../includes/Asset/js/jquery.dataTables.min.js"></script>
-    <script src="../includes/Asset/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../includes/Asset/js/jquery.tablednd.js"></script>
+    <script src="../INCLUDES/Asset/js/360.js"></script>
+    <script src="../INCLUDES/Asset/js/bs-custom-file-input.min.js"></script>
+    <script src="../INCLUDES/Asset/js/select2.min.js"></script>
+    <script src="../INCLUDES/Asset/js/jquery.dataTables.min.js"></script>
+    <script src="../INCLUDES/Asset/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
-    <script src="../includes/Asset/js/site.js"></script>
+    <script src="../INCLUDES/Asset/js/site.js"></script>
 
 
 
@@ -634,8 +634,8 @@
             <div class="nav-content float-right">
                 <ul class="navbar-nav">
                     <li class="nav-item icon dropdown d-none"><a class="nav-link" id="navbarComments" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="../includes/Asset/images/comments.png" /><span class="badge">2</span></a>
-                        <%--<img src="../includes/Asset/images/comments.png" /></a>--%>
+                        <img src="../INCLUDES/Asset/images/comments.png" /><span class="badge">2</span></a>
+                        <%--<img src="../INCLUDES/Asset/images/comments.png" /></a>--%>
 
                         <div class="dropdown-menu" aria-labelledby="navbarComments">
                             <%-- <a class="dropdown-item text-right font-weight-bold" href="#">Coming Soon...</a>--%>
@@ -648,7 +648,7 @@
 
                     <li class="nav-item icon dropdown d-none" onclick="BindNotification()">
                         <a class="nav-link" id="navbarNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="../includes/Asset/images/notifications.png" /><asp:Label class="badge" runat="server" ID="lblNotiCount" Text="" /></a>
+                            <img src="../INCLUDES/Asset/images/notifications.png" /><asp:Label class="badge" runat="server" ID="lblNotiCount" Text="" /></a>
                         <div class="dropdown-menu" aria-labelledby="navbarNotification" id="lstNotification" style="height: 250px; overflow-y: scroll;">
                         </div>
                         <%-- <div class="dropdown-menu" aria-labelledby="navbarNotification">
@@ -660,7 +660,7 @@
                     </li>
 
                     <li class="nav-item icon language dropdown border-0 pr-0 d-none">
-                        <img src="../includes/Asset/images/us.png" class="circle lang-icon" />
+                        <img src="../INCLUDES/Asset/images/us.png" class="circle lang-icon" />
                         <a class="nav-link">EN<i class="fas fa-chevron-down"></i></a>
                     </li>
                     <li class="nav-item icon border-0 pr-0">
