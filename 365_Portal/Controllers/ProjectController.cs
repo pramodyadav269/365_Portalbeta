@@ -102,12 +102,14 @@ namespace _365_Portal.Controllers
                     data = Utility.Successful(data);
 
 
+                    #region Activity Log
                     if (taskStatus.p_Action == 2 || taskStatus.p_Action == 3 || taskStatus.p_Action == 5)
                     {
                         ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Status.ToString(), taskStatus.p_Action, taskStatus.p_CompID, taskStatus.p_UserId
                           , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, taskStatus.p_StatusName);
                         var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
                     }
+                    #endregion Activity Log
                 }
                 catch (Exception ex)
                 {
