@@ -31,7 +31,7 @@
 
                             <div class="row input-validation">
                                 <div class="col-md-4">
-                                    <img class="circle user-photo" id="imgUserPic" src="../Asset/images/profile.png" />
+                                    <img class="circle user-photo" id="imgUserPic" src="../INCLUDES/Asset/images/profile.png" />
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="fileChangePic" onchange="encodeImagetoBase64(this,'userpic')">
                                         <label class="custom-file-label mt-2" for="fileChangePic">Change Profile Pic</label>
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="col-md-4" id="divCompanyLogo" style="display: none">
-                                    <img class="circle user-photo" id="imgCompLogo" src="../Asset/images/CompanyLogo.png" />
+                                    <img class="circle user-photo" id="imgCompLogo" src="../INCLUDES/Asset/images/CompanyLogo.png" />
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="fileChangeCompanyLogo" onchange="encodeImagetoBase64(this,'companypic')">
                                         <label class="custom-file-label mt-2" for="fileChangeCompanyLogo">Change Organization Logo</label>

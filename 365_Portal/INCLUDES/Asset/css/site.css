@@ -942,7 +942,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     border-radius: 50%;
 }*/
 .wr-content {
-  background: #F3F5F7;
+  background: #fff;
   padding: 16px 20px;
   border-radius: 6px; }
 
@@ -950,9 +950,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: .75rem; }
 
 .wr-content .wr-content-title {
-  font-family: OpenSans-SemiBold;
-  font-size: 16px;
-  color: #666666; }
+  font-family: OpenSans-Regular;
+  font-size: 13px;
+  color: #202338;
+  width: calc(100% - 20px); }
+  .wr-content .wr-content-title .float-right {
+    position: absolute;
+    right: 20px;
+    top: 16px; }
 
 .wr-content .wr-content-anchar .anchar-profile-icon {
   width: 20px;
@@ -2288,9 +2293,9 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   position: absolute;
   left: 0;
   right: 0;
-  width: 310px;
+  width: 270px;
   margin: 0 10px;
-  background: #fff;
+  background: #EBECF0;
   z-index: 1;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.16);
   border-radius: 6px;
@@ -2338,7 +2343,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   cursor: move; }
 
 .board-column-header {
-  font-size: 1.25rem;
+  font-size: 18px;
   position: relative;
   height: 60px;
   line-height: 60px;
@@ -2402,10 +2407,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .add-task {
   padding: 0 18px; }
   .add-task .btn {
-    background: #F3F5F7;
+    background: #EBE0C4;
     border-radius: 6px;
     font-size: 18px;
-    color: #131313;
+    color: #222629;
     font-family: OpenSans-SemiBold; }
     .add-task .btn .svg-inline--fa {
       position: relative;
