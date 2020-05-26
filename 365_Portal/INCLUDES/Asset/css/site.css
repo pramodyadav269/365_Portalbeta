@@ -832,8 +832,8 @@ main {
 
 .task-bar .task-title {
   text-transform: uppercase;
-  font-size: 12px;
-  font-family: OpenSans-Bold;
+  font-size: 14px;
+  font-family: OpenSans-SemiBold;
   color: #878787; }
 
 .task-bar .task-item {
@@ -942,7 +942,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     border-radius: 50%;
 }*/
 .wr-content {
-  background: #F3F5F7;
+  background: #fff;
   padding: 16px 20px;
   border-radius: 6px; }
 
@@ -950,9 +950,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   border-radius: .75rem; }
 
 .wr-content .wr-content-title {
-  font-family: OpenSans-SemiBold;
-  font-size: 16px;
-  color: #666666; }
+  font-family: OpenSans-Regular;
+  font-size: 13px;
+  color: #202338;
+  width: calc(100% - 40px); }
+  .wr-content .wr-content-title .float-right {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    font-size: 13px; }
 
 .wr-content .wr-content-anchar .anchar-profile-icon {
   width: 20px;
@@ -1061,12 +1067,19 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .user-name .name {
   font-weight: 600;
   color: #1B1C21;
-  font-size: 13px;
   margin-bottom: 2px; }
 
 .user-name .status {
-  font-size: 10px;
-  color: #A0AABE; }
+  color: #A0AABE;
+  font-size: 12px; }
+  .user-name .status a {
+    color: #A0AABE;
+    font-size: 14px;
+    padding: 0 4px; }
+    .user-name .status a:first-child {
+      padding-left: 0; }
+    .user-name .status a:last-child {
+      padding-right: 0; }
 
 .user-photo {
   margin-left: 22px;
@@ -2279,18 +2292,19 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   max-width: calc(100% - 280px);
   overflow-x: auto;
   padding-left: 14px;
-  overflow-y: hidden; }
+  overflow-y: hidden;
+  height: calc(100vh - 140px); }
 
 .website-redesign {
-  width: 1664px; }
+  width: 1468px; }
 
 .board-column {
   position: absolute;
   left: 0;
   right: 0;
-  width: 310px;
+  width: 270px;
   margin: 0 10px;
-  background: #fff;
+  background: #EBECF0;
   z-index: 1;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.16);
   border-radius: 6px;
@@ -2302,7 +2316,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     }*/ }
   .board-column.add-card {
     -webkit-box-shadow: none;
-    box-shadow: none; }
+    box-shadow: none;
+    background: #EBE0C4; }
   .board-column .float-right {
     color: rgba(0, 0, 0, 0.5);
     font-size: 14px; }
@@ -2338,7 +2353,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   cursor: move; }
 
 .board-column-header {
-  font-size: 1.25rem;
+  font-size: 18px;
   position: relative;
   height: 60px;
   line-height: 60px;
@@ -2402,10 +2417,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .add-task {
   padding: 0 18px; }
   .add-task .btn {
-    background: #F3F5F7;
+    background: #EBE0C4;
     border-radius: 6px;
     font-size: 18px;
-    color: #131313;
+    color: #222629;
     font-family: OpenSans-SemiBold; }
     .add-task .btn .svg-inline--fa {
       position: relative;
@@ -2414,21 +2429,19 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       color: rgba(0, 0, 0, 0.56);
       font-family: OpenSans-Regular; }
 
-.add-status {
-  padding: 0 18px; }
-  .add-status .btn {
-    background: #fff;
-    border-radius: 6px;
-    font-size: 18px;
-    color: #131313;
-    font-family: OpenSans-SemiBold;
-    text-align: left; }
-    .add-status .btn .svg-inline--fa {
-      position: relative;
-      top: -2px;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.56);
-      font-family: OpenSans-Regular; }
+.add-status .btn {
+  font-size: 18px;
+  color: #222629;
+  border-radius: 6px;
+  font-size: 18px;
+  font-family: OpenSans-SemiBold;
+  text-align: left; }
+  .add-status .btn .svg-inline--fa {
+    position: relative;
+    top: -2px;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.56);
+    font-family: OpenSans-Regular; }
 
 .help.card .btn {
   border-radius: 50px; }

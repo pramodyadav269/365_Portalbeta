@@ -39,6 +39,7 @@ namespace _365_Portal.Controllers
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
 
+                    #region Activity Log
                     if (task.t_Action == 2 || task.t_Action == 3 || task.t_Action == 4)
                     {
                         ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), task.t_Action, task.t_CompID, task.t_UserId
@@ -61,6 +62,7 @@ namespace _365_Portal.Controllers
 
                         }
                     }
+                    #endregion Activity Log
                 }
                 catch (Exception ex)
                 {
@@ -92,9 +94,11 @@ namespace _365_Portal.Controllers
                     data = Utility.ConvertDataSetToJSONString(ds);
                     data = Utility.Successful(data);
 
+                    #region Activity Log
                     ActivityLog objlog = ActivityLogBL.ActivityLogMapper(Modules.Task.ToString(), 10, task.Param_CompID, task.Param_UserID
-                      , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.Param_TaskName,"",task.Param_ProjectName,task.Param_StatusName);
+                      , UserName, System.Reflection.MethodBase.GetCurrentMethod().Name, task.Param_TaskName, "", task.Param_ProjectName, task.Param_StatusName);
                     var dsActivityLog = ActivityLogBL.LogCRUD(objlog);
+                    #endregion Activity Log
                 }
                 catch (Exception ex)
                 {

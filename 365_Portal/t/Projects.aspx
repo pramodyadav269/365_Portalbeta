@@ -384,7 +384,7 @@
         <div class="modal-dialog modal-lg shadow modal-right">
             <div class="modal-content rounded">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                    <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body p-5">
                     <h4 class="mb-4 font-weight-bold">Task Info</h4>
                     <div class="row input-validation-modal input-form-2">
@@ -481,7 +481,7 @@
         <div class="modal-dialog shadow">
             <div class="modal-content rounded">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                    <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body p-5">
                     <h4 class="mb-4 font-weight-bold">Add Status</h4>
                     <div class="row input-form-2">
@@ -1698,7 +1698,7 @@
         function ajacallActivityLogs() {
             ShowLoader();
             var requestParams = {
-                p_Action: "1"
+                p_Action: "3"
                 , p_ActivityMasterId: "0"
                 , p_CompID: "0"
                 , p_UserId: "0"

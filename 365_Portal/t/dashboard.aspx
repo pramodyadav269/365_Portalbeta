@@ -133,13 +133,13 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                        <img src="../Asset/images/close-button.png" class="close" /></a>
+                        <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                     <div class="modal-body">
                         <div class="row reward">
                             <div class="col-md-10 offset-md-1">
                                 <div class="row mt-3">
                                     <div class="col-md-3 mt-3 text-right">
-                                        <img id="imgAchievementIcon" src="../Asset/images/engager-icon.svg" class="img-achievements disabled" />
+                                        <img id="imgAchievementIcon" src="../INCLUDES/Asset/images/engager-icon.svg" class="img-achievements disabled" />
                                     </div>
                                     <div class="col-md-9">
                                         <h3 class="font-weight-bold modal-title" id="dvAchievementTitle">The Engager</h3>
@@ -167,7 +167,7 @@
                                         <h5 class="section-title">Your Reward on completion</h5>
                                     </div>
                                     <div class="col-md-12 text-center mt-3">
-                                        <img src="../Asset/images/reward-icon.svg" class="img-achievements" />
+                                        <img src="../INCLUDES/Asset/images/reward-icon.svg" class="img-achievements" />
                                     </div>
                                     <div class="col-md-12 text-center mt-5 mb-4">
                                         <a class="btn btn-custom bg-blue font-weight-bold text-white" data-dismiss="modal" aria-label="Close">Got It!</a>

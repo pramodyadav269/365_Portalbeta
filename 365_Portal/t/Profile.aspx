@@ -315,7 +315,7 @@
         <div class="col-md-8 mt-5 offset-md-2">
             <div class="row">
                 <div class="col-md-3 text-right">
-                    <img id="imgProfilePic" runat="server" class="circle user-photo" src="../Asset/images/profile.png" />
+                    <img id="imgProfilePic" runat="server" class="circle user-photo" src="../INCLUDES/Asset/images/profile.png" />
                 </div>
                 <div class="col-md-9">
                     <h2 class="font-weight-bold mt-3" id="lblUserName" runat="server"></h2>
@@ -436,13 +436,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                    <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body">
                     <div class="row reward">
                         <div class="col-md-10 offset-md-1">
                             <div class="row mt-3">
                                 <div class="col-md-3 mt-3 text-right">
-                                    <img id="imgAchievementIcon" src="../Asset/images/engager-icon.svg" class="img-achievements disabled" />
+                                    <img id="imgAchievementIcon" src="../INCLUDES/Asset/images/engager-icon.svg" class="img-achievements disabled" />
                                 </div>
                                 <div class="col-md-9">
                                     <h3 class="font-weight-bold modal-title" id="dvAchievementTitle">The Engager</h3>
@@ -470,7 +470,7 @@
                                     <h5 class="section-title">Your Reward on completion</h5>
                                 </div>
                                 <div class="col-md-12 text-center mt-3">
-                                    <img src="../Asset/images/reward-icon.svg" class="img-achievements" />
+                                    <img src="../INCLUDES/Asset/images/reward-icon.svg" class="img-achievements" />
                                 </div>
                                 <div class="col-md-12 text-center mt-5 mb-4">
                                     <a class="btn btn-custom bg-blue font-weight-bold text-white" data-dismiss="modal" aria-label="Close">Got It!</a>
@@ -487,7 +487,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                    <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body contents-datials">
                     <div class="row justify-content-center mt-5 mb-4">
                         <div class="col-12 col-sm-12 col-md-6 mb-3 overview" id="divFlashcard">
@@ -508,7 +508,7 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <a class="close-modal" data-dismiss="modal" aria-label="Close">
-                    <img src="../Asset/images/close-button.png" class="close" /></a>
+                    <img src="../INCLUDES/Asset/images/close-button.png" class="close" /></a>
                 <div class="modal-body contents-datials">
                     <div class="row">
                         <div class="col-md-10 offset-md-1 mt-5 mb-4" id="dvPdfViewer" style="display: none;">
@@ -925,11 +925,11 @@
                     $.each(gifts, function (i, data) {
                         giftHtml += '<dt onclick="OpenPlayer(this);" class="col-md-3" TopicID=' + data.TopicID + ' ModuleID=' + data.ModuleID + ' ContentID=' + data.ContentID + '>';
                         if (data.ContentType == 'VIDEO')
-                            giftHtml += '<img src="../Asset/images/next-video-icon.svg" />';
+                            giftHtml += '<img src="../INCLUDES/Asset/images/next-video-icon.svg" />';
                         else if (data.ContentType == 'FLASHCARD')
-                            giftHtml += '<img src="../Asset/images/next-flashcard-icon.svg" />';
+                            giftHtml += '<img src="../INCLUDES/Asset/images/next-flashcard-icon.svg" />';
                         else if (data.ContentType == 'PDF')
-                            giftHtml += '<img src="../Asset/images/next-pdf-icon.svg" />';
+                            giftHtml += '<img src="../INCLUDES/Asset/images/next-pdf-icon.svg" />';
                         giftHtml += '<span>' + data.Title + '</span>'
                         giftHtml += '</dt>';
                     });
@@ -940,15 +940,15 @@
                     $.each(achievements, function (i, data) {
                         achievementHtml += '<dt class="col" onclick="openModal(' + data.AchievementID + ');" ContentID=' + data.AchievementID + '>';
                         if (data.Title.includes("Professor"))
-                            achievementHtml += '<img src="../Asset/images/quiz-master-c-icon.svg" />';
+                            achievementHtml += '<img src="../INCLUDES/Asset/images/quiz-master-c-icon.svg" />';
                         if (data.Title.includes("Influencer"))
-                            achievementHtml += '<img src="../Asset/images/perfectionist-c-icon.svg" />';
+                            achievementHtml += '<img src="../INCLUDES/Asset/images/perfectionist-c-icon.svg" />';
                         if (data.Title.includes("LEGO Leader"))
-                            achievementHtml += '<img src="../Asset/images/wordsmith-c-icon.svg" />';
+                            achievementHtml += '<img src="../INCLUDES/Asset/images/wordsmith-c-icon.svg" />';
                         if (data.Title.includes("G.O.A.T"))
-                            achievementHtml += '<img src="../Asset/images/engager-icon.svg" />';
+                            achievementHtml += '<img src="../INCLUDES/Asset/images/engager-icon.svg" />';
                         //if (data.Title.includes("Guru"))
-                        //    achievementHtml += '<img src="../Asset/images/diploma.png" />';
+                        //    achievementHtml += '<img src="../INCLUDES/Asset/images/diploma.png" />';
                         achievementHtml += '<span>' + data.Title + '</span>'
                         achievementHtml += '</dt>';
                     });
@@ -1020,7 +1020,7 @@
                             flashcard += '<div class="card">';
                         else
                             flashcard += '<div class="card d-none">';
-                        flashcard += '<img class="card-img-top circle mx-auto" src="../Asset/images/employee-illustration.svg" />';
+                        flashcard += '<img class="card-img-top circle mx-auto" src="../INCLUDES/Asset/images/employee-illustration.svg" />';
                         flashcard += '<div class="card-body">';
                         flashcard += '<p class="card-text">' + data.Description + '</p>';
                         flashcard += '<p class="text-right anchor">' + (i + 1) + '/' + totalLength + '</p>';
