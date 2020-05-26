@@ -1698,7 +1698,7 @@
         function ajacallActivityLogs() {
             ShowLoader();
             var requestParams = {
-                p_Action: "1"
+                p_Action: "3"
                 , p_ActivityMasterId: "0"
                 , p_CompID: "0"
                 , p_UserId: "0"
