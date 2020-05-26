@@ -197,7 +197,7 @@
                                 p = Points[0].PointsEarned + ' points';
                             }
 
-                            $('#spBadgePoints').text(b + ', ' + p);
+                            $('#spBadgePoints').html('<a href="profile.aspx">' + b + '</a>|<a href="profile.aspx">' + p + '</a>');
                             $('#imgRank').attr("src", DataSet.Data.Rank[0].FilePath);
 
                             var requiredBadges = DataSet.Data.NextRank[0].MinBadges - Badge[0].BadgeCount;
@@ -701,7 +701,7 @@
                         <asp:Label CssClass="name" ID="lblUserName" runat="server" />
                         <%--<span class="status">0 badges, 0 points</span>
                         <span class="status" id="spPoints"> 0 points</span>--%>
-                        <span class="status" id="spBadgePoints">0 badges | 0 points</span>
+                        <span class="status" id="spBadgePoints"><a href="profile.aspx">0 badges</a>|<a href="profile.aspx">0 points</a></span>
                     </li>
                     <li class="nav-item user-photo dropdown">
                         <img id="imgProfilePic" runat="server" src="../INCLUDES/Asset/images/profile.png" class="nav-photo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />

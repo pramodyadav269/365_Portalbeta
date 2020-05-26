@@ -1156,8 +1156,8 @@ main {
 
 .task-bar .task-title {
     text-transform: uppercase;
-    font-size: 12px;
-    font-family: OpenSans-Bold;
+    font-size: 14px;
+    font-family: OpenSans-SemiBold;
     color: #878787;
 }
 
@@ -1313,6 +1313,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         position: absolute;
         right: 20px;
         top: 16px;
+        font-size: 13px;
     }
 }
 
@@ -1451,13 +1452,26 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .user-name .name {
     font-weight: 600;
     color: #1B1C21;
-    font-size: 13px;
     margin-bottom: 2px;
 }
 
 .user-name .status {
-    font-size: 10px;
     color: #A0AABE;
+    font-size: 12px;
+
+    a {
+        color: #A0AABE;
+        font-size: 14px;
+        padding: 0 4px;
+
+        &:first-child {
+            padding-left: 0;
+        }
+
+        &:last-child {
+            padding-right: 0;
+        }
+    }
 }
 
 .user-photo {
@@ -3307,6 +3321,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     overflow-x: auto;
     padding-left: 14px;
     overflow-y: hidden;
+    height: calc(100vh - 140px);
 }
 
 .website-redesign {
@@ -3332,6 +3347,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     &.add-card {
         -webkit-box-shadow: none;
         box-shadow: none;
+        background: #EBE0C4;
     }
 
     .float-right {
@@ -3483,13 +3499,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 }
 
 .add-status {
-    padding: 0 18px;
-
     .btn {
-        background: #fff;
+        font-size: 18px;
+        color: #222629;
         border-radius: 6px;
         font-size: 18px;
-        color: #131313;
         font-family: OpenSans-SemiBold;
         text-align: left;
 
