@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12 col-sm-12 d-flex justify-content-between header">
                 <div class="d-flex align-items-center">
-                    <h4 class="title">Add Course</h4>
+                    <h4 class="title" id="hdgPageTitle">Add Course</h4>
                 </div>
                 <div>
                     <div class="col dropdown p-0">
@@ -83,13 +83,11 @@
                                             <a id="btnManageTags" data-toggle="modal" data-target="#modalAddTag" onclick="clearModalText();" href="#"><u>Manage Tags</u></a>
                                         </div>
                                         <div class="col-sm-12">
-                                            <div class="form-group editor">
+                                            <div class="form-group editor" id="divCourseSummary">
                                                 <label>Course Summary </label>
-                                                <%--<span>Highlight why the course should be taken and who is the appropriate audience for the course.</span>--%>
                                                 <div id="txtCourseSummary"></div>
                                             </div>
                                         </div>
-
                                         <div class="col-sm-12 col-md-6 btnSpaceBottom">
                                             <a class="btn btn-black" id="btnAddCourse" onclick="AddCourse('add');"><i class="fas fa-plus-circle"></i>Save & Proceed</a>
                                         </div>
@@ -275,14 +273,14 @@
             '<label for="txtContentHeader" class="inline">Content Title</label>' +
             '<input type="text" class="form-control required" id="txtContentHeader" onkeyup="IsChangedAnything(this);" placeholder="Content Title" />' +
             '</div>' +
-            '<div class="form-group editor asterisk">' +
+            '<div class="form-group editor asterisk" id="divContentSummary">' +
             '<div id="txtContentDescription"></div>' +
             '</div>';
         //'<div class="form-group">' +
         //'<a class="btn btn-outline blod black" id="btnContentCancel" onclick="ContentCancel(this);">Cancel</a>' +
         //'</div>';
 
-        var dvLessonResourceEdit = '<div class="form-group editor">' +
+        var dvLessonResourceEdit = '<div class="form-group editor" id="divResourceSummary">' +
             '<label>Resources</label>' +
             '<div id="txtResourcesDescription"></div>' +
             '</div>';
@@ -311,6 +309,7 @@
             '</div>' +
 
             '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
+        
 
         $(document).ready(function () {
             debugger
@@ -321,6 +320,7 @@
                 if(CourseFlag != '0')
                 {
                     $('#btnAddCourse').text('Save');
+                    $('#hdgPageTitle').text('Edit Course');
                 }
 
                 EditCourse();
@@ -337,7 +337,13 @@
             {
                 $("#btnPublish").hide();
                 $("#btnDiscard").hide();
-            }     
+            }  
+            
+
+            $("#divCourseSummary").keyup(function(){            
+                debugger
+                IsChangedField = '1';
+            });            
         });
 
         function readQueryString() {
@@ -350,7 +356,6 @@
             }
             return vars;
         }
-
 
 
         function GetCourseCategoryTagsAndBadge(flag, CourseCategoryID, TagID) {
@@ -571,6 +576,8 @@
                                         if (DataSet.StatusCode == "1") {
 
                                             $("#btnDiscard").show();
+                                            $('#btnAddCourse').text('Save');
+                                            $('#hdgPageTitle').text('Edit Course');
 
                                             if (flag == 'redirect') {
                                                 Swal.fire({
@@ -1143,6 +1150,16 @@
             ManageLesson('editbind');
             ManageContent('editbind');
             inputInline();
+
+
+            $("#divResourceSummary").keyup(function(){      
+                debugger
+                IsChangedField = '1';
+            });
+            $("#divContentSummary").keyup(function(){            
+                debugger
+                IsChangedField = '1';
+            });
         }
 
         function ClearNewLesson() {
@@ -3506,11 +3523,6 @@
             IsChangedField = '1';
         }
 
-        //This is not working
-        $(".jodit_wysiwyg").keyup(function(){
-            debugger
-            IsChangedField = '1';
-        });
 
     </script>
 </asp:Content>
