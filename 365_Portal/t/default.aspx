@@ -183,7 +183,7 @@
                                                                     <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="{{'ansOption.AnswerText_1_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                </div> + 
+                                                                </div> 
                                                             </div>
 
                                                             <%--Dropdown List--%>
