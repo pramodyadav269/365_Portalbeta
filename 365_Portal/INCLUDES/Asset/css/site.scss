@@ -2832,22 +2832,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 .card-with-img {
 
     &.card {
-        width: 270px;
-        height: 406px;
-        /*
-        @media #{$small-and-down} {
-            width: auto;
-        }*/
+        width: 360px;
+        height: 540px;
+        background-color: #F8F8F9;
         border-radius: 0;
         border-bottom-left-radius: .1rem;
         border-bottom-right-radius: .1rem;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 
         .card-img-top {
             border-radius: 0;
-            height: 194px;
+            height: 270px;
             display: flex;
-            background: #eee;
 
             img {
                 width: 100%;
@@ -2879,11 +2875,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .card-body {
             &.item {
-                height: 164px;
-                padding: 28px 20px;
+                height: 216px;
+                padding: 32px 22px;
 
                 .card-text {
-                    font-size: 11px;
+                    font-size: 16px;
                     color: #707070;
                     font-family: OpenSans-Regular;
 
@@ -2904,7 +2900,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     }
 
                     &.type {
-                        font-size: 11px;
+                        font-size: 17px;
                         color: #707070;
                         font-family: OpenSans-Regular;
                         margin-bottom: 20px;
@@ -2912,7 +2908,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 }
 
                 .card-title {
-                    font-size: 12px;
+                    font-size: 18px;
                     color: #000000;
                     margin-bottom: 20px;
                     font-family: OpenSans-Bold;
@@ -2925,14 +2921,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                 align-items: center;
 
                 img {
-                    height: 23px;
-                    width: 23px;
+                    height: 31px;
+                    width: 31px;
                     border-radius: 50%;
-                    margin-right: 8px;
+                    margin-right: 12px;
                 }
 
                 .card-title {
-                    font-size: 11px;
+                    font-size: 16px;
                     color: #000000;
                     font-family: OpenSans-SemiBold;
                     margin: 0;
@@ -2942,11 +2938,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .dropdown {
             .dropdown-menu {
-                transform: translate3d(-214px, 26px, 0px) !important;
+                /*transform: translate3d(-214px, 26px, 0px) !important;*/
                 min-width: 224px;
+                background-color: #F8F8F9;
+                box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
 
                 .dropdown-item {
-                    font-size: 13px;
+                    font-size: 16px;
+                    font-family: OpenSans-SemiBold;
                     color: #000;
                     border: 0;
                     padding: .5rem .75rem;
@@ -2954,6 +2953,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     .svg-inline--fa {
                         font-size: 13px;
                         color: #000;
+                        display: none;
+                    }
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.02);
                     }
                 }
             }
