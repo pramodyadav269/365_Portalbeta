@@ -15,7 +15,7 @@
     <%-- beta view lesson start --%>
     <div class="dashboard">
 
-        <section id="dvModuleContainer" style="display:none;" class="course-wrapper" ng-if="ActiveContainer =='Module'">
+        <section id="dvModuleContainer" style="display: none;" class="course-wrapper" ng-if="ActiveContainer =='Module'">
             <div class="card text-white bg-dark-blue course-header">
                 <div class="card-body">
                     <div class="row">
@@ -23,7 +23,7 @@
                             <a class="back c-yellow" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8">
-                            <h2 class="card-title"  ng-bind-html="trustAsHtml(SelectedTopic.Title)">{{SelectedTopic.Title}}</h2>
+                            <h2 class="card-title" ng-bind-html="trustAsHtml(SelectedTopic.Title)">{{SelectedTopic.Title}}</h2>
                             <p class="card-text">{{SelectedTopic.Description}}</p>
                             <div class="action">
                                 <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
@@ -53,33 +53,25 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                        <div class="course-content">
-                            <div class="card shadow-sm course-point">
-                                <div class="card-body">
-                                    <h5 class="card-title">+{{SelectedTopic.Points}} Points</h5>
-                                    <img ng-show="SelectedTopic.CourseLogo !=null" class="img-fluid" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
-                                    <img ng-show="SelectedTopic.CourseLogo ==null" class="img-fluid" src="../INCLUDES/Asset/images/sun.png">
-                                    <p class="card-text"><i class="fas fa-stopwatch"></i>~{{ GetTopicTime(SelectedTopic.CourseTime) }}</p>
-                                    <div class="point-progress">
-                                        <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
-                                                aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
+                        <div class="course-content enroll">
+                            <div class="card">
+                                <img ng-show="SelectedTopic.CourseLogo !=null" class="card-img-top" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
+                                <img ng-show="SelectedTopic.CourseLogo ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">
 
-                                    </div>
-                                    <div class="tag">
-                                        <p class="card-text"><i class="fas fa-tag rotate-90deg"></i>Tags</p>
-                                        <div class="tag-item">
-                                            <span ng-repeat="tag in Module.TopicTags">{{tag.TagName}}</span>
-                                            <%-- <span>Admin</span>
-                                                <span>Developer</span>
-                                                <span>Beginner</span>
-                                                <span>Database</span>
-                                                <span>Salesforce Platform</span>--%>
+                                <div class="card-body">
+                                    <div class="creator">
+                                        <img src="../INCLUDES/Asset/images/profile.png" />
+                                        <div class="creator-details">
+                                            <span>Created by Chris Croft</span>
+                                            <span>Last updated 3/2020</span>
                                         </div>
                                     </div>
+                                    <div class="enroll-content">
+                                        <span>Course Category</span>
+                                        <span>Master leadership skills</span>
+                                    </div>
+
+                                    <a class="btn bg-yellow w-100">Enroll</a>
                                 </div>
                             </div>
                             <%--  <div class="card shadow-sm course-connection">
@@ -178,7 +170,7 @@
                                                                     <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="{{'ansOption.AnswerText_1_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                </div> 
+                                                                </div>
                                                             </div>
 
                                                             <%--Dropdown List--%>
@@ -193,7 +185,7 @@
                                                             <%--Radio Button List--%>
                                                             <div ng-if="question.QuestionTypeID == 3 ">
                                                                 <div class="custom-control custom-radio" ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_3_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_3_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'rbSVAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
@@ -202,7 +194,7 @@
                                                             <%--Radio Button List with box--%>
                                                             <div ng-if="question.QuestionTypeID == 9 " class="box">
                                                                 <div ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text"name="{{'ansOption.AnswerText_9_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_9_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label for="{{'rbAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%--    IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
@@ -962,7 +954,7 @@
                                                     <img ng-if="content.ContentType=='FINALQUIZ'" src="../includes/Asset/images/quiz-icon.svg" />
                                                 </div>
                                                 <div class="col-sm-9 col-md-9 col-lg-10">
-                                                    <h5 class="card-title"  ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
+                                                    <h5 class="card-title" ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
                                                     <p ng-bind-html="trustAsHtml(content.Description)" class="card-text"></p>
                                                 </div>
                                                 <div class="col-sm-1 col-md-1 col-lg-1">

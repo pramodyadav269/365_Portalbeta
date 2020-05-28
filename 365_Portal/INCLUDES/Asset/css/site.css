@@ -1846,6 +1846,49 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       .dashboard .course-wrapper .course-content .course-point .card-body .point-progress .progress {
         height: 8px;
         margin: 0 2.5rem; }
+  .dashboard .course-wrapper .course-content.enroll .card {
+    width: 270px;
+    height: 405px;
+    background-color: #F8F8F9;
+    border-radius: 0;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16); }
+    .dashboard .course-wrapper .course-content.enroll .card .card-img-top {
+      height: 195px; }
+    .dashboard .course-wrapper .course-content.enroll .card .card-body {
+      text-align: left;
+      padding: 24px 28px; }
+      .dashboard .course-wrapper .course-content.enroll .card .card-body .creator {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 18px; }
+        .dashboard .course-wrapper .course-content.enroll .card .card-body .creator img {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          margin-right: 14px; }
+        .dashboard .course-wrapper .course-content.enroll .card .card-body .creator .creator-details span {
+          font-size: 12px;
+          display: block; }
+          .dashboard .course-wrapper .course-content.enroll .card .card-body .creator .creator-details span:first-child {
+            color: #23253A;
+            font-family: OpenSans-SemiBold; }
+          .dashboard .course-wrapper .course-content.enroll .card .card-body .creator .creator-details span:last-child {
+            color: #ABABAB;
+            font-family: OpenSans-Regular; }
+      .dashboard .course-wrapper .course-content.enroll .card .card-body .enroll-content {
+        margin-bottom: 18px; }
+        .dashboard .course-wrapper .course-content.enroll .card .card-body .enroll-content span {
+          font-size: 12px;
+          display: block; }
+          .dashboard .course-wrapper .course-content.enroll .card .card-body .enroll-content span:last-child {
+            color: #23253A;
+            font-family: OpenSans-SemiBold; }
+          .dashboard .course-wrapper .course-content.enroll .card .card-body .enroll-content span:first-child {
+            color: #ABABAB;
+            font-family: OpenSans-Regular; }
+      .dashboard .course-wrapper .course-content.enroll .card .card-body .btn {
+        font-size: 20px;
+        font-family: OpenSans-SemiBold; }
   .dashboard .course-wrapper .course-content .course-connection .card-body .card-text {
     color: rgba(0, 0, 0, 0.5); }
   .dashboard .course-wrapper .course-content .course-connection .card-body .path {
