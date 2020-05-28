@@ -15,7 +15,7 @@
     <%-- beta view lesson start --%>
     <div class="dashboard">
 
-        <section id="dvModuleContainer" style="display: none;" class="course-wrapper" ng-if="ActiveContainer =='Module'">
+        <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
             <div class="card text-white bg-dark-blue course-header">
                 <div class="card-body">
                     <div class="row">
@@ -62,16 +62,24 @@
                                     <div class="creator">
                                         <img src="../INCLUDES/Asset/images/profile.png" />
                                         <div class="creator-details">
-                                            <span>Created by Chris Croft</span>
+                                            <span>Created by {{SelectedTopic.InstructorName}}</span>
                                             <span>Last updated 3/2020</span>
                                         </div>
                                     </div>
                                     <div class="enroll-content">
                                         <span>Course Category</span>
-                                        <span>Master leadership skills</span>
+                                        <span ng-bind-html="trustAsHtml(SelectedTopic.CategoryName)"></span>
                                     </div>
+                                     <div class="point-progress" ng-show="SelectedTopic.IsEnrolled == 1">
+                                        <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
 
-                                    <a class="btn bg-yellow w-100">Enroll</a>
+                                    </div>
+                                    <a class="btn bg-yellow w-100" ng-click="EnrollCourse(SelectedTopic.TopicId)" ng-show="SelectedTopic.IsEnrolled == null || SelectedTopic.IsEnrolled == 0">Enroll</a>
                                 </div>
                             </div>
                             <%--  <div class="card shadow-sm course-connection">
@@ -586,65 +594,7 @@
                     </div>
                 </section>
             </div>
-
-            <%--    <div id="dvModuleContainer"  ng-if="ActiveContainer =='Module'">
-            <div class="col-sm-12 header">
-                <a class="back" href="#" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
-                <h2 class="text-center font-weight-bold">{{SelectedTopic.Title}}</h2>
-                <h6 class="text-center section-title mt-3 color-0-25">Course</h6>
-            </div>
-            <div class="col-sm-6 mt-4 offset-md-3 completed-progress">
-                <div class="row">
-                    <div class="col-12">
-                        <p class="float-left"><span>{{SelectedTopic.CompletedModules}} of {{SelectedTopic.TotalModules}}</span> lessons completed</p>
-                        <i class="fas fa-trophy fa-lg float-right"></i>
-                    </div>
-                    <div class="col-12">
-                        <div class="progress border-radius-0">
-                            <div class="progress-bar bg-green" role="progressbar" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
-                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <section>
-                <h4 class="section-title">Unlocked Lessons</h4>
-                <div id="dvUnlockedLessons" class="content">
-                    <div class="content-item" ng-repeat="module in Module.UnlockedItems" my-unlocklesson-repeat-directive>
-                        <div class="card bc-blue" ng-click="GetContentsByModule(module.TopicID,module.ModuleID)" style="cursor: pointer;">
-                            <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{module.Title}}</h5>
-                                <p class="card-text">{{module.Description}}</p>
-                                <p ng-if="module.IsCompleted == 1" class="text-right anchor"><i class="fas fa-check c-green"></i></p>
-                                <p ng-if="module.IsCompleted != 1" class="text-right anchor">{{module.CompletedContents + '/' + module.TotalContents}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section>
-                <h4 class="section-title">Locked Lessons</h4>
-                <div id="dvLockedLessons" class="content">
-                    <div class="content-item" ng-repeat="module in Module.LockedItems" my-lockedlesson-repeat-directive>
-                        <div class="card bc-blue">
-                            <div class="card-icon">
-                                <img src="../INCLUDES/Asset/images/sun.png">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">{{module.Title}}</h5>
-                                <p class="card-text">{{module.Description}}</p>
-                                <p class="text-right anchor"><i class="fas fa-lock"></i></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>--%>
-
+           
             <div>
                 <div class="row">
                     <div class="col-12 achievements mb-5" style="display: none;">

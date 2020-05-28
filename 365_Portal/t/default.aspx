@@ -382,14 +382,14 @@
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -436,14 +436,14 @@
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
@@ -492,14 +492,14 @@
                             <div class="action-icon dropdown">
                                 <img src="../INCLUDES/Asset/images/dot-more-vertical-menu.svg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" />
                                 <div class="dropdown-menu br-0">
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="fas fa-graduation-cap"></i>Enroll</a>
-                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,1);"><i class="far fa-eye"></i>View more details</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="fas fa-graduation-cap"></i>Enroll</a>
+                                    <a class="dropdown-item" href="#" ng-click="GetModulesByTopic(topic.TopicId,0);"><i class="far fa-eye"></i>View more details</a>
                                     <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicId)"><i class="fas fa-pen"></i>Manage</a>
                                 </div>
                             </div>
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,1);">
+                            <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
                                 <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>

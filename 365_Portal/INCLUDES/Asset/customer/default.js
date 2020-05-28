@@ -13,8 +13,8 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     var courseId = GetParameterValues("courseid");
     if (courseId != null) {
         $("#dvModuleContainer").hide();
-        $scope.ActiveContainer = "Module";
-        var topicAssignedId = GetParameterValues("t");
+
+        var topicAssignedId = GetParameterValues("s");
         objDs.DS_GetModulesByTopic(parseInt(courseId), topicAssignedId == null ? 0 : topicAssignedId);
     }
 
@@ -41,7 +41,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     else if (currentPage.indexOf('course_preview.aspx') > -1 && courseId == null) {
         objDs.DS_GetUserTopics("", "");
     }
-
+    $("#dvModuleContainer").hide();
     $("#dvTopicContainer").hide();
     if (courseId == null) {
         $scope.ActiveContainer = "Topic";
@@ -119,7 +119,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         return image;
     }
 
-    $scope.GetModulesByTopic = function (topicId, checkIfTopicAssigned,refresh) {
+    $scope.GetModulesByTopic = function (topicId, checkIfTopicAssigned, refresh) {
         //$scope.SelectedTopic = $rootScope.Topics.filter(function (v) {
         //    return topicId == v.TopicId;
         //})[0];
@@ -128,7 +128,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
             $scope.ActiveContainer = "Module";
         }
         else {
-            window.location.href = 'course_preview.aspx?courseid=' + topicId + '&t=' + checkIfTopicAssigned;
+            window.location.href = 'course_preview.aspx?courseid=' + topicId + '&s=' + checkIfTopicAssigned + "&";
         }
     }
 
@@ -389,17 +389,20 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
 
         //}
 
-
-        $scope.ActiveContainer = prevPage;
-        if (prevPage == 'Content')
+        if (prevPage == 'Content') {
+            $scope.ActiveContainer = prevPage;
             $("#dvVideoRating").hide();
+        }
         if (prevPage == 'Topic') {
-            $("#dvTopicContainer").show();
+            // $("#dvTopicContainer").show();
+            document.location.replace(document.referrer)
         } if (prevPage == 'Content') {
+            $scope.ActiveContainer = prevPage;
             $('#videoControl').removeClass('d-none');
             $('#videoControl').hide();
         }
         if (prevPage == "Module") {
+            $scope.ActiveContainer = prevPage;
             $("#dvModuleContainer").show();
         }
     }
@@ -409,6 +412,11 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         $("#dvVideoRating").hide();
         objDs.DS_RateContent(topicId, moduleId, contentId, rating);
         $scope.GoBack('Content');
+    }
+
+    $scope.EnrollCourse = function (topicId) {
+        // alert(topicId);
+        objDs.DS_GetModulesByTopic(topicId, 1)
     }
 
     $scope.NextContent = function (contentId) {
@@ -678,6 +686,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             $rootScope.Module = responseData;
             $rootScope.SelectedTopic = responseData;
             $("#dvModuleContainer").show();
+            $rootScope.ActiveContainer = "Module";
         });
     }
 
