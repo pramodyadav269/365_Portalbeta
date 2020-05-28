@@ -10,15 +10,15 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/all.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/select2.min.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/360.css?v=26052020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css?v=26052020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/all.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/select2.min.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/360.css?v=260520201" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=260520201" rel="stylesheet" />
 
     <%-- JS --%>
     <script9q2 src="../INCLUDES/Asset/js/angular.min.js"></script9q2>

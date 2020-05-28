@@ -5,11 +5,21 @@ var allContents = [];
 // CONTROLLER FUNCTIONS
 app.controller("DefaultController", function ($scope, $rootScope, DataService, $sce) {
 
+    objDs = DataService;
     var searchText = GetParameterValues("t");
     $scope.SearchText = (searchText == "" || searchText == null) ? "" : searchText;
     $("#txtTopicSearchText").val($scope.SearchText);
+
+    var courseId = GetParameterValues("courseid");
+    if (courseId != null) {
+        $("#dvModuleContainer").hide();
+        $scope.ActiveContainer = "Module";
+        var topicAssignedId = GetParameterValues("t");
+        objDs.DS_GetModulesByTopic(parseInt(courseId), topicAssignedId == null ? 0 : topicAssignedId);
+    }
+
     var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
-    objDs = DataService;
+
     $scope.UserRole = userRole;
     if (userRole == "enduser") {
         $("#dvAddNewCourse_Floating").hide();
@@ -23,16 +33,19 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
         else {
             objDs.DS_GetAllTopics($scope.SearchText);
-
         }
     }
     else if (currentPage.indexOf('default.aspx') > -1) {
         objDs.DS_GetUserTopics("", "");
     }
+    else if (currentPage.indexOf('course_preview.aspx') > -1 && courseId == null) {
+        objDs.DS_GetUserTopics("", "");
+    }
 
     $("#dvTopicContainer").hide();
-
-    $scope.ActiveContainer = "Topic";
+    if (courseId == null) {
+        $scope.ActiveContainer = "Topic";
+    }
     $scope.NotificationText = "Notifications";
     $scope.ColorIndex = 1;
 
@@ -106,12 +119,17 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         return image;
     }
 
-    $scope.GetModulesByTopic = function (topicId, checkIfTopicAssigned) {
-        $scope.SelectedTopic = $rootScope.Topics.filter(function (v) {
-            return topicId == v.TopicId;
-        })[0];
-        objDs.DS_GetModulesByTopic(topicId, checkIfTopicAssigned);
-        $scope.ActiveContainer = "Module";
+    $scope.GetModulesByTopic = function (topicId, checkIfTopicAssigned,refresh) {
+        //$scope.SelectedTopic = $rootScope.Topics.filter(function (v) {
+        //    return topicId == v.TopicId;
+        //})[0];
+        if (refresh == 1) {
+            objDs.DS_GetModulesByTopic(topicId, checkIfTopicAssigned);
+            $scope.ActiveContainer = "Module";
+        }
+        else {
+            window.location.href = 'course_preview.aspx?courseid=' + topicId + '&t=' + checkIfTopicAssigned;
+        }
     }
 
     $scope.GetContentsByModule = function (topicId, moduleId) {
@@ -658,6 +676,8 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             responseData.TopicTags = ds.DS_SetClasses(responseData.LockedItems);
             responseData.UnlockedItems = ds.DS_SetClasses(responseData.UnlockedItems);
             $rootScope.Module = responseData;
+            $rootScope.SelectedTopic = responseData;
+            $("#dvModuleContainer").show();
         });
     }
 
@@ -871,7 +891,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             txtConfirmButtonText = 'Yes, archive it!';
         }
         else {
-           // Unarchieve
+            // Unarchieve
             txtMsg = "Do you want to un-archive ? Yes or No !";
             txtConfirmButtonText = 'Yes, un-archive it!';
         }

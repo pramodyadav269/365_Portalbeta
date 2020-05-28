@@ -404,6 +404,13 @@
     <Compile Include="t\card_drag.aspx.designer.cs">
       <DependentUpon>card_drag.aspx</DependentUpon>
     </Compile>
+    <Compile Include="t\course_preview.aspx.cs">
+      <DependentUpon>course_preview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="t\course_preview.aspx.designer.cs">
+      <DependentUpon>course_preview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="t\enduser.Master.cs">
       <DependentUpon>enduser.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2498,6 +2505,7 @@
     <Content Include="t\Contents.aspx" />
     <Content Include="t\dashboard.aspx" />
     <Content Include="t\courses.aspx" />
+    <Content Include="t\course_preview.aspx" />
     <Content Include="t\default.aspx" />
     <Content Include="t\Departments.aspx" />
     <Content Include="t\DownloadExcel.aspx" />
