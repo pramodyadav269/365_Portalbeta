@@ -5,5 +5,9 @@ namespace _365_Portal.Code
     public class ConnectionManager
     {
         public static string connectionString = WebConfigurationManager.ConnectionStrings["365LifeConnection"].ConnectionString;
+
+        public static string TaskMgmtconnectionString = WebConfigurationManager.ConnectionStrings["TaskMgmtConnection"].ConnectionString;
+
+
     }
 }

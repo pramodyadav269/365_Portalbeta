@@ -10,6 +10,7 @@ namespace _365_Portal.Code.DAL
 {
     public class TaskDAL
     {
+        public static MySqlConnection connstring = new MySqlConnection(ConnectionManager.TaskMgmtconnectionString);
         public static void Log(Exception ex, string methodName)
         {
             Logger.Log(ex, "TaskDAL", methodName);
@@ -51,7 +52,7 @@ namespace _365_Portal.Code.DAL
         public static DataSet TaskCRUD(TaskManagement task)
         {
             DataSet ds = new DataSet();
-            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            MySqlConnection conn = connstring;
 
             try
             {
@@ -79,7 +80,7 @@ namespace _365_Portal.Code.DAL
         public static DataSet TaskUpdate(UpdateTaskManagement updateTask)
         {
             DataSet ds = new DataSet();
-            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            MySqlConnection conn = connstring;
 
             try
             {

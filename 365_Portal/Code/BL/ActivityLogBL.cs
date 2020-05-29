@@ -52,7 +52,7 @@ namespace _365_Portal.Code.BL
                         break;
                     case (int)TaskAction.DELETE:
                         p_ActivityMasterId = (int)Activity.TaskDeleted;
-                        p_Message = p_UserName + "deleted <b>" + activitynameobject + "</b>";
+                        p_Message = p_UserName + " deleted <b>" + activitynameobject + "</b>";
                         break;
                     case 10:
                         p_ActivityMasterId = (int)Activity.TaskStatusChanged;
@@ -85,7 +85,7 @@ namespace _365_Portal.Code.BL
                         break;
                     case 4:
                         p_ActivityMasterId = (int)Activity.projectDeleted;
-                        p_Message = p_UserName + "deleted <b>" + activitynameobject + "</b>";
+                        p_Message = p_UserName + " deleted <b>" + activitynameobject + "</b>";
                         break;
                     default:
                         p_ActivityMasterId = 0;

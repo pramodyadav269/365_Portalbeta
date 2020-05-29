@@ -1657,7 +1657,11 @@
                     HideLoader();
                 },
                 success: function (response) {
-                    HideLoader();
+                    HideLoader
+                    var TaskCRUDAPIData = $.parseJSON(response);
+                    if (TaskCRUDAPIData.StatusCode == 0) {
+                        call_Notification(TaskCRUDAPIData);
+                    }
                 },
                 failure: function (response) {
                     Swal.fire({

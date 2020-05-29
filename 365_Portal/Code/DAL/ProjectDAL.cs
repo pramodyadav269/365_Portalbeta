@@ -11,6 +11,7 @@ namespace _365_Portal.Code.DAL
 {
     public class ProjectDAL
     {
+        public static MySqlConnection connstring = new MySqlConnection(ConnectionManager.TaskMgmtconnectionString);
 
         public static void Log(Exception ex, string methodName)
         {
@@ -38,14 +39,14 @@ namespace _365_Portal.Code.DAL
             cmd.Parameters.AddWithValue("p_UserId", taskStatus.p_UserId);
             cmd.Parameters.AddWithValue("p_ProjectID", taskStatus.p_ProjectID);
             cmd.Parameters.AddWithValue("p_StatusId", taskStatus.p_StatusId);
-            
+
             return cmd;
         }
 
         public static DataSet ProjectCRUD(Project project)
         {
             DataSet ds = new DataSet();
-            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            MySqlConnection conn = connstring;
             try
             {
                 conn.Open();
@@ -72,7 +73,7 @@ namespace _365_Portal.Code.DAL
         public static DataSet ProjectStatusCRUD(TaskStatus taskStatus)
         {
             DataSet ds = new DataSet();
-            MySqlConnection conn = new MySqlConnection(ConnectionManager.connectionString);
+            MySqlConnection conn = connstring;
             try
             {
                 conn.Open();
