@@ -65,7 +65,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)"></h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -122,7 +122,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -177,7 +177,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -234,7 +234,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type"  ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -269,7 +269,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type"  ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -381,7 +381,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
@@ -416,7 +416,7 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item">
+                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
                                     <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
                                     <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>

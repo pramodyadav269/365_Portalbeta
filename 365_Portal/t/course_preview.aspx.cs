@@ -16,7 +16,7 @@ namespace Life
                 }
                 else if (HttpContext.Current.Session["RoleName"].ToString() == ConstantMessages.Roles.companyadmin)
                 {
-                    dvAdminTasks.Visible = true;
+                  //  dvAdminTasks.Visible = true;
                 }
                 // Take UserName from Session.
                 // dvUserName.InnerText = "Hey " + HttpContext.Current.Session["FirstName"] + "!";
