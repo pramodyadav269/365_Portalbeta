@@ -38,6 +38,19 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-sm-12 col-md-7 col-lg-8 p-0">
+                        <div class="course-summary">
+                            <div class="summary-title">
+                                Course Summary
+                            </div>
+                            <p class="summary-content">
+                                DreamHouse is a realty company that provides a way for customers to shop for homes and contact real estate agents online. DreamHouse brokers use some of Salesforce’s standard functionality, like contacts and leads, to track home buyers.
+                                <br /><br />
+                                But when it comes to selling houses, there are a lot more things they want to track. For example, Salesforce doesn’t include a standard way to track properties. How is DreamHouse supposed to know which homes they have for sale or how much each home costs? 
+                                <br /><br />
+                                Luckily, their Salesforce admin, D’Angelo, knows that the Salesforce platform offers a solution. We’ll work with D’Angelo to see what he’s building. Let’s start with the data model. A data model is more or less what it sounds like. It’s a way to model what database tables look like in a way that makes sense to humans. If you’re not familiar with databases, think about storing data in a spreadsheet. For example, D’Angelo can use a spreadsheet to track all DreamHouse’s properties. Columns can store the address, cost, and other important attributes. Rows can store this information for each property that DreamHouse is selling. Database tables are set up in a similar way.
+                            </p>
+                        </div>
+
                         <div class="course-lesson">
                             <div class="lesson"></div>
                             <div class="lesson" ng-repeat="module in Module.UnlockedItems">
@@ -53,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                        <div class="course-content enroll">
+                        <div class="course-content enroll"><%-- <div class="course-content enroll no-header"> for no header--%>
                             <div class="card">
                                 <img ng-show="SelectedTopic.CourseLogo !=null" class="card-img-top" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
                                 <img ng-show="SelectedTopic.CourseLogo ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">

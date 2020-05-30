@@ -1471,6 +1471,10 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         &:last-child {
             padding-right: 0;
         }
+
+        &:hover {
+            text-decoration: underline !important;
+        }
     }
 }
 
@@ -2473,6 +2477,23 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
         }
 
+        .course-summary {
+            padding: 3rem 1rem 1rem 4rem;
+
+            .summary-title {
+                font-size: 20px;
+                font-family: OpenSans-SemiBold;
+                color: #000;
+                margin-bottom: 10px;
+            }
+
+            .summary-content {
+                font-size: 14px;
+                color: rgba(130, 130, 130, 0.92);
+                font-family: OpenSans-Regular;
+            }
+        }
+
         .course-lesson {
             padding: 3rem 1rem 2rem 4rem;
 
@@ -2654,6 +2675,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
             }
 
             &.enroll {
+
+                &.no-header {
+                    top: 56px;
+                }
+
                 .card {
                     width: 270px;
                     height: 405px;
@@ -2720,8 +2746,25 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         }
 
                         .btn {
-                            font-size:20px;
-                            font-family:OpenSans-SemiBold;
+                            font-size: 20px;
+                            font-family: OpenSans-SemiBold;
+                        }
+
+                        .point-progress {
+                            position: relative;
+                            margin-top:36px;
+
+                            span {
+                                position: absolute;
+                                left: 0;
+                                top: -6px;
+                            }
+
+                            .progress {
+                                height: 8px;
+                                margin-left: 40px;
+                                width: calc(100% - 40px);
+                            }
                         }
                     }
                 }

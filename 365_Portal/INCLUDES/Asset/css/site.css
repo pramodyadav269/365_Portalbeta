@@ -1080,6 +1080,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       padding-left: 0; }
     .user-name .status a:last-child {
       padding-right: 0; }
+    .user-name .status a:hover {
+      text-decoration: underline !important; }
 
 .user-photo {
   margin-left: 22px;
@@ -1728,6 +1730,18 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: .2rem; }
 
+.dashboard .course-wrapper .course-summary {
+  padding: 3rem 1rem 1rem 4rem; }
+  .dashboard .course-wrapper .course-summary .summary-title {
+    font-size: 20px;
+    font-family: OpenSans-SemiBold;
+    color: #000;
+    margin-bottom: 10px; }
+  .dashboard .course-wrapper .course-summary .summary-content {
+    font-size: 14px;
+    color: rgba(130, 130, 130, 0.92);
+    font-family: OpenSans-Regular; }
+
 .dashboard .course-wrapper .course-lesson {
   padding: 3rem 1rem 2rem 4rem; }
   @media only screen and (max-width: 600px) {
@@ -1846,6 +1860,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       .dashboard .course-wrapper .course-content .course-point .card-body .point-progress .progress {
         height: 8px;
         margin: 0 2.5rem; }
+  .dashboard .course-wrapper .course-content.enroll.no-header {
+    top: 56px; }
   .dashboard .course-wrapper .course-content.enroll .card {
     width: 270px;
     height: 405px;
@@ -1889,6 +1905,17 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       .dashboard .course-wrapper .course-content.enroll .card .card-body .btn {
         font-size: 20px;
         font-family: OpenSans-SemiBold; }
+      .dashboard .course-wrapper .course-content.enroll .card .card-body .point-progress {
+        position: relative;
+        margin-top: 36px; }
+        .dashboard .course-wrapper .course-content.enroll .card .card-body .point-progress span {
+          position: absolute;
+          left: 0;
+          top: -6px; }
+        .dashboard .course-wrapper .course-content.enroll .card .card-body .point-progress .progress {
+          height: 8px;
+          margin-left: 40px;
+          width: calc(100% - 40px); }
   .dashboard .course-wrapper .course-content .course-connection .card-body .card-text {
     color: rgba(0, 0, 0, 0.5); }
   .dashboard .course-wrapper .course-content .course-connection .card-body .path {
