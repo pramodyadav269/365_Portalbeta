@@ -179,6 +179,9 @@ namespace _365_Portal.Code.DAL
                 objUser.FaviconFileID = dt.Rows[0]["FaviconPath"].ToString();
                 objUser.OrganizationName = dt.Rows[0]["OrganizationName"].ToString();
 
+                objUser.IsFirstLogin = dt.Rows[0]["IsFirstLogin"].ToString();
+                objUser.IsFirstPasswordNotChanged = dt.Rows[0]["IsFirstPasswordNotChanged"].ToString();
+
                 if (dt.Rows[0]["EmailNotification"].ToString() == "")
                 {
                     objUser.EmailNotification = false;

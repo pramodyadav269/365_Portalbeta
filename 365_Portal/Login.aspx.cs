@@ -27,6 +27,13 @@ namespace _365_Portal
                 //HttpContext.Current.Session["UserId"] = null;
                 //HttpContext.Current.Session["RoleName"] = null;
                 Utility.DestroyAllSession();
+
+                //If Login From Cookie
+                HttpCookie myCookie = Request.Cookies["UserInfo"];
+                if (myCookie != null)
+                {
+                    LoginFromCookie(Convert.ToString(myCookie.Values["userid"]));
+                }
             }
             //LoadBadges();
         }
@@ -87,6 +94,14 @@ namespace _365_Portal
             return "http://img.youtube.com/vi/" + youTubeThumb + "/mqdefault.jpg";
         }
 
+        protected void LoginFromCookie(string UserId)
+        {
+            UserBO objResponse = new UserBO();            
+            objResponse = UserDAL.GetUserDetailsByUserID(UserId, "");
+
+            ProceedToSuccessLoginProcess(objResponse, objResponse.EmailID, objResponse.PasswordHash);
+        }
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             try
@@ -109,90 +124,7 @@ namespace _365_Portal
 
                     if (objResponse.ReturnCode == "1")
                     {
-                        //Login Log
-                        LoginLogout _loginLogout = new LoginLogout();
-                        _loginLogout.UserID = objResponse.UserID;
-                        _loginLogout.CompID = objResponse.CompId.ToString();
-                        _loginLogout.Type = "login";
-                        _loginLogout.IP_Address = Utility.GetClientIPaddress();
-                        UserDAL.InsertLoginLogoutHistory(_loginLogout, "");
-                        //End Login Log
-
-                        GetAccessToken(txtUserEmail.Text.Trim(), txtUserPassword.Text.Trim());
-
-                        if (HttpContext.Current.Session["access_token"] == null)
-                        {
-                            //lblError.Text = ConstantMessages.WebServiceLog.GenericErrorMsg;
-                            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "Swal.fire({text: '" + ConstantMessages.WebServiceLog.GenericErrorMsg + "',allowOutsideClick:false})", true);
-
-                            return;
-                        }
-                        else
-                        {
-                            // Call Login Business Layer Function to record message
-                            Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId, objResponse.EmailID);
-
-                            List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
-                            if (Cache["ActiveUsers"] != null)
-                            {
-                                lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
-                            }
-                            ActiveUsersCache cache = new ActiveUsersCache();
-                            cache.AddOrUpdate(lstActiveUsers, objResponse.UserID, objResponse.EmailID, objResponse.FirstName + " " + objResponse.LastName, Session.SessionID);
-                            Cache["ActiveUsers"] = lstActiveUsers;
-
-                            //For ProfilePic,CompanyProfilePic & Theme
-                            var UserDetails = UserDAL.GetUserDetailsByUserID(objResponse.UserID, "");
-                            if (UserDetails != null && !string.IsNullOrEmpty(UserDetails.ProfilePicFileID))
-                            {
-                                //HttpContext.Current.Session["ProfilePicFile"] = Utility.GetBase64ImageByFileID(UserDetails.ProfilePicFileID, "~/Files/ProfilePic/");
-                                //HttpContext.Current.Session["CompanyProfilePicFile"] = Utility.GetBase64ImageByFileID(UserDetails.CompanyProfilePicFileID, "~/Files/CompLogo/");
-                                //HttpContext.Current.Session["ThemeColor"] = UserDetails.ThemeColor;
-
-                                HttpContext.Current.Session["ThemeColor"] = UserDetails.ThemeColor;
-                                HttpContext.Current.Session["ThemeColor2"] = UserDetails.ThemeColor2;
-                                HttpContext.Current.Session["ThemeColor3"] = UserDetails.ThemeColor3;
-                                HttpContext.Current.Session["ThemeColor4"] = UserDetails.ThemeColor4;
-                                HttpContext.Current.Session["Favicon"] = UserDetails.FaviconFileID;
-
-                                Utility.CreateProfileAndThemeSession(UserDetails.ProfilePicFileID, UserDetails.CompanyProfilePicFileID, UserDetails.ThemeColor);
-                            }
-                            //End For ProfilePic,CompanyProfilePic & Theme
-
-                            if (objResponse.IsFirstLogin == "1" || objResponse.IsFirstPasswordNotChanged == "1")
-                            {
-                                if (objResponse.IsFirstLogin == "1")
-                                {
-                                    Utility.CreateFirstLoginSession(true);
-                                    //HttpContext.Current.Session["IsFirstLogin"] = true;                                    
-                                }
-                                if (objResponse.IsFirstPasswordNotChanged == "1")
-                                {
-                                    Utility.CreateFirstPasswordNotChangedSession(true);
-                                    //HttpContext.Current.Session["IsFirstPasswordNotChanged"] = true;                                    
-                                }
-                                if (objResponse.IsFirstLogin == "1")
-                                {
-                                    Response.Redirect("~/t/Settings.aspx", false);
-                                }
-                                else if (objResponse.IsFirstPasswordNotChanged == "1")
-                                {
-                                    Response.Redirect("~/t/ChangePassword.aspx", false);
-                                }
-                            }
-                            else
-                            {
-                                Utility.CreateFirstLoginSession(false);
-                                if (objResponse.Role.ToLower() == "enduser")
-                                {
-                                    Response.Redirect("~/t/default.aspx", false);
-                                }
-                                else if (objResponse.Role.ToLower() == "superadmin" || objResponse.Role.ToLower() == "companyadmin" || objResponse.Role.ToLower() == "subadmin")
-                                {
-                                    Response.Redirect("~/t/dashboard.aspx", false);
-                                }
-                            }
-                        }
+                        ProceedToSuccessLoginProcess(objResponse, txtUserEmail.Text.Trim(), txtUserPassword.Text.Trim());
                     }
                     else
                     {
@@ -210,5 +142,114 @@ namespace _365_Portal
 
             }
         }
+
+        protected void ProceedToSuccessLoginProcess(UserBO objResponse, string UserName , string Password)
+        {
+            HttpCookie myOldCookie = Request.Cookies["UserInfo"];
+            if (myOldCookie == null)
+            {
+                HttpCookie myCookie = new HttpCookie("UserInfo");
+                myCookie.Values.Add("userid", objResponse.UserID);
+                myCookie.Expires = DateTime.Now.AddHours(12);
+                Response.Cookies.Add(myCookie);
+            }
+
+
+            //HttpCookie _userInfoCookies = new HttpCookie("UserInfo");
+            //_userInfoCookies["UserId"] = objResponse.UserID;
+            //_userInfoCookies.Expires = DateTime.Now.AddMonths(1);
+            //Response.Cookies.Add(_userInfoCookies);
+            //End
+
+            //Login Log
+            LoginLogout _loginLogout = new LoginLogout();
+            _loginLogout.UserID = objResponse.UserID;
+            _loginLogout.CompID = objResponse.CompId.ToString();
+            _loginLogout.Type = "login";
+            _loginLogout.IP_Address = Utility.GetClientIPaddress();
+            UserDAL.InsertLoginLogoutHistory(_loginLogout, "");
+            //End Login Log
+
+            GetAccessToken(UserName, Password);
+
+            if (HttpContext.Current.Session["access_token"] == null)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "Swal.fire({text: '" + ConstantMessages.WebServiceLog.GenericErrorMsg + "',allowOutsideClick:false})", true);
+                return;
+            }
+            else
+            {
+                // Call Login Business Layer Function to record message
+                Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId, objResponse.EmailID);
+
+                List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
+                if (Cache["ActiveUsers"] != null)
+                {
+                    lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
+                }
+                ActiveUsersCache cache = new ActiveUsersCache();
+                cache.AddOrUpdate(lstActiveUsers, objResponse.UserID, objResponse.EmailID, objResponse.FirstName + " " + objResponse.LastName, Session.SessionID);
+                Cache["ActiveUsers"] = lstActiveUsers;
+
+                //For ProfilePic,CompanyProfilePic & Theme
+                var UserDetails = UserDAL.GetUserDetailsByUserID(objResponse.UserID, "");
+                if (UserDetails != null && !string.IsNullOrEmpty(UserDetails.ProfilePicFileID))
+                {
+                    HttpContext.Current.Session["ThemeColor"] = UserDetails.ThemeColor;
+                    HttpContext.Current.Session["ThemeColor2"] = UserDetails.ThemeColor2;
+                    HttpContext.Current.Session["ThemeColor3"] = UserDetails.ThemeColor3;
+                    HttpContext.Current.Session["ThemeColor4"] = UserDetails.ThemeColor4;
+                    HttpContext.Current.Session["Favicon"] = UserDetails.FaviconFileID;
+
+                    Utility.CreateProfileAndThemeSession(UserDetails.ProfilePicFileID, UserDetails.CompanyProfilePicFileID, UserDetails.ThemeColor);
+                }
+                //End For ProfilePic,CompanyProfilePic & Theme
+
+                if (objResponse.IsFirstLogin == "1" || objResponse.IsFirstPasswordNotChanged == "1")
+                {
+                    if (objResponse.IsFirstLogin == "1")
+                    {
+                        Utility.CreateFirstLoginSession(true);
+                    }
+                    if (objResponse.IsFirstPasswordNotChanged == "1")
+                    {
+                        Utility.CreateFirstPasswordNotChangedSession(true);
+                    }
+                    if (objResponse.IsFirstLogin == "1")
+                    {
+                        Response.Redirect("~/t/Settings.aspx", false);
+                    }
+                    else if (objResponse.IsFirstPasswordNotChanged == "1")
+                    {
+                        Response.Redirect("~/t/ChangePassword.aspx", false);
+                    }
+                }
+                else
+                {
+                    Utility.CreateFirstLoginSession(false);
+
+                    //This is used to redirect user on specific page where he requested .Purpose of this is to navigate already logged in user in same browser
+                    HttpCookie myCookie = Request.Cookies["UserInfo"];
+                    if (myCookie != null && HttpContext.Current.Session["requestedurl"] != null)
+                    {
+                        string requestedurl = Convert.ToString(HttpContext.Current.Session["requestedurl"]);
+                        HttpContext.Current.Session["requestedurl"] = null;
+                        Response.Redirect(requestedurl);
+                    }
+                    //End
+
+
+                    if (objResponse.Role.ToLower() == "enduser")
+                    {
+                        Response.Redirect("~/t/default.aspx", false);
+                    }
+                    else if (objResponse.Role.ToLower() == "superadmin" || objResponse.Role.ToLower() == "companyadmin" || objResponse.Role.ToLower() == "subadmin")
+                    {
+                        Response.Redirect("~/t/dashboard.aspx", false);
+                    }
+                }
+            }
+        }
+
     }
 }

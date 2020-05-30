@@ -9,55 +9,56 @@
             <h2 class="text-center font-weight-bold">Users</h2>
         </div>
 
-        <div class="col-md-12" id="divGird">
-            <div class="card shadow border-0 border-radius-0">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 mb-2">
-                            <a class="btn bg-yellow" onclick="AddNew();">Add New</a>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-12" id="divFilters">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-3" id="dvCompanyFilter" style="display: none;">
-                                    <div class="form-group">
-                                        <select id="ddlCompany" class="form-control select2 required" style="width: 100% !important"></select>
+            <div class="col-md-12" id="divGird">
+                <div class="card shadow border-0 border-radius-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 mb-2">
+                                <a class="btn bg-yellow" onclick="AddNew();">Add New</a>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-12" id="divFilters">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3" id="dvCompanyFilter" style="display: none;">
+                                        <div class="form-group">
+                                            <select id="ddlCompany" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-100"></div>
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="form-group">
-                                        <select id="ddlManagerFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                    <div class="w-100"></div>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <select id="ddlManagerFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="form-group">
-                                        <select id="ddlTeamFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <select id="ddlTeamFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="form-group">
-                                        <select id="ddlDepartmentFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <select id="ddlDepartmentFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="form-group">
-                                        <select id="ddlGroupFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <select id="ddlGroupFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12 col-md-2">
-                                    <div class="form-group">
-                                        <select id="ddlRoleFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                    <div class="col-sm-12 col-md-2">
+                                        <div class="form-group">
+                                            <select id="ddlRoleFilter" class="form-control select2 required" style="width: 100% !important"></select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <a class="btn bg-yellow mb-2" id="btnSearchUsers" onclick="SearchUsers();">Search</a>
-                                    <a class="btn bg-yellow mb-2" style="display: none;" id="btnExport" onclick="Export();">Export</a>
+                                    <div class="col">
+                                        <a class="btn bg-yellow mb-2" id="btnSearchUsers" onclick="SearchUsers();">Search</a>
+                                        <a class="btn bg-yellow mb-2" style="display: none;" id="btnExport" onclick="Export();">Export</a>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="w-100"></div>
+                            <div id="divTable" class="col-12 mt-3 table-responsive"></div>
                         </div>
-                        <div class="w-100"></div>
-                        <div id="divTable" class="col-12 mt-3 table-responsive"></div>
                     </div>
                 </div>
             </div>
@@ -189,7 +190,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
+
         <script>
 
             var accessToken = '<%=Session["access_token"]%>';
@@ -442,7 +444,7 @@
             }
 
             function AddNew() {
-
+                debugger
                 $('#btnSubmit').show();
                 $('#divPassword').show();
                 $('#btnUpdate').hide();
@@ -919,4 +921,5 @@
             }
 
         </script>
+
 </asp:Content>

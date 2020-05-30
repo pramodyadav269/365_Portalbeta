@@ -429,7 +429,7 @@ namespace _365_Portal.Code
         {
             System.Web.HttpContext.Current.Session.Clear();
             //System.Web.HttpContext.Current.Session.Abandon(); //Commented because this is does not allowing to create sessnio
-        }
+        }        
 
         public static void CreateUserSession(string UserID, string Role, string FirstName, string LastName, int CompID, string emailId)
         {

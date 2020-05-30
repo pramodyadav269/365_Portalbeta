@@ -1151,7 +1151,7 @@
             ManageContent('editbind');
             inputInline();
 
-
+            //This is added after rendering controls otherwise onkeyup event won't work
             $("#divResourceSummary").keyup(function(){      
                 debugger
                 IsChangedField = '1';

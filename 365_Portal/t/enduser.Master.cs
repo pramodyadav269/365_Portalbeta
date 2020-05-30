@@ -376,6 +376,14 @@ namespace _365_Portal.Admin
             }
             else
             {
+                //This is used to keep the page where user requested .Purpose of this is to navigate already logged in user in same browser
+                HttpCookie myCookie = Request.Cookies["UserInfo"];
+                if (myCookie != null)
+                {
+                    HttpContext.Current.Session["requestedurl"] = Request.Url.ToString();
+                }
+                //End
+
                 Response.Redirect("~/login.aspx");
             }
         }
@@ -419,6 +427,14 @@ namespace _365_Portal.Admin
                     objServiceLog.RequestType = ConstantMessages.WebServiceLog.Success;
 
                     Utility.DestroyAllSession();
+
+
+                    //This is to delete all cookies from client web browser
+                    HttpCookie myCookie = new HttpCookie("UserInfo");
+                    myCookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(myCookie);
+                    //End
+
                     Response.Redirect("~/login.aspx", false);
                 }
                 else
