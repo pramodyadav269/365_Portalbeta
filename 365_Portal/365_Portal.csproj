@@ -369,13 +369,6 @@
     </Compile>
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Test.aspx.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Test.aspx.designer.cs">
-      <DependentUpon>Test.aspx</DependentUpon>
-    </Compile>
     <Compile Include="t\Achievement.aspx.cs">
       <DependentUpon>Achievement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2493,7 +2486,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Test.aspx" />
     <Content Include="t\Achievement.aspx" />
     <Content Include="t\AddCategory.aspx" />
     <Content Include="t\AddTeam.aspx" />
