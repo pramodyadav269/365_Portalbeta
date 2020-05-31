@@ -6,7 +6,7 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
-
+    <div id="sb_widget"></div>
     <div class="theme-section" ng-if="ActiveContainer =='Topic'">
         <img src="../INCLUDES/Asset/images/theme_nature_header.svg" style="display: none;" />
         <h4 class="nature" id="dvUserName" style="display: none;" runat="server">Welcome User! Let's learn something new today :)</h4>
@@ -28,7 +28,7 @@
                             <a class="back c-yellow" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8">
-                            <h2 class="card-title"  ng-bind-html="trustAsHtml(SelectedTopic.Title)">{{SelectedTopic.Title}}</h2>
+                            <h2 class="card-title" ng-bind-html="trustAsHtml(SelectedTopic.Title)">{{SelectedTopic.Title}}</h2>
                             <p class="card-text">{{SelectedTopic.Description}}</p>
                             <div class="action">
                                 <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
@@ -183,7 +183,7 @@
                                                                     <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" ng-model="ansOption.IsSelected" id="{{'chkAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" name="{{'ansOption.AnswerText_1_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'chkAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
-                                                                </div> 
+                                                                </div>
                                                             </div>
 
                                                             <%--Dropdown List--%>
@@ -198,7 +198,7 @@
                                                             <%--Radio Button List--%>
                                                             <div ng-if="question.QuestionTypeID == 3 ">
                                                                 <div class="custom-control custom-radio" ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_3_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="radio" id="{{'rbSVAnsOption_' + question.QuestionID + $index}}" class="custom-control-input" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_3_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label class="custom-control-label" for="{{'rbSVAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%-- IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
@@ -207,7 +207,7 @@
                                                             <%--Radio Button List with box--%>
                                                             <div ng-if="question.QuestionTypeID == 9 " class="box">
                                                                 <div ng-repeat="ansOption in question.AnswerOptions">
-                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text"name="{{'ansOption.AnswerText_9_' +  question.QuestionID}}"  value="{{ansOption.AnswerID}}">
+                                                                    <input ng-disabled="SpecialContents.IsAnswered ==1 && SpecialContents.IsPassed ==1" type="checkbox" id="{{'rbAnsOption_' + question.QuestionID + $index}}" ng-model="question.Value_Text" name="{{'ansOption.AnswerText_9_' +  question.QuestionID}}" value="{{ansOption.AnswerID}}">
                                                                     <label for="{{'rbAnsOption_' + question.QuestionID + $index}}">{{ansOption.AnswerText}}</label>
                                                                     <%--    IsCorrect {{ansOption.IsCorrect}} , CorrectScore{{ansOption.CorrectScore}} ,InCorrectScore{{ansOption.InCorrectScore}}--%>
                                                                 </div>
@@ -967,7 +967,7 @@
                                                     <img ng-if="content.ContentType=='FINALQUIZ'" src="../includes/Asset/images/quiz-icon.svg" />
                                                 </div>
                                                 <div class="col-sm-9 col-md-9 col-lg-10">
-                                                    <h5 class="card-title"  ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
+                                                    <h5 class="card-title" ng-bind-html="trustAsHtml(content.Title)">{{content.Title}}</h5>
                                                     <p ng-bind-html="trustAsHtml(content.Description)" class="card-text"></p>
                                                 </div>
                                                 <div class="col-sm-1 col-md-1 col-lg-1">
@@ -1563,7 +1563,8 @@
         }
 
         var accessToken = '<%=Session["access_token"]%>';
-        var userRole ='<%=Session["RoleName"]%>';
+        var userRole = '<%=Session["RoleName"]%>';
+        var emailId = '<%=Session["EmailID"]%>';
 
 
         function ChangeFileName(cntrl) {
@@ -1628,6 +1629,18 @@
             }
         }
 
+    </script>
+
+    <%--<script src="SendBird.min.js"></script>--%>
+    <script src="https://sample.sendbird.com/widget/dist/widget.SendBird.js"></script>
+    <script>
+        sbWidget.start('3B0271C2-F6C0-49BE-88CB-0D63048F4DA5');
+        var appId = '3B0271C2-F6C0-49BE-88CB-0D63048F4DA5';
+        var userId = emailId
+        var nickname = emailId;
+        sbWidget.startWithConnect(appId, userId, nickname, function () {
+            // do something...
+        });
     </script>
 </asp:Content>
 
