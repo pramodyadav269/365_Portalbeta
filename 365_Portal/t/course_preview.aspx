@@ -17,6 +17,7 @@
 
         <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
             <div class="card text-white bg-dark-blue course-header">
+                <img src="../INCLUDES/Asset/images/course-preview.png" class="img-preview" />
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-7 col-lg-8 mb-2">
@@ -36,8 +37,50 @@
                 </div>
             </div>
             <div class="col-12">
-                <div class="row">
-                    <div class="col-sm-12 col-md-7 col-lg-8 p-0">
+                <div class="course-preview">
+                    <div class="course-content enroll">
+                        <%-- <div class="course-content enroll no-header"> for no header--%>
+                        <div class="card">
+                            <img ng-show="SelectedTopic.CourseLogo !=null" class="card-img-top" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
+                            <img ng-show="SelectedTopic.CourseLogo ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">
+
+                            <div class="card-body">
+                                <div class="creator">
+                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <div class="creator-details">
+                                        <span>{{SelectedTopic.InstructorName}}</span>
+                                        <span>{{ GetLastUpdatedDate(SelectedTopic.ModifiedDate)}}</span>
+                                    </div>
+                                </div>
+                                <div class="enroll-content">
+                                    <span>Course Category</span>
+                                    <span ng-bind-html="trustAsHtml(SelectedTopic.CategoryName)"></span>
+
+                                </div>
+                                <div class="point-progress" ng-show="SelectedTopic.IsEnrolled == 1">
+
+                                    <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
+                                            aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <a class="btn bg-yellow w-100" ng-click="EnrollCourse(SelectedTopic.TopicId)" ng-show="SelectedTopic.IsEnrolled == null || SelectedTopic.IsEnrolled == 0">Enroll</a>
+                            </div>
+                        </div>
+                        <%--  <div class="card shadow-sm course-connection">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Community Connections</h5>
+                                        <p class="card-text mb-1">Learning is better togather</p>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="path">Go to Community fee                </div>
+d</a>
+                                    </div>
+                                </div>--%>
+                    </div>
+                    <div class="col p-0">
                         <div class="course-summary">
                             <div class="summary-title">
                                 Course Summary
@@ -60,48 +103,7 @@
                             <div class="lesson"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-5 col-lg-4 p-0">
-                        <div class="course-content enroll"><%-- <div class="course-content enroll no-header"> for no header--%>
-                            <div class="card">
-                                <img ng-show="SelectedTopic.CourseLogo !=null" class="card-img-top" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
-                                <img ng-show="SelectedTopic.CourseLogo ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">
 
-                                <div class="card-body">
-                                    <div class="creator">
-                                        <img src="../INCLUDES/Asset/images/profile.png" />
-                                        <div class="creator-details">
-                                            <span>{{SelectedTopic.InstructorName}}</span>
-                                            <span> {{ GetLastUpdatedDate(SelectedTopic.ModifiedDate)}}</span>
-                                        </div>
-                                    </div>
-                                    <div class="enroll-content">
-                                        <span>Course Category</span>
-                                        <span ng-bind-html="trustAsHtml(SelectedTopic.CategoryName)"></span>
-                                        
-                                    </div>
-                                    <div class="point-progress" ng-show="SelectedTopic.IsEnrolled == 1">
-
-                                        <span>{{ GetCompletedPercentage(SelectedTopic.CompletedModules,SelectedTopic.TotalModules)}}</span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" ng-style="{ 'width': (SelectedTopic.CompletedModules / SelectedTopic.TotalModules) * 100 + '%' }"
-                                                aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <a class="btn bg-yellow w-100" ng-click="EnrollCourse(SelectedTopic.TopicId)" ng-show="SelectedTopic.IsEnrolled == null || SelectedTopic.IsEnrolled == 0">Enroll</a>
-                                </div>
-                            </div>
-                            <%--  <div class="card shadow-sm course-connection">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Community Connections</h5>
-                                        <p class="card-text mb-1">Learning is better togather</p>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="path">Go to Community feed</a>
-                                    </div>
-                                </div>--%>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

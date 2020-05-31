@@ -2131,6 +2131,7 @@
     <Content Include="INCLUDES\Asset\images\comments.png" />
     <Content Include="INCLUDES\Asset\images\CompanyLogo.png" />
     <Content Include="INCLUDES\Asset\images\contract-file.png" />
+    <Content Include="INCLUDES\Asset\images\course-preview.png" />
     <Content Include="INCLUDES\Asset\images\CourseLogo.png" />
     <Content Include="INCLUDES\Asset\images\delete_forever-24px.svg" />
     <Content Include="INCLUDES\Asset\images\diamond.png" />

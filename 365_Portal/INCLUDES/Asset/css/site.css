@@ -1708,13 +1708,21 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   max-height: 300px; }
 
 .dashboard .course-wrapper .course-header.card {
+  height: 267px;
   border-radius: 0;
-  background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box; }
+  background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: row; }
+  .dashboard .course-wrapper .course-header.card .img-preview {
+    height: 276px;
+    position: relative;
+    left: 8px;
+    top: 32px; }
   .dashboard .course-wrapper .course-header.card .card-body {
-    padding: 1.25rem; }
+    padding: 1.25rem 1.25rem 1.25rem 1rem; }
     @media only screen and (min-width: 601px) {
       .dashboard .course-wrapper .course-header.card .card-body {
-        padding: 3rem 4rem 2rem 4rem; } }
+        padding: 3rem 4rem 2rem 1rem; } }
     .dashboard .course-wrapper .course-header.card .card-body .card-title {
       font-family: OpenSans-SemiBold;
       font-size: 38px;
@@ -1729,6 +1737,13 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       margin-right: .5rem;
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: .2rem; }
+
+.dashboard .course-wrapper .course-preview {
+  display: flex;
+  flex-direction: row-reverse; }
+  @media only screen and (max-width: 992px) {
+    .dashboard .course-wrapper .course-preview {
+      flex-direction: column; } }
 
 .dashboard .course-wrapper .course-summary {
   padding: 3rem 1rem 1rem 4rem; }
@@ -1815,11 +1830,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .dashboard .course-wrapper .course-content {
   position: relative;
-  top: -190px;
-  padding: 3rem 4rem 2rem 3rem; }
-  @media only screen and (min-width: 601px) and (max-width: 992px) {
-    .dashboard .course-wrapper .course-content {
-      padding: 3rem 4rem 2rem 1rem; } }
+  top: -220px;
+  padding: 3rem 4rem 2rem 1rem; }
   @media only screen and (max-width: 600px) {
     .dashboard .course-wrapper .course-content {
       padding: 0 1.25rem 1.25rem;
@@ -1862,6 +1874,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
         margin: 0 2.5rem; }
   .dashboard .course-wrapper .course-content.enroll.no-header {
     top: 56px; }
+  @media only screen and (max-width: 992px) {
+    .dashboard .course-wrapper .course-content.enroll {
+      top: 0;
+      display: flex;
+      justify-content: center; } }
   .dashboard .course-wrapper .course-content.enroll .card {
     width: 270px;
     height: 405px;

@@ -2442,15 +2442,28 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     .course-wrapper {
         .course-header {
             &.card {
+                height: 267px;
                 border-radius: 0;
                 background: transparent linear-gradient(0deg, #212338 0%, #2B2E44 100%) 0% 0% no-repeat padding-box;
+                display: flex;
+                flex-direction: row;
+
+                .img-preview {
+                    height: 276px;
+                    position: relative;
+                    left: 8px;
+                    top: 32px;
+                }
 
                 .card-body {
-                    padding: 1.25rem;
+                    padding: 1.25rem 1.25rem 1.25rem 1rem;
+
 
                     @media #{$medium-and-up} {
-                        padding: 3rem 4rem 2rem 4rem;
+                        padding: 3rem 4rem 2rem 1rem;
                     }
+
+
 
                     .card-title {
                         font-family: OpenSans-SemiBold;
@@ -2474,6 +2487,15 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         }
                     }
                 }
+            }
+        }
+
+        .course-preview {
+            display: flex;
+            flex-direction: row-reverse;
+
+            @media #{$medium-and-down} {
+                flex-direction: column;
             }
         }
 
@@ -2597,12 +2619,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
         .course-content {
             position: relative;
-            top: -190px;
-            padding: 3rem 4rem 2rem 3rem;
-
-            @media #{$medium-only} {
-                padding: 3rem 4rem 2rem 1rem;
-            }
+            top: -220px;
+            padding: 3rem 4rem 2rem 1rem;
 
             @media #{$small-and-down} {
                 padding: 0 1.25rem 1.25rem;
@@ -2680,6 +2698,14 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                     top: 56px;
                 }
 
+
+                @media #{$medium-and-down} {
+                    top: 0;
+                    display: flex;
+                    justify-content: center;
+                }
+
+
                 .card {
                     width: 270px;
                     height: 405px;
@@ -2752,7 +2778,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
                         .point-progress {
                             position: relative;
-                            margin-top:36px;
+                            margin-top: 36px;
 
                             span {
                                 position: absolute;
