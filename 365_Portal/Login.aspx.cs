@@ -29,10 +29,14 @@ namespace _365_Portal
                 Utility.DestroyAllSession();
 
                 //If Login From Cookie
-                HttpCookie myCookie = Request.Cookies["UserInfo"];
-                if (myCookie != null)
+                //HttpCookie myCookie = Request.Cookies["UserInfo"];
+                //if (myCookie != null)
+                //{
+                //    LoginFromCookie(Convert.ToString(myCookie.Values["userid"]));
+                //}
+                if (Request.Cookies["userid"] != null && Request.Cookies["userid"].Value != null && Request.Cookies["userid"].Value.Trim() != "")
                 {
-                    LoginFromCookie(Convert.ToString(myCookie.Values["userid"]));
+                    LoginFromCookie(Convert.ToString(Request.Cookies["userid"].Value));
                 }
             }
             //LoadBadges();
@@ -145,14 +149,17 @@ namespace _365_Portal
 
         protected void ProceedToSuccessLoginProcess(UserBO objResponse, string UserName , string Password)
         {
-            HttpCookie myOldCookie = Request.Cookies["UserInfo"];
-            if (myOldCookie == null)
-            {
-                HttpCookie myCookie = new HttpCookie("UserInfo");
-                myCookie.Values.Add("userid", objResponse.UserID);
-                myCookie.Expires = DateTime.Now.AddHours(12);
-                Response.Cookies.Add(myCookie);
-            }
+            //HttpCookie myOldCookie = Request.Cookies["UserInfo"];
+            //if (myOldCookie == null)
+            //{
+            //    HttpCookie myCookie = new HttpCookie("UserInfo");
+            //    myCookie.Values.Add("userid", objResponse.UserID);
+            //    myCookie.Expires = DateTime.Now.AddMonths(1);
+            //    Response.Cookies.Add(myCookie);
+            //}
+
+            Response.Cookies["userid"].Value = objResponse.UserID;
+
 
 
             //HttpCookie _userInfoCookies = new HttpCookie("UserInfo");
@@ -250,6 +257,5 @@ namespace _365_Portal
                 }
             }
         }
-
     }
 }

@@ -203,7 +203,58 @@
             //Swal.fire({ text: 'Email has been sent to your registered', icon: 'error', showConfirmButton: false, showCloseButton: true, allowOutsideClick:false})
 
 
+            //Added on 02 JUN 20 for login via token
+            debugger
+            if (readQueryString()["token"] != undefined && readQueryString()["token"] != '') {
+                var accessToken = readQueryString()["token"];
+                VerifyAccessToken(accessToken);
+            }
+            //End
+
         });
+
+        function readQueryString() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        function VerifyAccessToken(accessToken)
+        {
+            var getUrl = "/API/User/LoginViaAccessToken";
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                contentType: "application/json",
+                success: function (response) {
+                    try {
+                        debugger
+                        var DataSet = $.parseJSON(response);
+                        HideLoader();
+                        if (DataSet.StatusCode == "1") {
+                            
+                            var expires = new Date();
+                            expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000));
+                            document.cookie = "userid" + '=' + DataSet.Data.UserId + ';path=/' + ';expires=' + expires.toUTCString();
+
+                            window.location.href = window.location.href.split('?')[0];
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    HideLoader();
+                }
+            });
+        }
 
         function getController(formdata, getUrl, flag) {
             //var accessToken = '<%=Session["access_token"]%>';

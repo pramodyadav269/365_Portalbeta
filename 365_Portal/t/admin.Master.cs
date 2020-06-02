@@ -429,9 +429,11 @@ namespace _365_Portal.Admin
                     Utility.DestroyAllSession();
 
                     //This is to delete all cookies from client web browser
-                    HttpCookie myCookie = new HttpCookie("UserInfo");
-                    myCookie.Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies.Add(myCookie);
+                    //HttpCookie myCookie = new HttpCookie("UserInfo");
+                    //myCookie.Expires = DateTime.Now.AddDays(-1);
+                    //Response.Cookies.Add(myCookie);
+
+                    Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
                     //End
 
 
