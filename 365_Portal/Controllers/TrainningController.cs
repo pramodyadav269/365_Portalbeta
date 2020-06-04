@@ -755,9 +755,7 @@ namespace _365_Portal.Controllers
             var data = "";
             var identity = MyAuthorizationServerProvider.AuthenticateUser();
             if (identity != null)
-            {
-                string Message = string.Empty;
-
+            {                
                 DataSet dsBadges = TrainningBL.GetBadges(identity.CompId, identity.UserID.ToString(), Convert.ToInt32(ConstantMessages.Action.VIEW));
                 DataSet dsPoints = TrainningBL.GetPoints(identity.CompId, identity.UserID.ToString(), Convert.ToInt32(ConstantMessages.Action.VIEW));
 
@@ -790,7 +788,43 @@ namespace _365_Portal.Controllers
             }
             else
             {
-                data = Utility.AuthenticationError();
+                //Added on 04 Jun 20 to preview add course without login
+                if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
+                {
+                    DataSet dsBadges = TrainningBL.GetBadges(0, "0", Convert.ToInt32(ConstantMessages.Action.VIEW));
+                    DataSet dsPoints = TrainningBL.GetPoints(0, "0", Convert.ToInt32(ConstantMessages.Action.VIEW));
+
+                    DataTable dtBadges = new DataTable();
+                    DataTable dtPoints = new DataTable();
+                    DataSet ds = new DataSet();
+
+                    if (dsBadges.Tables[0].Rows.Count > 0)
+                    {
+                        dtBadges = dsBadges.Tables[0].Copy();
+                    }
+                    ds.Tables.Add(dtBadges);
+                    ds.Tables[0].TableName = "Badges";
+
+                    if (dsPoints.Tables[0].Rows.Count > 0)
+                    {
+                        dtPoints = dsPoints.Tables[0].Copy();
+                    }
+                    ds.Tables.Add(dtPoints);
+                    ds.Tables[1].TableName = "Points";
+
+                    ds.Tables.Add(dsBadges.Tables[1].Copy());
+                    ds.Tables[2].TableName = "Rank";
+
+                    ds.Tables.Add(dsBadges.Tables[2].Copy());
+                    ds.Tables[3].TableName = "NextRank";
+
+                    data = Utility.ConvertDataSetToJSONString(ds);
+                    data = Utility.Successful(data);
+                }//End
+                else
+                {
+                    data = Utility.AuthenticationError();
+                }                
             }
             return new APIResult(Request, data);
         }

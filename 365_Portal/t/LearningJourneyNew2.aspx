@@ -230,14 +230,12 @@
     <%--End Modal popup region--%>
 
     <script>
+        
+        var accessToken = '<%=Session["access_token"]%>';
 
-        //new code
         var editorCourseSummary = new Jodit('#txtCourseSummary');
         var editorContentDescription = '';
         var editorResourcesDescription = '';
-
-
-        var accessToken = '<%=Session["access_token"]%>';
 
         var IsQueryString = '0';//To identify whether page load from query string or not
 

@@ -374,6 +374,10 @@ namespace _365_Portal.Admin
                     dvBody.Style.Add("font-family", theme4);
                 }
             }
+            else if (Request.Url.ToString().ToUpper().Contains("/t/LearningJourneyNew2.aspx?topic".ToUpper()))
+            {
+                //Proceed with page redirection
+            }
             else
             {
                 //This is used to keep the page where user requested .Purpose of this is to navigate already logged in user in same browser
