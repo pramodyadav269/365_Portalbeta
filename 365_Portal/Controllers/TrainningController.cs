@@ -140,12 +140,30 @@ namespace _365_Portal.Controllers
                 }
                 catch (Exception ex)
                 {
-                    data = Utility.Exception(ex); ;
+                    data = Utility.Exception(ex);
                 }
             }
             else
             {
-                data = Utility.AuthenticationError();
+                //Added on 04 Jun 20 to preview add course without login
+                if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
+                {
+                    int compId = 0;
+                    string userId = "0";
+                    int topicId = Convert.ToInt32(requestParams["TopicID"].ToString());
+                    var checkIfTopicAssigned = Convert.ToBoolean(Convert.ToInt32(requestParams["CheckIfTopicAssigned"].ToString()));
+                    if (checkIfTopicAssigned)
+                        TrainningBL.CheckIfTopicAssigned(compId, userId, topicId);
+
+                    var ds = TrainningBL.GetModulesByTopic(compId, userId, topicId);
+                    var sourceInfo = Utility.ConvertDataSetToJSONString(ds.Tables[0]);
+                    sourceInfo = sourceInfo.Substring(2, sourceInfo.Length - 4);
+                    data = Utility.GetModulesJSONFormat("1", "Successful", sourceInfo, Utility.ConvertDataSetToJSONString(ds.Tables[1]), Utility.ConvertDataSetToJSONString(ds.Tables[2]));
+                }//End
+                else
+                {
+                    data = Utility.AuthenticationError();
+                }                
             }
             return new APIResult(Request, data);
         }
@@ -489,7 +507,21 @@ namespace _365_Portal.Controllers
             }
             else
             {
-                data = Utility.AuthenticationError();
+                //Added on 04 Jun 20 to preview add course without login
+                if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
+                {
+                    int compId = 0;
+                    string userId = "0";
+                    List<Achievement> achievementList = new List<Achievement>();
+                    var ds = TrainningBL.GetAchievementGifts(compId, userId, ref achievementList);
+                    data = Utility.GetAchievementGiftsJSONFormat("1", "Success",
+                        JsonConvert.SerializeObject(achievementList),
+                        Utility.ConvertDataSetToJSONString(ds.Tables[2]));
+                }
+                else
+                {
+                    data = Utility.AuthenticationError();
+                }                    
             }
             return new APIResult(Request, data);
         }

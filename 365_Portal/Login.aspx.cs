@@ -235,6 +235,15 @@ namespace _365_Portal
                 {
                     Utility.CreateFirstLoginSession(false);
 
+                    //Added on 04 Jun 20 to preview add course without login
+                    if (HttpContext.Current.Session["requestedurlcourse"] != null)
+                    {
+                        string requestedurl = Convert.ToString(HttpContext.Current.Session["requestedurlcourse"]);
+                        HttpContext.Current.Session["requestedurlcourse"] = null;
+                        Response.Redirect(requestedurl);
+                    }
+                    //End
+
                     //This is used to redirect user on specific page where he requested .Purpose of this is to navigate already logged in user in same browser
                     HttpCookie myCookie = Request.Cookies["UserInfo"];
                     if (myCookie != null && HttpContext.Current.Session["requestedurl"] != null)
@@ -244,7 +253,6 @@ namespace _365_Portal
                         Response.Redirect(requestedurl);
                     }
                     //End
-
 
                     if (objResponse.Role.ToLower() == "enduser")
                     {

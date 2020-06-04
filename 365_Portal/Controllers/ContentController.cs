@@ -1126,50 +1126,8 @@ namespace _365_Portal.ControllersReOrderContent
                 }
                 else
                 {
-                    //Added on 04 Jun 20 to preview add course without login
-                    if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
-                    {
-                        if (!string.IsNullOrEmpty(Convert.ToString(requestParams["TopicID"])))
-                        {
-                            content.TopicID = Convert.ToInt32(requestParams["TopicID"]);
-                        }
-                        if (!string.IsNullOrEmpty(Convert.ToString(requestParams["IsActive"])))
-                        {
-                            content.IsActive = (bool)requestParams["IsActive"];
-                        }
-
-                        int action = 4;
-                        if (!string.IsNullOrEmpty(Convert.ToString(requestParams["Flag"])))
-                        {
-                            action = Convert.ToInt32(ConstantMessages.Action.SEARCH);
-                        }
-
-                        var ds = ContentBL.GetModules(action, content);
-                        if (ds != null)
-                        {
-                            DataTable dt = ds.Tables["Data"];
-                            if (ds.Tables.Count > 0)
-                            {
-                                data = Utility.ConvertDataSetToJSONString(dt);
-                                data = Utility.Successful(data);
-                            }
-                            else
-                            {
-                                data = dt.Rows[0]["ReturnMessage"].ToString();
-                                data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                            }
-                        }
-                        else
-                        {
-                            data = ConstantMessages.WebServiceLog.GenericErrorMsg;
-                            data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                        }
-                    }//End
-                    else
-                    {
-                        data = Utility.AuthenticationError();
-                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                    }                    
+                    data = Utility.AuthenticationError();
+                    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                 }
             }
             catch (Exception ex)
@@ -1998,27 +1956,7 @@ namespace _365_Portal.ControllersReOrderContent
             }
             else
             {
-                //Added on 04 Jun 20 to preview add course without login
-                if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
-                {
-                    var ds = ContentBL.EditTopics(0, "0", "", requestParams["TopicID"].ToString());
-                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                    {
-                        data = Utility.ConvertDataSetToJSONString(ds);
-                        data = Utility.Successful(data);
-                    }
-                    else
-                    {
-                        data = ConstantMessages.WebServiceLog.GenericErrorMsg;
-                        data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                    }
-                }//End
-                else
-                {
-                    data = Utility.AuthenticationError();
-                }
-
-                
+                data = Utility.AuthenticationError();
             }
             return new APIResult(Request, data);
         }
@@ -2098,31 +2036,7 @@ namespace _365_Portal.ControllersReOrderContent
             }
             else
             {
-                //Added on 04 Jun 20 to preview add course without login
-                if (Request.Headers.Contains("Authorization") && Request.Headers.GetValues("Authorization").First().ToUpper() == "Bearer".ToUpper())
-                {
-                    var dsTags = CommonBL.BindDropDown(objUser, "tag", ConstantMessages.Procedures.spBindDropdown);
-                    var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory", ConstantMessages.Procedures.spBindDropdown);
-
-                    DataTable dtTags = new DataTable();
-                    DataTable dtCourseCategory = new DataTable();
-                    dtTags = dsTags.Tables[0].Copy();
-                    dtCourseCategory = dsCourseCategory.Tables[0].Copy();
-
-                    DataSet ds = new DataSet();
-                    ds.Tables.Add(dtTags);
-                    ds.Tables[0].TableName = "Tag";
-
-                    ds.Tables.Add(dtCourseCategory);
-                    ds.Tables[1].TableName = "CourseCategory";
-
-                    data = Utility.ConvertDataSetToJSONString(ds);
-                    data = Utility.Successful(data);
-                }//End
-                else
-                {
-                    data = Utility.AuthenticationError();
-                }
+                data = Utility.AuthenticationError();
             }
             return new APIResult(Request, data);
         }

@@ -22,6 +22,10 @@ namespace Life
                 // dvUserName.InnerText = "Hey " + HttpContext.Current.Session["FirstName"] + "!";
                 dvUserName.InnerText = "Welcome " + HttpContext.Current.Session["FirstName"] + "! Let's learn something new today :)";
             }
+            else if (Request.Url.ToString().ToUpper().Contains("/t/course_preview.aspx".ToUpper()))
+            {
+                //Proceed with page redirection
+            }
             else
             {
                 Response.Redirect("~/login.aspx");

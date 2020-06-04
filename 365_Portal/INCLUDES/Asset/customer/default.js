@@ -416,15 +416,32 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
     }
 
     $scope.EnrollCourse = function (topicId) {
-        // alert(topicId);
-        objDs.DS_GetModulesByTopic(topicId, 1);
-        Swal.fire({
-            title: 'Success',
-            icon: 'success',
-            html: "Thanks for enrolling the course",
-            showConfirmButton: true,
-            showCloseButton: true
-        });
+        if (accessToken != undefined && accessToken != '') {
+            // alert(topicId);
+            objDs.DS_GetModulesByTopic(topicId, 1);
+            Swal.fire({
+                title: 'Success',
+                icon: 'success',
+                html: "Thanks for enrolling the course",
+                showConfirmButton: true,
+                showCloseButton: true
+            });
+        }
+        else {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Dear user you have to login to enroll this course. Please click on Login button to login",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: "Login"
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = '/Login.aspx';
+                }
+            });
+        }
     }
 
     $scope.NextContent = function (contentId) {

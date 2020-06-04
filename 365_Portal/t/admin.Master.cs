@@ -372,9 +372,11 @@ namespace _365_Portal.Admin
                     dvBody.Style.Add("font-family", theme4);
                 }
             }
-            else if (Request.Url.ToString().ToUpper().Contains("/t/LearningJourneyNew2.aspx?topic".ToUpper()))
+            else if (Request.Url.ToString().ToUpper().Contains("/t/course_preview.aspx?courseid".ToUpper()))
             {
                 //Proceed with page redirection
+                HttpContext.Current.Session["requestedurlcourse"] = Request.Url.ToString();
+                Response.Redirect(Request.Url.ToString(), false);
             }
             else
             {
