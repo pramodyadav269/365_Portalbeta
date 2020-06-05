@@ -236,12 +236,19 @@ namespace _365_Portal
                     Utility.CreateFirstLoginSession(false);
 
                     //Added on 04 Jun 20 to preview add course without login
-                    if (HttpContext.Current.Session["requestedurlcourse"] != null)
+                    if (Request.QueryString["url"] != null && !string.IsNullOrEmpty(Convert.ToString(Request.QueryString["url"])))
                     {
-                        string requestedurl = Convert.ToString(HttpContext.Current.Session["requestedurlcourse"]);
-                        HttpContext.Current.Session["requestedurlcourse"] = null;
+                        string requestedurl = Convert.ToString(Request.QueryString["url"]);
+                        requestedurl = HttpUtility.UrlDecode(requestedurl);
                         Response.Redirect(requestedurl);
                     }
+
+                    //if (HttpContext.Current.Session["requestedurlcourse"] != null)
+                    //{
+                    //    string requestedurl = Convert.ToString(HttpContext.Current.Session["requestedurlcourse"]);
+                    //    HttpContext.Current.Session["requestedurlcourse"] = null;
+                    //    Response.Redirect(requestedurl);
+                    //}
                     //End
 
                     //This is used to redirect user on specific page where he requested .Purpose of this is to navigate already logged in user in same browser

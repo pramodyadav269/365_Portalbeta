@@ -438,7 +438,9 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
                 confirmButtonText: "Login"
             }).then((result) => {
                 if (result.value) {
-                    window.location.href = '/Login.aspx';
+                    debugger
+                    var url = encodeURIComponent(window.location.href);
+                    window.location.href = '/Login.aspx?url=' + url;
                 }
             });
         }
@@ -716,6 +718,12 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             },
             data: requestParams,
         }).then(function success(response) {
+
+            if (accessToken == undefined || accessToken == '') {
+                $('#sideNav').hide();
+                $('#navHeader').hide();
+            }
+
             HideLoader();
             var responseData = response.data;
             responseData.TopicTags = ds.DS_SetClasses(responseData.LockedItems);

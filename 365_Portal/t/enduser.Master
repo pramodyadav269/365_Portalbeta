@@ -536,7 +536,7 @@
             </div>
         </div>
 
-        <nav class="navbar navbar-expand-sm bg-white navbar-light navbar-light justify-content-between nav-search nav-fix">
+        <nav class="navbar navbar-expand-sm bg-white navbar-light navbar-light justify-content-between nav-search nav-fix" id="navHeader">
             <%--<nav class="navbar fixed-top navbar-light bg-white">--%>
 
             <!-- Brand -->

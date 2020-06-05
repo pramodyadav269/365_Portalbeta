@@ -375,8 +375,8 @@ namespace _365_Portal.Admin
             else if (Request.Url.ToString().ToUpper().Contains("/t/course_preview.aspx?courseid".ToUpper()))
             {
                 //Proceed with page redirection
-                HttpContext.Current.Session["requestedurlcourse"] = Request.Url.ToString();
-                Response.Redirect(Request.Url.ToString(), false);
+                //HttpContext.Current.Session["requestedurlcourse"] = Request.Url.ToString();
+                //Response.Redirect(Request.Url.ToString(), false);
             }
             else
             {
