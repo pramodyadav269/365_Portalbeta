@@ -42,8 +42,6 @@ namespace _365_Portal.Admin
                     {
                         lblNotiCount.Text = "";
                     }
-
-
                 }
             }
 
@@ -213,7 +211,7 @@ namespace _365_Portal.Admin
                         dvUserDashboard.Visible = true;
                         dvTopics.Visible = true;
                         dvAllCourses.Visible = true;
-                       // dvAddNewCourse.Visible = true;
+                        // dvAddNewCourse.Visible = true;
 
                         dvLearn.Visible = true;
                         dvMyLearning.Visible = true;
@@ -228,7 +226,7 @@ namespace _365_Portal.Admin
 
                         dvCoursesInsights.Visible = true;
                         dvCoursesSettings.Visible = true;
-                    //    dvAddNewTask.Visible = true;
+                        //    dvAddNewTask.Visible = true;
 
                         dvProjects.Visible = true;
                         dvTaskInsights.Visible = true;
@@ -241,8 +239,8 @@ namespace _365_Portal.Admin
                         dvUserGroupMpng.Visible = true;
                         dvUsers.Visible = true;
 
-                      //  dvAddNewCourse.Visible = true;
-                     //   dvAddNewTask.Visible = true;
+                        //  dvAddNewCourse.Visible = true;
+                        //   dvAddNewTask.Visible = true;
 
                         dvCommunity.Visible = true;
                         dvLearnNewSkills.Visible = true;
@@ -298,7 +296,7 @@ namespace _365_Portal.Admin
                         dvAdminConsole.Visible = true;
                         dvContent.Visible = true;
 
-                      //  dvAddNewCourse.Visible = true;
+                        //  dvAddNewCourse.Visible = true;
                         //dvAddNewTask.Visible = true;
 
                         dvCoursesInsights.Visible = true;
@@ -374,6 +372,12 @@ namespace _365_Portal.Admin
                     dvBody.Style.Add("font-family", theme4);
                 }
             }
+            else if (Request.Url.ToString().ToUpper().Contains("/t/course_preview.aspx?courseid".ToUpper()))
+            {
+                //Proceed with page redirection
+                HttpContext.Current.Session["requestedurlcourse"] = Request.Url.ToString();
+                Response.Redirect(Request.Url.ToString(), false);
+            }
             else
             {
                 //This is used to keep the page where user requested .Purpose of this is to navigate already logged in user in same browser
@@ -429,9 +433,11 @@ namespace _365_Portal.Admin
                     Utility.DestroyAllSession();
 
                     //This is to delete all cookies from client web browser
-                    HttpCookie myCookie = new HttpCookie("UserInfo");
-                    myCookie.Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies.Add(myCookie);
+                    //HttpCookie myCookie = new HttpCookie("UserInfo");
+                    //myCookie.Expires = DateTime.Now.AddDays(-1);
+                    //Response.Cookies.Add(myCookie);
+
+                    Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
                     //End
 
 

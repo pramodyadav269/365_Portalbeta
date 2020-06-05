@@ -104,7 +104,7 @@
                                                 <%--<span>Set the image for the course.</span>--%>
                                                 <div class="logo-img course-logo" id="divCourseLogo"></div>
                                                 <div class="custom-file logo">
-                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURL(this, '.course-logo');encodeImagetoBase64(this,'CourseLogo')">
+                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURLCroppedImage(this, '.course-logo')">
                                                     <%--<img src=""/>--%>
                                                     <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
                                                 </div>
@@ -125,7 +125,7 @@
                                                     <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
 
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURL(this, '.instructor-photo');encodeImagetoBase64(this,'InstructorPhoto')">
+                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURLCroppedImage(this, '.instructor-photo')">
                                                         <label class="custom-file-label" for="imgInstructorPhoto" id="lblInstructorPhoto">Add Image</label>
                                                     </div>
                                                     <div class="logo-img instructor-photo position-relative" id="divInstructorPhoto"></div>
@@ -230,14 +230,12 @@
     <%--End Modal popup region--%>
 
     <script>
+        
+        var accessToken = '<%=Session["access_token"]%>';
 
-        //new code
         var editorCourseSummary = new Jodit('#txtCourseSummary');
         var editorContentDescription = '';
         var editorResourcesDescription = '';
-
-
-        var accessToken = '<%=Session["access_token"]%>';
 
         var IsQueryString = '0';//To identify whether page load from query string or not
 
@@ -553,7 +551,7 @@
 
                 requestParams = {
                     TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, CourseCategory: _CourseCategory, selectedTags: _selectedTags, CategoryColor: _CategoryColor, Summary: _Summary
-                    , CourseLogoBase64: base64CourseLogo, IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: base64InstructorPhoto
+                    , CourseLogoBase64: $('.course-logo img').attr('src'), IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: $('.instructor-photo img').attr('src')
                     , Accessibility: _Accessibility, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true
                 };
 

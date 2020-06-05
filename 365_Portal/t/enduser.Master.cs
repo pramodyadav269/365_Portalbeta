@@ -374,6 +374,11 @@ namespace _365_Portal.Admin
                     dvBody.Style.Add("font-family", theme4);
                 }
             }
+            else if (Request.Url.ToString().ToUpper().Contains("/t/course_preview.aspx?courseid".ToUpper()))
+            {
+                //Proceed with page redirection
+                HttpContext.Current.Session["requestedurlcourse"] = Request.Url.ToString();
+            }
             else
             {
                 //This is used to keep the page where user requested .Purpose of this is to navigate already logged in user in same browser
@@ -430,9 +435,11 @@ namespace _365_Portal.Admin
 
 
                     //This is to delete all cookies from client web browser
-                    HttpCookie myCookie = new HttpCookie("UserInfo");
-                    myCookie.Expires = DateTime.Now.AddDays(-1);
-                    Response.Cookies.Add(myCookie);
+                    //HttpCookie myCookie = new HttpCookie("UserInfo");
+                    //myCookie.Expires = DateTime.Now.AddDays(-1);
+                    //Response.Cookies.Add(myCookie);
+
+                    Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
                     //End
 
                     Response.Redirect("~/login.aspx", false);

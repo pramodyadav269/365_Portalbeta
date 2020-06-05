@@ -1117,12 +1117,6 @@ namespace _365_Portal.ControllersReOrderContent
                             data = dt.Rows[0]["ReturnMessage"].ToString();
                             data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                         }
-                        // }
-                        //else
-                        //{
-                        //    data = ConstantMessages.WebServiceLog.InValidValues;
-                        //    data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
-                        //}
                     }
                     else
                     {
@@ -2006,11 +2000,11 @@ namespace _365_Portal.ControllersReOrderContent
         public IHttpActionResult GetCourseCategoryTagsAndBadge()
         {
             var data = "";
+            UserBO objUser = new UserBO();
+
             var identity = MyAuthorizationServerProvider.AuthenticateUser();
             if (identity != null)
             {
-                UserBO objUser = new UserBO();
-
                 if (identity.Role == ConstantMessages.Roles.companyadmin || identity.Role == ConstantMessages.Roles.superadmin || identity.Role == ConstantMessages.Roles.subadmin)
                 {
                     objUser.UserID = identity.UserID;
@@ -2018,11 +2012,8 @@ namespace _365_Portal.ControllersReOrderContent
                     objUser.Role = identity.Role;
 
                     var dsTags = CommonBL.BindDropDown(objUser, "tag", ConstantMessages.Procedures.spBindDropdown);
-                    //var dsBadge = CommonBL.BindDropDown(objUser, "badge", ConstantMessages.Procedures.spBindDropdown);
                     var dsCourseCategory = CommonBL.BindDropDown(objUser, "coursecategory", ConstantMessages.Procedures.spBindDropdown);
 
-                    //DataTable dtBadge = new DataTable();
-                    //dtBadge = dsBadge.Tables[0].Copy();
                     DataTable dtTags = new DataTable();                    
                     DataTable dtCourseCategory = new DataTable();
                     dtTags = dsTags.Tables[0].Copy();                    

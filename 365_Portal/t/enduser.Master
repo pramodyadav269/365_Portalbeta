@@ -19,6 +19,7 @@
     <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=290520201" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/360.css?v=290520201" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/site.css?v=290520201" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../INCLUDES/Asset/js/angular.min.js"></script>
@@ -44,6 +45,7 @@
     <script src="../INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../INCLUDES/Asset/js/site.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
 
 
 
@@ -839,6 +841,29 @@
             <asp:ContentPlaceHolder ID="body" runat="server">
             </asp:ContentPlaceHolder>
         </main>
+
+        <div class="modal fade" id="modalCroppedImage" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Crop Image</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="divCourseLogoCropped"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="croppedImage();" data-dismiss="modal">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
     <script>
         const INSERT = 1;

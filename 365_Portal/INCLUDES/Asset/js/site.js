@@ -1,4 +1,6 @@
 ﻿
+var elImageCropped;
+
 $(document).ready(function () {
 
     $('.sidenav-nav a.sidenav-link').removeClass('active'); // remove active class all 'a' tags
@@ -100,6 +102,20 @@ $(document).ready(function () {
     }
 
     $('.collapse').collapse();
+
+    // init cropped image
+    $image_crop = $('#divCourseLogoCropped').croppie({
+        enableExif: true,
+        viewport: {
+            width: 200,
+            height: 200,
+            type: 'square'
+        },
+        boundary: {
+            width: 300,
+            height: 300
+        }
+    });
 });
 
 function inputInline() {
@@ -292,7 +308,6 @@ function setTextCount(ctrl) {
 }
 
 function readURL(ctrl, el) {
-
     if (ctrl.files.length === 0) {
         $(el).removeClass('img');
         $(el).empty();
@@ -303,15 +318,56 @@ function readURL(ctrl, el) {
     if (ctrl.files && ctrl.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            // $(el).html('src', e.target.result);
+
             $(el).addClass('img');
             $(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
+            
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {
         $(el).removeClass('img');
         $(el).empty();
     }
+}
+
+function readURLCroppedImage(ctrl, el) {
+    elImageCropped = el;
+    if (ctrl.files.length === 0) {
+        $(el).removeClass('img');
+        $(el).empty();
+        return;
+    }
+
+    var ext = ctrl.files[0].name.split('.').pop().toLowerCase();
+    if (ctrl.files && ctrl.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+
+            $(el).addClass('img');
+            //$(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
+
+            // croped image
+            $image_crop.croppie('bind', {
+                url: e.target.result
+            }).then(function () {
+                $('#modalCroppedImage').modal('toggle');
+            });
+        };
+        reader.readAsDataURL(ctrl.files[0]);
+    } else {
+        $(el).removeClass('img');
+        $(el).empty();
+    }
+}
+
+// cropped image then save query
+function croppedImage() {
+    $image_crop.croppie('result', {
+        type: 'canvas',
+        size: 'viewport'
+    }).then(function (response) {
+        $(elImageCropped).html('<img src="' + response + '" class="img-fluid" />');
+    });
 }
 
 function viewLesson() {

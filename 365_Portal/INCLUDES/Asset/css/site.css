@@ -2412,7 +2412,7 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     font-size: 14px; }
     .board-column .float-right .svg-inline--fa {
       cursor: pointer;
-      margin: 0 0.5rem; }
+      margin: 0 0.2rem; }
     .board-column .float-right a[clickevent="edit"]::before {
       position: relative;
       color: rgba(0, 0, 0, 0.5);

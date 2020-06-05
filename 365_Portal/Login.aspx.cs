@@ -29,10 +29,14 @@ namespace _365_Portal
                 Utility.DestroyAllSession();
 
                 //If Login From Cookie
-                HttpCookie myCookie = Request.Cookies["UserInfo"];
-                if (myCookie != null)
+                //HttpCookie myCookie = Request.Cookies["UserInfo"];
+                //if (myCookie != null)
+                //{
+                //    LoginFromCookie(Convert.ToString(myCookie.Values["userid"]));
+                //}
+                if (Request.Cookies["userid"] != null && Request.Cookies["userid"].Value != null && Request.Cookies["userid"].Value.Trim() != "")
                 {
-                    LoginFromCookie(Convert.ToString(myCookie.Values["userid"]));
+                    LoginFromCookie(Convert.ToString(Request.Cookies["userid"].Value));
                 }
             }
             //LoadBadges();
@@ -145,14 +149,17 @@ namespace _365_Portal
 
         protected void ProceedToSuccessLoginProcess(UserBO objResponse, string UserName , string Password)
         {
-            HttpCookie myOldCookie = Request.Cookies["UserInfo"];
-            if (myOldCookie == null)
-            {
-                HttpCookie myCookie = new HttpCookie("UserInfo");
-                myCookie.Values.Add("userid", objResponse.UserID);
-                myCookie.Expires = DateTime.Now.AddHours(12);
-                Response.Cookies.Add(myCookie);
-            }
+            //HttpCookie myOldCookie = Request.Cookies["UserInfo"];
+            //if (myOldCookie == null)
+            //{
+            //    HttpCookie myCookie = new HttpCookie("UserInfo");
+            //    myCookie.Values.Add("userid", objResponse.UserID);
+            //    myCookie.Expires = DateTime.Now.AddMonths(1);
+            //    Response.Cookies.Add(myCookie);
+            //}
+
+            Response.Cookies["userid"].Value = objResponse.UserID;
+
 
 
             //HttpCookie _userInfoCookies = new HttpCookie("UserInfo");
@@ -228,6 +235,15 @@ namespace _365_Portal
                 {
                     Utility.CreateFirstLoginSession(false);
 
+                    //Added on 04 Jun 20 to preview add course without login
+                    if (HttpContext.Current.Session["requestedurlcourse"] != null)
+                    {
+                        string requestedurl = Convert.ToString(HttpContext.Current.Session["requestedurlcourse"]);
+                        HttpContext.Current.Session["requestedurlcourse"] = null;
+                        Response.Redirect(requestedurl);
+                    }
+                    //End
+
                     //This is used to redirect user on specific page where he requested .Purpose of this is to navigate already logged in user in same browser
                     HttpCookie myCookie = Request.Cookies["UserInfo"];
                     if (myCookie != null && HttpContext.Current.Session["requestedurl"] != null)
@@ -237,7 +253,6 @@ namespace _365_Portal
                         Response.Redirect(requestedurl);
                     }
                     //End
-
 
                     if (objResponse.Role.ToLower() == "enduser")
                     {
@@ -250,6 +265,5 @@ namespace _365_Portal
                 }
             }
         }
-
     }
 }

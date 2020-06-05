@@ -3096,5 +3096,28 @@ namespace _365_Portal.Controllers
             }
             return new APIResult(Request, data);
         }
+
+        [HttpPost]
+        [Route("API/User/LoginViaAccessToken")]
+        public IHttpActionResult LoginViaAccessToken()
+        {
+            var data = "";
+            var identity = MyAuthorizationServerProvider.AuthenticateUser();
+            if (identity != null)
+            {
+                var UserDetails = new
+                {
+                    UserId = identity.UserID
+                };
+                data = JsonConvert.SerializeObject(UserDetails, Formatting.Indented);
+                data = Utility.Successful(data);
+            }
+            else
+            {
+                data = Utility.AuthenticationError();
+            }
+            return new APIResult(Request, data);
+        }
+
     }
 }
