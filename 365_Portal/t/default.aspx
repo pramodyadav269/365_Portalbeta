@@ -20,7 +20,7 @@
             <i class="fa fa-plus"></i><span>Compose</span>
         </a>--%>
 
-        <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'">
+        <section id="dvModuleContainer" class="course-wrapper" ng-if="ActiveContainer =='Module'" style="display:none;">
             <div class="card text-white bg-dark-blue course-header">
                 <div class="card-body">
                     <div class="row">
@@ -101,7 +101,7 @@
             </div>
         </section>
 
-        <section id="dvContentsContainer" ng-show="ActiveContainer =='Content'">
+        <section id="dvContentsContainer" ng-show="ActiveContainer =='Content'" style="display:none;">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#" ng-click="GoBack('Module')">{{SelectedTopic.Title}}</a></li>
@@ -243,7 +243,7 @@
         <%-- beta view lesson end --%>
 
         <div class="container-fluid dashboard">
-            <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
+            <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'" style="display:none;">
                 <h4 class="section-title" id="dvInProgressTitle" style="display: none;">In Progress Courses</h4>
 
                 <%-- Start new card style --%>
@@ -1063,7 +1063,7 @@
                     </div>
                 </div>
 
-                <div class="row survey" ng-if="ActiveContainer =='ContentSurveyView'">
+                <div class="row survey" ng-if="ActiveContainer =='ContentSurveyView'" style="display:none;">
                     <div class="col-sm-12 header">
                         <a class="back" href="#" ng-click="GoBack('Content')"><i class="fas fa-arrow-left"></i>{{ContentGoBackText}}</a>
                         <h2 class="text-center font-weight-bold">{{SelectedContent.Title}}</h2>
@@ -1170,7 +1170,7 @@
                     </div>
                 </div>
 
-                <div class="row flashcards" ng-if="ActiveContainer =='ContentFlashcardView'">
+                <div class="row flashcards" ng-if="ActiveContainer =='ContentFlashcardView'" style="display:none;">
                     <div class="col-sm-12 header">
                         <a class="back" href="#" ng-click="GoBack('Content')"><i class="fas fa-arrow-left"></i>{{ContentGoBackText}}</a>
                         <h2 class="text-center font-weight-bold">{{SpecialContents.Title}}</h2>
@@ -1253,7 +1253,7 @@
 
 
 
-                <div id="dvFinalQuiz" ng-if="ActiveContainer =='ContentCompleted'">
+                <div id="dvFinalQuiz" ng-if="ActiveContainer =='ContentCompleted'" style="display:none;">
                     You have completed all the videos/pdfs in this module.
             <h1>UP NEXT:</h1>
                     <div>QUIZ ICON</div>
@@ -1261,7 +1261,7 @@
                     <button onclick="return false;">DO THE QUIZ</button>
                 </div>
 
-                <div id="dvModuleCompleted" ng-if="ActiveContainer =='ModuleCompleted'">
+                <div id="dvModuleCompleted" ng-if="ActiveContainer =='ModuleCompleted'" style="display:none;">
                     Hurra!, You've just completed module:
             <h1>MODULE NAME</h1>
                     <div>You gained the following things</div>
@@ -1299,7 +1299,7 @@
                     </div>
                 </div>
 
-                <div id="dvAchievementReceived" ng-if="ActiveContainer =='AchievementReceived'">
+                <div id="dvAchievementReceived" ng-if="ActiveContainer =='AchievementReceived'" style="display:none;">
                     <div>Hurray!. You just became guru</div>
                     <div>ICON</div>
                     <div>Description</div>
@@ -1632,7 +1632,7 @@
     </script>
 
     <%--<script src="SendBird.min.js"></script>--%>
-    <script src="https://sample.sendbird.com/widget/dist/widget.SendBird.js"></script>
+   <%-- <script src="https://sample.sendbird.com/widget/dist/widget.SendBird.js"></script>
     <script>
         sbWidget.start('3B0271C2-F6C0-49BE-88CB-0D63048F4DA5');
         var appId = '3B0271C2-F6C0-49BE-88CB-0D63048F4DA5';
@@ -1641,6 +1641,6 @@
         sbWidget.startWithConnect(appId, userId, nickname, function () {
             // do something...
         });
-    </script>
+    </script>--%>
 </asp:Content>
 

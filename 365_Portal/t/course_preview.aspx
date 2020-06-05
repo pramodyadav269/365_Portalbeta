@@ -167,8 +167,14 @@ d</a>
                         <div class="lesson-scrollspy">--%>
                             <div class="lesson-content" id="list-item-finalquiz">
                                 <%-- <h2 class="lesson-title" ng-bind-html="trustAsHtml(SelectedModule.Title)"></h2>--%>
-                                <h4 class="lesson-content-title" ng-bind-html="trustAsHtml(SelectedContent.Title)"></h4>
-                                <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>
+                                <%--<h4 class="lesson-content-title" ng-bind-html="trustAsHtml(SelectedContent.Title)"></h4>
+                                <p ng-bind-html="trustAsHtml(SelectedContent.Description)"></p>--%>
+
+                                <div class="lesson-content" ng-if="content.ContentType == 'FINALQUIZ'" ng-repeat="content in Content.UnlockedItems">
+                                    <h4 class="lesson-content-title" ng-bind-html="trustAsHtml(content.Title)"></h4>
+                                    <p ng-bind-html="trustAsHtml(content.Description)"></p>
+                                </div>
+
                                 <%-- <div class="col-sm-12 header">
                                             <a class="back" href="#" ng-click="GoBack('Content')"><i class="fas fa-arrow-left"></i>{{ContentGoBackText}}</a>
                                             <h2 class="text-center font-weight-bold">{{SelectedContent.Title}}</h2>
