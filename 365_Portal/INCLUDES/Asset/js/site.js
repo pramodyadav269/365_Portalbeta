@@ -324,7 +324,7 @@ function readURL(ctrl, el) {
 
             $(el).addClass('img');
             $(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
-
+            
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {

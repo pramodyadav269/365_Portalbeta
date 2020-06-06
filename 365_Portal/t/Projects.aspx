@@ -1348,7 +1348,8 @@
                 cardHtml += ' </ol>';
                 if (Role != "enduser") {
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    //newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="AddTaskStatusEditable(this, 1)"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
@@ -2076,6 +2077,34 @@
                 }
                 ActualStatusHTML = "";
                 $(".statusediticons").removeClass('divDisable');
+            }
+        }
+
+
+        var statusAddHtml = "";
+        function AddTaskStatusEditable(ctrl, type) {
+            if (type == 1) { //edit 
+
+                statusAddHtml = $(ctrl).parents('.add-task').html();
+
+                var editstatusHTML = '';
+                editstatusHTML += '<div class="d-flex justify-content-between align-items-center">';
+                editstatusHTML += '<input type="text" class="form-control required col-9" id="txtTaskNameEdit" placeholder="Task Name">';
+                editstatusHTML += '<div class="float-right"><i class="fas fa-check" onclick="SaveTask();"></i>|<i class="fas fa-times" onclick="AddTaskStatusEditable(this,0)"></i></div>'
+                editstatusHTML += '</div>'
+
+                $(ctrl).parents('.add-task').empty().append(editstatusHTML);
+                $("#txtStatusNameEdit").val(StatusName);
+
+
+
+            }
+            else if (type == 0) { //cancel
+
+                if (statusAddHtml != "") {
+                    $(ctrl).parents('.add-task').empty().append(statusAddHtml);
+                }
+                statusAddHtml = "";
             }
         }
 
