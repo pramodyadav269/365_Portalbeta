@@ -1261,14 +1261,29 @@
                 });
 
                 newCardHtml += '<div class="board-column">';
-                newCardHtml += '<div id="divheaderStatus">';
-                newCardHtml += '<div class="board-column-header">' + objStatus.Status;
-                newCardHtml += '<div class="float-right statusediticons">';
+                newCardHtml += '<div id="divheaderStatus" class="header-control">';
+                
                 if (Role != "enduser") {
-                    newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
-                    newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status + '\');"></i>';
+
+                    //newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
+                    //newCardHtml += '|<i class="fas fa-trash-alt" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status + '\');"></i>';
+
+                    // added by imtiyaz
+                    newCardHtml += '<div class="board-column-header"><span class="column-header-title" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)">' + objStatus.Status + '</span>';
+                    newCardHtml += '<div class="float-right statusediticons dropdown">';
+                    newCardHtml += '<a  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>';
+                    newCardHtml += '<div class="dropdown-menu">';
+                    newCardHtml += '<a class="dropdown-item" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)">Edit</a>';
+                    newCardHtml += '<a class="dropdown-item" onclick="return DeleteTaskStatus(' + objStatus.StatusID + ',\'' + objStatus.Status + '\');">Delete</a>';
+                    newCardHtml += '</div>';
+                    newCardHtml += '</div>';
+                    newCardHtml += '</div>';
+                } else {
+                    newCardHtml += '<div class="board-column-header"><span class="column-header-title">' + objStatus.Status + '</span>';
+                    newCardHtml += '</div>';
                 }
-                newCardHtml += '</div></div>';
+
+
                 newCardHtml += '</div>';
 
                 newCardHtml += '<div class="board-column-content-wrapper">';
@@ -2032,8 +2047,13 @@
         var ActualStatusHTML = "";
         function TaskStatusEditable(objthis, type) {
             if (type == 1) { //edit 
+                debugger;
                 $(".statusediticons").addClass('divDisable');
-                ActualStatusHTML = $(objthis).parent().parent().parent().html();
+                //ActualStatusHTML = $(objthis).parent().parent().parent().html();
+
+                $(objthis).parents('.dropdown-menu').removeClass('show');
+                ActualStatusHTML = $(objthis).parents('.header-control').html();
+
                 var StatusId = $(objthis).attr("statusid");
                 var StatusName = $(objthis).attr("statusname");
                 var editstatusHTML = '';
@@ -2042,13 +2062,17 @@
                 //editstatusHTML += '<textbox  id="txtStatusNameEdit" > ' + StatusName + ' </textbox>';
                 editstatusHTML += '<div class="float-right"><i class="fas fa-check" onclick="SaveUpdateStatus(' + StatusId + ')"></i>|<i class="fas fa-times" onclick="TaskStatusEditable(this,0)"></i></div>'
                 editstatusHTML += '</div>'
-                $(objthis).parent().parent().replaceWith(editstatusHTML);
+                //$(objthis).parent().parent().replaceWith(editstatusHTML);
+                $(objthis).parents('.header-control').empty().append(editstatusHTML);
                 $("#txtStatusNameEdit").val(StatusName);
+
+
+
             }
             else if (type == 0) { //cancel
 
                 if (ActualStatusHTML != "") {
-                    $(objthis).parent().parent().replaceWith(ActualStatusHTML);
+                    $(objthis).parents('.header-control').empty().append(ActualStatusHTML);
                 }
                 ActualStatusHTML = "";
                 $(".statusediticons").removeClass('divDisable');

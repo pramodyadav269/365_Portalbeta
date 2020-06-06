@@ -2455,12 +2455,25 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
   padding: 0 18px;
   color: #000;
   font-family: OpenSans-Bold; }
+  .board-column-header .column-header-title {
+    cursor: pointer; }
+    .board-column-header .column-header-title:hover {
+      text-decoration: underline; }
   .board-column-header .float-right {
     color: rgba(0, 0, 0, 0.5);
     font-size: 14px; }
     .board-column-header .float-right .svg-inline--fa {
       cursor: pointer;
       margin: 0 0.5rem; }
+    .board-column-header .float-right .dropdown-menu {
+      transform: translate3d(-158px, 4px, 0px) !important;
+      border: 0;
+      padding: 0; }
+      .board-column-header .float-right .dropdown-menu .dropdown-item {
+        padding: .35rem 1rem;
+        font-size: 14px;
+        line-height: 14px;
+        font-family: OpenSans-Regular; }
 
 @media (max-width: 600px) {
   .board-column-header {
