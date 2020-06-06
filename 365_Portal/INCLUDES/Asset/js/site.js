@@ -108,13 +108,16 @@ $(document).ready(function () {
         enableExif: true,
         viewport: {
             width: 200,
-            height: 200,
-            type: 'square'
+            height: 200
         },
         boundary: {
             width: 300,
             height: 300
-        }
+        },
+        showZoomer: false,
+        enableResize: true,
+        maxZoom: 1.5,
+        enableOrientation: true
     });
 });
 
@@ -321,7 +324,7 @@ function readURL(ctrl, el) {
 
             $(el).addClass('img');
             $(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
-            
+
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {
@@ -350,6 +353,7 @@ function readURLCroppedImage(ctrl, el) {
             $image_crop.croppie('bind', {
                 url: e.target.result
             }).then(function () {
+                $('.cr-image').css({ 'transform': 'translate3d(86px, 86px, 0px) scale(1.5625)', 'transform-origin': '64px 64px' });
                 $('#modalCroppedImage').modal('toggle');
             });
         };

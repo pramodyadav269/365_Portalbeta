@@ -19,7 +19,7 @@
     <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=290520201" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/360.css?v=290520201" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/site.css?v=290520201" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/croppie.css" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../INCLUDES/Asset/js/angular.min.js"></script>
@@ -45,7 +45,7 @@
     <script src="../INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../INCLUDES/Asset/js/site.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+    <script src="../INCLUDES/Asset/js/croppie.js"></script>
 
 
 
@@ -852,10 +852,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div id="divCourseLogoCropped"></div>
-                            </div>
+                        <div id="cropped-wrapper">
+                            <div id="divCourseLogoCropped"></div>
                         </div>
                     </div>
                     <div class="modal-footer">

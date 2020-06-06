@@ -882,6 +882,7 @@
     <Content Include="INCLUDES\Asset\css\all.css" />
     <Content Include="INCLUDES\Asset\css\bootstrap-datetimepicker.min.css" />
     <Content Include="INCLUDES\Asset\css\bootstrap.min.css" />
+    <Content Include="INCLUDES\Asset\css\croppie.css" />
     <Content Include="INCLUDES\Asset\css\dataTables.bootstrap4.min.css" />
     <Content Include="INCLUDES\Asset\css\gijgo.min.css" />
     <Content Include="INCLUDES\Asset\css\jodit.min.css" />
@@ -2200,6 +2201,7 @@
     <Content Include="INCLUDES\Asset\js\bootstrap-datetimepicker.min.js" />
     <Content Include="INCLUDES\Asset\js\bootstrap.min.js" />
     <Content Include="INCLUDES\Asset\js\bs-custom-file-input.min.js" />
+    <Content Include="INCLUDES\Asset\js\croppie.js" />
     <Content Include="INCLUDES\Asset\js\dataTables.bootstrap4.min.js" />
     <Content Include="INCLUDES\Asset\js\gijgo.min.js" />
     <Content Include="INCLUDES\Asset\js\jodit.min.js" />
