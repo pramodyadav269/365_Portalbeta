@@ -2475,6 +2475,11 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
                         font-family: OpenSans-Regular;
                         font-size: 18px;
                         color: #fff;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
                     }
 
                     .action {

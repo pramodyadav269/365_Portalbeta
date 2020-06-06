@@ -785,6 +785,11 @@ d</a>
 
         $(document).ready(function () {
 
+            // remove sidenav
+            $('#sideNav').remove();
+            $('.navbar-brand .svg-inline--fa').remove();
+            $('main').css({ 'margin-left': '0' });
+
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
                 placeholder: "Select a option",

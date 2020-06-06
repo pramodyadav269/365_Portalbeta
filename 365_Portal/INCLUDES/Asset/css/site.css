@@ -1730,7 +1730,12 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
     .dashboard .course-wrapper .course-header.card .card-body .card-text {
       font-family: OpenSans-Regular;
       font-size: 18px;
-      color: #fff; }
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical; }
     .dashboard .course-wrapper .course-header.card .card-body .action span {
       cursor: pointer;
       padding: 0.3rem .45rem;
