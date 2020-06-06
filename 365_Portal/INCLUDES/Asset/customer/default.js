@@ -720,8 +720,17 @@ app.service("DataService", function ($http, $rootScope, $compile) {
         }).then(function success(response) {
 
             if (accessToken == undefined || accessToken == '') {
-                $('#sideNav').hide();
-                $('#navHeader').hide();
+                debugger
+                //$('#sideNav').hide();
+                $('#navHeader').remove();
+                $('#sideNav').remove();
+                $('.navbar-brand .svg-inline--fa').remove();
+                $('main').css({ 'margin-left': '0' });
+
+                //$('#divAction').remove();
+                //$('#btnBackToCourse').remove();
+
+                $rootScope.IsLoggedIn = 'false';
             }
 
             HideLoader();
