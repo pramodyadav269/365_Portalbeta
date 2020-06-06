@@ -727,9 +727,6 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $('.navbar-brand .svg-inline--fa').remove();
                 $('main').css({ 'margin-left': '0' });
 
-                //$('#divAction').remove();
-                //$('#btnBackToCourse').remove();
-
                 $rootScope.IsLoggedIn = 'false';
             }
 

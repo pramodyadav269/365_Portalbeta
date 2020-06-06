@@ -21,12 +21,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-7 col-lg-8 mb-2">
-                            <a class="back c-yellow" ng-show="IsLoggedIn == null" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                            <a class="back c-yellow" ng-show="IsLoggedIn != 'false'" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8">
                             <h2 class="card-title" ng-bind-html="trustAsHtml(SelectedTopic.Title)"></h2>
                             <p class="card-text" ng-bind-html="trustAsHtml(SelectedTopic.Description)"></p>
-                            <div class="action" ng-show="IsLoggedIn == null">
+                            <div class="action" ng-show="IsLoggedIn != 'false'">
                                 <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
                                 <span ng-show="SelectedTopic.IsFavourite !=1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                 <span ng-show="SelectedTopic.IsBookmark ==1" ng-click="ChangeTopicProperty(SelectedTopic,3,SelectedTopic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
