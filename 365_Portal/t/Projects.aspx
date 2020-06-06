@@ -398,8 +398,8 @@
                         <div class="col-12 col-sm-12 mb-3">
                             <div class="form-group">
                                 <label for="ddlStatus">Status</label>
+                                <input type="hidden" id="hdntaskddlStatusId" />
                                 <select class="form-control select2 required" id="ddlStatus" style="width: 100% !important">
-                                    <input type="hidden" id="hdntaskddlStatusId" />
                                 </select>
                             </div>
                         </div>
@@ -1262,7 +1262,7 @@
 
                 newCardHtml += '<div class="board-column">';
                 newCardHtml += '<div id="divheaderStatus" class="header-control">';
-                
+
                 if (Role != "enduser") {
 
                     //newCardHtml += '<i class="fas fa-pen" statusid="' + objStatus.StatusID + '" statusname="' + objStatus.Status + '" onclick="TaskStatusEditable(this,1)"></i>';
@@ -1349,7 +1349,7 @@
                 if (Role != "enduser") {
                     cardHtml += '<div class="col-12"><a class="btn bg-light-tr rounded w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
                     //newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="onOpenTaskInfoModal(' + objStatus.StatusID + ');"><i class="fas fa-plus"></i>Add Task</a></div>';
-                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="AddTaskStatusEditable(this, 1)"><i class="fas fa-plus"></i>Add Task</a></div>';
+                    newCardHtml += '<div class="col-12 mt-2 mb-4 add-task"><a class="btn w-100" onclick="AddTaskStatusEditable(this, 1,' + objStatus.StatusID + ',\'' + objStatus.Status + '\')"><i class="fas fa-plus"></i>Add Task</a></div>';
                 }
                 cardHtml += '</div>';
                 cardHtml += '</div>';
@@ -1413,7 +1413,6 @@
                     , t_TaskName: $("#txtTaskName").val()
                     , t_TaskSummary: $("#txtTopicSummary").val()
                     , t_DueDate: duedate != "" ? moment(duedate).format("YYYY-MM-DDTHH:mm:ss") : ""
-                    //, t_PrivateNotes: $("#txtAddPrivateNotes").val()
                     , t_PrivateNotes: ""
                     , t_UserId: "0"
                     , t_TaskAssignees_UserIds: $("#ddlAddAssignee").val().toString() //varchar(500), #(Userids comma separated)
@@ -1426,48 +1425,73 @@
                     , t_IsFileUploaded: isfileuploaded
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "../api/Task/TaskCRUD",
-                    contentType: "application/json",
-                    headers: { "Authorization": "Bearer " + accessToken },
-                    data: requestParams != null ? JSON.stringify(requestParams) : null,
-                    beforeSend: function () {
-                        //ShowLoader();
-                    },
-                    success: function (response) {
-                        var userlistAPIresponse = $.parseJSON(response);
-                        if (userlistAPIresponse.StatusCode > 0) {
-                            $("#modalTaskInfo").modal("hide");
-                            BindCards();
-                            ClearTaskForm();
+                ajaxSaveUpdateTask(requestParams, taskStatusName);
 
-                            var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
-                            if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != taskStatusId) {
-
-                                UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
-                            }
-
-                            if (task_ActionId == "2") {
-                                userlistAPIresponse.StatusDescription = "Task details added successfully";
-                            }
-                            else if (task_ActionId == "3") {
-                                userlistAPIresponse.StatusDescription = "Task details updated successfully";
-                            }
-                        }
-                        HideLoader();
-                        call_Notification(userlistAPIresponse);
-                    },
-                    failure: function (response) {
-                        Swal.fire({
-                            title: "Failure",
-                            text: "Please try Again",
-                            icon: "error",
-                            button: "Ok",
-                        });
-                    }
-                });
             }
+        }
+
+        function addQuickTask(statusid, taskStatusName) {
+
+            var requestParams = {
+                t_Action: 2
+                , t_ProjectID: ProjectID
+                , t_CompID: "0"
+                , t_TaskID: "0"
+                , t_TaskName: $("#txtquickTaskName").val()
+                , t_TaskSummary: ""
+                , t_DueDate: ""
+                , t_PrivateNotes: ""
+                , t_UserId: "0"
+                , t_TaskAssignees_UserIds: ""
+                , t_TagIds: ""
+                , t_FileIds: ""
+                , t_SubTasks: ""
+                , t_StatusID: statusid
+                , t_Comments: ""
+                , t_FileName: ""
+                , t_IsFileUploaded: false
+            };
+            ajaxSaveUpdateTask(requestParams, taskStatusName);
+        }
+
+        function ajaxSaveUpdateTask(requestParams, taskStatusName) {
+
+            $.ajax({
+                type: "POST",
+                url: "../api/Task/TaskCRUD",
+                contentType: "application/json",
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: requestParams != null ? JSON.stringify(requestParams) : null,
+                success: function (response) {
+                    var userlistAPIresponse = $.parseJSON(response);
+                    if (userlistAPIresponse.StatusCode > 0) {
+                        $("#modalTaskInfo").modal("hide");
+                        BindCards();
+                        ClearTaskForm();
+                        var hdntaskddlStatusId = $("#hdntaskddlStatusId").val();
+                        if (hdntaskddlStatusId != null && hdntaskddlStatusId != '' && hdntaskddlStatusId != requestParams.t_StatusID) {
+                            UpdateTaskStatus(requestParams.t_ProjectID, requestParams.t_TaskID, requestParams.t_StatusID, requestParams.t_TaskName, taskStatusName);
+                        }
+                        if (requestParams.t_Action == "2") {
+                            userlistAPIresponse.StatusDescription = "Task details added successfully";
+                        }
+                        else if (requestParams.t_Action == "3") {
+                            userlistAPIresponse.StatusDescription = "Task details updated successfully";
+                        }
+                    }
+                    HideLoader();
+                    call_Notification(userlistAPIresponse);
+                },
+                failure: function (response) {
+                    Swal.fire({
+                        title: "Failure",
+                        text: "Please try Again",
+                        icon: "error",
+                        button: "Ok",
+                    });
+                }
+            });
+
         }
 
         function BindTaskDetailsBYTaskId(TaskId) {
@@ -2082,25 +2106,19 @@
 
 
         var statusAddHtml = "";
-        function AddTaskStatusEditable(ctrl, type) {
+        function AddTaskStatusEditable(ctrl, type, statusid = 0, statusname = "") {
             if (type == 1) { //edit 
-
                 statusAddHtml = $(ctrl).parents('.add-task').html();
-
                 var editstatusHTML = '';
                 editstatusHTML += '<div class="align-items-center">';
-                editstatusHTML += '<textarea class="form-control required col-12" id="txtTaskNameEdit" placeholder="Task Name" rows="2"></textarea>';
-                editstatusHTML += '<div class="float-right mt-1 mb-3"><i class="fas fa-check" onclick="SaveTask();"></i>|<i class="fas fa-times" onclick="AddTaskStatusEditable(this,0)"></i></div>'
+                editstatusHTML += '<textarea class="form-control required col-12" id="txtquickTaskName" placeholder="Task Name" rows="2"></textarea>';
+                editstatusHTML += '<div class="float-right mt-1 mb-3"><i class="fas fa-check" onclick="addQuickTask(' + statusid + ',\'' + statusname + '\');"></i>|<i class="fas fa-times" onclick="AddTaskStatusEditable(this,0)"></i></div>'
                 editstatusHTML += '</div>'
 
                 $(ctrl).parents('.add-task').empty().append(editstatusHTML);
-                $("#txtStatusNameEdit").val(StatusName);
-
-
-
+                //$("#txtStatusNameEdit").val(StatusName);
             }
             else if (type == 0) { //cancel
-
                 if (statusAddHtml != "") {
                     $(ctrl).parents('.add-task').empty().append(statusAddHtml);
                 }
