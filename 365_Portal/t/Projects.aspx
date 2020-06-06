@@ -2088,9 +2088,9 @@
                 statusAddHtml = $(ctrl).parents('.add-task').html();
 
                 var editstatusHTML = '';
-                editstatusHTML += '<div class="d-flex justify-content-between align-items-center">';
-                editstatusHTML += '<input type="text" class="form-control required col-9" id="txtTaskNameEdit" placeholder="Task Name">';
-                editstatusHTML += '<div class="float-right"><i class="fas fa-check" onclick="SaveTask();"></i>|<i class="fas fa-times" onclick="AddTaskStatusEditable(this,0)"></i></div>'
+                editstatusHTML += '<div class="align-items-center">';
+                editstatusHTML += '<textarea class="form-control required col-12" id="txtTaskNameEdit" placeholder="Task Name" rows="2"></textarea>';
+                editstatusHTML += '<div class="float-right mt-1 mb-3"><i class="fas fa-check" onclick="SaveTask();"></i>|<i class="fas fa-times" onclick="AddTaskStatusEditable(this,0)"></i></div>'
                 editstatusHTML += '</div>'
 
                 $(ctrl).parents('.add-task').empty().append(editstatusHTML);
