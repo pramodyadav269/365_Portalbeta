@@ -786,12 +786,7 @@ d</a>
     </div>
     <script>
 
-        $(document).ready(function () {
-
-            // remove sidenav
-            $('#sideNav').remove();
-            $('.navbar-brand .svg-inline--fa').remove();
-            $('main').css({ 'margin-left': '0' });
+        $(document).ready(function () {            
 
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({
