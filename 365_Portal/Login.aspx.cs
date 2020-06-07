@@ -159,7 +159,7 @@ namespace _365_Portal
             //}
 
             Response.Cookies["userid"].Value = objResponse.UserID;
-
+            Response.Cookies["userid"].Expires = DateTime.Now.AddMonths(1);
 
 
             //HttpCookie _userInfoCookies = new HttpCookie("UserInfo");
