@@ -396,7 +396,12 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
         if (prevPage == 'Topic') {
             // $("#dvTopicContainer").show();
-            document.location.replace(document.referrer)
+            if (document.referrer == null || document.referrer=="") {
+                window.location.href = 'default.aspx';
+            }
+            else {
+                document.location.replace(document.referrer)
+            }
         } if (prevPage == 'Content') {
             $scope.ActiveContainer = prevPage;
             $('#videoControl').removeClass('d-none');
@@ -718,7 +723,6 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             },
             data: requestParams,
         }).then(function success(response) {
-
             if (accessToken == undefined || accessToken == '') {
                 debugger
                 //$('#sideNav').hide();
