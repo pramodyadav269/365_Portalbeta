@@ -21,12 +21,12 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-7 col-lg-8 mb-2">
-                            <a class="back c-yellow" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
+                            <a class="back c-yellow" ng-show="IsLoggedIn != 'false'" ng-click="GoBack('Topic')"><i class="fas fa-arrow-left"></i>Back to Courses</a>
                         </div>
                         <div class="col-sm-12 col-md-7 col-lg-8">
                             <h2 class="card-title" ng-bind-html="trustAsHtml(SelectedTopic.Title)"></h2>
                             <p class="card-text" ng-bind-html="trustAsHtml(SelectedTopic.Description)"></p>
-                            <div class="action">
+                            <div class="action" ng-show="IsLoggedIn != 'false'">
                                 <span ng-show="SelectedTopic.IsFavourite ==1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart c-red"></i></span>
                                 <span ng-show="SelectedTopic.IsFavourite !=1" ng-click="ChangeTopicProperty(SelectedTopic,1,SelectedTopic.TopicId,!SelectedTopic.IsFavourite)"><i class="fas fa-heart"></i></span>
                                 <span ng-show="SelectedTopic.IsBookmark ==1" ng-click="ChangeTopicProperty(SelectedTopic,3,SelectedTopic.TopicId,!SelectedTopic.IsBookmark)"><i class="fas fa-plus c-red"></i></span>
@@ -39,14 +39,17 @@
             <div class="col-12">
                 <div class="course-preview">
                     <div class="course-content enroll">
-                        <%-- <div class="course-content enroll no-header"> for no header--%>
+                        <%-- <div class="course-content enroll no-header"> for no header IsLoggedIn--%>
                         <div class="card">
                             <img ng-show="SelectedTopic.CourseLogo !=null" class="card-img-top" ng-src="{{'/Files/CourseLogo/' + SelectedTopic.CourseLogo}}">
                             <img ng-show="SelectedTopic.CourseLogo ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">
 
                             <div class="card-body">
                                 <div class="creator">
-                                    <img src="../INCLUDES/Asset/images/profile.png" />
+                                    <%--<img src="../INCLUDES/Asset/images/profile.png" />--%>
+                                    <img ng-show="SelectedTopic.InstructorPic !=null" class="card-img-top" ng-src="{{'/Files/InspectorImage/' + SelectedTopic.InstructorPic}}">
+                                    <img ng-show="SelectedTopic.InstructorPic ==null" class="card-img-top" src="../INCLUDES/Asset/images/sun.png">
+
                                     <div class="creator-details">
                                         <span>{{SelectedTopic.InstructorName}}</span>
                                         <span>{{ GetLastUpdatedDate(SelectedTopic.ModifiedDate)}}</span>
@@ -783,12 +786,7 @@ d</a>
     </div>
     <script>
 
-        $(document).ready(function () {
-
-            // remove sidenav
-            $('#sideNav').remove();
-            $('.navbar-brand .svg-inline--fa').remove();
-            $('main').css({ 'margin-left': '0' });
+        $(document).ready(function () {            
 
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({

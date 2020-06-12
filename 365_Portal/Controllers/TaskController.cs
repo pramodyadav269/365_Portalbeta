@@ -66,7 +66,7 @@ namespace _365_Portal.Controllers
                 }
                 catch (Exception ex)
                 {
-                    data = Utility.Exception(ex); ;
+                    data = Utility.Exception(ex);
                 }
             }
             else
