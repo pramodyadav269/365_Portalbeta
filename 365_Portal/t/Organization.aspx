@@ -148,10 +148,15 @@
                                     <label for="ddlEmployeeCount">No Of Employee</label>
                                     <select class="form-control select2 required" id="ddlEmployeeCount" style="width: 100% !important">
                                         <option></option>
-                                        <option value="1">Just You</option>
-                                        <option value="2">2-9</option>
-                                        <option value="3">10-99</option>
-                                        <option value="4">300+</option>
+                                        <option value="1">Self-employed</option>
+                                        <option value="2">1-10 employees</option>
+                                        <option value="3">11-50 employees</option>
+                                        <option value="4">51-200 employees</option>
+                                        <option value="5">201-500 employees</option>
+                                        <option value="6">501-1000 employees</option>
+                                        <option value="7">1001-5000 employees</option>
+                                        <option value="8">5001-10,000 employees</option>
+                                        <option value="9">10,001+ employees</option>
                                     </select>
                                 </div>
                             </div>

@@ -283,7 +283,7 @@
                         </ul>
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Insights</span><span class="link-text">Insights</span></a>
+                        <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Reports</span><span class="link-text">Reports</span></a>
 
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
@@ -406,12 +406,12 @@
                     </li>
                 </ul>
                 <ul class="sidenav-nav d-none" id="ulInsights">
-                    <h4 class="menu-title">Insights</h4>
+                    <h4 class="menu-title">Reports</h4>
                     <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
+                        <a class="sidenav-link" href="UserCourseStatus.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Course Status</span><span class="link-text">Course Status</span></a>
                     </li>
                     <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
+                        <a class="sidenav-link" href="UserCourseMgmt.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Course Engagement</span><span class="link-text">Course Engagement</span></a>
                     </li>
                 </ul>
 
