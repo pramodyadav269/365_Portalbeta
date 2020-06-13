@@ -71,6 +71,7 @@
 
                                 </div>
                                 <a class="btn bg-yellow w-100" ng-click="EnrollCourse(SelectedTopic.TopicId)" ng-show="SelectedTopic.IsEnrolled == null || SelectedTopic.IsEnrolled == 0">Enroll</a>
+
                             </div>
                         </div>
                         <%--  <div class="card shadow-sm course-connection">
@@ -784,6 +785,7 @@ d</a>
             </div>
         </div>
     </div>
+
     <script>
 
         $(document).ready(function () {            

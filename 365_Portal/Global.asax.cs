@@ -31,6 +31,32 @@ namespace _365_Portal
             System.Web.HttpContext.Current.SetSessionStateBehavior(System.Web.SessionState.SessionStateBehavior.Required);
         }
 
+        //private void Application_BeginRequest(object sender, EventArgs e)
+        //{            
+        //    if (System.IO.File.Exists(Request.PhysicalPath))
+        //    {
+        //        if (Request.ServerVariables["URL"].ToString() != "/")
+        //        {
+        //            // Get the URL requested by the user
+        //            string sRequestedURL = Request.Path;
+
+        //            string varurl = Request.ServerVariables["URL"].ToString().ToLower();
+        //            string sTargetURL = "";
+
+        //            if (varurl.Contains("/t/course_preview"))
+        //            {
+        //                sTargetURL = "~/t/course_preview.aspx?url=" + Convert.ToString(Request.QueryString["courseid"]);
+        //            }
+
+        //            if (sTargetURL != "")
+        //            {
+        //                Context.RewritePath(sTargetURL, false);
+        //            }
+        //        }
+        //    }
+        //}
+
+
         //protected void Application_PreRequestHandlerExecute(object sender, EventArgs e)
         //{
         //    if (User != null && User.Identity.IsAuthenticated)
