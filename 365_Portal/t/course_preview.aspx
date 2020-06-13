@@ -71,6 +71,7 @@
 
                                 </div>
                                 <a class="btn bg-yellow w-100" ng-click="EnrollCourse(SelectedTopic.TopicId)" ng-show="SelectedTopic.IsEnrolled == null || SelectedTopic.IsEnrolled == 0">Enroll</a>
+
                             </div>
                         </div>
                         <%--  <div class="card shadow-sm course-connection">
@@ -784,14 +785,10 @@ d</a>
             </div>
         </div>
     </div>
+
     <script>
 
-        $(document).ready(function () {
-
-            // remove sidenav
-            //$('#sideNav').remove();
-            //$('.navbar-brand .svg-inline--fa').remove();
-            //$('main').css({ 'margin-left': '0' });
+        $(document).ready(function () {            
 
             $("#dvMenu_Dashboard").addClass("active");
             $('select.select2').select2({

@@ -199,8 +199,8 @@ namespace _365_Portal.Admin
                         dvIntegrations.Visible = true;
                         dvSessions.Visible = true;
                         dvActivityLogs.Visible = true;
-                        dvBilling.Visible = true;
-                        dvEmail.Visible = true;
+                        dvBilling.Visible = false;
+                        dvEmail.Visible = false;
 
                         dvHelp.Visible = true;
                         dvSubMenu_HelpCenter.Visible = true;
@@ -260,8 +260,8 @@ namespace _365_Portal.Admin
 
                         dvSessions.Visible = true;
                         dvActivityLogs.Visible = true;
-                        dvBilling.Visible = true;
-                        dvEmail.Visible = true;
+                        dvBilling.Visible = false;
+                        dvEmail.Visible = false;
                         dvCustomize.Visible = true;
                         dvIntegrations.Visible = true;
                         dvAccountSettings.Visible = true;

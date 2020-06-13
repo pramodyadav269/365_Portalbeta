@@ -31,5 +31,6 @@ namespace Life
                 Response.Redirect("~/login.aspx");
             }
         }
+
     }
 }

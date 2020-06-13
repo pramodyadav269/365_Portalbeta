@@ -3616,7 +3616,8 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
 
 .board-column-content-wrapper {
     position: relative;
-    max-height: 288px;
+    /*max-height: 288px;*/
+    max-height: 58vh;
     overflow-y: auto;
 }
 
