@@ -27,7 +27,7 @@
                     <a class="nav-link" id="pills-organization-tab" data-toggle="pill" href="#pills-organization" role="tab" aria-controls="pills-organization" aria-selected="true">Organization</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true">Assigned</a>
+                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true">Restricted</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-drafts-tab" style="display: none;" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>

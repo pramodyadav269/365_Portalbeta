@@ -148,7 +148,7 @@
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
                                                         <input type="radio" id="rbAssigned" value="3" name="rgSharing" class="custom-control-input">
-                                                        <label class="custom-control-label" for="rbAssigned">Assigned</label>
+                                                        <label class="custom-control-label" for="rbAssigned">Restricted</label>
                                                         <small class="form-text">Only shared with assignees.</small>
 
                                                     </div>
