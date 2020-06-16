@@ -266,7 +266,7 @@
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
-                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <p class="card-text type">{{ topic.CategoryName }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
@@ -331,7 +331,7 @@
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
 
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
-                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <p class="card-text type">{{ topic.CategoryName }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
@@ -390,7 +390,7 @@
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
-                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <p class="card-text type">{{ topic.CategoryName }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
@@ -444,7 +444,7 @@
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
-                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <p class="card-text type">{{ topic.CategoryName }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
@@ -500,7 +500,7 @@
                             <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                             <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                             <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicId,0);">
-                                <p class="card-text type">{{ GetTopicTime(topic.CategoryName) }}</p>
+                                <p class="card-text type">{{ topic.CategoryName }}</p>
                                 <h6 class="card-title">{{topic.Title}}</h6>
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
