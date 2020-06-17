@@ -143,7 +143,7 @@
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
                                                         <input type="radio" id="rbOrganization" value="2" name="rgSharing" class="custom-control-input">
-                                                        <label class="custom-control-label" for="rbOrganization">Organization</label>
+                                                        <label class="custom-control-label" for="rbOrganization" id="lblOrganization"></label>
                                                         <small class="form-text">Anyone within this organization can find and access this course.</small>
                                                     </div>
                                                     <div class="custom-control custom-radio custom-control-inline">
@@ -232,6 +232,8 @@
     <script>
         
         var accessToken = '<%=Session["access_token"]%>';
+        var OrganizationName = '<%=Session["OrganizationName"]%>';
+        
 
         var editorCourseSummary = new Jodit('#txtCourseSummary');
         var editorContentDescription = '';
@@ -311,6 +313,10 @@
 
         $(document).ready(function () {
             debugger
+
+            $('#lblOrganization').text(OrganizationName);
+
+
             if (readQueryString()["topic"] != undefined && readQueryString()["topic"] != '') {
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';

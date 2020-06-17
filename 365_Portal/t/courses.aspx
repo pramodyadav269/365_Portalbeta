@@ -15,28 +15,28 @@
 
             <ul class="nav nav-pills" id="pills-tab-courses" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
+                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true" title="This tab shows you all the courses created within the application.">All</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-global-tab" data-toggle="pill" href="#pills-global" role="tab" aria-controls="pills-global" aria-selected="true">Global</a>
+                    <a class="nav-link" id="pills-global-tab" data-toggle="pill" href="#pills-global" role="tab" aria-controls="pills-global" aria-selected="true" title="This tab shows you all the courses that have been shared across all organizations within the application.">Global</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-published-tab" style="display: none;" data-toggle="pill" href="#pills-published" role="tab" aria-controls="pills-published" aria-selected="false">Published</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-organization-tab" data-toggle="pill" href="#pills-organization" role="tab" aria-controls="pills-organization" aria-selected="true">Organization</a>
+                    <a class="nav-link" id="pills-organization-tab" data-toggle="pill" href="#pills-organization" role="tab" aria-controls="pills-organization" aria-selected="true" title="This tab shows you courses published specifically by the organization you are viewing this under.">Organization</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true">Restricted</a>
+                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true" title="This tab shows you courses that have been assigned and are in progress by the user.">Restricted</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-drafts-tab" style="display: none;" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
+                    <a class="nav-link" id="pills-drafts-tab" style="display: none;" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false" title="This tab shows courses that are not yet published within the organization. Seen by all admins within the organization.">Drafts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="true">Favourites</a>
+                    <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="true" title="This tab shows you courses that you have marked with love to show your support and affection towards.">Favourites</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-LearningPath-tab" data-toggle="pill" href="#pills-LearningPath" role="tab" aria-controls="pills-LearningPath" aria-selected="true">Learning Path</a>
+                    <a class="nav-link" id="pills-LearningPath-tab" data-toggle="pill" href="#pills-LearningPath" role="tab" aria-controls="pills-LearningPath" aria-selected="true" title="This tab shows you courses that are creating a learning journey for you in your quest for knowledge.">Learning Path</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-Archieved-tab" style="display: none;" data-toggle="pill" href="#pills-Archieved" role="tab" aria-controls="pills-Archieved" aria-selected="true">Archived</a>
@@ -471,7 +471,18 @@
 
     </div>
     <script>
+
+        var OrganizationName = '<%=Session["OrganizationName"]%>';
+        var RoleName = '<%=Session["RoleName"]%>';
+
         $(document).ready(function () {
+            debugger
+            if (RoleName != undefined && (RoleName.toLowerCase() == 'companyadmin' || RoleName.toLowerCase() == 'subadmin' || RoleName.toLowerCase() == 'enduser'))
+            {
+                $('#pills-organization-tab').text(OrganizationName);
+            }
+            
+
             $(".nav-item").removeClass("active");
             $("#dvTopics").parent().addClass("active");
 

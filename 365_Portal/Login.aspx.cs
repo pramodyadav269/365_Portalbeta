@@ -187,7 +187,7 @@ namespace _365_Portal
             else
             {
                 // Call Login Business Layer Function to record message
-                Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId, objResponse.EmailID);
+                Utility.CreateUserSession(objResponse.UserID, objResponse.Role, objResponse.FirstName, objResponse.LastName, objResponse.CompId, objResponse.EmailID, objResponse.OrganizationName);
 
                 List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
                 if (Cache["ActiveUsers"] != null)
