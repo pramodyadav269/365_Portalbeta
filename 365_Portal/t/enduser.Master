@@ -10,20 +10,20 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/all.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/select2.min.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/360.css?v=13062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css?v=13062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/all.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/select2.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/360.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=18062020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/croppie.css" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../INCLUDES/Asset/js/angular.min.js"></script>
-    <script src="../INCLUDES/Asset/customer/default.js?t=13062020"></script>
+    <script src="../INCLUDES/Asset/customer/default.js?t=18062020"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
     <script src="../INCLUDES/Asset/js/jquery.min.js"></script>

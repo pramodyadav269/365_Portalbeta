@@ -271,7 +271,7 @@
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{ topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
@@ -336,7 +336,7 @@
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{ topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
@@ -395,7 +395,7 @@
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{ topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
@@ -449,7 +449,7 @@
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{ topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>
@@ -505,7 +505,7 @@
                                 <p class="card-text ellipsis">{{topic.Description}}</p>
                             </div>
                             <div class="card-body profile">
-                                <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                <img ng-show="topic.InstructorPic !=null" ng-src="{{ topic.InstructorPic}}" />
                                 <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                 <h6 class="card-title">{{topic.InstructorName}}</h6>
                             </div>

@@ -132,7 +132,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
     }
 
-    $scope.GetContentsByModule = function (topicId, moduleId,isEnrolled) {
+    $scope.GetContentsByModule = function (topicId, moduleId, isEnrolled) {
         if (isEnrolled == 1) {
             $scope.ActiveContainer = "Content";
             $scope.SelectedModule = $rootScope.Module.UnlockedItems.filter(function (v) {
@@ -396,7 +396,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
         if (prevPage == 'Topic') {
             // $("#dvTopicContainer").show();
-            if (document.referrer == null || document.referrer=="") {
+            if (document.referrer == null || document.referrer == "") {
                 window.location.href = 'default.aspx';
             }
             else {
@@ -580,6 +580,9 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             HideLoader();
             $("#dvTopicContainer").show();
             var responseData = response.data;
+
+            var userAssignedTopics = [];
+
             $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
             if ($rootScope.InProgressTopics == null || $rootScope.InProgressTopics.length == 0) {
                 $("#dvInProgressTitle").hide();
@@ -631,6 +634,11 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvPopularTopics").show();
             }
 
+            if ($rootScope.MyCourses != null)
+                $.merge(userAssignedTopics, $rootScope.MyCourses);
+            if ($rootScope.InProgressTopics != null)
+                $.merge(userAssignedTopics, $rootScope.InProgressTopics);
+
             var allTopics = [];
             if ($rootScope.InProgressTopics != null)
                 $.merge(allTopics, $rootScope.InProgressTopics);
@@ -668,9 +676,14 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 return v.IsFavourite == "1";
             });
 
-            $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.Accessibility == "3";
-            });
+            if (userRole == "enduser") {
+                $rootScope.AssignedTopics = userAssignedTopics;
+            }
+            else {
+                $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
+                    return v.Accessibility == "3";
+                });
+            }
 
             $rootScope.$apply();
 
