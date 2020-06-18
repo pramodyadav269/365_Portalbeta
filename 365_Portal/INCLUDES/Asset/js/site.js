@@ -104,21 +104,23 @@ $(document).ready(function () {
     $('.collapse').collapse();
 
     // init cropped image
-    $image_crop = $('#divCourseLogoCropped').croppie({
-        enableExif: true,
-        viewport: {
-            width: 200,
-            height: 200
-        },
-        boundary: {
-            width: 300,
-            height: 300
-        },
-        showZoomer: false,
-        enableResize: true,
-        maxZoom: 1.5,
-        enableOrientation: true
-    });
+    //$image_crop = $('#divCourseLogoCropped').croppie({
+    //    enableExif: true,
+    //    viewport: {
+    //        width: 200,
+    //        height: 200
+    //    },
+    //    boundary: {
+    //        width: 300,
+    //        height: 300
+    //    },
+    //    showZoomer: false,
+    //    enableResize: true,
+    //    //maxZoom: 1.5,
+    //    //enableOrientation: true
+    //});
+
+
 });
 
 function inputInline() {
@@ -324,7 +326,7 @@ function readURL(ctrl, el) {
 
             $(el).addClass('img');
             $(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
-            
+
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {
@@ -340,7 +342,7 @@ function readURLCroppedImage(ctrl, el) {
         $(el).empty();
         return;
     }
-
+    $('#divCourseLogoCropped').empty();
     var ext = ctrl.files[0].name.split('.').pop().toLowerCase();
     if (ctrl.files && ctrl.files[0] && (ext === "gif" || ext === "png" || ext === "jpeg" || ext === "jpg")) {
         var reader = new FileReader();
@@ -350,12 +352,25 @@ function readURLCroppedImage(ctrl, el) {
             //$(el).html('<img src="' + e.target.result + '" class="img-fluid" />');
 
             // croped image
-            $image_crop.croppie('bind', {
-                url: e.target.result
-            }).then(function () {
-                $('.cr-image').css({ 'transform': 'translate3d(86px, 86px, 0px) scale(1.5625)', 'transform-origin': '64px 64px' });
-                $('#modalCroppedImage').modal('toggle');
+            //$image_crop.croppie('bind', {
+            //    url: e.target.result
+            //}).then(function () {
+            //    $('.cr-image').css({ 'transform': 'translate3d(86px, 86px, 0px) scale(1.5625)', 'transform-origin': '64px 64px' });
+            //    $('#modalCroppedImage').modal('toggle');
+            //});
+
+
+            //new code..
+            $image_crop = new ImageCropper('#divCourseLogoCropped', e.target.result, {
+                fixed_size: true,
+                max_width: 460,
+                update_cb: function (p) {
+                    var m = $image_crop.crop("image/jpeg", 1);
+                    $(elImageCropped).html('<img src="' + m + '" class="img-fluid" />');
+                }
             });
+
+            $('#modalCroppedImage').modal('toggle');
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {
@@ -366,12 +381,12 @@ function readURLCroppedImage(ctrl, el) {
 
 // cropped image then save query
 function croppedImage() {
-    $image_crop.croppie('result', {
-        type: 'canvas',
-        size: 'viewport'
-    }).then(function (response) {
-        $(elImageCropped).html('<img src="' + response + '" class="img-fluid" />');
-    });
+    //$image_crop.croppie('result', {
+    //    type: 'canvas',
+    //    size: 'viewport'
+    //}).then(function (response) {
+    //    $(elImageCropped).html('<img src="' + response + '" class="img-fluid" />');
+    //});
 }
 
 function viewLesson() {

@@ -3048,8 +3048,3 @@ a .svg-inline--fa, .section-title .svg-inline--fa {
       left: calc(50% - 8px);
       font-size: 22px;
       color: #707070; }
-
-.cropped-wrapper {
-  width: 300px;
-  height: 300px;
-  margin: 0 auto; }

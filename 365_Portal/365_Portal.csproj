@@ -915,6 +915,7 @@
     <Content Include="INCLUDES\Asset\css\croppie.css" />
     <Content Include="INCLUDES\Asset\css\dataTables.bootstrap4.min.css" />
     <Content Include="INCLUDES\Asset\css\gijgo.min.css" />
+    <Content Include="INCLUDES\Asset\css\imagecrop.min.css" />
     <Content Include="INCLUDES\Asset\css\jodit.min.css" />
     <Content Include="INCLUDES\Asset\css\select2.min.css" />
     <None Include="compilerconfig.json" />
@@ -2234,6 +2235,7 @@
     <Content Include="INCLUDES\Asset\js\croppie.js" />
     <Content Include="INCLUDES\Asset\js\dataTables.bootstrap4.min.js" />
     <Content Include="INCLUDES\Asset\js\gijgo.min.js" />
+    <Content Include="INCLUDES\Asset\js\imagecrop.min.js" />
     <Content Include="INCLUDES\Asset\js\jodit.min.js" />
     <Content Include="INCLUDES\Asset\js\muuri.min.js" />
     <Content Include="INCLUDES\Asset\js\sortable_list.js" />
