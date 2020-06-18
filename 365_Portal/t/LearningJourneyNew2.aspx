@@ -777,6 +777,7 @@
                         }
                         else {
                             CourseFlag = '0';
+                            LessonFlag = '0';
 
                             if (DataSet.Data != undefined && DataSet.Data.length > 0) {
                                 Swal.fire(DataSet.Data[0].ReturnMessage, {
@@ -784,6 +785,11 @@
                                 });
                             }
                             else {
+                                $('#btnAddCourse').text('Save & Proceed');
+                                $('#hdgPageTitle').text('Add Course');
+                                $("#btnPublish").hide();
+                                $("#btnDiscard").hide();
+
                                 Swal.fire(DataSet.StatusDescription, {
                                     icon: "error",
                                 });
@@ -1283,7 +1289,8 @@
                                 }
                             }
                             else {
-                                Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                //Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
+                                Swal.fire(DataSet.StatusDescription, { icon: "error" });
                             }
                         }
                         else {

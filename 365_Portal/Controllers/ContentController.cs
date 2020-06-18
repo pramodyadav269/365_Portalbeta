@@ -1115,6 +1115,7 @@ namespace _365_Portal.ControllersReOrderContent
                         else
                         {
                             data = dt.Rows[0]["ReturnMessage"].ToString();
+                            //data = ConstantMessages.WebServiceLog.GenericErrorMsg;
                             data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
                         }
                     }

@@ -60,6 +60,12 @@
                                         <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
                                         <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                         <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="ArchiveUnArchiveTopic(topic.TopicID,0)"><i class="fas fa-trash-alt"></i>Archive</a>
+
+                                        <a class="dropdown-item" href="#" ng-show="UserRole =='superadmin'" ng-click="DeleteTopic(topic.TopicID)" title="It will delete this course permanently.">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Delete
+                                        </a>
+
                                        <%-- <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 &&  UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Archive</a>--%>
                                     </div>
                                 </div>
