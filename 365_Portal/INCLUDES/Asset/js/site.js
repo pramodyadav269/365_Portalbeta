@@ -120,7 +120,6 @@ $(document).ready(function () {
     //    //enableOrientation: true
     //});
 
-
 });
 
 function inputInline() {
@@ -381,6 +380,7 @@ function readURLCroppedImage(ctrl, el) {
 
 // cropped image then save query
 function croppedImage() {
+    $image_crop.destroy();
     //$image_crop.croppie('result', {
     //    type: 'canvas',
     //    size: 'viewport'
