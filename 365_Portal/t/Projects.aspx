@@ -512,6 +512,7 @@
         var ProjectName = "";
         var jsonTeam = [];
         var jsonStatusList = [];
+        var LastAddedProjectName = "";
 
         $(document).ajaxStart(function () {
             ShowLoader();
@@ -760,7 +761,21 @@
                 HideLoader();
             }
             $("#ulProjects").empty().html(projectHtml);
-            //}
+
+            if (LastAddedProjectName != "") {
+                var latestproject = $("#ulProjects > li").find("span.Project_items_Name:contains('" + LastAddedProjectName + "')");
+                latestproject.parent().parent().find('li.active').removeClass('active');
+                latestproject.parent().addClass('active');
+
+                setcontentTitle($(latestproject).text());
+                ProjectID = $(latestproject).attr("id");
+                ProjectName = latestproject.innerHTML;
+                BindStatusMaster();
+                BindCards();
+                BindTeam(ProjectID);
+
+                LastAddedProjectName = "";
+            }
         }
 
         function BindProjectDetailsBYProjectId(projectId) {
@@ -844,6 +859,7 @@
                         var ProjectCRUDAPIData = $.parseJSON(response);
                         if (ProjectCRUDAPIData.StatusCode > 0) {
                             ClearProjectForm();
+                            LastAddedProjectName = requestParams.p_ProjectName
                             BindProjects();
 
                             onClickBack("dvWebsiteRedesign", "dvCreateProject,dvRecentActivity");//Closing Project Form
@@ -1359,7 +1375,8 @@
                 newCardHtml += '</div>';
             });
 
-            if (jsonStatusList.length < 5 && Role != "enduser") {
+            //if (jsonStatusList.length < 5 && Role != "enduser") {
+            if (Role != "enduser") {
                 newCardHtml += '<div class="board-column add-card">';
                 newCardHtml += '<div class="add-status"><a class="btn w-100" onclick="onOpenAddStatusModal();"><i class="fas fa-plus"></i>Add another list</a></div>';
                 newCardHtml += '</div>';
@@ -2043,7 +2060,6 @@
         }
 
         function SelectProject(objthis) {
-            //setTimeout(function () { ShowLoader() }, 10000);
             $('.spinner-center').removeClass('d-none');
             onClickBack("dvWebsiteRedesign", "dvCreateProject,dvRecentActivity");//Closing Project Form
             $(objthis).parent().parent().find('li.active').removeClass('active');
@@ -2054,7 +2070,6 @@
             BindStatusMaster();
             BindCards();
             BindTeam(ProjectID);
-            //BindAssignee(ProjectID);
         }
 
         function EditSubTask(objthis) {
