@@ -26,6 +26,7 @@
                                 <select id="ddlOperator" class="form-control select2 required" style="width: 100% !important" >                                    
                                     <option value=">">Is greater than</option>
                                     <option value="<">Is less than</option>
+                                    <option value="=">Is equal to</option>
                                 </select>
                             </div>
                         </div>

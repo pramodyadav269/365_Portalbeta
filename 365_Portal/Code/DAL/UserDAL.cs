@@ -57,8 +57,8 @@ namespace _365_Portal.Code.DAL
                         objResponse.LastName = dt.Rows[0]["LastName"].ToString();
                         objResponse.IsFirstLogin = dt.Rows[0]["IsFirstLogin"].ToString();
                         objResponse.ProfilePicFileID = dt.Rows[0]["ProfilePicFileID"].ToString();
-
                         objResponse.IsFirstPasswordNotChanged = dt.Rows[0]["IsFirstPasswordNotChanged"].ToString();
+                        objResponse.OrganizationName = dt.Rows[0]["OrganizationName"].ToString();                        
                     }
                     else
                     {

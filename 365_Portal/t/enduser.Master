@@ -10,20 +10,20 @@
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
     <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
     <%-- CSS --%>
-    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/all.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/select2.min.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/360.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css?v=290520201" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/croppie.css" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/all.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/select2.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/360.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=18062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/imagecrop.min.css" rel="stylesheet" />
 
     <%-- JS --%>
     <script src="../INCLUDES/Asset/js/angular.min.js"></script>
-    <script src="../INCLUDES/Asset/customer/default.js?t=290520201"></script>
+    <script src="../INCLUDES/Asset/customer/default.js?t=18062020"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
     <script src="../INCLUDES/Asset/js/jquery.min.js"></script>
@@ -45,7 +45,7 @@
     <script src="../INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
     <script src="../INCLUDES/Asset/js/site.js"></script>
-    <script src="../INCLUDES/Asset/js/croppie.js"></script>
+    <script src="../INCLUDES/Asset/js/imagecrop.min.js"></script>
 
 
 
@@ -274,7 +274,7 @@
 
                     </li>
                     <li class="sidenav-item side-menu">
-                        <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Insights</span><span class="link-text">Insights</span></a>
+                        <a class="sidenav-link content-menu" id="A1" runat="server" href="#" menu-data="ulInsights"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Reports</span><span class="link-text">Reports</span></a>
                     </li>
                     <li class="sidenav-item border-0" id="dvCommunity" runat="server" visible="false">
                         <a class="sidenav-link content-menu" href="#" menu-data="ulCommunity"><span class="link-icon"><i class="fas fa-user-friends"></i></span><span class="tooltiptext">Community</span><span class="link-text">Community</span></a>
@@ -397,12 +397,12 @@
                 </ul>
 
                 <ul class="sidenav-nav d-none" id="ulInsights">
-                    <h4 class="menu-title">Insights</h4>
+                    <h4 class="menu-title">Reports</h4>
                     <li class="sidenav-item" id="dvCoursesInsights" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Courses Insights</span><span class="link-text">Courses Insights</span></a>
+                        <a class="sidenav-link" href="UserCourseStatus.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Course Status</span><span class="link-text">Course Status</span></a>
                     </li>
                     <li class="sidenav-item" id="dvTaskInsights" runat="server" visible="false">
-                        <a class="sidenav-link" href="#"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Tasks Insights</span><span class="link-text">Tasks Insights</span></a>
+                        <a class="sidenav-link" href="UserCourseMgmt.aspx"><span class="link-icon"><i class="fas fa-home"></i></span><span class="tooltiptext">Course Engagement</span><span class="link-text">Course Engagement</span></a>
                     </li>
                 </ul>
 
@@ -842,7 +842,7 @@
             </asp:ContentPlaceHolder>
         </main>
 
-        <div class="modal fade" id="modalCroppedImage" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" aria-hidden="true">
+        <div class="modal fade" id="modalCroppedImage" tabindex="-1" role="dialog" aria-labelledby="modalAddTagTitle" data-backdrop="static" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -852,9 +852,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="cropped-wrapper">
-                            <div id="divCourseLogoCropped"></div>
-                        </div>
+                        <div id="divCourseLogoCropped"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" onclick="croppedImage();" data-dismiss="modal">Apply</button>

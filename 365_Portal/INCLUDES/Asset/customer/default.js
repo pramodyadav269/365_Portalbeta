@@ -132,7 +132,7 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
     }
 
-    $scope.GetContentsByModule = function (topicId, moduleId,isEnrolled) {
+    $scope.GetContentsByModule = function (topicId, moduleId, isEnrolled) {
         if (isEnrolled == 1) {
             $scope.ActiveContainer = "Content";
             $scope.SelectedModule = $rootScope.Module.UnlockedItems.filter(function (v) {
@@ -396,7 +396,12 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         }
         if (prevPage == 'Topic') {
             // $("#dvTopicContainer").show();
-            document.location.replace(document.referrer)
+            if (document.referrer == null || document.referrer == "") {
+                window.location.href = 'default.aspx';
+            }
+            else {
+                document.location.replace(document.referrer)
+            }
         } if (prevPage == 'Content') {
             $scope.ActiveContainer = prevPage;
             $('#videoControl').removeClass('d-none');
@@ -495,6 +500,12 @@ app.controller("DefaultController", function ($scope, $rootScope, DataService, $
         objDs.ArchiveUnArchiveTopic(topicId, flag);
     }
     //End Added by Pramod on 25 APR 20
+
+    //Added by Pramod on 18 JUN 20
+    $scope.DeleteTopic = function (topicId) {
+        objDs.DeleteTopic(topicId);
+    }
+    //End Added by Pramod on 18 JUN 20
 });
 
 //COMMON SERVICE OPERATIONS
@@ -575,6 +586,9 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             HideLoader();
             $("#dvTopicContainer").show();
             var responseData = response.data;
+
+            var userAssignedTopics = [];
+
             $rootScope.InProgressTopics = responseData.Data.Data; // In Progress Courses
             if ($rootScope.InProgressTopics == null || $rootScope.InProgressTopics.length == 0) {
                 $("#dvInProgressTitle").hide();
@@ -626,6 +640,11 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $("#dvPopularTopics").show();
             }
 
+            if ($rootScope.MyCourses != null)
+                $.merge(userAssignedTopics, $rootScope.MyCourses);
+            if ($rootScope.InProgressTopics != null)
+                $.merge(userAssignedTopics, $rootScope.InProgressTopics);
+
             var allTopics = [];
             if ($rootScope.InProgressTopics != null)
                 $.merge(allTopics, $rootScope.InProgressTopics);
@@ -663,9 +682,14 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 return v.IsFavourite == "1";
             });
 
-            $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
-                return v.Accessibility == "3";
-            });
+            if (userRole == "enduser") {
+                $rootScope.AssignedTopics = userAssignedTopics;
+            }
+            else {
+                $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
+                    return v.Accessibility == "3";
+                });
+            }
 
             $rootScope.$apply();
 
@@ -718,10 +742,15 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             },
             data: requestParams,
         }).then(function success(response) {
-
             if (accessToken == undefined || accessToken == '') {
-                $('#sideNav').hide();
-                $('#navHeader').hide();
+                debugger
+                //$('#sideNav').hide();
+                $('#navHeader').remove();
+                $('#sideNav').remove();
+                $('.navbar-brand .svg-inline--fa').remove();
+                $('main').css({ 'margin-left': '0' });
+
+                $rootScope.IsLoggedIn = 'false';
             }
 
             HideLoader();
@@ -1000,6 +1029,64 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             }
         });
     }
+
+    //Added by pramod on 18 JUN 20
+    ds.DeleteTopic = function (topicId) {
+        var txtMsg = "Do you want to delete this course permanently ? Yes or No !";
+        var txtConfirmButtonText = "Yes, delete it!";
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: txtMsg,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: txtConfirmButtonText
+        }).then((result) => {
+            if (result.value) {
+                ShowLoader();
+                var requestParams = { TopicID: topicId, IsActive: 1, Action: 4 };
+                $http({
+                    method: "POST",
+                    url: "../api/Content/DeleteTopic",
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8',
+                        "Authorization": "Bearer " + accessToken
+                    },
+                    data: requestParams,
+                }).then(function success(response) {
+                    debugger
+                    var DataSet = response.data;
+                    HideLoader();
+
+                    if (DataSet != null && DataSet != "") {
+                        if (DataSet.StatusCode == "1") {
+                            Swal.fire({
+                                title: "Success",
+                                text: DataSet.Data[0].ReturnMessage,
+                                icon: "success"
+                            }).then((value) => {
+                                if (value) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            HideLoader();
+                            Swal.fire({
+                                title: "Failure",
+                                text: DataSet.StatusDescription,
+                                icon: "error"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+    //End Added by pramod on 18 JUN 20
+
 
 });
 

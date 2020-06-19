@@ -12,15 +12,15 @@ namespace _365_Portal.t
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ActiveUsersCache objSession = new ActiveUsersCache();
-            List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
-            if (Cache["ActiveUsers"] != null)
-            {
-                lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
-            }
-            lstActiveUsers = objSession.GetActiveUsers(lstActiveUsers);
-            gvSessions.DataSource = lstActiveUsers;
-            gvSessions.DataBind();
+            //ActiveUsersCache objSession = new ActiveUsersCache();
+            //List<ActiveUser> lstActiveUsers = new List<ActiveUser>();
+            //if (Cache["ActiveUsers"] != null)
+            //{
+            //    lstActiveUsers = (List<ActiveUser>)Cache["ActiveUsers"];
+            //}
+            //lstActiveUsers = objSession.GetActiveUsers(lstActiveUsers);
+            //gvSessions.DataSource = lstActiveUsers;
+            //gvSessions.DataBind();
         }
     }
 }

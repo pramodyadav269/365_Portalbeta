@@ -7,36 +7,54 @@
     <div class="container-fluid dashboard courses">
 
         <%-- floating button --%>
-        <a href="LearningJourneynew2.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
+        <%-- <a href="LearningJourneynew2.aspx" id="dvAddNewCourse_Floating" style="display:none" class="btn btn-float bottom-right">
              <i class="fa fa-plus"></i><span>Create</span>
-        </a>
+        </a>--%>
+
+        <div class="btn-bottom-right">
+            <a class="btn-floating btn-large bg-yellow">
+                <i class="fa fa-plus"></i>
+            </a>
+            <ul>
+                <li>
+                    <a class="btn-floating bg-orange">
+                        <i class="fas fa-external-link-square-alt"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="btn-floating bg-blue">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'">
 
             <ul class="nav nav-pills" id="pills-tab-courses" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true">All</a>
+                    <a class="nav-link active" id="pills-all-tab" data-toggle="pill" href="#pills-all" role="tab" aria-controls="pills-all" aria-selected="true" title="This tab shows you all the courses created within the application.">All</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-global-tab" data-toggle="pill" href="#pills-global" role="tab" aria-controls="pills-global" aria-selected="true">Global</a>
+                    <a class="nav-link" id="pills-global-tab" data-toggle="pill" href="#pills-global" role="tab" aria-controls="pills-global" aria-selected="true" title="This tab shows you all the courses that have been shared across all organizations within the application.">Global</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-published-tab" style="display: none;" data-toggle="pill" href="#pills-published" role="tab" aria-controls="pills-published" aria-selected="false">Published</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-organization-tab" data-toggle="pill" href="#pills-organization" role="tab" aria-controls="pills-organization" aria-selected="true">Organization</a>
+                    <a class="nav-link" id="pills-organization-tab" data-toggle="pill" href="#pills-organization" role="tab" aria-controls="pills-organization" aria-selected="true" title="This tab shows you courses published specifically by the organization you are viewing this under.">Organization</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true">Assigned</a>
+                    <a class="nav-link" id="pills-assigned-tab" data-toggle="pill" href="#pills-assigned" role="tab" aria-controls="pills-assigned" aria-selected="true" title="This tab shows you courses that have been assigned and are in progress by the user.">Restricted</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-drafts-tab" style="display: none;" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false">Drafts</a>
+                    <a class="nav-link" id="pills-drafts-tab" style="display: none;" data-toggle="pill" href="#pills-drafts" role="tab" aria-controls="pills-drafts" aria-selected="false" title="This tab shows courses that are not yet published within the organization. Seen by all admins within the organization.">Drafts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="true">Favourites</a>
+                    <a class="nav-link" id="pills-favourites-tab" data-toggle="pill" href="#pills-favourites" role="tab" aria-controls="pills-favourites" aria-selected="true" title="This tab shows you courses that you have marked with love to show your support and affection towards.">Favourites</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-LearningPath-tab" data-toggle="pill" href="#pills-LearningPath" role="tab" aria-controls="pills-LearningPath" aria-selected="true">Learning Path</a>
+                    <a class="nav-link" id="pills-LearningPath-tab" data-toggle="pill" href="#pills-LearningPath" role="tab" aria-controls="pills-LearningPath" aria-selected="true" title="This tab shows you courses that are creating a learning journey for you in your quest for knowledge.">Learning Path</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="pills-Archieved-tab" style="display: none;" data-toggle="pill" href="#pills-Archieved" role="tab" aria-controls="pills-Archieved" aria-selected="true">Archived</a>
@@ -60,18 +78,24 @@
                                         <a class="dropdown-item" href="#"><i class="fas fa-plus"></i>Add to Learning Path</a>--%>
                                         <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Manage</a>
                                         <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 && UserRole !='enduser'" ng-click="ArchiveUnArchiveTopic(topic.TopicID,0)"><i class="fas fa-trash-alt"></i>Archive</a>
+
+                                        <a class="dropdown-item" href="#" ng-show="UserRole =='superadmin'" ng-click="DeleteTopic(topic.TopicID)" title="It will delete this course permanently.">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Delete
+                                        </a>
+
                                        <%-- <a class="dropdown-item" href="#" ng-show="topic.CanEdit==1 &&  UserRole !='enduser'" ng-click="EditTopic(topic.TopicID)"><i class="fas fa-pen"></i>Archive</a>--%>
                                     </div>
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)"></h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -122,13 +146,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -177,13 +201,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -234,13 +258,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type"  ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -269,13 +293,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type"  ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -326,12 +350,12 @@
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.InstructorName)">{{topic.InstructorName}}</h6>
                                 </div>
@@ -381,13 +405,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -416,13 +440,13 @@
                                 </div>
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
-                                <div class="card-body item"  style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                <div class="card-body item" style="cursor: pointer" ng-click="GetModulesByTopic(topic.TopicID,0);">
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -452,12 +476,12 @@
                                 <img ng-show="topic.CourseLogo !=null" ng-src="{{'/Files/CourseLogo/' + topic.CourseLogo}}" class="card-img-top" alt="Card Image">
                                 <img ng-show="topic.CourseLogo ==null" src="../INCLUDES/Asset/images/mobile-img.jpg" class="card-img-top" alt="Card Image">
                                 <div class="card-body item">
-                                    <p class="card-text type" ng-bind-html="trustAsHtml(GetTopicTime(topic.CategoryName))"></p>
+                                    <p class="card-text type" ng-bind-html="trustAsHtml(topic.CategoryName)"></p>
                                     <h6 class="card-title" ng-bind-html="trustAsHtml(topic.Title)">{{topic.Title}}</h6>
-                                    <p class="card-text ellipsis"  ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
+                                    <p class="card-text ellipsis" ng-bind-html="trustAsHtml(topic.Description)">{{topic.Description}}</p>
                                 </div>
                                 <div class="card-body profile">
-                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{'/Files/ProfilePic/' + topic.InstructorPic}}" />
+                                    <img ng-show="topic.InstructorPic !=null" ng-src="{{topic.InstructorPic}}" />
                                     <img ng-show="topic.InstructorPic ==null" src="../INCLUDES/Asset/images/profile.png" />
                                     <h6 class="card-title">{{topic.InstructorName}}</h6>
                                 </div>
@@ -471,7 +495,17 @@
 
     </div>
     <script>
+
+        var OrganizationName = '<%=Session["OrganizationName"]%>';
+        var RoleName = '<%=Session["RoleName"]%>';
+
         $(document).ready(function () {
+            debugger
+            if (RoleName != undefined && (RoleName.toLowerCase() == 'companyadmin' || RoleName.toLowerCase() == 'subadmin' || RoleName.toLowerCase() == 'enduser')) {
+                $('#pills-organization-tab').text(OrganizationName);
+            }
+
+
             $(".nav-item").removeClass("active");
             $("#dvTopics").parent().addClass("active");
 
