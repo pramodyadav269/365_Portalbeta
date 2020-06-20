@@ -8,7 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
-    <link rel="icon" href="../INCLUDES/Asset/images/logo-black.svg" type="image/svg" sizes="16x16">
+    <link rel="icon" href="../INCLUDES/Asset/images/icons/onxy-flow.png" type="image/png" />
+
     <%-- CSS --%>
     <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=18062020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/all.css?v=18062020" rel="stylesheet" />
@@ -543,7 +544,9 @@
             <div class="navbar-brand">
                 <i class="fas fa-bars text-black" onclick="ToggleNav()"></i>
                 <a href="default.aspx">
-                    <img src="../INCLUDES/Asset/images/logo-black.svg" class="logo" alt="Logo"></a>
+                    <%--<img src="../INCLUDES/Asset/images/logo-black.svg" class="logo" alt="Logo">--%>
+                    <img src="../INCLUDES/Asset/images/icons/onxy-flow-with-name.png" class="logo" alt="Logo">
+                </a>
             </div>
 
             <%-- phase2 --%>

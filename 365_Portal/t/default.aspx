@@ -242,12 +242,13 @@
         </section>
         <%-- beta view lesson end --%>
 
-        <div class="container-fluid dashboard">
+        <div class="container-fluid dashboard dafault">
             <section id="dvTopicContainer" ng-if="ActiveContainer =='Topic'" style="display:none;">
                 <h4 class="section-title" id="dvInProgressTitle" style="display: none;">In Progress Courses</h4>
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvInProgressTopics">
+                    <a class="right-arrow-icon"><i class="fas fa-chevron-circle-right"></i></a>
                     <div class="courses-card" ng-repeat="topic in InProgressTopics" inprogress-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
@@ -312,6 +313,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvMyTopics">
+                    <a class="right-arrow-icon"><i class="fas fa-chevron-circle-right"></i></a>
                     <div class="courses-card" ng-repeat="topic in MyCourses" my-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
@@ -377,6 +379,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvRecommendedTopics">
+                    <a class="right-arrow-icon"><i class="fas fa-chevron-circle-right"></i></a>
                     <div class="courses-card" ng-repeat="topic in RecommendedCourses" recommended-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
@@ -431,6 +434,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvLatestTopics">
+                    <a class="right-arrow-icon"><i class="fas fa-chevron-circle-right"></i></a>
                     <div class="courses-card" ng-repeat="topic in LatestCourses" latest-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">
@@ -487,6 +491,7 @@
 
                 <%-- Start new card style --%>
                 <div class="row" id="dvPopularTopics">
+                    <a class="right-arrow-icon"><i class="fas fa-chevron-circle-right"></i></a>
                     <div class="courses-card" ng-repeat="topic in PopularCourses" popular-topic-repeat-directive>
                         <div class="card card-with-img">
                             <div class="action-icon dropdown">

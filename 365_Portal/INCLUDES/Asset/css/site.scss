@@ -139,7 +139,8 @@ body {
         }
 
         .logo {
-            height: 34px;
+            /*height: 34px;*/
+            height: 42px;
         }
 
         .card-body {
@@ -248,12 +249,21 @@ main {
 /* navbar right menu */
 .navbar {
     .navbar-brand {
+        padding: 0;
+
         .logo {
-            height: 30px;
+            /*height: 30px;*/
+            height: 38px;
+
 
             @media #{$small-and-down} {
                 margin-bottom: 8px;
             }
+        }
+
+        a {
+            color: #000;
+            font-family:OpenSans-SemiBold;
         }
 
         .svg-inline--fa {
@@ -959,6 +969,25 @@ main {
 
             @media #{$small-and-down} {
                 padding: 1rem;
+            }
+
+            &.dafault {
+                section {
+                    div.row {
+                        position: relative;
+
+                        .right-arrow-icon {
+                            cursor: pointer;
+                            position: absolute;
+                            right: 0px;
+                            top: calc(50% - 2rem);
+
+                            svg {
+                                font-size: 20px;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

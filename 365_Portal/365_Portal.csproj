@@ -2174,6 +2174,14 @@
     <Content Include="INCLUDES\Asset\images\grid-6.svg" />
     <Content Include="INCLUDES\Asset\images\icon-help.svg" />
     <Content Include="INCLUDES\Asset\images\icon-play.svg" />
+    <Content Include="INCLUDES\Asset\images\icons\checked.png" />
+    <Content Include="INCLUDES\Asset\images\icons\comment.png" />
+    <Content Include="INCLUDES\Asset\images\icons\idea.png" />
+    <Content Include="INCLUDES\Asset\images\icons\list.png" />
+    <Content Include="INCLUDES\Asset\images\icons\menu.png" />
+    <Content Include="INCLUDES\Asset\images\icons\onxy-flow-with-name.png" />
+    <Content Include="INCLUDES\Asset\images\icons\onxy-flow.png" />
+    <Content Include="INCLUDES\Asset\images\icons\settings.png" />
     <Content Include="INCLUDES\Asset\images\learning-library.png" />
     <Content Include="INCLUDES\Asset\images\like-icon.svg" />
     <Content Include="INCLUDES\Asset\images\logo-black.svg" />
