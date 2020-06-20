@@ -88,7 +88,8 @@ body {
       left: 12px;
       cursor: pointer; }
     .page-card .card .logo {
-      height: 34px; }
+      /*height: 34px;*/
+      height: 42px; }
     .page-card .card .card-body {
       padding: 1.5rem 3rem; }
       @media only screen and (max-width: 600px) {
@@ -158,19 +159,24 @@ main.fix {
     color: #919BB0; }
 
 /* navbar right menu */
-.navbar .navbar-brand .logo {
-  height: 30px; }
-  @media only screen and (max-width: 600px) {
-    .navbar .navbar-brand .logo {
-      margin-bottom: 8px; } }
-
-.navbar .navbar-brand .svg-inline--fa {
-  display: none;
-  font-size: 22px;
-  margin-right: 20px; }
-  @media only screen and (max-width: 600px) {
-    .navbar .navbar-brand .svg-inline--fa {
-      display: inline-block; } }
+.navbar .navbar-brand {
+  padding: 0; }
+  .navbar .navbar-brand .logo {
+    /*height: 30px;*/
+    height: 38px; }
+    @media only screen and (max-width: 600px) {
+      .navbar .navbar-brand .logo {
+        margin-bottom: 8px; } }
+  .navbar .navbar-brand a {
+    color: #000;
+    font-family: OpenSans-SemiBold; }
+  .navbar .navbar-brand .svg-inline--fa {
+    display: none;
+    font-size: 22px;
+    margin-right: 20px; }
+    @media only screen and (max-width: 600px) {
+      .navbar .navbar-brand .svg-inline--fa {
+        display: inline-block; } }
 
 .navbar .nav-content {
   display: flex;
@@ -680,6 +686,15 @@ main {
     @media only screen and (max-width: 600px) {
       main .container-fluid.dashboard {
         padding: 1rem; } }
+    main .container-fluid.dashboard.dafault section div.row {
+      position: relative; }
+      main .container-fluid.dashboard.dafault section div.row .right-arrow-icon {
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        top: calc(50% - 2rem); }
+        main .container-fluid.dashboard.dafault section div.row .right-arrow-icon svg {
+          font-size: 20px; }
 
 .section-title {
   color: rgba(0, 0, 0, 0.5); }

@@ -7,6 +7,7 @@
     <title>Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="INCLUDES/Asset/images/icons/onxy-flow.png" type="image/svg" sizes="16x16" />
     <%-- CSS --%>
     <link href="INCLUDES/Asset/css/bootstrap.min.css" rel="stylesheet" />
     <link href="INCLUDES/Asset/css/all.css" rel="stylesheet" />
@@ -111,7 +112,8 @@
                     <div class="card border-0 shadow bg-white">
                         <div class="card-body">
                             <h1 class="card-title mb-4 text-center font-weight-bold">
-                                <img src="/INCLUDES/Asset/images/logo-black.svg" class="logo" /></h1>
+                                <img src="INCLUDES/Asset/images/icons/onxy-flow-with-name.png" class="logo" />
+                            </h1>
 
                             <h4 class="card-subtitle mt-1 text-center font-weight-bold">Login with your email</h4>
                             <p class="mt-2 text-center card-text">Enter your email address and we'll send you a single-use code.</p>
@@ -161,9 +163,11 @@
                                 </div>
                             </div>
                             <div id="divAfterRecoveryMail" style="display: none;">
-                                <p class="mt-2 text-center card-text">We have sent the password recovery mail on your registered EmailId,
+                                <p class="mt-2 text-center card-text">
+                                    We have sent the password recovery mail on your registered EmailId,
                                     <br />
-                                    please open your mail and click on link to reset your password.</p>
+                                    please open your mail and click on link to reset your password.
+                                </p>
                             </div>
 
                         </div>
@@ -224,8 +228,7 @@
             return vars;
         }
 
-        function VerifyAccessToken(accessToken)
-        {
+        function VerifyAccessToken(accessToken) {
             var getUrl = "/API/User/LoginViaAccessToken";
             $.ajax({
                 type: "POST",
@@ -238,7 +241,7 @@
                         var DataSet = $.parseJSON(response);
                         HideLoader();
                         if (DataSet.StatusCode == "1") {
-                            
+
                             var expires = new Date();
                             expires.setTime(expires.getTime() + (30 * 24 * 60 * 60 * 1000));
                             document.cookie = "userid" + '=' + DataSet.Data.UserId + ';path=/' + ';expires=' + expires.toUTCString();
