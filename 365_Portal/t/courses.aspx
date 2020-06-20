@@ -11,18 +11,18 @@
              <i class="fa fa-plus"></i><span>Create</span>
         </a>--%>
 
-        <div class="btn-bottom-right">
-            <a class="btn-floating btn-large bg-yellow">
+        <div class="btn-bottom-right" id="dvAddNewCourse_Floating" style="display:none" >
+            <a class="btn-floating btn-large bg-yellow" >
                 <i class="fa fa-plus"></i>
             </a>
             <ul>
                 <li>
-                    <a class="btn-floating bg-orange">
+                    <a class="btn-floating bg-orange" href="assign_topics.aspx">
                         <i class="fas fa-external-link-square-alt"></i>
                     </a>
                 </li>
                 <li>
-                    <a class="btn-floating bg-blue">
+                    <a class="btn-floating bg-blue" href="LearningJourneynew2.aspx">
                         <i class="fa fa-plus"></i>
                     </a>
                 </li>
