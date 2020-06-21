@@ -35,25 +35,45 @@
                             <div class="col-md-4" id="divCompanyLogo">
                                 Upload your organization logo
                                 <br />
-                                <img class="circle user-photo" id="imgCompLogo" src="../INCLUDES/Asset/images/CompanyLogo.png" />
+
+                                <%--<img class="circle user-photo" id="imgCompLogo" src="../INCLUDES/asset/images/CompanyLogo.png" />
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="fileChangeCompanyLogo" onchange="encodeImagetoBase64(this,'companypic')">
+                                    <input type="file" class="custom-file-input" id="filechangecompanylogo" onchange="encodeImagetoBase64(this,'companypic')">
+                                    <label class="custom-file-label mt-2" for="filechangecompanylogo">change organization logo</label>
+                                </div>--%>
+
+                                <div class="OrgCompLogo">
+                                    <img class="circle user-photo" id="imgCompLogo" src="../INCLUDES/Asset/images/CompanyLogo.png" />
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileChangeCompanyLogo" onchange="readURLCroppedImage(this,'.OrgCompLogo','organization_complogo')">
                                     <label class="custom-file-label mt-2" for="fileChangeCompanyLogo">Change Organization Logo</label>
                                 </div>
+
                             </div>
 
                             <div class="col-md-4" id="divFavicon">
                                 Upload your organization Favicon
                                 <br />
-                                <img class="circle user-photo" id="imgFavicon" src="../INCLUDES/Asset/images/menu.png" />
+                                <%--<img class="circle user-photo" id="imgFavicon" src="../INCLUDES/Asset/images/menu.png" />
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="fileChangeFavicon" onchange="encodeImagetoBase64(this,'favicon')">
                                     <label class="custom-file-label mt-2" for="fileChangeFavicon">Change Favicon</label>
+                                </div>--%>
+
+                                <div class="OrgFeviconLogo">
+                                    <img class="circle user-photo" id="imgFavicon" src="../INCLUDES/Asset/images/menu.png" />
                                 </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileChangeFavicon" onchange="readURLCroppedImage(this,'.OrgFeviconLogo','organization_fevicon')">
+                                    <label class="custom-file-label mt-2" for="fileChangeFavicon">Change Favicon</label>
+                                </div>
+
+
                             </div>
                             <div class="w-100"></div>
                             <div class="col-md-12 mt-4 mb-3" id="divCompanyTheme">
-                                <div class="row ">
+                                <div class="row">
                                     <div class="col-md-12">Choose your theme colors </div>
                                     <div class="col-md-12 mt-3">
                                         Branding Color
@@ -178,12 +198,24 @@
                             <div class="w-100"></div>
 
                             <div class="col-md-4">
-                                <img class="circle user-photo" id="imgUserPic" src="../INCLUDES/Asset/images/profile.png" />
+                                <%--<img class="circle user-photo" id="imgUserPic" src="../INCLUDES/Asset/images/profile.png" />
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="fileChangePic" onchange="encodeImagetoBase64(this,'userpic')">
                                     <label class="custom-file-label mt-2" for="fileChangePic">Change Profile Pic</label><br />
                                     <br />
+                                </div>--%>
+
+                                <div class="OrgUserLogo">
+                                    <img class="circle user-photo" id="imgUserPic" src="../INCLUDES/Asset/images/profile.png" />
                                 </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="fileChangePic" onchange="readURLCroppedImage(this,'.OrgUserLogo','organization_userprofile')">
+                                    <label class="custom-file-label mt-2" for="fileChangePic">Change Profile Pic</label><br />
+                                    <br />
+                                </div>
+
+
+
                             </div>
                         </div>
                         <div class="row input-validation">
@@ -251,9 +283,9 @@
 
                     <div class="row input-validation">
                         <div class="col-md-12 mt-4">
-                            <a class="btn bg-yellow float-left" id="btnBack" onclick="toggle('divGird', 'divForm')">Back</a>
-                            <a class="btn bg-yellow float-right" id="btnSubmit" onclick="Submit();">Submit</a>
-                            <a class="btn bg-yellow float-right" id="btnUpdate" style="display: none;" onclick="Update();">Update</a>
+                            <a class="btn bg-yellow float-left" href="#" id="btnBack" onclick="toggle('divGird', 'divForm')">Back</a>
+                            <a class="btn bg-yellow float-right" href="#" id="btnSubmit" onclick="Submit();">Submit</a>
+                            <a class="btn bg-yellow float-right" href="#" id="btnUpdate" style="display: none;" onclick="Update();">Update</a>
                         </div>
                     </div>
 
@@ -398,10 +430,8 @@
             $('#divUpdatePassword').hide();
             clearFields('.input-validation');
 
-            //$("#imgUserPic").attr("src", "../Files/ProfilePic/" + DataSet.Data[0].ProfilePicFile);
-            //$("#imgCompLogo").attr("src", "../Files/CompLogo/" + DataSet.Data[0].CompanyProfilePicFile);
-            $("#imgUserPic").attr("src", "../Asset/images/profile.png");
-            $("#imgCompLogo").attr("src", "../Asset/images/CompanyLogo.png");
+            $("#imgUserPic").attr("src", "../INCLUDES/Asset/images/profile.png");
+            $("#imgCompLogo").attr("src", "../INCLUDES/Asset/images/CompanyLogo.png");
             $("#imgFavicon").attr("src", "../INCLUDES/Asset/images/menu.png");
 
             toggle('divForm', 'divGird');
@@ -561,12 +591,21 @@
                             if (DataSet.Data[0].ProfilePicFile != undefined && DataSet.Data[0].ProfilePicFile != '') {
                                 $("#imgUserPic").attr("src", "../Files/ProfilePic/" + DataSet.Data[0].ProfilePicFile);
                             }
+                            else {
+                                $("#imgUserPic").attr("src", "../INCLUDES/Asset/images/profile.png");
+                            }
 
                             if (DataSet.Data[0].CompanyProfilePicFile != undefined && DataSet.Data[0].CompanyProfilePicFile != '') {
                                 $("#imgCompLogo").attr("src", "../Files/CompLogo/" + DataSet.Data[0].CompanyProfilePicFile);
                             }
+                            else {
+                                $("#imgCompLogo").attr("src", "../INCLUDES/Asset/images/CompanyLogo.png");
+                            }
                             if (DataSet.Data[0].FaviconPicFile != undefined && DataSet.Data[0].FaviconPicFile != '') {
                                 $("#imgFavicon").attr("src", "../Files/Favicon/" + DataSet.Data[0].FaviconPicFile);
+                            }
+                            else {
+                                $("#imgFavicon").attr("src", "../INCLUDES/Asset/images/menu.png");
                             }
 
                             if (DataSet.Data[0].CompanyThemeColor3 == null || DataSet.Data[0].CompanyThemeColor3 == "") {
@@ -681,6 +720,7 @@
                 if (flag == 'create') {
                     var requestParams = {
                         UserProfileImageBase64: base64UserProfileString, CompanyProfileImageBase64: base64CompanyProfileString, FaviconImageBase64: base64FaviconString
+                        //UserProfileImageBase64: $('.OrgUserLogo img').attr('src'), CompanyProfileImageBase64: $('.OrgCompLogo img').attr('src'), FaviconImageBase64: $('.OrgFeviconLogo img').attr('src')
                         , CompanyThemeColor: ThemeColor, CompanyThemeColor2: ThemeColor2, CompanyThemeColor3: buttonFontColor, CompanyCustomFont: customFont
                         , BusinessName: BusinessName, EmployeeCount: EmployeeCount, Country: Country, RoleID: Role, FirstName: FirstName
                         , LastName: LastName, EmailID: EmailID, Password: Password, MobileNum: MobileNum, Position: Position, UpdateFlag: UpdateFlag
@@ -689,12 +729,14 @@
                 else {
                     var requestParams = {
                         UserID: id, UserProfileImageBase64: base64UserProfileString, CompanyProfileImageBase64: base64CompanyProfileString, FaviconImageBase64: base64FaviconString
+                        //UserID: id, UserProfileImageBase64: $('.OrgUserLogo img').attr('src'), CompanyProfileImageBase64: $('.OrgCompLogo img').attr('src'), FaviconImageBase64: $('.OrgFeviconLogo img').attr('src')
                         , CompanyThemeColor: ThemeColor, CompanyThemeColor2: ThemeColor2, CompanyThemeColor3: buttonFontColor, CompanyCustomFont: customFont
                         , BusinessName: BusinessName, EmployeeCount: EmployeeCount, Country: Country
                         , RoleID: Role, FirstName: FirstName, LastName: LastName, EmailID: EmailID, Password: Password, MobileNum: MobileNum, Position: Position, UpdateFlag: UpdateFlag
                     };
                 }
 
+                debugger
                 $.ajax({
                     type: "POST",
                     url: getUrl,
@@ -827,14 +869,14 @@
         var base64CompanyProfileString = '';
         var base64FaviconString = '';
         function encodeImagetoBase64(element, flag) {
-            //debugger
+            debugger
             var file = element.files[0];
             var size = file.size;
             if (file.size != undefined) {
                 if (file.size < 5000000) {
                     var reader = new FileReader();
                     reader.onloadend = function () {
-
+                        debugger
                         if (flag == 'userpic') {
                             base64UserProfileString = reader.result;
                             $("#imgUserPic").attr("src", base64UserProfileString);
@@ -868,8 +910,8 @@
             debugger
             ShowLoader();
             clearFields('.input-validation')
-            $("#imgUserPic").attr("src", "../Asset/images/profile.png");
-            $("#imgCompLogo").attr("src", "../Asset/images/CompanyLogo.png");
+            $("#imgUserPic").attr("src", "../INCLUDES/Asset/images/profile.png");
+            $("#imgCompLogo").attr("src", "../INCLUDES/Asset/images/CompanyLogo.png");
             $("#imgFavicon").attr("src", "../INCLUDES/Asset/images/menu.png");
 
             BindCountry('update');

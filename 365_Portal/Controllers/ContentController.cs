@@ -1133,7 +1133,7 @@ namespace _365_Portal.ControllersReOrderContent
             }
             catch (Exception ex)
             {
-                data = ex.Message;
+                data = ConstantMessages.WebServiceLog.GenericErrorMsg;
                 data = Utility.API_Status(Convert.ToInt32(ConstantMessages.StatusCode.Failure).ToString(), data);
             }
             return new APIResult(Request, data);

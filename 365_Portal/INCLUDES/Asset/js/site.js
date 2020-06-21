@@ -334,7 +334,8 @@ function readURL(ctrl, el) {
     }
 }
 
-function readURLCroppedImage(ctrl, el) {
+function readURLCroppedImage(ctrl, el, flag) {
+    debugger
     elImageCropped = el;
     if (ctrl.files.length === 0) {
         $(el).removeClass('img');
@@ -364,12 +365,34 @@ function readURLCroppedImage(ctrl, el) {
                 fixed_size: true,
                 max_width: 460,
                 update_cb: function (p) {
+                    debugger
                     var m = $image_crop.crop("image/jpeg", 1);
                     $(elImageCropped).html('<img src="' + m + '" class="img-fluid" />');
+                    
+                    if (flag == 'learningjourney_courselogo') {
+                        base64CourseLogo = m;
+                    }
+                    else if (flag == 'learningjourney_instructorimage') {
+                        base64InstructorPhoto = m;
+                    }
+
+                    else if (flag == 'organization_complogo') {
+                        base64CompanyProfileString = m;
+                    }
+                    else if (flag == 'organization_fevicon') {
+                        base64FaviconString = m;
+                    }
+                    else if (flag == 'organization_userprofile') {
+                        base64UserProfileString = m;
+                    }
+                    else if (flag == 'profileuserprofile') {
+                        base64UserProfileString = m;
+                    }
                 }
             });
 
             $('#modalCroppedImage').modal('toggle');
+            
         };
         reader.readAsDataURL(ctrl.files[0]);
     } else {
@@ -380,7 +403,16 @@ function readURLCroppedImage(ctrl, el) {
 
 // cropped image then save query
 function croppedImage() {
-    $image_crop.destroy();
+    debugger
+    if (window.location.pathname.includes('/t/Profile.aspx')) {
+        $image_crop.destroy();
+        UpdateProfilePic();
+    }
+    else {
+        $image_crop.destroy();
+    }
+
+    //$('#divCourseLogoCropped').empty();    
     //$image_crop.croppie('result', {
     //    type: 'canvas',
     //    size: 'viewport'

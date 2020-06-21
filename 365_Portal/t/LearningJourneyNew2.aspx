@@ -107,7 +107,7 @@
                                                 <%--<span>Set the image for the course.</span>--%>
                                                 <div class="logo-img course-logo" id="divCourseLogo"></div>
                                                 <div class="custom-file logo">
-                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURLCroppedImage(this, '.course-logo')">
+                                                    <input type="file" class="custom-file-input" id="imgCourseLogo" onchange="readURLCroppedImage(this, '.course-logo','learningjourney_courselogo')">
                                                     <%--<img src=""/>--%>
                                                     <label class="custom-file-label" for="imgCourseLogo">Drop your image here</label>
                                                 </div>
@@ -128,7 +128,7 @@
                                                     <input type="text" class="form-control" id="txtInstructorName" placeholder="Instructor Name" />
 
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURLCroppedImage(this, '.instructor-photo')">
+                                                        <input type="file" class="custom-file-input" id="imgInstructorPhoto" onchange="readURLCroppedImage(this, '.instructor-photo','learningjourney_instructorimage')">
                                                         <label class="custom-file-label" for="imgInstructorPhoto" id="lblInstructorPhoto">Add Image</label>
                                                     </div>
                                                     <div class="logo-img instructor-photo position-relative" id="divInstructorPhoto"></div>
@@ -560,7 +560,8 @@
 
                 requestParams = {
                     TopicID: _Topic_Id, TopicTitle: _Title, TopicDescription: _Description, CourseCategory: _CourseCategory, selectedTags: _selectedTags, CategoryColor: _CategoryColor, Summary: _Summary
-                    , CourseLogoBase64: $('.course-logo img').attr('src'), IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: $('.instructor-photo img').attr('src')
+                    //, CourseLogoBase64: $('.course-logo img').attr('src'), IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: $('.instructor-photo img').attr('src')
+                    , CourseLogoBase64: base64CourseLogo, IsCourseCreator: _IsCourseCreator, InstructorName: _InstructorName, InstructorPhotoBase64: base64InstructorPhoto
                     , Accessibility: _Accessibility, SrNo: _SrNo, MinUnlockedModules: "", UserID: "", IsActive: true
                 };
 
@@ -1293,7 +1294,7 @@
                             }
                             else {
                                 //Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
-                                Swal.fire(DataSet.StatusDescription, { icon: "error" });
+                                //Swal.fire(DataSet.StatusDescription, { icon: "error" });//Commented on 20 JUN 20
                             }
                         }
                         else {

@@ -16,11 +16,22 @@
                         <div class="card-body mb-2">
                             <li class="media align-items-center mb-3">
                                 <div class="mr-4 position-relative">
-                                    <img src="../INCLUDES/Asset/images/profile.png" class="photo" alt="profile pic" id="imgUserProfile" >
+
+                                    <%--<img class="photo userprofile" id="imgUserProfile" src="../INCLUDES/Asset/images/profile.png" alt="profile pic">
                                     <div class="custom-file upload">
                                         <input type="file" class="custom-file-input" id="fileUserProfile" onchange="encodeImagetoBase64(this,'userpic');" >
                                         <label class="custom-file-label" for="fileUserProfile"></label>
+                                    </div>--%>
+
+                                    <div class="ProfileUserProfile" >
+                                        <img class="photo userprofile" id="imgUserProfile" src="../INCLUDES/Asset/images/profile.png" alt="profile pic">
                                     </div>
+                                    <div class="custom-file upload">
+                                        <input type="file" class="custom-file-input" id="fileUserProfile" onchange="readURLCroppedImage(this,'.ProfileUserProfile','profileuserprofile');" >
+                                        <label class="custom-file-label" for="fileUserProfile"></label>
+                                    </div>
+
+
                                 </div>
                                 <div class="media-body">
                                     <h4 class="mt-0 mb-0" id="hdgName">User Name</h4>
@@ -1122,7 +1133,45 @@
             });
         }
 
-        var base64UserProfileString = '';        
+        var base64UserProfileString = '';
+
+        function UpdateProfilePic()
+        {
+            debugger
+            ShowLoader();
+            var getUrl = "/API/User/UpdateProfilePic";
+            var jsonResult = { UserProfileImageBase64: base64UserProfileString };
+
+            $.ajax({
+                type: "POST",
+                url: getUrl,
+                headers: { "Authorization": "Bearer " + accessToken },
+                data: JSON.stringify(jsonResult),
+                contentType: "application/json",
+                success: function (response) {
+                    HideLoader();
+                    try {
+                        var DataSet = $.parseJSON(response);
+                        HideLoader();
+                        if (DataSet.StatusCode == "1") {
+                            $("#imgUserProfile").attr("src", base64UserProfileString);
+                        }
+                        else {
+                            Swal.fire(DataSet.StatusDescription, {
+                                icon: "error",
+                            });
+                        }
+                    }
+                    catch (e) {
+                        HideLoader();
+                    }
+                },
+                failure: function (response) {
+                    HideLoader();
+                }
+            });
+        }
+
         function encodeImagetoBase64(element, flag) {
             debugger            
             var file = element.files[0];
