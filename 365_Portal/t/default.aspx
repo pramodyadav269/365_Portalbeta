@@ -5,11 +5,6 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
 
-    <style>
-        .courses-card {
-            margin-right: 0;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="server">
     <div id="sb_widget"></div>
