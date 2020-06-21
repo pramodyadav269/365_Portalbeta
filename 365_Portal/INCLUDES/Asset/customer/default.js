@@ -666,6 +666,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
             else
                 $rootScope.Topics = allTopics;
 
+
             $rootScope.GlobalTopics = $rootScope.AllTopics.filter(function (v) {
                 return v.Accessibility == "1";
             });
@@ -686,9 +687,11 @@ app.service("DataService", function ($http, $rootScope, $compile) {
                 $rootScope.AssignedTopics = userAssignedTopics;
             }
             else {
+
                 $rootScope.AssignedTopics = $rootScope.AllTopics.filter(function (v) {
                     return v.Accessibility == "3";
                 });
+
             }
 
             $rootScope.$apply();
@@ -1034,7 +1037,7 @@ app.service("DataService", function ($http, $rootScope, $compile) {
     ds.DeleteTopic = function (topicId) {
         var txtMsg = "Do you want to delete this course permanently ? Yes or No !";
         var txtConfirmButtonText = "Yes, delete it!";
-        
+
         Swal.fire({
             title: 'Are you sure?',
             text: txtMsg,

@@ -781,45 +781,6 @@ main {
 .rotate-90deg {
   transform: rotate(90deg); }
 
-/*slick slider*/
-.content.slick-slider.disable-bg-prev::before, .content.slick-slider.disable-bg-next::after {
-  opacity: 0; }
-
-.content.slick-slider.disable-bg-prev::before {
-  left: -200px; }
-
-.content.slick-slider.disable-bg-next::after {
-  right: -200px; }
-
-.content.slick-slider .slick-track {
-  float: left; }
-
-.content.slick-slider.disable-bg-next::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 140px;
-  height: 100%;
-  z-index: 1;
-  content: "";
-  background: linear-gradient(to left, rgba(245, 246, 247, 0) 0%, #F5F6F7 50%, #F5F6F7 51%, #F5F6F7 100%); }
-  @media only screen and (max-width: 600px) {
-    .content.slick-slider.disable-bg-next::before {
-      width: 60px; } }
-
-.content.slick-slider.disable-bg-prev::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 140px;
-  height: 100%;
-  z-index: 1;
-  content: "";
-  background: linear-gradient(to right, rgba(245, 246, 247, 0) 0%, #F5F6F7 50%, #F5F6F7 51%, #F5F6F7 100%); }
-  @media only screen and (max-width: 600px) {
-    .content.slick-slider.disable-bg-prev::after {
-      width: 60px; } }
-
 /* spinner style*/
 .spinner-center {
   position: fixed;
