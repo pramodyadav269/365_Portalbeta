@@ -2246,6 +2246,7 @@
     <Content Include="INCLUDES\Asset\js\imagecrop.min.js" />
     <Content Include="INCLUDES\Asset\js\jodit.min.js" />
     <Content Include="INCLUDES\Asset\js\muuri.min.js" />
+    <Content Include="INCLUDES\Asset\js\slick.min.js" />
     <Content Include="INCLUDES\Asset\js\sortable_list.js" />
     <Content Include="INCLUDES\Asset\js\jquery.dataTables.min.js" />
     <Content Include="INCLUDES\Asset\js\jquery.min.js" />
@@ -2254,7 +2255,6 @@
     <Content Include="INCLUDES\Asset\js\popper.min.js" />
     <Content Include="INCLUDES\Asset\js\select2.min.js" />
     <Content Include="INCLUDES\Asset\js\site.js" />
-    <Content Include="INCLUDES\Asset\js\slick.min.js" />
     <Content Include="INCLUDES\Asset\js\sweetalert2.js" />
     <Content Include="INCLUDES\Asset\tinymce\jquery.tinymce.min.js" />
     <Content Include="INCLUDES\Asset\tinymce\langs\readme.md" />
