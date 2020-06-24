@@ -45,7 +45,7 @@
     <script src="../INCLUDES/Asset/js/dataTables.bootstrap4.min.js"></script>
     <script src="../INCLUDES/Asset/js/jquery.tablednd.js"></script>
     <script src="../INCLUDES/Asset/js/slick.min.js"></script>
-    <script src="../INCLUDES/Asset/js/site.js"></script>
+    <script src="../includes/asset/js/site.js"></script>
     <script src="../INCLUDES/Asset/js/imagecrop.min.js"></script>
 
 

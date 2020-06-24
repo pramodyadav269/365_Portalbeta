@@ -220,6 +220,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
+            debugger
             var cards = ["Card 1", "Card 2", "Card 3", "Card 4"];
             var taskList = ["Task 1", "Task 3", "Task 4", "Task 5"];
             var cardHtml = "";
@@ -239,7 +240,7 @@
                 cardHtml += ' </div>';
             });
             $("#dvBoard").html(cardHtml);
-
+            
             InitializeCardsDraggableView();
 
         });

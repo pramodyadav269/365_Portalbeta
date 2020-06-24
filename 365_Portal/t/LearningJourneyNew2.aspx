@@ -1,6 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/t/admin.Master" AutoEventWireup="true" CodeBehind="LearningJourneyNew2.aspx.cs" Inherits="_365_Portal.t.LearningJourneyNew2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <%--Added on 24 JUN for dynamic div drag-drop--%>
+    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $("#dvLessonViewParentView").sortable();
+            $("#dvLessonViewParentView").disableSelection();
+        });
+    </script>
+    <%--End Added on 24 JUN for dynamic div drag-drop--%>
+
     <style>
         .btnSpaceBottom {
             margin-bottom: 1%;
@@ -10,8 +22,6 @@
         }.btnSpaceLeft {
             margin-left: 1%;
         }
-
-        
     </style>
 
 </asp:Content>
