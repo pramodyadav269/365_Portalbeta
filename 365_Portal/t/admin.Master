@@ -8,24 +8,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <%-- <link rel="icon" href="../INCLUDES/Asset/images/menu.png" type="image/png" sizes="16x16">--%>
-     <link rel="icon" href="../INCLUDES/Asset/images/icons/onxy-flow.png" type="image/png" />
+    <link rel="icon" href="../INCLUDES/Asset/images/icons/onxy-flow.png" type="image/png" />
 
     <%-- CSS --%>
-    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/all.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/select2.min.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/jodit.min.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/slick.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/360.css?v=19062020" rel="stylesheet" />
-    <link href="../INCLUDES/Asset/css/site.css?v=19062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap.min.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/all.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/gijgo.min.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/select2.min.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/jodit.min.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/slick.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/bootstrap-datetimepicker.min.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/360.css?v=22062020" rel="stylesheet" />
+    <link href="../INCLUDES/Asset/css/site.css?v=22062020" rel="stylesheet" />
     <link href="../INCLUDES/Asset/css/imagecrop.min.css" rel="stylesheet" />
 
 
     <%-- JS --%>
     <script src="../INCLUDES/Asset/js/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-sanitize.js"></script>
 
     <script src="../INCLUDES/Asset/js/jquery.min.js"></script>
     <script src="../INCLUDES/Asset/js/popper.min.js"></script>
@@ -57,6 +57,13 @@
         var customFont = '<%=Session["ThemeColor4"]%>';
         var favicon = '<%=Session["Favicon"]%>';
         $(document).ready(function () {
+            var currentPage = document.location.href.match(/[^\/]+$/)[0].toLowerCase();
+            if (currentPage.indexOf('projects.aspx') > -1) {
+                $('.navbar-brand a').empty().append('<img src="../INCLUDES/Asset/images/icons/list.png" class="logo" alt="Logo"> Task');
+            }
+            else {
+                $('.navbar-brand a').empty().append('<img src="../INCLUDES/Asset/images/icons/idea.png" class="logo" alt="Logo"> Learn');
+            }
 
             //alert(customFont);
             $('body').css({ "font-family": customFont });
@@ -274,7 +281,7 @@
                             </li>--%>
                         </ul>
                     </li>
-                    <li class="sidenav-item side-menu">
+                    <li class="sidenav-item side-menu" style="display: none;">
                         <a class="sidenav-link menu-title" id="dvProjects" runat="server" href="Projects.aspx" visible="false"><span class="link-icon"><i class="fas fa-tasks"></i></span><span class="tooltiptext">Tasks</span><span class="link-text">Tasks</span></a>
                         <a class="menu-title icon-right" id="dvAddNewTask" runat="server" visible="false" href="Projects.aspx"><i class="fas fa-plus-circle"></i></a>
                         <ul class="sub-sidenav-nav">
@@ -675,8 +682,8 @@
                         <a id="navDash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="../INCLUDES/Asset/images/dots-menu.svg" /></a>
                         <div class="dropdown-menu" aria-labelledby="navDash">
-                            <a class="dropdown-item" href="default.aspx" target="_blank">Learn</a>
-                            <a class="dropdown-item" href="projects.aspx" target="_blank">Task</a>
+                            <a class="dropdown-item" href="https://learn.onyxflow.com/login.aspx?url=t/default.aspx" target="_blank">Learn</a>
+                            <a class="dropdown-item" href="https://task.onyxflow.com/login.aspx?url=t/projects.aspx" target="_blank">Task</a>
                             <a class="dropdown-item" href="#">Chat</a>
                         </div>
                     </li>
