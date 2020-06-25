@@ -1390,25 +1390,32 @@
                 dots: false,
                 infinite: false,
                 speed: 300,
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 5,
+                slidesToScroll: 5,
                 responsive: [
                     {
-                        breakpoint: 1024,
+                        breakpoint: 1880,
+                        settings: {
+                            slidesToShow: 4,
+                            slidesToScroll: 4,
+                        }
+                    },
+                    {
+                        breakpoint: 1560,
                         settings: {
                             slidesToShow: 3,
                             slidesToScroll: 3,
                         }
                     },
                     {
-                        breakpoint: 600,
+                        breakpoint: 1260,
                         settings: {
                             slidesToShow: 2,
                             slidesToScroll: 2
                         }
                     },
                     {
-                        breakpoint: 480,
+                        breakpoint: 860,
                         settings: {
                             slidesToShow: 1,
                             slidesToScroll: 1
