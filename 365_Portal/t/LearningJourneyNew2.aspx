@@ -181,6 +181,11 @@
 
 
 
+            <a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveLessonOrder();">Save Reordering</a>
+            
+
+
+
             <%-- in progresss --%>
             <div class="col-12 col-sm-12 mt-4 accordion course-content-collapse" style="display: none;" id="divLessonMain">
 
@@ -1272,7 +1277,7 @@
                                 if (LessonTable != undefined && LessonTable.length > 0) {
                                     for (var i = 0; i < LessonTable.length; i++) {
 
-                                        Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_' + LessonTable[i].ModuleID + '">' +
+                                        Lesson = Lesson + '<div class="card mb-4" id="dvLessonGrid_' + LessonTable[i].ModuleID + '" >' +
                                             '<div class="tag lesson">Lesson ' + (i + 1) + '</div>' +
                                             '<div class="card-header">' +
                                             '<h5><i class="fas fa-grip-vertical"></i>' + LessonTable[i].Title + '</h5>' +
@@ -1291,9 +1296,12 @@
                                     $('#dvLessonViewParentView').empty().append(Lesson);
                                     $('#dvLessonViewParentEdit').empty();
 
+
+                                    $('#savereorder').show();
                                     $('#btnAddMoreLesson').show();
                                 }
                                 else {
+                                    $('#savereorder').hide();
                                     AddMoreLesson('0');
                                 }
                                 debugger
@@ -3548,6 +3556,90 @@
             IsChangedField = '1';
         }
 
+
+        function SaveLessonOrder()
+        {
+            debugger
+            ShowLoader();
+            var sqnData = "";
+            var array = [];
+            var url = "/API/Content/ReOrderContent";
+
+            var allLessonGrid = $("div[id^='dvLessonGrid_']");
+            for(var i = 0; i < allLessonGrid.length; i++)
+            {
+                sqnData += allLessonGrid[i].id.split('_')[1] + ",";
+            }
+            
+            sqnData = sqnData.replace(/,(?=\s*$)/, '');
+            if (sqnData != "") {
+                var requestParams = { Type: "2", IDs: sqnData };
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    headers: { "Authorization": "Bearer " + accessToken },
+                    data: JSON.stringify(requestParams),
+                    contentType: "application/json",
+                    processData: false,
+                    success: function (response) {
+                        debugger
+
+                        HideLoader();
+                        if (response != null && response != undefined) 
+                        {
+                            var DataSet = $.parseJSON(response);
+                            if (DataSet != null && DataSet != "") {
+                                if (DataSet.StatusCode == "1") {
+                                    if (DataSet.Data.length > 0) 
+                                    {
+                                        $('#savereorder').show();
+
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "Lesson re-ordered successfully.",
+                                            icon: "success"
+                                        });
+                                        BindLessonGrid('');
+                                    }
+                                    else {
+                                        Swal.fire({
+                                            title: "Failure",
+                                            text: "Please try Again",
+                                            icon: "error"
+                                        });
+                                    }
+                                }
+                                else {
+                                    Swal.fire({
+                                        title: "Failure",
+                                        text: DataSet.Data.ReturnMessage,
+                                        icon: "error"
+                                    });
+                                }
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "Failure",
+                                    text: "Please try Again",
+                                    icon: "error"
+                                });
+                            }
+                        }
+                    },
+                    complete: function () {
+                        HideLoader();
+                    }
+                });
+            }
+            else {
+                Swal.fire({
+                    title: "Failure",
+                    text: "Please try Again",
+                    icon: "error"
+                });
+
+            }
+        }
 
     </script>
 </asp:Content>
