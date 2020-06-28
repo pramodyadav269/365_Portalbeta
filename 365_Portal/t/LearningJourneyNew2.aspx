@@ -3,11 +3,33 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <%--Added on 24 JUN for dynamic div drag-drop--%>
-    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>    
+    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $("#dvLessonViewParentView").sortable();
+        $(function () {
+            //  $("#dvLessonViewParentView").sortable();
+            $('#dvLessonViewParentView').sortable({
+                start: function (event, ui) {
+                    //var start_pos = ui.item.index();
+                    //ui.item.data('start_pos', start_pos);
+                    //alert("start");
+                },
+                change: function (event, ui) {
+                    //var start_pos = ui.item.data('start_pos');
+                    //var index = ui.placeholder.index();
+                    //if (start_pos < index) {
+                    //    $('#sortable li:nth-child(' + index + ')').addClass('highlights');
+                    //} else {
+                    //    $('#sortable li:eq(' + (index + 1) + ')').addClass('highlights');
+                    //}
+                    // alert("change");
+                },
+                update: function (event, ui) {
+                    // $('#sortable li').removeClass('highlights');
+                    // alert("update");
+                    SaveLessonOrder();
+                }
+            });
             $("#dvLessonViewParentView").disableSelection();
         });
     </script>
@@ -17,9 +39,12 @@
         .btnSpaceBottom {
             margin-bottom: 1%;
         }
+
         .btnSpaceRight {
             margin-right: 1%;
-        }.btnSpaceLeft {
+        }
+
+        .btnSpaceLeft {
             margin-left: 1%;
         }
     </style>
@@ -87,7 +112,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-12 col-md-6">
-                                            <div class="form-group color-picker" style="display:none;">
+                                            <div class="form-group color-picker" style="display: none;">
                                                 <label for="txtCourseThemeColor">Theme Color</label>
                                                 <input type="color" class="form-control" id="txtCourseThemeColor" onchange="clickColor(0, -1, -1, 5)" value="#161E98" />
                                             </div>
@@ -181,8 +206,8 @@
 
 
 
-            <a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveLessonOrder();">Save Reordering</a>
-            
+            <a class="btn bg-blue text-white float-right" style="display: none;" id="savereorder" onclick="SaveLessonOrder();">Save Reordering</a>
+
 
 
 
@@ -248,10 +273,10 @@
     <%--End Modal popup region--%>
 
     <script>
-        
+
         var accessToken = '<%=Session["access_token"]%>';
         var OrganizationName = '<%=Session["OrganizationName"]%>';
-        
+
 
         var editorCourseSummary = new Jodit('#txtCourseSummary');
         var editorContentDescription = '';
@@ -327,7 +352,7 @@
             '</div>' +
 
             '<a class="btn btn-black float-right Auto" id="btnQuestionDone" onclick="AddQuestion(this,\'' + QuestionAction + '\',\'' + QuestionType + '\');" style="display:none;">Done</a>';
-        
+
 
         $(document).ready(function () {
             debugger
@@ -339,8 +364,7 @@
                 CourseFlag = readQueryString()["topic"];
                 IsQueryString = '1';
 
-                if(CourseFlag != '0')
-                {
+                if (CourseFlag != '0') {
                     $('#btnAddCourse').text('Save');
                     $('#hdgPageTitle').text('Edit Course');
                 }
@@ -355,17 +379,16 @@
                 GetCourseCategoryTagsAndBadge('view', 0, 0, 0);
             }
 
-            if(CourseFlag == '0')
-            {
+            if (CourseFlag == '0') {
                 $("#btnPublish").hide();
                 $("#btnDiscard").hide();
-            }  
-            
+            }
 
-            $("#divCourseSummary").keyup(function(){            
+
+            $("#divCourseSummary").keyup(function () {
                 debugger
                 IsChangedField = '1';
-            });            
+            });
         });
 
         function readQueryString() {
@@ -990,8 +1013,7 @@
             LessonFlag = id;
 
             //if($("div[id^='tempLessonGrid_']").length > 0)
-            if(id == '0' && IsChangedField == '1')
-            {
+            if (id == '0' && IsChangedField == '1') {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "Do you want to discard this lesson ? Yes or No !",
@@ -1002,24 +1024,21 @@
                     confirmButtonText: 'Yes, clear it!'
                 }).then((result) => {
                     debugger
-                    if (result.value) {  
+                    if (result.value) {
                         IsChangedField = '0';
                         AddMoreLessonBind(id);
                     }
-                    else
-                    {
+                    else {
                         return false;
                     }
                 });
             }
-            else
-            {
+            else {
                 AddMoreLessonBind(id);
             }
         }
 
-        function AddMoreLessonBind(id)
-        {
+        function AddMoreLessonBind(id) {
             LessonFlag = id;
 
             var deleteIsEnabled = '', tagStyle = '';
@@ -1088,11 +1107,11 @@
                 '<div class="col-sm-12" id="dvLessonContentEdit" style="padding-left: 52px;"></div>' +
 
 
-                '<div class="col-sm-12" id="dvContentContent" style="padding-left: 52px;">'+
-                '<div class="form-group editor">'+
-                '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add New Content</a>'+
-                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>'+
-                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>'+                
+                '<div class="col-sm-12" id="dvContentContent" style="padding-left: 52px;">' +
+                '<div class="form-group editor">' +
+                '<a class="btn btn-outline blod black" style="display:none;" id="btnNewContent" onclick="AddNewContent(this);">Add New Content</a>' +
+                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnSaveContent" onclick="SaveContent(this);">Save Content</a>' +
+                '<a class="btn btn-outline blod black btnSpaceRight" style="display:none;" id="btnCanelContent" onclick="ManageContent(\'editclear\');;">Cancel</a>' +
                 '</div>' +
                 '</div>' +
 
@@ -1123,8 +1142,8 @@
                 '<div class="w-100"></div>' +
                 '<div class="action-btn" id="divAddContent">' +
                 //'<a class="btn btn-outline blod black" id="btnAddContent"  name="btnAddContent" onclick="ManageContent(\'editbind\',\'\',\'addnew\');"><i class="fas fa-plus-circle"></i>Add New Content</a>' +
-                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>'+
-                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnCancelLesson" onclick="ClearNewLesson();">Cancel</a>'+                
+                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnSaveLesson" onclick="AddLessonWithOthers(this);">Save</a>' +
+                '<a class="btn btn-outline blod black float-right btnSpaceLeft" id="btnCancelLesson" onclick="ClearNewLesson();">Cancel</a>' +
                 '</div>' +
                 '</div>';
 
@@ -1181,11 +1200,11 @@
             inputInline();
 
             //This is added after rendering controls otherwise onkeyup event won't work
-            $("#divResourceSummary").keyup(function(){      
+            $("#divResourceSummary").keyup(function () {
                 debugger
                 IsChangedField = '1';
             });
-            $("#divContentSummary").keyup(function(){            
+            $("#divContentSummary").keyup(function () {
                 debugger
                 IsChangedField = '1';
             });
@@ -1193,13 +1212,11 @@
 
         function ClearNewLesson() {
             debugger
-            if(IsChangedField == '0')
-            {
+            if (IsChangedField == '0') {
                 $("div[id^='tempLessonGrid_']").remove();
                 $('#btnAddMoreLesson').show();
             }
-            else
-            {
+            else {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "Do you want to discard this lesson ? Yes or No !",
@@ -1211,7 +1228,7 @@
                 }).then((result) => {
                     if (result.value) {
                         debugger
-                        $("div[id^='tempLessonGrid_']").remove();                    
+                        $("div[id^='tempLessonGrid_']").remove();
 
                         //if($('#btnEditLesson_'+LessonFlag).hasClass('fa-chevron-down'))
                         //{
@@ -1270,7 +1287,7 @@
                         debugger
                         if (DataSet != null && DataSet != "") {
                             if (DataSet.StatusCode == "1") {
-                                var LessonTable = DataSet.Data;                                
+                                var LessonTable = DataSet.Data;
                                 $('#divLessonMain').show();
 
                                 var Lesson = '';
@@ -1297,17 +1314,16 @@
                                     $('#dvLessonViewParentEdit').empty();
 
 
-                                    $('#savereorder').show();
+                                   // $('#savereorder').show();
                                     $('#btnAddMoreLesson').show();
                                 }
                                 else {
-                                    $('#savereorder').hide();
+                                  //  $('#savereorder').hide();
                                     AddMoreLesson('0');
                                 }
                                 debugger
-                                if(flag== "addcontentandlesson")
-                                {
-                                    $("#btnEditLesson_"+tmpLessonId).click();
+                                if (flag == "addcontentandlesson") {
+                                    $("#btnEditLesson_" + tmpLessonId).click();
                                 }
                             }
                             else {
@@ -1337,11 +1353,10 @@
 
         function AddLession(flag, type) {
 
-            if(flag != 'withquiz')
-            {
+            if (flag != 'withquiz') {
                 ShowLoader();
-            }           
-            
+            }
+
             var getUrl;
             var _Topic_Id = CourseFlag;
             var _Title = $('#txtLessonTitle').val();
@@ -1415,15 +1430,14 @@
 
                                         tmpLessonId = LessonFlag;
 
-                                        AddContent(flag);                                        
+                                        AddContent(flag);
                                     }
                                     else if (flag == 'withquiz') {
                                         if (DataSet.Data[0].InsertedID != null && DataSet.Data[0].InsertedID != undefined && DataSet.Data[0].InsertedID != '') {
                                             LessonFlag = DataSet.Data[0].InsertedID;
                                         }
 
-                                        if($('#txtQuizTitle').val() != undefined)
-                                        {
+                                        if ($('#txtQuizTitle').val() != undefined) {
                                             AddQuiz('');
                                         }
                                     }
@@ -1571,11 +1585,10 @@
 
             debugger
             tmpLessonId = '0';
-            
+
             if ($('#tempLessonGrid_' + id).length) {
 
-                if(IsChangedField != '0')
-                {
+                if (IsChangedField != '0') {
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "Do you want to discard this lesson ? Yes or No !",
@@ -1592,10 +1605,9 @@
                         }
                     });
                 }
-                else
-                {
+                else {
                     $('#tempLessonGrid_' + id).remove();
-                }                
+                }
                 return false;
             }
 
@@ -1772,10 +1784,9 @@
 
 
         //Content
-        function AddNewContent(obj)
-        {
+        function AddNewContent(obj) {
             debugger
-            ManageContent('editbind','','addnew');    
+            ManageContent('editbind', '', 'addnew');
 
             //if($("#txtContentHeader").val() == undefined)
             //{
@@ -1787,12 +1798,10 @@
             //}
         }
 
-        function SaveContent(obj)
-        {
+        function SaveContent(obj) {
             var flag = 'addcontent';
 
-            if(LessonFlag == '0')
-            {
+            if (LessonFlag == '0') {
                 if ($('#txtLessonTitle').val() != undefined) {
                     var resultLesson = validateAddLesson();
                     if (resultLesson.error) {
@@ -1820,8 +1829,7 @@
                 flag = 'addcontentandlesson';
                 AddLession(flag);
             }
-            else
-            {
+            else {
                 var resultContent = validateAddContent('onlycontent');
                 if (resultContent.error) {
                     Swal.fire({
@@ -1832,8 +1840,7 @@
                     });
                     return false;
                 }
-                else
-                {
+                else {
                     AddContent(flag);
                 }
             }
@@ -1859,7 +1866,7 @@
 
                     ContentFlag = '0';//clear content because this div will be bind while new content creation
                     $("[id^='divContentDescription_']").empty();//to remove edit fields under accordion
-                    $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);                    
+                    $('#dvLessonContentEdit').empty().append(dvLessonContentEdit);
                 }
                 editorContentDescription = new Jodit('#txtContentDescription');
 
@@ -1937,15 +1944,13 @@
                                     }
                                     $('#dvLessonContentView').empty().append(Content);
 
-                                    if(flag == 'addcontent')
-                                    {
+                                    if (flag == 'addcontent') {
                                         ManageContent('editbind');
                                     }
-                                    else
-                                    {
+                                    else {
                                         ManageContent('editclear');
                                     }
-                                }                                
+                                }
                             }
                             else {
                                 Swal.fire({ title: "Failure", text: DataSet.StatusDescription, icon: "error" });
@@ -2058,7 +2063,7 @@
                                         title: "Success",
                                         text: DataSet.Data[0].ReturnMessage,
                                         icon: "success"
-                                    });                                    
+                                    });
                                 }
                                 else if (flag == 'addcontentandlesson') {
                                     HideLoader();
@@ -2067,13 +2072,13 @@
                                     }
 
                                     ContentFlag = '0';
-                                    BindLessonGrid(flag);                                    
+                                    BindLessonGrid(flag);
 
                                     Swal.fire({
                                         title: "Success",
                                         text: DataSet.Data[0].ReturnMessage,
                                         icon: "success"
-                                    });                                    
+                                    });
                                 }
 
                                 IsCoursePublishable();
@@ -2293,14 +2298,12 @@
                                     ManageResource('editclear');
                                     */
                                     ManageResource('editbind');
-                                    if(DataSet.Data.Data[0].Resource == null || DataSet.Data.Data[0].Resource == undefined)
-                                    {
+                                    if (DataSet.Data.Data[0].Resource == null || DataSet.Data.Data[0].Resource == undefined) {
                                         editorResourcesDescription.value = '';
                                     }
-                                    else
-                                    {
+                                    else {
                                         editorResourcesDescription.value = DataSet.Data.Data[0].Resource;
-                                    }                                    
+                                    }
                                 }
                             }
                             else {
@@ -2351,7 +2354,7 @@
                             ""
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-                                    
+
                                     if (flag.includes('lastsave')) {
                                         HideLoader();
                                         ResourceFlag = LessonFlag;
@@ -2368,7 +2371,7 @@
                                             });
                                         }
                                     }
-                                    
+
                                     IsCoursePublishable();
                                 }
                                 else {
@@ -2521,8 +2524,7 @@
 
                                     //$('#divQuestionType').empty().append(divQuestionType);
                                 }
-                                else
-                                {
+                                else {
                                     ManageQuiz('editbind');
                                     //$('#divQuestionType').empty().append(divQuestionType);
                                 }
@@ -2582,7 +2584,7 @@
                         }
 
                         HideLoader();
-                        
+
                         if (flag.includes('lastsave')) {
                             HideLoader();
 
@@ -2597,7 +2599,7 @@
                                     }
                                 });
                             }
-                        }                        
+                        }
                     }
                 });
             }
@@ -2643,10 +2645,10 @@
                     }
 
                     QuestionString = QuestionString + '<div class="card">' +
-                       
+
                         '<div class="card-header p-0">' +
                         '<div class="d-flex align-items-center ques">' +
-                        '<a class="sr head" onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ',' + (i + 1) +')";>' +
+                        '<a class="sr head" onclick="ShowQuestionInEditMode(this,' + Questions[i].QuestionID + ',' + (i + 1) + ')";>' +
                         'Q' + (i + 1) + '<i class="' + className + ' m-0 ml-2"></i><i class="fas fa-caret-down m-0 ml-1"></i></a>' +
                         '<h5 class="ml-3 mr-5">' + Questions[i].Title + '</h5></div>' +
 
@@ -2674,8 +2676,7 @@
         function ShowQuestion(cls, flag, QuestionAnswer, questionSrNo) {
             debugger
 
-            if($('#txtLessonTitle').val() != undefined)
-            {
+            if ($('#txtLessonTitle').val() != undefined) {
                 var resultLesson = validateAddLesson();
                 if (resultLesson.error) {
                     Swal.fire({
@@ -2687,8 +2688,7 @@
                     return false;
                 }
             }
-            if($('#txtQuizTitle').val() != undefined)
-            {
+            if ($('#txtQuizTitle').val() != undefined) {
                 var resultQuiz = validateAddQuiz();
                 if (resultQuiz.error) {
                     Swal.fire({
@@ -2700,15 +2700,13 @@
                     return false;
                 }
             }
-            if($('#txtLessonTitle').val() != undefined)
-            {
+            if ($('#txtLessonTitle').val() != undefined) {
                 AddLession('withquiz');
-            }            
-            else if($('#txtQuizTitle').val() != undefined)
-            {
+            }
+            else if ($('#txtQuizTitle').val() != undefined) {
                 AddQuiz('');
             }
-            
+
 
             var allLessonGrid = $("div[id^='dvLessonQues']");
             if (allLessonGrid.length > 0) {
@@ -2914,8 +2912,7 @@
 
         function AddQuestionCancel(obj) {
             debugger
-            if(IsChangedInQuizField != '0')
-            {
+            if (IsChangedInQuizField != '0') {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "Do you want to discard this question ? Yes or No !",
@@ -2932,8 +2929,7 @@
                     }
                 });
             }
-            else
-            {
+            else {
                 $(obj).closest("div[id^='dvLessonQues']").empty();
             }
         }
@@ -3445,8 +3441,7 @@
         function PublishCourse(flag) {
 
             debugger
-            if(IsChangedField != '0')
-            {
+            if (IsChangedField != '0') {
                 Swal.fire({
                     title: 'Are you sure?',
                     text: "Do you want to discard this lesson ? Yes or No !",
@@ -3457,20 +3452,18 @@
                     confirmButtonText: 'Yes, clear it!'
                 }).then((result) => {
                     debugger
-                    if (result.value) {          
+                    if (result.value) {
                         IsChangedField = '0';
                         PublishCourseMain(flag);
-                    }                
+                    }
                 });
             }
-            else
-            {
+            else {
                 PublishCourseMain(flag);
             }
         }
 
-        function PublishCourseMain(flag)
-        {
+        function PublishCourseMain(flag) {
             ShowLoader();
             var TopicID = CourseFlag;
             var getUrl = "/API/Content/PublishCourse";
@@ -3544,12 +3537,10 @@
 
         var IsChangedField = '0';
         var IsChangedInQuizField = '0';
-        function IsChangedAnything(obj)
-        {
+        function IsChangedAnything(obj) {
             debugger
             var id = $(obj).attr('id');
-            if(id == 'txtQuestion' || id == 'txtAnswer' || id == 'txtScore')
-            {
+            if (id == 'txtQuestion' || id == 'txtAnswer' || id == 'txtScore') {
                 IsChangedInQuizField = '1';
             }
 
@@ -3557,20 +3548,17 @@
         }
 
 
-        function SaveLessonOrder()
-        {
-            debugger
-            ShowLoader();
+        function SaveLessonOrder() {
+            //ShowLoader();
             var sqnData = "";
             var array = [];
             var url = "/API/Content/ReOrderContent";
 
             var allLessonGrid = $("div[id^='dvLessonGrid_']");
-            for(var i = 0; i < allLessonGrid.length; i++)
-            {
+            for (var i = 0; i < allLessonGrid.length; i++) {
                 sqnData += allLessonGrid[i].id.split('_')[1] + ",";
             }
-            
+
             sqnData = sqnData.replace(/,(?=\s*$)/, '');
             if (sqnData != "") {
                 var requestParams = { Type: "2", IDs: sqnData };
@@ -3585,21 +3573,19 @@
                         debugger
 
                         HideLoader();
-                        if (response != null && response != undefined) 
-                        {
+                        if (response != null && response != undefined) {
                             var DataSet = $.parseJSON(response);
                             if (DataSet != null && DataSet != "") {
                                 if (DataSet.StatusCode == "1") {
-                                    if (DataSet.Data.length > 0) 
-                                    {
-                                        $('#savereorder').show();
+                                    if (DataSet.Data.length > 0) {
+                                        //$('#savereorder').show();
 
-                                        Swal.fire({
-                                            title: "Success",
-                                            text: "Lesson re-ordered successfully.",
-                                            icon: "success"
-                                        });
-                                        BindLessonGrid('');
+                                        //Swal.fire({
+                                        //    title: "Success",
+                                        //    text: "Lesson re-ordered successfully.",
+                                        //    icon: "success"
+                                        //});
+                                      //  BindLessonGrid('');
                                     }
                                     else {
                                         Swal.fire({
