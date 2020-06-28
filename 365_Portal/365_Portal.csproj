@@ -2245,6 +2245,7 @@
     <Content Include="INCLUDES\Asset\js\gijgo.min.js" />
     <Content Include="INCLUDES\Asset\js\imagecrop.min.js" />
     <Content Include="INCLUDES\Asset\js\jodit.min.js" />
+    <Content Include="INCLUDES\Asset\js\jquery-ui.js" />
     <Content Include="INCLUDES\Asset\js\muuri.min.js" />
     <Content Include="INCLUDES\Asset\js\slick.min.js" />
     <Content Include="INCLUDES\Asset\js\sortable_list.js" />

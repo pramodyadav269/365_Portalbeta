@@ -100,10 +100,13 @@ namespace _365_Portal
 
         protected void LoginFromCookie(string UserId)
         {
-            UserBO objResponse = new UserBO();            
+            UserBO objResponse = new UserBO();
             objResponse = UserDAL.GetUserDetailsByUserID(UserId, "");
 
-            ProceedToSuccessLoginProcess(objResponse, objResponse.EmailID, objResponse.PasswordHash);
+            if (objResponse != null)
+            {
+                ProceedToSuccessLoginProcess(objResponse, objResponse.EmailID, objResponse.PasswordHash);
+            }
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

@@ -3,11 +3,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     <%--Added on 24 JUN for dynamic div drag-drop--%>
-    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--%>    
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <%--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>    --%>
+    <%--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--%>
+    <script src="../INCLUDES/Asset/js/jquery-ui.js"></script>
+
     <script>
         $( function() {
-            $("#dvLessonViewParentView").sortable();
+            $("#dvLessonViewParentView").sortable({
+                start: function(event, ui) {
+                    //debugger
+                },
+                change: function(event, ui) {
+                    //debugger
+                },
+                update: function(event, ui) {
+                    debugger
+                    SaveLessonOrder();
+                    //$('#sortable li').removeClass('highlights');
+                }
+            });
             $("#dvLessonViewParentView").disableSelection();
         });
     </script>
@@ -16,12 +30,12 @@
     <style>
         .btnSpaceBottom {
             margin-bottom: 1%;
-        }
-        .btnSpaceRight {
+        }.btnSpaceRight {
             margin-right: 1%;
         }.btnSpaceLeft {
             margin-left: 1%;
         }
+        
     </style>
 
 </asp:Content>
@@ -181,7 +195,7 @@
 
 
 
-            <a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveLessonOrder();">Save Reordering</a>
+            <%--<a class="btn bg-blue text-white float-right" style="display:none;" id="savereorder" onclick="SaveLessonOrder();">Save Reordering</a>--%>
             
 
 
@@ -1297,11 +1311,11 @@
                                     $('#dvLessonViewParentEdit').empty();
 
 
-                                    $('#savereorder').show();
+                                    //$('#savereorder').show();
                                     $('#btnAddMoreLesson').show();
                                 }
                                 else {
-                                    $('#savereorder').hide();
+                                    //$('#savereorder').hide();
                                     AddMoreLesson('0');
                                 }
                                 debugger
@@ -3592,7 +3606,7 @@
                                 if (DataSet.StatusCode == "1") {
                                     if (DataSet.Data.length > 0) 
                                     {
-                                        $('#savereorder').show();
+                                        //$('#savereorder').show();
 
                                         Swal.fire({
                                             title: "Success",
@@ -3640,6 +3654,7 @@
 
             }
         }
+
 
     </script>
 </asp:Content>
