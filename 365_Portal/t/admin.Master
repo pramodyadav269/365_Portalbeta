@@ -684,7 +684,7 @@
                         <div class="dropdown-menu" aria-labelledby="navDash">
                             <a class="dropdown-item" href="https://learn.onyxflow.com/login.aspx?url=t/default.aspx" target="_blank">Learn</a>
                             <a class="dropdown-item" href="https://task.onyxflow.com/login.aspx?url=t/projects.aspx" target="_blank">Task</a>
-                            <a class="dropdown-item" href="#">Chat</a>
+                            <a class="dropdown-item" href="https://chat.onyxflow.com">Chat</a>
                         </div>
                     </li>
 

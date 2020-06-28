@@ -1,6 +1,7 @@
 ﻿using _365_Portal.Models;
 using System;
 using System.Web;
+using System.Web.Configuration;
 
 namespace Life
 {
@@ -20,7 +21,13 @@ namespace Life
                 }
                 // Take UserName from Session.
                 // dvUserName.InnerText = "Hey " + HttpContext.Current.Session["FirstName"] + "!";
-               // dvUserName.InnerText = "Welcome " + HttpContext.Current.Session["FirstName"] + "! Let's learn something new today :)";
+                // dvUserName.InnerText = "Welcome " + HttpContext.Current.Session["FirstName"] + "! Let's learn something new today :)";
+
+                // if Product name is task
+                if (WebConfigurationManager.AppSettings["ProductName"] == "TASK")
+                {
+                    Response.Redirect("Projects.aspx");
+                }
             }
             else
             {
